@@ -1,0 +1,50 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
+html, body { height: 100%; }
+
+body { margin: 0; font-family: var(--font-family); background-color: var(--verde-background);}
+
+:root {
+  --verde-background: rgba(0, 59, 0, 0.673);
+  --verde-scrollbar: rgb(255, 255, 255);
+}
+
+
+/*==================================================================================================================================*/
+/* CSS DA SCROLLBAR */
+
+/* Scrollbar */
+.scrollwrap{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidenav-nav,
+.scrollwrap:hover,
+.scrollwrap:focus {
+  visibility: visible;
+}
+
+/* Funciona no chrome, edge e safari */
+.scrollwrap::-webkit-scrollbar {
+  width: 10px
+}
+
+.scrollwrap::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+.scrollwrap::-webkit-scrollbar-thumb{
+  background-color: var(--verde-scrollbar);
+  border-radius: 20px;
+}
+
+/* Funciona no firefox */
+.scrollwrap{
+  scrollbar-width: thin;
+  scrollbar-color: var(--verde-scrollbar) transparent;
+}
+
+/*==================================================================================================================================*/

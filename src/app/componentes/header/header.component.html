@@ -1,0 +1,63 @@
+<div class="divGeral">
+
+  <div class="menuBar">
+    <img class="img" src="assets/logo.png" alt="logo">
+
+    <span class="p-input-icon-left">
+      <i class="fa-solid fa-magnifying-glass" style="color: green;"></i>
+      <input type="text" pInputText [(ngModel)]="search" class="input" />
+    </span>
+
+    <div class="divBotoes">
+      <button style="color: green;" class="fa-solid fa-user fa-lg backgroundBotoes" routerLink="/login"></button>
+      <button style="color: green;" class="fa-solid fa-cart-shopping fa-lg backgroundBotoes"></button>
+      <button style="color: green;" class="fa-solid fa-phone fa-lg backgroundBotoes"></button>
+    </div>
+
+  </div>
+
+  <hr class="horizontalRow">
+  <!-- <div class="usuarios">
+    AQUI É O MENU DOS USUÁRIOS
+  </div>
+
+  <div class="administrador">
+    AQUI É O MENU DE ADMINISTRADOR
+  </div> -->
+
+  <div class="categorias">
+
+
+    <div class="botoesCategorias">
+      <p-carousel [value]="categorias" [numVisible]="7" [numScroll]="7" [circular]="false" [responsiveOptions]="responsiveOptions" class="carousel">
+        <ng-template pTemplate="item" let-categoria>
+          <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+            <div>
+              <div class="car-buttons mt-5">
+                <div class="sidenav-nav">
+                  <div class="sidenav-nav-item">
+                    <a
+                      class="sidenav-nav-link"
+                    >
+                      <i class="sidenav-link-icon" [class]="categoria.icon"></i>
+                      <span class="sidenav-link-text">
+                        {{categoria.nome}}
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+
+
+  </div>
+
+  
+
+
+</div>

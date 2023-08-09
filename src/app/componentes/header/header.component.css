@@ -1,0 +1,147 @@
+
+.divGeral{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.menuBar{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1%;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.categorias{
+  display: flex;
+  width: 100%;
+}
+
+.usuarios{
+  display: flex;
+  width: 100%;
+  padding: 1%;
+  background-color: rgb(129, 29, 29);
+}
+
+.administrador{
+  display: flex;
+  width: 100%;
+  padding: 1%;
+  background-color: violet;
+}
+
+.img{
+  width: 70px;
+  height: 80px;
+}
+
+.p-input-icon-left{
+  display: flex;
+  height: 60%;
+  width: 40%;
+}
+
+.input{
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.426);
+}
+
+.divBotoes{
+  display: flex;
+  width: 180px;
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+
+.backgroundBotoes{
+  border-radius: 8px;
+  background-color: transparent;
+  transition: all .3s ease;
+  width: 40px;
+  height: 40px;
+  border: 2px solid transparent;
+}
+
+.backgroundBotoes:hover{
+  background-color: white;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+
+.botoesCategorias{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel{
+  width: 100%;
+}
+
+.sidenav-nav {
+  padding: 4px;
+  margin: 0;
+  flex-direction: column;
+  align-items: center;
+
+  .sidenav-nav-item{
+    display: flex;
+    width: 200px;
+
+    height: 100%;
+    margin-bottom: 0.625rem;
+
+    .sidenav-nav-link{
+      display: flex;
+      align-items: center;
+      height: 3rem; /* Tamanho da altura dos botões */
+      /* min-width: 3rem; */
+      overflow: hidden;
+      min-height: 3rem;
+      max-height: 100%;
+      width: 100%;
+        /* Essas linhas fazem a responsividade do botão, porém o mesmo fica com o bug do estilingue
+        A label carrega enquanto a aba está abrindo, e por conta disso o estilingue dos botões */
+
+
+
+      text-decoration: none;
+      border-radius: 0.313rem;
+      transition: all .3s ease;
+      cursor: pointer;
+
+      .sidenav-link-icon{
+        font-size: 22px;
+        width: 2rem;
+        min-width: 2rem;
+        margin: 0 0.6rem;
+        text-align: center;
+        color: var(--verde-scrollbar);
+      }
+
+      .sidenav-link-text{
+        margin-left: 5px;
+        margin-right: 10px;
+        word-wrap: break-word;
+        color: var(--verde-scrollbar);
+      }
+    }
+
+    .sidenav-nav-link:hover{
+      background-color: white;
+      color: var(--verde-scrollbar);
+    }
+  }
+}
+
+.horizontalRow{
+  width: 95%;
+  border: 1px solid rgba(0, 0, 0, 0.184);
+}

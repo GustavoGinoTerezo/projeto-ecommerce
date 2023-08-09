@@ -1,0 +1,90 @@
+<div class="divGeral">
+
+  <div class="logo">
+    <img class="img" src="assets/logo.png" alt="Logo" routerLink="/tela-principal">
+  </div>
+
+  <div class="divLogin">
+
+    <div class="login">
+      <div class="divInputs">
+
+        <div class="headerLogin">
+          <h2>Já sou cadastrado !</h2>
+          <br>
+        </div>
+
+        <div class="email field p-fluid mt-4">
+          <div class="inputs">
+            <span class="p-float-label">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                pInputText
+                [(ngModel)]="emailLogin"
+              />
+
+              <label htmlFor="email">Email</label>
+            </span>
+
+          </div>
+        </div>
+
+        <div class="senha field p-fluid mt-4">
+          <div class="inputs">
+            <span class="p-float-label">
+              <p-password
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Digite sua senha"
+                [(ngModel)]="passwordLogin"
+                [feedback]="false"
+                [toggleMask]="true"
+              ></p-password>
+
+              <label htmlFor="senha">Senha</label>
+            </span>
+
+          </div>
+        </div>
+
+        <div class="remember">
+          <div class="checkbox-wrapper">
+            <p-checkbox
+              [(ngModel)]="checked"
+              [binary]="true"
+              inputId="binary"
+            ></p-checkbox>
+            <label for="binary">Lembre de mim</label>
+          </div>
+
+          <a
+            class="a-login"
+            href="redefinirSenha"
+            routerLink="/redefinir-senha-passo-1"
+            >Esqueceu sua senha ?</a
+          >
+        </div>
+
+        <p-button
+          label="Entrar"
+        ></p-button>
+
+        <br>
+        <hr class="horizontalRow">
+      </div>
+
+      <p>
+        Não possui conta ?
+        <a class="a-login" href="opcoesCadastro" routerLink="/criar-conta"
+          >Criar uma conta</a
+        >
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

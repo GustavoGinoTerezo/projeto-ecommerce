@@ -1,0 +1,18 @@
+.divGeral{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.corpo{
+  width: 100%;
+  padding: 1%;
+}
+
+.horizontalRow{
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.184);
+}
+
+
