@@ -7,10 +7,10 @@ html, body { height: 100%; }
 body { margin: 0; font-family: var(--font-family); background-color: var(--verde-background);}
 
 :root {
-  --verde-background: rgba(0, 59, 0, 0.673);
+  --verde-background: rgb(42, 153, 48);
   --verde-scrollbar: rgb(255, 255, 255);
+  --hover-background-botoes: rgba(26, 91, 30, 0.888);
 }
-
 
 /*==================================================================================================================================*/
 /* CSS DA SCROLLBAR */

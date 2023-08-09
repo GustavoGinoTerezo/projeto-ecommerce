@@ -119,7 +119,7 @@
       min-height: 3rem;
       max-height: 100%;
       width: 100%;
-      background-color: var(--verde-background);
+      background-color: var(--hover-background-botoes);
       text-decoration: none;
       border-radius: 0.313rem;
       transition: all .3s ease;
@@ -135,8 +135,6 @@
         color: var(--verde-scrollbar);
       }
 
-
-
       .sidenav-link-text{
         font-size: 20px;
         word-wrap: break-word;
@@ -145,8 +143,7 @@
     }
 
     .sidenav-nav-link:hover{
-      background-color: white;
-      color: var(--verde-scrollbar);
+      background-color: var(--verde-background);
     }
   }
 }
@@ -162,7 +159,7 @@
     height: 3rem; /* Tamanho da altura dos botões */
     min-height: 3rem;
     max-height: 100%;
-    background-color: var(--verde-background);
+    background-color: var(--hover-background-botoes);
     text-decoration: none;
     border-radius: 0.313rem;
     transition: all .3s ease;
@@ -175,6 +172,10 @@
       color: var(--verde-scrollbar);
     }
 
+  }
+
+  .sidenav-nav-link-info:hover{
+    background-color: var(--verde-background);
   }
 }
 .carousel{
