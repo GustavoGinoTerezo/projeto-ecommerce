@@ -20,36 +20,55 @@ export class TelaPrincipalComponent {
   categorias: Categorias[] = [];
   anunciosMaiores: Anuncios[] = [];
   anunciosMenores: Anuncios[] = [];
+
   responsiveOptions: any[] = [
     {
-    breakpoint: '1199px',
-    numVisible: 1,
-    numScroll: 1
+      breakpoint: '1199px',
+      numVisible: 2,
+      numScroll: 1
     },
     {
-        breakpoint: '991px',
+      breakpoint: '991px',
+      numVisible: 2,
+      numScroll: 1
+    },
+    {
+      breakpoint: '767px',
+      numVisible: 1,
+      numScroll: 1
+  }
+  ];
+
+  responsiveOptionsBanner: any[] = [
+    {
+        breakpoint: '1024px',
+        numVisible: 1,
+        numScroll: 1
+    },
+    {
+        breakpoint: '768px',
+        numVisible: 1,
+        numScroll: 1
+    },
+    {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1
+    }
+  ];
+
+  responsiveOptionsEmPromocao: any[] = [
+    {
+        breakpoint: '1199px',
         numVisible: 2,
         numScroll: 1
     },
     {
-        breakpoint: '767px',
+        breakpoint: '768px',
         numVisible: 1,
         numScroll: 1
-  }
-  ];
-  responsiveOptionsGaleria: any[] = [
-    {
-        breakpoint: '1024px',
-        numVisible: 5
     },
-    {
-        breakpoint: '768px',
-        numVisible: 3
-    },
-    {
-        breakpoint: '560px',
-        numVisible: 1
-    }
+    
   ];
 
   constructor(

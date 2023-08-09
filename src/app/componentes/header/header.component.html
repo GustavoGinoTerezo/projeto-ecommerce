@@ -1,12 +1,13 @@
 <div class="divGeral">
 
   <div class="menuBar">
-    <img class="img" src="assets/logo.png" alt="logo">
-
-    <span class="p-input-icon-left">
-      <i class="fa-solid fa-magnifying-glass" style="color: green;"></i>
-      <input type="text" pInputText [(ngModel)]="search" class="input" />
-    </span>
+    <div class="divLogoESearch">
+      <img class="img" src="assets/logo.png" alt="logo">
+      <span class="p-input-icon-left">
+        <i class="fa-solid fa-magnifying-glass" style="color: green;"></i>
+        <input type="text" pInputText [(ngModel)]="search" class="input" />
+      </span>
+    </div>
 
     <div class="divBotoes">
       <button style="color: white;" class="fa-solid fa-user fa-lg backgroundBotoes" routerLink="/login"></button>

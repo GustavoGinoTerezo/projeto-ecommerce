@@ -1,8 +1,10 @@
 <div class="divGeral">
 
-  <p-carousel [value]="images" [autoplayInterval]="7000" [showIndicators]="false" [numVisible]="1" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptions">
+  <p-carousel [value]="images" [autoplayInterval]="7000" [showIndicators]="false" [numVisible]="1" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptionsBanner">
     <ng-template pTemplate="item" let-images>
-      <img [src]="images.imagem" class="imgBanner"/>
+      <div class="imgBannerContainer">
+        <img [src]="images.imagem" class="imgBanner"/>
+      </div>
     </ng-template>
   </p-carousel>
 
@@ -68,9 +70,7 @@
     <img *ngFor="let anuncio of anunciosMaiores.slice(0, 2)" [src]="anuncio.imagem" alt="Imagem de Anuncio" class="imagemAnuncio">
   </div>
 
-
   <br>
-
 
   <div class="line-with-text">
     <hr>
@@ -132,8 +132,8 @@
     <hr>
   </div>
 
-  <div class="divCarousel">
-    <p-carousel [value]="produtosDestaque" [showIndicators]="false" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" class="carouselEmPromocao">
+  <div class="divCarouselEmPromocao">
+    <p-carousel [value]="produtosDestaque" [showIndicators]="false" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptionsEmPromocao" class="carouselEmPromocao">
       <ng-template pTemplate="item" let-produtos>
         <div class="containerGeral">
           <div class="container">
@@ -178,7 +178,7 @@
         </div>
       </ng-template>
     </p-carousel>
-    <div class="test" >
+    <div class="divAnunciosMenores" >
       <img *ngFor="let anuncio of anunciosMenores" [src]="anuncio.imagem" alt="Imagem de Anuncio" class="imagemAnuncioMenor">
     </div>
   </div>

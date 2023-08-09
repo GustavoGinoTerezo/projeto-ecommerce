@@ -5,11 +5,23 @@
   height: 100%;
 }
 
+.imgBannerContainer{
+  padding: 23px;
+}
+
 .imgBanner {
   display: flex;
   width: 100%;
   height: 400px; /* Defina a altura padrão desejada */
   border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+
+.imgBanner:hover{
+  scale: 1.02;
+  transition: 0.3s ease all;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.668);
 }
 
 .containerGeral{
@@ -195,6 +207,11 @@
   width: 100%;
 }
 
+.divCarouselEmPromocao{
+  display: flex;
+  width: 100%;
+}
+
 .carouselEmPromocao{
   width: 80%;
 }
@@ -204,9 +221,32 @@
 }
 
 /* Quando a largura da tela for menor que 768 pixels, esconda a label */
-@media (max-width: 767px) {
+@media (max-width: 800px) {
   .sidenav-link-text {
     display: none;
+  }
+
+  .divCarouselEmPromocao{
+    flex-direction: column;
+  }
+
+  .carouselEmPromocao{
+    width: 100%;
+  }
+
+  .containerGeral{
+    padding: 10px;
+  }
+
+
+  .imagemAnuncioMenor{
+    margin-bottom: 20px;
+    max-width: 60%;
+  }
+
+  .divAnunciosMenores{
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -267,6 +307,14 @@
 .imagemAnuncio{
   width: 49%;
   height: 200px;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+
+.imagemAnuncio:hover{
+  scale: 1.02;
+  transition: 0.3s ease all;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.668);
 }
 
 .imagemAnuncioMenor{
@@ -274,9 +322,18 @@
   height: 150px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  transition: 0.3s ease all;
 }
 
-.test{
+.imagemAnuncioMenor:hover{
+  scale: 1.05;
+  transition: 0.3s ease all;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.668);
+}
+
+
+.divAnunciosMenores{
   width: 100%;
   justify-content: space-around;
   padding: 23px;

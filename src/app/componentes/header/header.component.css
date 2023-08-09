@@ -6,6 +6,8 @@
   height: 100%;
 }
 
+
+
 .menuBar{
   display: flex;
   width: 100%;
@@ -14,6 +16,13 @@
   padding: 1%;
   padding-left: 10%;
   padding-right: 10%;
+}
+
+.divLogoESearch{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
 }
 
 .categorias{
@@ -44,8 +53,18 @@
 .p-input-icon-left{
   display: flex;
   height: 60%;
-  width: 40%;
+  width: 60%;
 }
+
+@media (max-width: 800px) {
+
+  .menuBar{
+    flex-direction: column;
+  }
+
+}
+
+
 
 .input{
   width: 100%;
