@@ -37,7 +37,6 @@
   margin-bottom: 0;
   border-left: 2px solid rgba(0, 0, 0, 0.462);
   border-right: 2px solid rgba(0, 0, 0, 0.462);
-
 }
 
 .precoEBotao{
@@ -103,4 +102,11 @@ img:hover{
   flex-direction: column;
   width: 100%;
   height: 100%;
+}
+
+@media (max-width: 800px) {
+
+  .containerImagemEDescEPreco{
+    flex-direction: column;
+  }
 }
