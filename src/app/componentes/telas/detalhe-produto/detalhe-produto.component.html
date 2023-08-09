@@ -1,17 +1,27 @@
-<div class="detalhe-produto-container">
-  <h2>Detalhes do Produto</h2>
-  <div class="produto-info" *ngIf="produto">
-    <div class="produto-nome">
-      Nome: {{ produto.nome }}
-    </div>
-    <div class="produto-descricao">
-      Descrição: {{ produto.descricao }}
-    </div>
-    <div class="produto-preco">
-      Preço: {{ produto.preco }}
-    </div>
-    <div class="produto-imagem">
-      <img [src]="produto.imagem" alt="Imagem do Produto">
-    </div>
+<div class="divGeral">
+  <div class="containerProduto" *ngIf="produto">
+
+      <h1 class="nome">
+        {{ produto.nome }}
+      </h1>
+
+      <div class="containerImagemEDescEPreco">
+        <div class="imgContainer">
+          <img [src]="produto.imagem" alt="Imagem do Produto" class="img">
+        </div>
+        <div class="containerDescEPreco">
+          <h2 class="descricao">
+            {{ produto.descricao }}
+          </h2>
+          <div class="precoEBotao">
+            <h2 class="preco">
+              {{ produto.preco }}
+            </h2>
+            <div class="botao">
+              <p-button>Adicionar ao carrinho</p-button>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
