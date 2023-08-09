@@ -13,6 +13,7 @@ export interface Produtos {
   providedIn: 'root'
 })
 export class ServiceProdutosService {
+  private produtos: Produtos[] = [];
 
   constructor() { }
 
@@ -31,5 +32,11 @@ export class ServiceProdutosService {
 
   getProdutosDestaque(): Observable<Produtos[]> {
     return of (this.produtosDestaque);
+  }
+
+  obterProdutoPorNome(nome: string): Produtos | undefined {
+    return this.produtosDestaque.find(
+      (produto) => produto.nome && produto.nome.toLowerCase() === nome.toLowerCase()
+    );
   }
 }

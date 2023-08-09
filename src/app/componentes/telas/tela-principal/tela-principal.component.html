@@ -1,6 +1,6 @@
 <div class="divGeral">
 
-  <p-carousel [value]="images" [autoplayInterval]="7000" [showIndicators]="false" [numVisible]="1" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptionsBanner">
+  <!-- <p-carousel [value]="images" [autoplayInterval]="7000" [showIndicators]="false" [numVisible]="1" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptionsBanner">
     <ng-template pTemplate="item" let-images>
       <div class="imgBannerContainer">
         <img [src]="images.imagem" class="imgBanner"/>
@@ -14,7 +14,7 @@
     <hr>
     <div class="textoHR">Em destaque</div>
     <hr>
-  </div>
+  </div> -->
 
   <div class="divCarousel">
     <p-carousel [value]="produtosDestaque" [showIndicators]="false" [numVisible]="4" [numScroll]="4" [circular]="true" [responsiveOptions]="responsiveOptions" class="carousel">
@@ -39,10 +39,10 @@
                 {{ produtos.preco }}
               </div>
               <div class="botoes margem">
-                <div class="sidenav-nav">
-                  <div class="sidenav-nav-item-info">
+                <div class="sidenav-nav" (click)="navigateProduto(produtos)">
+                  <div class="sidenav-nav-item-info" >
                     <a class="sidenav-nav-link-info">
-                      <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg"></i>
+                      <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg" ></i>
                     </a>
                   </div>
                 </div>
@@ -64,14 +64,13 @@
     </p-carousel>
   </div>
 
-  <br>
+  <!-- <br>
 
   <div class="containerAnuncio">
     <img *ngFor="let anuncio of anunciosMaiores.slice(0, 2)" [src]="anuncio.imagem" alt="Imagem de Anuncio" class="imagemAnuncio">
   </div>
 
   <br>
-
   <div class="line-with-text">
     <hr>
     <div class="textoHR">Mais vendidos</div>
@@ -198,7 +197,7 @@
         <img [src]="categoria.imagem" alt="imagem da categoria" class="categoriaImg">
       </div>
     </ng-template>
-  </p-carousel>
+  </p-carousel> -->
 
 </div>
 

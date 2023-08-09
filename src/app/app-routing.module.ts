@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './componentes/login-e-criar-conta/login/login.component';
 import { CriarContaComponent } from './componentes/login-e-criar-conta/criar-conta/criar-conta.component';
 import { TelaPrincipalComponent } from './componentes/telas/tela-principal/tela-principal.component';
+import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/detalhe-produto.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'tela-principal',
     component: TelaPrincipalComponent,
+  },
+  {
+    path: 'detalhe-produto/:nome',
+    component: DetalheProdutoComponent
   },
   {
     path: 'login',

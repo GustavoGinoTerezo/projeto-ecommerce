@@ -5,6 +5,7 @@ import { Anuncios, ServiceAnunciosService } from 'src/app/services/serviceAnunci
 import { Banner, ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
 import { Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Produtos } from 'src/app/services/serviceProdutos/service-produtos.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tela-principal',
@@ -68,7 +69,7 @@ export class TelaPrincipalComponent {
         numVisible: 1,
         numScroll: 1
     },
-    
+
   ];
 
   constructor(
@@ -77,6 +78,7 @@ export class TelaPrincipalComponent {
     private bannerService: ServiceBannerService,
     private categoriasService: ServiceCategoriasService,
     private anuncioService: ServiceAnunciosService,
+    private router: Router
   ){
 
     this.items = [];
@@ -113,7 +115,11 @@ export class TelaPrincipalComponent {
         console.log('Erro ao obter os dados dos usuários:', error);
       }
     );
+  }
 
+  navigateProduto(produto: Produtos) {
+    const nomeFormatado = produto.nome?.toLowerCase().replace(/\s+/g, '-');
+    this.router.navigate(['/detalhe-produto', nomeFormatado]);
   }
 
 
