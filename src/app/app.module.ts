@@ -15,6 +15,7 @@ import { MegaMenuModule } from 'primeng/megamenu';
 import { CarouselModule } from 'primeng/carousel';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ToastModule } from 'primeng/toast';
+import { GalleriaModule } from 'primeng/galleria';
 
 //telas
 import { LoginComponent } from './componentes/login-e-criar-conta/login/login.component';
@@ -47,6 +48,7 @@ import { MessageService } from 'primeng/api';
     CarouselModule,
     SplitButtonModule,
     ToastModule,
+    GalleriaModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

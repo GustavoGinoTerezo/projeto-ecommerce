@@ -1,20 +1,27 @@
 <div class="divGeral">
 
+  <p-carousel [value]="images" [autoplayInterval]="7000" [showIndicators]="false" [numVisible]="1" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptions">
+    <ng-template pTemplate="item" let-images>
+      <img [src]="images.imagem" class="imgBanner"/>
+    </ng-template>
+  </p-carousel>
+
+  <br>
+
   <div class="line-with-text">
     <hr>
     <div class="textoHR">Em destaque</div>
     <hr>
   </div>
 
-
   <div class="divCarousel">
-    <p-carousel [value]="produtosDestaque" [numVisible]="4" [numScroll]="4" [circular]="false" [responsiveOptions]="responsiveOptions" class="carousel">
+    <p-carousel [value]="produtosDestaque" [showIndicators]="false" [numVisible]="4" [numScroll]="4" [circular]="true" [responsiveOptions]="responsiveOptions" class="carousel">
       <ng-template pTemplate="item" let-produtos class="test">
         <div class="containerGeral">
           <div class="container">
             <div class="containerInterno">
               <div class="containerImagem">
-                <img src="assets/logo.png" alt="imagem produto" class="img">
+                <img [src]="produtos.imagem" alt="imagem produto" class="img">
               </div>
               <div class="tamanhoDivs">
                 <div class="nome margem">
@@ -62,13 +69,13 @@
   </div>
 
   <div class="divCarousel">
-    <p-carousel [value]="produtosDestaque" [numVisible]="4" [numScroll]="4" [circular]="false" [responsiveOptions]="responsiveOptions" class="carousel">
+    <p-carousel [value]="produtosDestaque" [showIndicators]="false" [numVisible]="4" [numScroll]="4" [circular]="true" [responsiveOptions]="responsiveOptions" class="carousel">
       <ng-template pTemplate="item" let-produtos class="test">
         <div class="containerGeral">
           <div class="container">
             <div class="containerInterno">
               <div class="containerImagem">
-                <img src="assets/logo.png" alt="imagem produto" class="img">
+                <img [src]="produtos.imagem" alt="imagem produto" class="img">
               </div>
               <div class="tamanhoDivs">
                 <div class="nome margem">
@@ -116,13 +123,13 @@
   </div>
 
   <div class="divCarousel">
-    <p-carousel [value]="produtosDestaque" [numVisible]="4" [numScroll]="4" [circular]="false" [responsiveOptions]="responsiveOptions" class="carousel">
+    <p-carousel [value]="produtosDestaque" [showIndicators]="false" [numVisible]="4" [numScroll]="4" [circular]="true" [responsiveOptions]="responsiveOptions" class="carousel">
       <ng-template pTemplate="item" let-produtos class="test">
         <div class="containerGeral">
           <div class="container">
             <div class="containerInterno">
               <div class="containerImagem">
-                <img src="assets/logo.png" alt="imagem produto" class="img">
+                <img [src]="produtos.imagem" alt="imagem produto" class="img">
               </div>
               <div class="tamanhoDivs">
                 <div class="nome margem">
@@ -162,6 +169,23 @@
       </ng-template>
     </p-carousel>
   </div>
+
+  <div class="line-with-text">
+    <hr>
+    <div class="textoHR">Categorias</div>
+    <hr>
+  </div>
+
+  <br>
+
+  <p-carousel [value]="categorias" [numVisible]="10" [numScroll]="10" [circular]="true" [showIndicators]="false" [responsiveOptions]="responsiveOptions">
+    <ng-template pTemplate="item" let-categoria>
+      <div class="categorias">
+        <div>{{categoria.nome}}</div>
+        <img [src]="categoria.imagem" alt="imagem da categoria" class="categoriaImg">
+      </div>
+    </ng-template>
+  </p-carousel>
 
 </div>
 

@@ -7,7 +7,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: var(--font-family); background-color: var(--verde-background);}
 
 :root {
-  --verde-background: rgb(42, 153, 48);
+  --verde-background: rgb(62, 62, 62);
   --verde-scrollbar: rgb(255, 255, 255);
   --hover-background-botoes: rgba(26, 91, 30, 0.888);
 }

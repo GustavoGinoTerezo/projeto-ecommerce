@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 
 export interface Categorias {
   nome: string;
+  imagem: string;
   icon: string;
   produtos?: Categorias[] ;
 }
@@ -17,17 +18,21 @@ export class ServiceCategoriasService {
     {
         nome: 'Categoria A',
         icon: 'fa-solid fa-question',
+        imagem: 'assets/logo.png',
         produtos: [{
           nome: 'Teste 1',
           icon: 'fa-solid fa-question',
+          imagem: 'assets/logo.png',
         }
         ]
     },
     {
       nome: 'Categoria B',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -35,8 +40,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria C',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -44,8 +51,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria D',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -53,8 +62,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria E',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -62,8 +73,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria F',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -71,8 +84,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria G',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -80,8 +95,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria H',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -89,8 +106,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria I',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -98,8 +117,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria J',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -107,8 +128,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria K',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -116,8 +139,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria L',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -125,8 +150,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria M',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -134,8 +161,10 @@ export class ServiceCategoriasService {
     {
     nome: 'Categoria N',
     icon: 'fa-solid fa-question',
+    imagem: 'assets/logo.png',
     produtos: [{
       nome: '',
+      imagem: 'assets/logo.png',
       icon:'',
     }
     ]
@@ -143,8 +172,10 @@ export class ServiceCategoriasService {
     {
     nome: 'Categoria O',
     icon: 'fa-solid fa-question',
+    imagem: 'assets/logo.png',
     produtos: [{
       nome: '',
+      imagem: 'assets/logo.png',
       icon:'',
     }
     ]
@@ -152,8 +183,10 @@ export class ServiceCategoriasService {
     {
     nome: 'Categoria P',
     icon: 'fa-solid fa-question',
+    imagem: 'assets/logo.png',
     produtos: [{
       nome: '',
+      imagem: 'assets/logo.png',
       icon:'',
     }
     ]
@@ -161,8 +194,10 @@ export class ServiceCategoriasService {
     {
       nome: 'Categoria Q',
       icon: 'fa-solid fa-question',
+      imagem: 'assets/logo.png',
       produtos: [{
         nome: '',
+        imagem: 'assets/logo.png',
         icon:'',
       }
       ]
@@ -170,8 +205,10 @@ export class ServiceCategoriasService {
     {
     nome: 'Categoria R',
     icon: 'fa-solid fa-question',
+    imagem: 'assets/logo.png',
     produtos: [{
       nome: '',
+      imagem: 'assets/logo.png',
       icon:'',
     }
     ]
@@ -179,8 +216,10 @@ export class ServiceCategoriasService {
     {
     nome: 'Categoria S',
     icon: 'fa-solid fa-question',
+    imagem: 'assets/logo.png',
     produtos: [{
       nome: '',
+      imagem: 'assets/logo.png',
       icon:'',
     }
     ]
@@ -188,8 +227,10 @@ export class ServiceCategoriasService {
     {
     nome: 'Categoria T',
     icon: 'fa-solid fa-question',
+    imagem: 'assets/logo.png',
     produtos: [{
       nome: '',
+      imagem: 'assets/logo.png',
       icon:'',
     }
     ]
