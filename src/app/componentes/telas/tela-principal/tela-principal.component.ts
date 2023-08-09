@@ -1,6 +1,7 @@
-import { ServiceProdutosService } from './../../services/serviceProdutos/service-produtos.service';
-import { Component, EventEmitter } from '@angular/core';
+import { ServiceProdutosService } from 'src/app/services/serviceProdutos/service-produtos.service';
+import { Component } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
+import { Anuncios, ServiceAnunciosService } from 'src/app/services/serviceAnuncios/service-anuncios.service';
 import { Banner, ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
 import { Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Produtos } from 'src/app/services/serviceProdutos/service-produtos.service';
@@ -16,7 +17,9 @@ export class TelaPrincipalComponent {
   produtosDestaque: Produtos[] = [];
   items: MenuItem[];
   images: Banner[] = [];
-  categorias: Categorias[] = []
+  categorias: Categorias[] = [];
+  anunciosMaiores: Anuncios[] = [];
+  anunciosMenores: Anuncios[] = [];
   responsiveOptions: any[] = [
     {
     breakpoint: '1199px',
@@ -54,6 +57,7 @@ export class TelaPrincipalComponent {
     private serviceProdutosDestaque: ServiceProdutosService,
     private bannerService: ServiceBannerService,
     private categoriasService: ServiceCategoriasService,
+    private anuncioService: ServiceAnunciosService,
   ){
 
     this.items = [];
@@ -61,11 +65,21 @@ export class TelaPrincipalComponent {
 
   ngOnInit(){
 
+    this.anuncioService.getAnunciosMaiores().subscribe(
+      (anunciosMaiores) => {
+        this.anunciosMaiores = anunciosMaiores;
+    });
+
+    this.anuncioService.getAnunciosMenores().subscribe(
+      (anunciosMenores) => {
+        this.anunciosMenores = anunciosMenores;
+    });
+
+
     this.categoriasService.getCategorias().subscribe(
       (categorias) => {
         this.categorias = categorias;
-      }
-    );
+    });
 
     this.bannerService.getImages().subscribe((images) => {
       this.images = images;

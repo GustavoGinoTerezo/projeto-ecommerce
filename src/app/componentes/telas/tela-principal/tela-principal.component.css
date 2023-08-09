@@ -144,6 +144,7 @@
 
       .sidenav-link-text{
         font-size: 20px;
+        margin-left: 5px;
         word-wrap: break-word;
         color: var(--verde-scrollbar);
       }
@@ -194,6 +195,10 @@
   width: 100%;
 }
 
+.carouselEmPromocao{
+  width: 80%;
+}
+
 .sidenav-link-text {
   display: block;
 }
@@ -225,26 +230,6 @@
   color: rgba(0, 0, 0, 0.502);
 }
 
-.custom-carousel {
-  /* Define a altura total do carrossel (incluindo as 3 linhas) */
-  height: 900px; /* Por exemplo, ajuste conforme necessário */
-
-  /* Define o tamanho das linhas do carrossel */
-  .p-carousel-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-
-  /* Define o tamanho dos itens individuais (linhas) */
-  .p-carousel-item {
-    flex: 1;
-  }
-}
-
-
-
 .categorias{
   display: flex;
   flex-direction: column;
@@ -271,4 +256,30 @@
   width: 100px;
 }
 
+.containerAnuncio{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 35px;
+  padding-right: 35px;
+}
 
+.imagemAnuncio{
+  width: 49%;
+  height: 200px;
+}
+
+.imagemAnuncioMenor{
+  width: 100%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.test{
+  width: 100%;
+  justify-content: space-around;
+  padding: 23px;
+  display: flex;
+  flex-direction: column;
+}

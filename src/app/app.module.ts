@@ -22,8 +22,9 @@ import { LoginComponent } from './componentes/login-e-criar-conta/login/login.co
 import { HeaderComponent } from './componentes/header/header.component';
 import { RodapeComponent } from './componentes/rodape/rodape.component';
 import { CriarContaComponent } from './componentes/login-e-criar-conta/criar-conta/criar-conta.component';
-import { TelaPrincipalComponent } from './componentes/tela-principal/tela-principal.component';
+import { TelaPrincipalComponent } from './componentes/telas/tela-principal/tela-principal.component';
 import { MessageService } from 'primeng/api';
+import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/detalhe-produto.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MessageService } from 'primeng/api';
     HeaderComponent,
     RodapeComponent,
     CriarContaComponent,
-    TelaPrincipalComponent
+    DetalheProdutoComponent,
+    TelaPrincipalComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { MessageService } from 'primeng/api';
     SplitButtonModule,
     ToastModule,
     GalleriaModule,
+
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

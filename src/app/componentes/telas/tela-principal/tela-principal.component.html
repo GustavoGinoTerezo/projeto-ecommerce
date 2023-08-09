@@ -62,6 +62,16 @@
     </p-carousel>
   </div>
 
+  <br>
+
+  <div class="containerAnuncio">
+    <img *ngFor="let anuncio of anunciosMaiores.slice(0, 2)" [src]="anuncio.imagem" alt="Imagem de Anuncio" class="imagemAnuncio">
+  </div>
+
+
+  <br>
+
+
   <div class="line-with-text">
     <hr>
     <div class="textoHR">Mais vendidos</div>
@@ -123,8 +133,8 @@
   </div>
 
   <div class="divCarousel">
-    <p-carousel [value]="produtosDestaque" [showIndicators]="false" [numVisible]="4" [numScroll]="4" [circular]="true" [responsiveOptions]="responsiveOptions" class="carousel">
-      <ng-template pTemplate="item" let-produtos class="test">
+    <p-carousel [value]="produtosDestaque" [showIndicators]="false" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" class="carouselEmPromocao">
+      <ng-template pTemplate="item" let-produtos>
         <div class="containerGeral">
           <div class="container">
             <div class="containerInterno">
@@ -168,6 +178,9 @@
         </div>
       </ng-template>
     </p-carousel>
+    <div class="test" >
+      <img *ngFor="let anuncio of anunciosMenores" [src]="anuncio.imagem" alt="Imagem de Anuncio" class="imagemAnuncioMenor">
+    </div>
   </div>
 
   <div class="line-with-text">

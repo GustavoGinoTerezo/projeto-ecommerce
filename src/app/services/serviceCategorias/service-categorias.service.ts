@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { Produtos } from '../serviceProdutos/service-produtos.service';
 
 export interface Categorias {
   nome: string;
   imagem: string;
   icon: string;
-  produtos?: Categorias[] ;
+  produtos?: Produtos[] ;
 }
 
 @Injectable({
@@ -21,7 +22,6 @@ export class ServiceCategoriasService {
         imagem: 'assets/logo.png',
         produtos: [{
           nome: 'Teste 1',
-          icon: 'fa-solid fa-question',
           imagem: 'assets/logo.png',
         }
         ]
@@ -33,7 +33,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -44,7 +43,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -55,7 +53,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -66,7 +63,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -77,7 +73,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -88,7 +83,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -99,7 +93,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -110,7 +103,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -121,7 +113,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -132,7 +123,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -143,7 +133,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -154,7 +143,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -165,7 +153,6 @@ export class ServiceCategoriasService {
     produtos: [{
       nome: '',
       imagem: 'assets/logo.png',
-      icon:'',
     }
     ]
     },
@@ -176,7 +163,6 @@ export class ServiceCategoriasService {
     produtos: [{
       nome: '',
       imagem: 'assets/logo.png',
-      icon:'',
     }
     ]
     },
@@ -187,7 +173,6 @@ export class ServiceCategoriasService {
     produtos: [{
       nome: '',
       imagem: 'assets/logo.png',
-      icon:'',
     }
     ]
     },
@@ -198,7 +183,6 @@ export class ServiceCategoriasService {
       produtos: [{
         nome: '',
         imagem: 'assets/logo.png',
-        icon:'',
       }
       ]
     },
@@ -209,7 +193,6 @@ export class ServiceCategoriasService {
     produtos: [{
       nome: '',
       imagem: 'assets/logo.png',
-      icon:'',
     }
     ]
     },
@@ -220,7 +203,6 @@ export class ServiceCategoriasService {
     produtos: [{
       nome: '',
       imagem: 'assets/logo.png',
-      icon:'',
     }
     ]
     },
@@ -231,7 +213,6 @@ export class ServiceCategoriasService {
     produtos: [{
       nome: '',
       imagem: 'assets/logo.png',
-      icon:'',
     }
     ]
     },
