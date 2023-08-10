@@ -16,6 +16,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ToastModule } from 'primeng/toast';
 import { GalleriaModule } from 'primeng/galleria';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 //telas
 import { LoginComponent } from './componentes/login-e-criar-conta/login/login.component';
@@ -25,6 +27,7 @@ import { CriarContaComponent } from './componentes/login-e-criar-conta/criar-con
 import { TelaPrincipalComponent } from './componentes/telas/tela-principal/tela-principal.component';
 import { MessageService } from 'primeng/api';
 import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/detalhe-produto.component';
+import { CategoriaComponent } from './componentes/telas/categoria/categoria.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/det
     CriarContaComponent,
     DetalheProdutoComponent,
     TelaPrincipalComponent,
+    CategoriaComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/det
     SplitButtonModule,
     ToastModule,
     GalleriaModule,
-
+    AvatarModule,
+    AvatarGroupModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

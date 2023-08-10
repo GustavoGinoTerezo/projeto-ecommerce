@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { Anuncios, ServiceAnunciosService } from 'src/app/services/serviceAnuncios/service-anuncios.service';
 import { Banner, ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
 import { Categorias, ServiceCategoriasService, Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
@@ -179,5 +179,8 @@ export class TelaPrincipalComponent {
     this.router.navigate(['/detalhe-produto', nomeFormatado]);
   }
 
-
+  navigateCategoria(categoria: Categorias) {
+    const nomeFormatado = categoria.nome?.toLowerCase().replace(/\s+/g, '-');
+    this.router.navigate(['/categoria', nomeFormatado]);
+  }
 }

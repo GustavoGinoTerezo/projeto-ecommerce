@@ -32,7 +32,7 @@
               </div>
               <div class="tamanhoDivs">
                 <div class="descricao margem">
-                  {{ produtos.descricao }}
+                  {{ produtos.descricaoBreve }}
                 </div>
               </div>
               <div class="preco margem">
@@ -93,7 +93,7 @@
               </div>
               <div class="tamanhoDivs">
                 <div class="descricao margem">
-                  {{ produtos.descricao }}
+                  {{ produtos.descricaoBreve }}
                 </div>
               </div>
               <div class="preco margem">
@@ -147,7 +147,7 @@
               </div>
               <div class="tamanhoDivs">
                 <div class="descricao margem">
-                  {{ produtos.descricao }}
+                  {{ produtos.descricaoBreve }}
                 </div>
               </div>
               <div class="preco margem">
@@ -192,7 +192,7 @@
 
   <p-carousel [value]="categorias" [numVisible]="10" [numScroll]="10" [circular]="true" [showIndicators]="false" [responsiveOptions]="responsiveOptionsCategorias">
     <ng-template pTemplate="item" let-categoria>
-      <div class="categorias">
+      <div class="categorias" (click)="navigateCategoria(categoria)">
         <div>{{categoria.nome}}</div>
         <img [src]="categoria.imagem" alt="imagem da categoria" class="categoriaImg">
       </div>

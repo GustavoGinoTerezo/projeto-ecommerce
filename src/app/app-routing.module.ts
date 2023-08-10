@@ -4,6 +4,7 @@ import { LoginComponent } from './componentes/login-e-criar-conta/login/login.co
 import { CriarContaComponent } from './componentes/login-e-criar-conta/criar-conta/criar-conta.component';
 import { TelaPrincipalComponent } from './componentes/telas/tela-principal/tela-principal.component';
 import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/detalhe-produto.component';
+import { CategoriaComponent } from './componentes/telas/categoria/categoria.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'detalhe-produto/:nome',
     component: DetalheProdutoComponent
+  },
+  {
+    path: 'categoria/:nome',
+    component: CategoriaComponent
   },
   {
     path: 'login',

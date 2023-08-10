@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 
@@ -7,17 +7,19 @@ import { Produtos, ServiceCategoriasService } from 'src/app/services/serviceCate
   templateUrl: './detalhe-produto.component.html',
   styleUrls: ['./detalhe-produto.component.css']
 })
-export class DetalheProdutoComponent {
+export class DetalheProdutoComponent implements OnInit {
 
   produto: Produtos | undefined;
   nomeProduto: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private produtoService: ServiceCategoriasService
+    private produtoService: ServiceCategoriasService,
   ) {}
 
+
   ngOnInit() {
+
     //================================================================================================================================//
     //RECEBER OS PARAMETROS DOS PRODUTOS EM DESTAQUE
     this.route.params.subscribe((params) => {
@@ -53,8 +55,6 @@ export class DetalheProdutoComponent {
       }
     }
     });
-
-
 
 
   }

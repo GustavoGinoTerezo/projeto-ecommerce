@@ -1,0 +1,6 @@
+<div *ngIf="categoria">
+  {{categoria.nome}}
+  <div *ngFor="let produto of categoria.produtos" class="comentarioIndividual">
+    {{produto.nome}}
+  </div>
+</div>
