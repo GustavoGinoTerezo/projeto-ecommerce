@@ -1,10 +1,8 @@
 <div class="divGeral">
   <div class="containerProduto" *ngIf="produto">
-
       <h1 class="nome">
         {{ produto.nome }}
       </h1>
-
       <div class="containerImagemEDescEPreco">
         <div class="imgContainer">
           <img [src]="produto.imagem" alt="Imagem do Produto" class="img">
@@ -25,3 +23,5 @@
       </div>
   </div>
 </div>
+
+

@@ -6,12 +6,17 @@
 }
 
 .imgBannerContainer{
+  display: flex;
   padding: 23px;
+  justify-content: center;
+  align-items: center;
 }
 
 .imgBanner {
   display: flex;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
+  width: 98%;
   height: 400px; /* Defina a altura padrão desejada */
   border-radius: 8px;
   cursor: pointer;

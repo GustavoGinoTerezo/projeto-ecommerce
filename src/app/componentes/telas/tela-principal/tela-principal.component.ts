@@ -1,11 +1,9 @@
-import { ServiceProdutosService } from 'src/app/services/serviceProdutos/service-produtos.service';
 import { Component } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Anuncios, ServiceAnunciosService } from 'src/app/services/serviceAnuncios/service-anuncios.service';
 import { Banner, ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
-import { Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
-import { Produtos } from 'src/app/services/serviceProdutos/service-produtos.service';
-import { Route, Router } from '@angular/router';
+import { Categorias, ServiceCategoriasService, Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tela-principal',
@@ -14,11 +12,14 @@ import { Route, Router } from '@angular/router';
 })
 export class TelaPrincipalComponent {
 
-
+  //Relacionado aos produtos
   produtosDestaque: Produtos[] = [];
-  items: MenuItem[];
-  images: Banner[] = [];
+  produtosMaisVendidos: Produtos[] = [];
+  produtosEmPromocao: Produtos[] = [];
   categorias: Categorias[] = [];
+
+  //Relacionado as Imagens
+  images: Banner[] = [];
   anunciosMaiores: Anuncios[] = [];
   anunciosMenores: Anuncios[] = [];
 
@@ -115,20 +116,20 @@ export class TelaPrincipalComponent {
     },
 
   ];
+
   constructor(
     private messageService: MessageService,
-    private serviceProdutosDestaque: ServiceProdutosService,
+    private serviceProdutosDestaque: ServiceCategoriasService,
     private bannerService: ServiceBannerService,
     private categoriasService: ServiceCategoriasService,
     private anuncioService: ServiceAnunciosService,
     private router: Router
   ){
-
-    this.items = [];
   }
 
   ngOnInit(){
-
+    //================================================================================================================================//
+    //RELACIONADO COM AS IMAGENS
     this.anuncioService.getAnunciosMaiores().subscribe(
       (anunciosMaiores) => {
         this.anunciosMaiores = anunciosMaiores;
@@ -139,24 +140,37 @@ export class TelaPrincipalComponent {
         this.anunciosMenores = anunciosMenores;
     });
 
+    this.bannerService.getImages().subscribe((images) => {
+      this.images = images;
+    });
+
+    //================================================================================================================================//
+    //RELACIONADO COM OS PRODUTOS
 
     this.categoriasService.getCategorias().subscribe(
       (categorias) => {
         this.categorias = categorias;
     });
 
-    this.bannerService.getImages().subscribe((images) => {
-      this.images = images;
-    });
-
+    //PRODUTOS EM DESTAQUE
     this.serviceProdutosDestaque.getProdutosDestaque().subscribe(
-      (categorias: Produtos[]) => {
-        this.produtosDestaque = categorias;
-        // Ordenar o array de usuários com base no status (do menor para o maior)
+      (produtosDestaque: Produtos[]) => {
+        this.produtosDestaque = produtosDestaque;
       },
-      (error: any) => {
-        console.log('Erro ao obter os dados dos usuários:', error);
-      }
+    );
+
+    //PRODUTOS MAIS VENDIDOS
+    this.serviceProdutosDestaque.getProdutosMaisVendidos().subscribe(
+      (produtosMaisVendidos: Produtos[]) => {
+        this.produtosMaisVendidos = produtosMaisVendidos;
+      },
+    );
+
+    //PRODUTOS EM PROMOCAO
+    this.serviceProdutosDestaque.getProdutosEmPromocao().subscribe(
+      (produtosEmPromocao: Produtos[]) => {
+        this.produtosEmPromocao = produtosEmPromocao;
+      },
     );
   }
 
