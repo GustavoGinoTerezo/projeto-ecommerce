@@ -72,6 +72,49 @@ export class TelaPrincipalComponent {
 
   ];
 
+  responsiveOptionsCategorias: any[] = [
+    {
+      breakpoint: '1400px',
+      numVisible: 8,
+      numScroll: 1
+    },
+    {
+        breakpoint: '1200px',
+        numVisible: 7,
+        numScroll: 1
+    },
+    {
+      breakpoint: '1000px',
+      numVisible: 6,
+      numScroll: 1
+    },
+    {
+      breakpoint: '860px',
+      numVisible: 5,
+      numScroll: 1
+    },
+    {
+      breakpoint: '730px',
+      numVisible: 4,
+      numScroll: 1
+    },
+    {
+      breakpoint: '600px',
+      numVisible: 3,
+      numScroll: 1
+    },
+    {
+      breakpoint: '480px',
+      numVisible: 2,
+      numScroll: 1
+    },
+    {
+        breakpoint: '350px',
+        numVisible: 1,
+        numScroll: 1
+    },
+
+  ];
   constructor(
     private messageService: MessageService,
     private serviceProdutosDestaque: ServiceProdutosService,
