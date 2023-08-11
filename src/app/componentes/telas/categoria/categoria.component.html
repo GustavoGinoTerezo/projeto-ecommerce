@@ -6,7 +6,7 @@
 
   <div class="categoriaEProdutos">
     <div class="divCarousel">
-      <p-carousel [value]="categorias" orientation="vertical" [numVisible]="3" [numScroll]="3" [circular]="true" [showIndicators]="false" class="carousel">
+      <p-carousel [value]="categorias" orientation="vertical" [numVisible]="5" [numScroll]="5" [circular]="true" [showIndicators]="false" class="carousel">
         <ng-template pTemplate="item" let-categoria >
           <div (click)="navigateCategoria(categoria)" class="containerCategoria">
             <div>{{categoria.nome}}</div>
@@ -22,10 +22,9 @@
 
 
     <div class="containerProdutos">
-
       <div *ngIf="categoria">
-        <div *ngFor="let produto of categoria.produtos | slice:first:first + rows" >
-          <div class="containerGeral">
+        <div class="linhaProdutos">
+          <div *ngFor="let produto of categoria.produtos | slice:first:first + rows" class="containerGeral">
             <div class="container">
               <div class="containerInterno">
                 <div class="containerImagem">
@@ -45,11 +44,10 @@
                   {{ produto.preco }}
                 </div>
                 <div class="botoes margem">
-                  <div class="sidenav-nav" >
-                    <!-- (click)="navigateProduto(produto)" -->
-                    <div class="sidenav-nav-item-info" >
+                  <div class="sidenav-nav">
+                    <div class="sidenav-nav-item-info">
                       <a class="sidenav-nav-link-info">
-                        <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg" ></i>
+                        <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg"></i>
                       </a>
                     </div>
                   </div>
@@ -70,11 +68,12 @@
         </div>
       </div>
 
-      <div>
-        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 20, 30]">
+      <div class="paginator">
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[12, 20, 30]">
         </p-paginator>
       </div>
     </div>
+
 
 
   </div>

@@ -11,11 +11,9 @@ export class CategoriaComponent {
 
   categoria: Categorias | undefined;
   nomeCategoria: string | null = null;
-
   categorias: Categorias[] = [];
-
   first: number = 0; // Primeiro item da página
-  rows: number = 10; // Número de itens por página
+  rows: number = 12; // Número de itens por página
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +23,7 @@ export class CategoriaComponent {
   ) {}
 
   ngOnInit() {
+
     this.route.params.subscribe((params) => {
       this.nomeCategoria = params['nome'];
 

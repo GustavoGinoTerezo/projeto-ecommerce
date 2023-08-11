@@ -45,102 +45,6 @@ export class ServiceCategoriasService {
       imagem: 'assets/logo.png',
       produtos: [
         {
-        nome: 'Teste 1',
-        imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-        nome: 'Teste 1',
-        imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
           nome: 'Teste 1',
           imagem: 'assets/logo.png',
         },
@@ -376,6 +280,17 @@ export class ServiceCategoriasService {
     {nome: 'Produto T', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto T', descricaoCompleta: 'Descrição completa do produto T', especificacaoTecnica: 'Especificação Técnica do Produto T', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
   ]
 
+  //==================================================================================================================================//
+
+  getCategorias(): Observable<Categorias[]> {
+    return of (this.categorias);
+  }
+
+  obterCategoriaPorNome(nome: string): Categorias | undefined {
+    return this.categorias.find(
+      (categoria) => categoria.nome && categoria.nome.toLowerCase() === nome.toLowerCase()
+    );
+  }
 
   //==================================================================================================================================//
   //PRODUTOS EM DESTAQUE
@@ -417,14 +332,6 @@ export class ServiceCategoriasService {
   }
 
   //==================================================================================================================================//
-  getCategorias(): Observable<Categorias[]> {
-    return of (this.categorias);
-  }
 
-  obterCategoriaPorNome(nome: string): Categorias | undefined {
-    return this.categorias.find(
-      (categoria) => categoria.nome && categoria.nome.toLowerCase() === nome.toLowerCase()
-    );
-  }
   constructor() { }
 }
