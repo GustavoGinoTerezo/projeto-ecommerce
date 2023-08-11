@@ -2,19 +2,19 @@
 
   <div class="containerProduto" *ngIf="produto || produtoDaCategoria">
       <h1 class="nome">
-        {{ produto?.nome || produtoDaCategoria?.nome }}
+        {{ produto?.nome || produtoDaCategoria.nome }}
       </h1>
       <div class="containerImagemEDescEPreco">
         <div class="imgContainer">
-          <img [src]="produto?.imagem || produtoDaCategoria?.imagem" alt="Imagem do Produto" class="img">
+          <img [src]="produto?.imagem || produtoDaCategoria.imagem" alt="Imagem do Produto" class="img">
         </div>
         <div class="containerDescEPreco">
           <h2 class="descricao">
-            {{ produto?.descricaoCompleta || produtoDaCategoria?.descricaoCompleta }}
+            {{ produto?.descricaoCompleta || produtoDaCategoria.descricaoCompleta }}
           </h2>
           <div class="precoEBotao">
             <h2 class="preco">
-              {{ produto?.preco || produtoDaCategoria?.preco }}
+              {{ produto?.preco || produtoDaCategoria.preco }}
             </h2>
             <div class="botao">
               <p-button>Adicionar ao carrinho</p-button>
@@ -30,7 +30,7 @@
     </h1>
 
     <h2 class="divDescricaoCompleta">
-      {{ produto?.especificacaoTecnica || produtoDaCategoria?.especificacaoTecnica }}
+      {{ produto?.especificacaoTecnica || produtoDaCategoria.especificacaoTecnica }}
     </h2>
 
   </div>
