@@ -18,6 +18,7 @@ import { ToastModule } from 'primeng/toast';
 import { GalleriaModule } from 'primeng/galleria';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { PaginatorModule } from 'primeng/paginator';
 
 //telas
 import { LoginComponent } from './componentes/login-e-criar-conta/login/login.component';
@@ -57,6 +58,7 @@ import { CategoriaComponent } from './componentes/telas/categoria/categoria.comp
     GalleriaModule,
     AvatarModule,
     AvatarGroupModule,
+    PaginatorModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

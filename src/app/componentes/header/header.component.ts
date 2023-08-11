@@ -29,7 +29,6 @@ export class HeaderComponent {
         numScroll: 1
     }
   ]
-  showCategoria: boolean = true;
 
   constructor(
     private categoriasService: ServiceCategoriasService,
@@ -49,10 +48,6 @@ export class HeaderComponent {
   navigateCategoria(categoria: Categorias) {
     const nomeFormatado = categoria.nome?.toLowerCase().replace(/\s+/g, '-');
     this.router.navigate(['/categoria', nomeFormatado]);
-    this.showCategoria = false; //controlando a div da categoria por enquanto
   }
 
-  showCategorias(){
-    this.showCategoria = true; //controlando a div da categoria por enquanto
-  }
 }

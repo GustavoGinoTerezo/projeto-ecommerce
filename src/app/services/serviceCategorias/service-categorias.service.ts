@@ -80,6 +80,78 @@ export class ServiceCategoriasService {
           nome: 'Teste 1',
           imagem: 'assets/logo.png',
         },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+        nome: 'Teste 1',
+        imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
       ]
     },
     {

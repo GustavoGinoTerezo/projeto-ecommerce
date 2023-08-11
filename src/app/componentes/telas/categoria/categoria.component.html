@@ -1,6 +1,85 @@
-<div *ngIf="categoria">
-  {{categoria.nome}}
-  <div *ngFor="let produto of categoria.produtos" class="comentarioIndividual">
-    {{produto.nome}}
+<div class="divGeral">
+
+  <div *ngIf="categoria" class="divCategoria">
+    {{categoria.nome}}
   </div>
+
+  <div class="categoriaEProdutos">
+    <div class="divCarousel">
+      <p-carousel [value]="categorias" orientation="vertical" [numVisible]="3" [numScroll]="3" [circular]="true" [showIndicators]="false" class="carousel">
+        <ng-template pTemplate="item" let-categoria >
+          <div (click)="navigateCategoria(categoria)" class="containerCategoria">
+            <div>{{categoria.nome}}</div>
+            <img [src]="categoria.imagem" alt="imagem da categoria" class="imgCarousel">
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+
+
+
+
+
+    <div class="containerProdutos">
+
+      <div *ngIf="categoria">
+        <div *ngFor="let produto of categoria.produtos | slice:first:first + rows" >
+          <div class="containerGeral">
+            <div class="container">
+              <div class="containerInterno">
+                <div class="containerImagem">
+                  <img [src]="produto.imagem" alt="imagem produto" class="img">
+                </div>
+                <div class="tamanhoDivs">
+                  <div class="nome margem">
+                    {{ produto.nome }}
+                  </div>
+                </div>
+                <div class="tamanhoDivs">
+                  <div class="descricao margem">
+                    {{ produto.descricaoBreve }}
+                  </div>
+                </div>
+                <div class="preco margem">
+                  {{ produto.preco }}
+                </div>
+                <div class="botoes margem">
+                  <div class="sidenav-nav" >
+                    <!-- (click)="navigateProduto(produto)" -->
+                    <div class="sidenav-nav-item-info" >
+                      <a class="sidenav-nav-link-info">
+                        <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg" ></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="sidenav-nav">
+                    <div class="sidenav-nav-item">
+                      <a class="sidenav-nav-link">
+                        <i class="sidenav-link-icon fa-solid fa-cart-shopping fa-lg"></i>
+                        <span class="sidenav-link-text">
+                          <div>Comprar</div>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 20, 30]">
+        </p-paginator>
+      </div>
+    </div>
+
+
+  </div>
+
 </div>
+
+
+
