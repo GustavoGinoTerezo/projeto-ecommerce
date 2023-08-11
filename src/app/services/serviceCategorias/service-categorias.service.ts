@@ -44,6 +44,91 @@ export class ServiceCategoriasService {
       icon: 'fa-solid fa-question',
       imagem: 'assets/logo.png',
       produtos: [
+        {nome: 'Teste 1', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do Teste 1', descricaoCompleta: 'Descrição completa do produto Teste 1', especificacaoTecnica: 'Especificação Técnica do Produto Teste 1', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
+        {
+          nome: 'Teste 1',
+          imagem: 'assets/logo.png',
+        },
         {
           nome: 'Teste 1',
           imagem: 'assets/logo.png',

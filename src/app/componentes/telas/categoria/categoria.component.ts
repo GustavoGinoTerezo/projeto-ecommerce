@@ -40,6 +40,18 @@ export class CategoriaComponent {
     );
   }
 
+  navigateToDetalheProduto(produto: Produtos) {
+
+    const nomeFormatado = produto.nome?.toLowerCase().replace(/\s+/g, '-');
+    this.router.navigate(['/detalhe-produto', nomeFormatado],
+    {
+      queryParams: {
+        produto: JSON.stringify(produto),
+      },
+    });
+
+  }
+
   navigateCategoria(categoria: Categorias) {
     const nomeFormatado = categoria.nome?.toLowerCase().replace(/\s+/g, '-');
     this.router.navigate(['/categoria', nomeFormatado]);

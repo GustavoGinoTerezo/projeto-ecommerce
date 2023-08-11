@@ -152,31 +152,12 @@ export class TelaPrincipalComponent {
         this.categorias = categorias;
     });
 
-
-
-
-
-
-
     //PRODUTOS EM DESTAQUE
     this.serviceProdutosDestaque.getProdutosDestaque().subscribe(
       (produtosDestaque: Produtos[]) => {
         this.produtosDestaque = produtosDestaque;
       },
     );
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //PRODUTOS MAIS VENDIDOS
     this.serviceProdutosDestaque.getProdutosMaisVendidos().subscribe(
@@ -193,56 +174,10 @@ export class TelaPrincipalComponent {
     );
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   navigateProduto(produto: Produtos) {
     const nomeFormatado = produto.nome?.toLowerCase().replace(/\s+/g, '-');
     this.router.navigate(['/detalhe-produto', nomeFormatado]);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   navigateCategoria(categoria: Categorias) {
     const nomeFormatado = categoria.nome?.toLowerCase().replace(/\s+/g, '-');

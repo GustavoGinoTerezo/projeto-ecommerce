@@ -1,20 +1,20 @@
 <div class="divGeral">
 
-  <div class="containerProduto" *ngIf="produto">
+  <div class="containerProduto" *ngIf="produto || produtoDaCategoria">
       <h1 class="nome">
-        {{ produto.nome }}
+        {{ produto?.nome || produtoDaCategoria?.nome }}
       </h1>
       <div class="containerImagemEDescEPreco">
         <div class="imgContainer">
-          <img [src]="produto.imagem" alt="Imagem do Produto" class="img">
+          <img [src]="produto?.imagem || produtoDaCategoria?.imagem" alt="Imagem do Produto" class="img">
         </div>
         <div class="containerDescEPreco">
           <h2 class="descricao">
-            {{ produto.descricaoCompleta }}
+            {{ produto?.descricaoCompleta || produtoDaCategoria?.descricaoCompleta }}
           </h2>
           <div class="precoEBotao">
             <h2 class="preco">
-              {{ produto.preco }}
+              {{ produto?.preco || produtoDaCategoria?.preco }}
             </h2>
             <div class="botao">
               <p-button>Adicionar ao carrinho</p-button>
@@ -24,27 +24,27 @@
       </div>
   </div>
 
-  <div *ngIf="produto" class="containerEspecificacaoTecnica">
+  <div *ngIf="produto || produtoDaCategoria" class="containerEspecificacaoTecnica">
     <h1 class="divH1">
       INFORMAÇÕES TÉCNICAS
     </h1>
 
     <h2 class="divDescricaoCompleta">
-      {{ produto.especificacaoTecnica }}
+      {{ produto?.especificacaoTecnica || produtoDaCategoria?.especificacaoTecnica }}
     </h2>
 
   </div>
 
-  <div *ngIf="produto" class="containerComentarios">
+  <div *ngIf="produto || produtoDaCategoria" class="containerComentarios">
     <h1 class="divH1">
       COMENTÁRIOS DOS USUÁRIOS
     </h1>
 
     <h2 class="divComentariosUsuarios">
-      <div *ngFor="let comentario of produto.comentariosProduto" class="comentarioIndividual">
+      <div *ngFor="let comentario of produto?.comentariosProduto || produtoDaCategoria?.comentariosProduto" class="comentarioIndividual">
         <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" styleClass="mr-2" size="large" shape="circle"></p-avatar>
         <div class="comentario">
-          {{ comentario.comentario }}
+          {{ comentario?.comentario }}
         </div>
       </div>
     </h2>

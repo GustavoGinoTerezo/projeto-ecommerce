@@ -12,6 +12,8 @@ export class DetalheProdutoComponent implements OnInit {
   produto: Produtos | undefined;
   nomeProduto: string | null = null;
 
+  produtoDaCategoria!: Produtos;
+
   constructor(
     private route: ActivatedRoute,
     private produtoService: ServiceCategoriasService,
@@ -19,6 +21,10 @@ export class DetalheProdutoComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.route.queryParams.subscribe((params) => {
+      this.produtoDaCategoria = JSON.parse(params['produto']);
+    });
 
     //================================================================================================================================//
     //RECEBER OS PARAMETROS DOS PRODUTOS EM DESTAQUE
