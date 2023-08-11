@@ -13,7 +13,7 @@ export class CategoriaComponent {
   nomeCategoria: string | null = null;
   categorias: Categorias[] = [];
   first: number = 0; // Primeiro item da página
-  rows: number = 12; // Número de itens por página
+  rows: number = 8; // Número de itens por página
 
   constructor(
     private route: ActivatedRoute,
