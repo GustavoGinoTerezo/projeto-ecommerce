@@ -21,14 +21,15 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { PaginatorModule } from 'primeng/paginator';
 
 //telas
-import { LoginComponent } from './componentes/login-e-criar-conta/login/login.component';
+import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { RodapeComponent } from './componentes/rodape/rodape.component';
-import { CriarContaComponent } from './componentes/login-e-criar-conta/criar-conta/criar-conta.component';
+import { CriarContaComponent } from './componentes/telas/login-e-criar-conta/criar-conta/criar-conta.component';
 import { TelaPrincipalComponent } from './componentes/telas/tela-principal/tela-principal.component';
 import { MessageService } from 'primeng/api';
 import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/detalhe-produto.component';
 import { CategoriaComponent } from './componentes/telas/categoria/categoria.component';
+import { CarrinhoDeComprasComponent } from './componentes/telas/carrinho-de-compras/carrinho-de-compras.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CategoriaComponent } from './componentes/telas/categoria/categoria.comp
     DetalheProdutoComponent,
     TelaPrincipalComponent,
     CategoriaComponent,
+    CarrinhoDeComprasComponent,
   ],
   imports: [
     BrowserModule,
