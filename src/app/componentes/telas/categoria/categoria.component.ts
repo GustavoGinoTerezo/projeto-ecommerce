@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Categorias, Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class CategoriaComponent {
     private route: ActivatedRoute,
     private produtoService: ServiceCategoriasService,
     private categoriasService: ServiceCategoriasService,
+    private carrinhoService: ServiceCarrinhoDeComprasService,
     private router: Router,
   ) {}
 
@@ -61,6 +63,11 @@ export class CategoriaComponent {
     this.first = event.first;
     this.rows = event.rows;
   }
+
+  adicionarAoCarrinho(produto: Produtos): void {
+    this.carrinhoService.adicionarAoCarrinho(produto);
+  }
+
 
   get totalRecords(): number {
     return this.categoria?.produtos?.length || 0;

@@ -5,6 +5,7 @@ import { CriarContaComponent } from './componentes/telas/login-e-criar-conta/cri
 import { TelaPrincipalComponent } from './componentes/telas/tela-principal/tela-principal.component';
 import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/detalhe-produto.component';
 import { CategoriaComponent } from './componentes/telas/categoria/categoria.component';
+import { CarrinhoDeComprasComponent } from './componentes/telas/carrinho-de-compras/carrinho-de-compras.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'criar-conta',
     component: CriarContaComponent,
+  },
+  {
+    path: 'carrinho-de-compra',
+    component: CarrinhoDeComprasComponent,
   },
 
 ];

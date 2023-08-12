@@ -1,1 +1,20 @@
-<p>carrinho-de-compras works!</p>
+<div class="divGeral">
+  <div class="containerProduto">
+    <div *ngFor="let item of carrinho" class="item-carrinho">
+      <img class="img" [src]="item.imagemProduto" alt="imagem produto" >
+      <div class="nome-produto">
+        {{ item.nomeProduto }}
+      </div>
+      <div class="quantidade">
+        {{ item.quantidade }}
+      </div>
+      <div class="preco">
+        {{ item.preco }}
+      </div>
+    </div>
+  </div>
+
+  <div class="valorTotal">
+    Resumo do pedido
+  </div>
+</div>
