@@ -1,6 +1,6 @@
 <div class="divGeral">
   <div class="containerProduto">
-    <div *ngFor="let item of carrinho" class="item-carrinho">
+    <div *ngFor="let item of carrinho | slice:first:first + rows" class="item-carrinho">
       <img class="img" [src]="item.imagemProduto" alt="imagem produto" >
       <div class="nome-produto">
         {{ item.nomeProduto }}
@@ -12,9 +12,38 @@
         {{ item.preco }}
       </div>
     </div>
+    <div class="paginator">
+      <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 15, 20]">
+      </p-paginator>
+    </div>
   </div>
 
-  <div class="valorTotal">
-    Resumo do pedido
+  <div class="containerValorTotal">
+    <div class="valorTotal">
+      <h1 class="resumoDoPedido">
+        Resumo
+      </h1>
+      <div class="valorTotalProdutos">
+        <div class="pMenor">Valor dos produtos:</div>
+        <div class="pMaior">R$ ?????,??</div>
+      </div>
+      <hr class="hr">
+      <div class="valorFrete">
+        <div class="pMenor">Frete:</div>
+        <div class="pMaior">R$ ???,??</div>
+      </div>
+      <div class="ValorTotalProdutosEFrete">
+        <div class="pMenor">Valor total:</div>
+        <h2 class="valorFinalFreteEProduto">R$ ?????,??</h2>
+      </div>
+      <div class="divBotoes">
+        <p-button label="Ir para o pagamento"></p-button>
+        <p-button class="buttonWidth button" label="Continuar comprando" routerLink="/tela-principal"></p-button>
+      </div>
+    </div>
   </div>
+
+
+
+
 </div>

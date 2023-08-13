@@ -19,17 +19,113 @@
   padding: 10px;
 }
 
+.containerValorTotal{
+  display: flex;
+  width: 30%;
+  height: 100%;
+}
+
 .valorTotal{
   display: flex;
-  width: 40%;
+  flex-direction: column;
+  width: 100%;
   height: 100%;
   max-height: 500px;
   justify-content: center;
-  align-items: center;
+  padding: 15px;
   background-color: rgba(255, 255, 255, 0.325);
   border-radius: 8px;
   border: 2px solid rgba(0, 0, 0, 0.462);
 }
+
+.resumoDoPedido{
+  display: flex;
+  width: 100%;
+  height: 15%;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 500;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.544);
+  margin: 0;
+}
+
+.valorTotalProdutos{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin-top: 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.544);
+}
+
+
+.hr{
+  display: flex;
+  width: 100%;
+}
+
+.valorFrete{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.544);
+}
+
+.ValorTotalProdutosEFrete{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 35%;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  background-color: rgba(0, 255, 21, 0.411);
+}
+
+.valorFinalFreteEProduto{
+  margin-top: 5px;
+  font-size: 30px;
+  font-weight: bolder;
+  color: rgb(15, 78, 20);
+}
+
+.pMenor{
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.pMaior{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.divBotoes{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+}
+
+:host ::ng-deep .p-button{
+  width: 100%;
+}
+
+.button{
+  margin-top: 10px;
+}
+
+
 
 .item-carrinho{
   display: flex;
@@ -84,4 +180,13 @@
   font-weight: 500;
   color: green;
 }
+
+
+
+.paginator{
+  width: 100%;
+  margin-top: 2px;
+}
+
+
 

@@ -8,12 +8,26 @@ import { CarrinhoDeCompra, ServiceCarrinhoDeComprasService } from 'src/app/servi
 })
 export class CarrinhoDeComprasComponent {
 
-  carrinho: CarrinhoDeCompra[] = [];
 
-  constructor(private carrinhoService: ServiceCarrinhoDeComprasService) {}
+  carrinho: CarrinhoDeCompra[] = [];
+  first: number = 0; // Primeiro item da página
+  rows: number = 10; // Número de itens por página
+
+  constructor(
+    private carrinhoService: ServiceCarrinhoDeComprasService,
+    ) {}
 
   ngOnInit(): void {
     this.carrinho = this.carrinhoService.getCarrinhoDeCompra();
+  }
+
+  onPageChange(event: any): void {
+    this.first = event.first;
+    this.rows = event.rows;
+  }
+
+  get totalRecords(): number {
+    return this.carrinho?.length || 0;
   }
 
 }

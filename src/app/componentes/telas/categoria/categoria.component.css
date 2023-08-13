@@ -268,6 +268,33 @@
   }
 }
 
+.paginator{
+  margin-top: 40px;
+}
+
+@media (max-width: 1290px){
+
+  .containerGeral{
+    flex-basis: calc(33%); /* 25% width for each product with margins */
+  }
+
+}
+
+@media (max-width: 1025px){
+
+  .containerGeral{
+    flex-basis: calc(50%); /* 25% width for each product with margins */
+  }
+
+}
+
+@media (max-width: 750px){
+
+  .containerGeral{
+    flex-basis: calc(100%); /* 25% width for each product with margins */
+  }
+
+}
 
 @media (max-width: 550px){
   .divCarousel{
@@ -277,11 +304,13 @@
   .sidenav-link-text {
     display: none;
   }
+
 }
 
-.paginator{
-  margin-top: 40px;
-}
+
+
+
+
 
 
 

@@ -16,20 +16,12 @@ export interface Produtos {
   descricaoBreve?: string;
   descricaoCompleta?: string;
   especificacaoTecnica?: string;
-  comentariosProduto?: [
-    {
-      id?: string;
-      comentario?: string;
-    },
-    {
-      id?: string;
-      comentario?: string;
-    },
-    {
-      id?: string;
-      comentario?: string;
-    }
-  ];
+  comentariosProduto?: ComentariosProdutos[];
+}
+
+export interface ComentariosProdutos{
+  id?: string;
+  comentario: string;
 }
 
 @Injectable({

@@ -32,7 +32,98 @@ export class ServiceCarrinhoDeComprasService {
       quantidade: '1',
       preco: 'R$ ???,??',
     },
-    
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Produto A',
+      quantidade: '1',
+      preco: 'R$ ???,??',
+    },
+
+
   ];
 
   adicionarAoCarrinho(produto: Produtos): void {
