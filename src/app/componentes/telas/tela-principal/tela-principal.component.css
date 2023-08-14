@@ -41,8 +41,8 @@
   justify-content: center;
   align-items: center;
   transition: 0.3s ease all;
-  background-color: rgba(255, 255, 255, 0.17);
-  border: 1px solid rgba(255, 255, 255, 0.27);
+  background-color: var(--container-externo-cards-produtos);
+  border: 1px solid var(--borda-dos-containers);
   border-radius: 8px;
 }
 
@@ -60,7 +60,7 @@
   border-radius: 8px;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: var(--container-interno-cards-produtos);
 }
 
 .containerImagem{
@@ -143,7 +143,7 @@
       min-height: 3rem;
       max-height: 100%;
       width: 100%;
-      background-color: var(--hover-background-botoes);
+      background-color: var(--background-botoes);
       text-decoration: none;
       border-radius: 0.313rem;
       transition: all .3s ease;
@@ -156,19 +156,19 @@
         width: 2rem;
         min-width: 2rem;
         text-align: center;
-        color: var(--verde-scrollbar);
+        color: var(--textos-e-icones-botoes);
       }
 
       .sidenav-link-text{
         font-size: 20px;
         margin-left: 5px;
         word-wrap: break-word;
-        color: var(--verde-scrollbar);
+        color: var(--textos-e-icones-botoes);
       }
     }
 
     .sidenav-nav-link:hover{
-      background-color: var(--verde-background);
+      background-color: var(--hover-background-botoes);
     }
   }
 }
@@ -184,7 +184,7 @@
     height: 3rem; /* Tamanho da altura dos botões */
     min-height: 3rem;
     max-height: 100%;
-    background-color: var(--hover-background-botoes);
+    background-color: var(--background-botoes);
     text-decoration: none;
     border-radius: 0.313rem;
     transition: all .3s ease;
@@ -194,13 +194,13 @@
       font-size: 22px;
       width: 45px;
       text-align: center;
-      color: var(--verde-scrollbar);
+      color: var(--textos-e-icones-botoes);
     }
 
   }
 
   .sidenav-nav-link-info:hover{
-    background-color: var(--verde-background);
+    background-color: var(--hover-background-botoes);
   }
 }
 .carousel{

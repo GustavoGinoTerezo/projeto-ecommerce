@@ -4,12 +4,21 @@
 
 html, body { height: 100%; }
 
-body { margin: 0; font-family: var(--font-family); background-color: var(--verde-background);}
+body { margin: 0; font-family: var(--font-family); background-color: var(--background);}
 
 :root {
-  --verde-background: rgb(62, 62, 62);
-  --verde-scrollbar: rgb(255, 255, 255);
-  --hover-background-botoes: rgba(26, 91, 30, 0.888);
+  --background: #f3f3f3;
+  --header-rodape: rgb(15, 182, 15);
+  --scrollbar: rgb(37, 158, 45);
+  --textos-e-icones-botoes: #f3f3f3;
+  --background-botoes: rgb(21, 87, 21);
+  --hover-background-botoes: rgb(30, 131, 36);
+  --container-externo-cards-produtos: rgb(224, 222, 222);
+  --container-interno-cards-produtos: #f3f3f3;
+  --borda-dos-containers: rgba(255, 255, 255, 0.27);
+  --background-das-divs-da-categoria: rgba(15, 182, 15, 0.381);
+  --cor-valor-total: rgb(15, 78, 20);
+
 }
 
 /*==================================================================================================================================*/
@@ -37,14 +46,14 @@ body { margin: 0; font-family: var(--font-family); background-color: var(--verde
 }
 
 .scrollwrap::-webkit-scrollbar-thumb{
-  background-color: var(--verde-scrollbar);
+  background-color: var(--scrollbar);
   border-radius: 20px;
 }
 
 /* Funciona no firefox */
 .scrollwrap{
   scrollbar-width: thin;
-  scrollbar-color: var(--verde-scrollbar) transparent;
+  scrollbar-color: var(--scrollbar) transparent;
 }
 
 /*==================================================================================================================================*/
