@@ -19,42 +19,44 @@
   <div class="divCarousel">
     <p-carousel [value]="produtosDestaque" [showIndicators]="false" [numVisible]="4" [numScroll]="4" [circular]="true" [responsiveOptions]="responsiveOptions" class="carousel">
       <ng-template pTemplate="item" let-produtos>
-        <div class="containerGeral">
+        <div class="containerGeral" >
           <div class="container">
-            <div class="containerInterno">
-              <div class="containerImagem">
-                <img [src]="produtos.imagem" alt="imagem produto" class="img">
-              </div>
-              <div class="tamanhoDivs">
-                <div class="nome margem">
-                  {{ produtos.nome }}
+            <div (click)="navigateProduto(produtos)">
+              <div class="containerInterno">
+                <div class="containerImagem">
+                  <img [src]="produtos.imagem" alt="imagem produto" class="img">
                 </div>
-              </div>
-              <div class="tamanhoDivs">
-                <div class="descricao margem">
-                  {{ produtos.descricaoBreve }}
-                </div>
-              </div>
-              <div class="preco margem">
-                {{ produtos.preco }}
-              </div>
-              <div class="botoes margem">
-                <div class="sidenav-nav" >
-                  <div class="sidenav-nav-item-info" (click)="navigateProduto(produtos)">
-                    <a class="sidenav-nav-link-info">
-                      <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg" ></i>
-                    </a>
+                <div class="tamanhoDivs">
+                  <div class="nome margem">
+                    {{ produtos.nome }}
                   </div>
                 </div>
-                <div class="sidenav-nav">
-                  <div class="sidenav-nav-item">
-                    <a class="sidenav-nav-link">
-                      <i class="sidenav-link-icon fa-solid fa-cart-shopping fa-lg"></i>
-                      <span class="sidenav-link-text">
-                        <div>Comprar</div>
-                      </span>
-                    </a>
+                <div class="tamanhoDivs">
+                  <div class="descricao margem">
+                    {{ produtos.descricaoBreve }}
                   </div>
+                </div>
+                <div class="preco margem">
+                  {{ produtos.preco }}
+                </div>
+              </div>
+            </div>
+            <div class="botoes margem">
+              <div class="sidenav-nav" >
+                <div class="sidenav-nav-item-info" (click)="navigateProduto(produtos)">
+                  <a class="sidenav-nav-link-info">
+                    <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg" ></i>
+                  </a>
+                </div>
+              </div>
+              <div class="sidenav-nav" >
+                <div class="sidenav-nav-item" >
+                  <a class="sidenav-nav-link" >
+                    <i class="sidenav-link-icon fa-solid fa-cart-shopping fa-lg"></i>
+                    <span class="sidenav-link-text">
+                      <div>Comprar</div>
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -79,43 +81,45 @@
 
   <div class="divCarousel">
     <p-carousel [value]="produtosMaisVendidos" [showIndicators]="false" [numVisible]="4" [numScroll]="4" [circular]="true" [responsiveOptions]="responsiveOptions" class="carousel">
-      <ng-template pTemplate="item" let-produtos class="test">
-        <div class="containerGeral">
+      <ng-template pTemplate="item" let-produtos>
+        <div class="containerGeral" >
           <div class="container">
-            <div class="containerInterno">
-              <div class="containerImagem">
-                <img [src]="produtos.imagem" alt="imagem produto" class="img">
-              </div>
-              <div class="tamanhoDivs">
-                <div class="nome margem">
-                  {{ produtos.nome }}
+            <div (click)="navigateProduto(produtos)">
+              <div class="containerInterno">
+                <div class="containerImagem">
+                  <img [src]="produtos.imagem" alt="imagem produto" class="img">
                 </div>
-              </div>
-              <div class="tamanhoDivs">
-                <div class="descricao margem">
-                  {{ produtos.descricaoBreve }}
-                </div>
-              </div>
-              <div class="preco margem">
-                {{ produtos.preco }}
-              </div>
-              <div class="botoes margem">
-                <div class="sidenav-nav" >
-                  <div class="sidenav-nav-item-info" (click)="navigateProduto(produtos)">
-                    <a class="sidenav-nav-link-info">
-                      <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg"></i>
-                    </a>
+                <div class="tamanhoDivs">
+                  <div class="nome margem">
+                    {{ produtos.nome }}
                   </div>
                 </div>
-                <div class="sidenav-nav">
-                  <div class="sidenav-nav-item">
-                    <a class="sidenav-nav-link">
-                      <i class="sidenav-link-icon fa-solid fa-cart-shopping fa-lg"></i>
-                      <span class="sidenav-link-text">
-                        <div>Comprar</div>
-                      </span>
-                    </a>
+                <div class="tamanhoDivs">
+                  <div class="descricao margem">
+                    {{ produtos.descricaoBreve }}
                   </div>
+                </div>
+                <div class="preco margem">
+                  {{ produtos.preco }}
+                </div>
+              </div>
+            </div>
+            <div class="botoes margem">
+              <div class="sidenav-nav" >
+                <div class="sidenav-nav-item-info" (click)="navigateProduto(produtos)">
+                  <a class="sidenav-nav-link-info">
+                    <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg" ></i>
+                  </a>
+                </div>
+              </div>
+              <div class="sidenav-nav" >
+                <div class="sidenav-nav-item" >
+                  <a class="sidenav-nav-link" >
+                    <i class="sidenav-link-icon fa-solid fa-cart-shopping fa-lg"></i>
+                    <span class="sidenav-link-text">
+                      <div>Comprar</div>
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -134,42 +138,44 @@
   <div class="divCarouselEmPromocao">
     <p-carousel [value]="produtosEmPromocao" [showIndicators]="false" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptionsEmPromocao" class="carouselEmPromocao">
       <ng-template pTemplate="item" let-produtos>
-        <div class="containerGeral">
+        <div class="containerGeral" >
           <div class="container">
-            <div class="containerInterno">
-              <div class="containerImagem">
-                <img [src]="produtos.imagem" alt="imagem produto" class="img">
-              </div>
-              <div class="tamanhoDivs">
-                <div class="nome margem">
-                  {{ produtos.nome }}
+            <div (click)="navigateProduto(produtos)">
+              <div class="containerInterno">
+                <div class="containerImagem">
+                  <img [src]="produtos.imagem" alt="imagem produto" class="img">
                 </div>
-              </div>
-              <div class="tamanhoDivs">
-                <div class="descricao margem">
-                  {{ produtos.descricaoBreve }}
-                </div>
-              </div>
-              <div class="preco margem">
-                {{ produtos.preco }}
-              </div>
-              <div class="botoes margem">
-                <div class="sidenav-nav" >
-                  <div class="sidenav-nav-item-info" (click)="navigateProduto(produtos)">
-                    <a class="sidenav-nav-link-info">
-                      <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg"></i>
-                    </a>
+                <div class="tamanhoDivs">
+                  <div class="nome margem">
+                    {{ produtos.nome }}
                   </div>
                 </div>
-                <div class="sidenav-nav">
-                  <div class="sidenav-nav-item">
-                    <a class="sidenav-nav-link">
-                      <i class="sidenav-link-icon fa-solid fa-cart-shopping fa-lg"></i>
-                      <span class="sidenav-link-text">
-                        <div>Comprar</div>
-                      </span>
-                    </a>
+                <div class="tamanhoDivs">
+                  <div class="descricao margem">
+                    {{ produtos.descricaoBreve }}
                   </div>
+                </div>
+                <div class="preco margem">
+                  {{ produtos.preco }}
+                </div>
+              </div>
+            </div>
+            <div class="botoes margem">
+              <div class="sidenav-nav" >
+                <div class="sidenav-nav-item-info" (click)="navigateProduto(produtos)">
+                  <a class="sidenav-nav-link-info">
+                    <i class="sidenav-link-icon-info fa-solid fa-circle-info fa-lg" ></i>
+                  </a>
+                </div>
+              </div>
+              <div class="sidenav-nav" >
+                <div class="sidenav-nav-item" >
+                  <a class="sidenav-nav-link" >
+                    <i class="sidenav-link-icon fa-solid fa-cart-shopping fa-lg"></i>
+                    <span class="sidenav-link-text">
+                      <div>Comprar</div>
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>

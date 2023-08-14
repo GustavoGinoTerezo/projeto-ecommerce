@@ -32,329 +32,563 @@ export class ServiceCategoriasService {
   categorias: Categorias[] =
   [
     {
-      nome: 'Categoria A',
+      nome: 'Boost',
       icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
+      imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
       produtos: [
-        {nome: 'Teste 1', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do Teste 1', descricaoCompleta: 'Descrição completa do produto Teste 1', especificacaoTecnica: 'Especificação Técnica do Produto Teste 1', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
         {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
+          nome: 'MJ 15 30 15',
+          imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do Teste 1',
+          descricaoCompleta: 'Descrição completa do produto Teste 1',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
         },
         {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
+          nome: 'MJ 16-30-15',
+          imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 15-30-15',
+          descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
         },
         {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
-        },
-        {
-          nome: 'Teste 1',
-          imagem: 'assets/logo.png',
+          nome: 'MJ 15-30-15',
+          imagem: 'assets/produtos/Plant-Prod-MJ-US-Boost-15-30-15-12278-12321.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 15-30-15',
+          descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
         },
       ]
     },
     {
-      nome: 'Categoria B',
+      nome: 'Grow',
       icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: 'Teste 2',
-        imagem: 'assets/logo.png',
-      }
+      imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-12319.jpg',
+      produtos: [
+        {
+          nome: 'MJ 12-8-26',
+          imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 12-8-26',
+          descricaoCompleta: 'Descrição completa do produto MJ 12-8-26',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 12-8-26',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
+        },
+        {
+          nome: 'MJ 12-8-26',
+          imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-2.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 12-8-26',
+          descricaoCompleta: 'Descrição completa do produto MJ 12-8-26',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 12-8-26',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
+        },
+        {
+          nome: 'MJ 12-8-26',
+          imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-12319.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 12-8-26',
+          descricaoCompleta: 'Descrição completa do produto MJ 12-8-26',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 12-8-26',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
+        },
+        {
+          nome: 'MJ US 12-8-26',
+          imagem: 'assets/produtos/Plant-Prod-MJ-US-Grow-12-8-26-12279-12319.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ US 12-8-26',
+          descricaoCompleta: 'Descrição completa do produto MJ US 12-8-26',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ US 12-8-26',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
+        },
       ]
     },
     {
-      nome: 'Categoria C',
+      nome: 'Bloom',
       icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: 'Teste 3',
-        imagem: 'assets/logo.png',
-      }
+      imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+      produtos: [
+        {
+          nome: 'MJ 10-30-20',
+          imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 10-30-20',
+          descricaoCompleta: 'Descrição completa do produto MJ 10-30-20',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 10-30-20',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
+        },
       ]
     },
     {
-      nome: 'Categoria D',
+      nome: 'Finisher',
       icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
+      imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg',
+      produtos: [
+        {
+          nome: 'MJ 4-31-37',
+          imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 4-31-37',
+          descricaoCompleta: 'Descrição completa do produto MJ 4-31-37',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 4-31-37',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
+        },
+        {
+          nome: 'MJ 4-31-37',
+          imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 4-31-37',
+          descricaoCompleta: 'Descrição completa do produto MJ 4-31-37',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 4-31-37',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
+        },
+        {
+          nome: 'MJ 4-31-37',
+          imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 4-31-37',
+          descricaoCompleta: 'Descrição completa do produto MJ 4-31-37',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 4-31-37',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
+        },
       ]
     },
     {
-      nome: 'Categoria E',
+      nome: 'Cal Kick',
       icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria F',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria G',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria H',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria I',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria J',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria K',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria L',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria M',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria N',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria O',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria P',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria Q',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria R',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria S',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
-      ]
-    },
-    {
-      nome: 'Categoria T',
-      icon: 'fa-solid fa-question',
-      imagem: 'assets/logo.png',
-      produtos: [{
-        nome: '',
-        imagem: 'assets/logo.png',
-      }
+      imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+      produtos: [
+        {
+          nome: 'MJ 15-0-14',
+          imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 15-0-14',
+          descricaoCompleta: 'Descrição completa do produto MJ 15-0-14',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-0-14',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
+        },
       ]
     },
 
   ];
 
   produtosDestaque: Produtos[] = [
-    {nome: 'Produto A', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto A', descricaoCompleta: 'Descrição completa do produto A', especificacaoTecnica: 'Especificação Técnica do Produto A', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto B', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto B', descricaoCompleta: 'Descrição completa do produto B', especificacaoTecnica: 'Especificação Técnica do Produto B', comentariosProduto: [{ comentario: 'Não gostei do produto' }, { comentario: 'Produto mais ou menos' }, { comentario: 'Normal a compra' }]},
-    {nome: 'Produto C', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto C', descricaoCompleta: 'Descrição completa do produto C', especificacaoTecnica: 'Especificação Técnica do Produto C' },
-    {nome: 'Produto D', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto D', descricaoCompleta: 'Descrição completa do produto D', especificacaoTecnica: 'Especificação Técnica do Produto D', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto E', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto E', descricaoCompleta: 'Descrição completa do produto E', especificacaoTecnica: 'Especificação Técnica do Produto E', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto F', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto F', descricaoCompleta: 'Descrição completa do produto F', especificacaoTecnica: 'Especificação Técnica do Produto F', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto G', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto G', descricaoCompleta: 'Descrição completa do produto G', especificacaoTecnica: 'Especificação Técnica do Produto G', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto H', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto H', descricaoCompleta: 'Descrição completa do produto H', especificacaoTecnica: 'Especificação Técnica do Produto H', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
+    {
+      nome: 'MJ 15 30 15',
+      imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 15-30-15',
+      descricaoCompleta: 'Descrição completa do MJ 15-30-15',
+      especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 12 8 26',
+      imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 12-8-26',
+      descricaoCompleta: 'Descrição completa do MJ 12-8-26',
+      especificacaoTecnica: 'Especificação Técnica do MJ 12-8-26',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 10 30 20',
+      imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 4 31 37',
+      imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 15 0 14',
+      imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
   ];
 
   produtosMaisVendidos: Produtos[] = [
-    {nome: 'Produto I', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto I', descricaoCompleta: 'Descrição completa do produto I', especificacaoTecnica: 'Especificação Técnica do Produto I', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto J', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto J', descricaoCompleta: 'Descrição completa do produto J', especificacaoTecnica: 'Especificação Técnica do Produto J', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto K', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto K', descricaoCompleta: 'Descrição completa do produto K', especificacaoTecnica: 'Especificação Técnica do Produto K', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto L', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto L', descricaoCompleta: 'Descrição completa do produto L', especificacaoTecnica: 'Especificação Técnica do Produto L', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto M', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto M', descricaoCompleta: 'Descrição completa do produto M', especificacaoTecnica: 'Especificação Técnica do Produto M', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto N', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto N', descricaoCompleta: 'Descrição completa do produto N', especificacaoTecnica: 'Especificação Técnica do Produto N', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto O', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto O', descricaoCompleta: 'Descrição completa do produto O', especificacaoTecnica: 'Especificação Técnica do Produto O', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto P', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto P', descricaoCompleta: 'Descrição completa do produto P', especificacaoTecnica: 'Especificação Técnica do Produto P', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
+    {
+      nome: 'MJ 15 30 15',
+      imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 15-30-15',
+      descricaoCompleta: 'Descrição completa do MJ 15-30-15',
+      especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 12 8 26',
+      imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 12-8-26',
+      descricaoCompleta: 'Descrição completa do MJ 12-8-26',
+      especificacaoTecnica: 'Especificação Técnica do MJ 12-8-26',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 10 30 20',
+      imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 4 31 37',
+      imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 15 0 14',
+      imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
   ]
 
   produtosEmPromocao: Produtos[] = [
-    {nome: 'Produto Q', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto Q', descricaoCompleta: 'Descrição completa do produto Q', especificacaoTecnica: 'Especificação Técnica do Produto A', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto R', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto R', descricaoCompleta: 'Descrição completa do produto R', especificacaoTecnica: 'Especificação Técnica do Produto R', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto S', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto S', descricaoCompleta: 'Descrição completa do produto S', especificacaoTecnica: 'Especificação Técnica do Produto S', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
-    {nome: 'Produto T', imagem: 'assets/logo.png', preco: 'R$ ???,??', descricaoBreve: 'Descrição breve do produto T', descricaoCompleta: 'Descrição completa do produto T', especificacaoTecnica: 'Especificação Técnica do Produto T', comentariosProduto: [{ comentario: 'Gostei do produto' }, { comentario: 'Produto mediano' }, { comentario: 'Amei a compra' }]},
+    {
+      nome: 'MJ 15 30 15',
+      imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 15-30-15',
+      descricaoCompleta: 'Descrição completa do MJ 15-30-15',
+      especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 12 8 26',
+      imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 12-8-26',
+      descricaoCompleta: 'Descrição completa do MJ 12-8-26',
+      especificacaoTecnica: 'Especificação Técnica do MJ 12-8-26',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 10 30 20',
+      imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 4 31 37',
+      imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'MJ 15 0 14',
+      imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
   ]
 
   //==================================================================================================================================//

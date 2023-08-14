@@ -12,10 +12,10 @@ export class ServiceBannerService {
 
   banner: Banner[] = [
     {
-      imagem: 'assets/logo.png'
+      imagem: 'assets/produtos/Marijuana-bud_logo.jpg'
     },
     {
-      imagem: 'https://i.pinimg.com/originals/b8/00/f5/b800f523231e10f4fc8af784e8ef4711.jpg'
+      imagem: 'assets/produtos/Cannabis_Farming.jpg'
     },
 ]
 

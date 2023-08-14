@@ -18,7 +18,6 @@ body { margin: 0; font-family: var(--font-family); background-color: var(--backg
   --borda-dos-containers: rgba(255, 255, 255, 0.27);
   --background-das-divs-da-categoria: rgba(15, 182, 15, 0.381);
   --cor-valor-total: rgb(15, 78, 20);
-
 }
 
 /*==================================================================================================================================*/

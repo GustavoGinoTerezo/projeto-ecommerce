@@ -12,22 +12,22 @@ export class ServiceAnunciosService {
 
   anuncioMaior: Anuncios[] = [
     {
-      imagem: 'https://www.maisdinheiro.net/wp-content/uploads/2009/06/anuncio-que-vende.jpg'
+      imagem: 'assets/anuncios/anuncio1.png'
     },
     {
-      imagem: 'https://www.maisdinheiro.net/wp-content/uploads/2009/06/anuncio-que-vende.jpg'
+      imagem: 'assets/anuncios/anuncio2.png'
     },
   ]
 
   anuncioMenor: Anuncios[] = [
     {
-      imagem: 'https://www.maisdinheiro.net/wp-content/uploads/2009/06/anuncio-que-vende.jpg'
+      imagem: 'assets/anuncios/anuncio3.png'
     },
     {
-      imagem: 'https://www.maisdinheiro.net/wp-content/uploads/2009/06/anuncio-que-vende.jpg'
+      imagem: 'assets/anuncios/anuncio4.png'
     },
     {
-      imagem: 'https://www.maisdinheiro.net/wp-content/uploads/2009/06/anuncio-que-vende.jpg'
+      imagem: 'assets/anuncios/anuncio5.png'
     },
   ]
 

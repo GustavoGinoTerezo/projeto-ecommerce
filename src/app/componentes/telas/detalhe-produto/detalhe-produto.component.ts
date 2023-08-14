@@ -23,7 +23,7 @@ export class DetalheProdutoComponent implements OnInit {
   ngOnInit() {
 
     this.route.queryParams.subscribe((params) => {
-      this.produtoDaCategoria = JSON.parse(params['produto']);
+      this.produtoDaCategoria = JSON.parse(params['produtoJson']);
     });
 
     //================================================================================================================================//
