@@ -5,7 +5,7 @@ export interface CarrinhoDeCompra {
   imagemProduto?: string;
   nomeProduto?: string;
   quantidade?: string;
-  preco?: string;
+  preco?: number;
 }
 
 @Injectable({
@@ -18,7 +18,7 @@ export class ServiceCarrinhoDeComprasService {
       imagemProduto: 'assets/logo.png',
       nomeProduto: 'Teste 1',
       quantidade: '',
-      preco: '9999999,99',
+      preco: 1234,
     }
 
   ];

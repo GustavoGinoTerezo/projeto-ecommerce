@@ -35,7 +35,6 @@ export class CarrinhoDeComprasComponent {
     }
   }
 
-
   get totalRecords(): number {
     return this.carrinho?.length || 0;
   }
