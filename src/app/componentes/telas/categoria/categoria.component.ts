@@ -61,8 +61,6 @@ export class CategoriaComponent {
     this.carrinhoService.adicionarAoCarrinho(produto);
   }
 
-
-
   get totalRecords(): number {
     return this.categoria?.produtos?.length || 0;
   }

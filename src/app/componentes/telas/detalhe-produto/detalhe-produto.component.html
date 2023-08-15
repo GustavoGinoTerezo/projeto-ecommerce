@@ -24,7 +24,7 @@
             {{ produto?.preco }}
           </h2>
           <div class="botao">
-            <p-button>Adicionar ao carrinho</p-button>
+            <p-button (click)="adicionarAoCarrinho(produto || produtoDaCategoria)">Adicionar ao carrinho</p-button>
           </div>
         </div>
       </div>

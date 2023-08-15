@@ -426,16 +426,16 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'mj-10-30-20',
+      nome: 'mj-4-31-37',
       imagem: [
             {
               imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
             }
           ],
       preco: 'R$ ???,??',
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      descricaoBreve: 'Descrição breve do MJ 4-31-37',
+      descricaoCompleta: 'Descrição completa do MJ 4-31-37',
+      especificacaoTecnica: 'Especificação Técnica do MJ 4-31-37',
       comentariosProduto: [
         {
           comentario: 'Gostei do produto'

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Categorias, Imagens, Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class DetalheProdutoComponent implements OnInit {
     private route: ActivatedRoute,
     private produtoService: ServiceCategoriasService,
     private categoriasService: ServiceCategoriasService,
+    private carrinhoService: ServiceCarrinhoDeComprasService,
   ) {}
 
   ngOnInit() {
@@ -68,6 +70,10 @@ export class DetalheProdutoComponent implements OnInit {
     } else {
       return [];
     }
+  }
+
+  adicionarAoCarrinho(produto: Produtos): void {
+    this.carrinhoService.adicionarAoCarrinho(produto);
   }
 
 

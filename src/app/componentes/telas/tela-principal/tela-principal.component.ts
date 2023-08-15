@@ -4,6 +4,7 @@ import { Anuncios, ServiceAnunciosService } from 'src/app/services/serviceAnunci
 import { Banner, ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
 import { Categorias, ServiceCategoriasService, Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Router } from '@angular/router';
+import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 
 @Component({
   selector: 'app-tela-principal',
@@ -153,6 +154,7 @@ export class TelaPrincipalComponent {
     private bannerService: ServiceBannerService,
     private categoriasService: ServiceCategoriasService,
     private anuncioService: ServiceAnunciosService,
+    private carrinhoService: ServiceCarrinhoDeComprasService,
     private router: Router
   ){
   }
@@ -216,5 +218,9 @@ export class TelaPrincipalComponent {
 
   formatarNomeProduto(produtos: string): string {
     return this.categoriasService.formatarNomeProduto(produtos);
+  }
+
+  adicionarAoCarrinho(produto: Produtos): void {
+    this.carrinhoService.adicionarAoCarrinho(produto);
   }
 }
