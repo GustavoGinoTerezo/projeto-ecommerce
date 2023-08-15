@@ -17,6 +17,7 @@ export class TelaPrincipalComponent {
   produtosMaisVendidos: Produtos[] = [];
   produtosEmPromocao: Produtos[] = [];
   categorias: Categorias[] = [];
+  nomeProdutoFormatado: string | null = null;
 
   //Relacionado as Imagens
   images: Banner[] = [];
@@ -211,5 +212,9 @@ export class TelaPrincipalComponent {
   navigateCategoria(categoria: Categorias) {
     const nomeFormatado = categoria.nome?.toLowerCase().replace(/\s+/g, '-');
     this.router.navigate(['/categoria', nomeFormatado]);
+  }
+
+  formatarNomeProduto(produtos: string): string {
+    return this.categoriasService.formatarNomeProduto(produtos);
   }
 }
