@@ -707,6 +707,52 @@ export class ServiceCategoriasService {
         }
       ]
     },
+    {
+      nome: 'mj-10-30-20',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+            }
+          ],
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
+    {
+      nome: 'mj-15-0-14',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+            }
+          ],
+      preco: 'R$ ???,??',
+      descricaoBreve: 'Descrição breve do MJ 10-30-20',
+      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
+      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
+      comentariosProduto: [
+        {
+          comentario: 'Gostei do produto'
+        },
+        {
+          comentario: 'Produto mediano'
+        },
+        {
+          comentario: 'Amei a compra'
+        }
+      ]
+    },
   ]
 
   //==================================================================================================================================//

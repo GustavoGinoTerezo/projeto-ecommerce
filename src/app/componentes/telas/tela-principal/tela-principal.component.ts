@@ -59,17 +59,46 @@ export class TelaPrincipalComponent {
     }
   ];
 
+  responsiveOptionsAnunciosMenores: any[] = [
+    {
+        breakpoint: '800px',
+        numVisible: 1,
+        numScroll: 1
+    },
+  ];
+
   responsiveOptionsEmPromocao: any[] = [
     {
-        breakpoint: '1199px',
+      breakpoint: '4000px',
+      numVisible: 6,
+      numScroll: 1
+    },
+    {
+      breakpoint: '3500px',
+      numVisible: 5,
+      numScroll: 1
+    },
+    {
+      breakpoint: '3100px',
+      numVisible: 4,
+      numScroll: 1
+    },
+    {
+      breakpoint: '2300px',
+      numVisible: 3,
+      numScroll: 1
+    },
+    {
+        breakpoint: '1800px',
         numVisible: 2,
         numScroll: 1
     },
     {
-        breakpoint: '768px',
+        breakpoint: '1230px',
         numVisible: 1,
         numScroll: 1
     },
+
 
   ];
 

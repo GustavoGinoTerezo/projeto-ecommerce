@@ -77,6 +77,8 @@
   display: flex;
   width: 100%;
   height: 100%;
+  max-height: 400px;
+  max-width: 300px;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -234,13 +236,7 @@
   display: block;
 }
 
-.divAnunciosMenores{
-  width: 100%;
-  justify-content: space-around;
-  padding: 23px;
-  display: flex;
-  flex-direction: column;
-}
+
 
 /* Quando a largura da tela for menor que 768 pixels, esconda a label */
 
@@ -292,21 +288,55 @@
 }
 
 .containerAnuncio{
-  display: flex;
   width: 100%;
-  justify-content: space-between;
-  padding-left: 35px;
-  padding-right: 35px;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.imagemAnuncio{
-  width: 49%;
+.containerAnuncioMenores{
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+
+}
+
+.divAnunciosMenores{
+  display: flex;
+  height: 100%;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+
+}
+
+:host ::ng-deep .carousel-alto .p-carousel-items-content{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+}
+
+.imgBannerAnuncioMenores{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 200px;
+  max-height: 180px;
+}
+
+.imgBannerAnuncioMaiores{
+  width: 98%;
+  margin-right: 20px;
+  margin-left: 20px;
   height: 200px;
   cursor: pointer;
   transition: 0.3s ease all;
 }
 
-.imagemAnuncio:hover{
+.imgBannerAnuncioMaiores:hover{
   scale: 1.02;
   transition: 0.3s ease all;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.668);
@@ -336,6 +366,27 @@
 
   .divCarouselEmPromocao{
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .divAnunciosMenores{
+    width: 50%;
+    height: 100%;
+  }
+
+  .containerAnuncioMenores{
+    width: 100%;
+    height: 100%;
+  }
+
+  :host ::ng-deep .carousel-alto .p-carousel-items-content{
+    min-height: 0px;
+  }
+
+  .imgBannerAnuncioMenores{
+    min-width: 250px;
+    min-height: 280px;
   }
 
   .carouselEmPromocao{

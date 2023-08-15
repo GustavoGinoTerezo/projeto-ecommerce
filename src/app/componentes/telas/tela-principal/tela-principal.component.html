@@ -74,9 +74,13 @@
 
   <br>
 
-  <div class="containerAnuncio">
-    <img *ngFor="let anuncio of anunciosMaiores.slice(0, 2)" [src]="anuncio.imagem" alt="Imagem de Anuncio" class="imagemAnuncio">
-  </div>
+  <p-carousel [value]="anunciosMaiores" [autoplayInterval]="7000" [showIndicators]="false" [numVisible]="2" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptionsBanner">
+    <ng-template pTemplate="item" let-images>
+      <div class="containerAnuncio">
+        <img [src]="images.imagem" class="imgBannerAnuncioMaiores"/>
+      </div>
+    </ng-template>
+  </p-carousel>
 
   <br>
   <div class="line-with-text">
@@ -148,7 +152,7 @@
   </div>
 
   <div class="divCarouselEmPromocao">
-    <p-carousel [value]="produtosEmPromocao" [showIndicators]="false" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" class="carouselEmPromocao">
+    <p-carousel [value]="produtosEmPromocao" [showIndicators]="false" [numVisible]="7" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptionsEmPromocao" class="carouselEmPromocao">
       <ng-template pTemplate="item" let-produtos>
         <div class="containerGeral" >
           <div class="container">
@@ -201,8 +205,16 @@
         </div>
       </ng-template>
     </p-carousel>
-    <div class="divAnunciosMenores" >
-      <img *ngFor="let anuncio of anunciosMenores" [src]="anuncio.imagem" alt="Imagem de Anuncio" class="imagemAnuncioMenor">
+
+
+    <div class="divAnunciosMenores">
+      <p-carousel [value]="anunciosMenores" [autoplayInterval]="7000" orientation="vertical" [showIndicators]="false" [numVisible]="3" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptionsAnunciosMenores" class="carousel-alto">
+        <ng-template pTemplate="item" let-images>
+          <div class="containerAnuncioMenores">
+            <img [src]="images.imagem" class="imgBannerAnuncioMenores"/>
+          </div>
+        </ng-template>
+      </p-carousel>
     </div>
   </div>
 
