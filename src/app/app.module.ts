@@ -19,6 +19,7 @@ import { GalleriaModule } from 'primeng/galleria';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { PaginatorModule } from 'primeng/paginator';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -61,6 +62,7 @@ import { CarrinhoDeComprasComponent } from './componentes/telas/carrinho-de-comp
     AvatarModule,
     AvatarGroupModule,
     PaginatorModule,
+    InputNumberModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

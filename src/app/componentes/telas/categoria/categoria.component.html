@@ -37,7 +37,7 @@
                   </div>
                   <div class="tamanhoDivs">
                     <div class="nome margem">
-                      {{ produto.nome }}
+                        {{ produto.nome ? formatarNomeProduto(produto.nome) : '' }}
                     </div>
                   </div>
                   <div class="tamanhoDivs">
@@ -46,7 +46,7 @@
                     </div>
                   </div>
                   <div class="preco margem">
-                    {{ produto.preco }}
+                    R$ {{ produto.preco }}
                   </div>
                 </div>
               </div>

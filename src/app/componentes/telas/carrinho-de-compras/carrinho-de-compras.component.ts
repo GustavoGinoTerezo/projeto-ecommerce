@@ -12,6 +12,8 @@ export class CarrinhoDeComprasComponent {
   carrinho: CarrinhoDeCompra[] = [];
   first: number = 0; // Primeiro item da página
   rows: number = 10; // Número de itens por página
+  cep!: string;
+  quantidade: number = 1;
 
   constructor(
     private carrinhoService: ServiceCarrinhoDeComprasService,
@@ -25,6 +27,14 @@ export class CarrinhoDeComprasComponent {
     this.first = event.first;
     this.rows = event.rows;
   }
+
+  excluirItem(item: CarrinhoDeCompra): void {
+    const index = this.carrinho.indexOf(item);
+    if (index !== -1) {
+      this.carrinho.splice(index, 1);
+    }
+  }
+
 
   get totalRecords(): number {
     return this.carrinho?.length || 0;

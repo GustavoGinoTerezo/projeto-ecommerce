@@ -61,6 +61,11 @@ export class CategoriaComponent {
     this.carrinhoService.adicionarAoCarrinho(produto);
   }
 
+  formatarNomeProduto(produtos: string): string {
+    return this.categoriasService.formatarNomeProduto(produtos);
+  }
+
+
   get totalRecords(): number {
     return this.categoria?.produtos?.length || 0;
   }

@@ -18,7 +18,6 @@ export class TelaPrincipalComponent {
   produtosMaisVendidos: Produtos[] = [];
   produtosEmPromocao: Produtos[] = [];
   categorias: Categorias[] = [];
-  nomeProdutoFormatado: string | null = null;
 
   //Relacionado as Imagens
   images: Banner[] = [];

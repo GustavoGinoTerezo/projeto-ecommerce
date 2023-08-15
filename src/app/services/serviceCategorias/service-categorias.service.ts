@@ -54,7 +54,7 @@ export class ServiceCategoriasService {
             },
 
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 15-30-15',
           descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
@@ -77,7 +77,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 15-30-15',
           descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
@@ -100,7 +100,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-US-Boost-15-30-15-12278-12321.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 15-30-15',
           descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
@@ -130,7 +130,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 12-8-26',
           descricaoCompleta: 'Descrição completa do produto MJ 12-8-26',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 12-8-26',
@@ -153,7 +153,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-2.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 12-8-26',
           descricaoCompleta: 'Descrição completa do produto MJ 12-8-26',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 12-8-26',
@@ -176,7 +176,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-12319.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 12-8-26',
           descricaoCompleta: 'Descrição completa do produto MJ 12-8-26',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 12-8-26',
@@ -199,7 +199,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-US-Grow-12-8-26-12279-12319.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ US 12-8-26',
           descricaoCompleta: 'Descrição completa do produto MJ US 12-8-26',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ US 12-8-26',
@@ -229,7 +229,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 10-30-20',
           descricaoCompleta: 'Descrição completa do produto MJ 10-30-20',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 10-30-20',
@@ -259,7 +259,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 4-31-37',
           descricaoCompleta: 'Descrição completa do produto MJ 4-31-37',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 4-31-37',
@@ -282,7 +282,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 4-31-37',
           descricaoCompleta: 'Descrição completa do produto MJ 4-31-37',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 4-31-37',
@@ -305,7 +305,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 4-31-37',
           descricaoCompleta: 'Descrição completa do produto MJ 4-31-37',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 4-31-37',
@@ -335,7 +335,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
             }
           ],
-          preco: 'R$ ???,??',
+          preco: '???,??',
           descricaoBreve: 'Descrição breve do MJ 15-0-14',
           descricaoCompleta: 'Descrição completa do produto MJ 15-0-14',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-0-14',
@@ -363,7 +363,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
             },
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 15-30-15',
       descricaoCompleta: 'Descrição completa do MJ 15-30-15',
       especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
@@ -386,7 +386,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 12-8-26',
       descricaoCompleta: 'Descrição completa do MJ 12-8-26',
       especificacaoTecnica: 'Especificação Técnica do MJ 12-8-26',
@@ -409,7 +409,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
       especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
@@ -432,7 +432,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 4-31-37',
       descricaoCompleta: 'Descrição completa do MJ 4-31-37',
       especificacaoTecnica: 'Especificação Técnica do MJ 4-31-37',
@@ -455,7 +455,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
       especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
@@ -481,7 +481,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 15-30-15',
       descricaoCompleta: 'Descrição completa do MJ 15-30-15',
       especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
@@ -504,7 +504,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 12-8-26',
       descricaoCompleta: 'Descrição completa do MJ 12-8-26',
       especificacaoTecnica: 'Especificação Técnica do MJ 12-8-26',
@@ -527,7 +527,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
       especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
@@ -550,7 +550,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
       especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
@@ -573,7 +573,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
       especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
@@ -599,7 +599,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 15-30-15',
       descricaoCompleta: 'Descrição completa do MJ 15-30-15',
       especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
@@ -622,7 +622,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 12-8-26',
       descricaoCompleta: 'Descrição completa do MJ 12-8-26',
       especificacaoTecnica: 'Especificação Técnica do MJ 12-8-26',
@@ -645,7 +645,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
       especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
@@ -668,7 +668,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
       especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
@@ -691,7 +691,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
       especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
@@ -714,7 +714,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
       especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
@@ -737,7 +737,7 @@ export class ServiceCategoriasService {
               imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
             }
           ],
-      preco: 'R$ ???,??',
+      preco: '???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
       especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
