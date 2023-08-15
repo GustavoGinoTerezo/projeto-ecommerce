@@ -15,4 +15,18 @@
   border: 1px solid rgba(0, 0, 0, 0.184);
 }
 
+.botao-flutuante {
+  position: fixed;
+  bottom: 20px; /* Ajuste essa distância conforme necessário */
+  right: 20px; /* Ajuste essa distância conforme necessário */
+  transition: 0.3s all ease;
+  border: 1px solid rgba(129, 129, 129, 0.316);
+  border-radius: 50%;
+  cursor: pointer;
+}
 
+.botao-flutuante:hover{
+  scale: 1.20;
+  transition: 0.3s all ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.668);
+}

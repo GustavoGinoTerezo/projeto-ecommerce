@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ecommerce';
+
+  acaoDoBotao() {
+    // Lógica que deve ser executada quando o botão for clicado
+    console.log('Botão flutuante clicado!');
+  }
 }
