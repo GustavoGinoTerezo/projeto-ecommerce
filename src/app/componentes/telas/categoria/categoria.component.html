@@ -6,30 +6,34 @@
 
   <div class="categoriaEProdutos">
     <div class="divCarousel">
-      <p-carousel [value]="categorias" orientation="vertical" [numVisible]="5" [numScroll]="5" [circular]="true" [showIndicators]="false" class="carousel">
+
+
+      <p-carousel [value]="categorias" orientation="vertical" [numVisible]="4" [numScroll]="4" [circular]="true" [showIndicators]="false" class="carousel carousel-alto">
         <ng-template pTemplate="item" let-categoria >
-          <div (click)="navigateCategoria(categoria)" class="containerCategoria">
+          <div class="containerCategoria" (click)="navigateCategoria(categoria)">
             <div>{{categoria.nome}}</div>
             <img [src]="categoria.imagem" alt="imagem da categoria" class="imgCarousel">
           </div>
         </ng-template>
       </p-carousel>
+
+
+
     </div>
-
-
-
-
-
 
     <div class="containerProdutos">
       <div *ngIf="categoria">
         <div class="linhaProdutos">
           <div *ngFor="let produto of categoria.produtos | slice:first:first + rows" class="containerGeral">
             <div class="container">
-              <div (click)="navigateToDetalheProduto(produto)">
+              <div>
                 <div class="containerInterno">
-                  <div class="containerImagem">
-                    <img [src]="produto.imagem" alt="imagem produto" class="img">
+                  <div class="divCarouselImagens">
+                    <p-carousel [value]="produto.imagem || []" [showIndicators]="false" [numVisible]="1" [numScroll]="1" [circular]="true">
+                      <ng-template let-imagem pTemplate="item">
+                        <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateToDetalheProduto(produto)">
+                      </ng-template>
+                    </p-carousel>
                   </div>
                   <div class="tamanhoDivs">
                     <div class="nome margem">

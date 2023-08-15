@@ -180,6 +180,13 @@ img:hover{
   border-radius: 9px;
 }
 
+.containerImagem{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
 .comentario{
   margin-left: 10px;
 }

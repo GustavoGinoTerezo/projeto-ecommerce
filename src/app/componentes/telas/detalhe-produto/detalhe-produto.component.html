@@ -1,56 +1,58 @@
 <div class="divGeral">
 
   <div class="containerProduto" *ngIf="produto || produtoDaCategoria">
-      <h1 class="nome">
-        {{ produto?.nome || produtoDaCategoria.nome }}
-      </h1>
-      <div class="containerImagemEDescEPreco">
-        <div class="imgContainer">
-          <img [src]="produto?.imagem || produtoDaCategoria.imagem" alt="Imagem do Produto" class="img">
-        </div>
-        <div class="containerDescEPreco">
-          <h2 class="descricao">
-            {{ produto?.descricaoCompleta || produtoDaCategoria.descricaoCompleta }}
-          </h2>
-          <div class="precoEBotao">
-            <h2 class="preco">
-              {{ produto?.preco || produtoDaCategoria.preco }}
-            </h2>
-            <div class="botao">
-              <p-button>Adicionar ao carrinho</p-button>
+
+    <h1 class="nome">
+      {{ nomeProdutoFormatado }}
+    </h1>
+    <div class="containerImagemEDescEPreco">
+      <div class="imgContainer">
+        <p-carousel [value]="getProdutoImages()" [numVisible]="1" [numScroll]="1" [circular]="true" [showIndicators]="false">
+          <ng-template pTemplate="item" let-imagem>
+            <div class="containerImagem">
+              <img [src]="imagem" alt="imagem produto" class="img">
             </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+      <div class="containerDescEPreco">
+        <h2 class="descricao">
+          {{ produto?.descricaoCompleta }}
+        </h2>
+        <div class="precoEBotao">
+          <h2 class="preco">
+            {{ produto?.preco }}
+          </h2>
+          <div class="botao">
+            <p-button>Adicionar ao carrinho</p-button>
           </div>
         </div>
       </div>
+    </div>
   </div>
 
-  <div *ngIf="produto || produtoDaCategoria" class="containerEspecificacaoTecnica">
+  <div *ngIf="produto" class="containerEspecificacaoTecnica">
     <h1 class="divH1">
       INFORMAÇÕES TÉCNICAS
     </h1>
 
     <h2 class="divDescricaoCompleta">
-      {{ produto?.especificacaoTecnica || produtoDaCategoria.especificacaoTecnica }}
+      {{ produto.especificacaoTecnica}}
     </h2>
-
   </div>
 
-  <div *ngIf="produto || produtoDaCategoria" class="containerComentarios">
+  <div *ngIf="produto" class="containerComentarios">
     <h1 class="divH1">
       COMENTÁRIOS DOS USUÁRIOS
     </h1>
 
     <h2 class="divComentariosUsuarios">
-      <div *ngFor="let comentario of produto?.comentariosProduto || produtoDaCategoria?.comentariosProduto" class="comentarioIndividual">
+      <div *ngFor="let comentario of produto?.comentariosProduto" class="comentarioIndividual">
         <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" styleClass="mr-2" size="large" shape="circle"></p-avatar>
         <div class="comentario">
           {{ comentario?.comentario }}
         </div>
       </div>
     </h2>
-
-
   </div>
 </div>
-
-

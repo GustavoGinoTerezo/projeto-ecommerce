@@ -11,7 +11,7 @@ export interface Categorias {
 export interface Produtos {
   id?: number;
   nome?: string;
-  imagem?: string;
+  imagem?: Imagens[];
   preco?: string;
   descricaoBreve?: string;
   descricaoCompleta?: string;
@@ -21,7 +21,11 @@ export interface Produtos {
 
 export interface ComentariosProdutos{
   id?: string;
-  comentario: string;
+  comentario?: string;
+}
+
+export interface Imagens{
+  imagem?: string;
 }
 
 @Injectable({
@@ -37,27 +41,19 @@ export class ServiceCategoriasService {
       imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
       produtos: [
         {
-          nome: 'MJ 15 30 15',
-          imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
-          preco: 'R$ ???,??',
-          descricaoBreve: 'Descrição breve do Teste 1',
-          descricaoCompleta: 'Descrição completa do produto Teste 1',
-          especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
-          comentariosProduto: [
-          {
-            comentario: 'Gostei do produto'
-          },
-          {
-            comentario: 'Produto mediano'
-          },
-          {
-            comentario: 'Amei a compra'
-          }
-          ]
-        },
-        {
-          nome: 'MJ 16-30-15',
-          imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
+          nome: 'mj-15-30-15',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+            },
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
+            },
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-US-Boost-15-30-15-12278-12321.jpg',
+            },
+
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ 15-30-15',
           descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
@@ -75,8 +71,35 @@ export class ServiceCategoriasService {
           ]
         },
         {
-          nome: 'MJ 15-30-15',
-          imagem: 'assets/produtos/Plant-Prod-MJ-US-Boost-15-30-15-12278-12321.jpg',
+          nome: 'mj-15-30-15',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
+            }
+          ],
+          preco: 'R$ ???,??',
+          descricaoBreve: 'Descrição breve do MJ 15-30-15',
+          descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          }
+          ]
+        },
+        {
+          nome: 'mj-15-30-15',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-US-Boost-15-30-15-12278-12321.jpg',
+            }
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ 15-30-15',
           descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
@@ -101,8 +124,12 @@ export class ServiceCategoriasService {
       imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-12319.jpg',
       produtos: [
         {
-          nome: 'MJ 12-8-26',
-          imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+          nome: 'mj-12-8-26',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+            }
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ 12-8-26',
           descricaoCompleta: 'Descrição completa do produto MJ 12-8-26',
@@ -120,8 +147,12 @@ export class ServiceCategoriasService {
           ]
         },
         {
-          nome: 'MJ 12-8-26',
-          imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-2.jpg',
+          nome: 'mj-12-8-26',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-2.jpg',
+            }
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ 12-8-26',
           descricaoCompleta: 'Descrição completa do produto MJ 12-8-26',
@@ -139,8 +170,12 @@ export class ServiceCategoriasService {
           ]
         },
         {
-          nome: 'MJ 12-8-26',
-          imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-12319.jpg',
+          nome: 'mj-12-8-26',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-12319.jpg',
+            }
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ 12-8-26',
           descricaoCompleta: 'Descrição completa do produto MJ 12-8-26',
@@ -158,8 +193,12 @@ export class ServiceCategoriasService {
           ]
         },
         {
-          nome: 'MJ US 12-8-26',
-          imagem: 'assets/produtos/Plant-Prod-MJ-US-Grow-12-8-26-12279-12319.jpg',
+          nome: 'mj-us-12-8-26',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-US-Grow-12-8-26-12279-12319.jpg',
+            }
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ US 12-8-26',
           descricaoCompleta: 'Descrição completa do produto MJ US 12-8-26',
@@ -184,8 +223,12 @@ export class ServiceCategoriasService {
       imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
       produtos: [
         {
-          nome: 'MJ 10-30-20',
-          imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+          nome: 'mj-10-30-20',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+            }
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ 10-30-20',
           descricaoCompleta: 'Descrição completa do produto MJ 10-30-20',
@@ -210,8 +253,12 @@ export class ServiceCategoriasService {
       imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg',
       produtos: [
         {
-          nome: 'MJ 4-31-37',
-          imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+          nome: 'mj-10-30-20',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+            }
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ 4-31-37',
           descricaoCompleta: 'Descrição completa do produto MJ 4-31-37',
@@ -229,8 +276,12 @@ export class ServiceCategoriasService {
           ]
         },
         {
-          nome: 'MJ 4-31-37',
-          imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323.jpg',
+          nome: 'mj-10-30-20',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323.jpg',
+            }
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ 4-31-37',
           descricaoCompleta: 'Descrição completa do produto MJ 4-31-37',
@@ -248,8 +299,12 @@ export class ServiceCategoriasService {
           ]
         },
         {
-          nome: 'MJ 4-31-37',
-          imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg',
+          nome: 'mj-10-30-20',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg',
+            }
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ 4-31-37',
           descricaoCompleta: 'Descrição completa do produto MJ 4-31-37',
@@ -274,8 +329,12 @@ export class ServiceCategoriasService {
       imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
       produtos: [
         {
-          nome: 'MJ 15-0-14',
-          imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+          nome: 'mj-15-0-14',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+            }
+          ],
           preco: 'R$ ???,??',
           descricaoBreve: 'Descrição breve do MJ 15-0-14',
           descricaoCompleta: 'Descrição completa do produto MJ 15-0-14',
@@ -294,13 +353,16 @@ export class ServiceCategoriasService {
         },
       ]
     },
-
   ];
 
   produtosDestaque: Produtos[] = [
     {
-      nome: 'MJ 15 30 15',
-      imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+      nome: 'mj-15-30-15',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+            },
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 15-30-15',
       descricaoCompleta: 'Descrição completa do MJ 15-30-15',
@@ -318,8 +380,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 12 8 26',
-      imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+      nome: 'mj-12-8-26',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 12-8-26',
       descricaoCompleta: 'Descrição completa do MJ 12-8-26',
@@ -337,8 +403,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 10 30 20',
-      imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+      nome: 'mj-10-30-20',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
@@ -356,8 +426,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 4 31 37',
-      imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+      nome: 'mj-10-30-20',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
@@ -375,8 +449,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 15 0 14',
-      imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+      nome: 'mj-15-0-14',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
@@ -397,8 +475,12 @@ export class ServiceCategoriasService {
 
   produtosMaisVendidos: Produtos[] = [
     {
-      nome: 'MJ 15 30 15',
-      imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+      nome: 'mj-15-30-15',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 15-30-15',
       descricaoCompleta: 'Descrição completa do MJ 15-30-15',
@@ -416,8 +498,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 12 8 26',
-      imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+      nome: 'mj-12-8-26',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 12-8-26',
       descricaoCompleta: 'Descrição completa do MJ 12-8-26',
@@ -435,8 +521,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 10 30 20',
-      imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+      nome: 'mj-10-30-20',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
@@ -454,8 +544,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 4 31 37',
-      imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+      nome: 'mj-10-30-20',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
@@ -473,8 +567,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 15 0 14',
-      imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+      nome: 'mj-15-0-14',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
@@ -495,8 +593,12 @@ export class ServiceCategoriasService {
 
   produtosEmPromocao: Produtos[] = [
     {
-      nome: 'MJ 15 30 15',
-      imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+      nome: 'mj-15-30-15',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 15-30-15',
       descricaoCompleta: 'Descrição completa do MJ 15-30-15',
@@ -514,8 +616,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 12 8 26',
-      imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+      nome: 'mj-12-8-26',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 12-8-26',
       descricaoCompleta: 'Descrição completa do MJ 12-8-26',
@@ -533,8 +639,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 10 30 20',
-      imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+      nome: 'mj-10-30-20',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
@@ -552,8 +662,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 4 31 37',
-      imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+      nome: 'mj-10-30-20',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
@@ -571,8 +685,12 @@ export class ServiceCategoriasService {
       ]
     },
     {
-      nome: 'MJ 15 0 14',
-      imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+      nome: 'mj-15-0-14',
+      imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
+            }
+          ],
       preco: 'R$ ???,??',
       descricaoBreve: 'Descrição breve do MJ 10-30-20',
       descricaoCompleta: 'Descrição completa do MJ 10-30-20',
@@ -642,6 +760,11 @@ export class ServiceCategoriasService {
     );
   }
 
+  formatarNomeProduto(nomeProduto: string): string {
+    const partesNome = nomeProduto.split('-');
+    const nomeFormatado = partesNome[0].toUpperCase() + ' ' + partesNome.slice(1).join('-');
+    return nomeFormatado;
+  }
   //==================================================================================================================================//
 
   constructor() { }

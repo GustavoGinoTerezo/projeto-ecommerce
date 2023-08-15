@@ -42,14 +42,9 @@ export class CategoriaComponent {
     );
   }
 
-  navigateToDetalheProduto(produto: Categorias) {
+  navigateToDetalheProduto(produto: Produtos) {
     const nomeFormatado = produto.nome?.toLowerCase().replace(/\s+/g, '-');
-    this.router.navigate(['/detalhe-produto', nomeFormatado],
-    {
-      queryParams: {
-        produtoJson: JSON.stringify(produto),
-      },
-    });
+    this.router.navigate(['/detalhe-produto', nomeFormatado]);
   }
 
   navigateCategoria(categoria: Categorias) {
@@ -65,6 +60,7 @@ export class CategoriaComponent {
   adicionarAoCarrinho(produto: Produtos): void {
     this.carrinhoService.adicionarAoCarrinho(produto);
   }
+
 
 
   get totalRecords(): number {

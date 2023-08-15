@@ -21,10 +21,16 @@
       <ng-template pTemplate="item" let-produtos>
         <div class="containerGeral" >
           <div class="container">
-            <div (click)="navigateProduto(produtos)">
+            <div >
               <div class="containerInterno">
-                <div class="containerImagem">
-                  <img [src]="produtos.imagem" alt="imagem produto" class="img">
+                <div class="divCarouselInterno">
+                  <p-carousel [value]="produtos.imagem" [showIndicators]="false" [circular]="true">
+                    <ng-template pTemplate="item" let-imagem>
+                      <div class="containerImagem">
+                        <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateProduto(produtos)">
+                      </div>
+                    </ng-template>
+                  </p-carousel>
                 </div>
                 <div class="tamanhoDivs">
                   <div class="nome margem">
@@ -84,10 +90,16 @@
       <ng-template pTemplate="item" let-produtos>
         <div class="containerGeral" >
           <div class="container">
-            <div (click)="navigateProduto(produtos)">
+            <div >
               <div class="containerInterno">
-                <div class="containerImagem">
-                  <img [src]="produtos.imagem" alt="imagem produto" class="img">
+                <div class="divCarouselInterno">
+                  <p-carousel [value]="produtos.imagem" [showIndicators]="false" [circular]="true">
+                    <ng-template pTemplate="item" let-imagem>
+                      <div class="containerImagem">
+                        <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateProduto(produtos)">
+                      </div>
+                    </ng-template>
+                  </p-carousel>
                 </div>
                 <div class="tamanhoDivs">
                   <div class="nome margem">
@@ -136,14 +148,20 @@
   </div>
 
   <div class="divCarouselEmPromocao">
-    <p-carousel [value]="produtosEmPromocao" [showIndicators]="false" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptionsEmPromocao" class="carouselEmPromocao">
+    <p-carousel [value]="produtosEmPromocao" [showIndicators]="false" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions" class="carouselEmPromocao">
       <ng-template pTemplate="item" let-produtos>
         <div class="containerGeral" >
           <div class="container">
-            <div (click)="navigateProduto(produtos)">
+            <div >
               <div class="containerInterno">
-                <div class="containerImagem">
-                  <img [src]="produtos.imagem" alt="imagem produto" class="img">
+                <div class="divCarouselInterno">
+                  <p-carousel [value]="produtos.imagem" [showIndicators]="false" [circular]="true">
+                    <ng-template pTemplate="item" let-imagem>
+                      <div class="containerImagem">
+                        <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateProduto(produtos)">
+                      </div>
+                    </ng-template>
+                  </p-carousel>
                 </div>
                 <div class="tamanhoDivs">
                   <div class="nome margem">
