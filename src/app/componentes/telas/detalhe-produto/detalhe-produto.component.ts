@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Categorias, Imagens, Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 
@@ -18,6 +19,7 @@ export class DetalheProdutoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private messageService: MessageService,
     private produtoService: ServiceCategoriasService,
     private categoriasService: ServiceCategoriasService,
     private carrinhoService: ServiceCarrinhoDeComprasService,
@@ -75,8 +77,15 @@ export class DetalheProdutoComponent implements OnInit {
 
   adicionarAoCarrinho(produto: Produtos): void {
     this.carrinhoService.adicionarAoCarrinho(produto);
+    this.showProdutoAdicionadoAoCarrinho();
   }
 
+  showProdutoAdicionadoAoCarrinho() {
+    this.messageService.add({
+      severity: 'success',
+      icon: 'pi pi-shopping-cart',
+      detail: 'Produto adicionado ao carrinho!' });
+  }
 
 }
 

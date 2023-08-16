@@ -221,5 +221,13 @@ export class TelaPrincipalComponent {
 
   adicionarAoCarrinho(produto: Produtos): void {
     this.carrinhoService.adicionarAoCarrinho(produto);
+    this.showProdutoAdicionadoAoCarrinho();
+  }
+
+  showProdutoAdicionadoAoCarrinho() {
+    this.messageService.add({
+      severity: 'success',
+      icon: 'pi pi-shopping-cart',
+      detail: 'Produto adicionado ao carrinho!' });
   }
 }

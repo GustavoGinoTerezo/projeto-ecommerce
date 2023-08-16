@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { CarrinhoDeCompra, ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 
@@ -19,6 +20,7 @@ export class CarrinhoDeComprasComponent {
   constructor(
     private carrinhoService: ServiceCarrinhoDeComprasService,
     private categoriasService: ServiceCategoriasService,
+    private messageService: MessageService,
     ) {}
 
   ngOnInit(): void {
@@ -53,6 +55,7 @@ export class CarrinhoDeComprasComponent {
     if (index !== -1) {
       this.carrinho.splice(index, 1);
     }
+    this.showProdutoAdicionadoAoCarrinho();
   }
 
   removerTodosOsProdutos() {
@@ -63,8 +66,17 @@ export class CarrinhoDeComprasComponent {
     return this.categoriasService.formatarNomeProduto(produtos);
   }
 
+  showProdutoAdicionadoAoCarrinho() {
+    this.messageService.add({
+      severity: 'error',
+      icon: 'pi pi-trash',
+      
+      detail: 'Produto removido do carrinho!' });
+  }
+
   get totalRecords(): number {
     return this.carrinho?.length || 0;
   }
+
 
 }
