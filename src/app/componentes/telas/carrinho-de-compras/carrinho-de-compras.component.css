@@ -229,7 +229,7 @@
 
 .paginator{
   width: 100%;
-  margin-top: 2px;
+  margin-top: 7px;
 }
 
 .containerInformaçoesProduto{
@@ -245,7 +245,7 @@
 .divRemoverProdutos{
   display: flex;
   width: 100%;
-  padding: 10px 0;
+  padding-bottom: 10px;
   align-items: center;
   justify-content: space-between;
   font-size: 25px;

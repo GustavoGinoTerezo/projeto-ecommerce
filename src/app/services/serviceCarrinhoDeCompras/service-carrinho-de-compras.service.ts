@@ -14,8 +14,12 @@ export interface CarrinhoDeCompra {
 export class ServiceCarrinhoDeComprasService {
 
   carrinhoDeCompra: CarrinhoDeCompra[] = [
-    
-
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Teste 1',
+      quantidade: 1,
+      preco: 1234.10
+    }
   ];
 
   adicionarAoCarrinho(produto: Produtos): void {
