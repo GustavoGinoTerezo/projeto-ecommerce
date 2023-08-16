@@ -4,7 +4,7 @@ import { Produtos } from '../serviceCategorias/service-categorias.service';
 export interface CarrinhoDeCompra {
   imagemProduto?: string;
   nomeProduto?: string;
-  quantidade?: string;
+  quantidade?: number;
   preco?: number;
 }
 
@@ -14,12 +14,7 @@ export interface CarrinhoDeCompra {
 export class ServiceCarrinhoDeComprasService {
 
   carrinhoDeCompra: CarrinhoDeCompra[] = [
-    {
-      imagemProduto: 'assets/logo.png',
-      nomeProduto: 'Teste 1',
-      quantidade: '',
-      preco: 1234,
-    }
+    
 
   ];
 
@@ -31,22 +26,19 @@ export class ServiceCarrinhoDeComprasService {
 
     if (itemExistente) {
       // Se o produto já existe, aumentar a quantidade
-      if (itemExistente.quantidade) {
-        itemExistente.quantidade = (parseInt(itemExistente.quantidade) + 1).toString();
-      } else {
-        itemExistente.quantidade = '1';
-      }
+      itemExistente.quantidade = (itemExistente.quantidade || 0) + 1;
     } else {
       // Caso contrário, adicionar um novo item ao carrinho
       const itemCarrinho: CarrinhoDeCompra = {
         imagemProduto: primeiraImagem,
         nomeProduto: produto.nome,
-        quantidade: '1',
+        quantidade: 1,
         preco: produto.preco
       };
       this.carrinhoDeCompra.push(itemCarrinho);
     }
   }
+
 
 
 

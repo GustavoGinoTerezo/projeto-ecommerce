@@ -1,7 +1,7 @@
 <div class="divGeral">
 
 
-  <div class="containerFreteEProduto">
+  <div class="containerFreteEProduto" *ngIf="carrinho.length > 0">
     <div class="containerFrete">
       <div class="labelFrete">
           Consultar frete e prazo de entrega
@@ -17,19 +17,43 @@
       </div>
     </div>
     <div class="containerProduto">
+      <div class="divRemoverProdutos">
+        Produtos
+        <p-button
+          icon="fa-solid fa-trash-can fa-xl"
+          styleClass="p-button-danger"
+          label="Remover todos os produtos"
+          (click)="removerTodosOsProdutos()"
+          ></p-button>
+      </div>
       <div *ngFor="let item of carrinho | slice:first:first + rows" class="item-carrinho">
-        <img class="img" [src]="item.imagemProduto" alt="imagem produto" >
-        <div class="nome-produto">
-          {{ item.nomeProduto }}
-        </div>
-        <div class="quantidade">
-          <p-inputNumber [size] = 1  [min] = 0 [(ngModel)]="item.quantidade" [showButtons]="true" buttonLayout="vertical" spinnerMode="horizontal" inputId="horizontal" decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="fa-solid fa-plus" decrementButtonIcon="fa-solid fa-minus"></p-inputNumber>
-        </div>
-        <div class="preco">
-          R$ {{ item.preco }}
-        </div>
-        <div class="botao-excluir">
-          <p-button icon="fa-solid fa-trash-can fa-xl" styleClass="p-button-danger" (click)="excluirItem(item)"></p-button>
+        <div class="containerInformaçoesProduto">
+          <img class="img" [src]="item.imagemProduto" alt="imagem produto" >
+          <div class="nome-produto">
+            {{ item.nomeProduto ? formatarNomeProduto(item.nomeProduto) : '' }}
+          </div>
+          <div class="quantidade">
+            <p-inputNumber
+              [size]="1"
+              [min]="1"
+              [(ngModel)]="item.quantidade"
+              [showButtons]="true"
+              buttonLayout="vertical"
+              spinnerMode="horizontal"
+              inputId="horizontal"
+              decrementButtonClass="p-button-danger"
+              incrementButtonClass="p-button-success"
+              incrementButtonIcon="fa-solid fa-plus"
+              decrementButtonIcon="fa-solid fa-minus"
+              (ngModelChange)="atualizarValorTotal()"
+            ></p-inputNumber>
+          </div>
+          <div class="preco">
+            {{ calcularValorItem(item) | currency:'BRL':'symbol':'1.2-2'}}
+          </div>
+          <div class="botao-excluir">
+            <p-button icon="fa-solid fa-trash-can fa-xl" styleClass="p-button-danger" (click)="excluirItem(item)"></p-button>
+          </div>
         </div>
       </div>
       <div class="paginator">
@@ -39,14 +63,14 @@
     </div>
   </div>
 
-  <div class="containerValorTotal">
+  <div class="containerValorTotal" *ngIf="carrinho.length > 0">
     <div class="valorTotal">
       <h1 class="resumoDoPedido">
         Resumo
       </h1>
       <div class="valorTotalProdutos">
         <div class="pMenor">Valor dos produtos:</div>
-        <div class="pMaior">R$ ?????,??</div>
+        <div class="pMaior">{{ calcularValorTotal() | currency:'BRL':'symbol':'1.2-2' }}</div>
       </div>
       <hr class="hr">
       <div class="valorFrete">
@@ -65,6 +89,23 @@
   </div>
 
 
+  <div class="containerSemProduto" *ngIf="carrinho.length === 0">
+    <div>Não há nenhum item no seu carrinho.</div>
+    <br>
+    <div>Caso queira, algum item, entre nas categorias referentes acima, ou vá para a página inicial</div>
+    <br>
+
+    <div>
+      <p-button
+        label="Página principal"
+        icon="fa-solid fa-house"
+        routerLink="/tela-principal"
+      >
+      </p-button>
+    </div>
+
+
+  </div>
 
 
 </div>
