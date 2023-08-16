@@ -30,7 +30,7 @@ import { TelaPrincipalComponent } from './componentes/telas/tela-principal/tela-
 import { MessageService } from 'primeng/api';
 import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/detalhe-produto.component';
 import { CategoriaComponent } from './componentes/telas/categoria/categoria.component';
-import { CarrinhoDeComprasComponent } from './componentes/telas/carrinho-de-compras/carrinho-de-compras.component';
+import { CarrinhoDeComprasComponent } from './componentes/telas/carrinho-de-compras/carrinho/carrinho-de-compras.component';
 
 @NgModule({
   declarations: [
