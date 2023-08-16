@@ -2,7 +2,7 @@
 
 
   <div class="containerFreteEProduto" *ngIf="carrinho.length > 0">
-    <div class="containerFrete">
+    <!-- <div class="containerFrete">
       <div class="labelFrete">
           Consultar frete e prazo de entrega
       </div>
@@ -15,44 +15,51 @@
           <p-button label="Não lembro do meu cep" styleClass="p-button-link" class="buttonNaoLembroOCep"></p-button>
         </div>
       </div>
-    </div>
+    </div> -->
+
     <div class="containerProduto">
-      <div class="divRemoverProdutos">
-        Produtos
+      <!-- <div class="divRemoverProdutos">
+        <div class="divLabelProdutos">
+          Produtos
+        </div>
         <p-button
           icon="fa-solid fa-trash-can fa-xl"
           styleClass="p-button-danger"
           label="Remover todos os produtos"
           (click)="removerTodosOsProdutos()"
           ></p-button>
-      </div>
+      </div> -->
       <div *ngFor="let item of carrinho | slice:first:first + rows" class="item-carrinho">
         <div class="containerInformaçoesProduto">
-          <img class="img" [src]="item.imagemProduto" alt="imagem produto" >
-          <div class="nome-produto">
-            {{ item.nomeProduto ? formatarNomeProduto(item.nomeProduto) : '' }}
+          <div class="containerImagemENome">
+            <img class="img" [src]="item.imagemProduto" alt="imagem produto" >
+            <div class="nome-produto">
+              {{ item.nomeProduto ? formatarNomeProduto(item.nomeProduto) : '' }}
+            </div>
           </div>
-          <div class="quantidade">
-            <p-inputNumber
-              [size]="1"
-              [min]="1"
-              [(ngModel)]="item.quantidade"
-              [showButtons]="true"
-              buttonLayout="vertical"
-              spinnerMode="horizontal"
-              inputId="horizontal"
-              decrementButtonClass="p-button-danger"
-              incrementButtonClass="p-button-success"
-              incrementButtonIcon="fa-solid fa-plus"
-              decrementButtonIcon="fa-solid fa-minus"
-              (ngModelChange)="atualizarValorTotal()"
-            ></p-inputNumber>
-          </div>
-          <div class="preco">
-            {{ calcularValorItem(item) | currency:'BRL':'symbol':'1.2-2'}}
-          </div>
-          <div class="botao-excluir">
-            <p-button icon="fa-solid fa-trash-can fa-xl" styleClass="p-button-danger" (click)="excluirItem(item)"></p-button>
+          <div class="containerQuantPrecoExcluir">
+            <div class="quantidade">
+                <p-inputNumber
+                  [size]="1"
+                  [min]="1"
+                  [(ngModel)]="item.quantidade"
+                  [showButtons]="true"
+                  buttonLayout="vertical"
+                  spinnerMode="horizontal"
+                  inputId="horizontal"
+                  decrementButtonClass="p-button-danger"
+                  incrementButtonClass="p-button-success"
+                  incrementButtonIcon="fa-solid fa-plus"
+                  decrementButtonIcon="fa-solid fa-minus"
+                  (ngModelChange)="atualizarValorTotal()"
+                ></p-inputNumber>
+                <div class="preco">
+                  {{ calcularValorItem(item) | currency:'BRL':'symbol':'1.2-2'}}
+                </div>
+            </div>
+            <div class="botao-excluir">
+              <p-button icon="fa-solid fa-trash-can fa-xl" styleClass="p-button-danger" (click)="excluirItem(item)"></p-button>
+            </div>
           </div>
         </div>
       </div>

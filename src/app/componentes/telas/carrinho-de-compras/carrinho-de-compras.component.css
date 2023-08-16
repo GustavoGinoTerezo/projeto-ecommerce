@@ -200,10 +200,9 @@
 
 .quantidade{
   display: flex;
-  flex-direction: column;
-  width: 10%;
   height: 100%;
-  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
   align-items: center;
   padding: 15px;
   font-size: 20px;
@@ -212,7 +211,7 @@
 
 .preco{
   display: flex;
-  width: 40%;
+  width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
@@ -224,7 +223,7 @@
 
 .botao-excluir{
   height: 100%;
-  width: 100px;
+  min-width: 50px;
 }
 
 .paginator{
@@ -264,4 +263,100 @@
   border-radius: 8px;
   border: 2px solid rgba(0, 0, 0, 0.462);
   padding: 23px;
+}
+
+.containerImagemENome{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.containerQuantPrecoExcluir{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+@media (max-width: 900px) {
+
+  .divGeral{
+    flex-direction: column;
+  }
+
+  .containerValorTotal{
+    margin-top: 5px;
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 660px) {
+
+  .labelFrete{
+    justify-content: center;
+  }
+
+
+  .inputFreteEBotoes{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .divNaoLembroOCep{
+
+    width: 100%;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .divRemoverProdutos{
+    flex-direction: column;
+  }
+
+  .divLabelProdutos{
+    display: none;
+  }
+
+  .containerImagemENome{
+    flex-direction: column;
+  }
+
+  .img{
+    width: 100%;
+    height: 100%;
+  }
+
+  .containerInformaçoesProduto{
+    flex-direction: column;
+  }
+
+
+}
+
+
+
+
+@media (max-width: 420px) {
+
+  .containerQuantPrecoExcluir{
+    flex-direction: column;
+  }
+
+  .quantidade{
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+  }
+
+  .botao-excluir{
+    width: 100%;
+  }
+
 }
