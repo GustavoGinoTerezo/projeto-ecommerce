@@ -1,3 +1,4 @@
+import { PagamentoComponent } from './componentes/telas/carrinho-de-compras/pagamento/pagamento.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -37,7 +38,10 @@ const routes: Routes = [
     path: 'carrinho-de-compra',
     component: CarrinhoDeComprasComponent,
   },
-
+  {
+    path: 'pagamento',
+    component: PagamentoComponent,
+  },
 ];
 
 @NgModule({

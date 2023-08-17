@@ -20,6 +20,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { StepsModule } from 'primeng/steps';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -31,9 +33,9 @@ import { MessageService } from 'primeng/api';
 import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/detalhe-produto.component';
 import { CategoriaComponent } from './componentes/telas/categoria/categoria.component';
 import { CarrinhoDeComprasComponent } from './componentes/telas/carrinho-de-compras/carrinho/carrinho-de-compras.component';
-import { PagamentoComponent } from './componentes/telas/carrinho-de-compras/pagamento/pagamento/pagamento.component';
-import { ConfirmacaoComponent } from './componentes/telas/carrinho-de-compras/confirmacao/confirmacao/confirmacao.component';
-import { ConclusaoDeCompraComponent } from './componentes/telas/carrinho-de-compras/concluir/conclusao-de-compra/conclusao-de-compra.component';
+import { PagamentoComponent } from './componentes/telas/carrinho-de-compras/pagamento/pagamento.component';
+import { ConfirmacaoComponent } from './componentes/telas/carrinho-de-compras/confirmacao/confirmacao.component';
+import { ConclusaoDeCompraComponent } from './componentes/telas/carrinho-de-compras/conclusao-de-compra/conclusao-de-compra.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { ConclusaoDeCompraComponent } from './componentes/telas/carrinho-de-comp
     AvatarGroupModule,
     PaginatorModule,
     InputNumberModule,
+    StepsModule,
+    RadioButtonModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

@@ -110,9 +110,9 @@ export class TelaPrincipalComponent {
       numScroll: 1
     },
     {
-        breakpoint: '1200px',
-        numVisible: 7,
-        numScroll: 1
+      breakpoint: '1200px',
+      numVisible: 7,
+      numScroll: 1
     },
     {
       breakpoint: '1000px',
@@ -140,9 +140,9 @@ export class TelaPrincipalComponent {
       numScroll: 1
     },
     {
-        breakpoint: '350px',
-        numVisible: 1,
-        numScroll: 1
+      breakpoint: '350px',
+      numVisible: 1,
+      numScroll: 1
     },
 
   ];

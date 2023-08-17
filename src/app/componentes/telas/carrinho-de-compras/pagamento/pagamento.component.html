@@ -1,0 +1,33 @@
+<div class="divGeral">
+  <div class="divSteps">
+    <p-steps [model]="items" [readonly]="true" ></p-steps>
+  </div>
+  <div class="formasPagamento">
+
+
+    <div class="containerFormaPagamento">
+      <div class="containerRadioButton">
+        <div *ngFor="let pagamento of formaPagamento; let i = index" >
+          <div class="radioButton">
+            <p-radioButton
+              [inputId]="pagamento.tipoPagamento"
+              name="category"
+              [value]="pagamento"
+              [(ngModel)]="formaPagamentoSelecionada"
+              (click)="toggleFormaPagamentoAtiva(i)">
+            </p-radioButton>
+            <label [for]="pagamento.tipoPagamento" class="labelFormaPagamento">
+              {{ pagamento.tipoPagamento }}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="descFormaPagamento" *ngIf="formaPagamentoSelecionada">
+        {{ formaPagamentoSelecionada.descricaoFormaPagamento }}
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
