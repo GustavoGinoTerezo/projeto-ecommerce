@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { CarrinhoDeCompra, ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 
@@ -16,6 +16,7 @@ export class CarrinhoDeComprasComponent {
   rows: number = 10; // Número de itens por página
   cep!: string;
   quantidade: number = 1;
+  items: MenuItem[] = [];
 
   constructor(
     private carrinhoService: ServiceCarrinhoDeComprasService,
@@ -26,6 +27,25 @@ export class CarrinhoDeComprasComponent {
   ngOnInit(): void {
     this.carrinho = this.carrinhoService.getCarrinhoDeCompra();
     this.calcularValorTotal();
+
+    this.items = [
+      {
+          label: 'Carrinho',
+          routerLink: '/carrinho-de-compra'
+      },
+      {
+          label: 'Pagamento',
+          routerLink: '/pagamento'
+      },
+      {
+          label: 'Confirmação',
+          routerLink: '/confirmacao'
+      },
+      {
+          label: 'Conclusão',
+          routerLink: '/conclusao'
+      }
+  ];
   }
 
   onPageChange(event: any): void {
@@ -70,7 +90,7 @@ export class CarrinhoDeComprasComponent {
     this.messageService.add({
       severity: 'error',
       icon: 'pi pi-trash',
-      
+
       detail: 'Produto removido do carrinho!' });
   }
 
