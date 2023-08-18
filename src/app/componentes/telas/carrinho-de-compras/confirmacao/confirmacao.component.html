@@ -1,5 +1,47 @@
 <div class="divGeral">
+
+
   <div class="divSteps">
-    <p-steps [model]="items" [readonly]="true" ></p-steps>
+    <p-steps [model]="items" [readonly]="true"></p-steps>
+  </div>
+
+  <div class="containerInformacoesEValorFinal">
+
+    <div class="informacoesEProduto">
+
+      <div class="informacoes">
+
+      </div>
+
+      <div class="produtos">
+
+      </div>
+
+    </div>
+
+    <div class="valores">
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
+<!--
+<div *ngIf="carrinho && carrinho.length">
+  <div *ngFor="let produto of carrinho">
+    <div>
+     {{ produto.quantidade }}
+      <br>
+      {{ (produto?.preco || 0) * (produto?.quantidade || 0) | number:'1.2-2' }}
+    </div>
   </div>
 </div>
+
+<div *ngIf="!carrinho || carrinho.length === 0">
+  <p>Nenhum produto no carrinho.</p>
+</div>
+-->

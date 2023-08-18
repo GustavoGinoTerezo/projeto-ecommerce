@@ -19,6 +19,24 @@ export class ServiceCarrinhoDeComprasService {
       nomeProduto: 'Teste 1',
       quantidade: 1,
       preco: 1234.10
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Teste 1',
+      quantidade: 3,
+      preco: 1234.10
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Teste 1',
+      quantidade: 7,
+      preco: 1234.10
+    },
+    {
+      imagemProduto: 'assets/logo.png',
+      nomeProduto: 'Teste 1',
+      quantidade: 5,
+      preco: 1234.10
     }
   ];
 

@@ -65,7 +65,6 @@ export class CarrinhoDeComprasComponent {
     return (item.quantidade || 0) * (item.preco || 0);
   }
 
-
   atualizarValorTotal(): void {
     this.calcularValorTotal();
   }
