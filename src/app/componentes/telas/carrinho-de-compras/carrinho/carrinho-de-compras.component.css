@@ -167,8 +167,6 @@
   margin-top: 10px;
 }
 
-
-
 .item-carrinho{
   display: flex;
   flex-direction: column;
@@ -282,7 +280,6 @@
   align-items: center;
 }
 
-
 @media (max-width: 900px) {
 
   .divGeral{
@@ -336,11 +333,7 @@
     flex-direction: column;
   }
 
-
 }
-
-
-
 
 @media (max-width: 420px) {
 
