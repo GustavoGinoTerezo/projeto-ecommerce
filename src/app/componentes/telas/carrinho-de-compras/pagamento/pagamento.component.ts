@@ -1,5 +1,6 @@
 import { FormaPagamento, FormaPagamentoService } from './../../../../services/serviceFormaPagamento/forma-pagamento.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -14,8 +15,10 @@ export class PagamentoComponent {
   formaPagamentoSelecionada: any = null;
   formaPagamentoAtiva: boolean[] = new Array(this.formaPagamento.length).fill(false);
 
+
   constructor(
     private formaPagamentoService: FormaPagamentoService,
+    private router: Router,
   ){}
 
   ngOnInit() {
@@ -51,5 +54,7 @@ export class PagamentoComponent {
     this.formaPagamentoAtiva[index] = true; // Open the clicked description
   }
 
-
+  navigateConfirmacao(){
+    this.router.navigate(['/confirmacao']);
+  }
 }

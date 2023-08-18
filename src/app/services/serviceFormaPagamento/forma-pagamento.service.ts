@@ -14,27 +14,27 @@ export class FormaPagamentoService {
   formaPagamento: FormaPagamento[] = [
     {
       tipoPagamento: 'PIX',
-      descricaoFormaPagamento: 'TESTE 1',
+      descricaoFormaPagamento: 'Descrição breve da forma de pagamento',
     },
     {
       tipoPagamento: 'Cartão de crédito',
-      descricaoFormaPagamento: 'TESTE 2',
+      descricaoFormaPagamento: 'Descrição breve da forma de pagamento',
     },
     {
       tipoPagamento: 'Boleto Bancário',
-      descricaoFormaPagamento: 'TESTE 3',
+      descricaoFormaPagamento: 'Descrição breve da forma de pagamento',
     },
     {
       tipoPagamento: 'PagSeguro',
-      descricaoFormaPagamento: 'TESTE 4',
+      descricaoFormaPagamento: 'Descrição breve da forma de pagamento',
     },
     {
       tipoPagamento: 'PayPal',
-      descricaoFormaPagamento: 'TESTE 5',
+      descricaoFormaPagamento: 'Descrição breve da forma de pagamento',
     },
     {
       tipoPagamento: 'Mercado Pago',
-      descricaoFormaPagamento: 'TESTE 6',
+      descricaoFormaPagamento: 'Descrição breve da forma de pagamento',
     },
   ]
 

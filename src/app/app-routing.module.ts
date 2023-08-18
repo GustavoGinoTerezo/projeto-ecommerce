@@ -7,6 +7,7 @@ import { TelaPrincipalComponent } from './componentes/telas/tela-principal/tela-
 import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/detalhe-produto.component';
 import { CategoriaComponent } from './componentes/telas/categoria/categoria.component';
 import { CarrinhoDeComprasComponent } from './componentes/telas/carrinho-de-compras/carrinho/carrinho-de-compras.component';
+import { ConfirmacaoComponent } from './componentes/telas/carrinho-de-compras/confirmacao/confirmacao.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'pagamento',
     component: PagamentoComponent,
+  },
+  {
+    path: 'confirmacao',
+    component: ConfirmacaoComponent,
   },
 ];
 

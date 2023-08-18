@@ -3,21 +3,48 @@
     <p-steps [model]="items" [readonly]="true" ></p-steps>
   </div>
   <div class="formasPagamento">
-
-
-    <div class="containerFormaPagamento">
-      <div class="containerRadioButton">
-        <div *ngFor="let pagamento of formaPagamento; let i = index" class="field-checkbox">
-          <p-radioButton [inputId]="pagamento.tipoPagamento" name="category" [value]="pagamento" [(ngModel)]="formaPagamentoSelecionada" (click)="toggleFormaPagamentoAtiva(i)"></p-radioButton>
-          <label [for]="pagamento.tipoPagamento" class="ml-2">{{ pagamento.tipoPagamento }}</label>
-          <div *ngIf="formaPagamentoAtiva[i]">{{ pagamento.descricaoFormaPagamento }}</div>
+    <div class="containerTipoPagamentoGeral">
+      <div *ngFor="let pagamento of formaPagamento; let i = index" class="containerTipoPagamento">
+        <label class="containerButtonELabel">
+          <p-radioButton
+            (click)="toggleFormaPagamentoAtiva(i)"
+            [inputId]="pagamento.tipoPagamento"
+            name="category"
+            [value]="pagamento"
+            [(ngModel)]="formaPagamentoSelecionada"
+          ></p-radioButton>
+          <label [for]="pagamento.tipoPagamento" class="labelFormaPagamento">
+            {{ pagamento.tipoPagamento }}
+          </label>
+        </label>
+        <div *ngIf="formaPagamentoAtiva[i]" class="descricaoFormaPagamento">
+          {{ pagamento.descricaoFormaPagamento }}
         </div>
-
       </div>
-
     </div>
-
-
+    <div class="containerValorTotal">
+      <div class="valorTotal">
+        <h1 class="resumoDoPedido">
+          Valor da compra
+        </h1>
+        <div class="ValorTotalProdutosEFrete">
+          <div class="pMenor">Valor total:</div>
+          <h2 class="valorFinalFreteEProduto">R$ ?????,??</h2>
+        </div>
+        <div class="divBotoes">
+          <p-button
+            label="Continuar"
+            (onClick)="navigateConfirmacao()"
+            [disabled]="!formaPagamentoSelecionada"
+          ></p-button>
+          <p-button
+            class="buttonWidth button"
+            label="Voltar"
+            routerLink="/carrinho-de-compra"
+          ></p-button>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>
