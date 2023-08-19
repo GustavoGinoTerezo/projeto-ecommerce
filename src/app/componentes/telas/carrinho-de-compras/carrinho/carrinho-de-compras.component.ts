@@ -25,7 +25,9 @@ export class CarrinhoDeComprasComponent {
     ) {}
 
   ngOnInit(): void {
+
     this.carrinho = this.carrinhoService.getCarrinhoDeCompra();
+    
     this.calcularValorTotal();
 
     this.items = [

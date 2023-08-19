@@ -42,18 +42,25 @@
 
         .containerDadosPessoaisEEndereco{
           display: flex;
+          width: 100%;
 
           .containerDadosPessoais{
             display: flex;
+            flex-direction: column;
             width: 100%;
             height: 100%;
             margin-right: 10px;
+            padding: 10px;
+            background-color: antiquewhite;
           }
 
           .containerEnderecoEntrega{
             display: flex;
+            flex-direction: column;
             width: 100%;
             height: 100%;
+            padding: 10px;
+            background-color: violet;
           }
         }
       }
@@ -74,13 +81,77 @@
       width: 30%;
       height: 100%;
       justify-content: center;
-      align-items: center;
       padding: 10px;
       background-color: aqua;
     }
   }
+}
 
 
+.divNome{
+  display: flex;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
 
+.divEmail{
+  display: flex;
+}
+
+.divTelefone{
+  display: flex;
+}
+
+.divCPF{
+  display: flex;
+}
+
+.divCEP{
+  display: flex;
+}
+
+.labelEmail{
+  margin-right: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.labelTelefone{
+  margin-right: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.labelCpfOuCnpj{
+  margin-right: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.labelCep{
+  margin-right: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.dadoEmail{
+
+  font-weight: 200;
+}
+
+.dadoTelefone{
+
+  font-weight: 200;
+}
+
+.dadoCPFouCNPJ{
+
+  font-weight: 200;
+}
+
+.dadoCEP{
+
+  font-weight: 200;
 }
 

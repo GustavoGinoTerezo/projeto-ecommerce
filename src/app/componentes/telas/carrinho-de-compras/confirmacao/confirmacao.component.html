@@ -17,11 +17,49 @@
         </div>
 
         <div class="containerDadosPessoaisEEndereco">
-          <div class="containerDadosPessoais">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, excepturi esse? Provident, earum ullam saepe nihil eveniet voluptatibus, accusamus quibusdam sunt facilis distinctio molestias laudantium odio impedit animi tempore sit magni repudiandae dolor rem cumque neque totam dolore. Eos illo fugit atque? Numquam libero molestias dolor, quam qui ipsa nemo ex beatae harum. Porro ut ipsum temporibus tempora maxime. Voluptates nostrum saepe asperiores, possimus, iste nihil officiis vero magnam aliquid deleniti provident incidunt reiciendis consequatur eius minus excepturi harum quos ducimus odit dignissimos sit. Ipsa autem in nesciunt veritatis vitae quia suscipit quod, facilis dolores eveniet repellendus. Iusto, esse necessitatibus.
+
+          <div class="containerDadosPessoais" *ngIf="usuario && usuario.length > 0">
+            <div class="divNome">
+              {{ usuario[0].nome }}
+            </div>
+            <div class="divEmail">
+              <div class="labelEmail">E-mail:</div>
+              <div class="dadoEmail">{{ usuario[0].email }}</div>
+            </div>
+            <div class="divTelefone">
+              <div class="labelTelefone">Telefone:</div>
+              <div class="dadoTelefone">{{ usuario[0].telefone }}</div>
+            </div>
+            <div class="divCPF">
+              <div class="labelCpfOuCnpj">CPF/CNPJ:</div>
+              <div class="dadoCPFouCNPJ">{{ usuario[0].cpfOuCnpj }}</div>
+            </div>
+            <div class="divCEP">
+              <div class="labelCep">CEP:</div>
+              <div class="dadoCEP">{{ usuario[0].cep }}</div>
+            </div>
           </div>
-          <div class="containerEnderecoEntrega">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus molestias, perspiciatis dolore, temporibus provident quasi accusamus earum vel reiciendis suscipit placeat natus excepturi aperiam! Fuga aperiam nesciunt temporibus, nam amet animi quis id iste assumenda, doloremque alias veritatis totam aspernatur impedit qui illum corporis fugiat modi porro facere ea ex! Nemo, quod, ad qui alias nisi veniam, fuga reiciendis quae repellendus minus esse nihil veritatis omnis praesentium amet eligendi ipsa odit repellat sapiente? Reprehenderit ex, quisquam optio incidunt nostrum maiores? Soluta, voluptatibus omnis. Amet necessitatibus atque quas est iusto quidem perspiciatis explicabo, doloribus fugit, deserunt voluptates asperiores obcaecati, veritatis a.
+
+          <div class="containerEnderecoEntrega" *ngIf="usuario && usuario.length > 0">
+            <div class="divNome">
+              {{ usuario[0].rua }}
+            </div>
+            <div class="divEmail">
+              <div class="labelEmail">Número:</div>
+              <div class="dadoEmail">{{ usuario[0].numeroResidencia }}</div>
+            </div>
+            <div class="divTelefone">
+              <div class="labelTelefone">Cidade:</div>
+              <div class="dadoTelefone">{{ usuario[0].cidade }}</div>
+            </div>
+            <div class="divCPF">
+              <div class="labelCpfOuCnpj">Bairro:</div>
+              <div class="dadoCPFouCNPJ">{{ usuario[0].bairro }}</div>
+            </div>
+            <div class="divCEP">
+              <div class="labelCep">CEP:</div>
+              <div class="dadoCEP">{{ usuario[0].cep }}</div>
+            </div>
           </div>
         </div>
       </div>
