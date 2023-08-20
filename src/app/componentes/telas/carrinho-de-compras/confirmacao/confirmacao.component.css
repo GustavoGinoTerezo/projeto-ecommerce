@@ -52,6 +52,58 @@
             margin-right: 10px;
             padding: 10px;
             background-color: antiquewhite;
+
+            .divNome{
+              display: flex;
+              font-size: 20px;
+              font-weight: 500;
+              margin-bottom: 5px;
+            }
+
+            .divEmail{
+              display: flex;
+
+              .labelEmail{
+                margin-right: 10px;
+                font-size: 15px;
+                font-weight: 500;
+              }
+
+              .dadoEmail{
+                font-weight: 200;
+              }
+            }
+
+            .divTelefone{
+              display: flex;
+
+              .labelTelefone{
+                margin-right: 10px;
+                font-size: 15px;
+                font-weight: 500;
+              }
+
+              .dadoTelefone{
+                font-weight: 200;
+              }
+            }
+
+            .divCPF{
+              display: flex;
+
+
+              .labelCpfOuCnpj{
+                margin-right: 10px;
+                font-size: 15px;
+                font-weight: 500;
+              }
+
+
+              .dadoCPFouCNPJ{
+                font-weight: 200;
+              }
+
+            }
           }
 
           .containerEnderecoEntrega{
@@ -61,6 +113,58 @@
             height: 100%;
             padding: 10px;
             background-color: violet;
+
+            .divNomeRua{
+              display: flex;
+              font-size: 20px;
+              font-weight: 500;
+              margin-bottom: 5px;
+            }
+
+            .divNumeroResidencia{
+              display: flex;
+
+              .labelNumeroResidencia{
+                margin-right: 10px;
+                font-size: 15px;
+                font-weight: 500;
+              }
+
+              .dadoNumeroResidencia{
+                font-weight: 200;
+              }
+            }
+
+            .divCidade{
+              display: flex;
+
+              .labelCidade{
+                margin-right: 10px;
+                font-size: 15px;
+                font-weight: 500;
+              }
+
+              .dadoCidade{
+                font-weight: 200;
+              }
+            }
+
+            .divBairro{
+              display: flex;
+
+
+              .labelBairro{
+                margin-right: 10px;
+                font-size: 15px;
+                font-weight: 500;
+              }
+
+
+              .dadoBairro{
+                font-weight: 200;
+              }
+
+            }
           }
         }
       }
@@ -87,71 +191,31 @@
   }
 }
 
-
-.divNome{
+.divCEP{
   display: flex;
-  font-size: 20px;
-  font-weight: 500;
+
+  .labelCep{
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .dadoCEP{
+    font-weight: 200;
+  }
+
+}
+
+.h1{
+  margin-bottom: 10px;
+}
+
+.h2{
   margin-bottom: 5px;
 }
 
-.divEmail{
-  display: flex;
+
+.hr{
+  width: 100%;
+  margin-bottom: 10px;
 }
-
-.divTelefone{
-  display: flex;
-}
-
-.divCPF{
-  display: flex;
-}
-
-.divCEP{
-  display: flex;
-}
-
-.labelEmail{
-  margin-right: 10px;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.labelTelefone{
-  margin-right: 10px;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.labelCpfOuCnpj{
-  margin-right: 10px;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.labelCep{
-  margin-right: 10px;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.dadoEmail{
-
-  font-weight: 200;
-}
-
-.dadoTelefone{
-
-  font-weight: 200;
-}
-
-.dadoCPFouCNPJ{
-
-  font-weight: 200;
-}
-
-.dadoCEP{
-
-  font-weight: 200;
-}
-

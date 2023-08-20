@@ -11,7 +11,7 @@
 
       <div class="informacoes">
         <div>
-          <h1>
+          <h1 class="h1">
             Informações gerais do pedido
           </h1>
         </div>
@@ -19,6 +19,11 @@
         <div class="containerDadosPessoaisEEndereco">
 
           <div class="containerDadosPessoais" *ngIf="usuario && usuario.length > 0">
+            <h2 class="h2">Dados pessoais</h2>
+            <div>
+              Dados a serem incluídos na nota fiscal correspondente ao pedido.
+            </div>
+            <hr class="hr">
             <div class="divNome">
               {{ usuario[0].nome }}
             </div>
@@ -41,20 +46,28 @@
           </div>
 
           <div class="containerEnderecoEntrega" *ngIf="usuario && usuario.length > 0">
-            <div class="divNome">
+
+            <h2 class="h2">Endereço de entrega</h2>
+
+            <div>
+              Endereço onde será feita a entrega do pedido.
+            </div>
+            <hr class="hr">
+
+            <div class="divNomeRua">
               {{ usuario[0].rua }}
             </div>
-            <div class="divEmail">
-              <div class="labelEmail">Número:</div>
-              <div class="dadoEmail">{{ usuario[0].numeroResidencia }}</div>
+            <div class="divNumeroResidencia">
+              <div class="labelNumeroResidencia">Número:</div>
+              <div class="dadoNumeroResidencia">{{ usuario[0].numeroResidencia }}</div>
             </div>
-            <div class="divTelefone">
-              <div class="labelTelefone">Cidade:</div>
-              <div class="dadoTelefone">{{ usuario[0].cidade }}</div>
+            <div class="divCidade">
+              <div class="labelCidade">Cidade:</div>
+              <div class="dadoCidade">{{ usuario[0].cidade }}</div>
             </div>
-            <div class="divCPF">
-              <div class="labelCpfOuCnpj">Bairro:</div>
-              <div class="dadoCPFouCNPJ">{{ usuario[0].bairro }}</div>
+            <div class="divBairro">
+              <div class="labelBairro">Bairro:</div>
+              <div class="dadoBairro">{{ usuario[0].bairro }}</div>
             </div>
             <div class="divCEP">
               <div class="labelCep">CEP:</div>
