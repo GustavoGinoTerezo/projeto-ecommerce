@@ -35,7 +35,7 @@
         </h2>
         <div class="precoEBotao">
           <h2 class="preco">
-            R$ {{ produto?.preco }}
+            R$ {{ produto?.preco?.toFixed(2) }}
           </h2>
           <div class="botao">
             <p-button (click)="adicionarAoCarrinho(produto || produtoDaCategoria)">Adicionar ao carrinho</p-button>

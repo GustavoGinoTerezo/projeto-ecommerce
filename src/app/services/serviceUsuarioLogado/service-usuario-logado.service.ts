@@ -19,15 +19,15 @@ export class ServiceUsuarioLogadoService {
 
   usuario: Usuario[] = [
     {
-      nome: 'Gustavo Gino Terezo',
-      email: 'gustavogino@outlook.com.br',
+      nome: 'Teste',
+      email: 'teste@teste.com',
       cpfOuCnpj: 99999999999,
-      telefone: 11952491407,
-      cep: '03756000',
-      cidade: 'São Paulo',
-      bairro: 'Jardim Gonzaga',
-      rua: 'Rua Jorge Ó Solanas',
-      numeroResidencia: 73
+      telefone: 99999999999,
+      cep: '99999999',
+      cidade: 'Teste',
+      bairro: 'Teste',
+      rua: 'Teste',
+      numeroResidencia: 99,
     }
   ]
 

@@ -25,7 +25,7 @@
       flex-direction: column;
       width: 70%;
       height: 100%;
-      margin-right: 15px;
+      margin-right: 5px;
 
       .informacoes{
         display: flex;
@@ -35,7 +35,7 @@
         justify-content: center;
         align-items: center;
         padding: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
         background-color: var(--container-externo-cards-produtos);
 
         .containerDadosPessoaisEEndereco{
@@ -192,7 +192,6 @@
             .img{
               width: 70px;
               height: 80px;
-
             }
 
           }
@@ -203,7 +202,6 @@
             justify-content: center;
             align-items: center;
             padding: 10px;
-
             font-weight: 500;
           }
 
@@ -254,9 +252,80 @@
       display: flex;
       width: 30%;
       height: 100%;
-      justify-content: center;
+      max-height: 400px;
       padding: 10px;
-      background-color: aqua;
+      background-color: var(--container-externo-cards-produtos);
+
+      .containerGeralValorTotal{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        max-height: 400px;
+        justify-content: center;
+        background-color: var(--container-interno-cards-produtos);
+        padding: 10px;
+
+        .containerValorProduto{
+          display: flex;
+          justify-content: space-between;
+          padding: 10px 0;
+
+          .labelValorProduto{
+            font-weight: 300;
+          }
+
+          .dadoProduto{
+            font-size: 15px;
+            font-weight: 500;
+          }
+        }
+
+        .containerFrete{
+          display: flex;
+          justify-content: space-between;
+          padding: 10px 0;
+
+          .labelFrete{
+            font-weight: 300;
+          }
+
+          .dadoFrete{
+            font-size: 15px;
+            font-weight: 500;
+
+          }
+        }
+
+        .containerValorTotal{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          padding: 10px;
+          height: 100px;
+          background-color: var(--background-das-divs-da-categoria);
+
+          .labelValorTotal{
+            font-weight: 300;
+          }
+
+          .dadoValorTotal{
+            font-weight: 500;
+            font-size: 25px;
+            text-align: right;
+            color: var(--cor-valor-total);
+          }
+
+        }
+
+        .containerBotoes{
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+      }
+
+
     }
   }
 }
@@ -277,6 +346,7 @@
 }
 
 .h1{
+  font-weight: 500;
   margin-bottom: 10px;
 }
 
@@ -290,3 +360,17 @@
   margin-bottom: 10px;
 }
 
+.button{
+  margin-top: 10px;
+}
+
+:host ::ng-deep .p-button{
+  width: 100%;
+}
+
+@media (max-width: 395px) {
+
+  .divSteps{
+   display: none;
+  }
+ }

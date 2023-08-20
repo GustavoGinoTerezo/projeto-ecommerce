@@ -29,9 +29,7 @@
   align-items: center;
   flex-direction: column;
   margin-right: 5px;
-  background-color: var(--background-das-divs-da-categoria);
-  border-radius: 8px;
-  border: 2px solid rgba(0, 0, 0, 0.462);
+  background-color: var(--container-externo-cards-produtos);
   padding: 10px;
 }
 
@@ -42,16 +40,23 @@
   flex-direction: column;
 }
 
+.containerFreteGeral{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  background-color: var(--container-externo-cards-produtos);
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
 .containerFrete{
   display: flex;
   flex-direction: column;
   width: 100%;
   justify-content: space-between;
-  background-color: var(--background-das-divs-da-categoria);
-  border-radius: 8px;
-  border: 2px solid rgba(0, 0, 0, 0.462);
+  background-color: var(--container-interno-cards-produtos);
   padding: 15px;
-  margin-bottom: 5px;
 }
 
 .labelFrete{
@@ -80,29 +85,28 @@
   display: flex;
   width: 30%;
   height: 100%;
+  max-height: 500px;
+  padding: 10px;
+  background-color: var(--container-externo-cards-produtos);
 }
 
 .valorTotal{
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   max-height: 500px;
   justify-content: center;
   padding: 15px;
-  background-color: var(--background-das-divs-da-categoria);
-  border-radius: 8px;
-  border: 2px solid rgba(0, 0, 0, 0.462);
+  background-color: var(--container-interno-cards-produtos);
 }
 
 .resumoDoPedido{
   display: flex;
   width: 100%;
-  height: 15%;
-  justify-content: center;
-  align-items: center;
+  height: 10%;
   font-size: 30px;
   font-weight: 500;
+  padding: 10px;
   border-radius: 8px;
   background-color: var(--container-interno-cards-produtos);
   margin: 0;
@@ -249,8 +253,6 @@
   width: 100%;
   align-items: center;
   background-color: var(--container-interno-cards-produtos);
-  border-radius: 8px;
-  border: 2px solid rgba(0, 0, 0, 0.462);
   padding: 10px;
 }
 
@@ -272,7 +274,7 @@
   align-items: center;
   flex-direction: column;
   margin-right: 5px;
-  background-color: var(--background-das-divs-da-categoria);
+  background-color: var(--container-externo-cards-produtos);
   border-radius: 8px;
   border: 2px solid rgba(0, 0, 0, 0.462);
   padding: 23px;
@@ -298,6 +300,10 @@
 @media (max-width: 900px) {
 
   .divGeral{
+    flex-direction: column;
+  }
+
+  .containerProdutosEValorTotal{
     flex-direction: column;
   }
 
@@ -350,9 +356,22 @@
 
 }
 
+@media (max-width: 395px) {
+
+ .divSteps{
+  display: none;
+ }
+}
+
+
 @media (max-width: 420px) {
 
   .containerQuantPrecoExcluir{
+    flex-direction: column;
+  }
+
+  .divInputEBotao{
+    width: 100%;
     flex-direction: column;
   }
 
@@ -365,8 +384,20 @@
     padding-right: 15px;
   }
 
+  :host ::ng-deep .p-inputmask{
+    width: 100%;
+  }
+
+  .margem{
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
+
   .botao-excluir{
     width: 100%;
   }
 
+  .buttonEnviar{
+    width: 100%;
+  }
 }

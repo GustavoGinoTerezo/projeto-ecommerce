@@ -13,10 +13,11 @@ export class CarrinhoDeComprasComponent {
 
   carrinho: CarrinhoDeCompra[] = [];
   first: number = 0; // Primeiro item da página
-  rows: number = 10; // Número de itens por página
+  rows: number = 5; // Número de itens por página
   cep!: string;
   quantidade: number = 1;
   items: MenuItem[] = [];
+  valorTotal: number = 0;
 
   constructor(
     private carrinhoService: ServiceCarrinhoDeComprasService,
@@ -27,7 +28,7 @@ export class CarrinhoDeComprasComponent {
   ngOnInit(): void {
 
     this.carrinho = this.carrinhoService.getCarrinhoDeCompra();
-    
+
     this.calcularValorTotal();
 
     this.items = [
@@ -55,12 +56,10 @@ export class CarrinhoDeComprasComponent {
     this.rows = event.rows;
   }
 
-  calcularValorTotal(): number {
-    let total = 0;
-    for (const item of this.carrinho) {
-      total += (item.quantidade || 0) * (item.preco || 0);
-    }
-    return total;
+  calcularValorTotal(): void {
+    this.valorTotal = this.carrinho.reduce((total, produto) => {
+      return total + (produto.preco || 0) * (produto.quantidade || 0);
+    }, 0);
   }
 
   calcularValorItem(item: CarrinhoDeCompra): number {

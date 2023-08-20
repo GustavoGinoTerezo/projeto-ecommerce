@@ -6,17 +6,19 @@
 
   <div class="containerProdutosEValorTotal">
     <div class="containerFreteEProduto" *ngIf="carrinho.length > 0">
-      <div class="containerFrete">
-        <div class="labelFrete">
-            Consultar frete e prazo de entrega
-        </div>
-        <div class="inputFreteEBotoes">
-          <div class="divInputEBotao margem">
-            <p-inputMask mask="99999-999" [(ngModel)]="cep" placeholder="CEP" class="margem"></p-inputMask>
-            <p-button label="Enviar"  styleClass="p-button-outlined"></p-button>
+      <div class="containerFreteGeral">
+        <div class="containerFrete">
+          <div class="labelFrete">
+              Consultar frete e prazo de entrega
           </div>
-          <div class="divNaoLembroOCep">
-            <p-button label="Não lembro do meu cep" styleClass="p-button-link" class="buttonNaoLembroOCep"></p-button>
+          <div class="inputFreteEBotoes">
+            <div class="divInputEBotao margem">
+              <p-inputMask mask="99999-999" [(ngModel)]="cep" placeholder="CEP" class="margem"></p-inputMask>
+              <p-button label="Enviar" styleClass="p-button-outlined" class="buttonEnviar"></p-button>
+            </div>
+            <div class="divNaoLembroOCep">
+              <p-button label="Não lembro do meu cep" styleClass="p-button-link" class="buttonNaoLembroOCep"></p-button>
+            </div>
           </div>
         </div>
       </div>
@@ -57,7 +59,7 @@
                     (ngModelChange)="atualizarValorTotal()"
                   ></p-inputNumber>
                   <div class="preco">
-                    {{ calcularValorItem(item) | currency:'BRL':'symbol':'1.2-2'}}
+                    R$ {{ calcularValorItem(item).toFixed(2) }}
                   </div>
               </div>
               <div class="botao-excluir">
@@ -67,7 +69,7 @@
           </div>
         </div>
         <div class="paginator">
-          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 15, 20]">
+          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[5, 10, 15]">
           </p-paginator>
         </div>
       </div>
@@ -79,7 +81,7 @@
         </h1>
         <div class="valorTotalProdutos">
           <div class="pMenor">Valor dos produtos:</div>
-          <div class="pMaior">{{ calcularValorTotal() | currency:'BRL':'symbol':'1.2-2' }}</div>
+          <div class="pMaior">R$ {{ valorTotal.toFixed(2) }}</div>
         </div>
         <hr class="hr">
         <div class="valorFrete">

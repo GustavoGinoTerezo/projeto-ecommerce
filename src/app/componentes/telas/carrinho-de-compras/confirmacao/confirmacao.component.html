@@ -81,35 +81,75 @@
         <h2 class="h2">Produtos</h2>
         <hr class="hr">
 
-        <div *ngFor="let produto of carrinho" class="containerProduto">
-
+        <div *ngFor="let produto of carrinho | slice:first:first + rows" class="containerProduto">
           <div class="containerImg">
             <img class="img" [src]="produto.imagemProduto" alt="Imagem do produto">
           </div>
-
           <div class="containerNomeProduto">
              {{produto.nomeProduto}}
           </div>
-
           <div class="containerQuantidade">
             <div class="labelQuantidade">Quant.</div>
             <div class="dadoQuantidade">{{ produto.quantidade }}</div>
           </div>
-
           <div class="containerPreco">
             <div class="labelValorProduto">Valor do prod.</div>
             <div class="dadoProduto">
-              R$ {{ (produto?.preco || 0) * (produto?.quantidade || 0) | number:'1.2-2' }}
+              R$ {{ calcularValorItem(produto).toFixed(2) }}
             </div>
           </div>
-
+        </div>
+        <div class="paginator">
+          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[5, 10, 15]">
+          </p-paginator>
         </div>
       </div>
 
     </div>
 
     <div class="valores">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga natus adipisci repellat inventore reiciendis officia hic tempore alias aperiam aliquam fugit eaque quos consequatur, laborum recusandae dolores, sunt ratione consequuntur eligendi. Ab eius natus velit maxime, ipsum esse a, nam repudiandae tempore quasi adipisci odit enim fuga dicta laborum provident fugiat illum dolorum aliquid, minus reiciendis ex. Eum ea recusandae quaerat voluptatum, iusto soluta reprehenderit architecto culpa, quidem porro qui eaque deleniti nisi praesentium consequatur. Modi, necessitatibus delectus? Distinctio quas ex nemo pariatur eum accusamus repellendus commodi, illum perferendis amet modi, assumenda vitae numquam. Exercitationem odit quis numquam, saepe quia consequuntur quaerat minima molestiae in accusamus iusto perspiciatis et mollitia!
+      <div class="containerGeralValorTotal">
+        <h2 class="h2">
+          Resumo do pedido
+        </h2>
+        <div class="containerValorProduto">
+          <div class="labelValorProduto">
+            Valor dos produtos:
+          </div>
+          <div class="dadoProduto">
+            R$ {{ valorTotal.toFixed(2) }}
+          </div>
+        </div>
+        <hr class="hr">
+        <div class="containerFrete">
+          <div class="labelFrete">
+            Frete:
+          </div>
+          <div class="dadoFrete">
+            R$ ???,??
+          </div>
+        </div>
+        <hr class="hr">
+        <div class="containerValorTotal">
+          <div class="labelValorTotal">
+            Forma de pagamento:
+          </div>
+          <div class="dadoValorTotal">
+            R$ {{ valorTotal.toFixed(2) }}
+          </div>
+        </div>
+        <div class="containerBotoes">
+          <p-button
+          label="Finalizar"
+          class="button"
+          ></p-button>
+          <p-button
+          class="button"
+          routerLink="/pagamento"
+          label="Voltar"
+          ></p-button>
+        </div>
+      </div>
     </div>
 
   </div>
