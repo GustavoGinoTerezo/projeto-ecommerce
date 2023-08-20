@@ -19,7 +19,6 @@
     width: 100%;
     height: 100%;
     display: flex;
-    background-color: blue;
 
     .informacoesEProduto{
       display: flex;
@@ -27,7 +26,6 @@
       width: 70%;
       height: 100%;
       margin-right: 15px;
-      background-color: red;
 
       .informacoes{
         display: flex;
@@ -38,7 +36,7 @@
         align-items: center;
         padding: 10px;
         margin-bottom: 15px;
-        background-color: orange;
+        background-color: var(--container-externo-cards-produtos);
 
         .containerDadosPessoaisEEndereco{
           display: flex;
@@ -51,7 +49,7 @@
             height: 100%;
             margin-right: 10px;
             padding: 10px;
-            background-color: antiquewhite;
+            background-color: var(--container-interno-cards-produtos);
 
             .divNome{
               display: flex;
@@ -112,7 +110,7 @@
             width: 100%;
             height: 100%;
             padding: 10px;
-            background-color: violet;
+            background-color: var(--container-interno-cards-produtos);
 
             .divNomeRua{
               display: flex;
@@ -171,12 +169,84 @@
 
       .produtos{
         display: flex;
+        flex-direction: column;
         width: 100%;
         height: 100%;
-        justify-content: center;
-        align-items: center;
         padding: 10px;
-        background-color: yellow;
+        background-color: var(--container-externo-cards-produtos);
+
+        .containerProduto{
+          display: flex;
+          width: 100%;
+          margin-bottom: 10px;
+          padding: 5px;
+          background-color: var(--container-interno-cards-produtos);
+
+          .containerImg{
+            display: flex;
+            width: 10%;
+            justify-content: center;
+            align-items: center;
+
+
+            .img{
+              width: 70px;
+              height: 80px;
+
+            }
+
+          }
+
+          .containerNomeProduto{
+            display: flex;
+            width: 60%;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+
+            font-weight: 500;
+          }
+
+          .containerQuantidade{
+            display: flex;
+            flex-direction: column;
+            width: 15%;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+
+
+            .labelQuantidade{
+              margin-bottom: 5px;
+              font-weight: 300;
+            }
+
+            .dadoQuantidade{
+              font-weight: 500;
+            }
+          }
+
+          .containerPreco{
+            display: flex;
+            flex-direction: column;
+            width: 15%;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+
+
+            .labelValorProduto{
+              margin-bottom: 5px;
+              font-weight: 300;
+            }
+
+            .dadoProduto{
+              font-weight: 500;
+            }
+          }
+        }
+
+
       }
     }
 
@@ -219,3 +289,4 @@
   width: 100%;
   margin-bottom: 10px;
 }
+
