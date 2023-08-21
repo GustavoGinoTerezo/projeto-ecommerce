@@ -39,6 +39,9 @@ import { ConfirmacaoComponent } from './componentes/telas/carrinho-de-compras/co
 import { ConclusaoDeCompraComponent } from './componentes/telas/carrinho-de-compras/conclusao-de-compra/conclusao-de-compra.component';
 import { FuncoesUsuarioComponent } from './componentes/telas/funcoes/usuario/funcoes-usuario/funcoes-usuario.component';
 import { FuncoesAdministradorComponent } from './componentes/telas/funcoes/administrador/funcoes-administrador/funcoes-administrador.component';
+import { MinhaContaComponent } from './componentes/telas/funcoes/usuario/minha-conta/minha-conta.component';
+import { MeusDadosComponent } from './componentes/telas/funcoes/usuario/meus-dados/meus-dados.component';
+import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-pedidos/meus-pedidos.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { FuncoesAdministradorComponent } from './componentes/telas/funcoes/admin
     ConclusaoDeCompraComponent,
     FuncoesUsuarioComponent,
     FuncoesAdministradorComponent,
+    MinhaContaComponent,
+    MeusDadosComponent,
+    MeusPedidosComponent,
   ],
   imports: [
     BrowserModule,

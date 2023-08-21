@@ -3,13 +3,11 @@
   class="sidenav scrollwrap scrollwrap_delayed"
   [ngClass]="collapsed ? 'sidenav-collapsed' : ''"
 >
-
   <ul class="sidenav-nav">
     <li class="sidenav-nav-item" *ngFor="let data of navData">
       <a
         class="sidenav-nav-link"
         (click)="handleItemClick(data)"
-        (click)="abrirLateral()"
         *ngIf="data.items && data.items.length > 0"
       >
         <i class="sidenav-link-icon" [class]="data.icon"></i>
@@ -24,7 +22,6 @@
           "
         ></i>
       </a>
-
       <a
         class="sidenav-nav-link"
         *ngIf="!data.items || (data.items && data.items.length === 0)"
@@ -32,7 +29,6 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         (click)="handleItemClick(data)"
-        (click)="abrirLateral()"
       >
         <i
           class="sidenav-link-icon"
@@ -42,7 +38,6 @@
           {{data.label}}
         </span>
       </a>
-
     </li>
   </ul>
 </div>
