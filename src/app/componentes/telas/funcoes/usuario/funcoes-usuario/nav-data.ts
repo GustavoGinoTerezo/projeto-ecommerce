@@ -4,7 +4,7 @@ export const navbarData: INavbarData[] = [
   {
     routerLink: 'minha-conta',
     icon: 'fa-solid fa-house',
-    label: 'Inicio',
+    label: 'Minha conta',
   },
   {
     routerLink: 'meus-dados',
