@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'ecommerce';
 
+  constructor(
+    private router: Router
+  ) {}
+
   acaoDoBotao() {
-    // Lógica que deve ser executada quando o botão for clicado
-    console.log('Botão flutuante clicado!');
+    window.open('https://api.whatsapp.com/send?phone=5519989937300', '_blank');
   }
 }

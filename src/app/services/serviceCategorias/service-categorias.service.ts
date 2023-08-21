@@ -253,7 +253,7 @@ export class ServiceCategoriasService {
       imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg',
       produtos: [
         {
-          nome: 'mj-10-30-20',
+          nome: 'mj-4-31-37',
           imagem: [
             {
               imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',

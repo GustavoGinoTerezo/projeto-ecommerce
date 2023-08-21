@@ -23,7 +23,7 @@
     .informacoesEProduto{
       display: flex;
       flex-direction: column;
-      width: 70%;
+      width: 100%;
       height: 100%;
       margin-right: 5px;
 
@@ -185,9 +185,9 @@
           .containerImg{
             display: flex;
             width: 10%;
+            min-width: 80px;
             justify-content: center;
             align-items: center;
-
 
             .img{
               width: 70px;
@@ -228,6 +228,7 @@
             display: flex;
             flex-direction: column;
             width: 15%;
+            min-width: 110px;
             justify-content: center;
             align-items: center;
             padding: 10px;
@@ -248,86 +249,87 @@
       }
     }
 
-    .valores{
+  }
+}
+
+.valores{
+  display: flex;
+  width: 30%;
+  height: 100%;
+  max-height: 400px;
+  padding: 10px;
+  background-color: var(--container-externo-cards-produtos);
+
+  .containerGeralValorTotal{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+    justify-content: center;
+    background-color: var(--container-interno-cards-produtos);
+    padding: 10px;
+
+    .containerValorProduto{
       display: flex;
-      width: 30%;
-      height: 100%;
-      max-height: 400px;
-      padding: 10px;
-      background-color: var(--container-externo-cards-produtos);
+      justify-content: space-between;
+      padding: 10px 0;
 
-      .containerGeralValorTotal{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-        max-height: 400px;
-        justify-content: center;
-        background-color: var(--container-interno-cards-produtos);
-        padding: 10px;
-
-        .containerValorProduto{
-          display: flex;
-          justify-content: space-between;
-          padding: 10px 0;
-
-          .labelValorProduto{
-            font-weight: 300;
-          }
-
-          .dadoProduto{
-            font-size: 15px;
-            font-weight: 500;
-          }
-        }
-
-        .containerFrete{
-          display: flex;
-          justify-content: space-between;
-          padding: 10px 0;
-
-          .labelFrete{
-            font-weight: 300;
-          }
-
-          .dadoFrete{
-            font-size: 15px;
-            font-weight: 500;
-
-          }
-        }
-
-        .containerValorTotal{
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          padding: 10px;
-          height: 100px;
-          background-color: var(--background-das-divs-da-categoria);
-
-          .labelValorTotal{
-            font-weight: 300;
-          }
-
-          .dadoValorTotal{
-            font-weight: 500;
-            font-size: 25px;
-            text-align: right;
-            color: var(--cor-valor-total);
-          }
-
-        }
-
-        .containerBotoes{
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-        }
+      .labelValorProduto{
+        font-weight: 300;
       }
 
+      .dadoProduto{
+        font-size: 15px;
+        font-weight: 500;
+      }
+    }
+
+    .containerFrete{
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+
+      .labelFrete{
+        font-weight: 300;
+      }
+
+      .dadoFrete{
+        font-size: 15px;
+        font-weight: 500;
+
+      }
+    }
+
+    .containerValorTotal{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 10px;
+      height: 100px;
+      background-color: var(--background-das-divs-da-categoria);
+
+      .labelValorTotal{
+        font-weight: 300;
+      }
+
+      .dadoValorTotal{
+        font-weight: 500;
+        font-size: 25px;
+        text-align: right;
+        color: var(--cor-valor-total);
+      }
 
     }
+
+    .containerBotoes{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
   }
+
+
 }
 
 .divCEP{
@@ -354,7 +356,6 @@
   margin-bottom: 5px;
 }
 
-
 .hr{
   width: 100%;
   margin-bottom: 10px;
@@ -368,9 +369,32 @@
   width: 100%;
 }
 
+@media (max-width: 1000px) {
+
+  .containerInformacoesEValorFinal{
+    flex-direction: column;
+  }
+
+  .valores{
+    margin-top: 5px;
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 570px) {
+
+  .containerDadosPessoaisEEndereco{
+    flex-direction: column;
+  }
+}
+
+
 @media (max-width: 395px) {
 
   .divSteps{
    display: none;
   }
  }
+
+

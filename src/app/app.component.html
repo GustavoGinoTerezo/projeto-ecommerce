@@ -2,11 +2,21 @@
 
   <app-header></app-header>
 
-  <div class="corpo">
-    <router-outlet></router-outlet>
+  <div class="containerGeral">
+    <div class="divUsuario">
+      <app-funcoes-usuario></app-funcoes-usuario>
+    </div>
+    <div class="corpo">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="divAdministrador">
+      <app-funcoes-administrador></app-funcoes-administrador>
+    </div>
   </div>
 
   <app-rodape></app-rodape>
+
+
 
   <p-button
     class="botao-flutuante"

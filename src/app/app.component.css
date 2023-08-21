@@ -3,11 +3,11 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  min-width: 300px;
+  min-width: 370px;
 }
 
 .corpo{
-  width: 100%;
+  width: 80%;
   padding: 1%;
 }
 
@@ -30,4 +30,24 @@
   scale: 1.20;
   transition: 0.3s all ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.668);
+}
+
+.containerGeral{
+  width: 100%;
+  display: flex;
+}
+
+.router{
+  width: 80%;
+}
+
+.divUsuario{
+  width: 10%;
+  background-color: blue;
+}
+
+
+.divAdministrador{
+  width: 10%;
+  background-color: red;
 }
