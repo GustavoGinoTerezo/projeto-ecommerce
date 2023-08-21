@@ -22,6 +22,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { StepsModule } from 'primeng/steps';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { SidebarModule } from 'primeng/sidebar';
 
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -77,6 +78,7 @@ import { FuncoesAdministradorComponent } from './componentes/telas/funcoes/admin
     InputNumberModule,
     StepsModule,
     RadioButtonModule,
+    SidebarModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

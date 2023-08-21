@@ -38,16 +38,15 @@
 }
 
 .router{
-  width: 80%;
+  width: 70%;
 }
 
 .divUsuario{
-  width: 10%;
-  background-color: blue;
+  width: 15%;
 }
 
 
 .divAdministrador{
-  width: 10%;
+  width: 15%;
   background-color: red;
 }
