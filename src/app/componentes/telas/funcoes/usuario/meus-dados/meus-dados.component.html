@@ -1,1 +1,51 @@
-<p>meus-dados works!</p>
+<div class="divGeral">
+
+  <div class="containerDados">
+    <div class="divInput">
+      <div class="p-inputgroup">
+        <input [(ngModel)]="nome" pInputText placeholder="Nome completo" />
+
+     </div>
+    </div>
+    <div class="divInput">
+      <div class="p-inputgroup">
+        <input [(ngModel)]="telefone" pInputText placeholder="Telefone" />
+     </div>
+    </div>
+    <div class="divInput">
+      <div class="p-inputgroup">
+        <input [disabled]="true" [(ngModel)]="email" pInputText placeholder="Email" />
+        <span class="p-inputgroup-addon">
+            <i class="fa-solid fa-lock"></i>
+        </span>
+     </div>
+    </div>
+    <div class="divInput">
+      <div class="p-inputgroup">
+        <input [disabled]="true" [(ngModel)]="cpfOuCnpj" pInputText placeholder="CPF" />
+        <span class="p-inputgroup-addon">
+            <i class="fa-solid fa-lock"></i>
+        </span>
+     </div>
+    </div>
+    <div class="divInput">
+      <div class="p-inputgroup">
+        <input [disabled]="true" [(ngModel)]="dataNascimento" pInputText placeholder="Data de nascimento" />
+        <span class="p-inputgroup-addon">
+            <i class="fa-solid fa-lock"></i>
+        </span>
+     </div>
+    </div>
+
+
+  </div>
+
+  <div class="containerEnderecos">
+
+  </div>
+
+</div>
+
+
+
+

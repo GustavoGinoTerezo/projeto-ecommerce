@@ -1,0 +1,38 @@
+.divGeral{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.containerDados{
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+  height: 100%;
+  padding: 0 13px;
+  background-color: var(--container-externo-cards-produtos);
+}
+
+.divInput{
+  display: flex;
+  width: 100%;
+  padding: 13px 0;
+}
+
+.span{
+  width: 100%;
+}
+
+:host ::ng-deep .p-inputtext{
+  width: 100%;
+}
+
+
+.containerEnderecos{
+  display: flex;
+  width: 49%;
+  height: 100%;
+  padding: 13px;
+  background-color: var(--container-externo-cards-produtos);
+}

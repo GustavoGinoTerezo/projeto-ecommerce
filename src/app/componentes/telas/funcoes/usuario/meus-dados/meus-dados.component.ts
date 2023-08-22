@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class MeusDadosComponent {
 
+  nome!: string;
+  telefone!: number;
+  email!: string;
+  cpfOuCnpj!: number;
+  dataNascimento!: number;
+
 }
