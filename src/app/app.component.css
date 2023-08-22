@@ -43,10 +43,12 @@
 
 .divUsuario{
   width: 15%;
+  min-width: 5rem;
 }
 
 
 .divAdministrador{
   width: 15%;
+  min-width: 5rem;
   background-color: red;
 }

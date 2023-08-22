@@ -1,1 +1,62 @@
-<p>minha-conta works!</p>
+<div class="divGeral">
+
+  <div class="divInformacao" *ngIf="informacaoUsuario">
+    <div class="containerImgEInfo">
+      <div class="containerImg">
+        <p-avatar class="avatar" size="xlarge" icon="fa-solid fa-user" styleClass="mr-2" shape="circle"></p-avatar>
+      </div>
+      <div class="containerInformacao">
+        <h1 class="h1">{{informacaoUsuario[0].nome}}</h1>
+        <h2 class="h2">{{informacaoUsuario[0].email}}</h2>
+      </div>
+    </div>
+    <div class="botao">
+    <p-button
+      icon="fa-solid fa-gear fa-xl" styleClass="p-button-rounded p-button-warning p-button-text"
+      (click)="navigateMeusDados()"
+      >
+    </p-button>
+    </div>
+  </div>
+
+  <div class="divUltimoPedido">
+    <h1>Resumo do último pedido</h1>
+    <div class="containerInformacoesUltimoPedido">
+      <div class="containerNumeroPedido">
+        <div class="labelNumeroPedido">Número do pedido</div>
+        <div>??????????</div>
+      </div>
+      <div class="containerStatus">
+        <div class="labelStatus">Status</div>
+        <div>??????????</div>
+      </div>
+      <div class="containerData">
+        <div class="labelData">Data</div>
+        <div>??????????</div>
+      </div>
+      <div class="containerFormaPagamento">
+        <div class="labelFormaPagamento">Forma de pagamento</div>
+        <div>??????????</div>
+      </div>
+    </div>
+    <hr class="hr">
+    <div class="containerEndereco">
+      <div class="containerEndereçoUltimoPedido">
+        <div class="labelEndereçoUltimoPedido">Endereçoo</div>
+        <div>??????????</div>
+        <div>??????????</div>
+        <div>??????????</div>
+      </div>
+    </div>
+    <hr class="hr">
+    <div class="botaoVerTodosOsPedidos">
+      <p-button
+        label="Ver todos os pedidos"
+        icon="fa-solid fa-dolly"
+        styleClass="p-button-outlined p-button-warning"
+        (click)="navigateTodosOsPedido()"
+        >
+      </p-button>
+    </div>
+  </div>
+</div>

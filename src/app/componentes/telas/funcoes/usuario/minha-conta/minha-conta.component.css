@@ -1,0 +1,160 @@
+.divGeral{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.divInformacao{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 13px;
+  margin-bottom: 5px;
+  background-color: var(--container-externo-cards-produtos);
+}
+
+.containerImgEInfo{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.containerImg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerInformacao{
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.botao{
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.divUltimoPedido{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 13px;
+  background-color: var(--container-externo-cards-produtos);
+}
+
+.containerInformacoesUltimoPedido{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.containerNumeroPedido{
+  display: flex;
+  flex-direction: column;
+}
+
+.containerStatus{
+  display: flex;
+  flex-direction: column;
+}
+
+.containerData{
+  display: flex;
+  flex-direction: column;
+}
+
+.containerFormaPagamento{
+  display: flex;
+  flex-direction: column;
+}
+
+.labelNumeroPedido{
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.labelStatus{
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.labelData{
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.labelFormaPagamento{
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+hr{
+  width: 100%;
+}
+
+.containerEndereco{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.containerEnderecoUltimoPedido{
+  display: flex;
+  flex-direction: column;
+}
+
+.labelEndereçoUltimoPedido{
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.avatar{
+  cursor: pointer;
+}
+
+.h1{
+  margin-bottom: 5px;
+}
+
+.h2{
+  margin-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .containerInformacoesUltimoPedido {
+    flex-direction: column; /* Altera a direção do flex para coluna */
+    align-items: flex-start; /* Alinha os itens à esquerda */
+  }
+
+  .containerNumeroPedido,
+  .containerStatus,
+  .containerData,
+  .containerFormaPagamento {
+    margin-top: 10px; /* Adicione um espaçamento entre as divs movidas para baixo */
+  }
+}
+
+@media (max-width: 590px) {
+
+  .divInformacao{
+    flex-direction: column;
+  }
+}
+
