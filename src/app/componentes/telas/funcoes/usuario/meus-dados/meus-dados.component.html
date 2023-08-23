@@ -38,12 +38,11 @@
     </div>
     <div class="containerBotoes">
       <div class="botaoAlterarEmail">
-        <p-button label="Alterar senha" styleClass="p-button-outlined p-button-warning"></p-button>
+        <p-button (click)="showDialog('email')" label="Alterar email" styleClass="p-button-outlined p-button-warning"></p-button>
       </div>
       <div class="botaoAlterarSenha">
-        <p-button label="Alterar email" styleClass="p-button-outlined p-button-warning"></p-button>
+        <p-button (click)="showDialog('senha')" label="Alterar senha" styleClass="p-button-outlined p-button-warning"></p-button>
       </div>
-
     </div>
     <hr class="hr">
     <div class="containerBotoesExcluirESalvarConta">
@@ -53,7 +52,6 @@
       <div class="botaoAlterarSenha">
         <p-button label="Excluir conta" styleClass="p-button-raised p-button-danger"></p-button>
       </div>
-
     </div>
   </div>
 
@@ -85,6 +83,65 @@
     </p-paginator>
   </div>
 
+  <p-dialog [focusTrap]="true" [closeOnEscape]="true" [draggable]="false" [resizable]="false" [(visible)]="dialogVisible" [style]="{ width: '50%', height: '65%' }">
+    <div class="containerGeralDialog">
+      <div class="containerLabelAlterarEmail">
+        <div>
+          <i [ngClass]="dialogType === 'email' ? 'fa-solid fa-envelope' : 'fa-solid fa-lock'" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <h1 class="h1Dialog">{{ dialogType === 'email' ? 'Alterar email' : 'Alterar senha' }}</h1>
+        </div>
+      </div>
+
+      <div class="labelPreencherCampos">
+        {{ dialogType === 'email' ? 'Preencha os campos abaixo para realizar a alteração de email.' : 'Preencha os campos abaixo para realizar a alteração de senha.' }}
+      </div>
+
+      <div class="containerInputsDialog">
+        <div class="divInput" *ngIf="dialogType === 'email'">
+          <span class="p-float-label">
+            <input pInputText id="new-email" [(ngModel)]="newEmail" />
+            <label htmlFor="new-email">Digite seu novo e-mail</label>
+          </span>
+        </div>
+        <div class="divInput" *ngIf="dialogType === 'email'">
+          <span class="p-float-label">
+            <input pInputText id="new-email" [(ngModel)]="newEmail" />
+            <label htmlFor="new-email">Confirme seu novo e-mail</label>
+          </span>
+        </div>
+        <div class="divInput" *ngIf="dialogType === 'email'">
+          <span class="p-float-label">
+            <p-password id="current-password" [(ngModel)]="currentPassword" [feedback]="false" [toggleMask]="true"></p-password>
+            <label htmlFor="current-password">Digite sua senha</label>
+          </span>
+        </div>
+
+        <div class="divInput" *ngIf="dialogType === 'senha'">
+          <span class="p-float-label">
+            <p-password id="current-password" [(ngModel)]="currentPassword" [feedback]="false" [toggleMask]="true"></p-password>
+            <label htmlFor="current-password">Digite sua senha atual</label>
+          </span>
+        </div>
+        <div class="divInput" *ngIf="dialogType === 'senha'">
+          <span class="p-float-label">
+            <p-password id="new-password" [(ngModel)]="newPassword" [feedback]="false" [toggleMask]="true"></p-password>
+            <label htmlFor="new-password">Digite a nova senha</label>
+          </span>
+        </div>
+        <div class="divInput" *ngIf="dialogType === 'senha'">
+          <span class="p-float-label">
+            <p-password id="confirm-new-password" [(ngModel)]="confirmNewPassword" [feedback]="false" [toggleMask]="true"></p-password>
+            <label htmlFor="confirm-new-password">Confirme a nova senha</label>
+          </span>
+        </div>
+        <div class="botaoDialog">
+          <p-button (click)="alterarDados()" label="Enviar"></p-button>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
 
 </div>
 

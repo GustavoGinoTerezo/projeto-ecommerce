@@ -23,6 +23,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { StepsModule } from 'primeng/steps';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SidebarModule } from 'primeng/sidebar';
+import { DialogModule } from 'primeng/dialog';
 
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -85,6 +86,7 @@ import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-p
     StepsModule,
     RadioButtonModule,
     SidebarModule,
+    DialogModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

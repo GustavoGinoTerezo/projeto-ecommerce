@@ -99,6 +99,33 @@
   width: 100%;
 }
 
+.containerGeralDialog{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.containerLabelAlterarEmail{
+  display: flex;
+  width: 200px;
+  height: 30px;
+  margin-bottom: 15px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.labelPreencherCampos{
+  margin-bottom: 15px;
+}
+
+.containerInputsDialog{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
 
 .containerEnderecoDados{
   padding: 13px;
@@ -131,6 +158,21 @@
   margin-bottom: 5px;
 }
 
+.h1Dialog{
+  margin-bottom: 0;
+}
+
 .h2{
   margin-bottom: 5px;
+}
+
+:host ::ng-deep .p-password{
+  width: 100%;
+}
+
+.botaoDialog{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
