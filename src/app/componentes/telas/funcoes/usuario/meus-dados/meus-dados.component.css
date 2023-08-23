@@ -10,14 +10,59 @@
   flex-direction: column;
   width: 49%;
   height: 100%;
-  padding: 0 13px;
+  padding: 13px;
   background-color: var(--container-externo-cards-produtos);
 }
 
 .divInput{
   display: flex;
+  flex-direction: column;
   width: 100%;
   padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.containerBotoes{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.containerBotoesExcluirESalvarConta{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.botaoAlterarEmail{
+  width: 49%;
+}
+
+.botaoAlterarSenha{
+  width: 49%;
+}
+
+:host ::ng-deep .botaoAlterarEmail .p-button{
+  width: 100%;
+}
+
+:host ::ng-deep .botaoAlterarSenha .p-button{
+  width: 100%;
+}
+
+:host ::ng-deep .botao .p-button{
+  height: 10px;
+}
+
+.hr{
+  width: 100%;
+}
+
+
+.h1{
+  margin-bottom: 25px;
 }
 
 .span{
@@ -31,8 +76,61 @@
 
 .containerEnderecos{
   display: flex;
+  flex-direction: column;
   width: 49%;
   height: 100%;
   padding: 13px;
   background-color: var(--container-externo-cards-produtos);
+}
+
+.botaoAdicionarEndereco{
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+
+:host ::ng-deep .botaoAdicionarEndereco .p-button{
+  width: 100%;
+}
+
+.containerEnderecoLoop{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+.containerEnderecoDados{
+  padding: 13px;
+  background-color: var(--background-das-divs-da-categoria);
+  margin-bottom: 5px;
+}
+
+.labelIdentificacao{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.labelRuaEResidencia{
+  display: flex;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.labelCidadeEBairro{
+  display: flex;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.labelCep{
+  display: flex;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.h2{
+  margin-bottom: 5px;
 }

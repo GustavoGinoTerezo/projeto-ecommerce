@@ -1,20 +1,25 @@
 <div class="divGeral">
 
-  <div class="containerDados">
+  <div class="containerDados" *ngIf="usuario">
+    <h1 class="h1">Dados básicos</h1>
     <div class="divInput">
-      <div class="p-inputgroup">
-        <input [(ngModel)]="nome" pInputText placeholder="Nome completo" />
-
-     </div>
+      <span class="p-float-label">
+        <input pInputText id="username" [(ngModel)]="usuario[0].nome" />
+        <label htmlFor="username">Nome completo</label>
+      </span>
+    </div>
+    <div class="divInput">
+      <span class="p-float-label">
+        <input pInputText id="username" [(ngModel)]="usuario[0].telefone" />
+        <label htmlFor="username">Telefone</label>
+      </span>
     </div>
     <div class="divInput">
       <div class="p-inputgroup">
-        <input [(ngModel)]="telefone" pInputText placeholder="Telefone" />
-     </div>
-    </div>
-    <div class="divInput">
-      <div class="p-inputgroup">
-        <input [disabled]="true" [(ngModel)]="email" pInputText placeholder="Email" />
+        <span class="p-float-label">
+          <input [disabled]="true" pInputText id="username" [(ngModel)]="usuario[0].email" />
+          <label htmlFor="username">Email</label>
+        </span>
         <span class="p-inputgroup-addon">
             <i class="fa-solid fa-lock"></i>
         </span>
@@ -22,27 +27,64 @@
     </div>
     <div class="divInput">
       <div class="p-inputgroup">
-        <input [disabled]="true" [(ngModel)]="cpfOuCnpj" pInputText placeholder="CPF" />
+        <span class="p-float-label">
+          <input [disabled]="true" pInputText id="username" [(ngModel)]="usuario[0].cpfOuCnpj" />
+          <label htmlFor="username">CPF</label>
+        </span>
         <span class="p-inputgroup-addon">
             <i class="fa-solid fa-lock"></i>
         </span>
      </div>
     </div>
-    <div class="divInput">
-      <div class="p-inputgroup">
-        <input [disabled]="true" [(ngModel)]="dataNascimento" pInputText placeholder="Data de nascimento" />
-        <span class="p-inputgroup-addon">
-            <i class="fa-solid fa-lock"></i>
-        </span>
-     </div>
+    <div class="containerBotoes">
+      <div class="botaoAlterarEmail">
+        <p-button label="Alterar senha" styleClass="p-button-outlined p-button-warning"></p-button>
+      </div>
+      <div class="botaoAlterarSenha">
+        <p-button label="Alterar email" styleClass="p-button-outlined p-button-warning"></p-button>
+      </div>
+
     </div>
+    <hr class="hr">
+    <div class="containerBotoesExcluirESalvarConta">
+      <div class="botaoAlterarEmail">
+        <p-button label="Salvar alterações" styleClass="p-button-raised p-button-success"></p-button>
+      </div>
+      <div class="botaoAlterarSenha">
+        <p-button label="Excluir conta" styleClass="p-button-raised p-button-danger"></p-button>
+      </div>
 
-
+    </div>
   </div>
 
-  <div class="containerEnderecos">
+  <div class="containerEnderecos" *ngIf="usuario">
+    <div class="botaoAdicionarEndereco">
+      <p-button label="Adicionar novo endereço" styleClass="p-button-raised p-button-primary"></p-button>
+    </div>
+    <div *ngFor="let usuario of usuario" class="containerEnderecoLoop">
+      <div *ngFor="let endereco of usuario.enderecoEntrega | slice:first:first + rows" class="containerEnderecoDados">
+        <div class="labelIdentificacao">
+          <h2 class="h2">{{endereco.identificacao}}</h2>
+          <div class="botao">
+            <p-button label="Editar" styleClass="p-button-outlined p-button-primary"></p-button>
+          </div>
+        </div>
+        <div class="labelRuaEResidencia">
+          {{endereco.rua}}, {{endereco.numeroResidencia}}
+        </div>
+        <div class="labelCidadeEBairro">
+          {{endereco.cidade}} - {{endereco.bairro}}
+        </div>
+        <div class="labelCep">
+          CEP: {{endereco.cep}}
+        </div>
+      </div>
+    </div>
 
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="calculateTotalRecords()">
+    </p-paginator>
   </div>
+
 
 </div>
 
