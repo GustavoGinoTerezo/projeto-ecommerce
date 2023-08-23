@@ -47,7 +47,7 @@
     <hr class="hr">
     <div class="containerBotoesExcluirESalvarConta">
       <div class="botaoAlterarEmail">
-        <p-button label="Salvar alterações" styleClass="p-button-raised p-button-success"></p-button>
+        <p-button (click)="showDialogSalvar()" label="Salvar alterações" styleClass="p-button-raised p-button-success"></p-button>
       </div>
       <div class="botaoAlterarSenha">
         <p-button label="Excluir conta" styleClass="p-button-raised p-button-danger"></p-button>
@@ -139,6 +139,70 @@
         <div class="botaoDialog">
           <p-button (click)="alterarDados()" label="Enviar"></p-button>
         </div>
+      </div>
+    </div>
+  </p-dialog>
+
+  <p-dialog [focusTrap]="true" [closeOnEscape]="true" [draggable]="false" [resizable]="false" [(visible)]="dialogVisibleSalvar" [style]="{ width: '30%', height: '65%' }">
+    <div class="containerGeralDialog">
+      <div class="containerLabelAlterarMeusDados">
+        <div>
+          <i class="fa-solid fa-floppy-disk" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <h1 class="h1Dialog">Alterar meus dados</h1>
+        </div>
+      </div>
+
+      <div class="labelPreencherCampos" >
+        <div>
+          Para realizarmos a alteração dos dados, enviaremos um código para seu celular ou e-mail cadastrado.
+        </div>
+        <div class="opcaoDesejada">
+          Selecione a opção desejada:
+        </div>
+      </div>
+
+      <div class="containerFormarEnvios" >
+
+        <div class="envioEmail" *ngIf="usuario">
+          <div class="containerIconLabel">
+            <div>
+              <i class="fa-solid fa-envelope" style="font-size: 1.5rem"></i>
+            </div>
+            <div>
+              <h3 class="h1Dialog">Email</h3>
+            </div>
+            <br>
+            <div class="containerLabelEmail">
+              <div>Enviaremos o código para o email:</div>
+              <br>
+              <div class="labelEmail">
+                {{usuario[0].email}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="envioSms" *ngIf="usuario">
+          <div class="containerIconLabel">
+            <div>
+              <i class="fa-solid fa-mobile-screen-button" style="font-size: 1.5rem"></i>
+            </div>
+            <div>
+              <h3 class="h1Dialog">SMS</h3>
+            </div>
+            <br>
+            <div class="containerLabelEmail">
+              <div>Enviaremos o código para o telefone:</div>
+              <br>
+              <div class="labelEmail">
+                {{usuario[0].telefone}}
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </p-dialog>

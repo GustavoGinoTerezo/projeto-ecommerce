@@ -11,8 +11,9 @@ export class MeusDadosComponent {
   usuario: Usuario[] = [];
   first: number = 0;
   rows: number = 3;
-  dialogVisible: boolean = false; // Controla a visibilidade do diálogo
-  dialogType: 'email' | 'senha' = 'email'; // Controla o tipo de diálogo exibido
+  dialogVisible: boolean = false;
+  dialogVisibleSalvar: boolean = false;
+  dialogType: 'email' | 'senha' = 'email';
   newEmail: string = '';
   currentPassword: string = '';
   newPassword: string = '';
@@ -42,6 +43,12 @@ export class MeusDadosComponent {
   showDialog(type: 'email' | 'senha') {
     this.dialogType = type;
     this.dialogVisible = true;
+    this.dialogVisibleSalvar = false;
+  }
+
+  showDialogSalvar() {
+    this.dialogVisible = false;
+    this.dialogVisibleSalvar = true;
   }
 
   alterarDados() {
