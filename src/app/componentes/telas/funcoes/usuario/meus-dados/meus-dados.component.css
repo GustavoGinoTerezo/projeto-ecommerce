@@ -11,6 +11,7 @@
   width: 49%;
   height: 100%;
   padding: 13px;
+  border-radius: 6px;
   background-color: var(--container-externo-cards-produtos);
 }
 
@@ -80,6 +81,7 @@
   width: 49%;
   height: 100%;
   padding: 13px;
+  border-radius: 6px;
   background-color: var(--container-externo-cards-produtos);
 }
 
@@ -131,6 +133,7 @@
   padding: 13px;
   background-color: var(--background-das-divs-da-categoria);
   margin-bottom: 5px;
+  border-radius: 6px;
 }
 
 .labelIdentificacao{

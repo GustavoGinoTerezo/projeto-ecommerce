@@ -14,6 +14,7 @@
   padding: 13px;
   margin-bottom: 5px;
   background-color: var(--container-externo-cards-produtos);
+  border-radius: 6px;
 }
 
 .containerImgEInfo{
@@ -47,6 +48,7 @@
   width: 100%;
   height: 100%;
   padding: 13px;
+  border-radius: 6px;
   background-color: var(--container-externo-cards-produtos);
 }
 
