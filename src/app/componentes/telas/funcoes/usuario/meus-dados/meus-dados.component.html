@@ -56,31 +56,107 @@
   </div>
 
   <div class="containerEnderecos" *ngIf="usuario">
-    <div class="botaoAdicionarEndereco">
-      <p-button label="Adicionar novo endereço" styleClass="p-button-raised p-button-primary"></p-button>
-    </div>
-    <div *ngFor="let usuario of usuario" class="containerEnderecoLoop">
-      <div *ngFor="let endereco of usuario.enderecoEntrega | slice:first:first + rows" class="containerEnderecoDados">
-        <div class="labelIdentificacao">
-          <h2 class="h2">{{endereco.identificacao}}</h2>
-          <div class="botao">
-            <p-button label="Editar" styleClass="p-button-outlined p-button-primary"></p-button>
+    <div *ngIf="divEnderecos">
+      <div class="botaoAdicionarEndereco">
+        <p-button (click)="addNewAddress()" label="Adicionar novo endereço" styleClass="p-button-raised p-button-primary"></p-button>
+      </div>
+      <div *ngFor="let usuario of usuario" class="containerEnderecoLoop">
+        <div *ngFor="let endereco of usuario.enderecoEntrega | slice:first:first + rows" class="containerEnderecoDados">
+          <div class="labelIdentificacao">
+            <h2 class="h2">{{endereco.identificacao}}</h2>
+            <div class="botao">
+              <p-button (click)="editAddress(endereco)" label="Editar" styleClass="p-button-outlined p-button-primary"></p-button>
+            </div>
+          </div>
+          <div class="labelRuaEResidencia">
+            {{endereco.rua}}, {{endereco.numeroResidencia}}
+          </div>
+          <div class="labelCidadeEBairro">
+            {{endereco.cidade}} - {{endereco.bairro}}
+          </div>
+          <div class="labelCep">
+            CEP: {{endereco.cep}}
           </div>
         </div>
-        <div class="labelRuaEResidencia">
-          {{endereco.rua}}, {{endereco.numeroResidencia}}
+      </div>
+      <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="calculateTotalRecords()">
+      </p-paginator>
+    </div>
+
+    <div class="cadastrarNovoEndereçoContainer" *ngIf="divNovoEndereco">
+      <div class="containerBotaoEH1">
+        <p-button  (onClick)="showDialogEnderecos()"  class="botaoVoltar"
+        icon="fa-solid fa-chevron-left" styleClass="p-button-rounded p-button-text"></p-button>
+        <div class="labelCadastrarNovoEnd">Cadastrar novo endereço</div>
+      </div>
+      <div class="divInput">
+        <div class="p-inputgroup">
+          <span class="p-float-label">
+            <input pInputText id="identificacao" [(ngModel)]="identificacao" />
+            <label htmlFor="identificacao">Identificação</label>
+          </span>
         </div>
-        <div class="labelCidadeEBairro">
-          {{endereco.cidade}} - {{endereco.bairro}}
+      </div>
+      <div class="cepECidade">
+        <div class="divInput cep">
+          <div class="p-inputgroup">
+            <span class="p-float-label">
+              <input pInputText id="cep" [(ngModel)]="cep" (input)="onCepInput()" />
+              <label htmlFor="cep">CEP</label>
+            </span>
+          </div>
         </div>
-        <div class="labelCep">
-          CEP: {{endereco.cep}}
+        <div class="divInput">
+          <div class="p-inputgroup">
+            <span class="p-float-label">
+              <input pInputText id="cidade" [(ngModel)]="cidade" [disabled]="disableAddressFields" />
+              <label htmlFor="cidade">Cidade</label>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="divInput">
+        <div class="p-inputgroup">
+          <span class="p-float-label">
+            <input pInputText id="bairro" [(ngModel)]="bairro" [disabled]="disableAddressFields" />
+            <label htmlFor="bairro">Bairro</label>
+          </span>
+        </div>
+      </div>
+      <div class="divInput">
+        <div class="p-inputgroup">
+          <span class="p-float-label">
+            <input pInputText id="logradouro" [(ngModel)]="logradouro" [disabled]="disableAddressFields" />
+            <label htmlFor="logradouro">Logradouro</label>
+          </span>
+        </div>
+      </div>
+      <div class="NumeroEComplemento">
+        <div class="divInput numero">
+          <div class="p-inputgroup">
+            <span class="p-float-label">
+              <input pInputText id="numero" [(ngModel)]="numero" />
+              <label htmlFor="numero">Número</label>
+            </span>
+          </div>
+        </div>
+        <div class="divInput">
+          <div class="p-inputgroup">
+            <span class="p-float-label">
+              <input pInputText id="complemento" [(ngModel)]="complemento" />
+              <label htmlFor="complemento">Complemento</label>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="botaoSalvarEndereco">
+          <p-button (onClick)="showDialogEnderecos()" label="Salvar alterações" styleClass="p-button-raised p-button-success"></p-button>
         </div>
       </div>
     </div>
 
-    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="calculateTotalRecords()">
-    </p-paginator>
+
   </div>
 
   <p-dialog [focusTrap]="true" [closeOnEscape]="true" [draggable]="false" [resizable]="false" [(visible)]="dialogVisible" [style]="{ width: '50%', height: '65%' }">

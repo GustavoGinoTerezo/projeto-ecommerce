@@ -15,7 +15,7 @@ export interface Usuario {
 
 export interface EnderecoEntrega {
   identificacao?: string;
-  cep?: string;
+  cep: number;
   cidade?: string;
   bairro?: string;
   rua?: string;
@@ -42,7 +42,7 @@ export class ServiceUsuarioLogadoService {
       [
         {
           identificacao: "Principal",
-          cep: "99999999",
+          cep: 9999999,
           cidade: "ABC",
           bairro: "Teste",
           rua: "Teste",
@@ -50,7 +50,7 @@ export class ServiceUsuarioLogadoService {
         },
         {
           identificacao: "Secundário 1",
-          cep: "99999999",
+          cep: 9999999,
           cidade: "Teste",
           bairro: "Teste",
           rua: "Teste",
@@ -58,7 +58,7 @@ export class ServiceUsuarioLogadoService {
         },
         {
           identificacao: "Secundário 2",
-          cep: "99999999",
+          cep: 9999999,
           cidade: "Teste",
           bairro: "Teste",
           rua: "Teste",
@@ -66,7 +66,7 @@ export class ServiceUsuarioLogadoService {
         },
         {
           identificacao: "Principal",
-          cep: "99999999",
+          cep: 9999999,
           cidade: "ABC",
           bairro: "Teste",
           rua: "Teste",
@@ -74,7 +74,7 @@ export class ServiceUsuarioLogadoService {
         },
         {
           identificacao: "Secundário 1",
-          cep: "99999999",
+          cep: 9999999,
           cidade: "Teste",
           bairro: "Teste",
           rua: "Teste",
@@ -82,7 +82,7 @@ export class ServiceUsuarioLogadoService {
         },
         {
           identificacao: "Secundário 2",
-          cep: "99999999",
+          cep: 9999999,
           cidade: "Teste",
           bairro: "Teste",
           rua: "Teste",
@@ -90,13 +90,13 @@ export class ServiceUsuarioLogadoService {
         },
         {
           identificacao: "Principal",
-          cep: "99999999",
+          cep: 9999999,
           cidade: "ABC",
           bairro: "Teste",
           rua: "Teste",
           numeroResidencia: 99
         },
-        
+
       ]
 
     }

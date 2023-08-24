@@ -18,6 +18,17 @@ export class MeusDadosComponent {
   currentPassword: string = '';
   newPassword: string = '';
   confirmNewPassword: string = '';
+  divEnderecos: boolean = true;
+  divNovoEndereco: boolean = false
+  identificacao!: string;
+  cep: number | null = null;
+  cidade!: string;
+  bairro!: string;
+  logradouro!: string;
+  numero: number | null = null;
+  complemento!: string;
+  disableAddressFields!: boolean;
+
 
   constructor(
     private usuarioService: ServiceUsuarioLogadoService
@@ -25,8 +36,8 @@ export class MeusDadosComponent {
 
   ngOnInit() {
     this.usuario = this.usuarioService.getUsuario();
+    this.checkIfAddressFieldsShouldBeDisabled();
   }
-
   onPageChange(event: any): void {
     this.first = event.first;
     this.rows = event.rows;
@@ -58,4 +69,48 @@ export class MeusDadosComponent {
     this.dialogVisible = false;
   }
 
+  editAddress(address: any) {
+    this.divNovoEndereco = true;
+    this.divEnderecos = false
+    this.identificacao = address.identificacao;
+    this.cep = address.cep;
+    this.cidade = address.cidade;
+    this.bairro = address.bairro;
+    this.logradouro = address.rua;
+    this.numero = address.numeroResidencia;
+    this.complemento = address.complemento;
+  }
+
+  showDialogEnderecos(){
+    this.divNovoEndereco = false;
+    this.divEnderecos = true;
+  }
+
+  onCepInput() {
+    this.checkIfAddressFieldsShouldBeDisabled();
+  }
+
+  addNewAddress() {
+    this.divNovoEndereco = true;
+    this.divEnderecos = false;
+    this.resetAddressFields();
+  }
+
+  resetAddressFields() {
+    this.identificacao = '';
+    this.cep = null;
+    this.cidade = '';
+    this.bairro = '';
+    this.logradouro = '';
+    this.numero = null;
+    this.complemento = '';
+    this.checkIfAddressFieldsShouldBeDisabled();
+  }
+
+  checkIfAddressFieldsShouldBeDisabled() {
+    const hasAddress = this.usuario?.[0]?.enderecoEntrega?.[0]?.cep || this.cep;
+    this.disableAddressFields = !!hasAddress;
+  }
+
+  
 }
