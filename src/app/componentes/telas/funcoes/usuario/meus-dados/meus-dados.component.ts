@@ -146,10 +146,6 @@ export class MeusDadosComponent {
     this.divEnderecos = true;
   }
 
-
-
-
-
   onCepInput() {
     this.checkIfAddressFieldsShouldBeDisabled();
   }
