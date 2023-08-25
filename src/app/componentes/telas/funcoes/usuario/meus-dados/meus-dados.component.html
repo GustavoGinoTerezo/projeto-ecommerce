@@ -58,7 +58,7 @@
   <div class="containerEnderecos" *ngIf="usuario">
     <div *ngIf="divEnderecos">
       <div class="botaoAdicionarEndereco">
-        <p-button (click)="addNewAddress()" label="Adicionar novo endereço" styleClass="p-button-raised p-button-primary"></p-button>
+        <p-button (click)="abrirDialogNewAddress()" label="Adicionar novo endereço" styleClass="p-button-raised p-button-primary"></p-button>
       </div>
       <div *ngFor="let usuario of usuario" class="containerEnderecoLoop">
         <div *ngFor="let endereco of usuario.enderecoEntrega | slice:first:first + rows" class="containerEnderecoDados">
@@ -160,7 +160,7 @@
       </div>
       <div>
         <div class="botaoSalvarEndereco">
-          <p-button (onClick)="showDialogEnderecos()" label="Salvar alterações" styleClass="p-button-raised p-button-success"></p-button>
+          <p-button (click)="salvarEndereco()" label="Salvar endereço" styleClass="p-button-raised p-button-success"></p-button>
         </div>
       </div>
     </div>

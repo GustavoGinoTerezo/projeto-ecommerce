@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ServiceUsuarioLogadoService, Usuario } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
+import { EnderecoEntrega, ServiceUsuarioLogadoService, Usuario } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
 
 @Component({
   selector: 'app-meus-dados',
@@ -21,14 +21,22 @@ export class MeusDadosComponent {
   divEnderecos: boolean = true;
   divNovoEndereco: boolean = false
   identificacao!: string;
-  cep: number | null = null;
+  cep!: number | null
   cidade!: string;
   bairro!: string;
   logradouro!: string;
-  numero: number | null = null;
+  numero!: number | null;
   complemento!: string;
   disableAddressFields!: boolean;
 
+  novoEndereco: EnderecoEntrega = {
+    identificacao: '',
+    cep: 0,
+    cidade: '',
+    bairro: '',
+    rua: '',
+    numeroResidencia: 0
+  };
 
   constructor(
     private usuarioService: ServiceUsuarioLogadoService
@@ -69,6 +77,37 @@ export class MeusDadosComponent {
     this.dialogVisible = false;
   }
 
+  abrirDialogNewAddress() {
+    this.divNovoEndereco = true;
+    this.divEnderecos = false;
+
+    console.log(this.usuario[0].enderecoEntrega)
+  }
+
+  showDialogEnderecos(){
+    this.divNovoEndereco = false;
+    this.divEnderecos = true;
+  }
+
+  salvarEndereco() {
+    const novoEndereco: EnderecoEntrega = {
+      identificacao: this.identificacao,
+      cep: this.cep!,
+      cidade: this.cidade,
+      bairro: this.bairro,
+      rua: this.logradouro,
+      numeroResidencia: this.numero!
+    };
+
+    const usuarioIndex = 0; // Supondo que você esteja trabalhando com o primeiro usuário
+    this.usuarioService.adicionarEndereco(usuarioIndex, novoEndereco);
+
+    console.log(this.usuario[0].enderecoEntrega)
+
+    this.resetAddressFields();
+    this.showDialogEnderecos();
+  }
+
   editAddress(address: any) {
     this.divNovoEndereco = true;
     this.divEnderecos = false
@@ -81,19 +120,10 @@ export class MeusDadosComponent {
     this.complemento = address.complemento;
   }
 
-  showDialogEnderecos(){
-    this.divNovoEndereco = false;
-    this.divEnderecos = true;
-  }
+
 
   onCepInput() {
     this.checkIfAddressFieldsShouldBeDisabled();
-  }
-
-  addNewAddress() {
-    this.divNovoEndereco = true;
-    this.divEnderecos = false;
-    this.resetAddressFields();
   }
 
   resetAddressFields() {
@@ -112,5 +142,5 @@ export class MeusDadosComponent {
     this.disableAddressFields = !!hasAddress;
   }
 
-  
+
 }

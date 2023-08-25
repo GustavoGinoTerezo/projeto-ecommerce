@@ -121,10 +121,6 @@ export class ServiceCarrinhoDeComprasService {
     }
   }
 
-
-
-
-
   getCarrinhoDeCompra(): CarrinhoDeCompra[] {
     return this.carrinhoDeCompra;
   }
