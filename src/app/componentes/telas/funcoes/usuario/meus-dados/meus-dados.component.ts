@@ -20,6 +20,7 @@ export class MeusDadosComponent {
   confirmNewPassword: string = '';
   divEnderecos: boolean = true;
   divNovoEndereco: boolean = false
+  id!: number;
   identificacao!: string;
   cep!: number | null
   cidade!: string;
@@ -28,6 +29,10 @@ export class MeusDadosComponent {
   numero!: number | null;
   complemento!: string;
   disableAddressFields!: boolean;
+  enderecoEditando: EnderecoEntrega | null = null;
+  buttonSalvarEnderecoNovoEndereco: boolean = false;
+  buttonSalvarEnderecoEditar: boolean = false;
+
   novoEndereco: EnderecoEntrega = {
     identificacao: '',
     cep: 0,
@@ -80,6 +85,7 @@ export class MeusDadosComponent {
   abrirDialogNewAddress() {
     this.divNovoEndereco = true;
     this.divEnderecos = false;
+    this.buttonSalvarEnderecoNovoEndereco = true;
 
     console.log(this.usuario[0].enderecoEntrega)
   }
@@ -87,24 +93,28 @@ export class MeusDadosComponent {
   showDialogEnderecos(){
     this.divNovoEndereco = false;
     this.divEnderecos = true;
+    this.buttonSalvarEnderecoNovoEndereco = false;
+    this.buttonSalvarEnderecoEditar = false;
   }
 
   editAddress(address: any) {
+    this.buttonSalvarEnderecoEditar = true;
+
     if (this.usuario[0]?.enderecoEntrega) {
       const enderecoEditIndex = this.usuario[0].enderecoEntrega.findIndex(
         (endereco) => endereco.identificacao === address.identificacao
       );
 
       if (enderecoEditIndex !== -1) {
-        const enderecoEditado = this.usuario[0].enderecoEntrega[enderecoEditIndex];
+        this.enderecoEditando = this.usuario[0].enderecoEntrega[enderecoEditIndex];
 
         // Preencha os campos do formulário com os valores editados
-        this.identificacao = enderecoEditado.identificacao || '';
-        this.cep = enderecoEditado.cep || null;
-        this.cidade = enderecoEditado.cidade || '';
-        this.bairro = enderecoEditado.bairro || '';
-        this.logradouro = enderecoEditado.rua || '';
-        this.numero = enderecoEditado.numeroResidencia || null;
+        this.identificacao = this.enderecoEditando.identificacao || '';
+        this.cep = this.enderecoEditando.cep || null;
+        this.cidade = this.enderecoEditando.cidade || '';
+        this.bairro = this.enderecoEditando.bairro || '';
+        this.logradouro = this.enderecoEditando.rua || '';
+        this.numero = this.enderecoEditando.numeroResidencia || null;
 
         // Alternar para a visualização de edição de endereço
         this.divNovoEndereco = true;
@@ -113,8 +123,45 @@ export class MeusDadosComponent {
     }
   }
 
+
+  salvarEdicao() {
+    if (this.usuario[0]?.enderecoEntrega) {
+      const enderecoEditIndex = this.usuario[0].enderecoEntrega.findIndex(
+        (endereco) => endereco === this.enderecoEditando
+      );
+
+      if (enderecoEditIndex !== -1) {
+        const enderecoEditado = this.usuario[0].enderecoEntrega[enderecoEditIndex];
+
+        // Atualize os campos do endereço editado
+        enderecoEditado.identificacao = this.identificacao;
+        enderecoEditado.cep = this.cep!;
+        enderecoEditado.cidade = this.cidade;
+        enderecoEditado.bairro = this.bairro;
+        enderecoEditado.rua = this.logradouro;
+        enderecoEditado.numeroResidencia = this.numero!;
+
+        // Redefina os campos do endereço após a edição
+        this.resetAddressFields();
+
+        // Alternar de volta para a visualização de endereços
+        this.divNovoEndereco = false;
+        this.divEnderecos = true;
+        this.buttonSalvarEnderecoEditar = false;
+      }
+    }
+  }
+
+
+
+
+
+
   // Componente TypeScript
   salvarEndereco() {
+
+
+
     const endereco: EnderecoEntrega = {
       identificacao: this.identificacao,
       cep: this.cep!,
@@ -124,19 +171,7 @@ export class MeusDadosComponent {
       numeroResidencia: this.numero!
     };
 
-    if (this.usuario[0]?.enderecoEntrega) {
-      const enderecoEditIndex = this.usuario[0].enderecoEntrega.findIndex(
-        (endereco) => endereco.identificacao === this.identificacao
-      );
-
-      if (enderecoEditIndex !== -1) {
-        // Atualize o endereço existente se ele for encontrado
-        this.usuario[0].enderecoEntrega[enderecoEditIndex] = { ...endereco };
-      } else {
-        console.log("Não achou o index")
-        this.usuarioService.adicionarEndereco(0, endereco);
-      }
-    }
+    this.usuarioService.adicionarEndereco(0, endereco);
 
     // Redefina os campos do endereço
     this.resetAddressFields();
@@ -144,6 +179,8 @@ export class MeusDadosComponent {
     // Alternar de volta para a visualização de endereços
     this.divNovoEndereco = false;
     this.divEnderecos = true;
+    this.buttonSalvarEnderecoEditar = false;
+    this.buttonSalvarEnderecoNovoEndereco = false;
   }
 
   onCepInput() {

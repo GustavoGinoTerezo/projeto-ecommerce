@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 export interface FormaPagamento{
   tipoPagamento: string;
-  descricaoFormaPagamento: string;
+  descricaoFormaPagamento?: string;
 }
 
 @Injectable({

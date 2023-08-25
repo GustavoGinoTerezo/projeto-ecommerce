@@ -14,6 +14,7 @@ export interface Usuario {
 }
 
 export interface EnderecoEntrega {
+  id?: number;
   identificacao?: string;
   cep: number;
   cidade?: string;
@@ -56,7 +57,7 @@ export class ServiceUsuarioLogadoService {
           rua: "Teste",
           numeroResidencia: 99
         },
-        
+
 
       ]
 
