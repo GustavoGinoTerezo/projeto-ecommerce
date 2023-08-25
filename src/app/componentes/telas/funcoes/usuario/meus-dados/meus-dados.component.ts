@@ -123,7 +123,6 @@ export class MeusDadosComponent {
     }
   }
 
-
   salvarEdicao() {
     if (this.usuario[0]?.enderecoEntrega) {
       const enderecoEditIndex = this.usuario[0].enderecoEntrega.findIndex(
@@ -152,16 +151,7 @@ export class MeusDadosComponent {
     }
   }
 
-
-
-
-
-
-  // Componente TypeScript
   salvarEndereco() {
-
-
-
     const endereco: EnderecoEntrega = {
       identificacao: this.identificacao,
       cep: this.cep!,
