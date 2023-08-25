@@ -1,3 +1,46 @@
 <div class="divGeral">
-  
+  <div class="divH1">
+    <h1>Meus pedidos</h1>
+  </div>
+  <div *ngIf="pedidos" class="containerGeralPedido">
+    <div class="containerPedido" *ngFor="let pedido of pedidos">
+      <div class="containerNumeroPedido">
+        <div>
+          Número do pedido
+        </div>
+        <div>
+          {{pedido.numeroPedido}}
+        </div>
+      </div>
+      <div class="containerStatus">
+        <div>
+          Status
+        </div>
+        <div>
+          {{pedido.status}}
+        </div>
+      </div>
+      <div class="containerDataPedido">
+        <div>
+          Data
+        </div>
+        <div>
+          {{pedido.dataPedido}}
+        </div>
+      </div>
+      <div class="containerFormaPagamento">
+        <div>
+          Pagamento
+        </div>
+        <div *ngFor="let formaPagamento of pedido.formaDoPagamento">
+          {{ formaPagamento.tipoPagamento }}
+        </div>
+      </div>
+      <div class="containerDetalhePedido">
+        <div>
+          <p-button label="teste"></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
