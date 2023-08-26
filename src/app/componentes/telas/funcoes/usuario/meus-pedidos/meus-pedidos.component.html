@@ -4,43 +4,72 @@
   </div>
   <div *ngIf="pedidos" class="containerGeralPedido">
     <div class="containerPedido" *ngFor="let pedido of pedidos">
-      <div class="containerNumeroPedido">
-        <div>
-          Número do pedido
-        </div>
-        <div>
-          {{pedido.numeroPedido}}
-        </div>
-      </div>
-      <div class="containerStatus">
-        <div>
-          Status
-        </div>
-        <div>
-          {{pedido.status}}
-        </div>
-      </div>
-      <div class="containerDataPedido">
-        <div>
-          Data
-        </div>
-        <div>
-          {{pedido.dataPedido}}
-        </div>
-      </div>
-      <div class="containerFormaPagamento">
-        <div>
-          Pagamento
-        </div>
-        <div *ngFor="let formaPagamento of pedido.formaDoPagamento">
-          {{ formaPagamento.tipoPagamento }}
-        </div>
-      </div>
-      <div class="containerDetalhePedido">
-        <div>
-          <p-button label="teste"></p-button>
-        </div>
-      </div>
+
+
+      <p-accordion [multiple]="false" [activeIndex]="[0]" >
+        <p-accordionTab header="Nº do pedido: {{pedido.numeroPedido}}" >
+              <div class="containerInternoPedidoGeral">
+                <div class="containerStatusDataPagamento">
+                  <div class="containerStatus">
+                    <div>
+                      Status
+                    </div>
+                    <div>
+                      {{pedido.status}}
+                    </div>
+                  </div>
+                  <div class="containerDataPedido">
+                    <div>
+                      Data
+                    </div>
+                    <div>
+                      {{pedido.dataPedido}}
+                    </div>
+                  </div>
+                  <div class="containerFormaPagamento">
+                    <div>
+                      Pagamento
+                    </div>
+                    <div *ngFor="let formaPagamento of pedido.formaDoPagamento">
+                      {{ formaPagamento.tipoPagamento }}
+                    </div>
+                  </div>
+                </div>
+                <hr class="hr">
+                <div class="containerEnderecoNotaFiscal">
+                  <div class="containerEnderecoGeral" *ngFor="let endereco of pedido.enderecoSelecionado">
+                    <div>
+                      Endereço
+                    </div>
+                    <div class="containerEndereco">
+                      <div>{{endereco.rua}}</div>
+                      <div>
+                        Número: {{ endereco.numeroResidencia}}, {{endereco.bairro}}
+                      </div>
+                      <div>
+                        CEP: {{endereco.cep}} - {{endereco.cidade}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="containerDataPedido">
+                  </div>
+                  <div class="containerFormaPagamento">
+                    <div class="containerRastreio">
+                      <div>
+                        <p-button label="Rastreio" icon="fa-solid fa-truck-fast fa-xl" styleClass="p-button-outlined"></p-button>
+                      </div>
+                      <div>
+                        <p-button label="Nota fiscal" icon="fa-solid fa-file-invoice-dollar fa-xl" styleClass="p-button-outlined"></p-button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </p-accordionTab>
+    </p-accordion>
     </div>
   </div>
 </div>
+
+
+

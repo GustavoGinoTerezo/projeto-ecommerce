@@ -24,6 +24,7 @@ import { StepsModule } from 'primeng/steps';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SidebarModule } from 'primeng/sidebar';
 import { DialogModule } from 'primeng/dialog';
+import { AccordionModule } from 'primeng/accordion';
 
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -87,6 +88,7 @@ import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-p
     RadioButtonModule,
     SidebarModule,
     DialogModule,
+    AccordionModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

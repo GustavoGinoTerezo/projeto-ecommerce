@@ -11,27 +11,39 @@
 
 .containerGeralPedido{
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 }
 
 .containerPedido{
-  display: flex;
   width: 100%;
   height: 100%;
-  justify-content: space-between;
   padding: 13px;
   background-color: var(--container-externo-cards-produtos);
 }
 
-.containerNumeroPedido{
+.containerInternoPedidoGeral{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
   width: 100%;
   height: 100%;
+}
 
+.containerStatusDataPagamento{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 60px;
+  margin-bottom: 10px;
+}
+
+.containerEnderecoNotaFiscal{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 100px;
+  margin-top: 10px;
 }
 
 .containerStatus{
@@ -41,6 +53,7 @@
   justify-content: space-around;
   width: 100%;
   height: 100%;
+  min-height: 60px;
 
 }
 
@@ -51,7 +64,7 @@
   justify-content: space-around;
   width: 100%;
   height: 100%;
-
+  min-height: 60px;
 }
 
 .containerFormaPagamento{
@@ -61,16 +74,40 @@
   justify-content: space-around;
   width: 100%;
   height: 100%;
-
+  min-height: 60px;
 }
 
-.containerDetalhePedido{
+.containerEnderecoGeral{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   width: 100%;
   height: 100%;
+  min-height: 100px;
 
 }
 
+.containerEndereco{
+  display: flex;
+  min-height: 100px;
+  margin-top: 8px;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.containerRastreio{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+}
+
+.hr{
+  display: flex;
+  width: 100%;
+  border: .1px solid rgba(0, 0, 0, 0.121);
+}

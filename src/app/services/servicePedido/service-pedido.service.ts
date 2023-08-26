@@ -26,6 +26,48 @@ export class ServicePedidoService {
       dataPedido: "25/08/2023",
       enderecoSelecionado: [{
         cep: 13500000,
+        cidade: "São Paulo",
+        bairro: "Jardim Gonzaga",
+        rua: "Rua Jorge Ó Solanas",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "PIX",
+      }],
+      carrinhoDeCompra: [{
+        imagemProduto: "teste",
+        nomeProduto: "teste",
+        quantidade: 1,
+        preco: 1,
+      }]
+    },
+    {
+      numeroPedido: 0,
+      status: "Pedido solicitado",
+      dataPedido: "25/08/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "São Paulo",
+        bairro: "Jardim Gonzaga",
+        rua: "Rua Jorge Ó Solanas",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "PIX",
+      }],
+      carrinhoDeCompra: [{
+        imagemProduto: "teste",
+        nomeProduto: "teste",
+        quantidade: 1,
+        preco: 1,
+      }]
+    },
+    {
+      numeroPedido: 0,
+      status: "Pedido solicitado",
+      dataPedido: "25/08/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
         cidade: "SP",
         bairro: "SP",
         rua: "SP",
