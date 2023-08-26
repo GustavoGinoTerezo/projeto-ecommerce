@@ -42,9 +42,21 @@
   display: flex;
   width: 100%;
   height: 100%;
-  min-height: 100px;
-  margin-top: 10px;
+  align-items: center;
+  margin-top: 15px;
 }
+
+.containerTimeLine{
+  width: 100%;
+  height: 350px;
+}
+
+:host ::ng-deep .p-timeline-event-content{
+  max-width: 150px;
+  min-height: 300px;
+  word-wrap: break-word;
+}
+
 
 .containerStatus{
   display: flex;
@@ -84,8 +96,6 @@
   justify-content: space-around;
   width: 100%;
   height: 100%;
-  min-height: 100px;
-
 }
 
 .containerEndereco{
@@ -94,6 +104,7 @@
   margin-top: 8px;
   justify-content: space-around;
   flex-direction: column;
+
 }
 
 .containerRastreio{
@@ -110,4 +121,33 @@
   display: flex;
   width: 100%;
   border: .1px solid rgba(0, 0, 0, 0.121);
+}
+
+.eventDate{
+  margin-bottom: 15px;
+}
+
+.icon{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  max-width: 30px;
+  height: 30px;
+  border: 1px solid var(--background-botoes);
+  border-radius: 50%;
+
+}
+
+.custom-marker{
+  border-radius: 50%;
+}
+
+:host ::ng-deep .p-timeline-event-connector{
+  background-color: var(--background-botoes);
+}
+
+.eventStatus{
+  margin-bottom: 10px;
 }

@@ -6,7 +6,7 @@
     <div class="containerPedido" *ngFor="let pedido of pedidos">
 
 
-      <p-accordion [multiple]="false" [activeIndex]="[0]" >
+      <p-accordion [multiple]="true" [activeIndex]="[0]" >
         <p-accordionTab header="Nº do pedido: {{pedido.numeroPedido}}" >
               <div class="containerInternoPedidoGeral">
                 <div class="containerStatusDataPagamento">
@@ -56,14 +56,44 @@
                   <div class="containerFormaPagamento">
                     <div class="containerRastreio">
                       <div>
-                        <p-button label="Rastreio" icon="fa-solid fa-truck-fast fa-xl" styleClass="p-button-outlined"></p-button>
+                        <p-button label="Nota fiscal" icon="fa-solid fa-file-invoice-dollar fa-xl" styleClass="p-button-outlined"></p-button>
                       </div>
                       <div>
-                        <p-button label="Nota fiscal" icon="fa-solid fa-file-invoice-dollar fa-xl" styleClass="p-button-outlined"></p-button>
+                        <p-button label="Rastreio detalhado" icon="fa-solid fa-truck-fast fa-xl" styleClass="p-button-outlined"></p-button>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <div class="containerTimeLine">
+                  <p-timeline [value]="events" layout="horizontal" >
+                    <ng-template pTemplate="marker" let-event>
+                      <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
+                        <i class="icon" style="color: #ffffff" [ngClass]="event.icon"></i>
+                    </span>
+                    </ng-template>
+                      <ng-template pTemplate="content" let-event>
+                          <div class="eventDate">{{ event.date }}</div>
+                          <div class="eventStatus">
+                            <i [ngClass]="event.icon"></i>
+                            {{event.status}}
+                          </div>
+                          <div class="eventStatus">
+                            <i [ngClass]="event.icon1"></i>
+                            {{event.status1}}
+                          </div>
+                          <div class="eventStatus">
+                            <i [ngClass]="event.icon1"></i>
+                            {{event.status2}}
+                          </div>
+                          <div class="eventStatus">
+                            <i [ngClass]="event.icon1"></i>
+                            {{event.status3}}
+                          </div>
+                      </ng-template>
+                  </p-timeline>
+                </div>
+
               </div>
         </p-accordionTab>
     </p-accordion>
