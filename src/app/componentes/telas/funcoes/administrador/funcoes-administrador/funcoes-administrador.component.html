@@ -1,1 +1,24 @@
-<p>funcoes-administrador works!</p>
+<div
+  class="sidenav scrollwrap scrollwrap_delayed"
+>
+  <ul class="sidenav-nav">
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+            <a
+        class="sidenav-nav-link"
+        *ngIf="!data.items || (data.items && data.items.length === 0)"
+        [routerLink]="[data.routerLink]"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="handleItemClick(data)"
+      >
+        <i
+          class="sidenav-link-icon"
+          [class]="data.icon"
+        ></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+          {{data.label}}
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>

@@ -46,6 +46,13 @@ import { FuncoesAdministradorComponent } from './componentes/telas/funcoes/admin
 import { MinhaContaComponent } from './componentes/telas/funcoes/usuario/minha-conta/minha-conta.component';
 import { MeusDadosComponent } from './componentes/telas/funcoes/usuario/meus-dados/meus-dados.component';
 import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-pedidos/meus-pedidos.component';
+import { GerenciamentoDeClientesComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-clientes/gerenciamento-de-clientes.component';
+import { RelatoriosDeVendasComponent } from './componentes/telas/funcoes/administrador/relatorios-de-vendas/relatorios-de-vendas.component';
+import { ControleDePedidosComponent } from './componentes/telas/funcoes/administrador/controle-de-pedidos/controle-de-pedidos.component';
+import { AdicionarCategoriasEProdutosComponent } from './componentes/telas/funcoes/administrador/adicionar-categorias-e-produtos/adicionar-categorias-e-produtos.component';
+import { EntradaDeEstoqueComponent } from './componentes/telas/funcoes/administrador/entrada-de-estoque/entrada-de-estoque.component';
+import { EntradaDeNotasFiscaisComponent } from './componentes/telas/funcoes/administrador/entrada-de-notas-fiscais/entrada-de-notas-fiscais.component';
+import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrador/personalizacao/personalizacao.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +73,13 @@ import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-p
     MinhaContaComponent,
     MeusDadosComponent,
     MeusPedidosComponent,
+    GerenciamentoDeClientesComponent,
+    RelatoriosDeVendasComponent,
+    ControleDePedidosComponent,
+    AdicionarCategoriasEProdutosComponent,
+    EntradaDeEstoqueComponent,
+    EntradaDeNotasFiscaisComponent,
+    PersonalizacaoComponent,
   ],
   imports: [
     BrowserModule,

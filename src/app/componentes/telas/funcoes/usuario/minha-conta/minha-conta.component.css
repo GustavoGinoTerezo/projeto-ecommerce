@@ -10,7 +10,6 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 100%;
   padding: 13px;
   margin-bottom: 5px;
   background-color: var(--container-externo-cards-produtos);
@@ -19,8 +18,8 @@
 
 .containerImgEInfo{
   display: flex;
+  align-items: center;
   width: 100%;
-  height: 100%;
 }
 
 .containerImg{
@@ -46,7 +45,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   padding: 13px;
   border-radius: 6px;
   background-color: var(--container-externo-cards-produtos);

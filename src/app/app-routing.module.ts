@@ -11,6 +11,13 @@ import { ConfirmacaoComponent } from './componentes/telas/carrinho-de-compras/co
 import { MinhaContaComponent } from './componentes/telas/funcoes/usuario/minha-conta/minha-conta.component';
 import { MeusDadosComponent } from './componentes/telas/funcoes/usuario/meus-dados/meus-dados.component';
 import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-pedidos/meus-pedidos.component';
+import { AdicionarCategoriasEProdutosComponent } from './componentes/telas/funcoes/administrador/adicionar-categorias-e-produtos/adicionar-categorias-e-produtos.component';
+import { ControleDePedidosComponent } from './componentes/telas/funcoes/administrador/controle-de-pedidos/controle-de-pedidos.component';
+import { EntradaDeEstoqueComponent } from './componentes/telas/funcoes/administrador/entrada-de-estoque/entrada-de-estoque.component';
+import { EntradaDeNotasFiscaisComponent } from './componentes/telas/funcoes/administrador/entrada-de-notas-fiscais/entrada-de-notas-fiscais.component';
+import { GerenciamentoDeClientesComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-clientes/gerenciamento-de-clientes.component';
+import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrador/personalizacao/personalizacao.component';
+import { RelatoriosDeVendasComponent } from './componentes/telas/funcoes/administrador/relatorios-de-vendas/relatorios-de-vendas.component';
 
 const routes: Routes = [
   {
@@ -62,6 +69,34 @@ const routes: Routes = [
   {
     path: 'meus-pedidos',
     component: MeusPedidosComponent,
+  },
+  {
+    path: 'adicionar-categorias-e-produtos',
+    component: AdicionarCategoriasEProdutosComponent,
+  },
+  {
+    path: 'controle-de-pedidos',
+    component: ControleDePedidosComponent,
+  },
+  {
+    path: 'entrada-de-estoque',
+    component: EntradaDeEstoqueComponent,
+  },
+  {
+    path: 'entrada-de-notas-fiscais',
+    component: EntradaDeNotasFiscaisComponent,
+  },
+  {
+    path: 'gerenciamento-de-clientes',
+    component: GerenciamentoDeClientesComponent,
+  },
+  {
+    path: 'personalizacao',
+    component: PersonalizacaoComponent,
+  },
+  {
+    path: 'relatorios-de-vendas',
+    component: RelatoriosDeVendasComponent,
   },
 ];
 
