@@ -6,7 +6,7 @@
     <div class="containerPedido" *ngFor="let pedido of pedidos">
 
 
-      <p-accordion [multiple]="true" [activeIndex]="[0]" >
+      <p-accordion [multiple]="false" [activeIndex]="[0]" >
         <p-accordionTab header="Nº do pedido: {{pedido.numeroPedido}}" >
               <div class="containerInternoPedidoGeral">
                 <div class="containerStatusDataPagamento">
@@ -92,9 +92,42 @@
                       </ng-template>
                   </p-timeline>
                 </div>
-                <hr class="hr">
                 <div class="containerProdutos">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur placeat doloremque ullam, repudiandae totam ratione adipisci impedit veniam libero quisquam molestias voluptates nihil, illum nemo quo cupiditate aut, maiores repellat.
+                  <h2 class="h2">Produto(s)</h2>
+                  <hr class="hr">
+                  <div class="produtoIndividual" *ngFor="let produto of pedido.carrinhoDeCompra">
+                    <div class="containerProdutoIndividual">
+                      <div class="divFoto">
+                        <img class="img" [src]="produto.imagemProduto" alt="Imagem do produto">
+                      </div>
+                      <div class="divNomeProduto">
+                        <div class="labelNomeProduto">{{produto.nomeProduto}}</div>
+                      </div>
+                      <div class="divQuantidadeProduto">
+                        <div class="labelQuantidade margemLabel">Quantidade</div>
+                        <div class="quantidadeProdutoDado">{{produto.quantidade}}</div>
+                      </div>
+                      <div class="divValorProduto">
+                        <div class="labelValorProduto margemLabel">Valor do produto</div>
+                        <div class="valorProdutoDado">R$ {{ calcularValorItem(produto).toFixed(2) }}</div>
+                      </div>
+                    </div>
+                    <hr class="hr">
+                  </div>
+                  <div class="divValorTotalDoPedido">
+                    <div class="divTotalDosProdutos">
+                      <div class="labelTotalProduto">Total dos produto(s)</div>
+                      <div class="dadoValorUnicoTotal">R$ {{ calcularValorTotalCarrinho(pedido).toFixed(2) }}</div>
+                    </div>
+                    <div class="divTotalFrete">
+                      <div class="labelFrete">Frete</div>
+                      <div class="dadoValorFrete">?????</div>
+                    </div>
+                    <div class="divTotalDoPedido">
+                      <div class="labelTotalPedido">Total do pedido</div>
+                      <div class="dadoTotalPedido">R$ {{ calcularValorTotalCarrinho(pedido).toFixed(2) }}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
         </p-accordionTab>

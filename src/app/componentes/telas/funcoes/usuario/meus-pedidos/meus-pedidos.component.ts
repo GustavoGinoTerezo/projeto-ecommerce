@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
 
 interface EventItem {
@@ -22,7 +23,7 @@ export class MeusPedidosComponent {
 
   pedidos: Pedido[] = []
   events: EventItem[];
-
+  valorTotal: number = 0;
 
   constructor(
     private pedidoService: ServicePedidoService,
@@ -78,6 +79,20 @@ export class MeusPedidosComponent {
 
     this.pedidos = this.pedidoService.getPedido();
 
-    console.log(this.pedidos)
+    for (const pedido of this.pedidos) {
+      pedido.valorTotal = this.calcularValorTotalCarrinho(pedido);
+    }
+
   }
+
+  calcularValorItem(item: CarrinhoDeCompra): number {
+    return (item.quantidade || 0) * (item.preco || 0);
+  }
+
+  calcularValorTotalCarrinho(pedido: Pedido): number {
+    return (pedido.carrinhoDeCompra || []).reduce((total, produto) => {
+      return total + this.calcularValorItem(produto);
+    }, 0);
+  }
+
 }

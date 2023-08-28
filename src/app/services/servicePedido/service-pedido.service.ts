@@ -10,6 +10,7 @@ export interface Pedido {
   enderecoSelecionado?: EnderecoEntrega[],
   formaDoPagamento?: FormaPagamento[],
   carrinhoDeCompra?: CarrinhoDeCompra[],
+  valorTotal?: number;
 }
 
 @Injectable({
@@ -26,20 +27,36 @@ export class ServicePedidoService {
       dataPedido: "25/08/2023",
       enderecoSelecionado: [{
         cep: 13500000,
-        cidade: "São Paulo",
-        bairro: "Jardim Gonzaga",
-        rua: "Rua Jorge Ó Solanas",
+        cidade: "Teste",
+        bairro: "Teste",
+        rua: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
         tipoPagamento: "PIX",
       }],
-      carrinhoDeCompra: [{
-        imagemProduto: "teste",
-        nomeProduto: "teste",
-        quantidade: 1,
-        preco: 1,
-      }]
+      carrinhoDeCompra:
+      [
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 3,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 5,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 7,
+          preco: 12401,
+        },
+
+      ]
     },
     {
       numeroPedido: 0,
@@ -47,9 +64,9 @@ export class ServicePedidoService {
       dataPedido: "25/08/2023",
       enderecoSelecionado: [{
         cep: 13500000,
-        cidade: "São Paulo",
-        bairro: "Jardim Gonzaga",
-        rua: "Rua Jorge Ó Solanas",
+        cidade: "Teste",
+        bairro: "Teste",
+        rua: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -59,7 +76,7 @@ export class ServicePedidoService {
         imagemProduto: "teste",
         nomeProduto: "teste",
         quantidade: 1,
-        preco: 1,
+        preco: 100,
       }]
     },
     {
@@ -80,7 +97,7 @@ export class ServicePedidoService {
         imagemProduto: "teste",
         nomeProduto: "teste",
         quantidade: 1,
-        preco: 1,
+        preco: 1000,
       }]
     },
   ]

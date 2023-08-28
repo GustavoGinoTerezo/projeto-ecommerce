@@ -9,6 +9,10 @@
   padding: 13px;
 }
 
+.h2{
+  margin-bottom: 0;
+}
+
 .containerGeralPedido{
   display: flex;
   flex-direction: column;
@@ -48,10 +52,163 @@
 
 .containerProdutos{
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  margin-top: 15px;
-  background-color: red;
+  margin-top: 45px;
+}
+
+.produtoIndividual{
+  display: flex;
+  flex-direction: column;
+}
+
+.containerProdutoIndividual{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 13px;
+}
+
+.divFoto{
+  display: flex;
+  width: 150px;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+}
+
+.img{
+  width: 150px;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.096);
+  border-radius: 6px;
+}
+
+.divNomeProduto{
+  display: flex;
+  padding: 0px 13px;
+  width: 100%;
+  align-items: center;
+}
+
+.divQuantidadeProduto{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.divValorProduto{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.labelNomeProduto{
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.labelQuantidade{
+  font-size: 18px;
+}
+
+.labelValorProduto{
+  font-size: 18px;
+}
+
+.valorProdutoDado{
+  font-weight: 700;
+}
+
+.quantidadeProdutoDado{
+  font-weight: 700;
+}
+
+.margemLabel{
+  margin-bottom: 10px;
+}
+
+.divValorTotalDoPedido{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 100%;
+  height: 130px;
+}
+
+.divTotalDosProdutos{
+  width: 100%;
+  display: flex;
+}
+
+.labelTotalProduto{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.dadoValorUnicoTotal{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.divTotalFrete{
+  width: 100%;
+  display: flex;
+
+}
+
+.labelFrete{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.dadoValorFrete{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.divTotalDoPedido{
+  display: flex;
+  width: 100%;
+  height: 30px;
+  align-items: center;
+  display: flex;
+  background-color: var(--container-externo-cards-produtos);
+}
+
+.labelTotalPedido{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.dadoTotalPedido{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .containerTimeLine{
@@ -128,7 +285,7 @@
 .hr{
   display: flex;
   width: 100%;
-  border: .1px solid rgba(0, 0, 0, 0.121);
+  border: .1px solid rgba(0, 0, 0, 0.04);
 }
 
 .eventDate{
@@ -159,3 +316,5 @@
 .eventStatus{
   margin-bottom: 10px;
 }
+
+
