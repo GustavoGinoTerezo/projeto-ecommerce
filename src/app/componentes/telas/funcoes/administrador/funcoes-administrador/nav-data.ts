@@ -2,7 +2,7 @@ import { INavbarData } from "./helper";
 
 export const navbarData: INavbarData[] = [
   {
-    routerLink: 'gerenciamento-de-clientes',
+    routerLink: 'gerenciamento-de-cliente',
     icon: 'fa-solid fa-users',
     label: 'Gerenciamento de Clientes',
   },

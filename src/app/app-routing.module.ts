@@ -87,7 +87,7 @@ const routes: Routes = [
     component: EntradaDeNotasFiscaisComponent,
   },
   {
-    path: 'gerenciamento-de-clientes',
+    path: 'gerenciamento-de-cliente',
     component: GerenciamentoDeClientesComponent,
   },
   {

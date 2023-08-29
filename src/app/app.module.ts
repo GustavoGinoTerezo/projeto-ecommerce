@@ -27,6 +27,7 @@ import { DialogModule } from 'primeng/dialog';
 import { AccordionModule } from 'primeng/accordion';
 import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
+import { TableModule } from 'primeng/table';
 
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -107,6 +108,7 @@ import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrad
     AccordionModule,
     TimelineModule,
     CardModule,
+    TableModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

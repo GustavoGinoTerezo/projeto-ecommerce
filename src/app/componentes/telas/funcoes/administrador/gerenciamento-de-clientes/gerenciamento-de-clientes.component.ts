@@ -1,6 +1,6 @@
 import { Usuario } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
 import { Component } from '@angular/core';
-import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
+import { Product, ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 
 @Component({
   selector: 'app-gerenciamento-de-clientes',
@@ -9,7 +9,11 @@ import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service
 })
 export class GerenciamentoDeClientesComponent {
 
+  products!: Product[];
+
+  selectedProduct!: Product;
   usuarios: Usuario[] = []
+
 
   constructor(
     private usuariosService: ServiceUsuariosService,
@@ -17,10 +21,14 @@ export class GerenciamentoDeClientesComponent {
 
   ngOnInit(){
 
-    this.usuarios = this.usuariosService.getUsuarios()
+    this.usuarios = this.usuariosService.getUsuarios();
+
+    this.usuariosService.getProductsMini().then((data) => {
+      this.products = data;
+  });
 
   }
 
-  
+
 
 }
