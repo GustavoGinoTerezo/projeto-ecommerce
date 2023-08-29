@@ -10,10 +10,12 @@ import { Product, ServiceUsuariosService } from 'src/app/services/serviceUsuario
 export class GerenciamentoDeClientesComponent {
 
   products!: Product[];
-
   selectedProduct!: Product;
-  usuarios: Usuario[] = []
+  filteredProducts: Product[] = [];
 
+  usuarios: Usuario[] = []
+  usuarioSelecionado!: Usuario;
+  usuariosFiltrados: Usuario[] = []
 
   constructor(
     private usuariosService: ServiceUsuariosService,
@@ -23,10 +25,27 @@ export class GerenciamentoDeClientesComponent {
 
     this.usuarios = this.usuariosService.getUsuarios();
 
-    this.usuariosService.getProductsMini().then((data) => {
-      this.products = data;
-  });
+    this.usuariosService.getUsuarioTabela().then((data) => {
+      this.usuarios = data;
+      this.usuariosFiltrados = data;
+    });
 
+  }
+
+  filterTable(event: any) {
+    const filterValue = event.target.value.toLowerCase();
+    if (!this.usuarios) {
+      this.usuariosFiltrados = [];
+    } else {
+      this.usuariosFiltrados = this.usuarios.filter(usuario => {
+        return (
+          usuario.nome?.toLowerCase().includes(filterValue) ||
+          usuario.email?.toLowerCase().includes(filterValue) ||
+          usuario.cep?.toLowerCase().includes(filterValue) ||
+          usuario.cidade?.toString().includes(filterValue)
+        );
+      });
+    }
   }
 
 
