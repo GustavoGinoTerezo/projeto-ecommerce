@@ -74,9 +74,25 @@
       </div>
     </div>
   </div>
-  <div>
+  <div class="containerBotoes">
+      <div class="divInputs">
+        <p-button label="Adicionar usuário" styleClass="p-button-raised p-button-success"></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button label="Atualizar usuário" styleClass="p-button-raised p-button-warning"></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button label="Excluir conta" styleClass="p-button-raised p-button-danger"></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button label="Limpar campos"
+        (click)="limparCampos()"
+        styleClass="p-button-raised p-button-info"
+        ></p-button>
+      </div>
 
-    <div class="card">
+    </div>
+  <div class="tabelaClientes">
 
       <p-table
       #dt
@@ -119,6 +135,5 @@
             </tr>
         </ng-template>
       </p-table>
-    </div>
   </div>
 </div>

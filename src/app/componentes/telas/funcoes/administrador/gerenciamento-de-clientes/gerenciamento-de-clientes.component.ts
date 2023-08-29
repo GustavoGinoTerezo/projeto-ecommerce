@@ -73,4 +73,16 @@ export class GerenciamentoDeClientesComponent {
     }
   }
 
+  limparCampos() {
+    this.nome = '';
+    this.email = '';
+    this.cpfOuCnpj = null;
+    this.telefone = null;
+    this.cep = null;
+    this.cidade = '';
+    this.bairro = '';
+    this.rua = '';
+    this.numeroResidencia = null;
+  }
+
 }
