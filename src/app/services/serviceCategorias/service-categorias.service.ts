@@ -13,6 +13,7 @@ export interface Produtos {
   nome?: string;
   imagem?: Imagens[];
   preco?: number;
+  status?: Status[];
   descricaoBreve?: string;
   descricaoCompleta?: string;
   especificacaoTecnica?: string;
@@ -22,6 +23,10 @@ export interface Produtos {
 export interface ComentariosProdutos{
   id?: string;
   comentario?: string;
+}
+
+export interface Status {
+  status: string;
 }
 
 export interface Imagens{
@@ -759,6 +764,10 @@ export class ServiceCategoriasService {
 
   getCategorias(): Observable<Categorias[]> {
     return of (this.categorias);
+  }
+
+  getCategoriasTabela() {
+    return Promise.resolve(this.categorias);
   }
 
   obterCategoriaPorNome(nome: string): Categorias | undefined {

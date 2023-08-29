@@ -30,7 +30,6 @@ export class GerenciamentoDeClientesComponent {
 
   ngOnInit(){
 
-    this.usuarios = this.usuariosService.getUsuarios();
 
     this.usuariosService.getUsuarioTabela().then((data) => {
       this.usuarios = data;

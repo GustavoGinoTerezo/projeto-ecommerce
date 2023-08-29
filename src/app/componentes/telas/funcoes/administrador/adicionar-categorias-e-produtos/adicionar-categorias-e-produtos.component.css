@@ -1,0 +1,117 @@
+.divGeral {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 13px;
+  flex-direction: column;
+  background-color: var(--container-externo-cards-produtos);
+  border-radius: 6px;
+}
+
+.divInputNome{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.divInputCpf{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.divInputEmail{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputTelefone{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.divInputCep{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputCidade{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.containerInputs{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin-top: 5px;
+}
+
+.containerNomeProdutoECategoria{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.containerPrecoEStatus{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.containerDescricoes{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.containerBotoes{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.divInputs{
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 0 10px;
+}
+
+.tabelaClientes{
+  margin-top: 30px;
+}
+
+:host ::ng-deep .p-inputtext{
+  width: 100%;
+}
+
+:host ::ng-deep .p-button{
+  width: 100%;
+}
+
+:host ::ng-deep .p-dropdown{
+  width: 98%;
+}
