@@ -5,7 +5,7 @@ export interface Usuario {
   email?: string;
   cpfOuCnpj?: number;
   telefone?: number;
-  cep?: string;
+  cep?: number;
   cidade?: string;
   bairro?: string;
   rua?: string;
@@ -34,7 +34,7 @@ export class ServiceUsuarioLogadoService {
       email: 'teste@teste.com',
       cpfOuCnpj: 99999999999,
       telefone: 99999999999,
-      cep: '99999999',
+      cep: 99999999,
       cidade: 'Teste',
       bairro: 'Teste',
       rua: 'Teste',

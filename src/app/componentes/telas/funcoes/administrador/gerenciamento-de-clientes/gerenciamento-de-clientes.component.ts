@@ -1,6 +1,6 @@
 import { Usuario } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
 import { Component } from '@angular/core';
-import { Product, ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
+import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 
 @Component({
   selector: 'app-gerenciamento-de-clientes',
@@ -9,13 +9,20 @@ import { Product, ServiceUsuariosService } from 'src/app/services/serviceUsuario
 })
 export class GerenciamentoDeClientesComponent {
 
-  products!: Product[];
-  selectedProduct!: Product;
-  filteredProducts: Product[] = [];
 
   usuarios: Usuario[] = []
   usuarioSelecionado!: Usuario;
   usuariosFiltrados: Usuario[] = []
+
+  nome: string = '';
+  email: string = '';
+  cpfOuCnpj!: number | null
+  cep!: number | null
+  telefone!: number | null
+  cidade: string = '';
+  bairro: string = '';
+  rua: string = '';
+  numeroResidencia!: number | null
 
   constructor(
     private usuariosService: ServiceUsuariosService,
@@ -38,16 +45,32 @@ export class GerenciamentoDeClientesComponent {
       this.usuariosFiltrados = [];
     } else {
       this.usuariosFiltrados = this.usuarios.filter(usuario => {
+        const cepString = usuario.cep?.toString() || ''
+        const cpfOuCnpjString = usuario.cpfOuCnpj?.toString() || ''
+        const telefoneString = usuario.telefone?.toString() || ''
         return (
           usuario.nome?.toLowerCase().includes(filterValue) ||
           usuario.email?.toLowerCase().includes(filterValue) ||
-          usuario.cep?.toLowerCase().includes(filterValue) ||
-          usuario.cidade?.toString().includes(filterValue)
+          cepString.includes(filterValue) ||
+          cpfOuCnpjString.includes(filterValue) ||
+          telefoneString.includes(filterValue)
         );
       });
     }
   }
 
-
+  updateInputFieldsWithSelectedUser() {
+    if (this.usuarioSelecionado) {
+      this.nome = this.usuarioSelecionado.nome || '';
+      this.email = this.usuarioSelecionado.email || '';
+      this.cpfOuCnpj = this.usuarioSelecionado.cep || null;
+      this.cep = this.usuarioSelecionado.cep || null;
+      this.telefone = this.usuarioSelecionado.telefone || null;
+      this.numeroResidencia = this.usuarioSelecionado.numeroResidencia || null;
+      this.bairro = this.usuarioSelecionado.bairro || '';
+      this.rua = this.usuarioSelecionado.rua || '';
+      this.cidade = this.usuarioSelecionado.cidade || '';
+    }
+  }
 
 }

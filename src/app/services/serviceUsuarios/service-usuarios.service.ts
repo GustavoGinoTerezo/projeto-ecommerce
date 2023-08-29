@@ -1,19 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../serviceUsuarioLogado/service-usuario-logado.service';
 
-export interface Product {
-  id?: string;
-  code?: string;
-  name?: string;
-  description?: string;
-  price?: number;
-  quantity?: number;
-  inventoryStatus?: string;
-  category?: string;
-  image?: string;
-  rating?: number;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +12,7 @@ usuarios: Usuario[] = [
     email: 'teste@teste.com',
     cpfOuCnpj: 99999999999,
     telefone: 99999999999,
-    cep: '99999999',
+    cep: 99999999,
     cidade: 'Teste',
     bairro: 'Teste',
     rua: 'Teste',
@@ -55,7 +42,7 @@ usuarios: Usuario[] = [
     email: 'teste@teste.com',
     cpfOuCnpj: 99999999999,
     telefone: 99999999999,
-    cep: '99999999',
+    cep: 99999999,
     cidade: 'Teste',
     bairro: 'Teste',
     rua: 'Teste',
@@ -85,7 +72,7 @@ usuarios: Usuario[] = [
     email: 'teste@teste.com',
     cpfOuCnpj: 99999999999,
     telefone: 99999999999,
-    cep: '99999999',
+    cep: 99999999,
     cidade: 'Teste',
     bairro: 'Teste',
     rua: 'Teste',
@@ -115,7 +102,7 @@ usuarios: Usuario[] = [
     email: 'teste@teste.com',
     cpfOuCnpj: 99999999999,
     telefone: 99999999999,
-    cep: '99999999',
+    cep: 99999999,
     cidade: 'Teste',
     bairro: 'Teste',
     rua: 'Teste',
@@ -145,7 +132,7 @@ usuarios: Usuario[] = [
     email: 'teste@teste.com',
     cpfOuCnpj: 99999999999,
     telefone: 99999999999,
-    cep: '99999999',
+    cep: 99999999,
     cidade: 'Teste',
     bairro: 'Teste',
     rua: 'Teste',

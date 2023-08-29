@@ -3,13 +3,17 @@
     <div class="containerNomeECpf">
       <div class="divInputNome">
         <span class="p-float-label">
-          <input pInputText id="username" />
-          <label htmlFor="username">Nome completo</label>
+          <input pInputText id="username"
+          [(ngModel)]="nome"
+          />
+          <label htmlFor="username"
+          >Nome completo</label>
         </span>
       </div>
       <div class="divInputCpf">
         <span class="p-float-label">
-          <input pInputText id="username" />
+          <input pInputText id="username"
+          [(ngModel)]="cpfOuCnpj"/>
           <label htmlFor="username">CPF ou CNPJ</label>
         </span>
       </div>
@@ -17,13 +21,15 @@
     <div class="containerEmailETelefone">
       <div class="divInputEmail">
         <span class="p-float-label">
-          <input pInputText id="username" />
+          <input pInputText id="username"
+          [(ngModel)]="email"/>
           <label htmlFor="username">Email</label>
         </span>
       </div>
       <div class="divInputTelefone">
         <span class="p-float-label">
-          <input pInputText id="username" />
+          <input pInputText id="username"
+          [(ngModel)]="telefone"/>
           <label htmlFor="username">Telefone</label>
         </span>
       </div>
@@ -31,13 +37,15 @@
     <div class="containerCepECidade">
       <div class="divInputCep">
         <span class="p-float-label">
-          <input pInputText id="username" />
+          <input pInputText id="username"
+          [(ngModel)]="cep"/>
           <label htmlFor="username">CEP</label>
         </span>
       </div>
       <div class="divInputCidade">
         <span class="p-float-label">
-          <input pInputText id="username" />
+          <input pInputText id="username"
+          [(ngModel)]="cidade"/>
           <label htmlFor="username">Cidade</label>
         </span>
       </div>
@@ -45,19 +53,22 @@
     <div class="containerBairroRuaENumeroResidencia">
       <div class="divInputBairro">
         <span class="p-float-label">
-          <input pInputText id="username" />
+          <input pInputText id="username"
+          [(ngModel)]="bairro"/>
           <label htmlFor="username">Bairro</label>
         </span>
       </div>
       <div class="divInputRua">
         <span class="p-float-label">
-          <input pInputText id="username" />
+          <input pInputText id="username"
+          [(ngModel)]="rua"/>
           <label htmlFor="username">Rua</label>
         </span>
       </div>
       <div class="divInputNumeroResidencia">
         <span class="p-float-label">
-          <input pInputText id="username" />
+          <input pInputText id="username"
+          [(ngModel)]="numeroResidencia"/>
           <label htmlFor="username">Nº da residência</label>
         </span>
       </div>
@@ -79,6 +90,7 @@
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [rowsPerPageOptions]="[5, 10, 15]"
       [filterDelay]="0"
+      (onRowSelect)="updateInputFieldsWithSelectedUser()"
       >
       <ng-template pTemplate="caption">
         <div class="table-header">
