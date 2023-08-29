@@ -1,0 +1,118 @@
+.divGeral {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 13px;
+}
+
+.divInputNome{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.divInputCpf{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.divInputEmail{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputTelefone{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.divInputCep{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputCidade{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.divInputBairro{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputRua{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputNumeroResidencia{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.containerInputs{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.containerNomeECpf{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.containerEmailETelefone{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.containerCepECidade{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.containerBairroRuaENumeroResidencia{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+:host ::ng-deep .p-inputtext{
+  width: 100%;
+}

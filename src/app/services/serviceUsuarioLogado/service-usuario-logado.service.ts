@@ -28,7 +28,7 @@ export interface EnderecoEntrega {
 })
 export class ServiceUsuarioLogadoService {
 
-  usuarios: Usuario[] = [
+  usuarioLogado: Usuario[] = [
     {
       nome: 'Teste',
       email: 'teste@teste.com',
@@ -60,19 +60,18 @@ export class ServiceUsuarioLogadoService {
 
 
       ]
-
     }
   ]
 
   constructor() { }
 
   getUsuario(): Usuario[] {
-    return this.usuarios;
+    return this.usuarioLogado;
   }
 
   adicionarEndereco(usuarioIndex: number, novoEndereco: EnderecoEntrega): void {
-    if (usuarioIndex >= 0 && usuarioIndex < this.usuarios.length) {
-      const usuario = this.usuarios[usuarioIndex];
+    if (usuarioIndex >= 0 && usuarioIndex < this.usuarioLogado.length) {
+      const usuario = this.usuarioLogado[usuarioIndex];
       if (usuario.enderecoEntrega) {
         usuario.enderecoEntrega.push(novoEndereco);
       } else {
