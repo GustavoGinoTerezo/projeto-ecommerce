@@ -32,6 +32,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { FileUploadModule } from 'primeng/fileupload';
+import { HttpClientModule } from '@angular/common/http';
+
 
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -117,6 +119,7 @@ import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrad
     InputTextareaModule,
     InputSwitchModule,
     FileUploadModule,
+    HttpClientModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
