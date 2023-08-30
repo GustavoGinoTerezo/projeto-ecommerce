@@ -17,14 +17,9 @@ export const navbarData: INavbarData[] = [
     label: 'Controle de Pedidos',
   },
   {
-    routerLink: 'adicionar-categorias-e-produtos',
-    icon: 'fa-brands fa-shopify',
-    label: 'Adicionar Categorias e Produtos',
-  },
-  {
-    routerLink: 'entrada-de-estoque',
+    routerLink: 'gerenciamento-de-categorias-e-produtos',
     icon: 'fa-solid fa-box-archive',
-    label: 'Entrada de Estoque',
+    label: 'Gerenciamento de Categorias e Produtos',
   },
   {
     routerLink: 'entrada-de-notas-fiscais',

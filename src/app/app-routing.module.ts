@@ -71,7 +71,7 @@ const routes: Routes = [
     component: MeusPedidosComponent,
   },
   {
-    path: 'adicionar-categorias-e-produtos',
+    path: 'gerenciamento-de-categorias-e-produtos',
     component: AdicionarCategoriasEProdutosComponent,
   },
   {

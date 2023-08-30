@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+export interface CategoriaVazia extends Categorias {
+  nome: '';
+}
+
 export interface Categorias {
   nome?: string;
   imagem?: string;

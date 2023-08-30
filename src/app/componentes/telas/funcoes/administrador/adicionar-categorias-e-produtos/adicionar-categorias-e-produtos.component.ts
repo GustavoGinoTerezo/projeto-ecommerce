@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
-import { Usuario } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
-import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
+import { CategoriaVazia, Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
+import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 
 interface City {
   name: string;
 }
+
+
 
 @Component({
   selector: 'app-adicionar-categorias-e-produtos',
@@ -17,19 +18,17 @@ export class AdicionarCategoriasEProdutosComponent {
   categorias: Categorias[] = [];
   categoriasFiltradas: Categorias[] = []
   categoriasSelecionada!: Categorias;
+  categoriasSelecionadaInput!: Categorias;
+  nomeProduto: string = '';
+  valorProduto!: number | null
+  descCompleta: string = '';
+  descBreve: string = '';
 
   countries!: any[] ;
   selectedCountry!: any;
+  valorProdutoFormatted: string = '';
 
-  nome: string = '';
-  email: string = '';
-  cpfOuCnpj!: number | null
-  cep!: number | null
-  telefone!: number | null
-  cidade: string = '';
-  bairro: string = '';
-  rua: string = '';
-  numeroResidencia!: number | null
+
 
 
   cities!: City[] ;
@@ -91,22 +90,46 @@ export class AdicionarCategoriasEProdutosComponent {
     }
   }
 
+  updateInputFieldsWithSelectedProduct(categoria: Categorias, produto: Produtos) {
+    this.categoriasSelecionadaInput = categoria;
+    this.nomeProduto = produto.nome || '';
+    this.descBreve = produto.descricaoBreve || '';
+    this.descCompleta = produto.descricaoCompleta || '';
+    this.valorProduto = produto.preco || null;
+    this.valorProdutoFormatted = this.formatCurrency(this.valorProduto);
+  }
 
+  categoriaVazia: CategoriaVazia = {
+    nome: '',
+  };
 
+  formatCurrency(value: number | null): string {
+    if (value !== null) {
+      return value.toFixed(2);
+    }
+    return '';
+  }
 
+  onValorProdutoInput(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement).value;
+    const sanitizedValue = inputValue.replace(/[^\d.,]/g, ''); // Remove caracteres inválidos
 
-
-
-
-  updateInputFieldsWithSelectedUser() {
-    if (this.categoriasSelecionada) {
-      this.nome = this.categoriasSelecionada.nome || '';
+    const parts = sanitizedValue.split('.');
+    if (parts.length > 2) {
+      this.valorProdutoFormatted = parts[0] + '.' + parts[1]; // Mantém até duas casas decimais
+    } else if (parts.length === 2) {
+      this.valorProdutoFormatted = parts[0] + '.' + parts[1].slice(0, 2); // Mantém até duas casas decimais
+    } else {
+      this.valorProdutoFormatted = sanitizedValue;
     }
   }
 
   limparCampos() {
-    this.nome = '';
+    this.nomeProduto = '';
+    this.valorProdutoFormatted = '';
+    this.descCompleta = '';
+    this.descBreve = '';
+    this.categoriasSelecionadaInput = this.categoriaVazia;
   }
-
 
 }
