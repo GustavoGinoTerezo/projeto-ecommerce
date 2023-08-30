@@ -6,8 +6,6 @@ interface City {
   name: string;
 }
 
-
-
 @Component({
   selector: 'app-adicionar-categorias-e-produtos',
   templateUrl: './adicionar-categorias-e-produtos.component.html',
@@ -23,11 +21,17 @@ export class AdicionarCategoriasEProdutosComponent {
   valorProduto!: number | null
   descCompleta: string = '';
   descBreve: string = '';
+  quantidadeProduto!: number | null
+  adicionarProdutoDisabled: boolean = false;
+
 
   countries!: any[] ;
   selectedCountry!: any;
   valorProdutoFormatted: string = '';
 
+  categoriasAdicionarSelecionadaInput: any;
+  nomeCategoriaSelecionada: string = '';
+  adicionarCategoriaDisabled: boolean = false;
 
 
 
@@ -97,6 +101,8 @@ export class AdicionarCategoriasEProdutosComponent {
     this.descCompleta = produto.descricaoCompleta || '';
     this.valorProduto = produto.preco || null;
     this.valorProdutoFormatted = this.formatCurrency(this.valorProduto);
+    this.adicionarProdutoDisabled = true;
+
   }
 
   categoriaVazia: CategoriaVazia = {
@@ -129,7 +135,23 @@ export class AdicionarCategoriasEProdutosComponent {
     this.valorProdutoFormatted = '';
     this.descCompleta = '';
     this.descBreve = '';
+    this.quantidadeProduto = null;
     this.categoriasSelecionadaInput = this.categoriaVazia;
+    this.adicionarProdutoDisabled = false;
   }
+
+  limparCamposCategoriaNova() {
+    this.nomeCategoriaSelecionada = '';
+    this.categoriasAdicionarSelecionadaInput = this.categoriaVazia;
+    this.adicionarCategoriaDisabled = false;
+  }
+
+  onCategoriaAdicionarSelect(event: any) {
+    this.categoriasAdicionarSelecionadaInput = event.value;
+    this.nomeCategoriaSelecionada = event.value.nome || '';
+    this.adicionarCategoriaDisabled = true;
+  }
+
+
 
 }
