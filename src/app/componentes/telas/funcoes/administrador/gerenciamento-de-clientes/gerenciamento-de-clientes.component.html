@@ -1,4 +1,5 @@
 <div class="divGeral">
+  <h1>Gerenciamento de Clientes</h1>
   <div class="containerInputs">
     <div class="containerNomeECpf">
       <div class="divInputNome">
@@ -76,7 +77,8 @@
   </div>
   <div class="containerBotoes">
       <div class="divInputs">
-        <p-button label="Adicionar usuário" styleClass="p-button-raised p-button-success"></p-button>
+        <p-button label="Adicionar usuário"
+        [disabled]="adicionarClienteDisabled"  styleClass="p-button-raised p-button-success"></p-button>
       </div>
       <div class="divInputs">
         <p-button label="Atualizar usuário" styleClass="p-button-raised p-button-warning"></p-button>

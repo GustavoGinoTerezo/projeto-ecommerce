@@ -14,6 +14,8 @@ export class GerenciamentoDeClientesComponent {
   usuarioSelecionado!: Usuario;
   usuariosFiltrados: Usuario[] = []
 
+  adicionarClienteDisabled!: boolean;
+
   nome: string = '';
   email: string = '';
   cpfOuCnpj!: number | null
@@ -69,6 +71,8 @@ export class GerenciamentoDeClientesComponent {
       this.bairro = this.usuarioSelecionado.bairro || '';
       this.rua = this.usuarioSelecionado.rua || '';
       this.cidade = this.usuarioSelecionado.cidade || '';
+
+      this.adicionarClienteDisabled = true;
     }
   }
 
@@ -82,6 +86,8 @@ export class GerenciamentoDeClientesComponent {
     this.bairro = '';
     this.rua = '';
     this.numeroResidencia = null;
+
+    this.adicionarClienteDisabled = false;
   }
 
 }
