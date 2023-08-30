@@ -87,7 +87,7 @@ const routes: Routes = [
     component: EntradaDeNotasFiscaisComponent,
   },
   {
-    path: 'gerenciamento-de-cliente',
+    path: 'gerenciamento-de-clientes',
     component: GerenciamentoDeClientesComponent,
   },
   {
@@ -95,7 +95,7 @@ const routes: Routes = [
     component: PersonalizacaoComponent,
   },
   {
-    path: 'relatorios-de-vendas',
+    path: 'relatorio-de-vendas',
     component: RelatoriosDeVendasComponent,
   },
 ];

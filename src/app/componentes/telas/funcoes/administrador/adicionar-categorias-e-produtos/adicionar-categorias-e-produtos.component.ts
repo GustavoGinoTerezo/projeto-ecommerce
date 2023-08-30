@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { CategoriaVazia, Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 
@@ -151,7 +152,5 @@ export class AdicionarCategoriasEProdutosComponent {
     this.nomeCategoriaSelecionada = event.value.nome || '';
     this.adicionarCategoriaDisabled = true;
   }
-
-
 
 }

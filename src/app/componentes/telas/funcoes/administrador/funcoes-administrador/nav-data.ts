@@ -2,14 +2,14 @@ import { INavbarData } from "./helper";
 
 export const navbarData: INavbarData[] = [
   {
-    routerLink: 'gerenciamento-de-cliente',
+    routerLink: 'gerenciamento-de-clientes',
     icon: 'fa-solid fa-users',
     label: 'Gerenciamento de Clientes',
   },
   {
-    routerLink: 'relatorios-de-vendas',
+    routerLink: 'relatorio-de-vendas',
     icon: 'fa-solid fa-magnifying-glass-chart',
-    label: 'Relatórios de Vendas',
+    label: 'Relatório de Vendas',
   },
   {
     routerLink: 'controle-de-pedidos',
@@ -17,7 +17,7 @@ export const navbarData: INavbarData[] = [
     label: 'Controle de Pedidos',
   },
   {
-    routerLink: 'adicionar-categorias-e-produtos',
+    routerLink: 'gerenciamento-de-categorias-e-produtos',
     icon: 'fa-brands fa-shopify',
     label: 'Gerenciamento de Categorias e Produtos',
   },

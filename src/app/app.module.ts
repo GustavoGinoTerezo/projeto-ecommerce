@@ -30,6 +30,8 @@ import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { FileUploadModule } from 'primeng/fileupload';
 
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -113,6 +115,8 @@ import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrad
     TableModule,
     DropdownModule,
     InputTextareaModule,
+    InputSwitchModule,
+    FileUploadModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

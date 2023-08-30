@@ -2,6 +2,8 @@ import { Usuario } from 'src/app/services/serviceUsuarioLogado/service-usuario-l
 import { Component } from '@angular/core';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 
+
+
 @Component({
   selector: 'app-gerenciamento-de-clientes',
   templateUrl: './gerenciamento-de-clientes.component.html',
@@ -25,6 +27,11 @@ export class GerenciamentoDeClientesComponent {
   bairro: string = '';
   rua: string = '';
   numeroResidencia!: number | null
+  emailAlternativo: string = '';
+  telefoneAlternativo!: number | null;
+
+  habilitarEmailAlternativo: boolean = false;
+  habilitarTelefoneAlternativo: boolean = false;
 
   constructor(
     private usuariosService: ServiceUsuariosService,

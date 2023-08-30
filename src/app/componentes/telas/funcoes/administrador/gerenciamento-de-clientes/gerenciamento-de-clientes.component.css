@@ -42,6 +42,23 @@
   margin-bottom: 15px;
 }
 
+.divInputEmailAlternativo{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.divDropDown{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
 .divInputCep{
   display: flex;
   flex-direction: column;
@@ -105,6 +122,44 @@
   justify-content: space-between;
 }
 
+.containerSwitchs{
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.switchEmailAlternativo{
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.switchTelefoneAlternativo{
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.labelEmailAlternativo{
+  margin-left: 10px;
+}
+
+.labelTelefoneAlternativo{
+  margin-left: 10px;
+}
+
+.containerEmailAlternativo{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.containerTelefoneAlternativo{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .containerCepECidade{
   display: flex;
   width: 100%;
@@ -136,10 +191,19 @@
   margin-top: 30px;
 }
 
+.hr{
+  margin-top: 15px;
+  width: 100%;
+}
+
 :host ::ng-deep .p-inputtext{
   width: 100%;
 }
 
 :host ::ng-deep .p-button{
+  width: 100%;
+}
+
+:host ::ng-deep .p-dropdown{
   width: 100%;
 }
