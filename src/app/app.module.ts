@@ -29,6 +29,7 @@ import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -111,6 +112,7 @@ import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrad
     CardModule,
     TableModule,
     DropdownModule,
+    InputTextareaModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

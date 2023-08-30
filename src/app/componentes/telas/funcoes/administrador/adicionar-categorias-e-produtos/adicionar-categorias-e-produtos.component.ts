@@ -18,6 +18,9 @@ export class AdicionarCategoriasEProdutosComponent {
   categoriasFiltradas: Categorias[] = []
   categoriasSelecionada!: Categorias;
 
+  countries!: any[] ;
+  selectedCountry!: any;
+
   nome: string = '';
   email: string = '';
   cpfOuCnpj!: number | null
@@ -28,8 +31,7 @@ export class AdicionarCategoriasEProdutosComponent {
   rua: string = '';
   numeroResidencia!: number | null
 
-  countries!: any[] ;
-  selectedCountry!: any;
+
   cities!: City[] ;
   selectedCity!: City;
 

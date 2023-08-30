@@ -27,7 +27,6 @@
 
 .divInputEmail{
   display: flex;
-  flex-direction: column;
   width: 100%;
   padding: 13px 0;
   margin-bottom: 15px;
@@ -49,15 +48,18 @@
   padding: 13px 0;
   margin-bottom: 15px;
   margin-right: 5px;
+
 }
 
 .divInputCidade{
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-height: 150px;
   padding: 13px 0;
   margin-bottom: 15px;
 }
+
 
 .containerInputs{
   display: flex;
@@ -104,6 +106,10 @@
   margin-top: 30px;
 }
 
+.labelDescCompleta{
+  font-size: 14px;
+}
+
 :host ::ng-deep .p-inputtext{
   width: 100%;
 }
@@ -115,3 +121,4 @@
 :host ::ng-deep .p-dropdown{
   width: 98%;
 }
+

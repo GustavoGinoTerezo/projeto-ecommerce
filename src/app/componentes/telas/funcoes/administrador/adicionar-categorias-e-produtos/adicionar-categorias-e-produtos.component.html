@@ -11,28 +11,30 @@
         </span>
       </div>
       <div class="divInputCpf">
-        <p-dropdown [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Selecione a categoria">
+        <p-dropdown [options]="categorias" [(ngModel)]="categoriasSelecionada" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Selecione a categoria">
+          <!-- Selected Item Template -->
           <ng-template pTemplate="selectedItem">
-              <div class="flex align-items-center gap-2" *ngIf="selectedCountry">
-                <div>{{ selectedCountry.name }}
-                </div>
-              </div>
+            <div class="flex align-items-center gap-2" *ngIf="categoriasSelecionada">
+              <div>{{ categoriasSelecionada.nome }}</div>
+            </div>
           </ng-template>
-          <ng-template let-country pTemplate="item">
-              <div class="flex align-items-center gap-2">
-                <div>{{ country.name }}</div>
-              </div>
+          <!-- Item Template -->
+          <ng-template let-categoria pTemplate="item">
+            <div class="flex align-items-center gap-2">
+              <div>{{ categoria.nome }}</div>
+            </div>
           </ng-template>
-      </p-dropdown>
+        </p-dropdown>
       </div>
     </div>
     <div class="containerPrecoEStatus">
       <div class="divInputEmail">
-        <span class="p-float-label">
-          <input pInputText id="username"
-          [(ngModel)]="email"/>
-          <label htmlFor="username">Preço</label>
-        </span>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">R$</span>
+          <input
+          [(ngModel)]="email"
+          type="text" pInputText placeholder="Preço" />
+        </div>
       </div>
       <div class="divInputTelefone">
         <p-dropdown [options]="cities"
@@ -50,14 +52,12 @@
       </div>
     </div>
     <div class="containerDescricoes">
-      <div class="divInputCep">
-        <span class="p-float-label">
-          <input pInputText id="username"
-          [(ngModel)]="cep"/>
-          <label htmlFor="username">Descrição completa do produto</label>
-        </span>
+      <div class="divInputCidade">
+      <span class="p-float-label">
+        <textarea id="float-input" rows="5" cols="30" pInputTextarea [autoResize]="true"></textarea>
+        <label class="labelDescCompleta" for="float-input">Descrição completa do produto</label>
+      </span>
       </div>
-
     </div>
   </div>
   <div class="containerBotoes">
