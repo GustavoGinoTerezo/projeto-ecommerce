@@ -7,12 +7,19 @@ interface City {
   name: string;
 }
 
+interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
+}
+
 @Component({
   selector: 'app-adicionar-categorias-e-produtos',
   templateUrl: './adicionar-categorias-e-produtos.component.html',
   styleUrls: ['./adicionar-categorias-e-produtos.component.css']
 })
 export class AdicionarCategoriasEProdutosComponent {
+
+
 
   categorias: Categorias[] = [];
   categoriasFiltradas: Categorias[] = []
@@ -34,6 +41,17 @@ export class AdicionarCategoriasEProdutosComponent {
   nomeCategoriaSelecionada: string = '';
   adicionarCategoriaDisabled: boolean = false;
 
+  isDragOver = false;
+
+  onDragOver(event: Event): void {
+    event.preventDefault();
+    this.isDragOver = true;
+  }
+
+  onDragLeave(event: Event): void {
+    event.preventDefault();
+    this.isDragOver = false;
+  }
 
 
   cities!: City[] ;
@@ -41,6 +59,7 @@ export class AdicionarCategoriasEProdutosComponent {
 
   constructor(
     private categoriasService: ServiceCategoriasService,
+    private messageService: MessageService,
   ){}
 
   ngOnInit(){
@@ -152,5 +171,7 @@ export class AdicionarCategoriasEProdutosComponent {
     this.nomeCategoriaSelecionada = event.value.nome || '';
     this.adicionarCategoriaDisabled = true;
   }
+
+  
 
 }

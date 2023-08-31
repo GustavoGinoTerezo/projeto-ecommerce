@@ -113,31 +113,64 @@
         ></p-dropdown>
       </div>
     </div>
-    <div class="containerDescricoes">
-      <div class="divInputCep">
-        <span class="p-float-label">
-          <input pInputText id="username" [(ngModel)]="descBreve" />
-          <label htmlFor="username">Descrição breve do produto</label>
-        </span>
+    <div class="containerDescEFotos">
+      <div class="containerDescs">
+        <div class="containerDescricoes">
+          <div class="divInputCep">
+            <span class="p-float-label">
+              <input pInputText id="username" [(ngModel)]="descBreve" />
+              <label htmlFor="username">Descrição breve do produto</label>
+            </span>
+          </div>
+        </div>
+        <div class="containerDescricoes">
+          <div class="divInputCidade">
+            <span class="p-float-label">
+              <textarea
+                id="float-input"
+                rows="5"
+                cols="30"
+                pInputTextarea
+                [autoResize]="true"
+                [(ngModel)]="descCompleta"
+              ></textarea>
+              <label class="labelDescCompleta" for="float-input">Descrição completa do produto</label>
+            </span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="containerDescricoes">
-      <div class="divInputCidade">
-        <span class="p-float-label">
-          <textarea
-            id="float-input"
-            rows="5"
-            cols="30"
-            pInputTextarea
-            [autoResize]="true"
-            [(ngModel)]="descCompleta"
-          ></textarea>
-          <label class="labelDescCompleta" for="float-input">Descrição completa do produto</label>
-        </span>
-      </div>
+
+        <div class="containerUploadFoto">
+          <div class="fileUploadFotos scrollwrap">
+            <p-fileUpload chooseLabel="Adicionar" chooseIcon="fa-solid fa-plus"  cancelLabel="Cancelar" [showUploadButton]="false" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*" [maxFileSize]="100000000">
+              <ng-template pTemplate="toolbar">
+                <div class="labelFotos">
+                  Escolher fotos do produto
+                </div>
+              </ng-template>
+              <ng-template let-file pTemplate="content">
+                  <div>{{file.name}}</div>
+              </ng-template>
+            </p-fileUpload>
+          </div>
+
+          <div class="fileUploadFormulacao">
+            <p-fileUpload chooseLabel="Adicionar" chooseIcon="fa-solid fa-plus"  cancelLabel="Cancelar" [showUploadButton]="false" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="false" accept="image/*" [maxFileSize]="100000000">
+                <ng-template pTemplate="toolbar">
+                  <div class="labelFotos">
+                    Escolher formulação do produto
+                  </div>
+                </ng-template>
+                <ng-template let-file pTemplate="file">
+                  <div>{{file.name}}</div>
+              </ng-template>
+            </p-fileUpload>
+          </div>
+        </div>
+
     </div>
   </div>
-  <div class="containerBotoes">
+  <div class="containerBotoesAdicionarProdutos">
     <div class="divInputs">
       <p-button label="Adicionar produto"
       [disabled]="adicionarProdutoDisabled"
