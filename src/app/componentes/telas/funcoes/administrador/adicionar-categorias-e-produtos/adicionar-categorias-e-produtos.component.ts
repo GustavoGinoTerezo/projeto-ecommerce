@@ -158,6 +158,7 @@ export class AdicionarCategoriasEProdutosComponent {
     this.quantidadeProduto = null;
     this.categoriasSelecionadaInput = this.categoriaVazia;
     this.adicionarProdutoDisabled = false;
+    this.selectedProductImages = []
   }
 
   limparCamposCategoriaNova() {
