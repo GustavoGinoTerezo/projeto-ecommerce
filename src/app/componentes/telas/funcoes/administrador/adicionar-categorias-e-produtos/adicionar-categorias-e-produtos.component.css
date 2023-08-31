@@ -63,9 +63,22 @@
   max-height: 200px;
 }
 
+.img{
+  width: 70px;
+  height: 70px;
+}
+
+.containerImagem{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+}
+
 .fileUploadFormulacao{
-  margin-top: 15px;
-  margin-bottom: 16px;
+  max-height: 200px;
+  margin-bottom: 18px;
 }
 
 
@@ -74,10 +87,6 @@
   display: flex;
   padding: 13px 0;
   height: 100%;
-}
-
-.containerDescs{
-  width: 100%;
 }
 
 .divInputCep{

@@ -31,7 +31,7 @@ export class AdicionarCategoriasEProdutosComponent {
   descBreve: string = '';
   quantidadeProduto!: number | null
   adicionarProdutoDisabled: boolean = false;
-
+  selectedProductImages: any[] = [];
 
   countries!: any[] ;
   selectedCountry!: any;
@@ -122,7 +122,7 @@ export class AdicionarCategoriasEProdutosComponent {
     this.valorProduto = produto.preco || null;
     this.valorProdutoFormatted = this.formatCurrency(this.valorProduto);
     this.adicionarProdutoDisabled = true;
-
+    this.selectedProductImages = produto.imagem || []
   }
 
   categoriaVazia: CategoriaVazia = {
@@ -172,6 +172,6 @@ export class AdicionarCategoriasEProdutosComponent {
     this.adicionarCategoriaDisabled = true;
   }
 
-  
+
 
 }

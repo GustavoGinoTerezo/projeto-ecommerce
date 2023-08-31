@@ -149,13 +149,17 @@
                 </div>
               </ng-template>
               <ng-template let-file pTemplate="content">
-                  <div>{{file.name}}</div>
+                <div *ngFor="let image of selectedProductImages" class="containerImagem">
+                  <img class="img" [src]="image.imagem" alt="Product Image" />
+                  <p-button label="Excluir" icon="fa-solid fa-xmark"></p-button>
+                </div>
+                <div>{{file.name}}</div>
               </ng-template>
             </p-fileUpload>
           </div>
 
-          <div class="fileUploadFormulacao">
-            <p-fileUpload chooseLabel="Adicionar" chooseIcon="fa-solid fa-plus"  cancelLabel="Cancelar" [showUploadButton]="false" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="false" accept="image/*" [maxFileSize]="100000000">
+          <div class="fileUploadFormulacao scrollwrap">
+            <p-fileUpload chooseLabel="Adicionar" chooseIcon="fa-solid fa-plus"  cancelLabel="Cancelar" [showUploadButton]="false" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*" [maxFileSize]="100000000">
                 <ng-template pTemplate="toolbar">
                   <div class="labelFotos">
                     Escolher formulação do produto
