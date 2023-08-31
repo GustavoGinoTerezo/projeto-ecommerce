@@ -13,8 +13,10 @@
       </div>
       <div class="divInputCpf">
         <span class="p-float-label">
-          <input pInputText id="username"
-          [(ngModel)]="cpfOuCnpj"/>
+          <input pInputText
+          id="username"
+          [(ngModel)]="cpfOuCnpj"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')">
           <label htmlFor="username">CPF ou CNPJ</label>
         </span>
       </div>
@@ -29,8 +31,7 @@
       </div>
       <div class="divInputTelefone">
         <span class="p-float-label">
-          <input pInputText id="username"
-          [(ngModel)]="telefone"/>
+          <p-inputMask mask="(99) 99999-9999" [(ngModel)]="telefone"></p-inputMask>
           <label htmlFor="username">Telefone principal</label>
         </span>
       </div>
@@ -44,6 +45,77 @@
           Email alternativo
         </div>
       </div>
+
+    </div>
+
+    <div class="containerEmailAlternativo" *ngIf="habilitarEmailAlternativo">
+      <div class="containerInputEDropDown">
+        <div class="divInputEmailAlternativo">
+          <span class="p-float-label">
+            <input pInputText id="username"
+            [(ngModel)]="emailAlternativo"
+            />
+            <label htmlFor="username"
+            >Email alternativo</label>
+          </span>
+        </div>
+        <div class="divDropDown">
+          <p-dropdown
+            optionLabel="nome"
+            [filter]="true"
+            filterBy="nome"
+            [showClear]="true"
+            placeholder="Selecione o email alternativo"
+            *ngIf="botaoDivAlternativo"
+          >
+          <!-- [options]="categorias"
+          [(ngModel)]="categoriasAdicionarSelecionadaInput"
+          (onChange)="onCategoriaAdicionarSelect($event)" -->
+            <!-- Selected Item Template -->
+            <ng-template pTemplate="selectedItem">
+              <!-- <div class="flex align-items-center gap-2" *ngIf="categoriasAdicionarSelecionadaInput">
+                <div>{{ categoriasAdicionarSelecionadaInput.nome }}</div>
+              </div> -->
+            </ng-template>
+            <!-- Item Template -->
+            <ng-template let-categoria pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                <div>{{ categoria.nome }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+
+      <div class="containerBotoesAlternativo" *ngIf="botaoDivAlternativo">
+        <div class="divInputs">
+          <p-button label="Adicionar"
+          styleClass="p-button-raised p-button-success"
+          [disabled]="!emailAlternativo"
+          ></p-button>
+        </div>
+        <div class="divInputs">
+          <p-button label="Atualizar"
+          styleClass="p-button-raised p-button-warning"
+          [disabled]="!emailAlternativo"></p-button>
+        </div>
+        <div class="divInputs">
+          <p-button label="Excluir"
+          styleClass="p-button-raised p-button-danger"
+          [disabled]="!emailAlternativo"></p-button>
+        </div>
+        <div class="divInputs">
+          <p-button label="Limpar campos"
+          (click)="limparCamposEmailAlternativo()"
+          styleClass="p-button-raised p-button-info"
+          ></p-button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="containerSwitchs">
       <div class="switchTelefoneAlternativo">
         <p-inputSwitch [(ngModel)]="habilitarTelefoneAlternativo" ></p-inputSwitch>
         <div class="labelTelefoneAlternativo">
@@ -52,79 +124,66 @@
       </div>
     </div>
 
-    <div class="containerEmailAlternativo" *ngIf="habilitarEmailAlternativo">
-      <div class="divInputEmailAlternativo">
-        <span class="p-float-label">
-          <input pInputText id="username"
-          [(ngModel)]="emailAlternativo"
-          />
-          <label htmlFor="username"
-          >Email alternativo</label>
-        </span>
-      </div>
-      <div class="divDropDown">
-        <p-dropdown
-
-          optionLabel="nome"
-          [filter]="true"
-          filterBy="nome"
-          [showClear]="true"
-          placeholder="Selecione o email alternativo"
-        >
-        <!-- [options]="categorias"
-        [(ngModel)]="categoriasAdicionarSelecionadaInput"
-        (onChange)="onCategoriaAdicionarSelect($event)" -->
-          <!-- Selected Item Template -->
-          <ng-template pTemplate="selectedItem">
-            <!-- <div class="flex align-items-center gap-2" *ngIf="categoriasAdicionarSelecionadaInput">
-              <div>{{ categoriasAdicionarSelecionadaInput.nome }}</div>
-            </div> -->
-          </ng-template>
-          <!-- Item Template -->
-          <ng-template let-categoria pTemplate="item">
-            <div class="flex align-items-center gap-2">
-              <div>{{ categoria.nome }}</div>
-            </div>
-          </ng-template>
-        </p-dropdown>
-      </div>
-    </div>
-
     <div class="containerTelefoneAlternativo" *ngIf="habilitarTelefoneAlternativo">
-      <div class="divInputEmailAlternativo">
-        <span class="p-float-label">
-          <input pInputText id="username"
-          [(ngModel)]="telefoneAlternativo"
-          />
-          <label htmlFor="username"
-          >Telefone alternativo</label>
-        </span>
+      <div class="containerInputEDropDown">
+        <div class="divInputEmailAlternativo">
+          <span class="p-float-label">
+            <p-inputMask mask="(99) 99999-9999" [(ngModel)]="telefoneAlternativo"></p-inputMask>
+            <label htmlFor="username"
+            >Telefone alternativo</label>
+          </span>
+        </div>
+        <div class="divDropDown">
+          <p-dropdown
+            optionLabel="nome"
+            [filter]="true"
+            filterBy="nome"
+            [showClear]="true"
+            placeholder="Selecione o telefone alternativo"
+            *ngIf="botaoDivAlternativo"
+          >
+          <!-- [options]="categorias"
+          [(ngModel)]="categoriasAdicionarSelecionadaInput"
+          (onChange)="onCategoriaAdicionarSelect($event)" -->
+            <!-- Selected Item Template -->
+            <ng-template pTemplate="selectedItem">
+              <!-- <div class="flex align-items-center gap-2" *ngIf="categoriasAdicionarSelecionadaInput">
+                <div>{{ categoriasAdicionarSelecionadaInput.nome }}</div>
+              </div> -->
+            </ng-template>
+            <!-- Item Template -->
+            <ng-template let-categoria pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                <div>{{ categoria.nome }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
       </div>
-      <div class="divDropDown">
-        <p-dropdown
 
-          optionLabel="nome"
-          [filter]="true"
-          filterBy="nome"
-          [showClear]="true"
-          placeholder="Selecione o telefone alternativo"
-        >
-        <!-- [options]="categorias"
-        [(ngModel)]="categoriasAdicionarSelecionadaInput"
-        (onChange)="onCategoriaAdicionarSelect($event)" -->
-          <!-- Selected Item Template -->
-          <ng-template pTemplate="selectedItem">
-            <!-- <div class="flex align-items-center gap-2" *ngIf="categoriasAdicionarSelecionadaInput">
-              <div>{{ categoriasAdicionarSelecionadaInput.nome }}</div>
-            </div> -->
-          </ng-template>
-          <!-- Item Template -->
-          <ng-template let-categoria pTemplate="item">
-            <div class="flex align-items-center gap-2">
-              <div>{{ categoria.nome }}</div>
-            </div>
-          </ng-template>
-        </p-dropdown>
+      <div class="containerBotoesAlternativo" *ngIf="botaoDivAlternativo">
+        <div class="divInputs">
+          <p-button label="Adicionar"
+          styleClass="p-button-raised p-button-success"
+          [disabled]="!telefoneAlternativo"></p-button>
+        </div>
+        <div class="divInputs">
+          <p-button label="Atualizar"
+          styleClass="p-button-raised p-button-warning"
+          [disabled]="!telefoneAlternativo"></p-button>
+        </div>
+        <div class="divInputs">
+          <p-button label="Excluir"
+          styleClass="p-button-raised p-button-danger"
+          [disabled]="!telefoneAlternativo"></p-button>
+        </div>
+        <div class="divInputs">
+          <p-button label="Limpar campos"
+          (click)="limparCamposTelefoneAlternativo()"
+          styleClass="p-button-raised p-button-info"
+          ></p-button>
+        </div>
+
       </div>
     </div>
 
@@ -133,8 +192,7 @@
     <div class="containerCepECidade">
       <div class="divInputCep">
         <span class="p-float-label">
-          <input pInputText id="username"
-          [(ngModel)]="cep"/>
+          <p-inputMask mask="99999-999" [(ngModel)]="cep"></p-inputMask>
           <label htmlFor="username">CEP</label>
         </span>
       </div>
@@ -156,15 +214,19 @@
       </div>
       <div class="divInputRua">
         <span class="p-float-label">
-          <input pInputText id="username"
-          [(ngModel)]="rua"/>
+          <input pInputText
+          id="username"
+          [(ngModel)]="rua"
+          >
           <label htmlFor="username">Rua</label>
         </span>
       </div>
       <div class="divInputNumeroResidencia">
         <span class="p-float-label">
-          <input pInputText id="username"
-          [(ngModel)]="numeroResidencia"/>
+          <input pInputText
+          id="username"
+          [(ngModel)]="numeroResidencia"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')">
           <label htmlFor="username">Nº da residência</label>
         </span>
       </div>
@@ -173,13 +235,26 @@
   <div class="containerBotoes">
       <div class="divInputs">
         <p-button label="Adicionar usuário"
-        [disabled]="adicionarClienteDisabled"  styleClass="p-button-raised p-button-success"></p-button>
+        [disabled]="botaoDisabled ||
+        !nome ||
+        !email ||
+        !cpfOuCnpj ||
+        !telefone ||
+        !cep ||
+        !cidade ||
+        !bairro ||
+        !rua ||
+        !numeroResidencia"  styleClass="p-button-raised p-button-success"></p-button>
       </div>
       <div class="divInputs">
-        <p-button label="Atualizar usuário" styleClass="p-button-raised p-button-warning"></p-button>
+        <p-button label="Atualizar usuário"
+        [disabled]="!botaoDisabled"
+        styleClass="p-button-raised p-button-warning"></p-button>
       </div>
       <div class="divInputs">
-        <p-button label="Excluir conta" styleClass="p-button-raised p-button-danger"></p-button>
+        <p-button label="Excluir conta"
+        [disabled]="!botaoDisabled"
+        styleClass="p-button-raised p-button-danger"></p-button>
       </div>
       <div class="divInputs">
         <p-button label="Limpar campos"
@@ -188,7 +263,7 @@
         ></p-button>
       </div>
 
-    </div>
+  </div>
   <div class="tabelaClientes">
 
       <p-table

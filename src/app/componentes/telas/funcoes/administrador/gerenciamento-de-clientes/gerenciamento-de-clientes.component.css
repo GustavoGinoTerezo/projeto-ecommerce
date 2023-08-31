@@ -149,15 +149,22 @@
 
 .containerEmailAlternativo{
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-between;
   margin-top: 5px;
 }
 
+.containerInputEDropDown{
+  display: flex;
+}
+
 .containerTelefoneAlternativo{
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-between;
+  margin-top: 5px;
 }
 
 .containerCepECidade{
@@ -178,6 +185,15 @@
   height: 100%;
   justify-content: center;
   align-items: center;
+}
+
+.containerBotoesAlternativo{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 35px;
 }
 
 .divInputs{
@@ -205,5 +221,9 @@
 }
 
 :host ::ng-deep .p-dropdown{
+  width: 100%;
+}
+
+:host ::ng-deep .p-inputnumber{
   width: 100%;
 }

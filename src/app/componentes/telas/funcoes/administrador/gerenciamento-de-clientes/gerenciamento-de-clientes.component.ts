@@ -11,12 +11,12 @@ import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service
 })
 export class GerenciamentoDeClientesComponent {
 
-
   usuarios: Usuario[] = []
   usuarioSelecionado!: Usuario;
   usuariosFiltrados: Usuario[] = []
 
-  adicionarClienteDisabled!: boolean;
+  botaoDivAlternativo: boolean = false;
+  botaoDisabled!: boolean;
 
   nome: string = '';
   email: string = '';
@@ -79,7 +79,9 @@ export class GerenciamentoDeClientesComponent {
       this.rua = this.usuarioSelecionado.rua || '';
       this.cidade = this.usuarioSelecionado.cidade || '';
 
-      this.adicionarClienteDisabled = true;
+      this.botaoDisabled = true;
+      this.botaoDivAlternativo = true;
+
     }
   }
 
@@ -94,7 +96,17 @@ export class GerenciamentoDeClientesComponent {
     this.rua = '';
     this.numeroResidencia = null;
 
-    this.adicionarClienteDisabled = false;
+    this.botaoDisabled = false;
+    this.botaoDivAlternativo = false;
+
+  }
+
+  limparCamposEmailAlternativo() {
+    this.emailAlternativo = '';
+  }
+
+  limparCamposTelefoneAlternativo() {
+    this.telefoneAlternativo = null;
   }
 
 }

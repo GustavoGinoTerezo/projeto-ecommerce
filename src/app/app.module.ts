@@ -34,7 +34,6 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
 
-
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
 import { HeaderComponent } from './componentes/header/header.component';
