@@ -48,7 +48,6 @@
   width: 100%;
   padding: 13px 0;
   margin-right: 5px;
-  margin-bottom: 15px;
 }
 
 .divDropDown{
@@ -155,8 +154,27 @@
   margin-top: 5px;
 }
 
+.containerAlternativos{
+  display: flex;
+  width: 100%;
+}
+
+.containerGeralEmailAlternativo{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 5px;
+}
+
+.containerGeralTelefoneAlternativo{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .containerInputEDropDown{
   display: flex;
+  flex-direction: column;
 }
 
 .containerTelefoneAlternativo{
@@ -189,11 +207,21 @@
 
 .containerBotoesAlternativo{
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
-  margin-bottom: 35px;
+  margin-bottom: 15px;
+}
+
+.divBotoes{
+  width: 100%;
+  display: flex;
+}
+
+.botoes{
+  margin-top: 15px;
 }
 
 .divInputs{
@@ -208,7 +236,6 @@
 }
 
 .hr{
-  margin-top: 15px;
   width: 100%;
 }
 

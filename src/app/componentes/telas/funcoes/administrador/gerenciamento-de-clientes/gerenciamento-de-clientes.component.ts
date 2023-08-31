@@ -30,7 +30,7 @@ export class GerenciamentoDeClientesComponent {
   emailAlternativo: string = '';
   telefoneAlternativo!: number | null;
 
-  habilitarEmailAlternativo: boolean = false;
+  habilitarEmailAlternativo: boolean = true;
   habilitarTelefoneAlternativo: boolean = false;
 
   constructor(
