@@ -30,6 +30,13 @@ export class GerenciamentoDeClientesComponent {
   emailAlternativo: string = '';
   telefoneAlternativo!: number | null;
 
+  identificacaoEndereco: string = '';
+  cepEntrega!: number | null
+  cidadeEntrega: string = '';
+  bairroEntrega: string = '';
+  ruaEntrega: string = '';
+  numeroResidenciaEntrega!: number | null
+
   habilitarEmailAlternativo: boolean = false;
   habilitarTelefoneAlternativo: boolean = false;
 

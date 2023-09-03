@@ -238,6 +238,121 @@
       </div>
     </div>
   </div>
+  <div class="containerInputsEntrega">
+    <hr class="hr">
+    <h2>Endereço de entrega</h2>
+    <div class="containerSelecaoEndereco">
+      <div class="divInputSelecao">
+        <span class="p-float-label">
+          <input pInputText id="username"
+          [(ngModel)]="identificacaoEndereco"
+          />
+          <label htmlFor="username"
+          >Identificação</label>
+        </span>
+      </div>
+      <div class="divDropDown">
+        <p-dropdown
+          optionLabel="nome"
+          [filter]="true"
+          filterBy="nome"
+          [showClear]="true"
+          placeholder="Selecione o endereço de entrega"
+        >
+        <!-- [options]="categorias"
+        [(ngModel)]="categoriasAdicionarSelecionadaInput"
+        (onChange)="onCategoriaAdicionarSelect($event)" -->
+          <!-- Selected Item Template -->
+          <ng-template pTemplate="selectedItem">
+            <!-- <div class="flex align-items-center gap-2" *ngIf="categoriasAdicionarSelecionadaInput">
+              <div>{{ categoriasAdicionarSelecionadaInput.nome }}</div>
+            </div> -->
+          </ng-template>
+          <!-- Item Template -->
+          <ng-template let-categoria pTemplate="item">
+            <div class="flex align-items-center gap-2">
+              <div>{{ categoria.nome }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="containerCepECidade">
+      <div class="divInputCep">
+        <span class="p-float-label">
+          <p-inputMask mask="99999-999" [(ngModel)]="cepEntrega"></p-inputMask>
+          <label htmlFor="username">CEP</label>
+        </span>
+      </div>
+      <div class="divInputCidade">
+        <span class="p-float-label">
+          <input pInputText id="username"
+          [(ngModel)]="cidadeEntrega"/>
+          <label htmlFor="username">Cidade</label>
+        </span>
+      </div>
+    </div>
+    <div class="containerBairroRuaENumeroResidencia">
+      <div class="divInputBairro">
+        <span class="p-float-label">
+          <input pInputText id="username"
+          [(ngModel)]="bairroEntrega"/>
+          <label htmlFor="username">Bairro</label>
+        </span>
+      </div>
+      <div class="divInputRua">
+        <span class="p-float-label">
+          <input pInputText
+          id="username"
+          [(ngModel)]="ruaEntrega"
+          >
+          <label htmlFor="username">Rua</label>
+        </span>
+      </div>
+      <div class="divInputNumeroResidencia">
+        <span class="p-float-label">
+          <input pInputText
+          id="username"
+          [(ngModel)]="numeroResidenciaEntrega"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+          <label htmlFor="username">Nº da residência</label>
+        </span>
+      </div>
+    </div>
+    <div class="containerBotoes">
+      <div class="divInputs">
+        <p-button label="Adicionar endereço"
+        [disabled]="botaoDisabled ||
+        !nome ||
+        !email ||
+        !cpfOuCnpj ||
+        !telefone ||
+        !cep ||
+        !cidade ||
+        !bairro ||
+        !rua ||
+        !numeroResidencia"  styleClass="p-button-raised p-button-success"></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button label="Atualizar endereço"
+        [disabled]="!botaoDisabled"
+        styleClass="p-button-raised p-button-warning"></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button label="Excluir endereço"
+        [disabled]="!botaoDisabled"
+        styleClass="p-button-raised p-button-danger"></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button label="Limpar campos"
+        (click)="limparCampos()"
+        styleClass="p-button-raised p-button-info"
+        ></p-button>
+      </div>
+  </div>
+  <hr class="hr2">
+  </div>
+
   <div class="containerBotoes">
       <div class="divInputs">
         <p-button label="Adicionar usuário"
