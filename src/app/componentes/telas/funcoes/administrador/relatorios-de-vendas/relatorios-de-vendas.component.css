@@ -7,3 +7,8 @@
   background-color: var(--container-externo-cards-produtos);
   border-radius: 6px;
 }
+
+.containerCaption{
+  display: flex;
+  justify-content: space-between;
+}

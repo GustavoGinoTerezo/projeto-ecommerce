@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
 import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import jsPDF from 'jspdf'; // Importe jsPDF dessa forma
+import 'jspdf-autotable'; // Importe jspdf-autotable
+import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 
 interface Column {
   field: string;
@@ -23,25 +27,26 @@ export class RelatoriosDeVendasComponent {
 
   pedidos!: Pedido[];
   carrinho: CarrinhoDeCompra[] = [];
-  cols!: Column[];
+  cols: Column[] = [
+    { field: 'numeroPedido', header: 'Nº do pedido', customExportHeader: 'Nº do pedido' },
+    { field: 'dataPedido', header: 'Data da compra', customExportHeader: 'Data da compra' },
+    { field: 'valorTotalDaCompra', header: 'Valor total da compra', customExportHeader: 'Valor total da compra' },
+    { field: 'FormaPagamento', header: 'Forma de pagamento', customExportHeader: 'Forma de pagamento' }
+  ];
   exportColumns!: ExportColumn[];
-
+  exportColumnsProdutos: ExportColumn[] = [
+    { title: 'Nome do produto', dataKey: 'nomeProduto' },
+    { title: 'Quantidade solicitada', dataKey: 'quantidade' },
+    { title: 'Preço unitário', dataKey: 'precoUnitario' },
+    { title: 'Total do produto', dataKey: 'totalProduto' },
+  ];
 
   constructor(private pedidoService: ServicePedidoService) {}
 
   ngOnInit() {
-
     this.pedidos = this.pedidoService.getPedido();
 
-    this.cols = [
-      { field: 'code', header: 'Code', customExportHeader: 'Product Code' },
-      { field: 'name', header: 'Name' },
-      { field: 'category', header: 'Category' },
-      { field: 'quantity', header: 'Quantity' }
-    ];
-
-    this.exportColumns = this.cols.map((col) => ({ title: col.header, dataKey: col.field }));
-
+    this.exportColumns = this.cols.map((col) => ({ title: col.customExportHeader || col.header, dataKey: col.field }));
   }
 
   filterTable(event: any) {
@@ -68,34 +73,125 @@ export class RelatoriosDeVendasComponent {
     return (item.quantidade || 0) * (item.preco || 0);
   }
 
+  generateExportData(pedidos: Pedido[]): any[] {
+    const exportData: any[] = [];
 
-  exportPdf() {
-    import('jspdf').then((jsPDF) => {
-        import('jspdf-autotable').then((x) => {
-            const doc = new jsPDF.default('p', 'px', 'a4');
-            (doc as any).autoTable(this.exportColumns, this.pedidos);
-            doc.save('pedidos.pdf');
+    for (const pedido of pedidos) {
+      const exportItem: any = {
+        numeroPedido: pedido.numeroPedido,
+        dataPedido: pedido.dataPedido,
+        valorTotalDaCompra: this.calcularValorTotal(pedido),
+        FormaPagamento: pedido.formaDoPagamento?.map(fp => fp.tipoPagamento).join(', '),
+        produtos: [] // Array para armazenar os detalhes dos produtos
+      };
+
+      if (pedido.carrinhoDeCompra) {
+        for (const item of pedido.carrinhoDeCompra) {
+          const produtoItem: any = {
+            nomeProduto: item.nomeProduto,
+            quantidade: item.quantidade,
+            precoUnitario: item.preco,
+            totalProduto: this.calcularValorItem(item)
+          };
+          exportItem.produtos.push(produtoItem); // Adicione os detalhes do produto ao array de produtos
+        }
+      }
+
+      exportData.push(exportItem);
+    }
+
+    return exportData;
+  }
+
+  exportPdfAll() {
+    const doc = new jsPDF();
+    const columns = this.exportColumns.map(col => col.title);
+    const exportData = this.generateExportData(this.pedidos);
+
+    for (let i = 0; i < exportData.length; i++) {
+      if (i > 0) {
+        // Adicione uma linha horizontal entre os pedidos
+        (doc as any).autoTable({
+          styles: { halign: 'center' },
+          margin: { top: 10 },
+          tableWidth: 'wrap',
+          head: [['']],
+          body: [['']],
         });
-    });
+      }
+
+      const pedidoItem = exportData[i];
+      (doc as any).autoTable({
+        head: [columns],
+        body: [this.exportColumns.map(col => pedidoItem[col.dataKey])],
+      });
+
+      // Verifique se há detalhes de produtos e renderize-os abaixo do pedido
+      if (pedidoItem.produtos && pedidoItem.produtos.length > 0) {
+        const columnsProdutos = this.exportColumnsProdutos.map(col => col.title);
+
+        const produtosRows = pedidoItem.produtos.map((produto: any) => {
+          return this.exportColumnsProdutos.map(col => produto[col.dataKey]);
+        });
+
+        (doc as any).autoTable({
+          head: [columnsProdutos],
+          body: produtosRows,
+        });
+      }
+    }
+
+    doc.save('pedidos.pdf');
   }
 
-  exportExcel() {
-      import('xlsx').then((xlsx) => {
-          const worksheet = xlsx.utils.json_to_sheet(this.pedidos);
-          const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-          const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-          this.saveAsExcelFile(excelBuffer, 'pedidos');
+  exportPdfUnique(pedido?: Pedido) {
+    const doc = new jsPDF();
+    const columns = this.exportColumns.map(col => col.title);
+    const exportData = pedido ? this.generateExportData([pedido]) : this.generateExportData(this.pedidos);
+
+    for (let i = 0; i < exportData.length; i++) {
+      if (i > 0) {
+        // Adicione uma linha horizontal entre os pedidos
+        (doc as any).autoTable({
+          styles: { halign: 'center' },
+          margin: { top: 10 },
+          tableWidth: 'wrap',
+          head: [['']],
+          body: [['']],
+        });
+      }
+
+      const pedidoItem = exportData[i];
+      (doc as any).autoTable({
+        head: [columns],
+        body: [this.exportColumns.map(col => pedidoItem[col.dataKey])],
       });
+
+      // Verifique se há detalhes de produtos e renderize-os abaixo do pedido
+      if (pedidoItem.produtos && pedidoItem.produtos.length > 0) {
+        const columnsProdutos = this.exportColumnsProdutos.map(col => col.title);
+
+        const produtosRows = pedidoItem.produtos.map((produto: any) => {
+          return this.exportColumnsProdutos.map(col => produto[col.dataKey]);
+        });
+
+        (doc as any).autoTable({
+          head: [columnsProdutos],
+          body: produtosRows,
+        });
+      }
+    }
+
+    const fileName = pedido ? `pedido_${pedido.numeroPedido}.pdf` : 'pedidos.pdf';
+    doc.save(fileName);
   }
 
-  saveAsExcelFile(buffer: any, fileName: string): void {
-      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-      let EXCEL_EXTENSION = '.xlsx';
-      const data: Blob = new Blob([buffer], {
-          type: EXCEL_TYPE
-      });
-      FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-  }
 
 
 }
+
+
+
+
+
+
