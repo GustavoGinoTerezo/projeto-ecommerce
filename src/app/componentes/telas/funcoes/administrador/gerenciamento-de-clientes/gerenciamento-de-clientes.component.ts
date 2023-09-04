@@ -39,6 +39,7 @@ export class GerenciamentoDeClientesComponent {
 
   habilitarEmailAlternativo: boolean = false;
   habilitarTelefoneAlternativo: boolean = false;
+  habilitarEnderecoEntrega: boolean = false;
 
   constructor(
     private usuariosService: ServiceUsuariosService,

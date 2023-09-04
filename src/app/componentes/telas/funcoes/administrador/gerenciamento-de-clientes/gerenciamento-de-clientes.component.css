@@ -267,6 +267,13 @@
   margin-top: 25px;
 }
 
+.containerLabelEntregaESwitch{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 :host ::ng-deep .p-inputtext{
   width: 100%;
 }

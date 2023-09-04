@@ -240,12 +240,20 @@
   </div>
   <div class="containerInputsEntrega">
     <hr class="hr">
-    <h2>Endereço de entrega</h2>
+    <div class="containerLabelEntregaESwitch">
+      <h2>Endereço de entrega</h2>
+      <div class="containerSwitchs">
+        <div class="switchEmailAlternativo">
+          <p-inputSwitch [(ngModel)]="habilitarEnderecoEntrega" ></p-inputSwitch>
+          </div>
+      </div>
+    </div>
     <div class="containerSelecaoEndereco">
       <div class="divInputSelecao">
         <span class="p-float-label">
           <input pInputText id="username"
           [(ngModel)]="identificacaoEndereco"
+          [disabled]="!habilitarEnderecoEntrega"
           />
           <label htmlFor="username"
           >Identificação</label>
@@ -253,6 +261,7 @@
       </div>
       <div class="divDropDown">
         <p-dropdown
+          [disabled]="!habilitarEnderecoEntrega"
           optionLabel="nome"
           [filter]="true"
           filterBy="nome"
@@ -280,13 +289,15 @@
     <div class="containerCepECidade">
       <div class="divInputCep">
         <span class="p-float-label">
-          <p-inputMask mask="99999-999" [(ngModel)]="cepEntrega"></p-inputMask>
+          <p-inputMask mask="99999-999" [(ngModel)]="cepEntrega"
+          [disabled]="!habilitarEnderecoEntrega"></p-inputMask>
           <label htmlFor="username">CEP</label>
         </span>
       </div>
       <div class="divInputCidade">
         <span class="p-float-label">
           <input pInputText id="username"
+          [disabled]="!habilitarEnderecoEntrega"
           [(ngModel)]="cidadeEntrega"/>
           <label htmlFor="username">Cidade</label>
         </span>
@@ -296,7 +307,8 @@
       <div class="divInputBairro">
         <span class="p-float-label">
           <input pInputText id="username"
-          [(ngModel)]="bairroEntrega"/>
+          [(ngModel)]="bairroEntrega"
+          [disabled]="!habilitarEnderecoEntrega"/>
           <label htmlFor="username">Bairro</label>
         </span>
       </div>
@@ -305,6 +317,7 @@
           <input pInputText
           id="username"
           [(ngModel)]="ruaEntrega"
+          [disabled]="!habilitarEnderecoEntrega"
           >
           <label htmlFor="username">Rua</label>
         </span>
@@ -313,6 +326,7 @@
         <span class="p-float-label">
           <input pInputText
           id="username"
+          [disabled]="!habilitarEnderecoEntrega"
           [(ngModel)]="numeroResidenciaEntrega"
           oninput="this.value = this.value.replace(/[^0-9]/g, '')">
           <label htmlFor="username">Nº da residência</label>
