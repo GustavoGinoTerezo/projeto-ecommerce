@@ -15,7 +15,7 @@ export class GerenciamentoDeClientesComponent {
   usuarioSelecionado!: Usuario;
   usuariosFiltrados: Usuario[] = []
 
-  botaoDivAlternativo: boolean = false;
+  botaoDiv: boolean = false;
   botaoDisabled!: boolean;
 
   nome: string = '';
@@ -88,7 +88,7 @@ export class GerenciamentoDeClientesComponent {
       this.cidade = this.usuarioSelecionado.cidade || '';
 
       this.botaoDisabled = true;
-      this.botaoDivAlternativo = true;
+      this.botaoDiv = true;
 
     }
   }
@@ -105,7 +105,17 @@ export class GerenciamentoDeClientesComponent {
     this.numeroResidencia = null;
 
     this.botaoDisabled = false;
-    this.botaoDivAlternativo = false;
+    this.botaoDiv = false;
+
+  }
+
+  limparCamposEnderecoEntrega() {
+    this.identificacaoEndereco = '';
+    this.cepEntrega = null;
+    this.cidadeEntrega = '';
+    this.bairroEntrega = '';
+    this.ruaEntrega = '';
+    this.numeroResidenciaEntrega = null;
 
   }
 

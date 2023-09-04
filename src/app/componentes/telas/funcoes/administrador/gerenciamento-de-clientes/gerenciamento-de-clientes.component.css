@@ -273,6 +273,10 @@
   align-items: center;
 }
 
+.containerDosContainers{
+  display: flex;
+  flex-direction: column;
+}
 
 :host ::ng-deep .p-inputtext{
   width: 100%;
