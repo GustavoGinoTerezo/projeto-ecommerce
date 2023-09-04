@@ -55,13 +55,13 @@ export class ServicePedidoService {
           quantidade: 7,
           preco: 12401,
         },
+      ],
 
-      ]
     },
     {
-      numeroPedido: 0,
+      numeroPedido: 1,
       status: "Pedido solicitado",
-      dataPedido: "25/08/2023",
+      dataPedido: "25/11/2023",
       enderecoSelecionado: [{
         cep: 13500000,
         cidade: "Teste",
@@ -70,19 +70,20 @@ export class ServicePedidoService {
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
-        tipoPagamento: "PIX",
+        tipoPagamento: "Boleto",
       }],
       carrinhoDeCompra: [{
         imagemProduto: "teste",
         nomeProduto: "teste",
         quantidade: 1,
         preco: 100,
-      }]
+      }],
+
     },
     {
-      numeroPedido: 0,
+      numeroPedido: 2,
       status: "Pedido solicitado",
-      dataPedido: "25/08/2023",
+      dataPedido: "25/10/2023",
       enderecoSelecionado: [{
         cep: 13500000,
         cidade: "SP",
@@ -91,19 +92,22 @@ export class ServicePedidoService {
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
-        tipoPagamento: "PIX",
+        tipoPagamento: "Cartão",
       }],
       carrinhoDeCompra: [{
         imagemProduto: "teste",
         nomeProduto: "teste",
         quantidade: 1,
         preco: 1000,
-      }]
+      }],
+
     },
   ]
 
   getPedido(): Pedido[] {
     return this.pedidos;
   }
+
+
 
 }

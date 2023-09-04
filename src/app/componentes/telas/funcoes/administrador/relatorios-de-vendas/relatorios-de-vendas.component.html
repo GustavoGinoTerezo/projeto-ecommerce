@@ -1,1 +1,84 @@
-<p>relatorios-de-vendas works!</p>
+<div class="divGeral">
+
+
+
+  <p-table
+  [paginator]="true"
+  [rows]="10"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [value]="pedidos"
+  dataKey="numeroPedido"
+  [tableStyle]="{ 'min-width': '60rem' }"
+  >
+
+  <ng-template pTemplate="caption">
+    <div class="table-header">
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="filterTable($event)" placeholder="Buscar" />
+        </span>
+    </div>
+  </ng-template>
+
+
+
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 5rem"></th>
+        <th pSortableColumn="numeroPedido">Nº do pedido <p-sortIcon field="numeroPedido"></p-sortIcon></th>
+        <th pSortableColumn="dataPedido">Data da compra <p-sortIcon field="dataPedido"></p-sortIcon></th>
+        <th>Valor total da compra</th>
+        <th>Forma de pagamento</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pedido let-expanded="expanded">
+      <tr>
+        <td>
+          <button type="button" pButton pRipple [pRowToggler]="pedido" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
+        <td p-sortField="numeroPedido">{{ pedido.numeroPedido }}</td>
+        <td p-sortField="dataPedido">{{ pedido.dataPedido }}</td>
+        <td p-sortField="valorTotal">{{ calcularValorTotal(pedido) | currency: 'BRL' }}</td>
+        <td>
+          <ng-container *ngFor="let formaPagamento of pedido.formaDoPagamento">
+            {{ formaPagamento.tipoPagamento }}
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+      <ng-template pTemplate="rowexpansion" let-pedidos>
+        <tr>
+          <td colspan="7">
+            <div class="p-3">
+              <p-table [value]="pedidos.carrinhoDeCompra" dataKey="nomeProduto">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Nome do produto</th>
+                    <th>Quantidade solicitada</th>
+                    <th>Preço unitário</th>
+                    <th>Total do produto</th>
+                    <th style="width: 4rem"></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-pedido>
+                  <tr>
+                    <td>{{ pedido.nomeProduto }}</td>
+                    <td> {{ pedido.quantidade }}</td>
+                    <td>{{ pedido.preco | currency: 'BRL'}}</td>
+                    <td>{{ calcularValorItem(pedido).toFixed(2) | currency: 'BRL' }}</td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="6">There are no order for this product yet.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+</div>
