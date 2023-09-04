@@ -32,6 +32,11 @@ export const navbarData: INavbarData[] = [
     label: 'Entrada de Notas Fiscais',
   },
   {
+    routerLink: 'gerenciamento-de-comentarios',
+    icon: 'fa-solid fa-comment-dots',
+    label: 'Gerenciamento de Comentários',
+  },
+  {
     routerLink: 'personalizacao',
     icon: 'fa-solid fa-gears',
     label: 'Personalização',

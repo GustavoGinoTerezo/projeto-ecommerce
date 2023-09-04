@@ -18,6 +18,7 @@ import { EntradaDeNotasFiscaisComponent } from './componentes/telas/funcoes/admi
 import { GerenciamentoDeClientesComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-clientes/gerenciamento-de-clientes.component';
 import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrador/personalizacao/personalizacao.component';
 import { RelatoriosDeVendasComponent } from './componentes/telas/funcoes/administrador/relatorios-de-vendas/relatorios-de-vendas.component';
+import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-comentarios/gerenciamento-de-comentarios/gerenciamento-de-comentarios.component';
 
 const routes: Routes = [
   {
@@ -93,6 +94,10 @@ const routes: Routes = [
   {
     path: 'personalizacao',
     component: PersonalizacaoComponent,
+  },
+  {
+    path: 'gerenciamento-de-comentarios',
+    component: GerenciamentoDeComentariosComponent,
   },
   {
     path: 'relatorio-de-vendas',

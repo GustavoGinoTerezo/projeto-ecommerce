@@ -59,6 +59,7 @@ import { AdicionarCategoriasEProdutosComponent } from './componentes/telas/funco
 import { EntradaDeEstoqueComponent } from './componentes/telas/funcoes/administrador/entrada-de-estoque/entrada-de-estoque.component';
 import { EntradaDeNotasFiscaisComponent } from './componentes/telas/funcoes/administrador/entrada-de-notas-fiscais/entrada-de-notas-fiscais.component';
 import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrador/personalizacao/personalizacao.component';
+import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-comentarios/gerenciamento-de-comentarios/gerenciamento-de-comentarios.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrad
     EntradaDeEstoqueComponent,
     EntradaDeNotasFiscaisComponent,
     PersonalizacaoComponent,
+    GerenciamentoDeComentariosComponent,
   ],
   imports: [
     BrowserModule,
