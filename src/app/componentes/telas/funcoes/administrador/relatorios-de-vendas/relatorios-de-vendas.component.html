@@ -1,13 +1,13 @@
 <div class="divGeral">
 
-  <div class="dadosGerais">
-    <div class="pedidosSolicitados">
-      <div>Total de pedidos solicitados</div>
-      <div>NUMERO TOTAL DE PEDIDOS</div>
+  <div class="dadosGerais" *ngIf="pedidos">
+    <div class="pedidosSolicitados" >
+      <div>Total de pedidos feitos</div>
+      <div class="pedidoLabel">{{pedidos.length}}</div>
     </div>
     <div class="rendaGeral">
       <div>Renda geral</div>
-      <div>VALOR TOTAL</div>
+      <div class="rendaGeralLabel">{{ calcularRendaGeral() | currency: 'BRL' }}</div>
     </div>
   </div>
 

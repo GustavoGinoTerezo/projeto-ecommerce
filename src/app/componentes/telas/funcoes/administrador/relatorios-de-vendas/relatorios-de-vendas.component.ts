@@ -213,7 +213,6 @@ export class RelatoriosDeVendasComponent {
     doc.save(fileName);
   }
 
-
   exportPdfAll() {
     const doc = new jsPDF();
     const exportData = this.generateExportData(this.pedidos);
@@ -285,11 +284,6 @@ export class RelatoriosDeVendasComponent {
     doc.save('pedidos.pdf');
   }
 
-
-
-
-
-
   showDialog(numeroPedido: string) {
     this.numeroDoPedido = numeroPedido;
     this.visible = true;
@@ -300,6 +294,13 @@ export class RelatoriosDeVendasComponent {
     return usuarios.find(usuario => usuario.id === idUsuario);
   }
 
+  calcularRendaGeral(): number {
+    let rendaGeral = 0;
+    for (const pedido of this.pedidos) {
+      rendaGeral += this.calcularValorTotal(pedido);
+    }
+    return rendaGeral;
+  }
 
 }
 
