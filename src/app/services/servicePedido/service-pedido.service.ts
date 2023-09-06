@@ -107,6 +107,342 @@ export class ServicePedidoService {
       }],
 
     },
+    {
+      numeroPedido: 0,
+      idUsuario: 0,
+      status: "Pedido solicitado",
+      dataPedido: "25/08/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "Teste",
+        bairro: "Teste",
+        rua: "Teste",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "PIX",
+      }],
+      carrinhoDeCompra:
+      [
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 3,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 5,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 7,
+          preco: 12401,
+        },
+      ],
+
+    },
+    {
+      numeroPedido: 1,
+      idUsuario: 1,
+      status: "Pedido solicitado",
+      dataPedido: "25/11/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "Teste",
+        bairro: "Teste",
+        rua: "Teste",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "Boleto",
+      }],
+      carrinhoDeCompra: [{
+        imagemProduto: "teste",
+        nomeProduto: "teste",
+        quantidade: 1,
+        preco: 100,
+      }],
+
+    },
+    {
+      numeroPedido: 2,
+      idUsuario: 2,
+      status: "Pedido solicitado",
+      dataPedido: "25/10/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "SP",
+        bairro: "SP",
+        rua: "SP",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "Cartão",
+      }],
+      carrinhoDeCompra: [{
+        imagemProduto: "teste",
+        nomeProduto: "teste",
+        quantidade: 1,
+        preco: 1000,
+      }],
+
+    },
+    {
+      numeroPedido: 0,
+      idUsuario: 0,
+      status: "Pedido solicitado",
+      dataPedido: "25/08/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "Teste",
+        bairro: "Teste",
+        rua: "Teste",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "PIX",
+      }],
+      carrinhoDeCompra:
+      [
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 3,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 5,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 7,
+          preco: 12401,
+        },
+      ],
+
+    },
+    {
+      numeroPedido: 1,
+      idUsuario: 1,
+      status: "Pedido solicitado",
+      dataPedido: "25/11/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "Teste",
+        bairro: "Teste",
+        rua: "Teste",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "Boleto",
+      }],
+      carrinhoDeCompra: [{
+        imagemProduto: "teste",
+        nomeProduto: "teste",
+        quantidade: 1,
+        preco: 100,
+      }],
+
+    },
+    {
+      numeroPedido: 2,
+      idUsuario: 2,
+      status: "Pedido solicitado",
+      dataPedido: "25/10/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "SP",
+        bairro: "SP",
+        rua: "SP",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "Cartão",
+      }],
+      carrinhoDeCompra: [{
+        imagemProduto: "teste",
+        nomeProduto: "teste",
+        quantidade: 1,
+        preco: 1000,
+      }],
+
+    },
+    {
+      numeroPedido: 0,
+      idUsuario: 0,
+      status: "Pedido solicitado",
+      dataPedido: "25/08/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "Teste",
+        bairro: "Teste",
+        rua: "Teste",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "PIX",
+      }],
+      carrinhoDeCompra:
+      [
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 3,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 5,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 7,
+          preco: 12401,
+        },
+      ],
+
+    },
+    {
+      numeroPedido: 1,
+      idUsuario: 1,
+      status: "Pedido solicitado",
+      dataPedido: "25/11/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "Teste",
+        bairro: "Teste",
+        rua: "Teste",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "Boleto",
+      }],
+      carrinhoDeCompra: [{
+        imagemProduto: "teste",
+        nomeProduto: "teste",
+        quantidade: 1,
+        preco: 100,
+      }],
+
+    },
+    {
+      numeroPedido: 2,
+      idUsuario: 2,
+      status: "Pedido solicitado",
+      dataPedido: "25/10/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "SP",
+        bairro: "SP",
+        rua: "SP",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "Cartão",
+      }],
+      carrinhoDeCompra: [{
+        imagemProduto: "teste",
+        nomeProduto: "teste",
+        quantidade: 1,
+        preco: 1000,
+      }],
+
+    },
+    {
+      numeroPedido: 0,
+      idUsuario: 0,
+      status: "Pedido solicitado",
+      dataPedido: "25/08/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "Teste",
+        bairro: "Teste",
+        rua: "Teste",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "PIX",
+      }],
+      carrinhoDeCompra:
+      [
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 3,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 5,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 7,
+          preco: 12401,
+        },
+      ],
+
+    },
+    {
+      numeroPedido: 1,
+      idUsuario: 1,
+      status: "Pedido solicitado",
+      dataPedido: "25/11/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "Teste",
+        bairro: "Teste",
+        rua: "Teste",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "Boleto",
+      }],
+      carrinhoDeCompra: [{
+        imagemProduto: "teste",
+        nomeProduto: "teste",
+        quantidade: 1,
+        preco: 100,
+      }],
+
+    },
+    {
+      numeroPedido: 2,
+      idUsuario: 2,
+      status: "Pedido em andamento",
+      dataPedido: "25/10/2023",
+      enderecoSelecionado: [{
+        cep: 13500000,
+        cidade: "SP",
+        bairro: "SP",
+        rua: "SP",
+        numeroResidencia: 99,
+      }],
+      formaDoPagamento: [{
+        tipoPagamento: "Cartão",
+      }],
+      carrinhoDeCompra: [{
+        imagemProduto: "teste",
+        nomeProduto: "teste",
+        quantidade: 1,
+        preco: 1000,
+      }],
+
+    },
   ]
 
   getPedido(): Pedido[] {

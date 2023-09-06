@@ -9,12 +9,7 @@ export const navbarData: INavbarData[] = [
   {
     routerLink: 'relatorio-de-vendas',
     icon: 'fa-solid fa-magnifying-glass-chart',
-    label: 'Relatório de Vendas',
-  },
-  {
-    routerLink: 'controle-de-pedidos',
-    icon: 'fa-solid fa-truck-plane',
-    label: 'Controle de Pedidos',
+    label: 'Relatório de Vendas e Controle de Pedidos',
   },
   {
     routerLink: 'gerenciamento-de-categorias-e-produtos',

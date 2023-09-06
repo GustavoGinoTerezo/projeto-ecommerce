@@ -1,5 +1,16 @@
 <div class="divGeral">
 
+  <div class="dadosGerais">
+    <div class="pedidosSolicitados">
+      <div>Total de pedidos solicitados</div>
+      <div>NUMERO TOTAL DE PEDIDOS</div>
+    </div>
+    <div class="rendaGeral">
+      <div>Renda geral</div>
+      <div>VALOR TOTAL</div>
+    </div>
+  </div>
+
   <p-table
   #dt
   [paginator]="true"
@@ -29,7 +40,7 @@
         <th pSortableColumn="dataPedido">Data da compra <p-sortIcon field="dataPedido"></p-sortIcon></th>
         <th>Valor total da compra</th>
         <th>Forma de pagamento</th>
-        <th>Status do pedido</th>
+        <th pSortableColumn="status">Status do pedido <p-sortIcon field="status"></p-sortIcon></th>
         <th>PDF do pedido</th>
         <th>Inserir nota fiscal</th>
       </tr>
@@ -47,7 +58,7 @@
             {{ formaPagamento.tipoPagamento }}
           </ng-container>
         </td>
-        <td>{{pedido.status}}</td>
+        <td p-sortField="status">{{pedido.status}}</td>
         <td>
           <button type="button" pButton pRipple (click)="exportPdfUnique(pedido)" class="p-button-warning mr-2" label="PDF" icon="pi pi-file-pdf"></button>
         </td>

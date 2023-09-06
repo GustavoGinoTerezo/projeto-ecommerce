@@ -92,6 +92,39 @@ export class RelatoriosDeVendasComponent {
         produtos: [] // Array para armazenar os detalhes dos produtos
       };
 
+      // Adicione informações do cliente se disponíveis
+      if (pedido.idUsuario !== undefined) {
+        // Adicione informações do cliente se disponíveis
+        const usuario = this.getUsuarioPorId(pedido.idUsuario);
+
+        if (usuario) {
+          exportItem.nomeCliente = usuario.nome || '';
+          exportItem.emailCliente = usuario.email || '';
+          exportItem.telefoneCliente = usuario.telefone || '';
+          exportItem.cpfCnpjCliente = usuario.cpfOuCnpj || '';
+        } else {
+          exportItem.nomeCliente = '';
+          exportItem.emailCliente = '';
+          exportItem.telefoneCliente = '';
+          exportItem.cpfCnpjCliente = '';
+        }
+        } else {
+
+        }
+
+      // Adicione informações do endereço se disponíveis
+      if (pedido.enderecoSelecionado) {
+        exportItem.cepCliente = pedido.enderecoSelecionado.length > 0 ? pedido.enderecoSelecionado[0].cep || '' : '';
+        exportItem.cidadeCliente = pedido.enderecoSelecionado[0].cidade || '';
+        exportItem.bairroCliente = pedido.enderecoSelecionado[0].bairro || '';
+        exportItem.ruaCliente = pedido.enderecoSelecionado[0].rua || '';
+      } else {
+        exportItem.cepCliente = '';
+        exportItem.cidadeCliente = '';
+        exportItem.bairroCliente = '';
+        exportItem.ruaCliente = '';
+      }
+
       if (pedido.carrinhoDeCompra) {
         for (const item of pedido.carrinhoDeCompra) {
           const produtoItem: any = {
@@ -108,46 +141,6 @@ export class RelatoriosDeVendasComponent {
     }
 
     return exportData;
-  }
-
-  exportPdfAll() {
-    const doc = new jsPDF();
-    const columns = this.exportColumns.map(col => col.title);
-    const exportData = this.generateExportData(this.pedidos);
-
-    for (let i = 0; i < exportData.length; i++) {
-      if (i > 0) {
-        (doc as any).autoTable({
-          styles: { halign: 'center' },
-          margin: { top: 10 },
-          tableWidth: 'wrap',
-          head: [['']],
-          body: [['']],
-        });
-      }
-
-      const pedidoItem = exportData[i];
-      (doc as any).autoTable({
-        head: [columns],
-        body: [this.exportColumns.map(col => pedidoItem[col.dataKey])],
-      });
-
-      // Verifique se há detalhes de produtos e renderize-os abaixo do pedido
-      if (pedidoItem.produtos && pedidoItem.produtos.length > 0) {
-        const columnsProdutos = this.exportColumnsProdutos.map(col => col.title);
-
-        const produtosRows = pedidoItem.produtos.map((produto: any) => {
-          return this.exportColumnsProdutos.map(col => produto[col.dataKey]);
-        });
-
-        (doc as any).autoTable({
-          head: [columnsProdutos],
-          body: produtosRows,
-        });
-      }
-    }
-
-    doc.save('pedidos.pdf');
   }
 
   exportPdfUnique(pedido?: Pedido) {
@@ -186,11 +179,116 @@ export class RelatoriosDeVendasComponent {
           body: produtosRows,
         });
       }
+
+      // Adicione informações do cliente
+      const clienteColumns = ['Nome do cliente', 'Email', 'Telefone', 'CPF/CNPJ'];
+      const clienteData = [
+        pedidoItem.nomeCliente,
+        pedidoItem.emailCliente,
+        pedidoItem.telefoneCliente,
+        pedidoItem.cpfCnpjCliente,
+      ];
+
+      (doc as any).autoTable({
+        head: [clienteColumns],
+        body: [clienteData],
+      });
+
+      // Adicione informações do endereço
+      const enderecoColumns = ['CEP', 'Cidade', 'Bairro', 'Rua'];
+      const enderecoData = [
+        pedidoItem.cepCliente,
+        pedidoItem.cidadeCliente,
+        pedidoItem.bairroCliente,
+        pedidoItem.ruaCliente,
+      ];
+
+      (doc as any).autoTable({
+        head: [enderecoColumns],
+        body: [enderecoData],
+      });
     }
 
     const fileName = pedido ? `pedido_${pedido.numeroPedido}.pdf` : 'pedidos.pdf';
     doc.save(fileName);
   }
+
+
+  exportPdfAll() {
+    const doc = new jsPDF();
+    const exportData = this.generateExportData(this.pedidos);
+
+    for (let i = 0; i < exportData.length; i++) {
+
+      const pedidoItem = exportData[i];
+
+      // Adicione informações do pedido
+      const columns = this.exportColumns.map(col => col.title);
+      (doc as any).autoTable({
+        head: [columns],
+        body: [this.exportColumns.map(col => pedidoItem[col.dataKey])],
+      });
+
+      // Adicione informações do cliente
+      const clienteColumns = ['Nome do cliente', 'Email', 'Telefone', 'CPF/CNPJ'];
+      const clienteData = [
+        pedidoItem.nomeCliente,
+        pedidoItem.emailCliente,
+        pedidoItem.telefoneCliente,
+        pedidoItem.cpfCnpjCliente,
+      ];
+
+      (doc as any).autoTable({
+        head: [clienteColumns],
+        body: [clienteData],
+      });
+
+      // Adicione informações do endereço
+      const enderecoColumns = ['CEP', 'Cidade', 'Bairro', 'Rua'];
+      const enderecoData = [
+        pedidoItem.cepCliente,
+        pedidoItem.cidadeCliente,
+        pedidoItem.bairroCliente,
+        pedidoItem.ruaCliente,
+      ];
+
+      (doc as any).autoTable({
+        head: [enderecoColumns],
+        body: [enderecoData],
+      });
+
+      // Verifique se há detalhes de produtos e renderize-os abaixo do pedido
+      if (pedidoItem.produtos && pedidoItem.produtos.length > 0) {
+        const columnsProdutos = this.exportColumnsProdutos.map(col => col.title);
+
+        const produtosRows = pedidoItem.produtos.map((produto: any) => {
+          return this.exportColumnsProdutos.map(col => produto[col.dataKey]);
+        });
+
+        (doc as any).autoTable({
+          head: [columnsProdutos],
+          body: produtosRows,
+        });
+      }
+
+      // Adicione uma linha horizontal entre as informações do cliente e do endereço
+      (doc as any).autoTable({
+        styles: { halign: 'center' },
+        margin: { top: 10 },
+        tableWidth: 'wrap',
+        head: [['']],
+        body: [['']],
+      });
+
+    }
+
+    doc.save('pedidos.pdf');
+  }
+
+
+
+
+
 
   showDialog(numeroPedido: string) {
     this.numeroDoPedido = numeroPedido;
