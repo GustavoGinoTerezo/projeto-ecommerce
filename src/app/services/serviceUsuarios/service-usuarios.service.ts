@@ -8,6 +8,7 @@ export class ServiceUsuariosService {
 
   usuarios: Usuario[] = [
     {
+      id: 0,
       nome: 'Teste',
       email: 'teste@teste.com',
       cpfOuCnpj: 99999999999,
@@ -38,6 +39,7 @@ export class ServiceUsuariosService {
       ]
     },
     {
+      id: 1,
       nome: 'Teste2',
       email: 'teste@teste.com',
       cpfOuCnpj: 99999999999,
@@ -68,6 +70,7 @@ export class ServiceUsuariosService {
       ]
     },
     {
+      id: 2,
       nome: 'Teste3',
       email: 'teste@teste.com',
       cpfOuCnpj: 99999999999,
@@ -98,6 +101,7 @@ export class ServiceUsuariosService {
       ]
     },
     {
+      id: 3,
       nome: 'Teste',
       email: 'teste@teste.com',
       cpfOuCnpj: 99999999999,
@@ -128,6 +132,7 @@ export class ServiceUsuariosService {
       ]
     },
     {
+      id: 4,
       nome: 'Teste',
       email: 'teste@teste.com',
       cpfOuCnpj: 99999999999,

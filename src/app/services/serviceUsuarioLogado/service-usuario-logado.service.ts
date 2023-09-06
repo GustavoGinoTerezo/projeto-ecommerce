@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Pedido } from '../servicePedido/service-pedido.service';
 
 export interface Usuario {
+  id?: number;
   nome?: string;
   email?: string;
   cpfOuCnpj?: number;
@@ -11,6 +13,7 @@ export interface Usuario {
   rua?: string;
   numeroResidencia?: number;
   enderecoEntrega?: EnderecoEntrega[];
+  pedidos?: Pedido[];
 }
 
 export interface EnderecoEntrega {

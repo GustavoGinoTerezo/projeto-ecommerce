@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { EnderecoEntrega } from '../serviceUsuarioLogado/service-usuario-logado.service';
 
 export interface Pedido {
+  id?: number;
+  idUsuario?: number;
   numeroPedido: number,
   status: string,
   dataPedido: string,
@@ -23,6 +25,7 @@ export class ServicePedidoService {
   pedidos: Pedido[] = [
     {
       numeroPedido: 0,
+      idUsuario: 0,
       status: "Pedido solicitado",
       dataPedido: "25/08/2023",
       enderecoSelecionado: [{
@@ -60,6 +63,7 @@ export class ServicePedidoService {
     },
     {
       numeroPedido: 1,
+      idUsuario: 1,
       status: "Pedido solicitado",
       dataPedido: "25/11/2023",
       enderecoSelecionado: [{
@@ -82,6 +86,7 @@ export class ServicePedidoService {
     },
     {
       numeroPedido: 2,
+      idUsuario: 2,
       status: "Pedido solicitado",
       dataPedido: "25/10/2023",
       enderecoSelecionado: [{

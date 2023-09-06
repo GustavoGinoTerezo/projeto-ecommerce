@@ -6,6 +6,7 @@ import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf'; // Importe jsPDF dessa forma
 import 'jspdf-autotable'; // Importe jspdf-autotable
 import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
+import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 
 interface Column {
   field: string;
@@ -40,8 +41,14 @@ export class RelatoriosDeVendasComponent {
     { title: 'Preço unitário', dataKey: 'precoUnitario' },
     { title: 'Total do produto', dataKey: 'totalProduto' },
   ];
+  visible: boolean = false;
+  selectedProductImages: any[] = [];
+  numeroDoPedido!: string;
 
-  constructor(private pedidoService: ServicePedidoService) {}
+  constructor(
+    private pedidoService: ServicePedidoService,
+    private usuarioService: ServiceUsuariosService
+    ) {}
 
   ngOnInit() {
     this.pedidos = this.pedidoService.getPedido();
@@ -110,7 +117,6 @@ export class RelatoriosDeVendasComponent {
 
     for (let i = 0; i < exportData.length; i++) {
       if (i > 0) {
-        // Adicione uma linha horizontal entre os pedidos
         (doc as any).autoTable({
           styles: { halign: 'center' },
           margin: { top: 10 },
@@ -186,6 +192,15 @@ export class RelatoriosDeVendasComponent {
     doc.save(fileName);
   }
 
+  showDialog(numeroPedido: string) {
+    this.numeroDoPedido = numeroPedido;
+    this.visible = true;
+  }
+
+  getUsuarioPorId(idUsuario: number) {
+    const usuarios = this.usuarioService.getUsuarios();
+    return usuarios.find(usuario => usuario.id === idUsuario);
+  }
 
 
 }
