@@ -18,24 +18,38 @@ export interface Produtos {
   imagem?: Imagens[];
   preco?: number;
   status?: Status[];
+  quantEntrada?: Entrada[];
+  quantSaida?: Saida[];
   descricaoBreve?: string;
   descricaoCompleta?: string;
   especificacaoTecnica?: string;
   comentariosProduto?: ComentariosProdutos[];
 }
 
-export interface ComentariosProdutos{
+export interface Imagens{
+  imagem?: string;
+}
+
+interface Status {
+  status: string;
+}
+
+export interface Entrada {
+  quantEntrada?: number;
+  dataEntrada?: String;
+}
+
+export interface Saida {
+  quantSaida?: number;
+  dataSaida?: String;
+}
+
+interface ComentariosProdutos{
   id?: string;
   comentario?: string;
 }
 
-export interface Status {
-  status: string;
-}
 
-export interface Imagens{
-  imagem?: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +78,26 @@ export class ServiceCategoriasService {
 
           ],
           preco: 1234.10,
+          quantEntrada: [
+            {
+              quantEntrada: 10,
+              dataEntrada: '10/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '11/05/2023',
+            },
+          ],
+          quantSaida: [
+            {
+            quantSaida: 5,
+            dataSaida: '10/05/2023',
+            },
+            {
+              quantSaida: 15,
+              dataSaida: '11/05/2023',
+            },
+          ],
           descricaoBreve: 'Descrição breve do MJ 15-30-15',
           descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
@@ -825,6 +859,8 @@ export class ServiceCategoriasService {
     return nomeFormatado;
   }
   //==================================================================================================================================//
+
+
 
   constructor() { }
 }

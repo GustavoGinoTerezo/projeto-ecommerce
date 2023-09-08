@@ -19,8 +19,6 @@ interface UploadEvent {
 })
 export class GerenciamentoDeCategoriasEProdutosComponent {
 
-
-
   categorias: Categorias[] = [];
   categoriasFiltradas: Categorias[] = []
   categoriasSelecionada!: Categorias;
