@@ -3,17 +3,15 @@
   <p-table
     #dt
     [value]="categoriasFiltradas"
-    selectionMode="single"
-    [(selection)]="categoriasSelecionada"
     [rowHover]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
     [paginator]="true"
     [rows]="5"
     [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [rowsPerPageOptions]="[5, 10, 15]"
-    [filterDelay]="0"
+    dataKey="produto"
   >
+  <!-- DATAKEY É NECESSÁRIO PARA ABRIR A LINHA -->
     <ng-template pTemplate="caption">
         <div class="table-header">
           <span class="p-input-icon-left">
@@ -28,21 +26,88 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
+        <th style="width: 5rem"></th>
         <th>Produto</th>
         <th>Entrada</th>
         <th>Saída</th>
         <th>Saldo</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-categoria>
-      <tr [pSelectableRow]="produto" *ngFor="let produto of categoria?.produtos">
+    <!-- ESTÁ ABRINDO A CATEGORIA E NÃO O PRODUTO EM ESPECÍFICO -->
+    <ng-template pTemplate="body" let-produto let-expanded="expanded">
+      <tr *ngFor="let produto of produto?.produtos">
+        <td>
+          <button type="button" pButton pRipple [pRowToggler]="produto.nome[0]" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
         <td>{{ produto?.nome }}</td>
         <td>{{ calcularTotalEntrada(produto) }}</td>
         <td>{{ calcularTotalSaida(produto) }}</td>
         <td>{{ calcularSaldo(produto) }}</td>
       </tr>
     </ng-template>
-    
+    <ng-template pTemplate="rowexpansion" let-pedido>
+      <tr>
+        <td colspan="8">
+          <div class="p-3">
+            <p-table [value]="pedido.enderecoSelecionado" >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Nome do cliente</th>
+                  <th>Email</th>
+                  <th>Telefone</th>
+                  <th>CPF/CNPJ</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-usuario>
+                <tr>
+                  <td>{{ usuario.cep }}</td>
+                  <td>{{ usuario.cidade }}</td>
+                  <td>{{ usuario.bairro }}</td>
+                  <td>{{ usuario.rua }} {{usuario.numeroResidencia}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="6">Nenhuma informação de usuário disponível.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8">
+          <div class="p-3">
+            <p-table [value]="pedido.enderecoSelecionado" >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>CEP</th>
+                  <th>Cidade</th>
+                  <th>Bairro</th>
+                  <th>Rua</th>
+                  <th style="width: 4rem"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-usuario>
+                <tr>
+                  <td>{{ usuario.cep }}</td>
+                  <td>{{ usuario.cidade }}</td>
+                  <td>{{ usuario.bairro }}</td>
+                  <td>{{ usuario.rua }}, {{usuario.numeroResidencia}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="6">Nenhuma informação de usuário disponível.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </td>
+      </tr>
+
+    </ng-template>
+
   </p-table>
 
 

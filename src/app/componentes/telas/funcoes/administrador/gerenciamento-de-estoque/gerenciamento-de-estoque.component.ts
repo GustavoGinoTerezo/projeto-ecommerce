@@ -25,6 +25,7 @@ export class GerenciamentoDeEstoqueComponent {
   categorias: Categorias[] = [];
   categoriasFiltradas: Categorias[] = []
   categoriasSelecionada!: Categorias;
+  expandedProducts: any[] = [];
 
   constructor(
     private categoriasService: ServiceCategoriasService,
@@ -93,7 +94,5 @@ export class GerenciamentoDeEstoqueComponent {
   calcularSaldo(produto: Produtos): number {
     return this.calcularTotalEntrada(produto) - this.calcularTotalSaida(produto);
   }
-
-
 
 }
