@@ -12,7 +12,6 @@ import { MinhaContaComponent } from './componentes/telas/funcoes/usuario/minha-c
 import { MeusDadosComponent } from './componentes/telas/funcoes/usuario/meus-dados/meus-dados.component';
 import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-pedidos/meus-pedidos.component';
 import { GerenciamentoDeCategoriasEProdutosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-categorias-e-produtos/gerenciamento-de-categorias-e-produtos.component';
-import { ControleDePedidosComponent } from './componentes/telas/funcoes/administrador/controle-de-pedidos/controle-de-pedidos.component';
 import { GerenciamentoDeEstoqueComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-estoque/gerenciamento-de-estoque.component';
 import { EntradaDeNotasFiscaisComponent } from './componentes/telas/funcoes/administrador/entrada-de-notas-fiscais/entrada-de-notas-fiscais.component';
 import { GerenciamentoDeClientesComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-clientes/gerenciamento-de-clientes.component';
@@ -74,10 +73,6 @@ const routes: Routes = [
   {
     path: 'gerenciamento-de-categorias-e-produtos',
     component: GerenciamentoDeCategoriasEProdutosComponent,
-  },
-  {
-    path: 'controle-de-pedidos',
-    component: ControleDePedidosComponent,
   },
   {
     path: 'gerenciamento-de-estoque',

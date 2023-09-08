@@ -90,8 +90,8 @@ export class ServiceCategoriasService {
           ],
           quantSaida: [
             {
-            quantSaida: 5,
-            dataSaida: '10/05/2023',
+              quantSaida: 5,
+              dataSaida: '10/05/2023',
             },
             {
               quantSaida: 15,
