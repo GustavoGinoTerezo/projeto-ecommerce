@@ -13,7 +13,7 @@ import { MeusDadosComponent } from './componentes/telas/funcoes/usuario/meus-dad
 import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-pedidos/meus-pedidos.component';
 import { GerenciamentoDeCategoriasEProdutosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-categorias-e-produtos/gerenciamento-de-categorias-e-produtos.component';
 import { ControleDePedidosComponent } from './componentes/telas/funcoes/administrador/controle-de-pedidos/controle-de-pedidos.component';
-import { EntradaDeEstoqueComponent } from './componentes/telas/funcoes/administrador/entrada-de-estoque/entrada-de-estoque.component';
+import { GerenciamentoDeEstoqueComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-estoque/gerenciamento-de-estoque.component';
 import { EntradaDeNotasFiscaisComponent } from './componentes/telas/funcoes/administrador/entrada-de-notas-fiscais/entrada-de-notas-fiscais.component';
 import { GerenciamentoDeClientesComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-clientes/gerenciamento-de-clientes.component';
 import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrador/personalizacao/personalizacao.component';
@@ -80,8 +80,8 @@ const routes: Routes = [
     component: ControleDePedidosComponent,
   },
   {
-    path: 'entrada-de-estoque',
-    component: EntradaDeEstoqueComponent,
+    path: 'gerenciamento-de-estoque',
+    component: GerenciamentoDeEstoqueComponent,
   },
   {
     path: 'entrada-de-notas-fiscais',

@@ -1,0 +1,199 @@
+<div class="divGeral">
+
+  <div class="dadosGerais" *ngIf="pedidos">
+    <div class="pedidosSolicitados" >
+      <div>Total de pedidos feitos</div>
+      <div class="pedidoLabel">{{pedidos.length}}</div>
+    </div>
+    <div class="rendaGeral">
+      <div>Renda geral</div>
+      <div class="rendaGeralLabel">{{ calcularRendaGeral() | currency: 'BRL' }}</div>
+    </div>
+  </div>
+
+  <p-table
+  #dt
+  [paginator]="true"
+  [rows]="10"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [value]="pedidos"
+  dataKey="numeroPedido"
+  [tableStyle]="{ 'min-width': '60rem' }"
+  >
+    <ng-template pTemplate="caption">
+      <div class="containerCaption">
+        <div class="divBotaoPDF">
+          <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdfAll()" class="p-button-warning mr-2" label="PDF completo do relátorio de vendas" pTooltip="PDF" tooltipPosition="bottom"></button>
+        </div>
+        <div class="divInputSearch">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="filterTable($event)" placeholder="Buscar" />
+          </span>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 5rem"></th>
+        <th pSortableColumn="numeroPedido">Nº do pedido <p-sortIcon field="numeroPedido"></p-sortIcon></th>
+        <th pSortableColumn="dataPedido">Data da compra <p-sortIcon field="dataPedido"></p-sortIcon></th>
+        <th>Valor total da compra</th>
+        <th>Forma de pagamento</th>
+        <th pSortableColumn="status">Status do pedido <p-sortIcon field="status"></p-sortIcon></th>
+        <th>PDF do pedido</th>
+        <th>Inserir nota fiscal</th>
+        <th>Cancelar pedido</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pedido let-expanded="expanded">
+      <tr>
+        <td>
+          <button type="button" pButton pRipple [pRowToggler]="pedido" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
+        <td p-sortField="numeroPedido">{{ pedido.numeroPedido }}</td>
+        <td p-sortField="dataPedido">{{ pedido.dataPedido }}</td>
+        <td p-sortField="valorTotal">{{ calcularValorTotal(pedido) | currency: 'BRL' }}</td>
+        <td>
+          <ng-container *ngFor="let formaPagamento of pedido.formaDoPagamento">
+            {{ formaPagamento.tipoPagamento }}
+          </ng-container>
+        </td>
+        <td p-sortField="status">{{pedido.status}}</td>
+        <td>
+          <button type="button" pButton pRipple (click)="exportPdfUnique(pedido)" class="p-button-warning mr-2" label="PDF" icon="pi pi-file-pdf"></button>
+        </td>
+        <td>
+          <p-button (click)="showDialog(pedido.numeroPedido)" icon="fa-solid fa-plus" ></p-button>
+        </td>
+        <td>
+          <p-button (click)="showDialog(pedido.numeroPedido)" styleClass="p-button-danger" icon="fa-solid fa-xmark" ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-pedido>
+      <tr>
+        <td colspan="8">
+          <div class="p-3">
+            <p-table [value]="[pedido]" dataKey="numeroPedido">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Nome do cliente</th>
+                  <th>Email</th>
+                  <th>Telefone</th>
+                  <th>CPF/CNPJ</th>
+                  <th style="width: 4rem"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-usuario>
+                <tr>
+                  <td>{{ getUsuarioPorId(usuario.idUsuario)?.nome }}</td>
+                  <td>{{ getUsuarioPorId(usuario.idUsuario)?.email }}</td>
+                  <td>{{ getUsuarioPorId(usuario.idUsuario)?.telefone }}</td>
+                  <td>{{ getUsuarioPorId(usuario.idUsuario)?.cpfOuCnpj }}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="6">Nenhuma informação de usuário disponível.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8">
+          <div class="p-3">
+            <p-table [value]="pedido.enderecoSelecionado" dataKey="numeroPedido">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>CEP</th>
+                  <th>Cidade</th>
+                  <th>Bairro</th>
+                  <th>Rua</th>
+                  <th style="width: 4rem"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-usuario>
+                <tr>
+                  <td>{{ usuario.cep }}</td>
+                  <td>{{ usuario.cidade }}</td>
+                  <td>{{ usuario.bairro }}</td>
+                  <td>{{ usuario.rua }}, {{usuario.numeroResidencia}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="6">Nenhuma informação de usuário disponível.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8">
+          <div class="p-3">
+            <p-table [value]="pedido.carrinhoDeCompra" dataKey="nomeProduto">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Nome do produto</th>
+                  <th>Quantidade solicitada</th>
+                  <th>Preço unitário</th>
+                  <th>Total do produto</th>
+                  <th style="width: 4rem"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-itemPedido>
+                <tr>
+                  <td>{{ itemPedido.nomeProduto }}</td>
+                  <td>{{ itemPedido.quantidade }}</td>
+                  <td>{{ itemPedido.preco | currency: 'BRL' }}</td>
+                  <td>{{ calcularValorItem(itemPedido).toFixed(2) | currency: 'BRL' }}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="6">Nenhum item de pedido disponível.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+
+</div>
+
+
+
+<p-dialog
+  header="Inserir nota fiscal"
+  [(visible)]="visible"
+  [style]="{width: '550px'}"
+  [draggable]="false"
+  [resizable]="false"
+  [focusTrap]="true"
+  [closeOnEscape]="true"
+  [focusOnShow]="true"
+  >
+  <p>
+    <p-fileUpload chooseLabel="Adicionar" chooseIcon="fa-solid fa-plus" uploadLabel="Enviar" cancelLabel="Cancelar" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" [maxFileSize]="100000000">
+      <ng-template pTemplate="toolbar">
+        <div class="labelNotaFiscal">
+          Selecionar nota fiscal do pedido
+          <div class="labelNumeroPedido">
+            {{ numeroDoPedido }}
+          </div>
+        </div>
+      </ng-template>
+      <ng-template let-file pTemplate="file">
+        <div>{{file.name}}</div>
+      </ng-template>
+    </p-fileUpload>
+  </p>
+</p-dialog>
+

@@ -17,7 +17,7 @@ export const navbarData: INavbarData[] = [
     label: 'Gerenciamento de Categorias e Produtos',
   },
   {
-    routerLink: 'entrada-de-estoque',
+    routerLink: 'gerenciamento-de-estoque',
     icon: 'fa-solid fa-box-archive',
     label: 'Gerenciamento de Estoque',
   },
