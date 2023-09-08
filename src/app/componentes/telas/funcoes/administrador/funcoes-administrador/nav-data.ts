@@ -7,7 +7,7 @@ export const navbarData: INavbarData[] = [
     label: 'Gerenciamento de Clientes',
   },
   {
-    routerLink: 'relatorio-de-vendas',
+    routerLink: 'relatorio-de-vendas-e-controle-de-pedidos',
     icon: 'fa-solid fa-magnifying-glass-chart',
     label: 'Relatório de Vendas e Controle de Pedidos',
   },

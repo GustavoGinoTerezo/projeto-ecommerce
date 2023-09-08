@@ -11,13 +11,13 @@ import { ConfirmacaoComponent } from './componentes/telas/carrinho-de-compras/co
 import { MinhaContaComponent } from './componentes/telas/funcoes/usuario/minha-conta/minha-conta.component';
 import { MeusDadosComponent } from './componentes/telas/funcoes/usuario/meus-dados/meus-dados.component';
 import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-pedidos/meus-pedidos.component';
-import { AdicionarCategoriasEProdutosComponent } from './componentes/telas/funcoes/administrador/adicionar-categorias-e-produtos/adicionar-categorias-e-produtos.component';
+import { GerenciamentoDeCategoriasEProdutosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-categorias-e-produtos/gerenciamento-de-categorias-e-produtos.component';
 import { ControleDePedidosComponent } from './componentes/telas/funcoes/administrador/controle-de-pedidos/controle-de-pedidos.component';
 import { EntradaDeEstoqueComponent } from './componentes/telas/funcoes/administrador/entrada-de-estoque/entrada-de-estoque.component';
 import { EntradaDeNotasFiscaisComponent } from './componentes/telas/funcoes/administrador/entrada-de-notas-fiscais/entrada-de-notas-fiscais.component';
 import { GerenciamentoDeClientesComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-clientes/gerenciamento-de-clientes.component';
 import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrador/personalizacao/personalizacao.component';
-import { RelatoriosDeVendasComponent } from './componentes/telas/funcoes/administrador/relatorios-de-vendas/relatorios-de-vendas.component';
+import { RelatoriosDeVendasEControleDePedidosComponent } from './componentes/telas/funcoes/administrador/relatorios-de-vendas-e-controle-de-pedidos/relatorios-de-vendas-e-controle-de-pedidos.component';
 import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-comentarios/gerenciamento-de-comentarios/gerenciamento-de-comentarios.component';
 
 const routes: Routes = [
@@ -73,7 +73,7 @@ const routes: Routes = [
   },
   {
     path: 'gerenciamento-de-categorias-e-produtos',
-    component: AdicionarCategoriasEProdutosComponent,
+    component: GerenciamentoDeCategoriasEProdutosComponent,
   },
   {
     path: 'controle-de-pedidos',
@@ -100,8 +100,8 @@ const routes: Routes = [
     component: GerenciamentoDeComentariosComponent,
   },
   {
-    path: 'relatorio-de-vendas',
-    component: RelatoriosDeVendasComponent,
+    path: 'relatorio-de-vendas-e-controle-de-pedidos',
+    component: RelatoriosDeVendasEControleDePedidosComponent,
   },
 ];
 

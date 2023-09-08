@@ -13,11 +13,11 @@ interface UploadEvent {
 }
 
 @Component({
-  selector: 'app-adicionar-categorias-e-produtos',
-  templateUrl: './adicionar-categorias-e-produtos.component.html',
-  styleUrls: ['./adicionar-categorias-e-produtos.component.css']
+  selector: 'app-gerenciamento-de-categorias-e-produtos',
+  templateUrl: './gerenciamento-de-categorias-e-produtos.component.html',
+  styleUrls: ['./gerenciamento-de-categorias-e-produtos.component.css']
 })
-export class AdicionarCategoriasEProdutosComponent {
+export class GerenciamentoDeCategoriasEProdutosComponent {
 
 
 

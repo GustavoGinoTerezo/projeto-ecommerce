@@ -53,9 +53,9 @@ import { MinhaContaComponent } from './componentes/telas/funcoes/usuario/minha-c
 import { MeusDadosComponent } from './componentes/telas/funcoes/usuario/meus-dados/meus-dados.component';
 import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-pedidos/meus-pedidos.component';
 import { GerenciamentoDeClientesComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-clientes/gerenciamento-de-clientes.component';
-import { RelatoriosDeVendasComponent } from './componentes/telas/funcoes/administrador/relatorios-de-vendas/relatorios-de-vendas.component';
+import { RelatoriosDeVendasEControleDePedidosComponent } from './componentes/telas/funcoes/administrador/relatorios-de-vendas-e-controle-de-pedidos/relatorios-de-vendas-e-controle-de-pedidos.component';
 import { ControleDePedidosComponent } from './componentes/telas/funcoes/administrador/controle-de-pedidos/controle-de-pedidos.component';
-import { AdicionarCategoriasEProdutosComponent } from './componentes/telas/funcoes/administrador/adicionar-categorias-e-produtos/adicionar-categorias-e-produtos.component';
+import { GerenciamentoDeCategoriasEProdutosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-categorias-e-produtos/gerenciamento-de-categorias-e-produtos.component';
 import { EntradaDeEstoqueComponent } from './componentes/telas/funcoes/administrador/entrada-de-estoque/entrada-de-estoque.component';
 import { EntradaDeNotasFiscaisComponent } from './componentes/telas/funcoes/administrador/entrada-de-notas-fiscais/entrada-de-notas-fiscais.component';
 import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrador/personalizacao/personalizacao.component';
@@ -81,9 +81,9 @@ import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes
     MeusDadosComponent,
     MeusPedidosComponent,
     GerenciamentoDeClientesComponent,
-    RelatoriosDeVendasComponent,
+    RelatoriosDeVendasEControleDePedidosComponent,
     ControleDePedidosComponent,
-    AdicionarCategoriasEProdutosComponent,
+    GerenciamentoDeCategoriasEProdutosComponent,
     EntradaDeEstoqueComponent,
     EntradaDeNotasFiscaisComponent,
     PersonalizacaoComponent,

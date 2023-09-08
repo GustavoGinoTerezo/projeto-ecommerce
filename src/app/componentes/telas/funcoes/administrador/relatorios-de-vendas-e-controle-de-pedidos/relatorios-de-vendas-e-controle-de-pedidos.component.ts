@@ -20,11 +20,11 @@ interface ExportColumn {
 }
 
 @Component({
-  selector: 'app-relatorios-de-vendas',
-  templateUrl: './relatorios-de-vendas.component.html',
-  styleUrls: ['./relatorios-de-vendas.component.css']
+  selector: 'app-relatorios-de-vendas-e-controle-de-pedidos',
+  templateUrl: './relatorios-de-vendas-e-controle-de-pedidos.component.html',
+  styleUrls: ['./relatorios-de-vendas-e-controle-de-pedidos.component.css']
 })
-export class RelatoriosDeVendasComponent {
+export class RelatoriosDeVendasEControleDePedidosComponent {
 
   pedidos!: Pedido[];
   carrinho: CarrinhoDeCompra[] = [];
