@@ -75,13 +75,11 @@
           [showClear]="true"
           placeholder="Selecione a categoria"
         >
-          <!-- Selected Item Template -->
           <ng-template pTemplate="selectedItem">
             <div class="flex align-items-center gap-2" *ngIf="categoriasSelecionadaInput">
               <div>{{ categoriasSelecionadaInput.nome }}</div>
             </div>
           </ng-template>
-          <!-- Item Template -->
           <ng-template let-categoria pTemplate="item">
             <div class="flex align-items-center gap-2">
               <div>{{ categoria.nome }}</div>
@@ -96,12 +94,6 @@
           <span class="p-inputgroup-addon">R$</span>
           <input [(ngModel)]="valorProdutoFormatted" (input)="onValorProdutoInput($event)" pInputText placeholder="Preço" />
         </div>
-      </div>
-      <div class="divInputNome">
-        <span class="p-float-label">
-          <input pInputText id="username" [(ngModel)]="quantidadeProduto" />
-          <label htmlFor="username">Quantidade</label>
-        </span>
       </div>
       <div class="divInputTelefone">
         <p-dropdown
@@ -220,7 +212,6 @@
       <ng-template pTemplate="header">
         <tr>
           <th>Produto</th>
-          <th>Quantidade</th>
           <th>Status</th>
           <th>Categoria</th>
         </tr>
@@ -228,7 +219,6 @@
       <ng-template pTemplate="body" let-categoria>
         <tr [pSelectableRow]="produto" (click)="updateInputFieldsWithSelectedProduct(categoria, produto)" *ngFor="let produto of categoria?.produtos">
           <td>{{ produto?.nome }}</td>
-          <td></td>
           <td></td>
           <td>{{ categoria?.nome }}</td>
         </tr>
