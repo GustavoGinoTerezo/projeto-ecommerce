@@ -119,6 +119,10 @@ export class ServiceCategoriasService {
               quantEntrada: 15,
               dataEntrada: '19/05/2023',
             },
+            {
+              quantEntrada: 15,
+              dataEntrada: '10/06/2023',
+            },
           ],
           quantSaida: [
             {

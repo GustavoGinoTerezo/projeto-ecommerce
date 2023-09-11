@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import jsPDF from 'jspdf';
 import { MessageService } from 'primeng/api';
 import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
-import { Categorias, ServiceCategoriasService, Produtos, CategoriaVazia } from 'src/app/services/serviceCategorias/service-categorias.service';
+import { Categorias, ServiceCategoriasService, Produtos, CategoriaVazia, Entrada, Saida } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 
@@ -27,6 +27,10 @@ export class GerenciamentoDeEstoqueComponent {
   categoriasSelecionada!: Categorias;
   expandedProducts: any[] = [];
 
+  originalQuantEntrada: Entrada[] = [];
+  originalQuantSaida: Saida[] = [];
+
+
   constructor(
     private categoriasService: ServiceCategoriasService,
   ){}
@@ -42,6 +46,10 @@ export class GerenciamentoDeEstoqueComponent {
     this.categoriasService.getCategoriasTabela().then((data) => {
       this.categoriasFiltradas = data;
     });
+
+    this.originalQuantEntrada = [...this.mapProdutos[0]?.quantEntrada || []];
+
+    this.originalQuantSaida = [...this.mapProdutos[0]?.quantSaida || []];
 
   }
 
@@ -67,18 +75,39 @@ export class GerenciamentoDeEstoqueComponent {
   filtrarDataEntrada(event: any) {
     const filterValue = event.target.value.toLowerCase();
     this.mapProdutos.forEach((produto) => {
-      produto!.quantEntrada = produto!.quantEntrada!.filter((entrada) =>
-        entrada!.dataEntrada!.toLowerCase().includes(filterValue)
-      );
+      if (produto && produto.quantEntrada) {
+        if (filterValue === "") {
+          // Se o campo de filtro estiver vazio, retorne o array original
+          produto.quantEntrada = this.originalQuantEntrada;
+        } else {
+          produto.quantEntrada = produto.quantEntrada.filter((entrada) => {
+            if (entrada && entrada.dataEntrada) {
+              return entrada.dataEntrada.toLowerCase().includes(filterValue);
+            }
+            return false; // ou qualquer outra lógica adequada
+          });
+        }
+      }
     });
   }
+
 
   filtrarDataSaida(event: any) {
     const filterValue = event.target.value.toLowerCase();
     this.mapProdutos.forEach((produto) => {
-      produto!.quantSaida = produto!.quantSaida!.filter((saida) =>
-        saida!.dataSaida!.toLowerCase().includes(filterValue)
-      );
+      if (produto && produto.quantSaida) {
+        if (filterValue === "") {
+          // Se o campo de filtro estiver vazio, retorne o array original
+          produto.quantSaida = this.originalQuantSaida;
+        } else {
+          produto.quantSaida = produto.quantSaida.filter((saida) => {
+            if (saida && saida.dataSaida) {
+              return saida.dataSaida.toLowerCase().includes(filterValue);
+            }
+            return false; // ou qualquer outra lógica adequada
+          });
+        }
+      }
     });
   }
 
