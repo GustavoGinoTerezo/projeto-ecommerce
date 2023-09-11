@@ -1,5 +1,13 @@
 <div class="divGeral">
 
+  <div>
+
+    <div></div>
+
+    <div></div>
+
+  </div>
+
   <p-table
     #dt
     [value]="mapProdutos"
@@ -68,6 +76,7 @@
                   <th pSortableColumn="dataEntrada">Data de Entrada<p-sortIcon field="dataEntrada"></p-sortIcon></th>
                   <th>Quantidade de Entrada</th>
                   <th>Nota fiscal referente a entrada</th>
+                  <th>Excluir entrada</th>
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-entrada>
@@ -75,6 +84,7 @@
                   <td p-sortField="dataEntrada">{{ entrada.dataEntrada }}</td>
                   <td>{{ entrada.quantEntrada }}</td>
                   <td><p-button styleClass="p-button-warning" icon="fa-solid fa-file-arrow-down fa-xl"></p-button></td>
+                  <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
                 </tr>
               </ng-template>
               <ng-template pTemplate="emptymessage">
@@ -107,6 +117,7 @@
                   <th pSortableColumn="dataSaida">Data de Saída<p-sortIcon field="dataSaida"></p-sortIcon></th>
                   <th>Quantidade de Saída</th>
                   <th>Nota fiscal referente a saída</th>
+                  <th>Excluir saída</th>
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-saida>
@@ -114,6 +125,7 @@
                   <td  p-sortField="dataSaida">{{ saida.dataSaida }}</td>
                   <td>{{ saida.quantSaida }}</td>
                   <td><p-button styleClass="p-button-warning" icon="fa-solid fa-file-arrow-down fa-xl"></p-button></td>
+                  <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
                 </tr>
               </ng-template>
               <ng-template pTemplate="emptymessage">
