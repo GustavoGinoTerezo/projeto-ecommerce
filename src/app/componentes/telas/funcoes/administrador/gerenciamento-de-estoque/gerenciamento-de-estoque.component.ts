@@ -64,6 +64,27 @@ export class GerenciamentoDeEstoqueComponent {
     }
   }
 
+  filtrarDataEntrada(event: any) {
+    const filterValue = event.target.value.toLowerCase();
+    this.mapProdutos.forEach((produto) => {
+      produto!.quantEntrada = produto!.quantEntrada!.filter((entrada) =>
+        entrada!.dataEntrada!.toLowerCase().includes(filterValue)
+      );
+    });
+  }
+
+  filtrarDataSaida(event: any) {
+    const filterValue = event.target.value.toLowerCase();
+    this.mapProdutos.forEach((produto) => {
+      produto!.quantSaida = produto!.quantSaida!.filter((saida) =>
+        saida!.dataSaida!.toLowerCase().includes(filterValue)
+      );
+    });
+  }
+
+
+
+
   categoriaVazia: CategoriaVazia = {
     nome: '',
   };

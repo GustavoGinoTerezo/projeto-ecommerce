@@ -89,35 +89,35 @@ export class ServiceCategoriasService {
             },
             {
               quantEntrada: 10,
-              dataEntrada: '10/05/2023',
+              dataEntrada: '12/05/2023',
             },
             {
               quantEntrada: 15,
-              dataEntrada: '11/05/2023',
+              dataEntrada: '13/05/2023',
             },
             {
               quantEntrada: 10,
-              dataEntrada: '10/05/2023',
+              dataEntrada: '14/05/2023',
             },
             {
               quantEntrada: 15,
-              dataEntrada: '11/05/2023',
+              dataEntrada: '15/05/2023',
             },
             {
               quantEntrada: 10,
-              dataEntrada: '10/05/2023',
+              dataEntrada: '16/05/2023',
             },
             {
               quantEntrada: 15,
-              dataEntrada: '11/05/2023',
+              dataEntrada: '17/05/2023',
             },
             {
               quantEntrada: 10,
-              dataEntrada: '10/05/2023',
+              dataEntrada: '18/05/2023',
             },
             {
               quantEntrada: 15,
-              dataEntrada: '11/05/2023',
+              dataEntrada: '19/05/2023',
             },
           ],
           quantSaida: [
