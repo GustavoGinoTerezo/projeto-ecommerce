@@ -2,16 +2,15 @@
 
   <p-table
     #dt
-    [value]="categoriasFiltradas"
+    [value]="mapProdutos"
     [rowHover]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
     [paginator]="true"
     [rows]="5"
     [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[5, 10, 15]"
-    dataKey="produto"
+    dataKey="nome"
   >
-  <!-- DATAKEY É NECESSÁRIO PARA ABRIR A LINHA -->
     <ng-template pTemplate="caption">
         <div class="table-header">
           <span class="p-input-icon-left">
@@ -33,37 +32,32 @@
         <th>Saldo</th>
       </tr>
     </ng-template>
-    <!-- ESTÁ ABRINDO A CATEGORIA E NÃO O PRODUTO EM ESPECÍFICO -->
     <ng-template pTemplate="body" let-produto let-expanded="expanded">
-      <tr *ngFor="let produto of produto?.produtos">
+      <tr>
         <td>
-          <button type="button" pButton pRipple [pRowToggler]="produto.nome[0]" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+          <button type="button" pButton pRipple [pRowToggler]="produto" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
         </td>
-        <td>{{ produto?.nome }}</td>
+        <td>{{ produto.nome }}</td>
         <td>{{ calcularTotalEntrada(produto) }}</td>
         <td>{{ calcularTotalSaida(produto) }}</td>
         <td>{{ calcularSaldo(produto) }}</td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="rowexpansion" let-pedido>
+    <ng-template pTemplate="rowexpansion" let-produto>
       <tr>
         <td colspan="8">
           <div class="p-3">
-            <p-table [value]="pedido.enderecoSelecionado" >
+            <p-table [value]="produto.quantEntrada" >
               <ng-template pTemplate="header">
                 <tr>
-                  <th>Nome do cliente</th>
-                  <th>Email</th>
-                  <th>Telefone</th>
-                  <th>CPF/CNPJ</th>
+                  <th>Data de Entrada</th>
+                  <th>Quantidade de Entrada</th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-usuario>
+              <ng-template pTemplate="body" let-entrada>
                 <tr>
-                  <td>{{ usuario.cep }}</td>
-                  <td>{{ usuario.cidade }}</td>
-                  <td>{{ usuario.bairro }}</td>
-                  <td>{{ usuario.rua }} {{usuario.numeroResidencia}}</td>
+                  <td>{{ entrada.dataEntrada }}</td>
+                  <td>{{ entrada.quantEntrada }}</td>
                 </tr>
               </ng-template>
               <ng-template pTemplate="emptymessage">
@@ -78,22 +72,17 @@
       <tr>
         <td colspan="8">
           <div class="p-3">
-            <p-table [value]="pedido.enderecoSelecionado" >
+            <p-table [value]="produto.quantSaida" >
               <ng-template pTemplate="header">
                 <tr>
-                  <th>CEP</th>
-                  <th>Cidade</th>
-                  <th>Bairro</th>
-                  <th>Rua</th>
-                  <th style="width: 4rem"></th>
+                  <th>Data de Saída</th>
+                  <th>Quantidade de Saída</th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-usuario>
+              <ng-template pTemplate="body" let-saida>
                 <tr>
-                  <td>{{ usuario.cep }}</td>
-                  <td>{{ usuario.cidade }}</td>
-                  <td>{{ usuario.bairro }}</td>
-                  <td>{{ usuario.rua }}, {{usuario.numeroResidencia}}</td>
+                  <td>{{ saida.dataSaida }}</td>
+                  <td>{{ saida.quantSaida }}</td>
                 </tr>
               </ng-template>
               <ng-template pTemplate="emptymessage">

@@ -87,6 +87,38 @@ export class ServiceCategoriasService {
               quantEntrada: 15,
               dataEntrada: '11/05/2023',
             },
+            {
+              quantEntrada: 10,
+              dataEntrada: '10/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '11/05/2023',
+            },
+            {
+              quantEntrada: 10,
+              dataEntrada: '10/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '11/05/2023',
+            },
+            {
+              quantEntrada: 10,
+              dataEntrada: '10/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '11/05/2023',
+            },
+            {
+              quantEntrada: 10,
+              dataEntrada: '10/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '11/05/2023',
+            },
           ],
           quantSaida: [
             {

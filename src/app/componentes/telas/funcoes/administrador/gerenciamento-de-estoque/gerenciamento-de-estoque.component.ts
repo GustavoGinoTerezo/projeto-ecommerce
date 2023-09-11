@@ -95,4 +95,8 @@ export class GerenciamentoDeEstoqueComponent {
     return this.calcularTotalEntrada(produto) - this.calcularTotalSaida(produto);
   }
 
+  get mapProdutos() {
+    return this.categorias.flatMap((categoria) => categoria.produtos);
+  }
+
 }
