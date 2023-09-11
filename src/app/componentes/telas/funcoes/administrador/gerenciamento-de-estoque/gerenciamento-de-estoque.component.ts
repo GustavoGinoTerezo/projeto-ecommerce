@@ -23,8 +23,10 @@ interface UploadEvent {
 export class GerenciamentoDeEstoqueComponent {
 
   categorias: Categorias[] = [];
-  categoriasFiltradas: Categorias[] = []
-  categoriasSelecionada!: Categorias;
+
+  produtosFiltrados: Produtos[] = [];
+
+
   expandedProducts: any[] = [];
 
   originalQuantEntrada: Entrada[] = [];
@@ -43,9 +45,7 @@ export class GerenciamentoDeEstoqueComponent {
       }
     );
 
-    this.categoriasService.getCategoriasTabela().then((data) => {
-      this.categoriasFiltradas = data;
-    });
+
 
     this.originalQuantEntrada = [...this.mapProdutos[0]?.quantEntrada || []];
 
@@ -53,24 +53,27 @@ export class GerenciamentoDeEstoqueComponent {
 
   }
 
+
   filterTable(event: any) {
     const filterValue = event.target.value.toLowerCase();
 
-    if (!this.categorias) {
-      this.categoriasFiltradas = [];
-    } else {
-      this.categoriasFiltradas = this.categorias.filter(categoria => {
-        const produtosFiltrados = categoria.produtos?.filter(produto => {
-          return produto.nome?.toLowerCase().includes(filterValue);
-        });
-
-        return (
-          categoria.nome?.toLowerCase().includes(filterValue) ||
-          (produtosFiltrados && produtosFiltrados.length > 0)
-        );
-      });
-    }
+    // Filtrar todos os produtos com base no nome
+    this.produtosFiltrados = this.categorias.flatMap((categoria) => {
+      return categoria.produtos?.filter((produto) => {
+        return produto?.nome && produto.nome.toLowerCase().includes(filterValue);
+      }) || [];
+    });
   }
+
+
+
+
+
+
+
+
+
+
 
   filtrarDataEntrada(event: any) {
     const filterValue = event.target.value.toLowerCase();
@@ -110,13 +113,6 @@ export class GerenciamentoDeEstoqueComponent {
       }
     });
   }
-
-
-
-
-  categoriaVazia: CategoriaVazia = {
-    nome: '',
-  };
 
   formatCurrency(value: number | null): string {
     if (value !== null) {

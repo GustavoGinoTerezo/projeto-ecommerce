@@ -27,4 +27,23 @@
   margin-left: 15px;
 }
 
+.containerEntradaSaida{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
 
+.containerEntrada{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.containerSaida{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}

@@ -1,10 +1,14 @@
 <div class="divGeral">
 
-  <div>
+  <div class="containerEntradaSaida">
 
-    <div></div>
+    <div class="containerEntrada">
+      <h1>Entrada</h1>
+    </div>
 
-    <div></div>
+    <div class="containerSaida">
+      <h1>Saída</h1>
+    </div>
 
   </div>
 
@@ -24,7 +28,8 @@
           <div class="input">
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
-              <input pInputText type="text"  placeholder="Buscar Produto" />
+              <input pInputText type="text" (input)="filterTable($event)" placeholder="Buscar Produto" />
+
             </span>
           </div>
           <div class="divBotoesCaption">
