@@ -23,12 +23,8 @@ interface UploadEvent {
 export class GerenciamentoDeEstoqueComponent {
 
   categorias: Categorias[] = [];
-
   produtosFiltrados: Produtos[] = [];
-
-
   expandedProducts: any[] = [];
-
   originalQuantEntrada: Entrada[] = [];
   originalQuantSaida: Saida[] = [];
 

@@ -32,18 +32,62 @@
   justify-content: space-between;
   width: 100%;
   height: 100%;
+
 }
 
 .containerEntrada{
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+  width: 49.5%;
 }
 
 .containerSaida{
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 49.5%;
+}
+
+.containerDropdownInput{
+  display: flex;
+  justify-content: space-between;
   width: 100%;
+}
+
+.containerDropdown{
+  width: 49.5%;
+}
+
+.containerInput{
+  display: flex;
+  width: 49.5%;
+}
+
+:host ::ng-deep .p-dropdown{
+  width: 100%;
+}
+
+.inputQuant{
+  width: 100%;
+}
+
+.containerFileUpload{
+  width: 100%;
+}
+
+.containerBotoes{
+  width: 100%;
+}
+
+.labelNotaFiscal{
+  margin-top: 15px;
+}
+
+:host ::ng-deep .containerBotoes .p-button{
+  width: 100%;
+}
+
+.margem{
+  margin-bottom: 15px;
 }
