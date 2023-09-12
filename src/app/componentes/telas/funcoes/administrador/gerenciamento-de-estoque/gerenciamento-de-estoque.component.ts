@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import jsPDF from 'jspdf';
 import { MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Categorias, ServiceCategoriasService, Produtos, CategoriaVazia, Entrada, Saida } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
@@ -22,9 +23,8 @@ interface UploadEvent {
 })
 export class GerenciamentoDeEstoqueComponent {
 
+  @ViewChild('dt') table!: Table;
   categorias: Categorias[] = [];
-  produtosFiltrados: Produtos[] = [];
-  expandedProducts: any[] = [];
   originalQuantEntrada: Entrada[] = [];
   originalQuantSaida: Saida[] = [];
 
@@ -41,35 +41,16 @@ export class GerenciamentoDeEstoqueComponent {
       }
     );
 
-
-
     this.originalQuantEntrada = [...this.mapProdutos[0]?.quantEntrada || []];
 
     this.originalQuantSaida = [...this.mapProdutos[0]?.quantSaida || []];
 
   }
 
-
   filterTable(event: any) {
-    const filterValue = event.target.value.toLowerCase();
-
-    // Filtrar todos os produtos com base no nome
-    this.produtosFiltrados = this.categorias.flatMap((categoria) => {
-      return categoria.produtos?.filter((produto) => {
-        return produto?.nome && produto.nome.toLowerCase().includes(filterValue);
-      }) || [];
-    });
+    const filterValue = event.target.value.toLowerCase(); // Obtém o valor do campo de pesquisa em minúsculas
+    this.table.filter(filterValue, 'nome', 'contains'); // Aplica o filtro na coluna 'nome' que contém o valor
   }
-
-
-
-
-
-
-
-
-
-
 
   filtrarDataEntrada(event: any) {
     const filterValue = event.target.value.toLowerCase();
