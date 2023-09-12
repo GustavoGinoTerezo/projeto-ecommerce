@@ -16,6 +16,7 @@ export class DetalheProdutoComponent implements OnInit {
   nomeProdutoFormatado: string | null = null;
   produtoDaCategoria!: Produtos;
   cep!: string;
+  novoComentario: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -85,6 +86,26 @@ export class DetalheProdutoComponent implements OnInit {
       severity: 'success',
       icon: 'pi pi-shopping-cart',
       detail: 'Produto adicionado ao carrinho!' });
+  }
+
+  adicionarComentario() {
+    // Verifique se o novoComentario não está vazio
+    if (!this.novoComentario.trim()) {
+      this.messageService.add({ severity: 'warn', summary: 'Aviso', detail: 'Digite um comentário.' });
+      return;
+    }
+
+    // Adicione o comentário pendente ao array de comentários pendentes do produto
+    if (this.produto) {
+      if (!this.produto.comentariosPendentes) {
+        this.produto.comentariosPendentes = [];
+      }
+
+      this.produto.comentariosPendentes.push({ comentario: this.novoComentario });
+    }
+
+    // Limpe o campo de entrada
+    this.novoComentario = '';
   }
 
 }

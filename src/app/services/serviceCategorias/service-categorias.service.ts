@@ -24,6 +24,7 @@ export interface Produtos {
   descricaoCompleta?: string;
   especificacaoTecnica?: string;
   comentariosProduto?: ComentariosProdutos[];
+  comentariosPendentes?: ComentariosProdutos[];
 }
 
 export interface Imagens{
@@ -44,7 +45,7 @@ export interface Saida {
   dataSaida?: String;
 }
 
-interface ComentariosProdutos{
+export interface ComentariosProdutos{
   id?: string;
   comentario?: string;
 }
@@ -55,6 +56,8 @@ interface ComentariosProdutos{
   providedIn: 'root'
 })
 export class ServiceCategoriasService {
+
+  constructor() { }
 
   categorias: Categorias[] =
   [
@@ -147,7 +150,8 @@ export class ServiceCategoriasService {
           {
             comentario: 'Amei a compra'
           }
-          ]
+          ],
+          comentariosPendentes: []
         },
         {
           nome: 'mj-15-30-15',
@@ -896,7 +900,14 @@ export class ServiceCategoriasService {
   }
   //==================================================================================================================================//
 
+  getProdutosComComentariosPendentes(): Observable<Produtos[]> {
+    const produtosComComentariosPendentes = this.categorias.reduce((result, categoria) => {
+      return result.concat(
+        categoria!.produtos!.filter(produto => produto.comentariosPendentes && produto.comentariosPendentes.length > 0)
+      );
+    }, [] as Produtos[]);
 
+    return of(produtosComComentariosPendentes);
+  }
 
-  constructor() { }
 }

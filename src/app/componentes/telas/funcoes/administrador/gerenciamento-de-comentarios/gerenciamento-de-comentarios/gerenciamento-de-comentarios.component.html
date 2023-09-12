@@ -1,1 +1,15 @@
-<p>gerenciamento-de-comentarios works!</p>
+<div class="admin">
+  <h2>Produtos com Comentários Pendentes</h2>
+  <ul *ngIf="lista">
+    <li *ngFor="let produto of produtosComComentariosPendentes">
+      <h3>{{ produto.nome }}</h3>
+      <ul>
+        <li *ngFor="let comentario of produto.comentariosPendentes; let i = index">
+          <p>Comentário Pendente: {{ comentario.comentario }}</p>
+          <button (click)="aprovarComentario(produto, comentario)">Aprovar</button>
+          <button (click)="rejeitarComentario(produto, comentario)">Rejeitar</button>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

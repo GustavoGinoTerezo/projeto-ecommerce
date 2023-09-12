@@ -201,6 +201,23 @@ img:hover{
   margin-left: 10px;
 }
 
+.hr{
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.containerInputComentario{
+  display: flex;
+  width: 100%;
+}
+
+.inputQuant{
+  width: 100%;
+}
+
+.botaoEnviarComentario{
+  margin-left: 5px;
+}
 
 @media (max-width: 800px) {
 
@@ -235,3 +252,5 @@ img:hover{
   }
 
 }
+
+
