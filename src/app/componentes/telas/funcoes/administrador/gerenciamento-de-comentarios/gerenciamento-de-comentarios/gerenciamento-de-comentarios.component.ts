@@ -10,6 +10,7 @@ export class GerenciamentoDeComentariosComponent  {
 
   produtosComComentariosPendentes: Produtos[] = [];
   lista: boolean = true;
+  comentariosCarregados: boolean = false; // Controle adicional
 
   constructor(private produtoService: ServiceCategoriasService) {}
 
@@ -17,6 +18,8 @@ export class GerenciamentoDeComentariosComponent  {
     // Obtém produtos com comentários pendentes
     this.produtoService.getProdutosComComentariosPendentes().subscribe(produtos => {
       this.produtosComComentariosPendentes = produtos;
+      this.comentariosCarregados = true; // Marca os comentários como carregados
+      this.atualizarLista();
     });
   }
 
@@ -34,6 +37,8 @@ export class GerenciamentoDeComentariosComponent  {
     if (!hasPendingComments) {
       this.lista = false;
     }
+
+    this.atualizarLista();
   }
 
 
@@ -51,7 +56,12 @@ export class GerenciamentoDeComentariosComponent  {
     if (!hasPendingComments) {
       this.lista = false;
     }
+
+    this.atualizarLista();
   }
 
-
+  private atualizarLista() {
+    // Definir this.lista com base no controle de comentários carregados
+    this.lista = this.comentariosCarregados && this.produtosComComentariosPendentes.some(p => p.comentariosPendentes?.length! > 0);
+  }
 }
