@@ -15,6 +15,15 @@ export interface Pedido {
   valorTotal?: number;
 }
 
+export class PedidoPaginatorState {
+
+  constructor(
+    public pedido: Pedido,
+    public first: number = 0,
+    public rows: number = 3) {}
+
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -50,6 +59,48 @@ export class ServicePedidoService {
           imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
           nomeProduto: "teste",
           quantidade: 5,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 7,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 3,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 5,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 7,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 3,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 5,
+          preco: 12401,
+        },
+        {
+          imagemProduto: "assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg",
+          nomeProduto: "teste",
+          quantidade: 7,
           preco: 12401,
         },
         {

@@ -3,9 +3,7 @@
     <h1>Meus pedidos</h1>
   </div>
   <div *ngIf="pedidos" class="containerGeralPedido">
-    <div class="containerPedido" *ngFor="let pedido of pedidos">
-
-
+    <div class="containerPedido" *ngFor="let pedido of pedidos | slice:first:first + rows; let i = index">
       <p-accordion [multiple]="false" [activeIndex]="[0]" >
         <p-accordionTab header="Nº do pedido: {{pedido.numeroPedido}}" >
               <div class="containerInternoPedidoGeral">
@@ -95,7 +93,7 @@
                 <div class="containerProdutos">
                   <h2 class="h2">Produto(s)</h2>
                   <hr class="hr">
-                  <div class="produtoIndividual" *ngFor="let produto of pedido.carrinhoDeCompra">
+                  <div class="produtoIndividual" *ngFor="let produto of pedido.carrinhoDeCompra | slice: paginatorStates[i].first : paginatorStates[i].first + paginatorStates[i].rows">
                     <div class="containerProdutoIndividual">
                       <div class="divFoto">
                         <img class="img" [src]="produto.imagemProduto" alt="Imagem do produto">
@@ -114,6 +112,7 @@
                     </div>
                     <hr class="hr">
                   </div>
+                  <p-paginator (onPageChange)="onPageChangeProduct($event, pedido, i)" [first]="paginatorStates[i].first" [rows]="paginatorStates[i].rows" [totalRecords]="pedido.carrinhoDeCompra!.length"></p-paginator>
                   <div class="divValorTotalDoPedido">
                     <div class="divTotalDosProdutos">
                       <div class="labelTotalProduto">Total dos produto(s)</div>
@@ -133,6 +132,8 @@
         </p-accordionTab>
     </p-accordion>
     </div>
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[5, 10, 15]">
+    </p-paginator>
   </div>
 </div>
 

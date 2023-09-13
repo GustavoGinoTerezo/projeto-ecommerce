@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
+import { PedidoPaginatorState } from 'src/app/services/servicePedido/service-pedido.service';
 
 interface EventItem {
   status?: string;
@@ -24,6 +25,16 @@ export class MeusPedidosComponent {
   pedidos: Pedido[] = []
   events: EventItem[];
   valorTotal: number = 0;
+
+  currentPage = 0;
+
+  first: number = 0; // Primeiro item da página
+  rows: number = 5; // Número de itens por página
+
+  firstProduct: number = 0; // Primeiro item da página
+  rowsProduct: number = 3; // Número de itens por página
+
+  paginatorStates: PedidoPaginatorState[] = [];
 
   constructor(
     private pedidoService: ServicePedidoService,
@@ -81,6 +92,8 @@ export class MeusPedidosComponent {
 
     for (const pedido of this.pedidos) {
       pedido.valorTotal = this.calcularValorTotalCarrinho(pedido);
+
+      this.paginatorStates.push(new PedidoPaginatorState(pedido));
     }
 
   }
@@ -93,6 +106,24 @@ export class MeusPedidosComponent {
     return (pedido.carrinhoDeCompra || []).reduce((total, produto) => {
       return total + this.calcularValorItem(produto);
     }, 0);
+  }
+
+  onPageChange(event: any): void {
+    this.first = event.first;
+    this.rows = event.rows;
+  }
+
+  onPageChangeProduct(event: any, pedido: Pedido, index: number): void {
+    const pageIndex = this.pedidos.indexOf(pedido);
+    if (pageIndex !== -1) {
+      // Atualize o estado do paginator para o pedido específico
+      this.paginatorStates[pageIndex].first = event.first;
+      this.paginatorStates[pageIndex].rows = event.rows;
+    }
+  }
+
+  get totalRecords(): number {
+    return this.pedidos?.length || 0;
   }
 
 }
