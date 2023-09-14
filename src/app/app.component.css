@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   min-width: 370px;
   overflow: hidden; /* Ocultar o overflow para a barra de rolagem não aparecer aqui */
   position: relative;
@@ -32,7 +32,9 @@
   flex-direction: column;
   justify-content: space-between;
   width: 70%;
-  padding: 1%;
+  padding-left: 1%;
+  padding-top: 1%;
+  padding-right: 1%;
 }
 
 .botao-flutuante {
@@ -52,7 +54,5 @@
 }
 
 .rodape {
-  /* Estilo do rodapé aqui */
-  text-align: center;
-  margin-top: auto;
+  padding-top: 13px;
 }
