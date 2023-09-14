@@ -1,57 +1,58 @@
-.divGeral{
+.divGeral {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   min-width: 370px;
+  overflow: hidden; /* Ocultar o overflow para a barra de rolagem não aparecer aqui */
+  position: relative;
 }
 
-.corpo{
+.header {
+  height: 10%;
+  min-height: 100px;
+}
+
+.containerGeral {
+  display: flex;
+  flex: 1; /* Preencher o espaço restante na divGeral */
+  overflow: auto; /* Adicionar uma barra de rolagem apenas à área de conteúdo */
+}
+
+.divUsuario,
+.divAdministrador {
+  width: 15%;
+  min-width: 5rem;
+  position: sticky;
+  top: 0; /* Considerar altura do header e um espaçamento opcional */
+}
+
+.corpo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 70%;
   padding: 1%;
 }
 
-.horizontalRow{
-  width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.184);
-}
-
 .botao-flutuante {
   position: fixed;
-  bottom: 20px; /* Ajuste essa distância conforme necessário */
-  right: 20px; /* Ajuste essa distância conforme necessário */
+  bottom: 20px;
+  right: 20px;
   transition: 0.3s all ease;
   border: 1px solid rgba(129, 129, 129, 0.316);
   border-radius: 50%;
   cursor: pointer;
 }
 
-.botao-flutuante:hover{
-  scale: 1.20;
+.botao-flutuante:hover {
+  transform: scale(1.20);
   transition: 0.3s all ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.668);
-}
-
-.containerGeral{
-  display: flex;
-  height: 100%;
-}
-
-.divUsuario{
-  width: 15%;
-  min-width: 5rem;
-}
-
-
-.divAdministrador{
-  width: 15%;
-  min-width: 5rem;
 }
 
 .rodape {
   /* Estilo do rodapé aqui */
   text-align: center;
-  margin-top: auto; /* Coloca o rodapé na parte inferior */
+  margin-top: auto;
 }
-
-

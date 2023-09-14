@@ -1,4 +1,4 @@
-import { MegaMenuItem } from 'primeng/api';
+import { MegaMenuItem, MenuItem } from 'primeng/api';
 import { Categorias, ServiceCategoriasService } from './../../services/serviceCategorias/service-categorias.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ export class HeaderComponent {
 
   search!: string;
   categorias: Categorias[] = []
+  menuItems: MenuItem[] = [];
   responsiveOptions: any[] = [
     {
       breakpoint: '1199px',
@@ -43,6 +44,11 @@ export class HeaderComponent {
         this.categorias = categorias;
       }
     );
+
+    this.menuItems = this.categorias.map((categoria: Categorias) => ({
+      label: categoria.nome,
+      icon: categoria.icon
+    }));
   }
 
   navigateCategoria(categoria: Categorias) {

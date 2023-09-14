@@ -63,7 +63,6 @@ export class ServiceCategoriasService {
   [
     {
       nome: 'Boost',
-      icon: 'fa-solid fa-question',
       imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
       produtos: [
         {
@@ -207,7 +206,6 @@ export class ServiceCategoriasService {
     },
     {
       nome: 'Grow',
-      icon: 'fa-solid fa-question',
       imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251-12319.jpg',
       produtos: [
         {
@@ -306,7 +304,7 @@ export class ServiceCategoriasService {
     },
     {
       nome: 'Bloom',
-      icon: 'fa-solid fa-question',
+      
       imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
       produtos: [
         {
@@ -336,7 +334,7 @@ export class ServiceCategoriasService {
     },
     {
       nome: 'Finisher',
-      icon: 'fa-solid fa-question',
+      
       imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg',
       produtos: [
         {
@@ -412,7 +410,7 @@ export class ServiceCategoriasService {
     },
     {
       nome: 'Cal Kick',
-      icon: 'fa-solid fa-question',
+      
       imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
       produtos: [
         {

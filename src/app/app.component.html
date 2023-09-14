@@ -1,28 +1,30 @@
-<div class="divGeral scrollwrap">
+<div class="divGeral">
+  <div class="header">
+    <app-header></app-header>
+  </div>
 
-  <app-header></app-header>
-
-  <div class="containerGeral ">
-    <div class="divUsuario">
+  <div class="containerGeral scrollwrap">
+    <div class="divUsuario scrollwrapInterna">
       <app-funcoes-usuario></app-funcoes-usuario>
     </div>
-    <div class="corpo scrollwrapInterna">
-      <router-outlet></router-outlet>
+    <div class="corpo">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+      <div>
+        <app-rodape></app-rodape>
+      </div>
     </div>
-    <div class="divAdministrador">
+    <div class="divAdministrador scrollwrapInterna">
       <app-funcoes-administrador></app-funcoes-administrador>
     </div>
   </div>
-
-  <app-rodape class="rodape"></app-rodape>
 
   <p-button
     class="botao-flutuante"
     icon="fa-brands fa-whatsapp fa-xl"
     styleClass="p-button-rounded p-button-success"
     (onClick)="acaoDoBotao()"
-    >
+  >
   </p-button>
-
 </div>
-

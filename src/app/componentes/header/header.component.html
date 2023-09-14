@@ -3,10 +3,27 @@
   <div class="menuBar">
     <div class="divLogoESearch">
       <img class="img" src="assets/logo.png" alt="logo" routerLink="tela-principal">
+      <div>
+        <div class="sidenav-nav">
+          <div class="sidenav-nav-item">
+            <a
+              class="sidenav-nav-link"
+              (click)="menu.toggle($event)"
+            >
+              <i class="sidenav-link-icon fa-solid fa-bars"></i>
+              <span class="sidenav-link-text">
+                Categorias
+              </span>
+            </a>
+          </div>
+        </div>
+        <p-slideMenu #menu [model]="menuItems" [popup]="true" [viewportHeight]="300" [menuWidth]="175"></p-slideMenu>
+      </div>
       <span class="p-input-icon-left">
         <i class="fa-solid fa-magnifying-glass" style="color: green;"></i>
         <input type="text" pInputText [(ngModel)]="search" class="input" />
       </span>
+
     </div>
 
     <div class="divBotoes">
@@ -15,9 +32,11 @@
       <button style="color: white;" class="fa-solid fa-phone fa-lg backgroundBotoes"></button>
     </div>
 
+
+
   </div>
 
-  <hr class="horizontalRow">
+  <!-- <hr class="horizontalRow"> -->
   <!-- <div class="usuarios">
     AQUI É O MENU DOS USUÁRIOS
   </div>
@@ -26,7 +45,7 @@
     AQUI É O MENU DE ADMINISTRADOR
   </div> -->
 
-  <div class="categorias">
+  <!-- <div class="categorias">
     <div class="botoesCategorias">
       <p-carousel [value]="categorias" [showIndicators]="false" [numVisible]="7" [numScroll]="7" [circular]="true" [responsiveOptions]="responsiveOptions" class="carousel">
         <ng-template pTemplate="item" let-categoria>
@@ -52,7 +71,7 @@
         </ng-template>
       </p-carousel>
     </div>
-  </div>
+  </div> -->
 
 
 
