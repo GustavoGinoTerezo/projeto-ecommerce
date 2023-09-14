@@ -56,19 +56,36 @@ body { margin: 0; font-family: var(--font-family); background-color: var(--backg
   scrollbar-width: thin;
 }
 
-.scrollwrapInterna::-webkit-scrollbar-track{
+/* CSS DA SCROLLBAR INTERNO*/
+
+/* Scrollbar */
+.scrollwrapInterno{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidenav-nav,
+.scrollwrapInterno:hover,
+.scrollwrapInterno:focus {
+  visibility: visible;
+}
+
+/* Funciona no chrome, edge e safari */
+.scrollwrapInterno::-webkit-scrollbar {
+  width: 10px
+}
+
+.scrollwrapInterno::-webkit-scrollbar-track{
   background: transparent;
 }
 
-.scrollwrapInterna::-webkit-scrollbar-thumb{
-  background-color: var(--scrollbar);
+.scrollwrapInterno::-webkit-scrollbar-thumb{
   border-radius: 20px;
 }
 
 /* Funciona no firefox */
-.scrollwrapInterna{
+.scrollwrapInterno{
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar) transparent;
 }
 
 /*==================================================================================================================================*/
