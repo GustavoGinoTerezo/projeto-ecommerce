@@ -69,7 +69,11 @@
         </div>
 
         <p-button
+          [disabled]="
+          !emailLogin ||
+          !passwordLogin"
           label="Entrar"
+          (onClick)="entrar()"
         ></p-button>
 
         <br>
