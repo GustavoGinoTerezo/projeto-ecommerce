@@ -50,8 +50,6 @@ export interface ComentariosProdutos{
   comentario?: string;
 }
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -304,7 +302,7 @@ export class ServiceCategoriasService {
     },
     {
       nome: 'Bloom',
-      
+
       imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
       produtos: [
         {
@@ -334,7 +332,7 @@ export class ServiceCategoriasService {
     },
     {
       nome: 'Finisher',
-      
+
       imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255-12323-1.jpg',
       produtos: [
         {
@@ -410,7 +408,7 @@ export class ServiceCategoriasService {
     },
     {
       nome: 'Cal Kick',
-      
+
       imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
       produtos: [
         {

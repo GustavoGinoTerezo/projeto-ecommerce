@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ServiceLoginService } from 'src/app/services/servicesAPI/serviceLogin/service-login.service';
+import { ServiceApiLoginService } from 'src/app/services/servicesAPI/serviceAPI-Login/service-api-login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent {
   checked: boolean = false;
 
   constructor(
-    private loginService: ServiceLoginService,
+    private loginService: ServiceApiLoginService,
   ){}
 
   entrar(){

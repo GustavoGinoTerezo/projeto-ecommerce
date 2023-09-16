@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ServiceRegistrarService } from 'src/app/services/servicesAPI/serviceRegistrar/service-registrar.service';
+import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/serviceAPI-Registrar/service-api-registrar.service';
 
 interface Estado {
   nome: string;
@@ -69,7 +69,7 @@ export class CriarContaComponent {
   }
 
   constructor(
-    private registrar: ServiceRegistrarService,
+    private registrar: ServiceApiRegistrarService,
   ){}
 
   cadastrar(){

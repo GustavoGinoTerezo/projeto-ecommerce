@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceRegistrarService {
+export class ServiceApiRegistrarService {
 
   constructor(
     private urlGlobal: ServiceUrlGlobalService,

@@ -5,7 +5,7 @@ import { ServiceUrlGlobalService } from '../serviceUrlGlobal/service-url-global.
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceLoginService {
+export class ServiceApiLoginService {
 
   constructor(
     private urlGlobal: ServiceUrlGlobalService,
