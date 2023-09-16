@@ -18,7 +18,7 @@
         <br>
 
         <div class="emails">
-          <div class="email field p-fluid mt-4 tamanhoInputs">
+          <div class="email field p-fluid mt-4 tamanhoInputsEmail">
             <div class="inputs">
               <span class="p-float-label">
                 <input
@@ -30,7 +30,7 @@
                   pInputText
                   [(ngModel)]="emailCadastroPrincipal"
                 />
-                <label htmlFor="Email Pri">Email Principal</label>
+                <label htmlFor="Email principal">Email principal</label>
               </span>
               <small
                 *ngIf="
@@ -43,20 +43,29 @@
             </div>
           </div>
 
-          <div class="email field p-fluid mt-4 tamanhoInputs">
+
+        </div>
+
+        <div class="emails">
+          <div class="email field p-fluid mt-4 tamanhoInputsEmail">
             <div class="inputs">
-              <span class="p-float-label">
-                <input
-                  id="emailSecundario"
-                  name="emailSecundario"
-                  #emailInputSecundario="ngModel"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                  type="emailSecundario"
-                  pInputText
-                  [(ngModel)]="emailCadastroSecundario"
-                />
-                <label htmlFor="Email Secundário">Email Secundário</label>
-              </span>
+              <div class="containerInputEmailSec">
+                <div class="checkbox">
+                  <p-checkbox [(ngModel)]="checkbox" [binary]="true" inputId="binary"></p-checkbox>
+                </div>
+                <div class="inputEmailSec">
+                  <input
+                    [disabled]="!checkbox"
+                    id="emailSecundario"
+                    name="emailSecundario"
+                    #emailInputSecundario="ngModel"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    pInputText
+                    [(ngModel)]="emailCadastroSecundario"
+                    placeholder="Email alternativo"
+                  />
+                </div>
+              </div>
               <small
                 *ngIf="
                 emailInputSecundario.invalid && (emailInputSecundario.dirty  || emailInputSecundario.touched)
@@ -80,7 +89,7 @@
                   pInputText
                   [(ngModel)]="nomeCompleto"
                 />
-                <label htmlFor="Nome Completo">Nome Completo</label>
+                <label htmlFor="Nome completo">Nome completo</label>
               </span>
             </div>
           </div>
@@ -88,16 +97,9 @@
           <div class="email field p-fluid mt-4 tamanhoInputs">
             <div class="inputs">
               <span class="p-float-label">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  pInputText
-                  [(ngModel)]="cpfOuCnpj"
-                />
+                <input pInputText type="text" [(ngModel)]="cpfOuCnpj" (keypress)="onKeyPress($event)" />
                 <label htmlFor="email">CPF ou CNPJ</label>
               </span>
-
             </div>
           </div>
         </div>
@@ -112,33 +114,36 @@
                   id="telefonePrincipal"
                   #telefoneprincipal="ngModel"
                   ></p-inputMask>
-                <label htmlFor="Telefone Principal">Telefone Principal</label>
+                <label htmlFor="Telefone principal">Telefone principal</label>
               </span>
-
             </div>
           </div>
-
           <div class="email field p-fluid mt-4 tamanhoInputs">
             <div class="inputs">
-              <span class="p-float-label">
-                <p-inputMask
-                  mask="(99) 99999-9999"
-                  [(ngModel)]="telefoneSecundario"
-                  id="telefoneSecundario"
-                  #telefonesecundario="ngModel"
-                  ></p-inputMask>
-                <label htmlFor="telefoneSecundario">Telefone Secundário</label>
-              </span>
-              <small
-                *ngIf="
-                telefonesecundario.invalid && (telefonesecundario.dirty  || telefonesecundario.touched)
-                "
-                class="p-error"
-              >
-                Formato de email inválido
-              </small>
+              <div class="containerInputEmailSec">
+                <div class="checkbox">
+                  <p-checkbox [(ngModel)]="checkboxTelefone" [binary]="true" inputId="binary"></p-checkbox>
+                </div>
+                <div class="inputEmailSec">
+                  <span class="p-float-label">
+                    <p-inputMask
+                      [disabled]="!checkboxTelefone"
+                      mask="(99) 99999-9999"
+                      [(ngModel)]="telefoneSecundario"
+                      id="telefoneSecundario"
+                      #telefonesecundario="ngModel"
+                      ></p-inputMask>
+                    <label htmlFor="Telefone alternativo">Telefone alternativo</label>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
+
+        </div>
+
+        <div class="telefone">
+
         </div>
 
         <div class="endereco">
@@ -189,19 +194,8 @@
             </div>
           </div>
 
-          <div class="email field p-fluid mt-4 tamanhoInputs">
-            <div class="inputs">
-              <span class="p-float-label">
-                <input
-                  id="estado"
-                  name="estado"
-                  type="estado"
-                  pInputText
-                  [(ngModel)]="estado"
-                />
-                <label htmlFor="Estado">Estado</label>
-              </span>
-            </div>
+          <div class="tamanhoInputs">
+            <p-dropdown [options]="estado"  [showClear]="true" [(ngModel)]="estadoSelecionado" placeholder="Estado" optionLabel="nome"></p-dropdown>
           </div>
         </div>
 

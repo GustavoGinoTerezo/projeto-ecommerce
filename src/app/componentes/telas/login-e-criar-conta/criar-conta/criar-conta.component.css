@@ -52,7 +52,14 @@
   /* Estilos para as opções de login */
 
   .inputs {
+    width: 100%;
     margin-bottom: 25px;
+  }
+
+  .containerInputEmailSec{
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
 
   /*área do lembre de mim*/
@@ -76,11 +83,16 @@
 
   .divInputs {
     width: 80%;
+
   }
 
   .infoPessoal{
     display: flex;
     justify-content: space-between;
+  }
+
+  .email{
+    width: 100%;
   }
 
   .emails{
@@ -94,6 +106,7 @@
   }
 
   .endereco{
+    width: 100%;
     display: flex;
     justify-content: space-between;
   }
@@ -143,4 +156,24 @@
 .desc {
   font-size: 14px;
   color: #555;
+}
+
+:host ::ng-deep .p-dropdown{
+  width: 100%;
+}
+
+.tamanhoInputsEmail{
+  width: 100%;
+}
+
+.tamanhoInputsTelefone{
+  width: 100%;
+}
+
+.inputEmailSec{
+  width: 100%;
+}
+
+.checkbox{
+  margin-right: 10px;
 }
