@@ -22,7 +22,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   categorias: Categorias[] = [];
   categoriasFiltradas: Categorias[] = []
   categoriasSelecionada!: Categorias;
-  categoriasSelecionadaInput!: Categorias;
+  categoriasSelecionadaInput!: any;
   nomeProduto: string = '';
   valorProduto!: number | null
   descCompleta: string = '';
@@ -30,30 +30,16 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   quantidadeProduto!: number | null
   adicionarProdutoDisabled: boolean = false;
   selectedProductImages: any[] = [];
-
-  countries!: any[] ;
-  selectedCountry!: any;
   valorProdutoFormatted: string = '';
-
   categoriasAdicionarSelecionadaInput: any;
   nomeCategoriaSelecionada: string = '';
   adicionarCategoriaDisabled: boolean = false;
-
   isDragOver = false;
-
-  onDragOver(event: Event): void {
-    event.preventDefault();
-    this.isDragOver = true;
-  }
-
-  onDragLeave(event: Event): void {
-    event.preventDefault();
-    this.isDragOver = false;
-  }
-
-
   cities!: City[] ;
   selectedCity!: City;
+  categoriaVazia: CategoriaVazia = {
+    nome: '',
+  };
 
   constructor(
     private categoriasService: ServiceCategoriasService,
@@ -72,24 +58,10 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       this.categoriasFiltradas = data;
     });
 
-    this.countries = [
-      { name: 'Australia', code: 'AU' },
-      { name: 'Brazil', code: 'BR' },
-      { name: 'China', code: 'CN' },
-      { name: 'Egypt', code: 'EG' },
-      { name: 'France', code: 'FR' },
-      { name: 'Germany', code: 'DE' },
-      { name: 'India', code: 'IN' },
-      { name: 'Japan', code: 'JP' },
-      { name: 'Spain', code: 'ES' },
-      { name: 'United States', code: 'US' }
-    ];
-
-    this.cities = [
+     this.cities = [
       { name: 'Disponível'},
       { name: 'Indisponível' },
     ];
-
 
   }
 
@@ -123,10 +95,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.selectedProductImages = produto.imagem || []
   }
 
-  categoriaVazia: CategoriaVazia = {
-    nome: '',
-  };
-
   formatCurrency(value: number | null): string {
     if (value !== null) {
       return value.toFixed(2);
@@ -154,14 +122,14 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.descCompleta = '';
     this.descBreve = '';
     this.quantidadeProduto = null;
-    this.categoriasSelecionadaInput = this.categoriaVazia;
+    this.categoriasSelecionadaInput = null;
     this.adicionarProdutoDisabled = false;
     this.selectedProductImages = []
   }
 
   limparCamposCategoriaNova() {
     this.nomeCategoriaSelecionada = '';
-    this.categoriasAdicionarSelecionadaInput = this.categoriaVazia;
+    this.categoriasAdicionarSelecionadaInput = null;
     this.adicionarCategoriaDisabled = false;
   }
 
@@ -171,6 +139,14 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.adicionarCategoriaDisabled = true;
   }
 
+  onDragOver(event: Event): void {
+    event.preventDefault();
+    this.isDragOver = true;
+  }
 
+  onDragLeave(event: Event): void {
+    event.preventDefault();
+    this.isDragOver = false;
+  }
 
 }

@@ -4,7 +4,11 @@
     <div class="containerNomeProdutoECategoria">
       <div class="divInputNome">
         <span class="p-float-label">
-          <input pInputText id="username" [(ngModel)]="nomeCategoriaSelecionada" />
+          <input
+            pInputText
+            id="categoria"
+            [(ngModel)]="nomeCategoriaSelecionada"
+           />
           <label htmlFor="username">Nome da Categoria</label>
         </span>
       </div>
@@ -38,8 +42,11 @@
 
   <div class="containerBotoes">
     <div class="divInputs">
-      <p-button label="Adicionar categoria"
-      [disabled]="adicionarCategoriaDisabled" styleClass="p-button-raised p-button-success"></p-button>
+      <p-button
+        label="Adicionar categoria"
+        [disabled]="adicionarCategoriaDisabled || categoriasAdicionarSelecionadaInput"
+        styleClass="p-button-raised p-button-success"
+      ></p-button>
     </div>
     <div class="divInputs">
       <p-button label="Atualizar categoria" styleClass="p-button-raised p-button-warning"></p-button>
