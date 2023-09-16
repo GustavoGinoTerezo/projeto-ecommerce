@@ -74,10 +74,6 @@ export class CriarContaComponent {
 
   cadastrar(){
 
-
-
-
-
     const dataLogin = {
       nome: this.nomeCompleto,
       senha: this.passwordCadastro,

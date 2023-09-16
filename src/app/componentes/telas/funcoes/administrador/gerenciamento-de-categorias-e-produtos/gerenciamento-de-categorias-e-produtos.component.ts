@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { CategoriaVazia, Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
+import { ServiceAPICategoriaService } from 'src/app/services/servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
 
 interface City {
   name: string;
@@ -32,7 +33,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   selectedProductImages: any[] = [];
   valorProdutoFormatted: string = '';
   categoriasAdicionarSelecionadaInput: any;
-  nomeCategoriaSelecionada: string = '';
+  nomeCategoriaSelecionada!: string;
   adicionarCategoriaDisabled: boolean = false;
   isDragOver = false;
   cities!: City[] ;
@@ -44,6 +45,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   constructor(
     private categoriasService: ServiceCategoriasService,
     private messageService: MessageService,
+    private apiCategoria: ServiceAPICategoriaService,
   ){}
 
   ngOnInit(){
@@ -148,5 +150,23 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     event.preventDefault();
     this.isDragOver = false;
   }
+
+
+
+  adicionarCategoria(){
+
+    const dataCadastrarCategoria = {
+      nome: this.nomeCategoriaSelecionada
+    }
+
+    this.apiCategoria.cadastrarCategoria(dataCadastrarCategoria).subscribe(response => {
+
+      console.log("Categoria adicionada com sucesso")
+
+    })
+
+  }
+
+
 
 }

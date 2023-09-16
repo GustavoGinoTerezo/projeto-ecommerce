@@ -46,6 +46,7 @@
         label="Adicionar categoria"
         [disabled]="adicionarCategoriaDisabled || categoriasAdicionarSelecionadaInput || !nomeCategoriaSelecionada"
         styleClass="p-button-raised p-button-success"
+        (onClick)="adicionarCategoria()"
       ></p-button>
     </div>
     <div class="divInputs">
