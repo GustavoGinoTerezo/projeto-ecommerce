@@ -16,4 +16,9 @@ export const navbarData: INavbarData[] = [
     icon: 'fa-solid fa-dolly',
     label: 'Meus pedidos',
   },
+  {
+    routerLink: 'tela-principal',
+    icon: 'fa-solid fa-right-from-bracket',
+    label: 'Logout',
+  },
 ];
