@@ -44,15 +44,23 @@
     <div class="divInputs">
       <p-button
         label="Adicionar categoria"
-        [disabled]="adicionarCategoriaDisabled || categoriasAdicionarSelecionadaInput"
+        [disabled]="adicionarCategoriaDisabled || categoriasAdicionarSelecionadaInput || !nomeCategoriaSelecionada"
         styleClass="p-button-raised p-button-success"
       ></p-button>
     </div>
     <div class="divInputs">
-      <p-button label="Atualizar categoria" styleClass="p-button-raised p-button-warning"></p-button>
+      <p-button
+        label="Atualizar categoria"
+        [disabled]="!categoriasAdicionarSelecionadaInput"
+        styleClass="p-button-raised p-button-warning"
+      ></p-button>
     </div>
     <div class="divInputs">
-      <p-button label="Excluir categoria" styleClass="p-button-raised p-button-danger"></p-button>
+      <p-button
+        label="Excluir categoria"
+        [disabled]="!categoriasAdicionarSelecionadaInput"
+        styleClass="p-button-raised p-button-danger"
+      ></p-button>
     </div>
     <div class="divInputs">
       <p-button
@@ -62,6 +70,7 @@
       ></p-button>
     </div>
   </div>
+
   <hr class="hr">
   <h1 class="h1">Gerenciamento de Produtos</h1>
   <div class="containerInputs">
