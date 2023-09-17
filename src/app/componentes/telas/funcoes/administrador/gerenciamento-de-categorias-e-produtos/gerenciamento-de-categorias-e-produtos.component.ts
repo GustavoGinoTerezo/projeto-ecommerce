@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { CategoriaVazia, Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
@@ -32,6 +33,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   quantidadeProduto!: number | null
   adicionarProdutoDisabled: boolean = false;
   selectedProductImages: any[] = [];
+  selectedProductImagesTemplate: any[] = [];
   valorProdutoFormatted: string = '';
   categoriasAdicionarSelecionadaInput: any;
   nomeCategoriaSelecionada!: string;
@@ -46,7 +48,8 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   constructor(
     private categoriasService: ServiceCategoriasService,
     private messageService: MessageService,
-    private apiCategoriaService: ServiceAPICategoriaService
+    private apiCategoriaService: ServiceAPICategoriaService,
+    private http: HttpClient
   ){}
 
   ngOnInit(){
@@ -156,6 +159,46 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.isDragOver = false;
   }
 
+  private atualizarPagina() {
+    //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
+    setTimeout(() => {
+      location.reload();
+    }, 2000);
+  }
+
+  onUpload(event:UploadEvent) {
+    for (let file of event.files) {
+      this.selectedProductImages.push(file);
+    }
+    console.log(this.selectedProductImages)
+  }
+
+  enviarImagensAoBackend() {
+    console.log(this.selectedProductImages)
+  }
+
+  //===============================================================================================//
+  //MENSAGENS TOAST
+
+  showSuccess(mensagemSucesso: string) {
+    this.messageService.add({ severity:   'success', detail: mensagemSucesso, life: 1600});
+  }
+
+  showInfo() {
+    this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
+  }
+
+  showWarn() {
+    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
+  }
+
+  showError(mensagemErro: string) {
+    this.messageService.add({ severity: 'error', detail: mensagemErro });
+  }
+
+  //===============================================================================================//
+  //API CATEGORIA
+
   adicionarCategoria(){
 
     const dataCadastrarCategoria = {
@@ -222,29 +265,27 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     );
   }
 
+  //===============================================================================================//
+  //API PRODUTO
 
-  private atualizarPagina() {
-    //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
-    setTimeout(() => {
-      location.reload();
-    }, 2000);
+  adicionarProduto(){
+    
+  }
+
+  atualizarProduto(){
+
+  }
+
+  excluirProduto(){
+
   }
 
 
-  showSuccess(mensagemSucesso: string) {
-    this.messageService.add({ severity:   'success', detail: mensagemSucesso, life: 1600});
-  }
 
-  showInfo() {
-    this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
-  }
 
-  showWarn() {
-    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
-  }
 
-  showError(mensagemErro: string) {
-    this.messageService.add({ severity: 'error', detail: mensagemErro });
-  }
+
+
+
 
 }

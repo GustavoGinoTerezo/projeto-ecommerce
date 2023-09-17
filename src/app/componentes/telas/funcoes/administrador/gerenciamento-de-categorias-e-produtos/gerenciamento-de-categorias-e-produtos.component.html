@@ -153,14 +153,24 @@
 
         <div class="containerUploadFoto">
           <div class="fileUploadFotos scrollwrap">
-            <p-fileUpload chooseLabel="Adicionar" chooseIcon="fa-solid fa-plus"  cancelLabel="Cancelar" [showUploadButton]="false" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*" [maxFileSize]="100000000">
+            <p-fileUpload
+            chooseLabel="Adicionar"
+            chooseIcon="fa-solid fa-plus"
+            cancelLabel="Cancelar"
+            [showUploadButton]="false"
+            name="myfile[]"
+            [multiple]="true"
+            accept="image/*"
+            [maxFileSize]="100000000"
+            (onSelect)="onUpload($event)"
+            >
               <ng-template pTemplate="toolbar">
                 <div class="labelFotos">
                   Escolher fotos do produto
                 </div>
               </ng-template>
               <ng-template let-file pTemplate="content">
-                <div *ngFor="let image of selectedProductImages" class="containerImagem">
+                <div *ngFor="let image of selectedProductImagesTemplate" class="containerImagem">
                   <img class="img" [src]="image.imagem" alt="Product Image" />
                   <p-button label="Excluir" icon="fa-solid fa-xmark"></p-button>
                 </div>
@@ -189,7 +199,9 @@
     <div class="divInputs">
       <p-button label="Adicionar produto"
       [disabled]="adicionarProdutoDisabled"
-      styleClass="p-button-raised p-button-success"></p-button>
+      styleClass="p-button-raised p-button-success"
+      (onClick)="enviarImagensAoBackend()"
+      ></p-button>
     </div>
     <div class="divInputs">
       <p-button label="Atualizar produto" styleClass="p-button-raised p-button-warning"></p-button>

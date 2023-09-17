@@ -14,9 +14,9 @@ export class ServiceAPICategoriaService {
   ) {}
 
   buscarCategorias() {
-    const endpoint = "categoria"; // O endpoint da API para buscar todas as categorias
+    const endpoint = "categoria";
     const url = this.urlGlobal.url + endpoint;
-    return this.http.get<any[]>(url); // Use http.get para fazer uma solicitação GET
+    return this.http.get<any[]>(url);
   }
 
   cadastrarCategoria(data: any) {
@@ -26,18 +26,14 @@ export class ServiceAPICategoriaService {
   }
 
   atualizarCategoria(idCategoria: number, novosDados: any) {
-    const endpoint = `categoria/${idCategoria}`; // Suponhamos que você precise fornecer o ID da categoria a ser atualizada
+    const endpoint = `categoria/${idCategoria}`;
     const url = this.urlGlobal.url + endpoint;
-
-    // Use http.put para fazer uma solicitação PUT para atualizar a categoria.
-    // Passa os novos dados no corpo da solicitação como o segundo argumento.
     return this.http.put<any>(url, novosDados);
   }
 
   excluirCategoria(categoriaId: number) {
-    const endpoint = `categoria/${categoriaId}`; // Suponhamos que você precise fornecer o ID da categoria a ser excluída
+    const endpoint = `categoria/${categoriaId}`;
     const url = this.urlGlobal.url + endpoint;
-    // Use http.delete para fazer uma solicitação DELETE para excluir a categoria
     return this.http.delete<any>(url);
   }
 
