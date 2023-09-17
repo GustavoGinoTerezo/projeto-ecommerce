@@ -20,7 +20,6 @@
           optionLabel="nome"
           [filter]="true"
           filterBy="nome"
-          [showClear]="true"
           placeholder="Selecione a categoria"
         >
           <!-- Selected Item Template -->
@@ -54,6 +53,7 @@
         label="Atualizar categoria"
         [disabled]="!categoriasAdicionarSelecionadaInput"
         styleClass="p-button-raised p-button-warning"
+        (onClick)="atualizarCategoria()"
       ></p-button>
     </div>
     <div class="divInputs">
@@ -61,11 +61,13 @@
         label="Excluir categoria"
         [disabled]="!categoriasAdicionarSelecionadaInput"
         styleClass="p-button-raised p-button-danger"
+        (onClick)="excluirCategoria()"
       ></p-button>
     </div>
     <div class="divInputs">
       <p-button
         label="Limpar campos"
+        [disabled]="!nomeCategoriaSelecionada"
         (click)="limparCamposCategoriaNova()"
         styleClass="p-button-raised p-button-info"
       ></p-button>
@@ -244,3 +246,6 @@
     </p-table>
   </div>
 </div>
+
+
+<p-toast [showTransitionOptions]="'200ms'" [hideTransitionOptions]="'200ms'"></p-toast>

@@ -20,6 +20,7 @@ interface UploadEvent {
 })
 export class GerenciamentoDeCategoriasEProdutosComponent {
 
+  idCategoria!: number;
   categorias: Categorias[] = [];
   categoriasFiltradas: Categorias[] = []
   categoriasSelecionada!: Categorias;
@@ -45,16 +46,17 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   constructor(
     private categoriasService: ServiceCategoriasService,
     private messageService: MessageService,
-    private apiCategoria: ServiceAPICategoriaService,
+    private apiCategoriaService: ServiceAPICategoriaService
   ){}
 
   ngOnInit(){
 
-    this.categoriasService.getCategorias().subscribe(
-      (categorias) => {
-        this.categorias = categorias;
-      }
-    );
+    // Aguarde um curto período de tempo antes de acessar as categorias
+    // ou utilize observables para lidar com a conclusão da chamada da API
+    setTimeout(() => {
+      this.categorias = this.categoriasService.categorias;
+    }, 1000); // Aguarda  segundo (ajuste conforme necessário)
+
 
     this.categoriasService.getCategoriasTabela().then((data) => {
       this.categoriasFiltradas = data;
@@ -64,6 +66,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       { name: 'Disponível'},
       { name: 'Indisponível' },
     ];
+
 
   }
 
@@ -139,6 +142,8 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.categoriasAdicionarSelecionadaInput = event.value;
     this.nomeCategoriaSelecionada = event.value.nome || '';
     this.adicionarCategoriaDisabled = true;
+    this.idCategoria = event.value.catId
+    console.log(this.idCategoria)
   }
 
   onDragOver(event: Event): void {
@@ -151,22 +156,95 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.isDragOver = false;
   }
 
-
-
   adicionarCategoria(){
 
     const dataCadastrarCategoria = {
       nome: this.nomeCategoriaSelecionada
     }
+    const mensagemSucesso = "Categoria adicionada com sucesso."
+    const mensagemErro = "Erro ao adicionar a categoria."
 
-    this.apiCategoria.cadastrarCategoria(dataCadastrarCategoria).subscribe(response => {
+    this.apiCategoriaService.cadastrarCategoria(dataCadastrarCategoria).subscribe
+    ((response) => {
+      this.showSuccess(mensagemSucesso)
+      console.log("Categoria adicionada com sucesso", response)
+    },
+    (error) => {
+      this.showError(mensagemErro)
+      console.log("Erro ao adicionar a categoria", error)
+    }
+    )
 
-      console.log("Categoria adicionada com sucesso")
-
-    })
+    this.atualizarPagina();
 
   }
 
+  atualizarCategoria(){
 
+    const idCategoria = this.idCategoria;
+
+    const novoNomeCategoria = {
+      nome: this.nomeCategoriaSelecionada
+    }
+
+    const mensagemSucesso = "Categoria atualizada com sucesso."
+    const mensagemErro = "Erro ao atualizar a categoria."
+
+    this.apiCategoriaService.atualizarCategoria(idCategoria, novoNomeCategoria).subscribe(
+      (response) => {
+        console.log("Categoria atualizada com sucesso", response);
+        this.showSuccess(mensagemSucesso)
+        this.atualizarPagina();
+      },
+      (error) => {
+        this.showError(mensagemErro)
+        console.error("Erro ao atualizar a categoria", error)
+      }
+    );
+  }
+
+  excluirCategoria() {
+
+    const idCategoria = this.idCategoria;
+    const mensagemSucesso = "Categoria excluída com sucesso."
+    const mensagemErro = "Erro ao excluir a categoria."
+
+    this.apiCategoriaService.excluirCategoria(idCategoria).subscribe(
+      (response) => {
+        console.log("Categoria excluída com sucesso", response);
+        this.showSuccess(mensagemSucesso)
+        this.atualizarPagina();
+      },
+      (error) => {
+        this.showError(mensagemErro)
+        console.error("Erro ao excluir a categoria", error);
+      }
+    );
+  }
+
+
+  private atualizarPagina() {
+    //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
+    setTimeout(() => {
+      location.reload();
+    }, 2000);
+  }
+
+
+  showSuccess(mensagemSucesso: string) {
+    this.messageService.add({ severity:   'success', detail: mensagemSucesso, life: 1600});
+  }
+
+  showInfo() {
+    this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
+  }
+
+  showWarn() {
+    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
+  }
+
+  showError(mensagemErro: string) {
+    this.messageService.add({ severity: 'error', detail: mensagemErro });
+  }
 
 }
