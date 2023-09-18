@@ -16,7 +16,11 @@ export class AppComponent {
   ) {}
 
   ngOnInit(){
+
     this.categoriasService.atualizarCategoriasDaAPI();
+
+    this.categoriasService.atualizarProdutosDaAPI();
+
   }
 
   acaoDoBotao() {

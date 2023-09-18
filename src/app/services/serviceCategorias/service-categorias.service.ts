@@ -3,6 +3,7 @@ import { Observable, map, of } from 'rxjs';
 import { ServiceAPICategoriaService } from '../servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
 import { HttpClient } from '@angular/common/http';
 import { ServiceUrlGlobalService } from '../servicesAPI/serviceUrlGlobal/service-url-global.service';
+import { ServiceAPIProdutoService } from '../servicesAPI/serviceAPI-Produto/service-api-produto.service';
 
 export interface CategoriaVazia extends Categorias {
   nome: '';
@@ -59,6 +60,7 @@ export class ServiceCategoriasService {
 
   constructor(
     private apiCategoriaService: ServiceAPICategoriaService,
+    private apiProdutos: ServiceAPIProdutoService,
     private urlGlobal: ServiceUrlGlobalService,
     private http: HttpClient,
   ) { }
@@ -244,6 +246,8 @@ export class ServiceCategoriasService {
 
   categoriasAPI: Categorias[] = [];
 
+  produtosAPI: Produtos[] = []
+
   //==================================================================================================================================//
 
   getCategorias(): Observable<Categorias[]> {
@@ -251,7 +255,7 @@ export class ServiceCategoriasService {
   }
 
   getCategoriasTabela() {
-    return Promise.resolve(this.categorias);
+    return Promise.resolve(this.produtosAPI);
   }
 
   obterCategoriaPorNome(nome: string): Categorias | undefined {
@@ -321,6 +325,18 @@ export class ServiceCategoriasService {
       (categoriasAPI) => {
         this.categoriasAPI = categoriasAPI;
         console.log(this.categoriasAPI)
+      },
+      (error) => {
+        console.error('Erro ao buscar categorias da API', error);
+      }
+    );
+  }
+
+  atualizarProdutosDaAPI(){
+    this.apiProdutos.buscarProdutos().subscribe(
+      (produtosAPI) => {
+        this.produtosAPI = produtosAPI;
+        console.log(this.produtosAPI)
       },
       (error) => {
         console.error('Erro ao buscar categorias da API', error);

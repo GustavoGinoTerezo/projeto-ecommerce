@@ -24,18 +24,17 @@
   margin-bottom: 15px;
 }
 
-.divInputEmail{
+.divInputPreco{
   display: flex;
-  width: 100%;
+  width: 33%;
   padding: 13px 0;
   margin-bottom: 15px;
-  margin-right: 5px;
 }
 
-.divInputTelefone{
+.divInputDropDown{
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 33%;
   padding: 13px 0;
   margin-bottom: 15px;
 }

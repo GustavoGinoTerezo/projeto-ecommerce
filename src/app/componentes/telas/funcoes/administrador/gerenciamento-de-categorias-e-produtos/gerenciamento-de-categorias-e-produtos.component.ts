@@ -7,7 +7,12 @@ import { ServiceAPICategoriaService } from 'src/app/services/servicesAPI/service
 import { ServiceAPIProdutoService } from 'src/app/services/servicesAPI/serviceAPI-Produto/service-api-produto.service';
 
 interface Status {
-  name: string;
+  nome: string;
+  cod: string;
+}
+
+interface Layout {
+  nome: string;
   cod: string;
 }
 
@@ -25,7 +30,10 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   idCategoria!: number;
   categorias: Categorias[] = [];
-  categoriasFiltradas: Categorias[] = []
+  produtos: Produtos[] = [];
+
+
+  categoriasFiltradas: Categorias[] = [];
   categoriasSelecionada!: Categorias;
   categoriasSelecionadaInput!: any;
   nomeProduto: string = '';
@@ -42,7 +50,9 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   adicionarCategoriaDisabled: boolean = false;
   isDragOver = false;
   status!: Status[] ;
+  layout!: Layout[] ;
   selectedStatus!: Status;
+  selectedLayout!: Layout;
   categoriaVazia: CategoriaVazia = {
     nome: '',
   };
@@ -62,19 +72,28 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     // ou utilize observables para lidar com a conclusão da chamada da API
     setTimeout(() => {
       this.categorias = this.categoriasService.categoriasAPI;
+      this.produtos = this.categoriasService.produtosAPI;
+      this.categoriasFiltradas = this.produtos
+
     }, 1000); // Aguarda  segundo (ajuste conforme necessário)
 
 
-    this.categoriasService.getCategoriasTabela().then((data) => {
-      this.categoriasFiltradas = data;
-    });
+    // this.categoriasService.getCategoriasTabela().then((data) => {
+    //   this.categoriasFiltradas = data;
+    // });
 
-     this.status = [
-      { name: 'Disponível', cod: "1"},
-      { name: 'Indisponível', cod: "2"},
-      { name: 'Não vísivel', cod: "3"},
+    this.status = [
+      { nome: 'Disponível', cod: "1"},
+      { nome: 'Indisponível', cod: "2"},
+      { nome: 'Não vísivel', cod: "3"},
     ];
 
+    this.layout = [
+      { nome: 'Padrão', cod: "0"},
+      { nome: 'Em destaque', cod: "1"},
+      { nome: 'Mais vendidos', cod: "2"},
+      { nome: 'Em promoção', cod: "3"},
+    ];
 
   }
 
@@ -303,6 +322,40 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.apiProdutoService.cadastrarProduto(dataProduto).subscribe(
       (response) => {
         console.log("Produto adicionado com sucesso", response)
+
+        const prodId = response.prodId
+
+        const dataPosProduto = {
+          posProdTp: this.selectedLayout.cod,
+          prodId: prodId
+        }
+
+        this.apiProdutoService.cadastrarPosicaoProduto(dataPosProduto).subscribe(
+          (response) => {
+            console.log("Posição do produto cadastrada com sucesso", response)
+          },
+          (error) => {
+            console.log("Erro no cadastro da posição do produto", error)
+          }
+        )
+
+        // for(const imagem of this.selectedProductImages){
+        //   const dataFotosProduto = {
+        //     prodId: prodId,
+        //     prodFotoTp: 1,
+        //     imgfomulacao: imagem.name.toString()
+        //   }
+
+        //   this.apiProdutoService.cadastrarFotosProduto(dataFotosProduto).subscribe(
+        //     (response) => {
+        //       console.log("Foto do produto cadastrada com sucesso", response)
+        //     },
+        //     (error) => {
+        //       console.log("Erro no cadastro da foto do produto", error)
+        //     }
+        //   )
+        // };
+
       },
       (error) => {
         console.log("Erro ao cadastrar produto", error)

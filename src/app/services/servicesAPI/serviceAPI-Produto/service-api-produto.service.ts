@@ -12,6 +12,10 @@ export class ServiceAPIProdutoService {
     private http: HttpClient,
   ) {}
 
+
+  //================================================//
+  //ADICIONAR PRODUTO
+
   buscarProdutos() {
     const endpoint = "produto";
     const url = this.urlGlobal.url + endpoint;
@@ -32,6 +36,59 @@ export class ServiceAPIProdutoService {
 
   excluirProduto(idProduto: number) {
     const endpoint = `produto/${idProduto}`;
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.delete<any>(url);
+  }
+
+  //================================================//
+  //ADICIONAR POSIÇÃO DO PRODUTO
+
+  buscarPosicaoProdutos() {
+    const endpoint = "posprod";
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.get<any[]>(url);
+  }
+
+  cadastrarPosicaoProduto(data: any) {
+    const endpoint = "posprod";
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.post<any>(url, data);
+  }
+
+  atualizarPosicaoProduto(idPosProduto: number, novosDados: any) {
+    const endpoint = `posprod/${idPosProduto}`;
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.put<any>(url, novosDados);
+  }
+
+  excluirPosicaoProduto(idPosProduto: number) {
+    const endpoint = `posprod/${idPosProduto}`;
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.delete<any>(url);
+  }
+
+  //================================================//
+  //ADICIONAR FOTOS DO PRODUTO
+  buscarFotosProdutos() {
+    const endpoint = "prodfoto";
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.get<any[]>(url);
+  }
+
+  cadastrarFotosProduto(data: any) {
+    const endpoint = "prodfoto";
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.post<any>(url, data);
+  }
+
+  atualizarFotosProduto(prodFotoId: number, novosDados: any) {
+    const endpoint = `prodfoto/${prodFotoId}`;
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.put<any>(url, novosDados);
+  }
+
+  excluirFotosProduto(prodFotoId: number) {
+    const endpoint = `prodfoto/${prodFotoId}`;
     const url = this.urlGlobal.url + endpoint;
     return this.http.delete<any>(url);
   }

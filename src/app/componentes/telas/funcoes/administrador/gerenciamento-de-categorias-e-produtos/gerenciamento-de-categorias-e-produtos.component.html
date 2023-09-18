@@ -108,19 +108,28 @@
       </div>
     </div>
     <div class="containerPrecoEStatus">
-      <div class="divInputEmail">
+      <div class="divInputPreco">
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon">R$</span>
           <input [(ngModel)]="valorProdutoFormatted" (keypress)="onKeyPress($event)" (input)="onValorProdutoInput($event)" pInputText placeholder="Preço" />
         </div>
       </div>
-      <div class="divInputTelefone">
+      <div class="divInputDropDown">
         <p-dropdown
           [options]="status"
           placeholder="Selecione o status"
           [(ngModel)]="selectedStatus"
           [showClear]="true"
-          optionLabel="name"
+          optionLabel="nome"
+        ></p-dropdown>
+      </div>
+      <div class="divInputDropDown">
+        <p-dropdown
+          [options]="layout"
+          placeholder="Selecione o layout"
+          [(ngModel)]="selectedLayout"
+          [showClear]="true"
+          optionLabel="nome"
         ></p-dropdown>
       </div>
     </div>
@@ -248,7 +257,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-categoria>
-        <tr [pSelectableRow]="produto" (click)="updateInputFieldsWithSelectedProduct(categoria, produto)" *ngFor="let produto of categoria?.produtos">
+        <tr [pSelectableRow]="produto" (click)="updateInputFieldsWithSelectedProduct(categoria, produto)" *ngFor="let produto of produtos">
           <td>{{ produto?.nome }}</td>
           <td></td>
           <td>{{ categoria?.nome }}</td>
