@@ -88,10 +88,10 @@
         <p-dropdown
           [options]="categorias"
           [(ngModel)]="categoriasSelecionadaInput"
+          (onChange)="onCategoriaAdicionarProdutoSelect($event)"
           optionLabel="nome"
           [filter]="true"
           filterBy="nome"
-          [showClear]="true"
           placeholder="Selecione a categoria"
         >
           <ng-template pTemplate="selectedItem">
@@ -111,14 +111,14 @@
       <div class="divInputEmail">
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon">R$</span>
-          <input [(ngModel)]="valorProdutoFormatted" (input)="onValorProdutoInput($event)" pInputText placeholder="Preço" />
+          <input [(ngModel)]="valorProdutoFormatted" (keypress)="onKeyPress($event)" (input)="onValorProdutoInput($event)" pInputText placeholder="Preço" />
         </div>
       </div>
       <div class="divInputTelefone">
         <p-dropdown
-          [options]="cities"
+          [options]="status"
           placeholder="Selecione o status"
-          [(ngModel)]="selectedCity"
+          [(ngModel)]="selectedStatus"
           [showClear]="true"
           optionLabel="name"
         ></p-dropdown>
@@ -200,7 +200,7 @@
       <p-button label="Adicionar produto"
       [disabled]="adicionarProdutoDisabled"
       styleClass="p-button-raised p-button-success"
-      (onClick)="enviarImagensAoBackend()"
+      (onClick)="adicionarProduto()"
       ></p-button>
     </div>
     <div class="divInputs">

@@ -24,6 +24,12 @@ export class ServiceApiRegistrarService {
     return this.http.post<any>(url, data);
   }
 
+  registrarUf(data: any) {
+    const endpoint = "uf";
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.post<any>(url, data);
+  }
+
   registrarTelefone(data: any) {
     const endpoint = "telefone";
     const url = this.urlGlobal.url + endpoint;

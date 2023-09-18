@@ -5,7 +5,11 @@
 
 html, body { height: 100%; }
 
-body { margin: 0; font-family: var(--font-family); background-color: var(--background);}
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--background);
+}
 
 :root {
   --background: #f3f3f3;

@@ -4,6 +4,7 @@ import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/service
 interface Estado {
   nome: string;
   uf: string;
+  icms: number;
 }
 
 @Component({
@@ -37,35 +38,34 @@ export class CriarContaComponent {
   ngOnInit() {
 
     this.estado = [
-      { nome: 'Acre', uf: 'AC' },
-      { nome: 'Alagoas', uf: 'AL' },
-      { nome: 'Amapá', uf: 'AP' },
-      { nome: 'Amazonas', uf: 'AM' },
-      { nome: 'Bahia', uf: 'BA' },
-      { nome: 'Ceará', uf: 'CE' },
-      { nome: 'Distrito Federal', uf: 'DF' },
-      { nome: 'Espírito Santo', uf: 'ES' },
-      { nome: 'Goiás', uf: 'GO' },
-      { nome: 'Maranhão', uf: 'MA' },
-      { nome: 'Mato Grosso', uf: 'MT' },
-      { nome: 'Mato Grosso do Sul', uf: 'MS' },
-      { nome: 'Minas Gerais', uf: 'MG' },
-      { nome: 'Pará', uf: 'PA' },
-      { nome: 'Paraíba', uf: 'PB' },
-      { nome: 'Paraná', uf: 'PR' },
-      { nome: 'Pernambuco', uf: 'PE' },
-      { nome: 'Piauí', uf: 'PI' },
-      { nome: 'Rio de Janeiro', uf: 'RJ' },
-      { nome: 'Rio Grande do Norte', uf: 'RN' },
-      { nome: 'Rio Grande do Sul', uf: 'RS' },
-      { nome: 'Rondônia', uf: 'RO' },
-      { nome: 'Roraima', uf: 'RR' },
-      { nome: 'Santa Catarina', uf: 'SC' },
-      { nome: 'São Paulo', uf: 'SP' },
-      { nome: 'Sergipe', uf: 'SE' },
-      { nome: 'Tocantins', uf: 'TO' }
+      { nome: 'Acre', uf: 'ac', icms: 0 },
+      { nome: 'Alagoas', uf: 'al', icms: 0 },
+      { nome: 'Amapá', uf: 'ap', icms: 0 },
+      { nome: 'Amazonas', uf: 'am', icms: 0 },
+      { nome: 'Bahia', uf: 'ba', icms: 0 },
+      { nome: 'Ceará', uf: 'ce', icms: 0 },
+      { nome: 'Distrito Federal', uf: 'df', icms: 0 },
+      { nome: 'Espírito Santo', uf: 'es', icms: 0 },
+      { nome: 'Goiás', uf: 'go', icms: 0 },
+      { nome: 'Maranhão', uf: 'ma', icms: 0 },
+      { nome: 'Mato Grosso', uf: 'mt', icms: 0 },
+      { nome: 'Mato Grosso do Sul', uf: 'ms', icms: 0 },
+      { nome: 'Minas Gerais', uf: 'mg', icms: 0 },
+      { nome: 'Pará', uf: 'pa', icms: 0 },
+      { nome: 'Paraíba', uf: 'pb', icms: 0 },
+      { nome: 'Paraná', uf: 'pr', icms: 0 },
+      { nome: 'Pernambuco', uf: 'pe', icms: 0 },
+      { nome: 'Piauí', uf: 'pi', icms: 0 },
+      { nome: 'Rio de Janeiro', uf: 'rj', icms: 0 },
+      { nome: 'Rio Grande do Norte', uf: 'rn', icms: 0 },
+      { nome: 'Rio Grande do Sul', uf: 'rs', icms: 0 },
+      { nome: 'Rondônia', uf: 'ro', icms: 0 },
+      { nome: 'Roraima', uf: 'rr', icms: 0 },
+      { nome: 'Santa Catarina', uf: 'sc', icms: 0 },
+      { nome: 'São Paulo', uf: 'sp', icms: 0 },
+      { nome: 'Sergipe', uf: 'se', icms: 0 },
+      { nome: 'Tocantins', uf: 'to', icms: 0}
     ];
-
   }
 
   constructor(
@@ -93,20 +93,32 @@ export class CriarContaComponent {
 
       // Supondo que a resposta contenha o ID do login
 
-      const ufSelecionado = this.estadoSelecionado.uf;
+      // const dataUf = {
+      //   UfId: this.estadoSelecionado.uf,
+      //   icms: this.estadoSelecionado.icms,
+      //   nome: this.estadoSelecionado.nome
+      // }
 
-      const dataEndereco = {
-        LoginId: LoginId,
-        tpcadastro: "0",
-        endereco: this.endereco,
-        cidade: this.cidade,
-        bairro: this.bairro,
-        Uf: ufSelecionado,
-      }
+      // this.registrar.registrarUf(dataUf).subscribe(response => {
 
-      this.registrar.registrarEndereco(dataEndereco).subscribe(result => {
-        console.log("Endereço adicionado com sucesso")
-      });
+        // const ufId = response.UfId;
+
+        const dataEndereco = {
+          LoginId: LoginId,
+          tpcadastro: "0",
+          endereco: this.endereco,
+          cidade: this.cidade,
+          bairro: this.bairro,
+          // UfId: ufId
+        }
+
+        this.registrar.registrarEndereco(dataEndereco).subscribe(response => {
+          console.log("Endereço adicionado com sucesso")
+        });
+
+      // })
+
+
 
       const telefonePrincipalSemFormato = this.removeFormatoTelefone(this.telefonePrincipal);
 

@@ -4,9 +4,11 @@ import { MessageService } from 'primeng/api';
 import { CategoriaVazia, Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { ServiceAPICategoriaService } from 'src/app/services/servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
+import { ServiceAPIProdutoService } from 'src/app/services/servicesAPI/serviceAPI-Produto/service-api-produto.service';
 
-interface City {
+interface Status {
   name: string;
+  cod: string;
 }
 
 interface UploadEvent {
@@ -34,13 +36,13 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   adicionarProdutoDisabled: boolean = false;
   selectedProductImages: any[] = [];
   selectedProductImagesTemplate: any[] = [];
-  valorProdutoFormatted: string = '';
+  valorProdutoFormatted!: number | null;
   categoriasAdicionarSelecionadaInput: any;
   nomeCategoriaSelecionada!: string;
   adicionarCategoriaDisabled: boolean = false;
   isDragOver = false;
-  cities!: City[] ;
-  selectedCity!: City;
+  status!: Status[] ;
+  selectedStatus!: Status;
   categoriaVazia: CategoriaVazia = {
     nome: '',
   };
@@ -49,7 +51,9 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     private categoriasService: ServiceCategoriasService,
     private messageService: MessageService,
     private apiCategoriaService: ServiceAPICategoriaService,
-    private http: HttpClient
+    private apiProdutoService: ServiceAPIProdutoService,
+    private http: HttpClient,
+
   ){}
 
   ngOnInit(){
@@ -65,13 +69,15 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       this.categoriasFiltradas = data;
     });
 
-     this.cities = [
-      { name: 'Disponível'},
-      { name: 'Indisponível' },
+     this.status = [
+      { name: 'Disponível', cod: "1"},
+      { name: 'Indisponível', cod: "2"},
+      { name: 'Não vísivel', cod: "3"},
     ];
 
 
   }
+
 
   filterTable(event: any) {
     const filterValue = event.target.value.toLowerCase();
@@ -97,36 +103,47 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.nomeProduto = produto.nome || '';
     this.descBreve = produto.descricaoBreve || '';
     this.descCompleta = produto.descricaoCompleta || '';
+
+    // Formatar o valor do produto usando a função formatCurrency
     this.valorProduto = produto.preco || null;
-    this.valorProdutoFormatted = this.formatCurrency(this.valorProduto);
+    this.valorProdutoFormatted = this.formatCurrency(this.valorProduto!);
+
     this.adicionarProdutoDisabled = true;
-    this.selectedProductImages = produto.imagem || []
+    this.selectedProductImages = produto.imagem || [];
   }
 
-  formatCurrency(value: number | null): string {
-    if (value !== null) {
-      return value.toFixed(2);
+  onKeyPress(event: KeyboardEvent): void {
+    const allowedCharacters = /[0-9.]/; // Permitir números e ponto (.)
+    const inputChar = String.fromCharCode(event.charCode);
+
+    if (!allowedCharacters.test(inputChar)) {
+      event.preventDefault();
     }
-    return '';
   }
 
   onValorProdutoInput(event: Event): void {
     const inputValue = (event.target as HTMLInputElement).value;
-    const sanitizedValue = inputValue.replace(/[^\d.,]/g, ''); // Remove caracteres inválidos
+    const sanitizedValue = inputValue.replace(/,/g, '.'); // Substituir todas as vírgulas por ponto (.)
 
-    const parts = sanitizedValue.split('.');
-    if (parts.length > 2) {
-      this.valorProdutoFormatted = parts[0] + '.' + parts[1]; // Mantém até duas casas decimais
-    } else if (parts.length === 2) {
-      this.valorProdutoFormatted = parts[0] + '.' + parts[1].slice(0, 2); // Mantém até duas casas decimais
+    // Verificar se há um valor válido antes de formatar
+    if (sanitizedValue !== null && sanitizedValue !== '') {
+      const parsedValue = parseFloat(sanitizedValue);
+      this.valorProdutoFormatted = isNaN(parsedValue) ? null : parsedValue;
     } else {
-      this.valorProdutoFormatted = sanitizedValue;
+      this.valorProdutoFormatted = null;
     }
   }
 
+
+  formatCurrency(value: number): number {
+    return value;
+  }
+
+
+
   limparCampos() {
     this.nomeProduto = '';
-    this.valorProdutoFormatted = '';
+    this.valorProdutoFormatted = null;
     this.descCompleta = '';
     this.descBreve = '';
     this.quantidadeProduto = null;
@@ -145,6 +162,11 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.categoriasAdicionarSelecionadaInput = event.value;
     this.nomeCategoriaSelecionada = event.value.nome || '';
     this.adicionarCategoriaDisabled = true;
+    this.idCategoria = event.value.catId
+    console.log(this.idCategoria)
+  }
+
+  onCategoriaAdicionarProdutoSelect(event: any) {
     this.idCategoria = event.value.catId
     console.log(this.idCategoria)
   }
@@ -224,8 +246,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   atualizarCategoria(){
 
-    const idCategoria = this.idCategoria;
-
     const novoNomeCategoria = {
       nome: this.nomeCategoriaSelecionada
     }
@@ -233,7 +253,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     const mensagemSucesso = "Categoria atualizada com sucesso."
     const mensagemErro = "Erro ao atualizar a categoria."
 
-    this.apiCategoriaService.atualizarCategoria(idCategoria, novoNomeCategoria).subscribe(
+    this.apiCategoriaService.atualizarCategoria(this.idCategoria, novoNomeCategoria).subscribe(
       (response) => {
         console.log("Categoria atualizada com sucesso", response);
         this.showSuccess(mensagemSucesso)
@@ -248,11 +268,10 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   excluirCategoria() {
 
-    const idCategoria = this.idCategoria;
     const mensagemSucesso = "Categoria excluída com sucesso."
     const mensagemErro = "Erro ao excluir a categoria."
 
-    this.apiCategoriaService.excluirCategoria(idCategoria).subscribe(
+    this.apiCategoriaService.excluirCategoria(this.idCategoria).subscribe(
       (response) => {
         console.log("Categoria excluída com sucesso", response);
         this.showSuccess(mensagemSucesso)
@@ -270,6 +289,25 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   adicionarProduto(){
 
+    const dataProduto = {
+      catId: this.idCategoria,
+      nome: this.nomeProduto,
+      status: this. selectedStatus.cod,
+      descBreve: this.descBreve,
+      descCompleta: this.descCompleta,
+      preco: this.valorProdutoFormatted,
+      qtdEntrada: 0,
+      qtdSaida: 0
+    }
+
+    this.apiProdutoService.cadastrarProduto(dataProduto).subscribe(
+      (response) => {
+        console.log("Produto adicionado com sucesso", response)
+      },
+      (error) => {
+        console.log("Erro ao cadastrar produto", error)
+      }
+    )
   }
 
   atualizarProduto(){
