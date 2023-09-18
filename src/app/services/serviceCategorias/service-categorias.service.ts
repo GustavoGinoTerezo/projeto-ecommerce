@@ -321,7 +321,7 @@ export class ServiceCategoriasService {
     this.apiCategoriaService.buscarCategorias().subscribe(
       (categoriasAPI) => {
         this.categoriasAPI = categoriasAPI;
-        console.log(this.categorias)
+        console.log(this.categoriasAPI)
       },
       (error) => {
         console.error('Erro ao buscar categorias da API', error);
