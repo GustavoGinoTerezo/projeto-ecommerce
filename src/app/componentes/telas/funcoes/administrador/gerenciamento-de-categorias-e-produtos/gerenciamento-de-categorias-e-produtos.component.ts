@@ -57,7 +57,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     // Aguarde um curto período de tempo antes de acessar as categorias
     // ou utilize observables para lidar com a conclusão da chamada da API
     setTimeout(() => {
-      this.categorias = this.categoriasService.categorias;
+      this.categorias = this.categoriasService.categoriasAPI;
     }, 1000); // Aguarda  segundo (ajuste conforme necessário)
 
 
@@ -269,7 +269,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   //API PRODUTO
 
   adicionarProduto(){
-    
+
   }
 
   atualizarProduto(){

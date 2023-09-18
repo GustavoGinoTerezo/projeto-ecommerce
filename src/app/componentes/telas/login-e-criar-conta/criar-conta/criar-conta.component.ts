@@ -97,7 +97,7 @@ export class CriarContaComponent {
 
       const dataEndereco = {
         LoginId: LoginId,
-        tpcadastro: "1",
+        tpcadastro: "0",
         endereco: this.endereco,
         cidade: this.cidade,
         bairro: this.bairro,

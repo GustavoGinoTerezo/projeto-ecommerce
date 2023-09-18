@@ -57,162 +57,111 @@ export interface ComentariosProdutos{
 
 export class ServiceCategoriasService {
 
-
-
   constructor(
     private apiCategoriaService: ServiceAPICategoriaService,
     private urlGlobal: ServiceUrlGlobalService,
     private http: HttpClient,
   ) { }
 
+  categorias: Categorias[] =
+  [
+    {
+      nome: 'Boost',
+      produtos: [
+        {
+          nome: 'mj-15-30-15',
+          imagem: [
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
+            },
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
+            },
+            {
+              imagem: 'assets/produtos/Plant-Prod-MJ-US-Boost-15-30-15-12278-12321.jpg',
+            },
 
-  categorias: Categorias[] = [];
-
-  // categorias: Categorias[] =
-  // [
-  //   {
-  //     nome: 'Boost',
-  //     produtos: [
-  //       {
-  //         nome: 'mj-15-30-15',
-  //         imagem: [
-  //           {
-  //             imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
-  //           },
-  //           {
-  //             imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
-  //           },
-  //           {
-  //             imagem: 'assets/produtos/Plant-Prod-MJ-US-Boost-15-30-15-12278-12321.jpg',
-  //           },
-
-  //         ],
-  //         preco: 1234.10,
-  //         quantEntrada: [
-  //           {
-  //             quantEntrada: 10,
-  //             dataEntrada: '10/05/2023',
-  //           },
-  //           {
-  //             quantEntrada: 15,
-  //             dataEntrada: '11/05/2023',
-  //           },
-  //           {
-  //             quantEntrada: 10,
-  //             dataEntrada: '12/05/2023',
-  //           },
-  //           {
-  //             quantEntrada: 15,
-  //             dataEntrada: '13/05/2023',
-  //           },
-  //           {
-  //             quantEntrada: 10,
-  //             dataEntrada: '14/05/2023',
-  //           },
-  //           {
-  //             quantEntrada: 15,
-  //             dataEntrada: '15/05/2023',
-  //           },
-  //           {
-  //             quantEntrada: 10,
-  //             dataEntrada: '16/05/2023',
-  //           },
-  //           {
-  //             quantEntrada: 15,
-  //             dataEntrada: '17/05/2023',
-  //           },
-  //           {
-  //             quantEntrada: 10,
-  //             dataEntrada: '18/05/2023',
-  //           },
-  //           {
-  //             quantEntrada: 15,
-  //             dataEntrada: '19/05/2023',
-  //           },
-  //           {
-  //             quantEntrada: 15,
-  //             dataEntrada: '10/06/2023',
-  //           },
-  //         ],
-  //         quantSaida: [
-  //           {
-  //             quantSaida: 5,
-  //             dataSaida: '10/05/2023',
-  //           },
-  //           {
-  //             quantSaida: 15,
-  //             dataSaida: '11/05/2023',
-  //           },
-  //         ],
-  //         descricaoBreve: 'Descrição breve do MJ 15-30-15',
-  //         descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
-  //         especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
-  //         comentariosProduto: [
-  //         {
-  //           comentario: 'Gostei do produto'
-  //         },
-  //         {
-  //           comentario: 'Produto mediano'
-  //         },
-  //         {
-  //           comentario: 'Amei a compra'
-  //         },
-  //         ],
-  //         comentariosPendentes: [
-  //           {
-  //             comentario: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-  //           }
-  //         ]
-  //       },
-  //       {
-  //         nome: 'mj-15-30-15',
-  //         imagem: [
-  //           {
-  //             imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
-  //           }
-  //         ],
-  //         preco: 1234.10,
-  //         descricaoBreve: 'Descrição breve do MJ 15-30-15',
-  //         descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
-  //         especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
-  //         comentariosProduto: [
-  //         {
-  //           comentario: 'Gostei do produto'
-  //         },
-  //         {
-  //           comentario: 'Produto mediano'
-  //         },
-  //         {
-  //           comentario: 'Amei a compra'
-  //         }
-  //         ]
-  //       },
-  //       {
-  //         nome: 'mj-15-30-15',
-  //         imagem: [
-  //           {
-  //             imagem: 'assets/produtos/Plant-Prod-MJ-US-Boost-15-30-15-12278-12321.jpg',
-  //           }
-  //         ],
-  //         preco: 1234.10,
-  //         descricaoBreve: 'Descrição breve do MJ 15-30-15',
-  //         descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
-  //         especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
-  //         comentariosProduto: [
-  //         {
-  //           comentario: 'Gostei do produto'
-  //         },
-  //         {
-  //           comentario: 'Produto mediano'
-  //         },
-  //         {
-  //           comentario: 'Amei a compra'
-  //         }
-  //         ]
-  //       },
-  //     ]
-  //   },
-  // ];
+          ],
+          preco: 1234.10,
+          quantEntrada: [
+            {
+              quantEntrada: 10,
+              dataEntrada: '10/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '11/05/2023',
+            },
+            {
+              quantEntrada: 10,
+              dataEntrada: '12/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '13/05/2023',
+            },
+            {
+              quantEntrada: 10,
+              dataEntrada: '14/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '15/05/2023',
+            },
+            {
+              quantEntrada: 10,
+              dataEntrada: '16/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '17/05/2023',
+            },
+            {
+              quantEntrada: 10,
+              dataEntrada: '18/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '19/05/2023',
+            },
+            {
+              quantEntrada: 15,
+              dataEntrada: '10/06/2023',
+            },
+          ],
+          quantSaida: [
+            {
+              quantSaida: 5,
+              dataSaida: '10/05/2023',
+            },
+            {
+              quantSaida: 15,
+              dataSaida: '11/05/2023',
+            },
+          ],
+          descricaoBreve: 'Descrição breve do MJ 15-30-15',
+          descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
+          especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
+          comentariosProduto: [
+          {
+            comentario: 'Gostei do produto'
+          },
+          {
+            comentario: 'Produto mediano'
+          },
+          {
+            comentario: 'Amei a compra'
+          },
+          ],
+          comentariosPendentes: [
+            {
+              comentario: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+            }
+          ]
+        },
+      ]
+    },
+  ];
 
   produtosDestaque: Produtos[] = [
     {
@@ -226,98 +175,6 @@ export class ServiceCategoriasService {
       descricaoBreve: 'Descrição breve do MJ 15-30-15',
       descricaoCompleta: 'Descrição completa do MJ 15-30-15',
       especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-12-8-26',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 12-8-26',
-      descricaoCompleta: 'Descrição completa do MJ 12-8-26',
-      especificacaoTecnica: 'Especificação Técnica do MJ 12-8-26',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-10-30-20',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-4-31-37',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 4-31-37',
-      descricaoCompleta: 'Descrição completa do MJ 4-31-37',
-      especificacaoTecnica: 'Especificação Técnica do MJ 4-31-37',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-15-0-14',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
       comentariosProduto: [
         {
           comentario: 'Gostei do produto'
@@ -356,98 +213,7 @@ export class ServiceCategoriasService {
         }
       ]
     },
-    {
-      nome: 'mj-12-8-26',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 12-8-26',
-      descricaoCompleta: 'Descrição completa do MJ 12-8-26',
-      especificacaoTecnica: 'Especificação Técnica do MJ 12-8-26',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-10-30-20',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-10-30-20',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-15-0-14',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
+
   ]
 
   produtosEmPromocao: Produtos[] = [
@@ -474,145 +240,10 @@ export class ServiceCategoriasService {
         }
       ]
     },
-    {
-      nome: 'mj-12-8-26',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-12-8-26-Grow-12251.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 12-8-26',
-      descricaoCompleta: 'Descrição completa do MJ 12-8-26',
-      especificacaoTecnica: 'Especificação Técnica do MJ 12-8-26',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-10-30-20',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-10-30-20-Bloom-12209-12320-1.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-10-30-20',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-15-0-14',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-10-30-20',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-    {
-      nome: 'mj-15-0-14',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-15-0-14-Cal-Kick-12256.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 10-30-20',
-      descricaoCompleta: 'Descrição completa do MJ 10-30-20',
-      especificacaoTecnica: 'Especificação Técnica do MJ 10-30-20',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
   ]
+
+
+  categoriasAPI: Categorias[] = [];
 
   //==================================================================================================================================//
 
@@ -689,7 +320,7 @@ export class ServiceCategoriasService {
   atualizarCategoriasDaAPI() {
     this.apiCategoriaService.buscarCategorias().subscribe(
       (categoriasAPI) => {
-        this.categorias = categoriasAPI;
+        this.categoriasAPI = categoriasAPI;
         console.log(this.categorias)
       },
       (error) => {

@@ -27,7 +27,7 @@ export class DetalheProdutoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // console.log("Iniciando ngOnInit");
+
     this.categoriasService.getCategorias().subscribe(
       (categorias) => {
         // console.log("Categorias obtidas:", categorias);
@@ -61,7 +61,6 @@ export class DetalheProdutoComponent implements OnInit {
         return produtoEncontrado;
       }
     }
-
     // console.log("Produto não encontrado nas categorias");
     return undefined;
   }
