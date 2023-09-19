@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { CategoriaVazia, Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
+import { CategoriaVazia, Categorias, PosicaoProdutos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { ServiceAPICategoriaService } from 'src/app/services/servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
 import { ServiceAPIProdutoService } from 'src/app/services/servicesAPI/serviceAPI-Produto/service-api-produto.service';
@@ -31,11 +31,11 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   idCategoria!: number;
   categorias: Categorias[] = [];
   produtos: Produtos[] = [];
-
+  posicaoProdutos: PosicaoProdutos[] = [];
 
   categoriasFiltradas: Categorias[] = [];
   categoriasSelecionada!: Categorias;
-  categoriasSelecionadaInput!: any;
+  categoriasSelecionadaInput: Categorias | null = null;
   nomeProduto: string = '';
   valorProduto!: number | null
   descCompleta: string = '';
@@ -49,10 +49,15 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   nomeCategoriaSelecionada!: string;
   adicionarCategoriaDisabled: boolean = false;
   isDragOver = false;
+
   status!: Status[] ;
   layout!: Layout[] ;
-  selectedStatus!: Status;
-  selectedLayout!: Layout;
+
+  statusDesconhecido: Status = { nome: '', cod: '' };
+  selectedStatus: Status | null = null;
+
+  selectedLayout: Layout | null = null;
+
   categoriaVazia: CategoriaVazia = {
     nome: '',
   };
@@ -71,16 +76,14 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     // Aguarde um curto período de tempo antes de acessar as categorias
     // ou utilize observables para lidar com a conclusão da chamada da API
     setTimeout(() => {
+
       this.categorias = this.categoriasService.categoriasAPI;
+
       this.produtos = this.categoriasService.produtosAPI;
-      this.categoriasFiltradas = this.produtos
+
+      this.posicaoProdutos = this.categoriasService.posicaoProdutosAPI
 
     }, 1000); // Aguarda  segundo (ajuste conforme necessário)
-
-
-    // this.categoriasService.getCategoriasTabela().then((data) => {
-    //   this.categoriasFiltradas = data;
-    // });
 
     this.status = [
       { nome: 'Disponível', cod: "1"},
@@ -96,7 +99,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     ];
 
   }
-
 
   filterTable(event: any) {
     const filterValue = event.target.value.toLowerCase();
@@ -117,18 +119,45 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     }
   }
 
-  updateInputFieldsWithSelectedProduct(categoria: Categorias, produto: Produtos) {
-    this.categoriasSelecionadaInput = categoria;
+  updateInputFieldsWithSelectedProduct(produto: Produtos) {
     this.nomeProduto = produto.nome || '';
-    this.descBreve = produto.descricaoBreve || '';
-    this.descCompleta = produto.descricaoCompleta || '';
-
-    // Formatar o valor do produto usando a função formatCurrency
+    this.descBreve = produto.descBreve || '';
+    this.descCompleta = produto.descCompleta || '';
     this.valorProduto = produto.preco || null;
     this.valorProdutoFormatted = this.formatCurrency(this.valorProduto!);
-
     this.adicionarProdutoDisabled = true;
     this.selectedProductImages = produto.imagem || [];
+    this.idCategoria = produto.catId!;
+
+    // Encontre a categoria correspondente ou defina como null
+    this.categoriasSelecionadaInput = this.categorias.find(categoria => categoria.catId === produto.catId) || null;
+
+    // Encontre o status correspondente ou use o status "desconhecido" como padrão
+    this.selectedStatus = this.status.find(status => status.cod === produto.status!.toString()) || this.statusDesconhecido;
+
+    // Encontre o objeto relevante em posicaoProdutos usando produto.prodId como referência
+    const posicaoProduto = this.posicaoProdutos.find(posicao => posicao.prodId === produto.prodId);
+
+    // Defina selectedLayout com base em posicaoProduto
+    if (posicaoProduto) {
+      // Aqui você pode definir a lógica para mapear posicaoProduto.posProdTp para o objeto Layout correto
+      if (posicaoProduto.posProdTp === '0') {
+        this.selectedLayout = { nome: 'Padrão', cod: "0"};
+      } else if (posicaoProduto.posProdTp === '1') {
+        this.selectedLayout = { nome: 'Em destaque', cod: "1"};
+      } else if (posicaoProduto.posProdTp === '2') {
+        this.selectedLayout = { nome: 'Mais vendidos', cod: "2"};
+      } else if (posicaoProduto.posProdTp === '3') {
+        this.selectedLayout = { nome: 'Em promoção', cod: "3"};
+      } else {
+        // Lidar com outros casos ou definir um valor padrão se necessário
+        this.selectedLayout = null;
+      }
+
+    } else {
+      // Lidar com o caso em que posicaoProduto não foi encontrado
+      this.selectedLayout = null;
+    }
   }
 
   onKeyPress(event: KeyboardEvent): void {
@@ -167,6 +196,8 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.descBreve = '';
     this.quantidadeProduto = null;
     this.categoriasSelecionadaInput = null;
+    this.selectedStatus = null;
+    this.selectedLayout = null;
     this.adicionarProdutoDisabled = false;
     this.selectedProductImages = []
   }
@@ -311,7 +342,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     const dataProduto = {
       catId: this.idCategoria,
       nome: this.nomeProduto,
-      status: this. selectedStatus.cod,
+      status: this.selectedStatus!.cod,
       descBreve: this.descBreve,
       descCompleta: this.descCompleta,
       preco: this.valorProdutoFormatted,
@@ -319,48 +350,50 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       qtdSaida: 0
     }
 
-    this.apiProdutoService.cadastrarProduto(dataProduto).subscribe(
-      (response) => {
-        console.log("Produto adicionado com sucesso", response)
+    console.log(dataProduto)
 
-        const prodId = response.prodId
+    // this.apiProdutoService.cadastrarProduto(dataProduto).subscribe(
+    //   (response) => {
+    //     console.log("Produto adicionado com sucesso", response)
 
-        const dataPosProduto = {
-          posProdTp: this.selectedLayout.cod,
-          prodId: prodId
-        }
+    //     const prodId = response.prodId
 
-        this.apiProdutoService.cadastrarPosicaoProduto(dataPosProduto).subscribe(
-          (response) => {
-            console.log("Posição do produto cadastrada com sucesso", response)
-          },
-          (error) => {
-            console.log("Erro no cadastro da posição do produto", error)
-          }
-        )
+    //     const dataPosProduto = {
+    //       posProdTp: this.selectedLayout.cod,
+    //       prodId: prodId
+    //     }
 
-        // for(const imagem of this.selectedProductImages){
-        //   const dataFotosProduto = {
-        //     prodId: prodId,
-        //     prodFotoTp: 1,
-        //     imgfomulacao: imagem.name.toString()
-        //   }
+    //     this.apiProdutoService.cadastrarPosicaoProduto(dataPosProduto).subscribe(
+    //       (response) => {
+    //         console.log("Posição do produto cadastrada com sucesso", response)
+    //       },
+    //       (error) => {
+    //         console.log("Erro no cadastro da posição do produto", error)
+    //       }
+    //     )
 
-        //   this.apiProdutoService.cadastrarFotosProduto(dataFotosProduto).subscribe(
-        //     (response) => {
-        //       console.log("Foto do produto cadastrada com sucesso", response)
-        //     },
-        //     (error) => {
-        //       console.log("Erro no cadastro da foto do produto", error)
-        //     }
-        //   )
-        // };
+    //     // for(const imagem of this.selectedProductImages){
+    //     //   const dataFotosProduto = {
+    //     //     prodId: prodId,
+    //     //     prodFotoTp: 1,
+    //     //     imgfomulacao: imagem.name.toString()
+    //     //   }
 
-      },
-      (error) => {
-        console.log("Erro ao cadastrar produto", error)
-      }
-    )
+    //     //   this.apiProdutoService.cadastrarFotosProduto(dataFotosProduto).subscribe(
+    //     //     (response) => {
+    //     //       console.log("Foto do produto cadastrada com sucesso", response)
+    //     //     },
+    //     //     (error) => {
+    //     //       console.log("Erro no cadastro da foto do produto", error)
+    //     //     }
+    //     //   )
+    //     // };
+
+    //   },
+    //   (error) => {
+    //     console.log("Erro ao cadastrar produto", error)
+    //   }
+    // )
   }
 
   atualizarProduto(){

@@ -10,23 +10,31 @@ export interface CategoriaVazia extends Categorias {
 }
 
 export interface Categorias {
+  catId?: number;
   nome?: string;
   produtos?: Produtos[] ;
 }
 
 export interface Produtos {
-  id?: number;
+  prodId?: number;
+  catId?: number;
   nome?: string;
   imagem?: Imagens[];
   preco?: number;
   status?: Status[];
   quantEntrada?: Entrada[];
   quantSaida?: Saida[];
-  descricaoBreve?: string;
-  descricaoCompleta?: string;
+  descBreve?: string;
+  descCompleta?: string;
   especificacaoTecnica?: string;
   comentariosProduto?: ComentariosProdutos[];
   comentariosPendentes?: ComentariosProdutos[];
+}
+
+export interface PosicaoProdutos {
+  posProdId?: number,
+  posProdTp?: string,
+  prodId?: number
 }
 
 export interface Imagens{
@@ -141,8 +149,8 @@ export class ServiceCategoriasService {
               dataSaida: '11/05/2023',
             },
           ],
-          descricaoBreve: 'Descrição breve do MJ 15-30-15',
-          descricaoCompleta: 'Descrição completa do produto MJ 15-30-15',
+          descBreve: 'Descrição breve do MJ 15-30-15',
+          descCompleta: 'Descrição completa do produto MJ 15-30-15',
           especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
           comentariosProduto: [
           {
@@ -174,8 +182,8 @@ export class ServiceCategoriasService {
             },
           ],
       preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 15-30-15',
-      descricaoCompleta: 'Descrição completa do MJ 15-30-15',
+      descBreve: 'Descrição breve do MJ 15-30-15',
+      descCompleta: 'Descrição completa do MJ 15-30-15',
       especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
       comentariosProduto: [
         {
@@ -200,8 +208,8 @@ export class ServiceCategoriasService {
             }
           ],
       preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 15-30-15',
-      descricaoCompleta: 'Descrição completa do MJ 15-30-15',
+      descBreve: 'Descrição breve do MJ 15-30-15',
+      descCompleta: 'Descrição completa do MJ 15-30-15',
       especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
       comentariosProduto: [
         {
@@ -227,8 +235,8 @@ export class ServiceCategoriasService {
             }
           ],
       preco: 1234.10,
-      descricaoBreve: 'Descrição breve do MJ 15-30-15',
-      descricaoCompleta: 'Descrição completa do MJ 15-30-15',
+      descBreve: 'Descrição breve do MJ 15-30-15',
+      descCompleta: 'Descrição completa do MJ 15-30-15',
       especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
       comentariosProduto: [
         {
@@ -248,14 +256,12 @@ export class ServiceCategoriasService {
 
   produtosAPI: Produtos[] = []
 
+  posicaoProdutosAPI: PosicaoProdutos[] = []
+
   //==================================================================================================================================//
 
   getCategorias(): Observable<Categorias[]> {
     return of (this.categorias);
-  }
-
-  getCategoriasTabela() {
-    return Promise.resolve(this.produtosAPI);
   }
 
   obterCategoriaPorNome(nome: string): Categorias | undefined {
@@ -337,6 +343,18 @@ export class ServiceCategoriasService {
       (produtosAPI) => {
         this.produtosAPI = produtosAPI;
         console.log(this.produtosAPI)
+      },
+      (error) => {
+        console.error('Erro ao buscar categorias da API', error);
+      }
+    );
+  }
+
+  atualizarPosicaoProdutosDaAPI(){
+    this.apiProdutos.buscarPosicaoProdutos().subscribe(
+      (posicaoProdutosAPI) => {
+        this.posicaoProdutosAPI = posicaoProdutosAPI;
+        console.log(this.posicaoProdutosAPI)
       },
       (error) => {
         console.error('Erro ao buscar categorias da API', error);

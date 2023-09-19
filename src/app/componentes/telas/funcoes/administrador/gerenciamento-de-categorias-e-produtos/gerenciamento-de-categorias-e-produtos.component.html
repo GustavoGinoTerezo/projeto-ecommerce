@@ -213,7 +213,8 @@
       ></p-button>
     </div>
     <div class="divInputs">
-      <p-button label="Atualizar produto" styleClass="p-button-raised p-button-warning"></p-button>
+      <p-button label="Atualizar produto" styleClass="p-button-raised p-button-warning"
+      ></p-button>
     </div>
     <div class="divInputs">
       <p-button label="Excluir produto" styleClass="p-button-raised p-button-danger"></p-button>
@@ -229,7 +230,7 @@
   <div class="tabelaClientes">
     <p-table
       #dt
-      [value]="categoriasFiltradas"
+      [value]="produtos"
       selectionMode="single"
       [(selection)]="categoriasSelecionada"
       [rowHover]="true"
@@ -256,11 +257,11 @@
           <th>Categoria</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-categoria>
-        <tr [pSelectableRow]="produto" (click)="updateInputFieldsWithSelectedProduct(categoria, produto)" *ngFor="let produto of produtos">
+      <ng-template pTemplate="body" let-produto>
+        <tr [pSelectableRow]="produto" (click)="updateInputFieldsWithSelectedProduct(produto)" >
           <td>{{ produto?.nome }}</td>
           <td></td>
-          <td>{{ categoria?.nome }}</td>
+          <td></td>
         </tr>
 
       </ng-template>
