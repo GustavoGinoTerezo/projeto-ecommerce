@@ -74,8 +74,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     private messageService: MessageService,
     private apiCategoriaService: ServiceAPICategoriaService,
     private apiProdutoService: ServiceAPIProdutoService,
-    private http: HttpClient,
-
   ){}
 
   ngOnInit(){

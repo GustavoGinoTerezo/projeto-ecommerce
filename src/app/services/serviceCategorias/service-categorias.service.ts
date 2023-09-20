@@ -22,8 +22,8 @@ export interface Produtos {
   imagem?: Imagens[];
   preco?: number;
   status?: Status[];
-  quantEntrada?: Entrada[];
-  quantSaida?: Saida[];
+  qtdEntrada?: Entrada[];
+  qtdSaida?: Saida[];
   descBreve?: string;
   descCompleta?: string;
   especificacaoTecnica?: string;
@@ -93,7 +93,7 @@ export class ServiceCategoriasService {
 
           ],
           preco: 1234.10,
-          quantEntrada: [
+          qtdEntrada: [
             {
               quantEntrada: 10,
               dataEntrada: '10/05/2023',
@@ -139,7 +139,7 @@ export class ServiceCategoriasService {
               dataEntrada: '10/06/2023',
             },
           ],
-          quantSaida: [
+          qtdSaida: [
             {
               quantSaida: 5,
               dataSaida: '10/05/2023',

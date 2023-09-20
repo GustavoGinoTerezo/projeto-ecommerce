@@ -8,8 +8,11 @@
         <div class="containerDropdown">
           <p-dropdown
           placeholder="Selecionar produto"
-          [options]="mapProdutos"
+          [options]="produtos"
           optionLabel="nome"
+          [showClear]="true"
+          [filter]="true"
+          filterBy="nome"
           ></p-dropdown>
         </div>
         <div class="containerInput">
@@ -37,7 +40,14 @@
       <h2 class="h2">Saída de produto</h2>
       <div class="containerDropdownInput margem">
         <div class="containerDropdown">
-          <p-dropdown placeholder="Selecionar produto"></p-dropdown>
+          <p-dropdown
+          placeholder="Selecionar produto"
+          [options]="produtos"
+          optionLabel="nome"
+          [showClear]="true"
+          [filter]="true"
+          filterBy="nome"
+          ></p-dropdown>
         </div>
         <div class="containerInput">
           <input class="inputQuant" pInputText type="text" placeholder="Quantidade de Saída" />
@@ -64,7 +74,7 @@
 
   <p-table
     #dt
-    [value]="mapProdutos"
+    [value]="produtos"
     [rowHover]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
     [paginator]="true"
@@ -72,6 +82,7 @@
     [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[5, 10, 15]"
     dataKey="nome"
+
   >
     <ng-template pTemplate="caption">
         <div class="table-header">
@@ -99,9 +110,10 @@
           <button type="button" pButton pRipple [pRowToggler]="produto" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
         </td>
         <td>{{ produto.nome }}</td>
-        <td>{{ calcularTotalEntrada(produto) }}</td>
-        <td>{{ calcularTotalSaida(produto) }}</td>
+        <td>{{ produto.qtdEntrada }}</td>
+        <td>{{ produto.qtdSaida }}</td>
         <td>{{ calcularSaldo(produto) }}</td>
+
       </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-produto>
@@ -109,7 +121,7 @@
         <td colspan="8">
           <div class="p-3">
             <p-table
-            [value]="produto.quantEntrada"
+            [value]="produtos"
             [paginator]="true"
             [rowsPerPageOptions]="[5, 10, 15]"
             [rows]="5"
@@ -118,7 +130,8 @@
                 <div class="table-header">
                   <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="filtrarDataEntrada($event)" placeholder="Buscar data de entrada" />
+                    <input pInputText type="text" placeholder="Buscar data de entrada" />
+                    <!-- (input)="filtrarDataEntrada($event)" -->
                   </span>
                 </div>
               </ng-template>
@@ -133,7 +146,7 @@
               <ng-template pTemplate="body" let-entrada>
                 <tr>
                   <td p-sortField="dataEntrada">{{ entrada.dataEntrada }}</td>
-                  <td>{{ entrada.quantEntrada }}</td>
+                  <td>{{ entrada.qtdEntrada }}</td>
                   <td><p-button styleClass="p-button-warning" icon="fa-solid fa-file-arrow-down fa-xl"></p-button></td>
                   <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
                 </tr>
@@ -151,7 +164,7 @@
         <td colspan="8">
           <div class="p-3">
             <p-table
-            [value]="produto.quantSaida"
+            [value]="produto.qtdSaida"
             [paginator]="true"
             [rowsPerPageOptions]="[5, 10, 15]"
             [rows]="5">
@@ -159,7 +172,8 @@
                 <div class="table-header">
                   <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="filtrarDataSaida($event)" placeholder="Buscar data de saída" />
+                    <input pInputText type="text"placeholder="Buscar data de saída" />
+                    <!-- (input)="filtrarDataSaida($event)"  -->
                   </span>
                 </div>
               </ng-template>
@@ -174,7 +188,7 @@
               <ng-template pTemplate="body" let-saida>
                 <tr>
                   <td  p-sortField="dataSaida">{{ saida.dataSaida }}</td>
-                  <td>{{ saida.quantSaida }}</td>
+                  <td>{{ saida.qtdSaida }}</td>
                   <td><p-button styleClass="p-button-warning" icon="fa-solid fa-file-arrow-down fa-xl"></p-button></td>
                   <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
                 </tr>

@@ -6,6 +6,8 @@ import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/serv
 import { Categorias, ServiceCategoriasService, Produtos, CategoriaVazia, Entrada, Saida } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
+import { ServiceAPICategoriaService } from 'src/app/services/servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
+import { ServiceAPIProdutoService } from 'src/app/services/servicesAPI/serviceAPI-Produto/service-api-produto.service';
 
 interface City {
   name: string;
@@ -28,22 +30,30 @@ export class GerenciamentoDeEstoqueComponent {
   originalQuantEntrada: Entrada[] = [];
   originalQuantSaida: Saida[] = [];
 
+  produtos: Produtos[] = []
 
   constructor(
     private categoriasService: ServiceCategoriasService,
+    private messageService: MessageService,
+    private apiCategoriaService: ServiceAPICategoriaService,
+    private apiProdutoService: ServiceAPIProdutoService,
   ){}
 
   ngOnInit(){
 
-    this.categoriasService.getCategorias().subscribe(
-      (categorias) => {
-        this.categorias = categorias;
-      }
-    );
+    setTimeout(() => {
 
-    this.originalQuantEntrada = [...this.mapProdutos[0]?.quantEntrada || []];
+      this.categorias = this.categoriasService.categoriasAPI;
 
-    this.originalQuantSaida = [...this.mapProdutos[0]?.quantSaida || []];
+      this.produtos = this.categoriasService.produtosAPI;
+
+      console.log(this.produtos)
+
+    }, 1000);
+
+    // this.originalQuantEntrada = [...this.mapProdutos[0]?.quantEntrada || []];
+
+    // this.originalQuantSaida = [...this.mapProdutos[0]?.quantSaida || []];
 
   }
 
@@ -52,44 +62,44 @@ export class GerenciamentoDeEstoqueComponent {
     this.table.filter(filterValue, 'nome', 'contains'); // Aplica o filtro na coluna 'nome' que contém o valor
   }
 
-  filtrarDataEntrada(event: any) {
-    const filterValue = event.target.value.toLowerCase();
-    this.mapProdutos.forEach((produto) => {
-      if (produto && produto.quantEntrada) {
-        if (filterValue === "") {
-          // Se o campo de filtro estiver vazio, retorne o array original
-          produto.quantEntrada = this.originalQuantEntrada;
-        } else {
-          produto.quantEntrada = produto.quantEntrada.filter((entrada) => {
-            if (entrada && entrada.dataEntrada) {
-              return entrada.dataEntrada.toLowerCase().includes(filterValue);
-            }
-            return false; // ou qualquer outra lógica adequada
-          });
-        }
-      }
-    });
-  }
+  // filtrarDataEntrada(event: any) {
+  //   const filterValue = event.target.value.toLowerCase();
+  //   this.mapProdutos.forEach((produto) => {
+  //     if (produto && produto.quantEntrada) {
+  //       if (filterValue === "") {
+  //         // Se o campo de filtro estiver vazio, retorne o array original
+  //         produto.quantEntrada = this.originalQuantEntrada;
+  //       } else {
+  //         produto.quantEntrada = produto.quantEntrada.filter((entrada) => {
+  //           if (entrada && entrada.dataEntrada) {
+  //             return entrada.dataEntrada.toLowerCase().includes(filterValue);
+  //           }
+  //           return false; // ou qualquer outra lógica adequada
+  //         });
+  //       }
+  //     }
+  //   });
+  // }
 
 
-  filtrarDataSaida(event: any) {
-    const filterValue = event.target.value.toLowerCase();
-    this.mapProdutos.forEach((produto) => {
-      if (produto && produto.quantSaida) {
-        if (filterValue === "") {
-          // Se o campo de filtro estiver vazio, retorne o array original
-          produto.quantSaida = this.originalQuantSaida;
-        } else {
-          produto.quantSaida = produto.quantSaida.filter((saida) => {
-            if (saida && saida.dataSaida) {
-              return saida.dataSaida.toLowerCase().includes(filterValue);
-            }
-            return false; // ou qualquer outra lógica adequada
-          });
-        }
-      }
-    });
-  }
+  // filtrarDataSaida(event: any) {
+  //   const filterValue = event.target.value.toLowerCase();
+  //   this.mapProdutos.forEach((produto) => {
+  //     if (produto && produto.quantSaida) {
+  //       if (filterValue === "") {
+  //         // Se o campo de filtro estiver vazio, retorne o array original
+  //         produto.quantSaida = this.originalQuantSaida;
+  //       } else {
+  //         produto.quantSaida = produto.quantSaida.filter((saida) => {
+  //           if (saida && saida.dataSaida) {
+  //             return saida.dataSaida.toLowerCase().includes(filterValue);
+  //           }
+  //           return false; // ou qualquer outra lógica adequada
+  //         });
+  //       }
+  //     }
+  //   });
+  // }
 
   formatCurrency(value: number | null): string {
     if (value !== null) {
@@ -98,28 +108,13 @@ export class GerenciamentoDeEstoqueComponent {
     return '';
   }
 
-  calcularTotalEntrada(produto: Produtos): number {
-    if (produto?.quantEntrada) {
-      return produto.quantEntrada.reduce((total, entrada) => total + (entrada.quantEntrada || 0), 0);
-    }
-    return 0;
-  }
-
-  // Função para calcular o total de saídas de um produto
-  calcularTotalSaida(produto: Produtos): number {
-    if (produto?.quantSaida) {
-      return produto.quantSaida.reduce((total, saida) => total + (saida.quantSaida || 0), 0);
-    }
-    return 0;
-  }
-
-  // Função para calcular o saldo de um produto (entrada - saída)
   calcularSaldo(produto: Produtos): number {
-    return this.calcularTotalEntrada(produto) - this.calcularTotalSaida(produto);
+    const entrada = typeof produto.qtdEntrada === 'number' ? produto.qtdEntrada : 0;
+    const saida = typeof produto.qtdSaida === 'number' ? produto.qtdSaida : 0;
+    return entrada - saida;
   }
 
-  get mapProdutos() {
-    return this.categorias.flatMap((categoria) => categoria.produtos);
-  }
+
+
 
 }
