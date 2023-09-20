@@ -45,13 +45,17 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   descCompleta: string = '';
   descBreve: string = '';
   quantidadeProduto!: number | null
-  adicionarProdutoDisabled: boolean = false;
+
   selectedProductImages: any[] = [];
   selectedProductImagesTemplate: any[] = [];
   valorProdutoFormatted!: number | null;
   categoriasAdicionarSelecionadaInput: any;
   nomeCategoriaSelecionada!: string;
+
   adicionarCategoriaDisabled: boolean = false;
+  adicionarProdutoDisabled: boolean = false;
+
+
   isDragOver = false;
 
   status!: Status[] ;
@@ -124,6 +128,8 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   }
 
   updateInputFieldsWithSelectedProduct(produto: Produtos) {
+    this.adicionarProdutoDisabled = true;
+
     this.idProduto = produto.prodId!;
     this.idCategoria = produto.catId!;
 
@@ -212,6 +218,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   }
 
   limparCampos() {
+    this.adicionarProdutoDisabled = false;
     this.nomeProduto = '';
     this.valorProdutoFormatted = null;
     this.descCompleta = '';
@@ -220,7 +227,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.categoriasSelecionadaInput = null;
     this.selectedStatus = null;
     this.selectedLayout = null;
-    this.adicionarProdutoDisabled = false;
     this.selectedProductImages = []
   }
 

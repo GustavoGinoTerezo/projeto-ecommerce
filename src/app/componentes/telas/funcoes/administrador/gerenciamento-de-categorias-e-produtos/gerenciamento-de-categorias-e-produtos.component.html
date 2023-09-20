@@ -207,23 +207,43 @@
   <div class="containerBotoesAdicionarProdutos">
     <div class="divInputs">
       <p-button label="Adicionar produto"
-      [disabled]="adicionarProdutoDisabled"
+      [disabled]="
+      adicionarProdutoDisabled ||
+      !nomeProduto ||
+      !categoriasSelecionadaInput ||
+      !valorProdutoFormatted ||
+      !selectedStatus ||
+      !selectedLayout ||
+      !descBreve ||
+      !descCompleta"
       styleClass="p-button-raised p-button-success"
       (onClick)="adicionarProduto()"
       ></p-button>
     </div>
     <div class="divInputs">
-      <p-button label="Atualizar produto" styleClass="p-button-raised p-button-warning"
+      <p-button label="Atualizar produto"
+      [disabled]="!adicionarProdutoDisabled"
+      styleClass="p-button-raised p-button-warning"
       (onClick)="atualizarProduto()"
       ></p-button>
     </div>
     <div class="divInputs">
-      <p-button label="Excluir produto" styleClass="p-button-raised p-button-danger"
+      <p-button label="Excluir produto"
+      [disabled]="!adicionarProdutoDisabled"
+      styleClass="p-button-raised p-button-danger"
       (onClick)="excluirProduto()"></p-button>
     </div>
     <div class="divInputs">
       <p-button
         label="Limpar campos"
+      [disabled]="
+      !nomeProduto ||
+      !categoriasSelecionadaInput ||
+      !valorProdutoFormatted ||
+      !selectedStatus ||
+      !selectedLayout ||
+      !descBreve ||
+      !descCompleta"
         (click)="limparCampos()"
         styleClass="p-button-raised p-button-info"
       ></p-button>
