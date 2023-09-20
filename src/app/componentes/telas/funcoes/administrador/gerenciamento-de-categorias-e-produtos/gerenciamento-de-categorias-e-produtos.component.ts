@@ -33,6 +33,10 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   produtos: Produtos[] = [];
   posicaoProdutos: PosicaoProdutos[] = [];
 
+  idProduto!: number;
+  posProdId!: number;
+
+
   categoriasFiltradas: Categorias[] = [];
   categoriasSelecionada!: Categorias;
   categoriasSelecionadaInput: Categorias | null = null;
@@ -120,24 +124,19 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   }
 
   updateInputFieldsWithSelectedProduct(produto: Produtos) {
-    this.nomeProduto = produto.nome || '';
-    this.descBreve = produto.descBreve || '';
-    this.descCompleta = produto.descCompleta || '';
-    this.valorProduto = produto.preco || null;
-    this.valorProdutoFormatted = this.formatCurrency(this.valorProduto!);
-    this.adicionarProdutoDisabled = true;
-    this.selectedProductImages = produto.imagem || [];
+    this.idProduto = produto.prodId!;
     this.idCategoria = produto.catId!;
+    // this.posProdId =
 
+    this.nomeProduto = produto.nome || '';
     // Encontre a categoria correspondente ou defina como null
     this.categoriasSelecionadaInput = this.categorias.find(categoria => categoria.catId === produto.catId) || null;
-
+    this.valorProduto = produto.preco || null;
+    this.valorProdutoFormatted = this.formatCurrency(this.valorProduto!);
     // Encontre o status correspondente ou use o status "desconhecido" como padrão
     this.selectedStatus = this.status.find(status => status.cod === produto.status!.toString()) || this.statusDesconhecido;
-
     // Encontre o objeto relevante em posicaoProdutos usando produto.prodId como referência
     const posicaoProduto = this.posicaoProdutos.find(posicao => posicao.prodId === produto.prodId);
-
     // Defina selectedLayout com base em posicaoProduto
     if (posicaoProduto) {
       // Aqui você pode definir a lógica para mapear posicaoProduto.posProdTp para o objeto Layout correto
@@ -153,11 +152,31 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
         // Lidar com outros casos ou definir um valor padrão se necessário
         this.selectedLayout = null;
       }
-
     } else {
       // Lidar com o caso em que posicaoProduto não foi encontrado
       this.selectedLayout = null;
     }
+    this.descBreve = produto.descBreve || '';
+    this.descCompleta = produto.descCompleta || '';
+
+    this.adicionarProdutoDisabled = true;
+    this.selectedProductImages = produto.imagem || [];
+
+    // Adicione um console.log para registrar todos os campos
+    console.log('Campos atualizados:', {
+      idProduto: this.idProduto,
+      nomeProduto: this.nomeProduto,
+      descBreve: this.descBreve,
+      descCompleta: this.descCompleta,
+      valorProduto: this.valorProduto,
+      valorProdutoFormatted: this.valorProdutoFormatted,
+      adicionarProdutoDisabled: this.adicionarProdutoDisabled,
+      selectedProductImages: this.selectedProductImages,
+      idCategoria: this.idCategoria,
+      categoriasSelecionadaInput: this.categoriasSelecionadaInput,
+      selectedStatus: this.selectedStatus,
+      selectedLayout: this.selectedLayout,
+    });
   }
 
   onKeyPress(event: KeyboardEvent): void {
@@ -182,12 +201,9 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     }
   }
 
-
   formatCurrency(value: number): number {
     return value;
   }
-
-
 
   limparCampos() {
     this.nomeProduto = '';
@@ -242,10 +258,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     for (let file of event.files) {
       this.selectedProductImages.push(file);
     }
-    console.log(this.selectedProductImages)
-  }
-
-  enviarImagensAoBackend() {
     console.log(this.selectedProductImages)
   }
 
@@ -350,53 +362,92 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       qtdSaida: 0
     }
 
-    console.log(dataProduto)
+    this.apiProdutoService.cadastrarProduto(dataProduto).subscribe(
+      (response) => {
+        console.log("Produto adicionado com sucesso", response)
 
-    // this.apiProdutoService.cadastrarProduto(dataProduto).subscribe(
-    //   (response) => {
-    //     console.log("Produto adicionado com sucesso", response)
+        const prodId = response.prodId
 
-    //     const prodId = response.prodId
+        const dataPosProduto = {
+          posProdTp: this.selectedLayout!.cod,
+          prodId: prodId
+        }
 
-    //     const dataPosProduto = {
-    //       posProdTp: this.selectedLayout.cod,
-    //       prodId: prodId
-    //     }
+        this.apiProdutoService.cadastrarPosicaoProduto(dataPosProduto).subscribe(
+          (response) => {
+            console.log("Posição do produto cadastrada com sucesso", response)
+            this.atualizarPagina();
+          },
+          (error) => {
+            console.log("Erro no cadastro da posição do produto", error)
+          }
+        )
 
-    //     this.apiProdutoService.cadastrarPosicaoProduto(dataPosProduto).subscribe(
-    //       (response) => {
-    //         console.log("Posição do produto cadastrada com sucesso", response)
-    //       },
-    //       (error) => {
-    //         console.log("Erro no cadastro da posição do produto", error)
-    //       }
-    //     )
+        // for(const imagem of this.selectedProductImages){
+        //   const dataFotosProduto = {
+        //     prodId: prodId,
+        //     prodFotoTp: 1,
+        //     imgfomulacao: imagem.name.toString()
+        //   }
 
-    //     // for(const imagem of this.selectedProductImages){
-    //     //   const dataFotosProduto = {
-    //     //     prodId: prodId,
-    //     //     prodFotoTp: 1,
-    //     //     imgfomulacao: imagem.name.toString()
-    //     //   }
+        //   this.apiProdutoService.cadastrarFotosProduto(dataFotosProduto).subscribe(
+        //     (response) => {
+        //       console.log("Foto do produto cadastrada com sucesso", response)
+        //     },
+        //     (error) => {
+        //       console.log("Erro no cadastro da foto do produto", error)
+        //     }
+        //   )
+        // };
 
-    //     //   this.apiProdutoService.cadastrarFotosProduto(dataFotosProduto).subscribe(
-    //     //     (response) => {
-    //     //       console.log("Foto do produto cadastrada com sucesso", response)
-    //     //     },
-    //     //     (error) => {
-    //     //       console.log("Erro no cadastro da foto do produto", error)
-    //     //     }
-    //     //   )
-    //     // };
-
-    //   },
-    //   (error) => {
-    //     console.log("Erro ao cadastrar produto", error)
-    //   }
-    // )
+      },
+      (error) => {
+        console.log("Erro ao cadastrar produto", error)
+      }
+    )
   }
 
   atualizarProduto(){
+
+    const dataProduto = {
+      catId: this.idCategoria,
+      nome: this.nomeProduto,
+      status: this.selectedStatus!.cod,
+      descBreve: this.descBreve,
+      descCompleta: this.descCompleta,
+      preco: this.valorProdutoFormatted,
+    }
+
+    this.apiProdutoService.atualizarProduto(this.idProduto, dataProduto).subscribe(
+      (response) => {
+        console.log("Produto atualizado com sucesso", response)
+      },
+      (error) => {
+        console.log("Erro ao atualizar produto.")
+      }
+    )
+
+    // Encontre o objeto correspondente em posicaoProdutos usando o prodId
+    const posicaoProdutoEncontrado = this.posicaoProdutos.find(posicao => posicao.prodId === this.idProduto);
+
+    // Atribua posProdId a partir de posicaoProdutoEncontrado
+    this.posProdId = posicaoProdutoEncontrado!.posProdId!;
+
+    // Agora, posProdId conterá o valor
+    console.log('posProdId:', this.posProdId);
+
+    const dataPosicaoProduto = {
+      posProdTp: this.selectedLayout!.cod
+    }
+
+    this.apiProdutoService.atualizarPosicaoProduto(this.posProdId, dataPosicaoProduto).subscribe((response) => {
+      console.log("Posição do produto atualizada com sucesso", response)
+      this.atualizarPagina();
+    },
+    (error) => {
+      console.log("Erro ao atualizar posição do produto.", error)
+    }
+    )
 
   }
 
