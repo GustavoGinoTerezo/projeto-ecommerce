@@ -36,8 +36,8 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   idProduto!: number;
   posProdId!: number;
 
+  produtosFiltrados!: Produtos[];
 
-  categoriasFiltradas: Categorias[] = [];
   categoriasSelecionada!: Categorias;
   categoriasSelecionadaInput: Categorias | null = null;
   nomeProduto: string = '';
@@ -54,7 +54,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   adicionarCategoriaDisabled: boolean = false;
   adicionarProdutoDisabled: boolean = false;
-
 
   isDragOver = false;
 
@@ -81,8 +80,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   ngOnInit(){
 
-    // Aguarde um curto período de tempo antes de acessar as categorias
-    // ou utilize observables para lidar com a conclusão da chamada da API
     setTimeout(() => {
 
       this.categorias = this.categoriasService.categoriasAPI;
@@ -91,7 +88,9 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
       this.posicaoProdutos = this.categoriasService.posicaoProdutosAPI
 
-    }, 1000); // Aguarda  segundo (ajuste conforme necessário)
+      this.produtosFiltrados = this.produtos
+
+    }, 1000);
 
     this.status = [
       { nome: 'Disponível', cod: "1"},
@@ -109,21 +108,16 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   }
 
   filterTable(event: any) {
-    const filterValue = event.target.value.toLowerCase();
+    const searchText = event.target.value.toLowerCase();
 
-    if (!this.categorias) {
-      this.categoriasFiltradas = [];
+    if (!searchText) {
+      // Se o campo de pesquisa estiver vazio, redefina a lista de produtos para a lista original
+      this.produtos = this.produtosFiltrados;
     } else {
-      this.categoriasFiltradas = this.categorias.filter(categoria => {
-        const produtosFiltrados = categoria.produtos?.filter(produto => {
-          return produto.nome?.toLowerCase().includes(filterValue);
-        });
-
-        return (
-          categoria.nome?.toLowerCase().includes(filterValue) ||
-          (produtosFiltrados && produtosFiltrados.length > 0)
-        );
-      });
+      // Caso contrário, filtre os produtos com base no texto de pesquisa
+      this.produtos = this.produtosFiltrados.filter(produto =>
+        produto.nome!.toLowerCase().includes(searchText)
+      );
     }
   }
 
@@ -276,21 +270,21 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   //===============================================================================================//
   //MENSAGENS TOAST
 
-    showSuccess(mensagemSucesso: string) {
-      this.messageService.add({ severity:   'success', detail: mensagemSucesso, life: 1600});
-    }
+  showSuccess(mensagemSucesso: string) {
+    this.messageService.add({ severity:   'success', detail: mensagemSucesso, life: 1600});
+  }
 
-    showInfo() {
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
-    }
+  showInfo() {
+    this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
+  }
 
-    showWarn() {
-      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
-    }
+  showWarn() {
+    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
+  }
 
-    showError(mensagemErro: string) {
-      this.messageService.add({ severity: 'error', detail: mensagemErro });
-    }
+  showError(mensagemErro: string) {
+    this.messageService.add({ severity: 'error', detail: mensagemErro });
+  }
 
   //===============================================================================================//
   //API CATEGORIA
@@ -472,13 +466,5 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     )
 
   }
-
-
-
-
-
-
-
-
 
 }
