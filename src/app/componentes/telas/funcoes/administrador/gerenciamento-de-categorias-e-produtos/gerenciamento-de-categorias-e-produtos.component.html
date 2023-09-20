@@ -282,10 +282,9 @@
       <ng-template pTemplate="body" let-produto>
         <tr [pSelectableRow]="produto" (click)="updateInputFieldsWithSelectedProduct(produto)" >
           <td>{{ produto?.nome }}</td>
-          <td></td>
-          <td></td>
+          <td>{{ mapStatusName(produto?.status) }}</td>
+          <td>{{ mapCategoryName(produto?.catId) }}</td>
         </tr>
-
       </ng-template>
     </p-table>
   </div>

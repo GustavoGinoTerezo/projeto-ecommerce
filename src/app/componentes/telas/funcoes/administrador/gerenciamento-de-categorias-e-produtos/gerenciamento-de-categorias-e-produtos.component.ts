@@ -267,6 +267,25 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     console.log(this.selectedProductImages)
   }
 
+  mapStatusName(statusCod: string): string {
+    const status = this.status.find(s => s.cod === statusCod);
+    return status ? status.nome : 'Desconhecido'; // Retorna "Desconhecido" se não encontrar um status correspondente
+  }
+
+  mapCategoryName(catId: number | undefined): string {
+    if (catId === undefined) {
+      return 'Desconhecida';
+    }
+    const category = this.categorias.find(c => c.catId === catId);
+    return category ? category.nome || 'Desconhecida' : 'Desconhecida';
+  }
+
+
+
+
+
+
+
   //===============================================================================================//
   //MENSAGENS TOAST
 
