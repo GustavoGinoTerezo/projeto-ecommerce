@@ -126,7 +126,13 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   updateInputFieldsWithSelectedProduct(produto: Produtos) {
     this.idProduto = produto.prodId!;
     this.idCategoria = produto.catId!;
-    // this.posProdId =
+
+    // Encontre o objeto correspondente em posicaoProdutos usando o prodId
+    const posicaoProdutoEncontrado = this.posicaoProdutos.find(posicao => posicao.prodId === this.idProduto);
+    // Atribua posProdId a partir de posicaoProdutoEncontrado
+    this.posProdId = posicaoProdutoEncontrado!.posProdId!;
+    // Agora, posProdId conterá o valor
+    console.log('posProdId:', this.posProdId);
 
     this.nomeProduto = produto.nome || '';
     // Encontre a categoria correspondente ou defina como null
@@ -264,21 +270,21 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   //===============================================================================================//
   //MENSAGENS TOAST
 
-  showSuccess(mensagemSucesso: string) {
-    this.messageService.add({ severity:   'success', detail: mensagemSucesso, life: 1600});
-  }
+    showSuccess(mensagemSucesso: string) {
+      this.messageService.add({ severity:   'success', detail: mensagemSucesso, life: 1600});
+    }
 
-  showInfo() {
-    this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
-  }
+    showInfo() {
+      this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
+    }
 
-  showWarn() {
-    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
-  }
+    showWarn() {
+      this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
+    }
 
-  showError(mensagemErro: string) {
-    this.messageService.add({ severity: 'error', detail: mensagemErro });
-  }
+    showError(mensagemErro: string) {
+      this.messageService.add({ severity: 'error', detail: mensagemErro });
+    }
 
   //===============================================================================================//
   //API CATEGORIA
@@ -427,15 +433,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       }
     )
 
-    // Encontre o objeto correspondente em posicaoProdutos usando o prodId
-    const posicaoProdutoEncontrado = this.posicaoProdutos.find(posicao => posicao.prodId === this.idProduto);
-
-    // Atribua posProdId a partir de posicaoProdutoEncontrado
-    this.posProdId = posicaoProdutoEncontrado!.posProdId!;
-
-    // Agora, posProdId conterá o valor
-    console.log('posProdId:', this.posProdId);
-
     const dataPosicaoProduto = {
       posProdTp: this.selectedLayout!.cod
     }
@@ -448,10 +445,25 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       console.log("Erro ao atualizar posição do produto.", error)
     }
     )
-
   }
 
   excluirProduto(){
+
+    this.apiProdutoService.excluirPosicaoProduto(this.posProdId).subscribe((response) => {
+      console.log("Posição do produto excluída com sucesso", response)
+      this.apiProdutoService.excluirProduto(this.idProduto).subscribe((response) => {
+        console.log("Produto excluído com sucesso", response)
+        this.atualizarPagina();
+      },
+      (error) => {
+        console.log("Erro ao excluir o produto.", error)
+      }
+      )
+    },
+    (error) => {
+      console.log("Erro ao excluir posição do produto.", error)
+    }
+    )
 
   }
 
