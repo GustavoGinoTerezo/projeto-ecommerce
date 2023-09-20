@@ -47,8 +47,9 @@ export class HeaderComponent {
 
       this.menuItems = this.categorias.map((categoria: Categorias) => ({
         label: categoria.nome,
+        command: () => this.navigateCategoria(categoria),
       }));
-    }, 1000); // Aguarda 1 segundo (ajuste conforme necessário)
+    }, 2000); // Aguarda 1 segundo (ajuste conforme necessário)
 
 
   }

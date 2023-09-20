@@ -258,6 +258,13 @@ export class ServiceCategoriasService {
 
   posicaoProdutosAPI: PosicaoProdutos[] = []
 
+  produtosDestaqueAPI: Produtos[] = [];
+
+  produtosMaisVendidosAPI: Produtos[] = [];
+
+  produtosEmPromocaoAPI: Produtos[] = [];
+
+
   //==================================================================================================================================//
 
   getCategorias(): Observable<Categorias[]> {
@@ -330,7 +337,10 @@ export class ServiceCategoriasService {
     this.apiCategoriaService.buscarCategorias().subscribe(
       (categoriasAPI) => {
         this.categoriasAPI = categoriasAPI;
-        console.log(this.categoriasAPI)
+        console.log(this.categoriasAPI);
+
+        // Após obter as categorias da API, chame os métodos para atualizar produtos
+        this.atualizarProdutosDaAPI();
       },
       (error) => {
         console.error('Erro ao buscar categorias da API', error);
@@ -338,28 +348,76 @@ export class ServiceCategoriasService {
     );
   }
 
-  atualizarProdutosDaAPI(){
+  atualizarProdutosDaAPI() {
     this.apiProdutos.buscarProdutos().subscribe(
       (produtosAPI) => {
         this.produtosAPI = produtosAPI;
-        console.log(this.produtosAPI)
+        console.log(this.produtosAPI);
+
+        // Após obter os produtos da API, chame o método para atualizar a posição dos produtos
+        this.atualizarPosicaoProdutosDaAPI();
       },
       (error) => {
-        console.error('Erro ao buscar categorias da API', error);
+        console.error('Erro ao buscar produtos da API', error);
       }
     );
   }
 
-  atualizarPosicaoProdutosDaAPI(){
+  atualizarPosicaoProdutosDaAPI() {
     this.apiProdutos.buscarPosicaoProdutos().subscribe(
       (posicaoProdutosAPI) => {
         this.posicaoProdutosAPI = posicaoProdutosAPI;
-        console.log(this.posicaoProdutosAPI)
+        console.log(this.posicaoProdutosAPI);
+
+        // Após obter a posição dos produtos da API, chame os métodos para atualizar destaques, mais vendidos e promoções
+        this.atualizarProdutosDestaque();
+        this.atualizarProdutosMaisVendidos();
+        this.atualizarProdutosEmPromocao();
       },
       (error) => {
-        console.error('Erro ao buscar categorias da API', error);
+        console.error('Erro ao buscar posição de produtos da API', error);
       }
     );
   }
+
+  atualizarProdutosDestaque() {
+    // Primeiro, filtre os objetos em posicaoProdutosAPI onde posProdTp é igual a "1"
+    const produtosEmDestaque = this.posicaoProdutosAPI
+      .filter((posicao) => posicao.posProdTp === '1')
+      .map((posicao) => posicao.prodId);
+
+    // Em seguida, filtre os produtos em produtosAPI com base nos IDs encontrados anteriormente
+    this.produtosDestaqueAPI = this.produtosAPI
+      .filter((produto) => produtosEmDestaque.includes(produto.prodId));
+
+    console.log(this.produtosDestaqueAPI); // Adicione este console.log para verificar o conteúdo do array
+  }
+
+  atualizarProdutosMaisVendidos() {
+    // Primeiro, filtre os objetos em posicaoProdutosAPI onde posProdTp é igual a "2"
+    const produtosMaisVendidos = this.posicaoProdutosAPI
+      .filter((posicao) => posicao.posProdTp === '2')
+      .map((posicao) => posicao.prodId);
+
+    // Em seguida, filtre os produtos em produtosAPI com base nos IDs encontrados anteriormente
+    this.produtosMaisVendidosAPI = this.produtosAPI
+      .filter((produto) => produtosMaisVendidos.includes(produto.prodId));
+
+    console.log(this.produtosMaisVendidosAPI); // Adicione este console.log para verificar o conteúdo do array
+  }
+
+  atualizarProdutosEmPromocao() {
+    // Primeiro, filtre os objetos em posicaoProdutosAPI onde posProdTp é igual a "3"
+    const produtosEmPromocao = this.posicaoProdutosAPI
+      .filter((posicao) => posicao.posProdTp === '3')
+      .map((posicao) => posicao.prodId);
+
+    // Em seguida, filtre os produtos em produtosAPI com base nos IDs encontrados anteriormente
+    this.produtosEmPromocaoAPI = this.produtosAPI
+      .filter((produto) => produtosEmPromocao.includes(produto.prodId));
+
+    console.log(this.produtosEmPromocaoAPI); // Adicione este console.log para verificar o conteúdo do array
+  }
+
 
 }

@@ -28,6 +28,7 @@ export class DetalheProdutoComponent implements OnInit {
 
   ngOnInit() {
 
+
     this.categoriasService.getCategorias().subscribe(
       (categorias) => {
         // console.log("Categorias obtidas:", categorias);

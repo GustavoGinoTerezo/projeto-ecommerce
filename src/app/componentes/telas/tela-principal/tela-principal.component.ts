@@ -183,26 +183,20 @@ export class TelaPrincipalComponent {
         this.categorias = categorias;
     });
 
-    //PRODUTOS EM DESTAQUE
-    this.serviceProdutosDestaque.getProdutosDestaque().subscribe(
-      (produtosDestaque: Produtos[]) => {
-        this.produtosDestaque = produtosDestaque;
-      },
-    );
 
-    //PRODUTOS MAIS VENDIDOS
-    this.serviceProdutosDestaque.getProdutosMaisVendidos().subscribe(
-      (produtosMaisVendidos: Produtos[]) => {
-        this.produtosMaisVendidos = produtosMaisVendidos;
-      },
-    );
+    setTimeout(() => {
 
-    //PRODUTOS EM PROMOCAO
-    this.serviceProdutosDestaque.getProdutosEmPromocao().subscribe(
-      (produtosEmPromocao: Produtos[]) => {
-        this.produtosEmPromocao = produtosEmPromocao;
-      },
-    );
+      //PRODUTOS EM DESTAQUE
+      this.produtosDestaque = this.categoriasService.produtosDestaqueAPI
+
+      //PRODUTOS MAIS VENDIDOS
+      this.produtosMaisVendidos = this.categoriasService.produtosDestaqueAPI
+
+      //PRODUTOS EM PROMOCAO
+      this.produtosEmPromocao = this.categoriasService.produtosEmPromocaoAPI
+
+    }, 2000);
+
   }
 
   navigateProduto(produto: Produtos) {

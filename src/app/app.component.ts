@@ -19,11 +19,10 @@ export class AppComponent {
 
     this.categoriasService.atualizarCategoriasDaAPI();
 
-    this.categoriasService.atualizarProdutosDaAPI();
-
-    this.categoriasService.atualizarPosicaoProdutosDaAPI();
-
   }
+
+
+
 
   acaoDoBotao() {
     window.open('https://api.whatsapp.com/send?phone=5519989937300', '_blank');
