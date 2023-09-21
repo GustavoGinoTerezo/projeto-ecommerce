@@ -27,7 +27,17 @@ export class CarrinhoDeComprasComponent {
 
   ngOnInit(): void {
 
-    this.carrinho = this.carrinhoService.getCarrinhoDeCompra();
+    // Recupere a lista de IDs do carrinho do sessionStorage
+    const carrinho = JSON.parse(sessionStorage.getItem('carrinho') || '[]');
+
+    // Você pode usar 'carrinho' como um array de IDs de produtos
+    console.log('IDs dos produtos no carrinho:', carrinho);
+
+
+    // this.carrinho = this.carrinhoService.getCarrinhoDeCompra();
+
+
+
 
     this.calcularValorTotal();
 
