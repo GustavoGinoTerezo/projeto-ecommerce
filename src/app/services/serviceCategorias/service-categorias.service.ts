@@ -264,6 +264,8 @@ export class ServiceCategoriasService {
 
   produtosEmPromocaoAPI: Produtos[] = [];
 
+  private idProduto: number | undefined;
+
 
   //==================================================================================================================================//
 
@@ -288,6 +290,11 @@ export class ServiceCategoriasService {
     return of (this.posicaoProdutosAPI)
   }
 
+  obterProdutoPorNome(nome: string): Categorias | undefined {
+    return this.produtosAPI.find(
+      (produto) => produto.nome && produto.nome.toLowerCase() === nome.toLowerCase()
+    );
+  }
   //==================================================================================================================================//
   //PRODUTOS EM DESTAQUE
   getProdutosDestaque(): Observable<Produtos[]> {
@@ -430,6 +437,5 @@ export class ServiceCategoriasService {
 
     // console.log(this.produtosEmPromocaoAPI); // Adicione este console.log para verificar o conteúdo do array
   }
-
 
 }

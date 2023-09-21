@@ -12,7 +12,11 @@ import { Categorias, Imagens, Produtos, ServiceCategoriasService } from 'src/app
 export class DetalheProdutoComponent implements OnInit {
 
   categorias: Categorias[] = [];
+  produtos: Produtos[] = [];
   produto: Produtos | undefined;
+
+  nomeProduto: string | null = null;
+
   nomeProdutoFormatado: string | null = null;
   produtoDaCategoria!: Produtos;
   cep!: string;
@@ -28,43 +32,33 @@ export class DetalheProdutoComponent implements OnInit {
 
   ngOnInit() {
 
-    this.categoriasService.getCategorias().subscribe(
-      (categoriasAPI) => {
-        this.categorias = categoriasAPI;
-      }
-    );
+    setTimeout(() => {
 
-    this.route.params.subscribe((params) => {
-      const nomeProduto = params['nome'];
-      // console.log("Nome do produto na URL:", nomeProduto);
-
-      if (nomeProduto) {
-        this.produto = this.encontrarProdutoPorNome(nomeProduto);
-        // console.log("Produto encontrado:", this.produto);
-
-        // Formatar o nome do produto para exibição
-        this.nomeProdutoFormatado = this.produtoService.formatarNomeProduto(nomeProduto);
-      }
-    });
-
-
-  }
-
-  encontrarProdutoPorNome(nomeProduto: string): Produtos | undefined {
-    // console.log("Procurando produto por nome:", nomeProduto);
-    const nomeProdutoLowerCase = nomeProduto.toLowerCase();
-
-    for (const categoria of this.categorias) {
-      const produtoEncontrado = categoria.produtos?.find(
-        produto => produto.nome?.toLowerCase() === nomeProdutoLowerCase
+      this.categoriasService.getCategorias().subscribe(
+        (categoriasAPI) => {
+          this.categorias = categoriasAPI;
+        }
       );
-      if (produtoEncontrado) {
-        // console.log("Produto encontrado nas categorias:", produtoEncontrado);
-        return produtoEncontrado;
-      }
-    }
-    // console.log("Produto não encontrado nas categorias");
-    return undefined;
+
+      this.categoriasService.getProdutos().subscribe(
+        (produtosAPI) => {
+          this.produtos = produtosAPI
+       }
+      );
+
+      this.route.params.subscribe((params) => {
+        this.nomeProduto = params['nome'];
+
+        if (this.nomeProduto) {
+          const nomeOriginal = this.nomeProduto.replace(/-/g, ' ');
+          this.produto = this.produtoService.obterProdutoPorNome(nomeOriginal);
+
+          this.nomeProdutoFormatado = this.produtoService.formatarNomeProduto(this.nomeProduto);
+        }
+      })
+
+    }, 1000)
+
   }
 
   getProdutoImages(): string[] {
