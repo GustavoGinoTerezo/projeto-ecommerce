@@ -32,15 +32,6 @@ export class CategoriaComponent {
 
     setTimeout(() => {
 
-      this.route.params.subscribe((params) => {
-        this.nomeCategoria = params['nome'];
-
-        if (this.nomeCategoria) {
-          const nomeOriginal = this.nomeCategoria.replace(/-/g, ' ');
-          this.categoria = this.produtoService.obterCategoriaPorNome(nomeOriginal);
-        }
-      });
-
       this.categoriasService.getCategorias().subscribe(
         (categoriasAPI) => {
           this.categorias = categoriasAPI;
@@ -53,8 +44,17 @@ export class CategoriaComponent {
        }
       );
 
-      console.log(this.categoria)
-      console.log(this.produtos)
+      this.route.params.subscribe((params) => {
+        this.nomeCategoria = params['nome'];
+
+        if (this.nomeCategoria) {
+          const nomeOriginal = this.nomeCategoria.replace(/-/g, ' ');
+          this.categoria = this.produtoService.obterCategoriaPorNome(nomeOriginal);
+
+          // FILTRA E MOSTRA OS PRODUTOS DA CATEGORIA CORRESPONDENTE
+          this.produtosDaCategoria = this.produtos.filter(produto => produto.catId === this.categoria!.catId);
+        }
+      });
 
     }, 2000)
 
@@ -91,9 +91,8 @@ export class CategoriaComponent {
     return this.categoriasService.formatarNomeProduto(produtos);
   }
 
-
   get totalRecords(): number {
-    return this.categoria?.produtos?.length || 0;
+    return this.produtosDaCategoria?.length || 0;
   }
 }
 
