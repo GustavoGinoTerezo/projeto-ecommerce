@@ -349,7 +349,7 @@ export class ServiceCategoriasService {
     this.apiCategoriaService.buscarCategorias().subscribe(
       (categoriasAPI) => {
         this.categoriasAPI = categoriasAPI;
-        console.log(this.categoriasAPI);
+        // console.log(this.categoriasAPI);
 
         // Após obter as categorias da API, chame os métodos para atualizar produtos
         this.atualizarProdutosDaAPI();
@@ -364,7 +364,7 @@ export class ServiceCategoriasService {
     this.apiProdutos.buscarProdutos().subscribe(
       (produtosAPI) => {
         this.produtosAPI = produtosAPI;
-        console.log(this.produtosAPI);
+        // console.log(this.produtosAPI);
 
         // Após obter os produtos da API, chame o método para atualizar a posição dos produtos
         this.atualizarPosicaoProdutosDaAPI();
@@ -379,7 +379,7 @@ export class ServiceCategoriasService {
     this.apiProdutos.buscarPosicaoProdutos().subscribe(
       (posicaoProdutosAPI) => {
         this.posicaoProdutosAPI = posicaoProdutosAPI;
-        console.log(this.posicaoProdutosAPI);
+        // console.log(this.posicaoProdutosAPI);
 
         // Após obter a posição dos produtos da API, chame os métodos para atualizar destaques, mais vendidos e promoções
         this.atualizarProdutosDestaque();
@@ -402,7 +402,7 @@ export class ServiceCategoriasService {
     this.produtosDestaqueAPI = this.produtosAPI
       .filter((produto) => produtosEmDestaque.includes(produto.prodId));
 
-    console.log(this.produtosDestaqueAPI); // Adicione este console.log para verificar o conteúdo do array
+    // console.log(this.produtosDestaqueAPI); // Adicione este console.log para verificar o conteúdo do array
   }
 
   atualizarProdutosMaisVendidos() {
@@ -415,7 +415,7 @@ export class ServiceCategoriasService {
     this.produtosMaisVendidosAPI = this.produtosAPI
       .filter((produto) => produtosMaisVendidos.includes(produto.prodId));
 
-    console.log(this.produtosMaisVendidosAPI); // Adicione este console.log para verificar o conteúdo do array
+    // console.log(this.produtosMaisVendidosAPI); // Adicione este console.log para verificar o conteúdo do array
   }
 
   atualizarProdutosEmPromocao() {
@@ -428,7 +428,7 @@ export class ServiceCategoriasService {
     this.produtosEmPromocaoAPI = this.produtosAPI
       .filter((produto) => produtosEmPromocao.includes(produto.prodId));
 
-    console.log(this.produtosEmPromocaoAPI); // Adicione este console.log para verificar o conteúdo do array
+    // console.log(this.produtosEmPromocaoAPI); // Adicione este console.log para verificar o conteúdo do array
   }
 
 

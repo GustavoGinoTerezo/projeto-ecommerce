@@ -17,6 +17,7 @@ export class CategoriaComponent {
   first: number = 0; // Primeiro item da página
   rows: number = 8; // Número de itens por página
   produtos: Produtos[] = []
+  produtosDaCategoria: Produtos[] = []
 
   constructor(
     private route: ActivatedRoute,
@@ -29,20 +30,34 @@ export class CategoriaComponent {
 
   ngOnInit() {
 
-    this.route.params.subscribe((params) => {
-      this.nomeCategoria = params['nome'];
+    setTimeout(() => {
 
-      if (this.nomeCategoria) {
-        const nomeOriginal = this.nomeCategoria.replace(/-/g, ' ');
-        this.categoria = this.produtoService.obterCategoriaPorNome(nomeOriginal);
-      }
-    });
+      this.route.params.subscribe((params) => {
+        this.nomeCategoria = params['nome'];
 
-    this.categoriasService.getCategorias().subscribe(
-      (categoriasAPI) => {
-        this.categorias = categoriasAPI;
-      }
-    );
+        if (this.nomeCategoria) {
+          const nomeOriginal = this.nomeCategoria.replace(/-/g, ' ');
+          this.categoria = this.produtoService.obterCategoriaPorNome(nomeOriginal);
+        }
+      });
+
+      this.categoriasService.getCategorias().subscribe(
+        (categoriasAPI) => {
+          this.categorias = categoriasAPI;
+        }
+      );
+
+      this.categoriasService.getProdutos().subscribe(
+        (produtosAPI) => {
+          this.produtos = produtosAPI
+       }
+      );
+
+      console.log(this.categoria)
+      console.log(this.produtos)
+
+    }, 2000)
+
   }
 
   navigateToDetalheProduto(produto: Produtos) {
