@@ -43,9 +43,17 @@ export class GerenciamentoDeEstoqueComponent {
 
     setTimeout(() => {
 
-      this.categorias = this.categoriasService.categoriasAPI;
+      this.categoriasService.getCategorias().subscribe(
+        (categoriasAPI) => {
+          this.categorias = categoriasAPI;
+        }
+      );
 
-      this.produtos = this.categoriasService.produtosAPI;
+      this.categoriasService.getProdutos().subscribe(
+        (produtosAPI) => {
+          this.produtos = produtosAPI;
+        }
+      );
 
       console.log(this.produtos)
 

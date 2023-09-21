@@ -80,11 +80,23 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
     setTimeout(() => {
 
-      this.categorias = this.categoriasService.categoriasAPI;
+      this.categoriasService.getCategorias().subscribe(
+        (categoriasAPI) => {
+          this.categorias = categoriasAPI;
+        }
+      );
 
-      this.produtos = this.categoriasService.produtosAPI;
+      this.categoriasService.getProdutos().subscribe(
+        (produtosAPI) => {
+          this.produtos = produtosAPI;
+        }
+      );
 
-      this.posicaoProdutos = this.categoriasService.posicaoProdutosAPI
+      this.categoriasService.getPosicaoProdutos().subscribe(
+        (posicaoProdutosAPI) => {
+          this.posicaoProdutos = posicaoProdutosAPI;
+        }
+      );
 
       this.produtosFiltrados = this.produtos
 

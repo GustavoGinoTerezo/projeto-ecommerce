@@ -43,7 +43,11 @@ export class HeaderComponent {
     // Aguarde um curto período de tempo antes de acessar as categorias
     // ou utilize observables para lidar com a conclusão da chamada da API
     setTimeout(() => {
-      this.categorias = this.categoriasService.categoriasAPI;
+      this.categoriasService.getCategorias().subscribe(
+        (categoriasAPI) => {
+          this.categorias = categoriasAPI;
+        }
+      );
 
       this.menuItems = this.categorias.map((categoria: Categorias) => ({
         label: categoria.nome,

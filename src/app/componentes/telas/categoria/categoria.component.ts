@@ -16,6 +16,7 @@ export class CategoriaComponent {
   categorias: Categorias[] = [];
   first: number = 0; // Primeiro item da página
   rows: number = 8; // Número de itens por página
+  produtos: Produtos[] = []
 
   constructor(
     private route: ActivatedRoute,
@@ -38,8 +39,8 @@ export class CategoriaComponent {
     });
 
     this.categoriasService.getCategorias().subscribe(
-      (categorias) => {
-        this.categorias = categorias;
+      (categoriasAPI) => {
+        this.categorias = categoriasAPI;
       }
     );
   }

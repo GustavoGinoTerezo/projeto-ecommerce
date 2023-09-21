@@ -28,25 +28,26 @@ export class DetalheProdutoComponent implements OnInit {
 
   ngOnInit() {
 
-
     this.categoriasService.getCategorias().subscribe(
-      (categorias) => {
-        // console.log("Categorias obtidas:", categorias);
-        this.categorias = categorias;
-        this.route.params.subscribe((params) => {
-          const nomeProduto = params['nome'];
-          // console.log("Nome do produto na URL:", nomeProduto);
-
-          if (nomeProduto) {
-            this.produto = this.encontrarProdutoPorNome(nomeProduto);
-            // console.log("Produto encontrado:", this.produto);
-
-            // Formatar o nome do produto para exibição
-            this.nomeProdutoFormatado = this.produtoService.formatarNomeProduto(nomeProduto);
-          }
-        });
+      (categoriasAPI) => {
+        this.categorias = categoriasAPI;
       }
     );
+
+    this.route.params.subscribe((params) => {
+      const nomeProduto = params['nome'];
+      // console.log("Nome do produto na URL:", nomeProduto);
+
+      if (nomeProduto) {
+        this.produto = this.encontrarProdutoPorNome(nomeProduto);
+        // console.log("Produto encontrado:", this.produto);
+
+        // Formatar o nome do produto para exibição
+        this.nomeProdutoFormatado = this.produtoService.formatarNomeProduto(nomeProduto);
+      }
+    });
+
+
   }
 
   encontrarProdutoPorNome(nomeProduto: string): Produtos | undefined {

@@ -268,24 +268,35 @@ export class ServiceCategoriasService {
   //==================================================================================================================================//
 
   getCategorias(): Observable<Categorias[]> {
-    return of (this.categorias);
+    return of (this.categoriasAPI);
   }
 
   obterCategoriaPorNome(nome: string): Categorias | undefined {
-    return this.categorias.find(
+    return this.categoriasAPI.find(
       (categoria) => categoria.nome && categoria.nome.toLowerCase() === nome.toLowerCase()
     );
   }
 
   //==================================================================================================================================//
+  //PRODUTOS
+
+  getProdutos(): Observable<Categorias[]> {
+    return of (this.produtosAPI);
+  }
+
+  getPosicaoProdutos(): Observable<PosicaoProdutos[]> {
+    return of (this.posicaoProdutosAPI)
+  }
+
+  //==================================================================================================================================//
   //PRODUTOS EM DESTAQUE
   getProdutosDestaque(): Observable<Produtos[]> {
-    return of (this.produtosDestaque);
+    return of (this.produtosDestaqueAPI);
   }
 
   //MUDAR A URL COM O NOME DO PRODUTO
   obterProdutoPorNomeDestaque(nome: string): Produtos | undefined {
-    return this.produtosDestaque.find(
+    return this.produtosDestaqueAPI.find(
       (produto) => produto.nome && produto.nome.toLowerCase() === nome.toLowerCase()
     );
   }
@@ -293,25 +304,25 @@ export class ServiceCategoriasService {
   //==================================================================================================================================//
   //PRODUTOS MAIS VENDIDOS
   getProdutosMaisVendidos(): Observable<Produtos[]> {
-    return of (this.produtosMaisVendidos);
+    return of (this.produtosMaisVendidosAPI);
   }
 
   //MUDAR A URL COM O NOME DO PRODUTO
   obterProdutoPorNomeMaisVendidos(nome: string): Produtos | undefined {
-    return this.produtosMaisVendidos.find(
+    return this.produtosMaisVendidosAPI.find(
       (produto) => produto.nome && produto.nome.toLowerCase() === nome.toLowerCase()
     );
   }
 
   //==================================================================================================================================//
-  //PRODUTOS MAIS VENDIDOS
+  //PRODUTOS EM PROMOÇÃO
   getProdutosEmPromocao(): Observable<Produtos[]> {
-    return of (this.produtosEmPromocao);
+    return of (this.produtosEmPromocaoAPI);
   }
 
   //MUDAR A URL COM O NOME DO PRODUTO
   obterProdutoPorNomeEmPromocao(nome: string): Produtos | undefined {
-    return this.produtosEmPromocao.find(
+    return this.produtosEmPromocaoAPI.find(
       (produto) => produto.nome && produto.nome.toLowerCase() === nome.toLowerCase()
     );
   }
@@ -322,7 +333,6 @@ export class ServiceCategoriasService {
     return nomeFormatado;
   }
   //==================================================================================================================================//
-
   getProdutosComComentariosPendentes(): Observable<Produtos[]> {
     const produtosComComentariosPendentes = this.categorias.reduce((result, categoria) => {
       return result.concat(
@@ -333,6 +343,8 @@ export class ServiceCategoriasService {
     return of(produtosComComentariosPendentes);
   }
 
+  //==================================================================================================================================//
+  // API
   atualizarCategoriasDaAPI() {
     this.apiCategoriaService.buscarCategorias().subscribe(
       (categoriasAPI) => {

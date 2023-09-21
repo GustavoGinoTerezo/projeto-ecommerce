@@ -178,22 +178,34 @@ export class TelaPrincipalComponent {
     //================================================================================================================================//
     //RELACIONADO COM OS PRODUTOS
 
-    this.categoriasService.getCategorias().subscribe(
-      (categorias) => {
-        this.categorias = categorias;
-    });
-
-
     setTimeout(() => {
 
+      this.categoriasService.getCategorias().subscribe(
+        (categoriasAPI) => {
+          this.categorias = categoriasAPI;
+        }
+      );
+
       //PRODUTOS EM DESTAQUE
-      this.produtosDestaque = this.categoriasService.produtosDestaqueAPI
+      this.categoriasService.getProdutosDestaque().subscribe(
+        (produtosDestaqueAPI) => {
+          this.produtosDestaque = produtosDestaqueAPI;
+        }
+      );
 
       //PRODUTOS MAIS VENDIDOS
-      this.produtosMaisVendidos = this.categoriasService.produtosDestaqueAPI
+      this.categoriasService.getProdutosMaisVendidos().subscribe(
+        (produtosMaisVendidosAPI) => {
+          this.produtosMaisVendidos = produtosMaisVendidosAPI;
+        }
+      );
 
       //PRODUTOS EM PROMOCAO
-      this.produtosEmPromocao = this.categoriasService.produtosEmPromocaoAPI
+      this.categoriasService.getProdutosEmPromocao().subscribe(
+        (produtosEmPromocaoAPI) => {
+          this.produtosEmPromocao = produtosEmPromocaoAPI;
+        }
+      );
 
     }, 2000);
 
