@@ -57,7 +57,7 @@ export class GerenciamentoDeEstoqueComponent {
 
       console.log(this.produtos)
 
-    }, 1000);
+    }, 1500);
 
     // this.originalQuantEntrada = [...this.mapProdutos[0]?.quantEntrada || []];
 

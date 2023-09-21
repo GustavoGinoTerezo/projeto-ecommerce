@@ -32,31 +32,31 @@ export class CategoriaComponent {
 
     setTimeout(() => {
 
-      this.categoriasService.getCategorias().subscribe(
-        (categoriasAPI) => {
-          this.categorias = categoriasAPI;
-        }
-      );
+    this.categoriasService.getCategorias().subscribe(
+      (categoriasAPI) => {
+        this.categorias = categoriasAPI;
+      }
+    );
 
-      this.categoriasService.getProdutos().subscribe(
-        (produtosAPI) => {
-          this.produtos = produtosAPI
-       }
-      );
+    this.categoriasService.getProdutos().subscribe(
+      (produtosAPI) => {
+        this.produtos = produtosAPI
+      }
+    );
 
-      this.route.params.subscribe((params) => {
-        this.nomeCategoria = params['nome'];
+    this.route.params.subscribe((params) => {
+      this.nomeCategoria = params['nome'];
 
-        if (this.nomeCategoria) {
-          const nomeOriginal = this.nomeCategoria.replace(/-/g, ' ');
-          this.categoria = this.produtoService.obterCategoriaPorNome(nomeOriginal);
+      if (this.nomeCategoria) {
+        const nomeOriginal = this.nomeCategoria.replace(/-/g, ' ');
+        this.categoria = this.produtoService.obterCategoriaPorNome(nomeOriginal);
 
           // FILTRA E MOSTRA OS PRODUTOS DA CATEGORIA CORRESPONDENTE
           this.produtosDaCategoria = this.produtos.filter(produto => produto.catId === this.categoria!.catId);
         }
       });
 
-    }, 2000)
+    }, 1500)
 
   }
 

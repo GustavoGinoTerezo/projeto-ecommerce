@@ -100,7 +100,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
       this.produtosFiltrados = this.produtos
 
-    }, 1000);
+    }, 1500);
 
     this.status = [
       { nome: 'Disponível', cod: "1"},
@@ -289,12 +289,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     const category = this.categorias.find(c => c.catId === catId);
     return category ? category.nome || 'Desconhecida' : 'Desconhecida';
   }
-
-
-
-
-
-
 
   //===============================================================================================//
   //MENSAGENS TOAST

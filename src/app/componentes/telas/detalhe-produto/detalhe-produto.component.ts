@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
@@ -34,30 +34,30 @@ export class DetalheProdutoComponent implements OnInit {
 
     setTimeout(() => {
 
-      this.categoriasService.getCategorias().subscribe(
-        (categoriasAPI) => {
-          this.categorias = categoriasAPI;
-        }
-      );
+    this.categoriasService.getCategorias().subscribe(
+      (categoriasAPI) => {
+        this.categorias = categoriasAPI;
+      }
+    );
 
-      this.categoriasService.getProdutos().subscribe(
-        (produtosAPI) => {
-          this.produtos = produtosAPI
-       }
-      );
+    this.categoriasService.getProdutos().subscribe(
+      (produtosAPI) => {
+        this.produtos = produtosAPI
+      }
+    );
 
-      this.route.params.subscribe((params) => {
-        this.nomeProduto = params['nome'];
+    this.route.params.subscribe((params) => {
+      this.nomeProduto = params['nome'];
 
-        if (this.nomeProduto) {
-          const nomeOriginal = this.nomeProduto.replace(/-/g, ' ');
-          this.produto = this.produtoService.obterProdutoPorNome(nomeOriginal);
+      if (this.nomeProduto) {
+        const nomeOriginal = this.nomeProduto.replace(/-/g, ' ');
+        this.produto = this.produtoService.obterProdutoPorNome(nomeOriginal);
 
-          this.nomeProdutoFormatado = this.produtoService.formatarNomeProduto(this.nomeProduto);
-        }
-      })
+        this.nomeProdutoFormatado = this.produtoService.formatarNomeProduto(this.nomeProduto);
+      }
+    })
 
-    }, 1000)
+    }, 1500)
 
   }
 
