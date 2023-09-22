@@ -56,7 +56,7 @@
                     incrementButtonClass="p-button-success"
                     incrementButtonIcon="fa-solid fa-plus"
                     decrementButtonIcon="fa-solid fa-minus"
-                    (ngModelChange)="atualizarValorTotal()"
+                    (ngModelChange)="atualizarQuantidade(item, $event)"
                   ></p-inputNumber>
                   <div class="preco">
                     R$ {{ calcularValorItem(item).toFixed(2) }}
