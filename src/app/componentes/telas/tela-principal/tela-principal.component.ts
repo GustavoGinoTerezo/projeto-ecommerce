@@ -227,11 +227,7 @@ export class TelaPrincipalComponent {
 
   adicionarAoCarrinho(produto: Produtos): void {
 
-
-
     // this.carrinhoService.adicionarAoCarrinho(produto);
-
-
 
     // Recupere a lista de IDs do carrinho do sessionStorage ou crie uma lista vazia se ainda não existir
     const carrinho = JSON.parse(sessionStorage.getItem('carrinho') || '[]');
