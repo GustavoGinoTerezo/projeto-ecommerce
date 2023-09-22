@@ -343,8 +343,8 @@
 
 .containerBanner{
   display: flex;
+  justify-content: center;
   height: 100%;
-  max-height: 900px;
 }
 
 .imgBannerContainer{
@@ -362,8 +362,8 @@
   align-items: center;
   width: 98%;
   height: 100%;
-  max-width: 1720px;
-  max-height: 800px;
+  max-width: 1100px;
+  max-height: 400px;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s ease all;
