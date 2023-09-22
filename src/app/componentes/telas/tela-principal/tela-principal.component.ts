@@ -207,7 +207,7 @@ export class TelaPrincipalComponent {
         }
       );
 
-    }, 2000);
+    }, 2500);
 
   }
 

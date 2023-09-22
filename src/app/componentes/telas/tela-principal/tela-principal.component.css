@@ -5,23 +5,7 @@
   height: 100%;
 }
 
-.imgBannerContainer{
-  display: flex;
-  padding: 23px;
-  justify-content: center;
-  align-items: center;
-}
 
-.imgBanner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 98%;
-  height: 400px; /* Defina a altura padrão desejada */
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s ease all;
-}
 
 .imgBanner:hover{
   scale: 1.02;
@@ -357,7 +341,41 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.668);
 }
 
+.containerBanner{
+  display: flex;
+  height: 100%;
+  max-height: 900px;
+}
 
+.imgBannerContainer{
+  display: flex;
+  padding: 23px;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.imgBanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 98%;
+  height: 100%;
+  max-width: 1720px;
+  max-height: 800px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+
+:host ::ng-deep .carousel-banner .p-carousel{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
 
 @media (max-width: 800px) {
   .sidenav-link-text {
@@ -379,6 +397,10 @@
     width: 100%;
     height: 100%;
   }
+
+
+
+
 
   :host ::ng-deep .carousel-alto .p-carousel-items-content{
     min-height: 0px;
