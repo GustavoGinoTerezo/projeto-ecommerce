@@ -313,9 +313,11 @@
 
 .imgBannerAnuncioMaiores{
   width: 98%;
+  height: 100%;
+  max-width: 1000px;
+  max-height: 200px;
   margin-right: 20px;
   margin-left: 20px;
-  height: 200px;
   cursor: pointer;
   transition: 0.3s ease all;
 }
