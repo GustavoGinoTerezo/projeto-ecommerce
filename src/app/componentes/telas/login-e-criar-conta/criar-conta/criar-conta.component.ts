@@ -103,18 +103,32 @@ export class CriarContaComponent {
 
         // const ufId = response.UfId;
 
-        const dataEndereco = {
+        const dataEnderecoCobranca = {
           LoginId: LoginId,
-          tpcadastro: "0",
+          tpcadastro: "1",
           endereco: this.endereco,
           cidade: this.cidade,
           bairro: this.bairro,
           // UfId: ufId
         }
 
-        this.registrar.registrarEndereco(dataEndereco).subscribe(response => {
-          console.log("Endereço adicionado com sucesso")
+        this.registrar.registrarEndereco(dataEnderecoCobranca).subscribe(response => {
+          console.log("Endereço de cobrança adicionado com sucesso")
         });
+
+        const dataEnderecoEntrega = {
+          LoginId: LoginId,
+          tpcadastro: "2",
+          endereco: this.endereco,
+          cidade: this.cidade,
+          bairro: this.bairro,
+          // UfId: ufId
+        }
+
+        this.registrar.registrarEndereco(dataEnderecoEntrega).subscribe(response => {
+          console.log("Endereço de entrega adicionado com sucesso")
+        });
+
 
       // })
 

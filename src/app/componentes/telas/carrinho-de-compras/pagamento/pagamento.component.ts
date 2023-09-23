@@ -71,4 +71,10 @@ export class PagamentoComponent {
     sessionStorage.setItem('p', formaPagamento)
     this.router.navigate(['/confirmacao']);
   }
+
+  navigateCarrinho(){
+    sessionStorage.removeItem('p');
+    this.router.navigate(['/carrinho-de-compra']);
+  }
+
 }
