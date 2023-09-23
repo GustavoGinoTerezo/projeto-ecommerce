@@ -32,6 +32,7 @@ export class CarrinhoDeComprasComponent {
   const carrinhoIds = JSON.parse(sessionStorage.getItem('c') || '[]');
 
     setTimeout(() => {
+
       this.categoriasService.getProdutos().subscribe(
         (produtosAPI) => {
           this.produtos = produtosAPI;
@@ -150,17 +151,18 @@ export class CarrinhoDeComprasComponent {
   }
 
   removeProdutoDoSessionStorage(produtoId: any) {
-    const carrinhoIds = JSON.parse(sessionStorage.getItem('carrinho') || '[]');
+    const carrinhoIds = JSON.parse(sessionStorage.getItem('c') || '[]');
     const indexesToRemove = carrinhoIds
       .map((id: any, index: any) => (id === produtoId ? index : -1)) // Encontre todos os índices a serem removidos
       .filter((index: number) => index !== -1); // Remova índices inválidos
     // Remova os IDs encontrados na ordem inversa (para não afetar os outros índices)
     indexesToRemove.reverse().forEach((index: any) => carrinhoIds.splice(index, 1));
-    sessionStorage.setItem('carrinho', JSON.stringify(carrinhoIds));
+    sessionStorage.setItem('c', JSON.stringify(carrinhoIds));
   }
 
   removerTodosOsProdutos() {
     this.carrinho = []; // Limpa o array de carrinho para remover todos os produtos
+    sessionStorage.removeItem('c');
   }
 
   formatarNomeProduto(produtos: string): string {

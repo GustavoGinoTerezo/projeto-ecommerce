@@ -134,6 +134,10 @@
           <div class="labelValorTotal">
             Forma de pagamento:
           </div>
+          <div *ngIf="formaPagamentoSelecionada" class="formaPagamento">
+            {{ formaPagamentoSelecionada.tipoPagamento }}
+          </div>
+          <br>
           <div class="dadoValorTotal">
             R$ {{ valorTotal.toFixed(2) }}
           </div>
