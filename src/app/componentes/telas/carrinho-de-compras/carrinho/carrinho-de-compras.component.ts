@@ -163,6 +163,7 @@ export class CarrinhoDeComprasComponent {
   removerTodosOsProdutos() {
     this.carrinho = []; // Limpa o array de carrinho para remover todos os produtos
     sessionStorage.removeItem('c');
+    sessionStorage.removeItem('p');
   }
 
   formatarNomeProduto(produtos: string): string {
