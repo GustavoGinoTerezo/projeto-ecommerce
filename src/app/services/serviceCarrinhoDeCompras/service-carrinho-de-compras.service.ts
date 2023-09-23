@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Produtos } from '../serviceCategorias/service-categorias.service';
 
 export interface CarrinhoDeCompra {
+  prodId?: number;
   imagemProduto?: string;
   nomeProduto?: string;
   quantidade?: number;
