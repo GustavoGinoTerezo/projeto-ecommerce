@@ -23,28 +23,41 @@ export class PagamentoComponent {
   ngOnInit() {
 
     this.items = [
-        {
-            label: 'Carrinho',
-            routerLink: '/carrinho-de-compra'
-        },
-        {
-            label: 'Pagamento',
-            routerLink: '/pagamento'
-        },
-        {
-            label: 'Confirmação',
-            routerLink: '/confimacao'
-        },
-        {
-            label: 'Conclusão',
-            routerLink: '/conclusao'
-        }
+      {
+          label: 'Carrinho',
+          routerLink: '/carrinho-de-compra'
+      },
+      {
+          label: 'Pagamento',
+          routerLink: '/pagamento'
+      },
+      {
+          label: 'Confirmação',
+          routerLink: '/confimacao'
+      },
+      {
+          label: 'Conclusão',
+          routerLink: '/conclusao'
+      }
     ];
 
     this.formaPagamentoService.getFormaPagamento().subscribe(
       (formaPagamento) => {
         this.formaPagamento = formaPagamento;
     });
+
+    const formaPagamentoAtiva = sessionStorage.getItem('p');
+    const numeroFormaPagamentoAtiva = formaPagamentoAtiva ? parseInt(formaPagamentoAtiva, 10) : -1;
+    this.toggleFormaPagamentoAtiva(numeroFormaPagamentoAtiva);
+
+    // Depois de ativar a forma de pagamento, encontre a forma de pagamento correspondente pelo ID
+    const formaPagamentoSelecionada = this.formaPagamento.find((pagamento) => pagamento.idPagamento === numeroFormaPagamentoAtiva);
+
+    // Defina a forma de pagamento selecionada para ativar o radiobutton correspondente
+    this.formaPagamentoSelecionada = formaPagamentoSelecionada;
+
+
+
   }
 
   // Inside your component class
@@ -54,6 +67,8 @@ export class PagamentoComponent {
   }
 
   navigateConfirmacao(){
+    const formaPagamento = this.formaPagamentoSelecionada.idPagamento
+    sessionStorage.setItem('p', formaPagamento)
     this.router.navigate(['/confirmacao']);
   }
 }

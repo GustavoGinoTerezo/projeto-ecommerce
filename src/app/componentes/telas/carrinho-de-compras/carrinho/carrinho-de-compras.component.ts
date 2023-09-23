@@ -29,7 +29,7 @@ export class CarrinhoDeComprasComponent {
 
   ngOnInit(): void {
 
-  const carrinhoIds = JSON.parse(sessionStorage.getItem('carrinho') || '[]');
+  const carrinhoIds = JSON.parse(sessionStorage.getItem('c') || '[]');
 
     setTimeout(() => {
       this.categoriasService.getProdutos().subscribe(
@@ -90,7 +90,7 @@ export class CarrinhoDeComprasComponent {
     const produtoEncontrado = this.produtos.find((produto) => produto.nome === item.nomeProduto);
     if (produtoEncontrado) {
       // Recupere o array existente do sessionStorage
-      const carrinhoIds = JSON.parse(sessionStorage.getItem('carrinho') || '[]');
+      const carrinhoIds = JSON.parse(sessionStorage.getItem('c') || '[]');
       // Calcule a quantidade de IDs para o produto correspondente no carrinho
       const quantidadeDeIds = carrinhoIds.filter((id: any) => id === produtoEncontrado.prodId).length;
       // Calcule a diferença entre newValue e a quantidade de IDs
@@ -109,7 +109,7 @@ export class CarrinhoDeComprasComponent {
         }
       }
       // Atualize o sessionStorage com o novo array de IDs
-      sessionStorage.setItem('carrinho', JSON.stringify(carrinhoIds));
+      sessionStorage.setItem('c', JSON.stringify(carrinhoIds));
       // Atualize a quantidade no item do carrinho
       item.quantidade = newValue;
       // Recalcule o valor total

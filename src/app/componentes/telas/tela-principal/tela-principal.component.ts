@@ -230,11 +230,11 @@ export class TelaPrincipalComponent {
     // this.carrinhoService.adicionarAoCarrinho(produto);
 
     // Recupere a lista de IDs do carrinho do sessionStorage ou crie uma lista vazia se ainda não existir
-    const carrinho = JSON.parse(sessionStorage.getItem('carrinho') || '[]');
+    const carrinho = JSON.parse(sessionStorage.getItem('c') || '[]');
     // Adicione o ID do produto ao carrinho
     carrinho.push(produto.prodId);
     // Salve a lista atualizada de IDs de carrinho de volta no sessionStorage
-    sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+    sessionStorage.setItem('c', JSON.stringify(carrinho));
     // Exiba uma mensagem ou realize outras ações necessárias
     this.showProdutoAdicionadoAoCarrinho();
   }
