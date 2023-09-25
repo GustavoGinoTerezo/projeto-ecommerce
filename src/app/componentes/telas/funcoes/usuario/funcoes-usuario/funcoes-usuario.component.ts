@@ -66,7 +66,8 @@ export class FuncoesUsuarioComponent {
     item.expanded = !item.expanded;
   }
 
-  navegacao() {
+  logout(route: string) {
+    this.router.navigate([route]);
     this.mostrarLateraisService.setMostrarLateralUsuario(false);
     this.mostrarLateraisService.setMostrarLateralAdministrador(false);
 

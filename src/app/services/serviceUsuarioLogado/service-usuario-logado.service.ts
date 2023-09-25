@@ -107,9 +107,7 @@ export class ServiceUsuarioLogadoService {
 
   // Método para atualizar e armazenar o valor no Local Storage
   public setMostrarLateralUsuario(value: boolean): void {
-
     this.mostrarLateralUsuario.next(value);
-
     sessionStorage.setItem(this.localStorageKey, value.toString());
   }
 

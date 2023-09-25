@@ -31,9 +31,6 @@ export class LoginComponent {
 
     this.loginService.logar(dataLogin).subscribe(response => {
 
-      console.log(response.tpusuario)
-      console.log("Login feito com sucesso")
-
       const tpu = sessionStorage.setItem('tpu', response.tpusuario)
 
       if(response){

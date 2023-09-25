@@ -44,7 +44,7 @@
         class="sidenav-nav-link"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
-        (click)="navegacao()"
+        (click)="logout('/tela-principal')"
       >
         <i class="sidenav-link-icon fa-solid fa-right-from-bracket"></i>
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
