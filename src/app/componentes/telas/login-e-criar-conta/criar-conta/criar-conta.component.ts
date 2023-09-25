@@ -152,8 +152,6 @@ export class CriarContaComponent {
 
       // })
 
-
-
       const telefonePrincipal = this.removeFormatoTelefone(this.telefonePrincipal);
 
       const dataTelefone = {
@@ -168,9 +166,6 @@ export class CriarContaComponent {
         console.log("Erro ao cadastrar telefone principal")
       }
       );
-
-
-
 
       if (this.telefoneSecundario) {
 
@@ -209,6 +204,12 @@ export class CriarContaComponent {
       event.preventDefault(); // Impede a entrada de caracteres não numéricos
     }
   }
+
+  checkedRegex(email: string): boolean {
+    const regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    return regex.test(email);
+  }
+
 
 
 }

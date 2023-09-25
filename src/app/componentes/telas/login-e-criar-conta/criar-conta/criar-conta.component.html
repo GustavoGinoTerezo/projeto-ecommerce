@@ -274,24 +274,25 @@
 
       <div class="divInputs">
         <p-button
-            label="Cadastrar"
-            [disabled]="
-            !emailCadastroPrincipal ||
-            !nomeCompleto ||
-            !cpfOuCnpj ||
-            !telefonePrincipal ||
-            !endereco ||
-            !bairro ||
-            !cidade ||
-            !estado ||
-            (passwordCadastro !== passwordCadastroRepetir) ||
-            !passwordCadastro ||
-            !passwordCadastroRepetir ||
-            !checked
-            "
-            (onClick)="cadastrar()"
-            >
-          </p-button>
+          label="Cadastrar"
+          [disabled]="
+          !emailCadastroPrincipal ||
+          !nomeCompleto ||
+          !cpfOuCnpj ||
+          !telefonePrincipal ||
+          !endereco ||
+          !bairro ||
+          !cidade ||
+          !estado ||
+          (passwordCadastro !== passwordCadastroRepetir) ||
+          !passwordCadastro ||
+          !passwordCadastroRepetir ||
+          !checked ||
+          checkbox && !checkedRegex(emailCadastroSecundario)
+          "
+          (onClick)="cadastrar()"
+          >
+        </p-button>
       </div>
 
 
