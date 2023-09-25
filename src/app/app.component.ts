@@ -27,14 +27,17 @@ export class AppComponent {
 
     this.categoriasService.atualizarCategoriasDaAPI();
 
-    this.ativarLateral()
+    this.ativarLateral();
+
   }
+
+// ====================================================================================== //
+// CONTROLE DE ACESSO //
 
   ativarLateral(){
     const tpusuario = sessionStorage.getItem('tpu')
 
     if(tpusuario === "0"){
-      console.log("Aqui é o tpusuario", tpusuario)
       this.mostrarLateraisService.getMostrarLateralUsuario().subscribe((value: boolean) => {
         this.mostrarLateralUsuario = value;
       });
@@ -47,6 +50,8 @@ export class AppComponent {
       });
     }
   }
+
+// ====================================================================================== //
 
   acaoDoBotao() {
     window.open('https://api.whatsapp.com/send?phone=5519989937300', '_blank');

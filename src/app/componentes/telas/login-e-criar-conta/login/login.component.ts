@@ -19,7 +19,7 @@ export class LoginComponent {
     private loginService: ServiceApiLoginService,
     private router: Router,
     private mostrarLateraisService: ServiceUsuarioLogadoService,
-    private teste: AppComponent,
+    private ativarLateralService: AppComponent,
   ){}
 
   entrar(){
@@ -31,26 +31,31 @@ export class LoginComponent {
 
     this.loginService.logar(dataLogin).subscribe(response => {
 
+    // ====================================================================================== //
+    // CONTROLE DE ACESSO //
+
       const tpu = sessionStorage.setItem('tpu', response.tpusuario)
 
       if(response){
         if(response.tpusuario === "0"){
           this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
           this.mostrarLateraisService.setMostrarLateralUsuario(true);
-          this.teste.ativarLateral();
+          this.ativarLateralService.ativarLateral();
 
           } else if(response.tpusuario === "1") {
           this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
           this.mostrarLateraisService.setMostrarLateralAdministrador(true);
           this.mostrarLateraisService.setMostrarLateralUsuario(true);
-          this.teste.ativarLateral();
+          this.ativarLateralService.ativarLateral();
           } else {
-
             console.log("Email ou senha inválidos")
           }
       }
-    })
-
+    // ====================================================================================== //
+    },
+    (error) => {
+      console.log("Email ou senha inválidos", error)
+    }
+    )
   }
-
 }

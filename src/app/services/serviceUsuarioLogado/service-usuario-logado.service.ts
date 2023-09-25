@@ -82,10 +82,8 @@ export class ServiceUsuarioLogadoService {
     }
   }
 
-
-
-
-
+// ====================================================================================== //
+// CONTROLE DE ACESSO //
 
   private mostrarLateralUsuario = new BehaviorSubject<boolean>(false);
 
