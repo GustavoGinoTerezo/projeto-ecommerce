@@ -5,18 +5,11 @@ import { ServiceUrlGlobalService } from '../serviceUrlGlobal/service-url-global.
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceApiUsuarioService {
+export class ServiceApiUsuarioLogadoService {
 
   constructor(
     private urlGlobal: ServiceUrlGlobalService,
     private http: HttpClient,
   ) {}
 
-  idUsuario = sessionStorage.getItem('u');
-
-  buscarEnderecos(){
-    const endpoint = "endereco"
-    const url = this.urlGlobal + endpoint + this.idUsuario;
-    return this.http.get<any>(url);
-  }
 }

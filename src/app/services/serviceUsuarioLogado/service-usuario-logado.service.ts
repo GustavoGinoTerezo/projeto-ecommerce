@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Pedido } from '../servicePedido/service-pedido.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ServiceApiUsuarioLogadoService } from '../servicesAPI/serviceAPI-UsuarioLogado/service-api-usuario-logado.service';
+import { ServiceApiEnderecosService } from '../servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
+import { ServiceApiTelefonesService } from '../servicesAPI/serviceAPI-Telefones/service-api-telefones.service';
 
 export interface Usuario {
   id?: number;
@@ -27,10 +30,34 @@ export interface EnderecoEntrega {
   numeroResidencia?: number;
 }
 
+export interface Telefone {
+  contId?: number;
+  LoginId?: number;
+  telefone?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceUsuarioLogadoService {
+
+  private mostrarLateralUsuario = new BehaviorSubject<boolean>(false);
+  private mostrarLateralAdministrador = new BehaviorSubject<boolean>(false);
+  // Obtenha o nome da chave para o Local Storage
+  private readonly localStorageKey = 'l';
+
+  constructor(
+    private apiEnderecos: ServiceApiEnderecosService,
+    private apiTelefones: ServiceApiTelefonesService,
+
+  ) {
+    // Recupere o estado inicial do Local Storage, se disponível
+    const savedState = sessionStorage.getItem(this.localStorageKey);
+    if (savedState !== null) {
+      this.mostrarLateralUsuario.next(savedState === 'true');
+      this.mostrarLateralAdministrador.next(savedState === 'true');
+    }
+  }
 
   usuarioLogado: Usuario[] = [
     {
@@ -67,7 +94,13 @@ export class ServiceUsuarioLogadoService {
 
   usuarioLogadoAPI: Usuario[] = []
 
-  enderecoUsuarioAPI: EnderecoEntrega[] = []
+  enderecosAPI: EnderecoEntrega[] = []
+
+  enderecoUsuarioLogadoAPI: EnderecoEntrega[] = []
+
+  telefonesAPI: Telefone[] = []
+
+  telefonesUsuarioLogadoAPI: Telefone[] = []
 
   getUsuario(): Usuario[] {
     return this.usuarioLogado;
@@ -83,48 +116,77 @@ export class ServiceUsuarioLogadoService {
       }
     }
   }
+
   // ====================================================================================== //
 
+  atualizarEnderecoUsuarioLogadoAPI(){
+
+    const idUsuario = sessionStorage.getItem('u')
+
+    if(idUsuario){
+      this.apiEnderecos.buscarEnderecos().subscribe(
+        (enderecosAPI) => {
+          this.enderecosAPI = enderecosAPI;
+
+          console.log(idUsuario)
+          console.log(this.enderecosAPI)
+
+          this.enderecoUsuarioLogadoAPI = enderecosAPI.filter((endereco) => endereco.LoginId === Number(idUsuario))
+
+          console.log('Endereços do usuário logado:', this.enderecoUsuarioLogadoAPI);
+        },
+        (error) => {
+          console.log("Erro ao buscar os endereços gerais", error)
+        }
+      )
+    }
+  }
+
+  // ====================================================================================== //
+
+  atualizarTelefoneUsuarioLogadoAPI(){
+
+    const idUsuario = sessionStorage.getItem('u')
+
+    if(idUsuario){
+      this.apiTelefones.buscarTelefones().subscribe(
+        (telefonesAPI) => {
+          this.telefonesAPI = telefonesAPI;
+
+          console.log(this.telefonesAPI)
+
+          this.telefonesUsuarioLogadoAPI = telefonesAPI.filter((telefone) => telefone.LoginId === Number(idUsuario))
+
+          console.log('Telefones do usuário logado:', this.telefonesUsuarioLogadoAPI);
+      },
+      (error) => {
+        console.log("Erro ao buscar os endereços gerais", error)
+      }
+      )
+    }
+  }
 
   // ====================================================================================== //
   // CONTROLE DE ACESSO //
 
-  private mostrarLateralUsuario = new BehaviorSubject<boolean>(false);
-
-  private mostrarLateralAdministrador = new BehaviorSubject<boolean>(false);
-
-  // Obtenha o nome da chave para o Local Storage
-  private readonly localStorageKey = 'l';
-
-  // Recupere o estado inicial do Local Storage, se disponível
-  constructor() {
-    const savedState = sessionStorage.getItem(this.localStorageKey);
-    if (savedState !== null) {
-
-      this.mostrarLateralUsuario.next(savedState === 'true');
-
-      this.mostrarLateralAdministrador.next(savedState === 'true');
-    }
-  }
-
   // Método para atualizar e armazenar o valor no Local Storage
-  public setMostrarLateralUsuario(value: boolean): void {
+  setMostrarLateralUsuario(value: boolean): void {
     this.mostrarLateralUsuario.next(value);
     sessionStorage.setItem(this.localStorageKey, value.toString());
   }
 
-  public setMostrarLateralAdministrador(value: boolean): void {
+  setMostrarLateralAdministrador(value: boolean): void {
     this.mostrarLateralAdministrador.next(value);
     sessionStorage.setItem(this.localStorageKey, value.toString());
   }
 
   // Método para obter o valor como um observable
-  public getMostrarLateralUsuario(): Observable<boolean> {
+  getMostrarLateralUsuario(): Observable<boolean> {
     return this.mostrarLateralUsuario.asObservable();
   }
 
   // Método para obter o valor como um observable
-  public getMostrarLateralAdministrador(): Observable<boolean> {
+  getMostrarLateralAdministrador(): Observable<boolean> {
     return this.mostrarLateralAdministrador.asObservable();
   }
 

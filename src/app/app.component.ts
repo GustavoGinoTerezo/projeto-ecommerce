@@ -21,11 +21,16 @@ export class AppComponent {
     private router: Router,
     private categoriasService: ServiceCategoriasService,
     private mostrarLateraisService: ServiceUsuarioLogadoService,
+    private usuarioLogado: ServiceUsuarioLogadoService,
   ) {}
 
   ngOnInit(){
 
     this.categoriasService.atualizarCategoriasDaAPI();
+
+    this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
+
+    this.usuarioLogado.atualizarTelefoneUsuarioLogadoAPI()
 
     this.ativarLateral();
 
