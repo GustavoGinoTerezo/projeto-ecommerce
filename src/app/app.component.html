@@ -5,7 +5,7 @@
 
   <div class="containerGeral scrollwrap">
     <div class="divUsuario">
-      <app-funcoes-usuario></app-funcoes-usuario>
+      <app-funcoes-usuario *ngIf="mostrarLateralUsuario"></app-funcoes-usuario>
     </div>
     <div class="corpo">
       <div>
@@ -15,8 +15,8 @@
         <app-rodape></app-rodape>
       </div>
     </div>
-    <div class="divAdministrador">
-      <app-funcoes-administrador></app-funcoes-administrador>
+    <div class="divAdministrador" >
+      <app-funcoes-administrador *ngIf="mostrarLateralAdministrador"></app-funcoes-administrador>
     </div>
   </div>
 

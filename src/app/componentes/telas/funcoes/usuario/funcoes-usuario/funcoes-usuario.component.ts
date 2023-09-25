@@ -2,6 +2,7 @@ import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { INavbarData, fadeInOut } from './helper';
 import { Router } from '@angular/router';
 import { navbarData } from './nav-data';
+import { ServiceUsuarioLogadoService } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -20,7 +21,9 @@ interface SideNavToggle {
 export class FuncoesUsuarioComponent {
 
   constructor(
-    private router: Router,){}
+    private router: Router,
+    private mostrarLateraisService: ServiceUsuarioLogadoService,
+    ){}
 
   @Output() onToggleSidenav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
@@ -61,6 +64,14 @@ export class FuncoesUsuarioComponent {
       }
     }
     item.expanded = !item.expanded;
+  }
+
+  navegacao() {
+    this.mostrarLateraisService.setMostrarLateralUsuario(false);
+    this.mostrarLateraisService.setMostrarLateralAdministrador(false);
+
+    sessionStorage.removeItem('l')
+    sessionStorage.removeItem('tpu')
   }
 
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Pedido } from '../servicePedido/service-pedido.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface Usuario {
   id?: number;
@@ -66,8 +67,6 @@ export class ServiceUsuarioLogadoService {
     }
   ]
 
-  constructor() { }
-
   getUsuario(): Usuario[] {
     return this.usuarioLogado;
   }
@@ -82,5 +81,52 @@ export class ServiceUsuarioLogadoService {
       }
     }
   }
+
+
+
+
+
+
+  private mostrarLateralUsuario = new BehaviorSubject<boolean>(false);
+
+  private mostrarLateralAdministrador = new BehaviorSubject<boolean>(false);
+
+  // Obtenha o nome da chave para o Local Storage
+  private readonly localStorageKey = 'l';
+
+  // Recupere o estado inicial do Local Storage, se disponível
+  constructor() {
+    const savedState = sessionStorage.getItem(this.localStorageKey);
+    if (savedState !== null) {
+
+      this.mostrarLateralUsuario.next(savedState === 'true');
+
+      this.mostrarLateralAdministrador.next(savedState === 'true');
+    }
+  }
+
+  // Método para atualizar e armazenar o valor no Local Storage
+  public setMostrarLateralUsuario(value: boolean): void {
+
+    this.mostrarLateralUsuario.next(value);
+
+    sessionStorage.setItem(this.localStorageKey, value.toString());
+  }
+
+  public setMostrarLateralAdministrador(value: boolean): void {
+    this.mostrarLateralAdministrador.next(value);
+    sessionStorage.setItem(this.localStorageKey, value.toString());
+  }
+
+  // Método para obter o valor como um observable
+  public getMostrarLateralUsuario(): Observable<boolean> {
+    return this.mostrarLateralUsuario.asObservable();
+  }
+
+  // Método para obter o valor como um observable
+  public getMostrarLateralAdministrador(): Observable<boolean> {
+    return this.mostrarLateralAdministrador.asObservable();
+  }
+
 
 }

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
+import { ServiceUsuarioLogadoService } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
 import { ServiceApiLoginService } from 'src/app/services/servicesAPI/serviceAPI-Login/service-api-login.service';
 
 @Component({
@@ -14,6 +17,9 @@ export class LoginComponent {
 
   constructor(
     private loginService: ServiceApiLoginService,
+    private router: Router,
+    private mostrarLateraisService: ServiceUsuarioLogadoService,
+    private teste: AppComponent,
   ){}
 
   entrar(){
@@ -25,11 +31,27 @@ export class LoginComponent {
 
     this.loginService.logar(dataLogin).subscribe(response => {
 
-      const access_token = response.access_token;
-
-      console.log(access_token)
+      console.log(response.tpusuario)
       console.log("Login feito com sucesso")
 
+      const tpu = sessionStorage.setItem('tpu', response.tpusuario)
+
+      if(response){
+        if(response.tpusuario === "0"){
+          this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
+          this.mostrarLateraisService.setMostrarLateralUsuario(true);
+          this.teste.ativarLateral();
+
+          } else if(response.tpusuario === "1") {
+          this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
+          this.mostrarLateraisService.setMostrarLateralAdministrador(true);
+          this.mostrarLateraisService.setMostrarLateralUsuario(true);
+          this.teste.ativarLateral();
+          } else {
+
+            console.log("Email ou senha inválidos")
+          }
+      }
     })
 
   }
