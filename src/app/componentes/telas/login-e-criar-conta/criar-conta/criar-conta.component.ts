@@ -91,6 +91,26 @@ export class CriarContaComponent {
       console.log(access_token)
       console.log(LoginId)
 
+      if (this.emailCadastroSecundario) {
+        const dataEmailAlternativo = {
+          LoginId: LoginId,
+          email: this.emailCadastroSecundario
+        };
+
+        this.registrar.registrarEmails(dataEmailAlternativo).subscribe(
+          (response) => {
+            console.log("Email alternativo cadastrado com sucesso", response);
+          },
+          (error) => {
+            console.log("Erro ao cadastrar email alternativo");
+          }
+        );
+      } else {
+        console.log("O campo emailCadastroSecundario está vazio, email alternativo não cadastrado.");
+      }
+
+
+
       // Supondo que a resposta contenha o ID do login
 
       // const dataUf = {
@@ -134,16 +154,44 @@ export class CriarContaComponent {
 
 
 
-      const telefonePrincipalSemFormato = this.removeFormatoTelefone(this.telefonePrincipal);
+      const telefonePrincipal = this.removeFormatoTelefone(this.telefonePrincipal);
 
       const dataTelefone = {
         LoginId: LoginId,
-        telefone: telefonePrincipalSemFormato,
+        telefone: telefonePrincipal,
       }
 
       this.registrar.registrarTelefone(dataTelefone).subscribe(result => {
         console.log("Telefone adicionado com sucesso")
-      });
+      },
+      (error) => {
+        console.log("Erro ao cadastrar telefone principal")
+      }
+      );
+
+
+
+
+      if (this.telefoneSecundario) {
+
+        const telefoneAlternativo = this.removeFormatoTelefone(this.telefoneSecundario);
+
+      const dataTelefoneAlternativo = {
+        LoginId: LoginId,
+        telefone: telefoneAlternativo,
+      }
+
+        this.registrar.registrarTelefone(dataTelefoneAlternativo).subscribe(
+          (response) => {
+            console.log("Telefone alternativo cadastrado com sucesso", response);
+          },
+          (error) => {
+            console.log("Erro ao cadastrar telefone alternativo");
+          }
+        );
+      } else {
+        console.log("O campo telefoneSecundario está vazio, telefone alternativo não cadastrado.");
+      }
 
     });
   }

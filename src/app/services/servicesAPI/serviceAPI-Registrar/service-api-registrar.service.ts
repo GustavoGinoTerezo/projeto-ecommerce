@@ -36,4 +36,9 @@ export class ServiceApiRegistrarService {
     return this.http.post<any>(url, data);
   }
 
+  registrarEmails(data: any) {
+    const endpoint = "emails";
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.post<any>(url, data);
+  }
 }
