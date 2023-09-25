@@ -288,7 +288,8 @@
           !passwordCadastro ||
           !passwordCadastroRepetir ||
           !checked ||
-          checkbox && !checkedRegex(emailCadastroSecundario)
+          checkbox && !checkedRegex(emailCadastroSecundario) ||
+          checkboxTelefone && !telefoneSecundario
           "
           (onClick)="cadastrar()"
           >
