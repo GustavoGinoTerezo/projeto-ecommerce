@@ -35,7 +35,7 @@ export class AppComponent {
 // CONTROLE DE ACESSO //
 
   ativarLateral(){
-    const tpusuario = sessionStorage.getItem('tpu')
+    const tpusuario = sessionStorage.getItem('t')
 
     if(tpusuario === "0"){
       this.mostrarLateraisService.getMostrarLateralUsuario().subscribe((value: boolean) => {

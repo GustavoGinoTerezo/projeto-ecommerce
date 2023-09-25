@@ -61,11 +61,13 @@ export class ServiceUsuarioLogadoService {
           rua: "Teste",
           numeroResidencia: 99
         },
-
-
       ]
     }
   ]
+
+  usuarioLogadoAPI: Usuario[] = []
+
+  enderecoUsuarioAPI: EnderecoEntrega[] = []
 
   getUsuario(): Usuario[] {
     return this.usuarioLogado;
@@ -81,9 +83,11 @@ export class ServiceUsuarioLogadoService {
       }
     }
   }
+  // ====================================================================================== //
 
-// ====================================================================================== //
-// CONTROLE DE ACESSO //
+
+  // ====================================================================================== //
+  // CONTROLE DE ACESSO //
 
   private mostrarLateralUsuario = new BehaviorSubject<boolean>(false);
 

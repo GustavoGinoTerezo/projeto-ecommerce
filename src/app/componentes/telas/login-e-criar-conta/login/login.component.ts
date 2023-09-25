@@ -34,7 +34,8 @@ export class LoginComponent {
     // ====================================================================================== //
     // CONTROLE DE ACESSO //
 
-      const tpu = sessionStorage.setItem('tpu', response.tpusuario)
+      const tpu = sessionStorage.setItem('t', response.tpusuario)
+      const u = sessionStorage.setItem('u', response.LoginId)
 
       if(response){
         if(response.tpusuario === "0"){
@@ -42,20 +43,18 @@ export class LoginComponent {
           this.mostrarLateraisService.setMostrarLateralUsuario(true);
           this.ativarLateralService.ativarLateral();
 
-          } else if(response.tpusuario === "1") {
+        } else if (response.tpusuario === "1") {
           this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
           this.mostrarLateraisService.setMostrarLateralAdministrador(true);
           this.mostrarLateraisService.setMostrarLateralUsuario(true);
           this.ativarLateralService.ativarLateral();
-          } else {
-            console.log("Email ou senha inválidos")
-          }
+        }
       }
-    // ====================================================================================== //
     },
     (error) => {
       console.log("Email ou senha inválidos", error)
-    }
-    )
+    });
   }
+
+
 }

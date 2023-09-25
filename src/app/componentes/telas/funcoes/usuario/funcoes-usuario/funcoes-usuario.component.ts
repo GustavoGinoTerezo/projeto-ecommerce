@@ -72,7 +72,8 @@ export class FuncoesUsuarioComponent {
     this.mostrarLateraisService.setMostrarLateralAdministrador(false);
 
     sessionStorage.removeItem('l')
-    sessionStorage.removeItem('tpu')
+    sessionStorage.removeItem('t')
+    sessionStorage.removeItem('u')
   }
 
 }
