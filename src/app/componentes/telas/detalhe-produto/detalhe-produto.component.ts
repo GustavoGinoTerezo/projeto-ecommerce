@@ -72,7 +72,9 @@ export class DetalheProdutoComponent implements OnInit {
   }
 
   adicionarAoCarrinho(produto: Produtos): void {
-    this.carrinhoService.adicionarAoCarrinho(produto);
+    const carrinho = JSON.parse(sessionStorage.getItem('c') || '[]');
+    carrinho.push(produto.prodId);
+    sessionStorage.setItem('c', JSON.stringify(carrinho));
     this.showProdutoAdicionadoAoCarrinho();
   }
 
