@@ -61,4 +61,12 @@ export class AppComponent {
   acaoDoBotao() {
     window.open('https://api.whatsapp.com/send?phone=5519989937300', '_blank');
   }
+
+  // SESSIONSTORAGE VARIÁVEIS
+
+  // t - tpCadastro
+  // c - ids dos produtos para o carrinho
+  // u - idUsuario
+  // l - lateral
+  // p - forma de pagamento
 }
