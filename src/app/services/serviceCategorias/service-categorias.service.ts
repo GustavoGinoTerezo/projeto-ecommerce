@@ -386,12 +386,7 @@ export class ServiceCategoriasService {
     this.apiProdutos.buscarPosicaoProdutos().subscribe(
       (posicaoProdutosAPI) => {
         this.posicaoProdutosAPI = posicaoProdutosAPI;
-        // console.log(this.posicaoProdutosAPI);
-
         // Após obter a posição dos produtos da API, chame os métodos para atualizar destaques, mais vendidos e promoções
-        this.atualizarProdutosDestaque();
-        this.atualizarProdutosMaisVendidos();
-        this.atualizarProdutosEmPromocao();
       },
       (error) => {
         console.error('Erro ao buscar posição de produtos da API', error);
@@ -410,6 +405,7 @@ export class ServiceCategoriasService {
       .filter((produto) => produtosEmDestaque.includes(produto.prodId));
 
     // // console.log(this.produtosDestaqueAPI); // Adicione este console.log para verificar o conteúdo do array
+    return of(null);
   }
 
   atualizarProdutosMaisVendidos() {
@@ -423,6 +419,7 @@ export class ServiceCategoriasService {
       .filter((produto) => produtosMaisVendidos.includes(produto.prodId));
 
     // // console.log(this.produtosMaisVendidosAPI); // Adicione este console.log para verificar o conteúdo do array
+    return of(null);
   }
 
   atualizarProdutosEmPromocao() {
@@ -436,6 +433,7 @@ export class ServiceCategoriasService {
       .filter((produto) => produtosEmPromocao.includes(produto.prodId));
 
     // // console.log(this.produtosEmPromocaoAPI); // Adicione este console.log para verificar o conteúdo do array
+    return of(null);
   }
 
 }

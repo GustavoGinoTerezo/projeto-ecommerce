@@ -5,6 +5,7 @@ import { Banner, ServiceBannerService } from 'src/app/services/serviceBanner/ser
 import { Categorias, ServiceCategoriasService, Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Router } from '@angular/router';
 import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-tela-principal',
@@ -175,40 +176,45 @@ export class TelaPrincipalComponent {
       this.images = images;
     });
 
+
     //================================================================================================================================//
     //RELACIONADO COM OS PRODUTOS
 
     setTimeout(() => {
-
       this.categoriasService.getCategorias().subscribe(
         (categoriasAPI) => {
           this.categorias = categoriasAPI;
         }
       );
 
-      //PRODUTOS EM DESTAQUE
-      this.categoriasService.getProdutosDestaque().subscribe(
-        (produtosDestaqueAPI) => {
-          this.produtosDestaque = produtosDestaqueAPI;
-        }
-      );
+      this.categoriasService.atualizarProdutosDestaque()
+      .pipe(
+        switchMap(() => this.categoriasService.atualizarProdutosMaisVendidos()),
+        switchMap(() => this.categoriasService.atualizarProdutosEmPromocao())
+      )
+      .subscribe(() => {
+        // Agora, os métodos em seu serviço foram concluídos e você pode chamar
+        // os métodos que fazem as chamadas HTTP para obter os dados desejados.
+        this.getProdutos();
+      });
 
-      //PRODUTOS MAIS VENDIDOS
-      this.categoriasService.getProdutosMaisVendidos().subscribe(
-        (produtosMaisVendidosAPI) => {
-          this.produtosMaisVendidos = produtosMaisVendidosAPI;
-        }
-      );
+    }, 1500);
 
-      //PRODUTOS EM PROMOCAO
-      this.categoriasService.getProdutosEmPromocao().subscribe(
-        (produtosEmPromocaoAPI) => {
-          this.produtosEmPromocao = produtosEmPromocaoAPI;
-        }
-      );
+  }
 
-    }, 3000);
+  getProdutos() {
+    // Aqui você pode chamar os métodos que fazem as chamadas HTTP após a conclusão dos métodos no serviço.
+    this.categoriasService.getProdutosDestaque().subscribe((produtosDestaqueAPI) => {
+      this.produtosDestaque = produtosDestaqueAPI;
+    });
 
+    this.categoriasService.getProdutosMaisVendidos().subscribe((produtosMaisVendidosAPI) => {
+      this.produtosMaisVendidos = produtosMaisVendidosAPI;
+    });
+
+    this.categoriasService.getProdutosEmPromocao().subscribe((produtosEmPromocaoAPI) => {
+      this.produtosEmPromocao = produtosEmPromocaoAPI;
+    });
   }
 
   navigateProduto(produto: Produtos) {
