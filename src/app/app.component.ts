@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceCategoriasService } from './services/serviceCategorias/service-categorias.service';
 import { ServiceUsuarioLogadoService } from './services/serviceUsuarioLogado/service-usuario-logado.service';
+import { AES } from 'crypto-ts';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-root',
@@ -36,25 +38,48 @@ export class AppComponent {
 
   }
 
+
 // ====================================================================================== //
 // CONTROLE DE ACESSO //
 
-  ativarLateral(){
-    const tpusuario = sessionStorage.getItem('t')
+ativarLateral() {
+  // Chave secreta usada para criptografia (a mesma chave que você usou para criptografar)
+  const secretKeytpUsuario = 'tpUsuario';
 
-    if(tpusuario === "0"){
-      this.mostrarLateraisService.getMostrarLateralUsuario().subscribe((value: boolean) => {
-        this.mostrarLateralUsuario = value;
-      });
-    } else if (tpusuario === "1"){
-      this.mostrarLateraisService.getMostrarLateralAdministrador().subscribe((value: boolean) => {
-        this.mostrarLateralAdministrador = value;
-      });
-      this.mostrarLateraisService.getMostrarLateralUsuario().subscribe((value: boolean) => {
-        this.mostrarLateralUsuario = value;
-      });
+  // Valor criptografado recuperado do sessionStorage
+  const encryptedTpUsuario = sessionStorage.getItem('t');
+
+  // Verifique se o valor criptografado existe e, em seguida, faça a descriptografia
+  if (encryptedTpUsuario) {
+    const decryptedTpUsuario = CryptoJS.AES.decrypt(encryptedTpUsuario, secretKeytpUsuario);
+
+    // Verifique se a descriptografia foi bem-sucedida
+    if (decryptedTpUsuario.sigBytes > 0) {
+      const tpUsuario = parseInt(decryptedTpUsuario.toString(CryptoJS.enc.Utf8), 10); // Converta para número
+
+      // Verifique se this.mostrarLateraisService não é nulo
+      if (this.mostrarLateraisService) {
+        if (tpUsuario === 0) { // Agora compare com números em vez de strings
+          this.mostrarLateraisService.getMostrarLateralUsuario().subscribe((value: boolean) => {
+            this.mostrarLateralUsuario = value;
+          });
+        } else if (tpUsuario === 1) { // Agora compare com números em vez de strings
+          this.mostrarLateraisService.getMostrarLateralAdministrador().subscribe((value: boolean) => {
+            this.mostrarLateralAdministrador = value;
+          });
+          this.mostrarLateraisService.getMostrarLateralUsuario().subscribe((value: boolean) => {
+            this.mostrarLateralUsuario = value;
+          });
+        }
+      }
     }
   }
+}
+
+
+
+
+
 
 
 
@@ -69,6 +94,8 @@ export class AppComponent {
   // t - tpCadastro
   // c - ids dos produtos para o carrinho
   // u - idUsuario
-  // l - lateral
+  // lu - lateral user
+  // la - lateral admin
   // p - forma de pagamento
+
 }

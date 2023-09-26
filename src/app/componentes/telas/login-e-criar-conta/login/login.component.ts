@@ -5,6 +5,7 @@ import { ServiceUsuarioLogadoService } from 'src/app/services/serviceUsuarioLoga
 import { ServiceApiEnderecosService } from 'src/app/services/servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
 import { ServiceApiLoginService } from 'src/app/services/servicesAPI/serviceAPI-Login/service-api-login.service';
 import { ServiceApiUsuarioLogadoService } from 'src/app/services/servicesAPI/serviceAPI-UsuarioLogado/service-api-usuario-logado.service';
+import { AES } from 'crypto-ts';
 
 @Component({
   selector: 'app-login',
@@ -36,27 +37,52 @@ export class LoginComponent {
 
     this.loginService.logar(dataLogin).subscribe(response => {
 
-      sessionStorage.setItem('u', response.LoginId)
-      sessionStorage.setItem('t', response.tpusuario)
+      try {
+        const secretKeyidUsuario = 'idUsuario';
+        const secretKeytpUsuario = 'tpUsuario';
+        const secretKeyaccessToken = 'accessToken';
 
-      this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
-      this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
+        // Valores a serem criptografados
+        const loginId = response.LoginId.toString();
+        const tpUsuario = response.tpusuario.toString();
+        const accessToken = response.access_token.toString();
 
-    // ====================================================================================== //
-    // CONTROLE DE ACESSO //
+        // Certifique-se de que os valores não estão vazios antes de criptografar
+        if (loginId && tpUsuario && accessToken) {
+          // Criptografar os valores
+          const encryptedLoginId = AES.encrypt(loginId, secretKeyidUsuario).toString();
+          const encryptedTpUsuario = AES.encrypt(tpUsuario, secretKeytpUsuario).toString();
+          const encryptedAccessToken = AES.encrypt(accessToken, secretKeyaccessToken).toString();
 
-      if(response){
-        if(response.tpusuario === "0"){
-          this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
-          this.mostrarLateraisService.setMostrarLateralUsuario(true);
-          this.ativarLateralService.ativarLateral();
+          // Armazenar os valores criptografados no sessionStorage
+          sessionStorage.setItem('u', encryptedLoginId);
+          sessionStorage.setItem('t', encryptedTpUsuario);
+          sessionStorage.setItem('at', encryptedAccessToken);
 
-        } else if (response.tpusuario === "1") {
-          this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
-          this.mostrarLateraisService.setMostrarLateralAdministrador(true);
-          this.mostrarLateraisService.setMostrarLateralUsuario(true);
-          this.ativarLateralService.ativarLateral();
+          this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
+          this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
+
+          // ====================================================================================== //
+          // CONTROLE DE ACESSO //
+
+          if(response){
+            if(response.tpusuario === "0"){
+              this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
+              this.mostrarLateraisService.setMostrarLateralUsuario(true);
+              this.ativarLateralService.ativarLateral();
+
+            } else if (response.tpusuario === "1") {
+              this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
+              this.mostrarLateraisService.setMostrarLateralAdministrador(true);
+              this.mostrarLateraisService.setMostrarLateralUsuario(true);
+              this.ativarLateralService.ativarLateral();
+            }
+          }
+        } else {
+          console.error('Um ou mais valores de entrada estão vazios ou não são strings.');
         }
+      } catch (error) {
+        console.error('Erro de criptografia:', error);
       }
     },
     (error) => {
