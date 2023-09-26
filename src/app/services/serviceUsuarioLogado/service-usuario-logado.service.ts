@@ -54,15 +54,26 @@ export class ServiceUsuarioLogadoService {
     private apiTelefones: ServiceApiTelefonesService,
 
   ) {
-    // Recupere o estado inicial do Local Storage, se disponível
-    const savedStateUser = sessionStorage.getItem(this.localStorageKeyUser);
-    if (savedStateUser !== null) {
-      this.mostrarLateralUsuario.next(savedStateUser === 'true');
+
+    const encryptedValueFromStorageUsuario = sessionStorage.getItem(this.localStorageKeyUser);
+    if (encryptedValueFromStorageUsuario) {
+      const secretKeyLateral = 'valorLateral';
+      const decryptedValue = AES.decrypt(encryptedValueFromStorageUsuario, secretKeyLateral);
+      if (decryptedValue.sigBytes > 0) {
+        const decryptedBooleanValue = decryptedValue.toString(CryptoJS.enc.Utf8) === 'true';
+        this.mostrarLateralUsuario.next(decryptedBooleanValue);
+      }
     }
 
-    const savedStateAdmin = sessionStorage.getItem(this.localStorageKeyUser);
-    if (savedStateAdmin !== null) {
-      this.mostrarLateralAdministrador.next(savedStateAdmin === 'true');
+    const encryptedValueFromStorageAdmin = sessionStorage.getItem(this.localStorageKeyAdmin);
+    if (encryptedValueFromStorageAdmin) {
+      const secretKeyLateral = 'valorLateral';
+      const decryptedValue = AES.decrypt(encryptedValueFromStorageAdmin, secretKeyLateral);
+      if (decryptedValue.sigBytes > 0) {
+        const decryptedBooleanValue = decryptedValue.toString(CryptoJS.enc.Utf8) === 'true';
+        this.mostrarLateralAdministrador.next(decryptedBooleanValue);
+        console.log('Valor booleano descriptografado (Administrador):', decryptedBooleanValue);
+      }
     }
   }
 
@@ -213,8 +224,11 @@ export class ServiceUsuarioLogadoService {
 
   // Método para atualizar e armazenar o valor no Local Storage
   setMostrarLateralUsuario(value: boolean): void {
+    const valueToEncrypt = value; // Substitua pelo valor booleano que você deseja armazenar
+    const secretKeyLateral = 'valorLateral';
+    const encryptedValue = AES.encrypt(valueToEncrypt.toString(), secretKeyLateral).toString();
     this.mostrarLateralUsuario.next(value);
-    sessionStorage.setItem(this.localStorageKeyUser, value.toString());
+    sessionStorage.setItem('lu', encryptedValue); // 'lu' é a chave para o Local Storage
   }
 
   // Método para obter o valor como um observable
@@ -225,8 +239,11 @@ export class ServiceUsuarioLogadoService {
   // ====================================================================================== //
 
   setMostrarLateralAdministrador(value: boolean): void {
+    const valueToEncrypt = value; // Substitua pelo valor booleano que você deseja armazenar
+    const secretKeyLateral = 'valorLateral';
+    const encryptedValue = AES.encrypt(valueToEncrypt.toString(), secretKeyLateral).toString();
     this.mostrarLateralAdministrador.next(value);
-    sessionStorage.setItem(this.localStorageKeyAdmin, value.toString());
+    sessionStorage.setItem('la', encryptedValue); // 'la' é a chave para o Local Storage
   }
 
   // Método para obter o valor como um observable

@@ -74,6 +74,9 @@ export class FuncoesUsuarioComponent {
     sessionStorage.removeItem('l')
     sessionStorage.removeItem('t')
     sessionStorage.removeItem('u')
+    sessionStorage.removeItem('at')
+    sessionStorage.removeItem('la')
+    sessionStorage.removeItem('lu')
   }
 
 }
