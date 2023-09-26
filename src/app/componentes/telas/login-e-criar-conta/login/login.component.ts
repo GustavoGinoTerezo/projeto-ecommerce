@@ -40,7 +40,7 @@ export class LoginComponent {
       sessionStorage.setItem('t', response.tpusuario)
 
       this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
-      this.usuarioLogado.atualizarTelefoneUsuarioLogadoAPI()
+      this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
 
     // ====================================================================================== //
     // CONTROLE DE ACESSO //

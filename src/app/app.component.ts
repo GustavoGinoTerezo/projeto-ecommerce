@@ -30,7 +30,7 @@ export class AppComponent {
 
     this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
 
-    this.usuarioLogado.atualizarTelefoneUsuarioLogadoAPI()
+    this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
 
     this.ativarLateral();
 

@@ -41,7 +41,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "Teste",
         bairro: "Teste",
-        rua: "Teste",
+        endereco: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -121,7 +121,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "Teste",
         bairro: "Teste",
-        rua: "Teste",
+        endereco: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -144,7 +144,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "SP",
         bairro: "SP",
-        rua: "SP",
+        endereco: "SP",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -167,7 +167,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "Teste",
         bairro: "Teste",
-        rua: "Teste",
+        endereco: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -205,7 +205,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "Teste",
         bairro: "Teste",
-        rua: "Teste",
+        endereco: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -228,7 +228,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "SP",
         bairro: "SP",
-        rua: "SP",
+        endereco: "SP",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -251,7 +251,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "Teste",
         bairro: "Teste",
-        rua: "Teste",
+        endereco: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -289,7 +289,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "Teste",
         bairro: "Teste",
-        rua: "Teste",
+        endereco: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -312,7 +312,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "SP",
         bairro: "SP",
-        rua: "SP",
+        endereco: "SP",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -335,7 +335,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "Teste",
         bairro: "Teste",
-        rua: "Teste",
+        endereco: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -373,7 +373,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "Teste",
         bairro: "Teste",
-        rua: "Teste",
+        endereco: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -396,7 +396,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "SP",
         bairro: "SP",
-        rua: "SP",
+        endereco: "SP",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -419,7 +419,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "Teste",
         bairro: "Teste",
-        rua: "Teste",
+        endereco: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -457,7 +457,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "Teste",
         bairro: "Teste",
-        rua: "Teste",
+        endereco: "Teste",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{
@@ -480,7 +480,7 @@ export class ServicePedidoService {
         cep: 13500000,
         cidade: "SP",
         bairro: "SP",
-        rua: "SP",
+        endereco: "SP",
         numeroResidencia: 99,
       }],
       formaDoPagamento: [{

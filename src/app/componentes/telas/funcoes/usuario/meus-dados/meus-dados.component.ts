@@ -8,6 +8,8 @@ import { EnderecoEntrega, ServiceUsuarioLogadoService, Usuario } from 'src/app/s
 })
 export class MeusDadosComponent {
 
+  enderecosEntrega: EnderecoEntrega[] = []
+
   usuario: Usuario[] = [];
   first: number = 0;
   rows: number = 3;
@@ -38,7 +40,7 @@ export class MeusDadosComponent {
     cep: 0,
     cidade: '',
     bairro: '',
-    rua: '',
+    endereco: '',
     numeroResidencia: 0
   };
 
@@ -49,6 +51,14 @@ export class MeusDadosComponent {
   ngOnInit() {
     this.usuario = this.usuarioService.getUsuario();
     this.checkIfAddressFieldsShouldBeDisabled();
+
+    this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe(
+      (enderecosEntregaAPI) => {
+        this.enderecosEntrega = enderecosEntregaAPI;
+        console.log(this.enderecosEntrega)
+      }
+    );
+
   }
 
   onPageChange(event: any): void {
@@ -86,8 +96,6 @@ export class MeusDadosComponent {
     this.divNovoEndereco = true;
     this.divEnderecos = false;
     this.buttonSalvarEnderecoNovoEndereco = true;
-
-    console.log(this.usuario[0].enderecoEntrega)
   }
 
   showDialogEnderecos(){
@@ -99,28 +107,29 @@ export class MeusDadosComponent {
 
   editAddress(address: any) {
     this.buttonSalvarEnderecoEditar = true;
+    this.divNovoEndereco = true;
+    this.divEnderecos = false;
 
-    if (this.usuario[0]?.enderecoEntrega) {
-      const enderecoEditIndex = this.usuario[0].enderecoEntrega.findIndex(
-        (endereco) => endereco.identificacao === address.identificacao
-      );
+    // if (this.usuario[0]?.enderecoEntrega) {
+    //   const enderecoEditIndex = this.usuario[0].enderecoEntrega.findIndex(
+    //     (endereco) => endereco.identificacao === address.identificacao
+    //   );
 
-      if (enderecoEditIndex !== -1) {
-        this.enderecoEditando = this.usuario[0].enderecoEntrega[enderecoEditIndex];
+    //   if (enderecoEditIndex !== -1) {
+    //     this.enderecoEditando = this.usuario[0].enderecoEntrega[enderecoEditIndex];
 
-        // Preencha os campos do formulário com os valores editados
-        this.identificacao = this.enderecoEditando.identificacao || '';
-        this.cep = this.enderecoEditando.cep || null;
-        this.cidade = this.enderecoEditando.cidade || '';
-        this.bairro = this.enderecoEditando.bairro || '';
-        this.logradouro = this.enderecoEditando.rua || '';
-        this.numero = this.enderecoEditando.numeroResidencia || null;
+    //     // Preencha os campos do formulário com os valores editados
+    //     this.identificacao = this.enderecoEditando.identificacao || '';
+    //     this.cep = this.enderecoEditando.cep || null;
+    //     this.cidade = this.enderecoEditando.cidade || '';
+    //     this.bairro = this.enderecoEditando.bairro || '';
+    //     this.logradouro = this.enderecoEditando.endereco || '';
+    //     this.numero = this.enderecoEditando.numeroResidencia || null;
 
-        // Alternar para a visualização de edição de endereço
-        this.divNovoEndereco = true;
-        this.divEnderecos = false;
-      }
-    }
+    //     // Alternar para a visualização de edição de endereço
+
+    //   }
+    // }
   }
 
   salvarEdicao() {
@@ -137,7 +146,7 @@ export class MeusDadosComponent {
         enderecoEditado.cep = this.cep!;
         enderecoEditado.cidade = this.cidade;
         enderecoEditado.bairro = this.bairro;
-        enderecoEditado.rua = this.logradouro;
+        enderecoEditado.endereco = this.logradouro;
         enderecoEditado.numeroResidencia = this.numero!;
 
         // Redefina os campos do endereço após a edição
@@ -157,7 +166,7 @@ export class MeusDadosComponent {
       cep: this.cep!,
       cidade: this.cidade,
       bairro: this.bairro,
-      rua: this.logradouro,
+      endereco: this.logradouro,
       numeroResidencia: this.numero!
     };
 

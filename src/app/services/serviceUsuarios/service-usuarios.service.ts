@@ -25,7 +25,7 @@ export class ServiceUsuariosService {
           cep: 9999999,
           cidade: "ABC",
           bairro: "Teste",
-          rua: "Teste",
+          endereco: "Teste",
           numeroResidencia: 99
         },
         {
@@ -33,7 +33,7 @@ export class ServiceUsuariosService {
           cep: 9999999,
           cidade: "Teste",
           bairro: "Teste",
-          rua: "Teste",
+          endereco: "Teste",
           numeroResidencia: 99
         },
       ]
@@ -56,7 +56,7 @@ export class ServiceUsuariosService {
           cep: 9999999,
           cidade: "ABC",
           bairro: "Teste",
-          rua: "Teste",
+          endereco: "Teste",
           numeroResidencia: 99
         },
         {
@@ -64,7 +64,7 @@ export class ServiceUsuariosService {
           cep: 9999999,
           cidade: "Teste",
           bairro: "Teste",
-          rua: "Teste",
+          endereco: "Teste",
           numeroResidencia: 99
         },
       ]
@@ -87,7 +87,7 @@ export class ServiceUsuariosService {
           cep: 9999999,
           cidade: "ABC",
           bairro: "Teste",
-          rua: "Teste",
+          endereco: "Teste",
           numeroResidencia: 99
         },
         {
@@ -95,7 +95,7 @@ export class ServiceUsuariosService {
           cep: 998,
           cidade: "Teste",
           bairro: "Teste",
-          rua: "Teste",
+          endereco: "Teste",
           numeroResidencia: 99
         },
       ]
@@ -118,7 +118,7 @@ export class ServiceUsuariosService {
           cep: 9999999,
           cidade: "ABC",
           bairro: "Teste",
-          rua: "Teste",
+          endereco: "Teste",
           numeroResidencia: 99
         },
         {
@@ -126,7 +126,7 @@ export class ServiceUsuariosService {
           cep: 9999999,
           cidade: "Teste",
           bairro: "Teste",
-          rua: "Teste",
+          endereco: "Teste",
           numeroResidencia: 99
         },
       ]
@@ -149,7 +149,7 @@ export class ServiceUsuariosService {
           cep: 9999999,
           cidade: "ABC",
           bairro: "Teste",
-          rua: "Teste",
+          endereco: "Teste",
           numeroResidencia: 99
         },
         {
@@ -157,7 +157,7 @@ export class ServiceUsuariosService {
           cep: 9999999,
           cidade: "Teste",
           bairro: "Teste",
-          rua: "Teste",
+          endereco: "Teste",
           numeroResidencia: 99
         },
       ]

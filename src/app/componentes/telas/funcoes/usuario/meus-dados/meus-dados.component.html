@@ -60,16 +60,18 @@
       <div class="botaoAdicionarEndereco">
         <p-button (click)="abrirDialogNewAddress()" label="Adicionar novo endereço" styleClass="p-button-raised p-button-primary"></p-button>
       </div>
-      <div *ngFor="let usuario of usuario" class="containerEnderecoLoop">
-        <div *ngFor="let endereco of usuario.enderecoEntrega | slice:first:first + rows" class="containerEnderecoDados">
+      <div class="containerEnderecoLoop">
+        <div *ngFor="let endereco of enderecosEntrega | slice:first:first + rows" class="containerEnderecoDados">
           <div class="labelIdentificacao">
-            <h2 class="h2">{{endereco.identificacao}}</h2>
+            <h2 class="h2">
+              {{endereco.identificacao}}
+            </h2>
             <div class="botao">
-              <p-button (click)="editAddress(endereco)" label="Editar" styleClass="p-button-outlined p-button-primary"></p-button>
+              <p-button (onClick)="editAddress(endereco)" label="Editar" styleClass="p-button-outlined p-button-primary"></p-button>
             </div>
           </div>
           <div class="labelRuaEResidencia">
-            {{endereco.rua}}, {{endereco.numeroResidencia}}
+            {{endereco.endereco}}, {{endereco.numeroResidencia}}
           </div>
           <div class="labelCidadeEBairro">
             {{endereco.cidade}} - {{endereco.bairro}}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Pedido } from '../servicePedido/service-pedido.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ServiceApiUsuarioLogadoService } from '../servicesAPI/serviceAPI-UsuarioLogado/service-api-usuario-logado.service';
 import { ServiceApiEnderecosService } from '../servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
 import { ServiceApiTelefonesService } from '../servicesAPI/serviceAPI-Telefones/service-api-telefones.service';
@@ -26,7 +26,7 @@ export interface EnderecoEntrega {
   cep: number;
   cidade?: string;
   bairro?: string;
-  rua?: string;
+  endereco?: string;
   numeroResidencia?: number;
 }
 
@@ -72,31 +72,20 @@ export class ServiceUsuarioLogadoService {
       numeroResidencia: 99,
       enderecoEntrega:
       [
-        {
-          identificacao: "Principal",
-          cep: 9999999,
-          cidade: "ABC",
-          bairro: "Teste",
-          rua: "Teste",
-          numeroResidencia: 99
-        },
-        {
-          identificacao: "Secundário 1",
-          cep: 9999999,
-          cidade: "Teste",
-          bairro: "Teste",
-          rua: "Teste",
-          numeroResidencia: 99
-        },
+
       ]
     }
   ]
 
   usuarioLogadoAPI: Usuario[] = []
 
-  enderecosAPI: EnderecoEntrega[] = []
+  enderecosAPI: any[] = []
 
-  enderecoUsuarioLogadoAPI: EnderecoEntrega[] = []
+  enderecoCobrancaUsuarioLogadoAPI: any[] = []
+
+  enderecoEntregaUsuarioLogadoAPI: any[] = []
+
+
 
   telefonesAPI: Telefone[] = []
 
@@ -119,32 +108,44 @@ export class ServiceUsuarioLogadoService {
 
   // ====================================================================================== //
 
-  atualizarEnderecoUsuarioLogadoAPI(){
+  atualizarEnderecoUsuarioLogadoAPI() {
+    const idUsuario = sessionStorage.getItem('u');
 
-    const idUsuario = sessionStorage.getItem('u')
-
-    if(idUsuario){
+    if (idUsuario) {
       this.apiEnderecos.buscarEnderecos().subscribe(
         (enderecosAPI) => {
           this.enderecosAPI = enderecosAPI;
 
-          console.log(idUsuario)
-          console.log(this.enderecosAPI)
+          console.log(idUsuario);
+          console.log(this.enderecosAPI);
 
-          this.enderecoUsuarioLogadoAPI = enderecosAPI.filter((endereco) => endereco.LoginId === Number(idUsuario))
+          // Filtra endereços com tpCadastro igual a "1" para o array enderecoCobrancaUsuarioLogadoAPI
+          this.enderecoCobrancaUsuarioLogadoAPI = enderecosAPI.filter((endereco) => endereco.LoginId === Number(idUsuario) && endereco.tpcadastro === "1");
 
-          console.log('Endereços do usuário logado:', this.enderecoUsuarioLogadoAPI);
+          // Filtra endereços com tpCadastro igual a "2" para o array enderecoEntregaUsuarioLogadoAPI
+          this.enderecoEntregaUsuarioLogadoAPI = enderecosAPI.filter((endereco) => endereco.LoginId === Number(idUsuario) && endereco.tpcadastro === "2");
+
+          console.log('Endereços do usuário logado (Cobrança):', this.enderecoCobrancaUsuarioLogadoAPI);
+          console.log('Endereços do usuário logado (Entrega):', this.enderecoEntregaUsuarioLogadoAPI);
         },
         (error) => {
-          console.log("Erro ao buscar os endereços gerais", error)
+          console.log("Erro ao buscar os endereços gerais", error);
         }
-      )
+      );
     }
   }
 
+
+  getEnderecoCobrancaUsuarioLogado(): Observable<EnderecoEntrega[]> {
+    return of (this.enderecoCobrancaUsuarioLogadoAPI);
+  }
+
+  getEnderecoEntregaUsuarioLogado(): Observable<EnderecoEntrega[]> {
+    return of (this.enderecoEntregaUsuarioLogadoAPI);
+  }
   // ====================================================================================== //
 
-  atualizarTelefoneUsuarioLogadoAPI(){
+  atualizarTelefonesUsuarioLogadoAPI(){
 
     const idUsuario = sessionStorage.getItem('u')
 
@@ -166,6 +167,10 @@ export class ServiceUsuarioLogadoService {
     }
   }
 
+  getTelefonesUsuarioLogado(): Observable<any[]> {
+    return of (this.telefonesUsuarioLogadoAPI);
+  }
+
   // ====================================================================================== //
   // CONTROLE DE ACESSO //
 
@@ -175,14 +180,16 @@ export class ServiceUsuarioLogadoService {
     sessionStorage.setItem(this.localStorageKey, value.toString());
   }
 
-  setMostrarLateralAdministrador(value: boolean): void {
-    this.mostrarLateralAdministrador.next(value);
-    sessionStorage.setItem(this.localStorageKey, value.toString());
-  }
-
   // Método para obter o valor como um observable
   getMostrarLateralUsuario(): Observable<boolean> {
     return this.mostrarLateralUsuario.asObservable();
+  }
+
+  // ====================================================================================== //
+
+  setMostrarLateralAdministrador(value: boolean): void {
+    this.mostrarLateralAdministrador.next(value);
+    sessionStorage.setItem(this.localStorageKey, value.toString());
   }
 
   // Método para obter o valor como um observable

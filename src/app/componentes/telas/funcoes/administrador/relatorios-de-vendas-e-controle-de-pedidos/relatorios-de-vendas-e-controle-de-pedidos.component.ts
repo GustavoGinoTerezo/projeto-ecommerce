@@ -117,7 +117,7 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
         exportItem.cepCliente = pedido.enderecoSelecionado.length > 0 ? pedido.enderecoSelecionado[0].cep || '' : '';
         exportItem.cidadeCliente = pedido.enderecoSelecionado[0].cidade || '';
         exportItem.bairroCliente = pedido.enderecoSelecionado[0].bairro || '';
-        exportItem.ruaCliente = pedido.enderecoSelecionado[0].rua || '';
+        exportItem.ruaCliente = pedido.enderecoSelecionado[0].endereco || '';
       } else {
         exportItem.cepCliente = '';
         exportItem.cidadeCliente = '';
