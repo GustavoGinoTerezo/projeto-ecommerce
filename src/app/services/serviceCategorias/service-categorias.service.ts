@@ -356,7 +356,7 @@ export class ServiceCategoriasService {
     this.apiCategoriaService.buscarCategorias().subscribe(
       (categoriasAPI) => {
         this.categoriasAPI = categoriasAPI;
-        // console.log(this.categoriasAPI);
+        console.log("1")
 
         // Após obter as categorias da API, chame os métodos para atualizar produtos
         this.atualizarProdutosDaAPI();
@@ -371,7 +371,7 @@ export class ServiceCategoriasService {
     this.apiProdutos.buscarProdutos().subscribe(
       (produtosAPI) => {
         this.produtosAPI = produtosAPI;
-        // console.log(this.produtosAPI);
+        console.log("2")
 
         // Após obter os produtos da API, chame o método para atualizar a posição dos produtos
         this.atualizarPosicaoProdutosDaAPI();
@@ -386,6 +386,7 @@ export class ServiceCategoriasService {
     this.apiProdutos.buscarPosicaoProdutos().subscribe(
       (posicaoProdutosAPI) => {
         this.posicaoProdutosAPI = posicaoProdutosAPI;
+        console.log("3")
         // Após obter a posição dos produtos da API, chame os métodos para atualizar destaques, mais vendidos e promoções
       },
       (error) => {
@@ -405,6 +406,7 @@ export class ServiceCategoriasService {
       .filter((produto) => produtosEmDestaque.includes(produto.prodId));
 
     // // console.log(this.produtosDestaqueAPI); // Adicione este console.log para verificar o conteúdo do array
+    console.log("5")
     return of(null);
   }
 
@@ -419,6 +421,7 @@ export class ServiceCategoriasService {
       .filter((produto) => produtosMaisVendidos.includes(produto.prodId));
 
     // // console.log(this.produtosMaisVendidosAPI); // Adicione este console.log para verificar o conteúdo do array
+    console.log("6")
     return of(null);
   }
 
@@ -433,6 +436,7 @@ export class ServiceCategoriasService {
       .filter((produto) => produtosEmPromocao.includes(produto.prodId));
 
     // // console.log(this.produtosEmPromocaoAPI); // Adicione este console.log para verificar o conteúdo do array
+    console.log("7")
     return of(null);
   }
 

@@ -184,6 +184,7 @@ export class TelaPrincipalComponent {
       this.categoriasService.getCategorias().subscribe(
         (categoriasAPI) => {
           this.categorias = categoriasAPI;
+          console.log("4")
         }
       );
 
@@ -198,7 +199,7 @@ export class TelaPrincipalComponent {
         this.getProdutos();
       });
 
-    }, 1500);
+    }, 2500);
 
   }
 
@@ -206,14 +207,17 @@ export class TelaPrincipalComponent {
     // Aqui você pode chamar os métodos que fazem as chamadas HTTP após a conclusão dos métodos no serviço.
     this.categoriasService.getProdutosDestaque().subscribe((produtosDestaqueAPI) => {
       this.produtosDestaque = produtosDestaqueAPI;
+      console.log("8")
     });
 
     this.categoriasService.getProdutosMaisVendidos().subscribe((produtosMaisVendidosAPI) => {
       this.produtosMaisVendidos = produtosMaisVendidosAPI;
+      console.log("9")
     });
 
     this.categoriasService.getProdutosEmPromocao().subscribe((produtosEmPromocaoAPI) => {
       this.produtosEmPromocao = produtosEmPromocaoAPI;
+      console.log("10")
     });
   }
 
