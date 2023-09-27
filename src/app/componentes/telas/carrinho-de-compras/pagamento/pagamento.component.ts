@@ -2,6 +2,8 @@ import { FormaPagamento, FormaPagamentoService } from './../../../../services/se
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { AES } from 'crypto-ts';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-pagamento',
@@ -47,17 +49,27 @@ export class PagamentoComponent {
     });
 
     const formaPagamentoAtiva = sessionStorage.getItem('p');
-    const numeroFormaPagamentoAtiva = formaPagamentoAtiva ? parseInt(formaPagamentoAtiva, 10) : -1;
-    this.toggleFormaPagamentoAtiva(numeroFormaPagamentoAtiva);
+    const secretKeyPagamento = 'formaPagamento'; // Use a mesma chave usada para criptografar
 
-    // Depois de ativar a forma de pagamento, encontre a forma de pagamento correspondente pelo ID
-    const formaPagamentoSelecionada = this.formaPagamento.find((pagamento) => pagamento.idPagamento === numeroFormaPagamentoAtiva);
+    if (formaPagamentoAtiva) {
+      // Descriptografe o valor da forma de pagamento
+      const decryptedFormaPagamento = AES.decrypt(formaPagamentoAtiva, secretKeyPagamento);
 
-    // Defina a forma de pagamento selecionada para ativar o radiobutton correspondente
-    this.formaPagamentoSelecionada = formaPagamentoSelecionada;
+      // Verifique se a descriptografia foi bem-sucedida
+      if (decryptedFormaPagamento.sigBytes > 0) {
+        // Converta o resultado descriptografado de volta em um número
+        const numeroFormaPagamentoAtiva = parseInt(decryptedFormaPagamento.toString(CryptoJS.enc.Utf8), 10);
 
+        // Ative a forma de pagamento correspondente pelo ID
+        this.toggleFormaPagamentoAtiva(numeroFormaPagamentoAtiva);
 
+        // Encontre a forma de pagamento selecionada pelo ID
+        const formaPagamentoSelecionada = this.formaPagamento.find((pagamento) => pagamento.idPagamento === numeroFormaPagamentoAtiva);
 
+        // Defina a forma de pagamento selecionada para ativar o radiobutton correspondente
+        this.formaPagamentoSelecionada = formaPagamentoSelecionada;
+      }
+    }
   }
 
   // Inside your component class
@@ -66,9 +78,16 @@ export class PagamentoComponent {
     this.formaPagamentoAtiva[index] = true;
   }
 
-  navigateConfirmacao(){
-    const formaPagamento = this.formaPagamentoSelecionada.idPagamento
-    sessionStorage.setItem('p', formaPagamento)
+  navigateConfirmacao() {
+    const formaPagamento = this.formaPagamentoSelecionada.idPagamento;
+    const secretKeyPagamento = 'formaPagamento';
+
+    // Criptografe o valor da forma de pagamento
+    const encryptedFormaPagamento = AES.encrypt(formaPagamento.toString(), secretKeyPagamento).toString();
+
+    // Armazene o valor criptografado no sessionStorage
+    sessionStorage.setItem('p', encryptedFormaPagamento);
+
     this.router.navigate(['/confirmacao']);
   }
 
