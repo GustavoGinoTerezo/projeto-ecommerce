@@ -35,33 +35,30 @@
           <div class="labelEndereco">
               Selecione o endereço para entrega
           </div>
-          <div class="containerEnderecoIndividual"
-          *ngFor="let endereco of enderecosEntrega">
+          <div *ngFor="let endereco of enderecosEntrega | slice:first:first + rows" class="containerEnderecoDados">
             <div>
               <p-radioButton name="checkbox" value="Cheese" [(ngModel)]="checkbox" inputId="checkbox"></p-radioButton>
             </div>
-              <div class="containerEnderecoLoop">
-                <div *ngFor="let endereco of enderecosEntrega | slice:first:first + rows" class="containerEnderecoDados">
-                  <div class="labelIdentificacao">
-                    <h2 class="h2">
-                      <!-- {{endereco.identificacao}} -->
-                      AQUI É A IDENTIFICAÇÃO DO ENDEREÇO
-                    </h2>
-                  </div>
-                  <div class="labelRuaEResidencia">
-                    {{endereco.endereco}}, {{endereco.numeroResidencia}}
-                  </div>
-                  <div class="labelCidadeEBairro">
-                    {{endereco.cidade}} - {{endereco.bairro}}
-                  </div>
-                  <div class="labelCep">
-                    CEP: {{endereco.cep}}
-                  </div>
-                </div>
+            <div class="containerEnderecoLoop">
+              <div class="labelIdentificacao">
+                <h2 class="h2">
+                  <!-- {{endereco.identificacao}} -->
+                  AQUI É A IDENTIFICAÇÃO DO ENDEREÇO
+                </h2>
               </div>
-              <p-paginator (onPageChange)="onPageChangeEnderecos($event)" [first]="firstEndereco" [rows]="rowsEndereco" [totalRecords]="totalRecordsEnderecos">
-              </p-paginator>
+              <div class="labelRuaEResidencia">
+                {{endereco.endereco}}, {{endereco.numeroResidencia}}
+              </div>
+              <div class="labelCidadeEBairro">
+                {{endereco.cidade}} - {{endereco.bairro}}
+              </div>
+              <div class="labelCep">
+                CEP: {{endereco.cep}}
+              </div>
             </div>
+          </div>
+            <p-paginator (onPageChange)="onPageChangeEnderecos($event)" [first]="firstEndereco" [rows]="rowsEndereco" [totalRecords]="totalRecordsEnderecos">
+            </p-paginator>
         </div>
       </div>
 
