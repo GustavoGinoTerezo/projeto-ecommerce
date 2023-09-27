@@ -4,6 +4,7 @@ import { CarrinhoDeCompra, ServiceCarrinhoDeComprasService } from 'src/app/servi
 import { Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
+import { ServiceUsuarioLogadoService, EnderecoEntrega } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
 
 @Component({
   selector: 'app-carrinho-de-compras',
@@ -21,16 +22,23 @@ export class CarrinhoDeComprasComponent {
   items: MenuItem[] = [];
   valorTotal: number = 0;
   produtos: Produtos[] = []
+  enderecosEntrega: EnderecoEntrega[] = []
+  checkbox!: string;
+  firstEndereco: number = 0;
+  rowsEndereco: number = 3;
 
   constructor(
     private carrinhoService: ServiceCarrinhoDeComprasService,
     private categoriasService: ServiceCategoriasService,
     private messageService: MessageService,
+    private usuarioService: ServiceUsuarioLogadoService,
     ) {}
 
   ngOnInit(): void {
 
     const encryptedCarrinhoFromStorage = sessionStorage.getItem('c');
+
+
 
     setTimeout(() => {
 
@@ -82,6 +90,14 @@ export class CarrinhoDeComprasComponent {
           this.calcularValorTotal();
         }
       );
+
+      this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe(
+        (enderecosEntregaAPI) => {
+          this.enderecosEntrega = enderecosEntregaAPI;
+          console.log(this.enderecosEntrega)
+        }
+      );
+
     }, 1000);
 
     this.items = [
@@ -156,6 +172,11 @@ export class CarrinhoDeComprasComponent {
   onPageChange(event: any): void {
     this.first = event.first;
     this.rows = event.rows;
+  }
+
+  onPageChangeEnderecos(event: any): void {
+    this.firstEndereco = event.first;
+    this.rowsEndereco = event.rows;
   }
 
   calcularValorTotal(): void {
@@ -235,5 +256,8 @@ export class CarrinhoDeComprasComponent {
     return this.carrinho?.length || 0;
   }
 
+  get totalRecordsEnderecos(): number {
+    return this.enderecosEntrega?.length || 0;
+  }
 
 }

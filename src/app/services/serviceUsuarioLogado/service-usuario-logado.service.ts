@@ -20,6 +20,7 @@ export interface Usuario {
   numeroResidencia?: number;
   enderecoEntrega?: EnderecoEntrega[];
   pedidos?: Pedido[];
+
 }
 
 export interface EnderecoEntrega {
@@ -30,6 +31,7 @@ export interface EnderecoEntrega {
   bairro?: string;
   endereco?: string;
   numeroResidencia?: number;
+  UfId?: number;
 }
 
 export interface Telefone {

@@ -51,7 +51,28 @@
   border-radius: 6px;
 }
 
+.containerEnderecoGeral{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  background-color: var(--container-externo-cards-produtos);
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+}
+
 .containerFrete{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  background-color: var(--container-interno-cards-produtos);
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.containerEndereco{
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -69,7 +90,16 @@
   margin-bottom: 20px;
 }
 
-.inputFreteEBotoes{
+.labelEndereco{
+  display: flex;
+  width: 100%;
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+
+.containerEnderecoIndividual{
   display: flex;
   width: 100%;
 }
@@ -406,4 +436,47 @@
   .buttonEnviar{
     width: 100%;
   }
+}
+
+
+.containerEnderecoLoop {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.containerEnderecoDados {
+  padding: 13px;
+  background-color: var(--background-das-divs-da-categoria);
+  margin-bottom: 5px;
+  border-radius: 6px;
+}
+
+.labelIdentificacao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.h2 {
+  margin-bottom: 5px;
+}
+
+.labelRuaEResidencia {
+  display: flex;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.labelCidadeEBairro {
+  display: flex;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.labelCep {
+  display: flex;
+  width: 100%;
+  margin-bottom: 5px;
 }
