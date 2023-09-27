@@ -26,6 +26,7 @@ export class CriarContaComponent {
   passwordCadastro!: string;
   passwordCadastroRepetir!: string;
   checked: boolean = false;
+  cep!: number | null
 
   checkbox: boolean = false
   checkboxTelefone: boolean = false

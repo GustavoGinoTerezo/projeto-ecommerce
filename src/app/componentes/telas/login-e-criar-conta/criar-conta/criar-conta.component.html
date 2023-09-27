@@ -114,28 +114,17 @@
                   id="telefonePrincipal"
                   #telefoneprincipal="ngModel"
                   ></p-inputMask>
-                <label htmlFor="Telefone principal">Telefone principal</label>
+                <label htmlFor="Telefone principal">Telefone</label>
               </span>
             </div>
           </div>
           <div class="email field p-fluid mt-4 tamanhoInputs">
             <div class="inputs">
               <div class="containerInputEmailSec">
-                <div class="checkbox">
-                  <p-checkbox [(ngModel)]="checkboxTelefone" [binary]="true" inputId="binary"></p-checkbox>
-                </div>
-                <div class="inputEmailSec">
-                  <span class="p-float-label">
-                    <p-inputMask
-                      [disabled]="!checkboxTelefone"
-                      mask="(99) 99999-9999"
-                      [(ngModel)]="telefoneSecundario"
-                      id="telefoneSecundario"
-                      #telefonesecundario="ngModel"
-                      ></p-inputMask>
-                    <label htmlFor="Telefone alternativo">Telefone alternativo</label>
-                  </span>
-                </div>
+                <span class="p-float-label">
+                  <p-inputMask mask="99999-999" [(ngModel)]="cep"></p-inputMask>
+                  <label htmlFor="username">CEP</label>
+                </span>
               </div>
             </div>
           </div>
