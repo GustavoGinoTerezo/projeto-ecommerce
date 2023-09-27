@@ -108,33 +108,55 @@ export class CarrinhoDeComprasComponent {
     // Encontre o produto correspondente no array de produtos
     const produtoEncontrado = this.produtos.find((produto) => produto.nome === item.nomeProduto);
     if (produtoEncontrado) {
-      // Recupere o array existente do sessionStorage
-      const carrinhoIds = JSON.parse(sessionStorage.getItem('c') || '[]');
+      // Recupere o carrinho criptografado do sessionStorage
+      const encryptedCarrinhoFromStorage = sessionStorage.getItem('c');
+      const secretKeyCarrinho = 'carrinho';
+
+      let carrinhoIds: number[] = [];
+
+      if (encryptedCarrinhoFromStorage) {
+        // Descriptografe o carrinho se ele existir
+        const decryptedCarrinho = AES.decrypt(encryptedCarrinhoFromStorage, secretKeyCarrinho);
+
+        // Verifique se a descriptografia foi bem-sucedida
+        if (decryptedCarrinho.sigBytes > 0) {
+          // Converta o resultado descriptografado de volta em um array de IDs
+          carrinhoIds = JSON.parse(decryptedCarrinho.toString(CryptoJS.enc.Utf8));
+        }
+      }
+
       // Calcule a quantidade de IDs para o produto correspondente no carrinho
-      const quantidadeDeIds = carrinhoIds.filter((id: any) => id === produtoEncontrado.prodId).length;
+      const quantidadeDeIds = carrinhoIds.filter((id) => id === produtoEncontrado.prodId).length;
+
       // Calcule a diferença entre newValue e a quantidade de IDs
       const diff = newValue - quantidadeDeIds;
       // Se a diferença for positiva, adicione IDs ao array
       if (diff > 0) {
         for (let i = 0; i < diff; i++) {
-          carrinhoIds.push(produtoEncontrado.prodId);
+          carrinhoIds.push(produtoEncontrado.prodId!);
         }
       } else if (diff < 0) { // Se a diferença for negativa, remova IDs do array
         for (let i = 0; i < -diff; i++) {
-          const indexToRemove = carrinhoIds.lastIndexOf(produtoEncontrado.prodId);
+          const indexToRemove = carrinhoIds.lastIndexOf(produtoEncontrado.prodId!);
           if (indexToRemove !== -1) {
             carrinhoIds.splice(indexToRemove, 1);
           }
         }
       }
       // Atualize o sessionStorage com o novo array de IDs
-      sessionStorage.setItem('c', JSON.stringify(carrinhoIds));
+      sessionStorage.setItem('c', AES.encrypt(JSON.stringify(carrinhoIds), secretKeyCarrinho).toString());
+
       // Atualize a quantidade no item do carrinho
       item.quantidade = newValue;
       // Recalcule o valor total
       this.calcularValorTotal();
     }
   }
+
+
+
+
+
 
   onPageChange(event: any): void {
     this.first = event.first;
