@@ -5,6 +5,7 @@ import { Produtos, ServiceCategoriasService } from 'src/app/services/serviceCate
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { ServiceUsuarioLogadoService, EnderecoEntrega } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrinho-de-compras',
@@ -28,19 +29,24 @@ export class CarrinhoDeComprasComponent {
   firstEndereco: number = 0;
   rowsEndereco: number = 1;
   enderecoEntregaAtivo: boolean[] = new Array(this.enderecosEntrega.length).fill(false);
+  mostrarFreteOuEndereco!: boolean;
 
   constructor(
-    private carrinhoService: ServiceCarrinhoDeComprasService,
     private categoriasService: ServiceCategoriasService,
     private messageService: MessageService,
     private usuarioService: ServiceUsuarioLogadoService,
+    private router: Router,
     ) {}
 
   ngOnInit(): void {
 
     const encryptedCarrinhoFromStorage = sessionStorage.getItem('c');
 
-
+    if(sessionStorage.getItem('at')){
+      this.mostrarFreteOuEndereco = true;
+    } else {
+      this.mostrarFreteOuEndereco = false;
+    }
 
     setTimeout(() => {
 
@@ -124,10 +130,8 @@ export class CarrinhoDeComprasComponent {
 
   selecionarEndereco(endereco: EnderecoEntrega): void {
     this.enderecoSelecionado = endereco;
-
     console.log(this.enderecoSelecionado)
   }
-
 
   atualizarQuantidade(item: CarrinhoDeCompra, newValue: number): void {
     // Encontre o produto correspondente no array de produtos
@@ -177,6 +181,20 @@ export class CarrinhoDeComprasComponent {
       this.calcularValorTotal();
     }
   }
+
+  navegarPagamento(){
+    const enderecoSelecionado = this.enderecoSelecionado.endId;
+    const secretKeyEnderecoSelecionado = 'enderecoSelecionado';
+
+    // Criptografe o valor da forma de pagamento
+    const encryptedEnderecoSelecionado = AES.encrypt(enderecoSelecionado.toString(), secretKeyEnderecoSelecionado).toString();
+
+    // Armazene o valor criptografado no sessionStorage
+    sessionStorage.setItem('es', encryptedEnderecoSelecionado);
+
+    this.router.navigate(['/pagamento']);
+  }
+
 
   onPageChange(event: any): void {
     this.firstProduto = event.first;

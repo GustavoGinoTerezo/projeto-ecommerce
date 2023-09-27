@@ -92,5 +92,5 @@ ativarLateral() {
   // la - lateral admin
   // p - forma de pagamento
   // at - access token
-
+  // es - endereço selecionado
 }

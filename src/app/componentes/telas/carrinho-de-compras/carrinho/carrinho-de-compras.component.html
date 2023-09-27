@@ -10,7 +10,7 @@
 
 
 
-      <div class="containerFreteGeral">
+      <div class="containerFreteGeral" *ngIf="!mostrarFreteOuEndereco">
         <div class="containerFrete">
           <div class="labelFrete">
               Consultar frete e prazo de entrega
@@ -30,7 +30,7 @@
 
 
 
-      <div class="containerEnderecoGeral">
+      <div class="containerEnderecoGeral" *ngIf="mostrarFreteOuEndereco">
         <div class="containerEndereco">
           <div class="labelEndereco">
               Selecione o endereço para entrega
@@ -142,7 +142,12 @@
           <h2 class="valorFinalFreteEProduto">R$ ?????,??</h2>
         </div>
         <div class="divBotoes">
-          <p-button label="Ir para o pagamento" routerLink="/pagamento"></p-button>
+          <p-button
+            label="Ir para o pagamento"
+            [disabled]="!enderecoSelecionado"
+            (onClick)="navegarPagamento()"
+            >
+          </p-button>
           <p-button class="buttonWidth button" label="Continuar comprando" routerLink="/tela-principal"></p-button>
         </div>
       </div>
