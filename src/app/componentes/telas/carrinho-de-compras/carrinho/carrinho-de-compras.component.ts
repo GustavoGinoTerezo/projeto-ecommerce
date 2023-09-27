@@ -153,11 +153,6 @@ export class CarrinhoDeComprasComponent {
     }
   }
 
-
-
-
-
-
   onPageChange(event: any): void {
     this.first = event.first;
     this.rows = event.rows;
@@ -184,20 +179,38 @@ export class CarrinhoDeComprasComponent {
       if (produtoId) {
         this.removeProdutoDoSessionStorage(produtoId);
       }
-      this.carrinho.splice(index, 1);
+
+      // Remove todos os itens correspondentes ao produto do carrinho
+      this.carrinho = this.carrinho.filter((carrinhoItem) => carrinhoItem.nomeProduto !== item.nomeProduto);
+
       this.calcularValorTotal();
-      this.showProdutoAdicionadoAoCarrinho();
+      this.showProdutoRemovidoCarrinho();
     }
   }
 
-  removeProdutoDoSessionStorage(produtoId: any) {
-    const carrinhoIds = JSON.parse(sessionStorage.getItem('c') || '[]');
-    const indexesToRemove = carrinhoIds
-      .map((id: any, index: any) => (id === produtoId ? index : -1)) // Encontre todos os índices a serem removidos
-      .filter((index: number) => index !== -1); // Remova índices inválidos
-    // Remova os IDs encontrados na ordem inversa (para não afetar os outros índices)
-    indexesToRemove.reverse().forEach((index: any) => carrinhoIds.splice(index, 1));
-    sessionStorage.setItem('c', JSON.stringify(carrinhoIds));
+
+  removeProdutoDoSessionStorage(produtoId: number): void {
+    const encryptedCarrinhoFromStorage = sessionStorage.getItem('c');
+    const secretKeyCarrinho = 'carrinho';
+
+    let carrinhoIds: number[] = [];
+
+    if (encryptedCarrinhoFromStorage) {
+      // Descriptografe o carrinho se ele existir
+      const decryptedCarrinho = AES.decrypt(encryptedCarrinhoFromStorage, secretKeyCarrinho);
+
+      // Verifique se a descriptografia foi bem-sucedida
+      if (decryptedCarrinho.sigBytes > 0) {
+        // Converta o resultado descriptografado de volta em um array de IDs
+        carrinhoIds = JSON.parse(decryptedCarrinho.toString(CryptoJS.enc.Utf8));
+      }
+    }
+
+    // Remova todos os IDs correspondentes ao produto do array
+    carrinhoIds = carrinhoIds.filter((id) => id !== produtoId);
+
+    // Atualize o sessionStorage com o novo array de IDs criptografado
+    sessionStorage.setItem('c', AES.encrypt(JSON.stringify(carrinhoIds), secretKeyCarrinho).toString());
   }
 
   removerTodosOsProdutos() {
@@ -210,7 +223,7 @@ export class CarrinhoDeComprasComponent {
     return this.categoriasService.formatarNomeProduto(produtos);
   }
 
-  showProdutoAdicionadoAoCarrinho() {
+  showProdutoRemovidoCarrinho() {
     this.messageService.add({
       severity: 'error',
       icon: 'pi pi-trash',
