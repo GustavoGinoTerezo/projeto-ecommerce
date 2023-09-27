@@ -24,7 +24,7 @@ export interface Usuario {
 }
 
 export interface EnderecoEntrega {
-  id?: number;
+  endId?: number;
   identificacao?: string;
   cep: number;
   cidade?: string;

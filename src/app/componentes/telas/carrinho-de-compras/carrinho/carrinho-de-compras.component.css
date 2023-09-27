@@ -450,6 +450,14 @@
   background-color: var(--background-das-divs-da-categoria);
   margin-bottom: 5px;
   border-radius: 6px;
+  display: flex;
+}
+
+.containerRadioButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 13px;
 }
 
 .labelIdentificacao {
@@ -467,16 +475,22 @@
   display: flex;
   width: 100%;
   margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .labelCidadeEBairro {
   display: flex;
   width: 100%;
   margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .labelCep {
   display: flex;
   width: 100%;
   margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
 }

@@ -15,17 +15,19 @@ export class CarrinhoDeComprasComponent {
 
 
   carrinho: CarrinhoDeCompra[] = [];
-  first: number = 0; // Primeiro item da página
-  rows: number = 5; // Número de itens por página
+  firstProduto: number = 0; // Primeiro item da página
+  rowsProduto: number = 5; // Número de itens por página
   cep!: string;
   quantidade: number = 1;
   items: MenuItem[] = [];
   valorTotal: number = 0;
   produtos: Produtos[] = []
   enderecosEntrega: EnderecoEntrega[] = []
+  enderecoSelecionado: any;
   checkbox!: string;
   firstEndereco: number = 0;
-  rowsEndereco: number = 3;
+  rowsEndereco: number = 1;
+  enderecoEntregaAtivo: boolean[] = new Array(this.enderecosEntrega.length).fill(false);
 
   constructor(
     private carrinhoService: ServiceCarrinhoDeComprasService,
@@ -120,6 +122,13 @@ export class CarrinhoDeComprasComponent {
   ];
   }
 
+  selecionarEndereco(endereco: EnderecoEntrega): void {
+    this.enderecoSelecionado = endereco;
+
+    console.log(this.enderecoSelecionado)
+  }
+
+
   atualizarQuantidade(item: CarrinhoDeCompra, newValue: number): void {
     // Encontre o produto correspondente no array de produtos
     const produtoEncontrado = this.produtos.find((produto) => produto.nome === item.nomeProduto);
@@ -170,8 +179,8 @@ export class CarrinhoDeComprasComponent {
   }
 
   onPageChange(event: any): void {
-    this.first = event.first;
-    this.rows = event.rows;
+    this.firstProduto = event.first;
+    this.rowsProduto = event.rows;
   }
 
   onPageChangeEnderecos(event: any): void {
