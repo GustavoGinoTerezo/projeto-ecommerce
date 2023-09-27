@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { CarrinhoDeCompra, ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
-
+import { AES } from 'crypto-ts';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-carrinho-de-compras',
@@ -29,41 +30,58 @@ export class CarrinhoDeComprasComponent {
 
   ngOnInit(): void {
 
-  const carrinhoIds = JSON.parse(sessionStorage.getItem('c') || '[]');
+    const encryptedCarrinhoFromStorage = sessionStorage.getItem('c');
 
     setTimeout(() => {
+
+      const secretKeyCarrinho = 'carrinho';
+
+      let carrinhoIds: number[] = [];
+
+      if (encryptedCarrinhoFromStorage) {
+        // Descriptografe o carrinho se ele existir
+        const decryptedCarrinho = AES.decrypt(encryptedCarrinhoFromStorage, secretKeyCarrinho);
+
+        // Verifique se a descriptografia foi bem-sucedida
+        if (decryptedCarrinho.sigBytes > 0) {
+          // Converta o resultado descriptografado de volta em um array de IDs
+          carrinhoIds = JSON.parse(decryptedCarrinho.toString(CryptoJS.enc.Utf8));
+        }
+      }
+
+      // Agora você tem os IDs de produtos descriptografados em 'carrinhoIds'
 
       this.categoriasService.getProdutos().subscribe(
         (produtosAPI) => {
           this.produtos = produtosAPI;
 
-          // Mapeie os produtos do carrinho com um objeto para controlar a quantidade
+          // Crie um objeto para manter a contagem de produtos com o mesmo ID
           const carrinhoMap: { [id: number]: CarrinhoDeCompra } = {};
 
           carrinhoIds.forEach((produtoId: any) => {
             const produtoEncontrado = this.produtos.find((produto) => produto.prodId === produtoId);
             if (produtoEncontrado) {
-              // Se o produto já existe no carrinho, aumente a quantidade em vez de adicionar um novo
+              // Se o produto já existe no carrinho, aumente a quantidade
               if (carrinhoMap[produtoId]) {
                 carrinhoMap[produtoId].quantidade!++;
               } else {
-                const carrinhoItem: CarrinhoDeCompra = {
+                // Caso contrário, crie um novo item no carrinho
+                carrinhoMap[produtoId] = {
                   prodId: produtoEncontrado.prodId,
                   nomeProduto: produtoEncontrado.nome,
                   preco: produtoEncontrado.preco,
-                  quantidade: 1,
+                  quantidade: 1, // Defina a quantidade inicial como 1
                 };
-                carrinhoMap[produtoId] = carrinhoItem;
               }
             }
           });
 
-          // Converta o mapa de carrinho de volta para um array
+          // Converta o objeto de carrinho de volta para um array de itens do carrinho
           this.carrinho = Object.values(carrinhoMap);
+
+          this.calcularValorTotal();
         }
       );
-
-      this.calcularValorTotal();
     }, 1000);
 
     this.items = [

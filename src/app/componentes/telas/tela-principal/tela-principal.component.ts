@@ -6,6 +6,8 @@ import { Categorias, ServiceCategoriasService, Produtos } from 'src/app/services
 import { Router } from '@angular/router';
 import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { switchMap } from 'rxjs';
+import { AES } from 'crypto-ts';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-tela-principal',
@@ -236,17 +238,42 @@ export class TelaPrincipalComponent {
   }
 
   adicionarAoCarrinho(produto: Produtos): void {
+    // Recupere o carrinho criptografado do sessionStorage
+    const encryptedCarrinhoFromStorage = sessionStorage.getItem('c');
+    const secretKeyCarrinho = 'carrinho';
 
-    // this.carrinhoService.adicionarAoCarrinho(produto);
+    let carrinho: number[] = [];
 
-    // Recupere a lista de IDs do carrinho do sessionStorage ou crie uma lista vazia se ainda não existir
-    const carrinho = JSON.parse(sessionStorage.getItem('c') || '[]');
-    // Adicione o ID do produto ao carrinho
-    carrinho.push(produto.prodId);
-    // Salve a lista atualizada de IDs de carrinho de volta no sessionStorage
-    sessionStorage.setItem('c', JSON.stringify(carrinho));
-    // Exiba uma mensagem ou realize outras ações necessárias
-    this.showProdutoAdicionadoAoCarrinho();
+    if (encryptedCarrinhoFromStorage) {
+      // Descriptografe o carrinho se ele existir
+      const decryptedCarrinho = AES.decrypt(encryptedCarrinhoFromStorage, secretKeyCarrinho);
+
+      // Verifique se a descriptografia foi bem-sucedida
+      if (decryptedCarrinho.sigBytes > 0) {
+        try {
+          // Converta o resultado descriptografado de volta em um array
+          carrinho = JSON.parse(decryptedCarrinho.toString(CryptoJS.enc.Utf8));
+        } catch (error) {
+          // Em caso de erro na análise JSON, inicialize o carrinho como um array vazio
+          carrinho = [];
+        }
+      }
+    }
+
+    // Verifique se o produto possui um ID válido antes de adicioná-lo ao carrinho
+    if (produto.prodId !== undefined) {
+      // Adicione o ID do produto ao carrinho
+      carrinho.push(produto.prodId);
+
+      // Criptografe o carrinho atualizado e converta para string antes de salvar no sessionStorage
+      const encryptedCarrinho = AES.encrypt(JSON.stringify(carrinho), secretKeyCarrinho).toString();
+
+      // Salve o carrinho criptografado no sessionStorage
+      sessionStorage.setItem('c', encryptedCarrinho);
+
+      // Exiba uma mensagem ou realize outras ações necessárias
+      this.showProdutoAdicionadoAoCarrinho();
+    }
   }
 
   showProdutoAdicionadoAoCarrinho() {

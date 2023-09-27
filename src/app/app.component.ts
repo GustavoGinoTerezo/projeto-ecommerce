@@ -92,7 +92,7 @@ ativarLateral() {
   // SESSIONSTORAGE VARIÁVEIS
 
   // t - tpCadastro
-  // c - ids dos produtos para o carrinho
+  // c - array com os ids dos produtos para o carrinho
   // u - idUsuario
   // lu - lateral user
   // la - lateral admin
