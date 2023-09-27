@@ -77,12 +77,6 @@ ativarLateral() {
 }
 
 
-
-
-
-
-
-
 // ====================================================================================== //
 
   acaoDoBotao() {
@@ -92,10 +86,11 @@ ativarLateral() {
   // SESSIONSTORAGE VARIÁVEIS
 
   // t - tpCadastro
-  // c - array com os ids dos produtos para o carrinho
   // u - idUsuario
+  // c - array com os ids dos produtos para o carrinho
   // lu - lateral user
   // la - lateral admin
   // p - forma de pagamento
+  // at - access token
 
 }

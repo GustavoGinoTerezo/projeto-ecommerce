@@ -71,12 +71,15 @@ export class FuncoesUsuarioComponent {
     this.mostrarLateraisService.setMostrarLateralUsuario(false);
     this.mostrarLateraisService.setMostrarLateralAdministrador(false);
 
-    sessionStorage.removeItem('l')
     sessionStorage.removeItem('t')
     sessionStorage.removeItem('u')
-    sessionStorage.removeItem('at')
-    sessionStorage.removeItem('la')
+    sessionStorage.removeItem('c')
     sessionStorage.removeItem('lu')
+    sessionStorage.removeItem('la')
+    sessionStorage.removeItem('p')
+    sessionStorage.removeItem('at')
+
+
   }
 
 }
