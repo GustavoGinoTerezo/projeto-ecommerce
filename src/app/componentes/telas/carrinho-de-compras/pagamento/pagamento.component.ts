@@ -49,11 +49,11 @@ export class PagamentoComponent {
     });
 
     const formaPagamentoAtiva = sessionStorage.getItem('p');
-    const secretKeyPagamento = 'formaPagamento'; // Use a mesma chave usada para criptografar
+    const d75bebc1471a279ab08da91a018b44d77bc0db35e56d700a3ffc7a47f455af0b = '8bdc349582ed93b3bab86341c35b5a1c7187b7b9219d6a2c2808cbb9823a3c82'; // Use a mesma chave usada para criptografar
 
     if (formaPagamentoAtiva) {
       // Descriptografe o valor da forma de pagamento
-      const decryptedFormaPagamento = AES.decrypt(formaPagamentoAtiva, secretKeyPagamento);
+      const decryptedFormaPagamento = AES.decrypt(formaPagamentoAtiva, d75bebc1471a279ab08da91a018b44d77bc0db35e56d700a3ffc7a47f455af0b);
 
       // Verifique se a descriptografia foi bem-sucedida
       if (decryptedFormaPagamento.sigBytes > 0) {
@@ -80,10 +80,10 @@ export class PagamentoComponent {
 
   navigateConfirmacao() {
     const formaPagamento = this.formaPagamentoSelecionada.idPagamento;
-    const secretKeyPagamento = 'formaPagamento';
+    const d75bebc1471a279ab08da91a018b44d77bc0db35e56d700a3ffc7a47f455af0b = 'formaPagamento';
 
     // Criptografe o valor da forma de pagamento
-    const encryptedFormaPagamento = AES.encrypt(formaPagamento.toString(), secretKeyPagamento).toString();
+    const encryptedFormaPagamento = AES.encrypt(formaPagamento.toString(), d75bebc1471a279ab08da91a018b44d77bc0db35e56d700a3ffc7a47f455af0b).toString();
 
     // Armazene o valor criptografado no sessionStorage
     sessionStorage.setItem('p', encryptedFormaPagamento);

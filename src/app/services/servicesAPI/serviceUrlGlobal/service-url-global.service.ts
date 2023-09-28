@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 export class ServiceUrlGlobalService {
 
-  url: string = 'https://defiant-gown-bear.cyclic.cloud/';
+  url: string = 'https://plum-important-adder.cyclic.app/';
 
   constructor() { }
 }

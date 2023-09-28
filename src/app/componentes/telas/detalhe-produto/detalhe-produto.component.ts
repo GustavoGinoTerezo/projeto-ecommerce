@@ -75,20 +75,20 @@ export class DetalheProdutoComponent implements OnInit {
 
   adicionarAoCarrinho(produto: Produtos): void {
     // Recupere o carrinho criptografado do sessionStorage
-    const encryptedCarrinhoFromStorage = sessionStorage.getItem('c');
-    const secretKeyCarrinho = 'carrinho';
+    const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
+    const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
 
     let carrinho: number[] = [];
 
-    if (encryptedCarrinhoFromStorage) {
+    if (a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5) {
       // Descriptografe o carrinho se ele existir
-      const decryptedCarrinho = AES.decrypt(encryptedCarrinhoFromStorage, secretKeyCarrinho);
+      const a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a = AES.decrypt(a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5, a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb);
 
       // Verifique se a descriptografia foi bem-sucedida
-      if (decryptedCarrinho.sigBytes > 0) {
+      if (a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.sigBytes > 0) {
         try {
           // Converta o resultado descriptografado de volta em um array
-          carrinho = JSON.parse(decryptedCarrinho.toString(CryptoJS.enc.Utf8));
+          carrinho = JSON.parse(a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.toString(CryptoJS.enc.Utf8));
         } catch (error) {
           // Em caso de erro na análise JSON, inicialize o carrinho como um array vazio
           carrinho = [];
@@ -102,10 +102,10 @@ export class DetalheProdutoComponent implements OnInit {
       carrinho.push(produto.prodId);
 
       // Criptografe o carrinho atualizado e converta para string antes de salvar no sessionStorage
-      const encryptedCarrinho = AES.encrypt(JSON.stringify(carrinho), secretKeyCarrinho).toString();
+      const b031d16372c388ed5c4462fe1e968adaaa821c5ab62e3b20497569ffe802b0cb = AES.encrypt(JSON.stringify(carrinho), a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb).toString();
 
       // Salve o carrinho criptografado no sessionStorage
-      sessionStorage.setItem('c', encryptedCarrinho);
+      sessionStorage.setItem('c', b031d16372c388ed5c4462fe1e968adaaa821c5ab62e3b20497569ffe802b0cb);
 
       // Exiba uma mensagem ou realize outras ações necessárias
       this.showProdutoAdicionadoAoCarrinho();

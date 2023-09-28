@@ -57,24 +57,23 @@ export class ServiceUsuarioLogadoService {
 
   ) {
 
-    const encryptedValueFromStorageUsuario = sessionStorage.getItem(this.localStorageKeyUser);
-    if (encryptedValueFromStorageUsuario) {
-      const secretKeyLateral = 'valorLateral';
-      const decryptedValue = AES.decrypt(encryptedValueFromStorageUsuario, secretKeyLateral);
-      if (decryptedValue.sigBytes > 0) {
-        const decryptedBooleanValue = decryptedValue.toString(CryptoJS.enc.Utf8) === 'true';
-        this.mostrarLateralUsuario.next(decryptedBooleanValue);
+    const b3dc20a9c71655e6aacd4eca882ee40db9840b7ee63449ec3d4c489d90f97acd = sessionStorage.getItem(this.localStorageKeyUser);
+    if (b3dc20a9c71655e6aacd4eca882ee40db9840b7ee63449ec3d4c489d90f97acd) {
+      const bca28149008cc4d67ff50cc56428acf41769c98ad543b93c4644fcc7c7c713e7  = '915004b899b1c54c1ebb0ac65e5bf4973e671c725114c7b56c17b313cdca2402';
+      const a7c780a56fe0d647d178aeb6310093f48e95220cf217e749eb29c7cce2e8b206 = AES.decrypt(b3dc20a9c71655e6aacd4eca882ee40db9840b7ee63449ec3d4c489d90f97acd, bca28149008cc4d67ff50cc56428acf41769c98ad543b93c4644fcc7c7c713e7 );
+      if (a7c780a56fe0d647d178aeb6310093f48e95220cf217e749eb29c7cce2e8b206.sigBytes > 0) {
+        const BooleanValue = a7c780a56fe0d647d178aeb6310093f48e95220cf217e749eb29c7cce2e8b206.toString(CryptoJS.enc.Utf8) === 'true';
+        this.mostrarLateralUsuario.next(BooleanValue);
       }
     }
 
-    const encryptedValueFromStorageAdmin = sessionStorage.getItem(this.localStorageKeyAdmin);
-    if (encryptedValueFromStorageAdmin) {
-      const secretKeyLateral = 'valorLateral';
-      const decryptedValue = AES.decrypt(encryptedValueFromStorageAdmin, secretKeyLateral);
-      if (decryptedValue.sigBytes > 0) {
-        const decryptedBooleanValue = decryptedValue.toString(CryptoJS.enc.Utf8) === 'true';
-        this.mostrarLateralAdministrador.next(decryptedBooleanValue);
-        console.log('Valor booleano descriptografado (Administrador):', decryptedBooleanValue);
+    const e8c582580f5986fcb9aa66d0ef3d37c959706c6f0774b9888aee8b79989fc975 = sessionStorage.getItem(this.localStorageKeyAdmin);
+    if (e8c582580f5986fcb9aa66d0ef3d37c959706c6f0774b9888aee8b79989fc975) {
+      const f0b0b743645e63793355e744ad8e422f24d502395f126ba420be48f4b5d28b35 = '89ba4b199e1c5afb70d1444d5338e3d773b3a8d4a52d731f2cf39f4f043d1c6a';
+      const a5f3f7caf5832d607f698626c71f5122afba5db22ff26c9fe1e5c6f33d4f135f = AES.decrypt(e8c582580f5986fcb9aa66d0ef3d37c959706c6f0774b9888aee8b79989fc975, f0b0b743645e63793355e744ad8e422f24d502395f126ba420be48f4b5d28b35);
+      if (a5f3f7caf5832d607f698626c71f5122afba5db22ff26c9fe1e5c6f33d4f135f.sigBytes > 0) {
+        const BooleanValue = a5f3f7caf5832d607f698626c71f5122afba5db22ff26c9fe1e5c6f33d4f135f.toString(CryptoJS.enc.Utf8) === 'true';
+        this.mostrarLateralAdministrador.next(BooleanValue);
       }
     }
   }
@@ -123,18 +122,18 @@ export class ServiceUsuarioLogadoService {
 
   atualizarEnderecoUsuarioLogadoAPI() {
     // Chave secreta usada para criptografia (a mesma chave que você usou para criptografar)
-    const secretKeyidUsuario = 'idUsuario';
+    const ef88b713413e01ff4fc0a3ccb4037c9e5e0f864915876375ef66eef5801e1bee = '3a5fcd67e16707188a6dd213303761fd530fed07434b8641044460fd9fdde581';
 
     // Valor criptografado recuperado do sessionStorage
-    const encryptedIdUsuario = sessionStorage.getItem('u');
+    const e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01 = sessionStorage.getItem('u');
 
     // Verifique se o valor criptografado existe e, em seguida, faça a descriptografia
-    if (encryptedIdUsuario) {
-      const decryptedIdUsuario = AES.decrypt(encryptedIdUsuario, secretKeyidUsuario);
+    if (e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01) {
+      const ef8e3dae5e45b8aeb8cda97ad3e012d9fa6115f03fa5c527ede47a83a7e73b68 = AES.decrypt(e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01, ef88b713413e01ff4fc0a3ccb4037c9e5e0f864915876375ef66eef5801e1bee);
 
       // Verifique se a descriptografia foi bem-sucedida
-      if (decryptedIdUsuario.sigBytes > 0) {
-        const idUsuario = parseInt(decryptedIdUsuario.toString(CryptoJS.enc.Utf8), 10); // Converta para número
+      if (ef8e3dae5e45b8aeb8cda97ad3e012d9fa6115f03fa5c527ede47a83a7e73b68.sigBytes > 0) {
+        const idUsuario = parseInt(ef8e3dae5e45b8aeb8cda97ad3e012d9fa6115f03fa5c527ede47a83a7e73b68.toString(CryptoJS.enc.Utf8), 10); // Converta para número
 
         // Verifique se idUsuario não é um NaN (valor inválido)
         if (!isNaN(idUsuario)) {
@@ -177,18 +176,18 @@ export class ServiceUsuarioLogadoService {
 
   atualizarTelefonesUsuarioLogadoAPI() {
     // Chave secreta usada para criptografia (a mesma chave que você usou para criptografar)
-    const secretKeyidUsuario = 'idUsuario';
+    const ef88b713413e01ff4fc0a3ccb4037c9e5e0f864915876375ef66eef5801e1bee = '3a5fcd67e16707188a6dd213303761fd530fed07434b8641044460fd9fdde581';
 
     // Valor criptografado recuperado do sessionStorage
-    const encryptedIdUsuario = sessionStorage.getItem('u');
+    const e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01 = sessionStorage.getItem('u');
 
     // Verifique se o valor criptografado existe e, em seguida, faça a descriptografia
-    if (encryptedIdUsuario) {
-      const decryptedIdUsuario = AES.decrypt(encryptedIdUsuario, secretKeyidUsuario);
+    if (e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01) {
+      const ef8e3dae5e45b8aeb8cda97ad3e012d9fa6115f03fa5c527ede47a83a7e73b68 = AES.decrypt(e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01, ef88b713413e01ff4fc0a3ccb4037c9e5e0f864915876375ef66eef5801e1bee);
 
       // Verifique se a descriptografia foi bem-sucedida
-      if (decryptedIdUsuario.sigBytes > 0) {
-        const idUsuario = parseInt(decryptedIdUsuario.toString(CryptoJS.enc.Utf8), 10); // Converta para número
+      if (ef8e3dae5e45b8aeb8cda97ad3e012d9fa6115f03fa5c527ede47a83a7e73b68.sigBytes > 0) {
+        const idUsuario = parseInt(ef8e3dae5e45b8aeb8cda97ad3e012d9fa6115f03fa5c527ede47a83a7e73b68.toString(CryptoJS.enc.Utf8), 10); // Converta para número
 
         // Verifique se idUsuario não é um NaN (valor inválido)
         if (!isNaN(idUsuario)) {
@@ -226,11 +225,11 @@ export class ServiceUsuarioLogadoService {
 
   // Método para atualizar e armazenar o valor no Local Storage
   setMostrarLateralUsuario(value: boolean): void {
-    const valueToEncrypt = value; // Substitua pelo valor booleano que você deseja armazenar
-    const secretKeyLateral = 'valorLateral';
-    const encryptedValue = AES.encrypt(valueToEncrypt.toString(), secretKeyLateral).toString();
+    const f66ff88644488ab96512a5d46504b7092a6772bb6cefc25a33155d99e5d7bf9c = value; // Substitua pelo valor booleano que você deseja armazenar
+    const bca28149008cc4d67ff50cc56428acf41769c98ad543b93c4644fcc7c7c713e7 = '915004b899b1c54c1ebb0ac65e5bf4973e671c725114c7b56c17b313cdca2402';
+    const b3dc20a9c71655e6aacd4eca882ee40db9840b7ee63449ec3d4c489d90f97acd = AES.encrypt(f66ff88644488ab96512a5d46504b7092a6772bb6cefc25a33155d99e5d7bf9c.toString(), bca28149008cc4d67ff50cc56428acf41769c98ad543b93c4644fcc7c7c713e7).toString();
     this.mostrarLateralUsuario.next(value);
-    sessionStorage.setItem('lu', encryptedValue); // 'lu' é a chave para o Local Storage
+    sessionStorage.setItem('lu', b3dc20a9c71655e6aacd4eca882ee40db9840b7ee63449ec3d4c489d90f97acd); // 'lu' é a chave para o Local Storage
   }
 
   // Método para obter o valor como um observable
@@ -241,11 +240,11 @@ export class ServiceUsuarioLogadoService {
   // ====================================================================================== //
 
   setMostrarLateralAdministrador(value: boolean): void {
-    const valueToEncrypt = value; // Substitua pelo valor booleano que você deseja armazenar
-    const secretKeyLateral = 'valorLateral';
-    const encryptedValue = AES.encrypt(valueToEncrypt.toString(), secretKeyLateral).toString();
+    const df86151330606924f008e64fe2f30777205edce46eb688fed337a2c333410a92 = value; // Substitua pelo valor booleano que você deseja armazenar
+    const f0b0b743645e63793355e744ad8e422f24d502395f126ba420be48f4b5d28b35 = '89ba4b199e1c5afb70d1444d5338e3d773b3a8d4a52d731f2cf39f4f043d1c6a';
+    const e8c582580f5986fcb9aa66d0ef3d37c959706c6f0774b9888aee8b79989fc975 = AES.encrypt(df86151330606924f008e64fe2f30777205edce46eb688fed337a2c333410a92.toString(), f0b0b743645e63793355e744ad8e422f24d502395f126ba420be48f4b5d28b35).toString();
     this.mostrarLateralAdministrador.next(value);
-    sessionStorage.setItem('la', encryptedValue); // 'la' é a chave para o Local Storage
+    sessionStorage.setItem('la', e8c582580f5986fcb9aa66d0ef3d37c959706c6f0774b9888aee8b79989fc975); // 'la' é a chave para o Local Storage
   }
 
   // Método para obter o valor como um observable

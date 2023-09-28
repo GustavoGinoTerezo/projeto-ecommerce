@@ -38,9 +38,11 @@ export class LoginComponent {
     this.loginService.logar(dataLogin).subscribe(response => {
 
       try {
-        const secretKeyidUsuario = 'idUsuario';
-        const secretKeytpUsuario = 'tpUsuario';
-        const secretKeyaccessToken = 'accessToken';
+        const ef88b713413e01ff4fc0a3ccb4037c9e5e0f864915876375ef66eef5801e1bee = '3a5fcd67e16707188a6dd213303761fd530fed07434b8641044460fd9fdde581';
+
+        const a4e21fcb21ced0f0bf2b03794e2dd121ad1d6e780749f413985b40b416e34dd1 = 'c6cac15e687c642f42ac6259a8a9fbb12fb6f33b8c72c1491c20d3f539ba3992';
+
+        const b902d003e9c8fd435794396aa9dd3a985d4ffc3d3147338dc9b9297e78ab8f31 = 'c9a8113cc37af17ec4e32a9c77ac9afffb417a3af2a1a88154f0fd71a553fd51';
 
         // Valores a serem criptografados
         const loginId = response.LoginId.toString();
@@ -50,14 +52,18 @@ export class LoginComponent {
         // Certifique-se de que os valores não estão vazios antes de criptografar
         if (loginId && tpUsuario && accessToken) {
           // Criptografar os valores
-          const encryptedLoginId = AES.encrypt(loginId, secretKeyidUsuario).toString();
-          const encryptedTpUsuario = AES.encrypt(tpUsuario, secretKeytpUsuario).toString();
-          const encryptedAccessToken = AES.encrypt(accessToken, secretKeyaccessToken).toString();
+          const e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01 = AES.encrypt(loginId, ef88b713413e01ff4fc0a3ccb4037c9e5e0f864915876375ef66eef5801e1bee).toString();
+
+          const bdc3dbdf44be45645eab34ef107f5d585a25e40288a9cc83edc0fdf8330b8601 = AES.encrypt(tpUsuario, a4e21fcb21ced0f0bf2b03794e2dd121ad1d6e780749f413985b40b416e34dd1).toString();
+
+          const d34c262a8352a8af80188c4b5415df1319ceddd602a0147cd3077d0ca7e6dc35 = AES.encrypt(accessToken, b902d003e9c8fd435794396aa9dd3a985d4ffc3d3147338dc9b9297e78ab8f31).toString();
 
           // Armazenar os valores criptografados no sessionStorage
-          sessionStorage.setItem('u', encryptedLoginId);
-          sessionStorage.setItem('t', encryptedTpUsuario);
-          sessionStorage.setItem('at', encryptedAccessToken);
+          sessionStorage.setItem('u', e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01);
+
+          sessionStorage.setItem('t', bdc3dbdf44be45645eab34ef107f5d585a25e40288a9cc83edc0fdf8330b8601);
+
+          sessionStorage.setItem('at', d34c262a8352a8af80188c4b5415df1319ceddd602a0147cd3077d0ca7e6dc35);
 
           this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
           this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()

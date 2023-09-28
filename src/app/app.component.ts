@@ -13,9 +13,6 @@ import * as CryptoJS from 'crypto-js';
 export class AppComponent {
   title = 'ecommerce';
 
-  usuario: boolean = false;
-  administrador: boolean = false;
-
   mostrarLateralUsuario: boolean = false;
   mostrarLateralAdministrador: boolean = false;
 
@@ -43,19 +40,17 @@ export class AppComponent {
 // CONTROLE DE ACESSO //
 
 ativarLateral() {
-  // Chave secreta usada para criptografia (a mesma chave que você usou para criptografar)
-  const secretKeytpUsuario = 'tpUsuario';
 
-  // Valor criptografado recuperado do sessionStorage
-  const encryptedTpUsuario = sessionStorage.getItem('t');
+  const a4e21fcb21ced0f0bf2b03794e2dd121ad1d6e780749f413985b40b416e34dd1 = 'c6cac15e687c642f42ac6259a8a9fbb12fb6f33b8c72c1491c20d3f539ba3992';
 
-  // Verifique se o valor criptografado existe e, em seguida, faça a descriptografia
-  if (encryptedTpUsuario) {
-    const decryptedTpUsuario = CryptoJS.AES.decrypt(encryptedTpUsuario, secretKeytpUsuario);
+  const bdc3dbdf44be45645eab34ef107f5d585a25e40288a9cc83edc0fdf8330b8601 = sessionStorage.getItem('t');
+
+  if (bdc3dbdf44be45645eab34ef107f5d585a25e40288a9cc83edc0fdf8330b8601) {
+    const f63694ef33b2bbd387c5399a54d2e5eb062d27e2a1518d0b0cae6c65c39f805a = CryptoJS.AES.decrypt(bdc3dbdf44be45645eab34ef107f5d585a25e40288a9cc83edc0fdf8330b8601, a4e21fcb21ced0f0bf2b03794e2dd121ad1d6e780749f413985b40b416e34dd1);
 
     // Verifique se a descriptografia foi bem-sucedida
-    if (decryptedTpUsuario.sigBytes > 0) {
-      const tpUsuario = parseInt(decryptedTpUsuario.toString(CryptoJS.enc.Utf8), 10); // Converta para número
+    if (f63694ef33b2bbd387c5399a54d2e5eb062d27e2a1518d0b0cae6c65c39f805a.sigBytes > 0) {
+      const tpUsuario = parseInt(f63694ef33b2bbd387c5399a54d2e5eb062d27e2a1518d0b0cae6c65c39f805a.toString(CryptoJS.enc.Utf8), 10); // Converta para número
 
       // Verifique se this.mostrarLateraisService não é nulo
       if (this.mostrarLateraisService) {
@@ -85,12 +80,6 @@ ativarLateral() {
 
   // SESSIONSTORAGE VARIÁVEIS
 
-  // t - tpCadastro
-  // u - idUsuario
-  // c - array com os ids dos produtos para o carrinho
-  // lu - lateral user
-  // la - lateral admin
   // p - forma de pagamento
-  // at - access token
   // es - endereço selecionado
 }

@@ -40,7 +40,7 @@ export class CarrinhoDeComprasComponent {
 
   ngOnInit(): void {
 
-    const encryptedCarrinhoFromStorage = sessionStorage.getItem('c');
+    const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
 
     if(sessionStorage.getItem('at')){
       this.mostrarFreteOuEndereco = true;
@@ -50,18 +50,18 @@ export class CarrinhoDeComprasComponent {
 
     setTimeout(() => {
 
-      const secretKeyCarrinho = 'carrinho';
+      const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
 
       let carrinhoIds: number[] = [];
 
-      if (encryptedCarrinhoFromStorage) {
+      if (a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5) {
         // Descriptografe o carrinho se ele existir
-        const decryptedCarrinho = AES.decrypt(encryptedCarrinhoFromStorage, secretKeyCarrinho);
+        const a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a = AES.decrypt(a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5, a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb);
 
         // Verifique se a descriptografia foi bem-sucedida
-        if (decryptedCarrinho.sigBytes > 0) {
+        if (a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.sigBytes > 0) {
           // Converta o resultado descriptografado de volta em um array de IDs
-          carrinhoIds = JSON.parse(decryptedCarrinho.toString(CryptoJS.enc.Utf8));
+          carrinhoIds = JSON.parse(a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.toString(CryptoJS.enc.Utf8));
         }
       }
 
@@ -138,19 +138,19 @@ export class CarrinhoDeComprasComponent {
     const produtoEncontrado = this.produtos.find((produto) => produto.nome === item.nomeProduto);
     if (produtoEncontrado) {
       // Recupere o carrinho criptografado do sessionStorage
-      const encryptedCarrinhoFromStorage = sessionStorage.getItem('c');
-      const secretKeyCarrinho = 'carrinho';
+      const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
+      const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
 
       let carrinhoIds: number[] = [];
 
-      if (encryptedCarrinhoFromStorage) {
+      if (a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5) {
         // Descriptografe o carrinho se ele existir
-        const decryptedCarrinho = AES.decrypt(encryptedCarrinhoFromStorage, secretKeyCarrinho);
+        const a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a = AES.decrypt(a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5, a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb);
 
         // Verifique se a descriptografia foi bem-sucedida
-        if (decryptedCarrinho.sigBytes > 0) {
+        if (a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.sigBytes > 0) {
           // Converta o resultado descriptografado de volta em um array de IDs
-          carrinhoIds = JSON.parse(decryptedCarrinho.toString(CryptoJS.enc.Utf8));
+          carrinhoIds = JSON.parse(a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.toString(CryptoJS.enc.Utf8));
         }
       }
 
@@ -173,7 +173,7 @@ export class CarrinhoDeComprasComponent {
         }
       }
       // Atualize o sessionStorage com o novo array de IDs
-      sessionStorage.setItem('c', AES.encrypt(JSON.stringify(carrinhoIds), secretKeyCarrinho).toString());
+      sessionStorage.setItem('c', AES.encrypt(JSON.stringify(carrinhoIds), a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb).toString());
 
       // Atualize a quantidade no item do carrinho
       item.quantidade = newValue;
@@ -184,13 +184,13 @@ export class CarrinhoDeComprasComponent {
 
   navegarPagamento(){
     const enderecoSelecionado = this.enderecoSelecionado.endId;
-    const secretKeyEnderecoSelecionado = 'enderecoSelecionado';
+    const d880c83d159fd83056bf415dc345fdcbd5c642e26ca51703af13bc9db17838d2 = '9776a1b50191cae98292336600e0a7bd4263bf18b3d87c7dbb5cb3dd7f54438f';
 
     // Criptografe o valor da forma de pagamento
-    const encryptedEnderecoSelecionado = AES.encrypt(enderecoSelecionado.toString(), secretKeyEnderecoSelecionado).toString();
+    const a8b12ace84b6e44cf9290c7a8d584d0f44a4ff2079add964f67e6e999e0045d6 = AES.encrypt(enderecoSelecionado.toString(), d880c83d159fd83056bf415dc345fdcbd5c642e26ca51703af13bc9db17838d2).toString();
 
     // Armazene o valor criptografado no sessionStorage
-    sessionStorage.setItem('es', encryptedEnderecoSelecionado);
+    sessionStorage.setItem('es', a8b12ace84b6e44cf9290c7a8d584d0f44a4ff2079add964f67e6e999e0045d6);
 
     this.router.navigate(['/pagamento']);
   }
@@ -238,19 +238,19 @@ export class CarrinhoDeComprasComponent {
 
 
   removeProdutoDoSessionStorage(produtoId: number): void {
-    const encryptedCarrinhoFromStorage = sessionStorage.getItem('c');
-    const secretKeyCarrinho = 'carrinho';
+    const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
+    const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
 
     let carrinhoIds: number[] = [];
 
-    if (encryptedCarrinhoFromStorage) {
+    if (a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5) {
       // Descriptografe o carrinho se ele existir
-      const decryptedCarrinho = AES.decrypt(encryptedCarrinhoFromStorage, secretKeyCarrinho);
+      const a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a = AES.decrypt(a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5, a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb);
 
       // Verifique se a descriptografia foi bem-sucedida
-      if (decryptedCarrinho.sigBytes > 0) {
+      if (a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.sigBytes > 0) {
         // Converta o resultado descriptografado de volta em um array de IDs
-        carrinhoIds = JSON.parse(decryptedCarrinho.toString(CryptoJS.enc.Utf8));
+        carrinhoIds = JSON.parse(a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.toString(CryptoJS.enc.Utf8));
       }
     }
 
@@ -258,7 +258,7 @@ export class CarrinhoDeComprasComponent {
     carrinhoIds = carrinhoIds.filter((id) => id !== produtoId);
 
     // Atualize o sessionStorage com o novo array de IDs criptografado
-    sessionStorage.setItem('c', AES.encrypt(JSON.stringify(carrinhoIds), secretKeyCarrinho).toString());
+    sessionStorage.setItem('c', AES.encrypt(JSON.stringify(carrinhoIds), a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb).toString());
   }
 
   removerTodosOsProdutos() {

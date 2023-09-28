@@ -32,9 +32,7 @@
 
       <div class="containerEnderecoGeral" *ngIf="mostrarFreteOuEndereco">
         <div class="containerEndereco">
-          <div class="labelEndereco">
-              Selecione o endereço para entrega
-          </div>
+
           <div *ngFor="let endereco of enderecosEntrega | slice: firstEndereco: firstEndereco + rowsEndereco let i = index"  class="containerEnderecoDados">
             <div class="containerRadioButton">
               <p-radioButton
@@ -65,6 +63,9 @@
           </div>
             <p-paginator (onPageChange)="onPageChangeEnderecos($event)" [first]="firstEndereco" [rows]="rowsEndereco" [totalRecords]="totalRecordsEnderecos">
             </p-paginator>
+            <div class="labelEndereco">
+              Selecione o endereço para entrega
+          </div>
         </div>
       </div>
 
