@@ -22,7 +22,7 @@ export const navbarData: INavbarData[] = [
     label: 'Gerenciamento de Comentários',
   },
   {
-    routerLink: 'gerenciamento-de-comentarios',
+    routerLink: 'gerenciamento-de-fornecedores',
     icon: 'fa-solid fa-building',
     label: 'Gerenciamento de Fornecedores',
   },
@@ -30,11 +30,6 @@ export const navbarData: INavbarData[] = [
     routerLink: 'relatorio-de-vendas-e-controle-de-pedidos',
     icon: 'fa-solid fa-magnifying-glass-chart',
     label: 'Relatório de Vendas e Controle de Pedidos',
-  },
-  {
-    routerLink: 'entrada-de-notas-fiscais',
-    icon: 'fa-solid fa-file-invoice-dollar',
-    label: 'Entrada de Notas Fiscais',
   },
   {
     routerLink: 'personalizacao',

@@ -57,9 +57,9 @@ import { GerenciamentoDeClientesComponent } from './componentes/telas/funcoes/ad
 import { RelatoriosDeVendasEControleDePedidosComponent } from './componentes/telas/funcoes/administrador/relatorios-de-vendas-e-controle-de-pedidos/relatorios-de-vendas-e-controle-de-pedidos.component';
 import { GerenciamentoDeCategoriasEProdutosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-categorias-e-produtos/gerenciamento-de-categorias-e-produtos.component';
 import { GerenciamentoDeEstoqueComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-estoque/gerenciamento-de-estoque.component';
-import { EntradaDeNotasFiscaisComponent } from './componentes/telas/funcoes/administrador/entrada-de-notas-fiscais/entrada-de-notas-fiscais.component';
 import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrador/personalizacao/personalizacao.component';
 import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-comentarios/gerenciamento-de-comentarios/gerenciamento-de-comentarios.component';
+import { GerenciamentoDeFornecedoresComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-fornecedores/gerenciamento-de-fornecedores.component';
 
 @NgModule({
   declarations: [
@@ -84,9 +84,9 @@ import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes
     RelatoriosDeVendasEControleDePedidosComponent,
     GerenciamentoDeCategoriasEProdutosComponent,
     GerenciamentoDeEstoqueComponent,
-    EntradaDeNotasFiscaisComponent,
     PersonalizacaoComponent,
     GerenciamentoDeComentariosComponent,
+    GerenciamentoDeFornecedoresComponent,
   ],
   imports: [
     BrowserModule,

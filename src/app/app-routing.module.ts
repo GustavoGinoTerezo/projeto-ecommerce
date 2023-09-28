@@ -13,11 +13,12 @@ import { MeusDadosComponent } from './componentes/telas/funcoes/usuario/meus-dad
 import { MeusPedidosComponent } from './componentes/telas/funcoes/usuario/meus-pedidos/meus-pedidos.component';
 import { GerenciamentoDeCategoriasEProdutosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-categorias-e-produtos/gerenciamento-de-categorias-e-produtos.component';
 import { GerenciamentoDeEstoqueComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-estoque/gerenciamento-de-estoque.component';
-import { EntradaDeNotasFiscaisComponent } from './componentes/telas/funcoes/administrador/entrada-de-notas-fiscais/entrada-de-notas-fiscais.component';
 import { GerenciamentoDeClientesComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-clientes/gerenciamento-de-clientes.component';
 import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrador/personalizacao/personalizacao.component';
 import { RelatoriosDeVendasEControleDePedidosComponent } from './componentes/telas/funcoes/administrador/relatorios-de-vendas-e-controle-de-pedidos/relatorios-de-vendas-e-controle-de-pedidos.component';
 import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-comentarios/gerenciamento-de-comentarios/gerenciamento-de-comentarios.component';
+import { GerenciamentoDeFornecedoresComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-fornecedores/gerenciamento-de-fornecedores.component';
+
 
 const routes: Routes = [
   {
@@ -79,8 +80,8 @@ const routes: Routes = [
     component: GerenciamentoDeEstoqueComponent,
   },
   {
-    path: 'entrada-de-notas-fiscais',
-    component: EntradaDeNotasFiscaisComponent,
+    path: 'gerenciamento-de-fornecedores',
+    component: GerenciamentoDeFornecedoresComponent,
   },
   {
     path: 'gerenciamento-de-clientes',
