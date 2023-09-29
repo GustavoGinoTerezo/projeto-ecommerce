@@ -5,7 +5,7 @@
       <div class="containerNomeProdutoECategoria">
         <div class="divInputNome">
           <span class="p-float-label">
-            <input pInputText id="username"  />
+            <input pInputText id="username" [(ngModel)]="nomeFornecedor" />
             <label htmlFor="username">Nome do fornecedor</label>
           </span>
         </div>
@@ -60,7 +60,7 @@
                 cols="30"
                 pInputTextarea
                 [autoResize]="true"
-
+                [(ngModel)]="descricaoFornecedor"
               ></textarea>
               <label class="labelDescCompleta" for="float-input">Descrição completa do fornecedor</label>
             </span>
