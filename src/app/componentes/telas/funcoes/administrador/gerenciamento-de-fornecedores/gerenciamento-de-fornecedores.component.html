@@ -1,1 +1,156 @@
-<p>gerenciamento-de-fornecedores works!</p>
+<div class="divGeral">
+  <div>
+    <h1>Gerenciamento de fornecedores</h1>
+    <div class="containerInputs">
+      <div class="containerNomeProdutoECategoria">
+        <div class="divInputNome">
+          <span class="p-float-label">
+            <input pInputText id="username"  />
+            <label htmlFor="username">Nome do fornecedor</label>
+          </span>
+        </div>
+
+      </div>
+      <div class="containerPrecoEStatus">
+        <div class="divInputPreco">
+          <span class="p-float-label">
+            <p-inputMask mask="99.999.999/9999-99" [(ngModel)]="cnpj" id="CNPJ"></p-inputMask>
+            <label htmlFor="CPNJ">CNPJ do fornecedor</label>
+          </span>
+        </div>
+        <div class="divInputDropDown">
+          <span class="p-float-label">
+            <p-inputMask mask="(99) 99999-9999" [(ngModel)]="telefone" id="telefone"></p-inputMask>
+            <label htmlFor="telefone">Telefone do fornecedor</label>
+        </span>
+        </div>
+      </div>
+      <div class="containerNomeProdutoECategoria">
+        <div class="divInputNome">
+          <span class="p-float-label">
+            <input
+              id="emailPrincipal"
+              name="emailPrincipal"
+              #emailcadastrofornecedor="ngModel"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              type="emailPrincipal"
+              pInputText
+              [(ngModel)]="emailCadastroFornecedor"
+            />
+            <label htmlFor="Email principal">Email do fornecedor</label>
+          </span>
+          <small
+                *ngIf="
+                emailcadastrofornecedor.invalid && (emailcadastrofornecedor.dirty  || emailcadastrofornecedor.touched)
+                "
+                class="p-error"
+              >
+                Formato de email inválido
+          </small>
+        </div>
+
+      </div>
+      <div class="containerDescs">
+        <div class="containerDescricoes">
+          <div class="divInputCidade">
+            <span class="p-float-label">
+              <textarea
+                id="float-input"
+                rows="5"
+                cols="30"
+                pInputTextarea
+                [autoResize]="true"
+
+              ></textarea>
+              <label class="labelDescCompleta" for="float-input">Descrição completa do fornecedor</label>
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="containerBotoesAdicionarProdutos">
+      <div class="divInputs">
+        <p-button label="Adicionar Fornecedor"
+
+        styleClass="p-button-raised p-button-success"
+
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button label="Atualizar Fornecedor"
+
+        styleClass="p-button-raised p-button-warning"
+
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button label="Excluir Fornecedor"
+
+        styleClass="p-button-raised p-button-danger"
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button
+          label="Limpar campos"
+
+
+          styleClass="p-button-raised p-button-info"
+        ></p-button>
+      </div>
+    </div>
+    <div class="tabelaClientes">
+      <p-table
+        #dt
+
+        selectionMode="single"
+
+        [rowHover]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[5, 10, 15]"
+        [filterDelay]="0"
+      >
+        <ng-template pTemplate="caption">
+          <div class="table-header">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input
+              pInputText
+              type="text"
+
+              placeholder="Buscar Produto" />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome do fornecedor</th>
+            <th>CNPJ</th>
+            <th>Telefone</th>
+            <th>Email</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-produto>
+          <tr [pSelectableRow]="produto" >
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+
+
+  </div>
+
+  <div></div>
+
+</div>
