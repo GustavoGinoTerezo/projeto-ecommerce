@@ -264,7 +264,34 @@ export class ServiceCategoriasService {
 
   produtosEmPromocaoAPI: Produtos[] = [];
 
-  private idProduto: number | undefined;
+  produtosMocado: Produtos[] = [
+    {
+      prodId: 0,
+      nome: "Teste",
+    },
+    {
+      prodId: 1,
+      nome: "Teste1",
+    },
+    {
+      prodId: 2,
+      nome: "Teste2",
+    },
+    {
+      prodId: 3,
+      nome: "Teste3",
+    },
+    {
+      prodId: 4,
+      nome: "Teste4",
+    },
+    {
+      prodId: 5,
+      nome: "Teste5",
+    },
+  ]
+
+
 
 
   //==================================================================================================================================//
@@ -283,7 +310,7 @@ export class ServiceCategoriasService {
   //PRODUTOS
 
   getProdutos(): Observable<Categorias[]> {
-    return of (this.produtosAPI);
+    return of (this.produtosMocado);
   }
 
   getPosicaoProdutos(): Observable<PosicaoProdutos[]> {

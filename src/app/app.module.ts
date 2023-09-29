@@ -34,6 +34,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
 import { SlideMenuModule } from 'primeng/slidemenu';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 //telas
 import { LoginComponent } from './componentes/telas/login-e-criar-conta/login/login.component';
@@ -121,6 +122,7 @@ import { GerenciamentoDeFornecedoresComponent } from './componentes/telas/funcoe
     FileUploadModule,
     HttpClientModule,
     SlideMenuModule,
+    MultiSelectModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

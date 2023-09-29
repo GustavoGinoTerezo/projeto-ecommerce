@@ -37,13 +37,7 @@
 .containerEntrada{
   display: flex;
   flex-direction: column;
-  width: 49.5%;
-}
-
-.containerSaida{
-  display: flex;
-  flex-direction: column;
-  width: 49.5%;
+  width: 100%;
 }
 
 .containerDropdownInput{
@@ -52,16 +46,46 @@
   width: 100%;
 }
 
+.containerGeralInputs{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.containerInputs{
+  display: flex;
+  width: 25%;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.containerExterno{
+  width: 100%;
+}
+
+.containerInterno{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputQuantidade{
+  width: 98%;
+
+}
+
 .containerDropdown{
-  width: 49.5%;
+  width: 49.7%;
 }
 
 .containerInput{
   display: flex;
-  width: 49.5%;
+  width: 49.7%;
 }
 
-:host ::ng-deep .p-dropdown{
+:host ::ng-deep .p-multiselect{
   width: 100%;
 }
 
@@ -69,11 +93,8 @@
   width: 100%;
 }
 
-.containerFileUpload{
-  width: 100%;
-}
-
 .containerBotoes{
+  margin-bottom: 15px;
   width: 100%;
 }
 
@@ -86,9 +107,10 @@
 }
 
 .h2{
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .margem{
-  margin-bottom: 15px;
+  padding: 13px 0;
 }
+

@@ -29,7 +29,8 @@ export class GerenciamentoDeEstoqueComponent {
   categorias: Categorias[] = [];
   originalQuantEntrada: Entrada[] = [];
   originalQuantSaida: Saida[] = [];
-
+  produtosSelecionados: any[] = []
+  quantidadeProdutos: number[] = []
   produtos: Produtos[] = []
 
   constructor(
@@ -122,7 +123,21 @@ export class GerenciamentoDeEstoqueComponent {
     return entrada - saida;
   }
 
+  onQuantidadeChange(produto: any, quantidade: number) {
+    console.log('id Produto', produto.prodId)
+    console.log('Nome do produto:', produto.nome);
+    console.log('Quantidade:', quantidade);
+  }
 
-
+  onEnviarEntrada() {
+    // Loop através dos produtos selecionados e suas respectivas quantidades
+    for (let i = 0; i < this.produtosSelecionados.length; i++) {
+      const produto = this.produtosSelecionados[i];
+      const quantidade = this.quantidadeProdutos[i];
+      console.log('id Produto', produto.prodId)
+      console.log('Nome do produto:', produto.nome);
+      console.log('Quantidade:', quantidade);
+    }
+  }
 
 }

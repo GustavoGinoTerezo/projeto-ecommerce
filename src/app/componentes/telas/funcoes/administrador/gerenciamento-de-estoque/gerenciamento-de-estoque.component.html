@@ -6,68 +6,33 @@
       <h2 class="h2">Entrada de produto</h2>
       <div class="containerDropdownInput margem">
         <div class="containerDropdown">
-          <p-dropdown
-          placeholder="Selecionar produto"
-          [options]="produtos"
-          optionLabel="nome"
-          [showClear]="true"
-          [filter]="true"
-          filterBy="nome"
-          ></p-dropdown>
+          <span class="p-float-label">
+            <p-multiSelect [options]="produtos" [(ngModel)]="produtosSelecionados" optionLabel="nome" ></p-multiSelect>
+            <label for="ms-cities">Selecione os produtos</label>
+        </span>
         </div>
-        <div class="containerInput">
-          <input class="inputQuant" pInputText type="text" placeholder="Quantidade de Entrada" />
+        <div class="containerInput p-float-label">
+          <input class="inputQuant" pInputText type="text" /><label htmlFor="number-input">Número da nota fiscal</label>
         </div>
       </div>
-      <div class="containerFileUpload margem">
-        <p-fileUpload chooseLabel="Adicionar" chooseIcon="fa-solid fa-plus" [showUploadButton]="false" cancelLabel="Cancelar" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" [maxFileSize]="100000000">
-          <ng-template pTemplate="toolbar">
-            <div class="labelNotaFiscal">
-              Selecionar nota fiscal da entrada do produto
-            </div>
-          </ng-template>
-          <ng-template let-file pTemplate="file">
-            <div>{{file.name}}</div>
-          </ng-template>
-        </p-fileUpload>
-      </div>
-      <div class="containerBotoes margem">
-        <p-button styleClass="p-button-success" label="Enviar Entrada"></p-button>
-      </div>
-    </div>
 
-    <div class="containerSaida ">
-      <h2 class="h2">Saída de produto</h2>
-      <div class="containerDropdownInput margem">
-        <div class="containerDropdown">
-          <p-dropdown
-          placeholder="Selecionar produto"
-          [options]="produtos"
-          optionLabel="nome"
-          [showClear]="true"
-          [filter]="true"
-          filterBy="nome"
-          ></p-dropdown>
-        </div>
-        <div class="containerInput">
-          <input class="inputQuant" pInputText type="text" placeholder="Quantidade de Saída" />
-        </div>
-      </div>
-      <div class="containerFileUpload margem">
-        <p-fileUpload chooseLabel="Adicionar" chooseIcon="fa-solid fa-plus" [showUploadButton]="false" uploadLabel="Enviar" cancelLabel="Cancelar" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" [maxFileSize]="100000000">
-          <ng-template pTemplate="toolbar">
-            <div class="labelNotaFiscal">
-              Selecionar nota fiscal da saída do produto
+
+      <div class="containerGeralInputs" *ngIf="produtosSelecionados">
+        <div class="containerInputs margem" *ngFor="let produto of produtosSelecionados; let i = index">
+            <div class="containerExterno">
+              <div class="p-float-label containerInterno">
+                <input pInputText inputId="integeronly" [(ngModel)]="quantidadeProdutos[i]" (ngModelChange)="onQuantidadeChange(produto, quantidadeProdutos[i])" class="inputQuantidade">
+                <label htmlFor="number-input">Quantidade {{ produto.nome }}</label>
+              </div>
             </div>
-          </ng-template>
-          <ng-template let-file pTemplate="file">
-            <div>{{file.name}}</div>
-          </ng-template>
-        </p-fileUpload>
+        </div>
       </div>
-      <div class="containerBotoes margem">
-        <p-button styleClass="p-button-warning" label="Enviar Saída"></p-button>
+
+
+      <div class="containerBotoes">
+        <p-button styleClass="p-button-success" label="Enviar Entrada" (click)="onEnviarEntrada()"></p-button>
       </div>
+
     </div>
 
   </div>
