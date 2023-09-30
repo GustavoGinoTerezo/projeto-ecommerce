@@ -16,6 +16,43 @@
   margin-bottom: 15px;
 }
 
+.divInputPeso{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.divInputAltura{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.divInputLargura{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.divInputComprimento{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+
 .divInputCpf{
   display: flex;
   flex-direction: column;
@@ -118,6 +155,13 @@
 }
 
 .containerPrecoEStatus{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+
+.containerDimensionamento{
   display: flex;
   width: 100%;
   justify-content: space-between;

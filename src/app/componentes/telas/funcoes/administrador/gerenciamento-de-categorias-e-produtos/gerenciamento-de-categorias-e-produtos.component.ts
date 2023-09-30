@@ -52,6 +52,11 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   categoriasAdicionarSelecionadaInput: any;
   nomeCategoriaSelecionada!: string;
 
+  pesoProduto!: number;
+  alturaProduto!: number;
+  larguraProduto!: number;
+  comprimentoProduto!: number;
+
   adicionarCategoriaDisabled: boolean = false;
   adicionarProdutoDisabled: boolean = false;
 

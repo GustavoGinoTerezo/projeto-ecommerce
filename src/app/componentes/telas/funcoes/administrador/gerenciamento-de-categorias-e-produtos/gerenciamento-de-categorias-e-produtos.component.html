@@ -107,11 +107,37 @@
         </p-dropdown>
       </div>
     </div>
+    <div class="containerDimensionamento">
+      <div class="divInputPeso">
+        <span class="p-float-label">
+          <input pInputText id="peso" [(ngModel)]="pesoProduto" (keypress)="onKeyPress($event)" />
+          <label htmlFor="peso">Peso do produto (kg)</label>
+        </span>
+      </div>
+      <div class="divInputAltura">
+        <span class="p-float-label">
+          <input pInputText id="altura" [(ngModel)]="alturaProduto" (keypress)="onKeyPress($event)"/>
+          <label htmlFor="altura">Altura do produto (cm)</label>
+        </span>
+      </div>
+      <div class="divInputLargura">
+        <span class="p-float-label">
+          <input pInputText id="largura" [(ngModel)]="larguraProduto" (keypress)="onKeyPress($event)"/>
+          <label htmlFor="largura">Largura do produto (cm)</label>
+        </span>
+      </div>
+      <div class="divInputComprimento">
+        <span class="p-float-label">
+          <input pInputText id="comprimento" [(ngModel)]="comprimentoProduto" (keypress)="onKeyPress($event)"/>
+          <label htmlFor="comprimento">Comprimento do produto (cm)</label>
+        </span>
+      </div>
+    </div>
     <div class="containerPrecoEStatus">
       <div class="divInputPreco">
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon">R$</span>
-          <input [(ngModel)]="valorProdutoFormatted" (keypress)="onKeyPress($event)" (input)="onValorProdutoInput($event)" pInputText placeholder="Preço" />
+          <input [(ngModel)]="valorProdutoFormatted" (keypress)="onKeyPress($event)" (input)="onValorProdutoInput($event)" pInputText placeholder="Preço"/>
         </div>
       </div>
       <div class="divInputDropDown">
