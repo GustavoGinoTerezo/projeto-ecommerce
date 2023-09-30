@@ -86,7 +86,7 @@
         <td colspan="8">
           <div class="p-3">
             <p-table
-            [value]="produtos"
+            [value]="produto.qtdEntrada"
             [paginator]="true"
             [rowsPerPageOptions]="[5, 10, 15]"
             [rows]="5"
@@ -111,8 +111,8 @@
               <ng-template pTemplate="body" let-entrada>
                 <tr>
                   <td p-sortField="dataEntrada">{{ entrada.dataEntrada }}</td>
-                  <td>{{ entrada.qtdEntrada }}</td>
-                  <td><p-button styleClass="p-button-warning" icon="fa-solid fa-file-arrow-down fa-xl"></p-button></td>
+                  <td>{{ entrada.quantEntrada }}</td>
+                  <td></td>
                   <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
                 </tr>
               </ng-template>
@@ -153,8 +153,8 @@
               <ng-template pTemplate="body" let-saida>
                 <tr>
                   <td  p-sortField="dataSaida">{{ saida.dataSaida }}</td>
-                  <td>{{ saida.qtdSaida }}</td>
-                  <td><p-button styleClass="p-button-warning" icon="fa-solid fa-file-arrow-down fa-xl"></p-button></td>
+                  <td>{{ saida.quantSaida }}</td>
+                  <td></td>
                   <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
                 </tr>
               </ng-template>

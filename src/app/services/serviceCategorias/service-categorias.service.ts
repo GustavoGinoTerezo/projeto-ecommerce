@@ -268,6 +268,14 @@ export class ServiceCategoriasService {
     {
       prodId: 0,
       nome: "Teste",
+      qtdEntrada: [{
+        quantEntrada: 10,
+        dataEntrada: "10/10/2023"
+      }],
+      qtdSaida: [{
+        quantSaida: 5,
+        dataSaida: "11/10/2023"
+      }],
     },
     {
       prodId: 1,
