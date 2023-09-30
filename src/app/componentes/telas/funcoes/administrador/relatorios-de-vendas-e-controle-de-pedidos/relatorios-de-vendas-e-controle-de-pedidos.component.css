@@ -17,9 +17,19 @@
 }
 
 .labelNumeroPedido{
-  margin-top: 10px;
   font-size: 24px;
   font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.containerInputNotaFiscal{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.inputNotaFiscal{
+  width: 89%;
 }
 
 .dadosGerais{

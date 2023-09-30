@@ -41,9 +41,11 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
     { title: 'Preço unitário', dataKey: 'precoUnitario' },
     { title: 'Total do produto', dataKey: 'totalProduto' },
   ];
-  visible: boolean = false;
+  visibleNotaFiscal: boolean = false;
+  visibleTransportadora: boolean = false;
   selectedProductImages: any[] = [];
   numeroDoPedido!: string;
+  numeroNotaFiscal!: number
 
   constructor(
     private pedidoService: ServicePedidoService,
@@ -278,15 +280,19 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
         head: [['']],
         body: [['']],
       });
-
     }
 
     doc.save('pedidos.pdf');
   }
 
-  showDialog(numeroPedido: string) {
+  showDialogNotaFiscal(numeroPedido: string) {
     this.numeroDoPedido = numeroPedido;
-    this.visible = true;
+    this.visibleNotaFiscal = true;
+  }
+
+  showDialogTransportadora(numeroPedido: string) {
+    this.numeroDoPedido = numeroPedido;
+    this.visibleTransportadora = true;
   }
 
   getUsuarioPorId(idUsuario: number) {

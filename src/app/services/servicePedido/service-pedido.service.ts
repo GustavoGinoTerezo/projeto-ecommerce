@@ -159,7 +159,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 0,
+      numeroPedido: 3,
       idUsuario: 0,
       status: "Pedido solicitado",
       dataPedido: "25/08/2023",
@@ -197,7 +197,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 1,
+      numeroPedido: 4,
       idUsuario: 1,
       status: "Pedido solicitado",
       dataPedido: "25/11/2023",
@@ -220,7 +220,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 2,
+      numeroPedido: 5,
       idUsuario: 2,
       status: "Pedido solicitado",
       dataPedido: "25/10/2023",
@@ -243,7 +243,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 0,
+      numeroPedido: 6,
       idUsuario: 0,
       status: "Pedido solicitado",
       dataPedido: "25/08/2023",
@@ -281,7 +281,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 1,
+      numeroPedido: 7,
       idUsuario: 1,
       status: "Pedido solicitado",
       dataPedido: "25/11/2023",
@@ -304,7 +304,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 2,
+      numeroPedido: 8,
       idUsuario: 2,
       status: "Pedido solicitado",
       dataPedido: "25/10/2023",
@@ -327,7 +327,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 0,
+      numeroPedido: 9,
       idUsuario: 0,
       status: "Pedido solicitado",
       dataPedido: "25/08/2023",
@@ -365,7 +365,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 1,
+      numeroPedido: 10,
       idUsuario: 1,
       status: "Pedido solicitado",
       dataPedido: "25/11/2023",
@@ -388,7 +388,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 2,
+      numeroPedido: 11,
       idUsuario: 2,
       status: "Pedido solicitado",
       dataPedido: "25/10/2023",
@@ -411,7 +411,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 0,
+      numeroPedido: 12,
       idUsuario: 0,
       status: "Pedido solicitado",
       dataPedido: "25/08/2023",
@@ -449,7 +449,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 1,
+      numeroPedido: 13,
       idUsuario: 1,
       status: "Pedido solicitado",
       dataPedido: "25/11/2023",
@@ -472,7 +472,7 @@ export class ServicePedidoService {
 
     },
     {
-      numeroPedido: 2,
+      numeroPedido: 14,
       idUsuario: 2,
       status: "Pedido em andamento",
       dataPedido: "25/10/2023",

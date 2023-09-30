@@ -42,7 +42,8 @@
         <th>Forma de pagamento</th>
         <th pSortableColumn="status">Status do pedido <p-sortIcon field="status"></p-sortIcon></th>
         <th>PDF do pedido</th>
-        <th>Inserir nota fiscal</th>
+        <th>Inserir número da nota fiscal</th>
+        <th>Solicitar transportadora</th>
         <th>Cancelar pedido</th>
       </tr>
     </ng-template>
@@ -64,8 +65,9 @@
           <button type="button" pButton pRipple (click)="exportPdfUnique(pedido)" class="p-button-warning mr-2" label="PDF" icon="pi pi-file-pdf"></button>
         </td>
         <td>
-          <p-button (click)="showDialog(pedido.numeroPedido)" icon="fa-solid fa-plus" ></p-button>
+          <p-button label="Adicionar" (click)="showDialogNotaFiscal(pedido.numeroPedido)" icon="fa-solid fa-plus" ></p-button>
         </td>
+        <td><p-button label="Solicitar" (click)="showDialogTransportadora(pedido.numeroPedido)" styleClass="p-button-success" icon="fa-solid fa-plus" ></p-button></td>
         <td>
           <p-button styleClass="p-button-danger" icon="fa-solid fa-xmark" ></p-button>
         </td>
@@ -163,7 +165,6 @@
         </td>
       </tr>
     </ng-template>
-
   </p-table>
 
 </div>
@@ -171,8 +172,8 @@
 
 
 <p-dialog
-  header="Inserir nota fiscal"
-  [(visible)]="visible"
+  header="Inserir número da nota fiscal"
+  [(visible)]="visibleNotaFiscal"
   [style]="{width: '550px'}"
   [draggable]="false"
   [resizable]="false"
@@ -180,19 +181,34 @@
   [closeOnEscape]="true"
   [focusOnShow]="true"
   >
-  <p>
-    <p-fileUpload chooseLabel="Adicionar" chooseIcon="fa-solid fa-plus" uploadLabel="Enviar" cancelLabel="Cancelar" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" [maxFileSize]="100000000">
-      <ng-template pTemplate="toolbar">
-        <div class="labelNotaFiscal">
-          Selecionar nota fiscal do pedido
-          <div class="labelNumeroPedido">
-            {{ numeroDoPedido }}
-          </div>
-        </div>
-      </ng-template>
-      <ng-template let-file pTemplate="file">
-        <div>{{file.name}}</div>
-      </ng-template>
-    </p-fileUpload>
-  </p>
+  <div>
+    <div class="labelNumeroPedido">
+      Pedido: {{numeroDoPedido}}
+    </div>
+    <div class="containerInputNotaFiscal">
+      <input pInputText
+        id="numeroNotaFiscal"
+        [(ngModel)]="numeroNotaFiscal"
+        placeholder="Nº da nota fiscal"
+        class="inputNotaFiscal"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+        <p-button styleClass="p-button-success" icon="fa-solid fa-check"></p-button>
+    </div>
+  </div>
+</p-dialog>
+
+<p-dialog
+  header="Solicitar transportadora"
+  [(visible)]="visibleTransportadora"
+  [style]="{width: '550px'}"
+  [draggable]="false"
+  [resizable]="false"
+  [focusTrap]="true"
+  [closeOnEscape]="true"
+  [focusOnShow]="true"
+  >
+
+  <div></div>
+  <div></div>
+
 </p-dialog>

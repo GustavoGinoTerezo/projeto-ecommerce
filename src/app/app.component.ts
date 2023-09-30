@@ -13,8 +13,8 @@ import * as CryptoJS from 'crypto-js';
 export class AppComponent {
   title = 'ecommerce';
 
-  mostrarLateralUsuario: boolean = true;
-  mostrarLateralAdministrador: boolean = true;
+  mostrarLateralUsuario: boolean = false;
+  mostrarLateralAdministrador: boolean = false;
 
   constructor(
     private router: Router,
@@ -25,7 +25,7 @@ export class AppComponent {
 
   ngOnInit(){
 
-    // this.categoriasService.atualizarCategoriasDaAPI();
+    this.categoriasService.atualizarCategoriasDaAPI();
 
     this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
 

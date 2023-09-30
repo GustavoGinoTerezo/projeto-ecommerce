@@ -318,7 +318,7 @@ export class ServiceCategoriasService {
   //PRODUTOS
 
   getProdutos(): Observable<Categorias[]> {
-    return of (this.produtosMocado);
+    return of (this.produtosAPI);
   }
 
   getPosicaoProdutos(): Observable<PosicaoProdutos[]> {
