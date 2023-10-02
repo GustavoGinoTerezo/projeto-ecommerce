@@ -25,8 +25,6 @@ export class AppComponent {
 
   ngOnInit(){
 
-    this.categoriasService.atualizarCategoriasDaAPI();
-
     this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
 
     this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()

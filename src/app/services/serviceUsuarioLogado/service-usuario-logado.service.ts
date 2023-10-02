@@ -147,8 +147,8 @@ export class ServiceUsuarioLogadoService {
               // Filtra endereços com tpCadastro igual a "2" para o array enderecoEntregaUsuarioLogadoAPI
               this.enderecoEntregaUsuarioLogadoAPI = enderecosAPI.filter((endereco) => endereco.LoginId === idUsuario && endereco.tpcadastro === "2");
 
-              console.log('Endereços do usuário logado (Cobrança):', this.enderecoCobrancaUsuarioLogadoAPI);
-              console.log('Endereços do usuário logado (Entrega):', this.enderecoEntregaUsuarioLogadoAPI);
+              // console.log('Endereços do usuário logado (Cobrança):', this.enderecoCobrancaUsuarioLogadoAPI);
+              // console.log('Endereços do usuário logado (Entrega):', this.enderecoEntregaUsuarioLogadoAPI);
             },
             (error) => {
               console.log("Erro ao buscar os endereços gerais", error);
@@ -198,7 +198,7 @@ export class ServiceUsuarioLogadoService {
               // Filtra telefones com o mesmo idUsuario
               this.telefonesUsuarioLogadoAPI = telefonesAPI.filter((telefone) => telefone.LoginId === idUsuario);
 
-              console.log('Telefones do usuário logado:', this.telefonesUsuarioLogadoAPI);
+              // console.log('Telefones do usuário logado:', this.telefonesUsuarioLogadoAPI);
             },
             (error) => {
               console.log("Erro ao buscar os telefones gerais", error);

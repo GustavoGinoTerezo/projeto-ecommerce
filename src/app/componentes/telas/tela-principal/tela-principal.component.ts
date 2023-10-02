@@ -161,7 +161,19 @@ export class TelaPrincipalComponent {
   ){
   }
 
-  ngOnInit(){
+  async ngOnInit(){
+
+    try {
+      await this.categoriasService.atualizarCategoriasDaAPI();
+      this.categoriasService.getCategorias().subscribe((categoriasAPI) => {
+        this.categorias = categoriasAPI;
+        console.log("7");
+        this.getProdutos();
+      });
+    } catch (error) {
+      console.error('Erro ao buscar categorias e produtos', error);
+    }
+    
     //================================================================================================================================//
     //RELACIONADO COM AS IMAGENS
     this.anuncioService.getAnunciosMaiores().subscribe(
@@ -179,30 +191,9 @@ export class TelaPrincipalComponent {
     });
 
 
+
     //================================================================================================================================//
     //RELACIONADO COM OS PRODUTOS
-
-    setTimeout(() => {
-      this.categoriasService.getCategorias().subscribe(
-        (categoriasAPI) => {
-          this.categorias = categoriasAPI;
-          console.log("4")
-        }
-      );
-
-      this.categoriasService.atualizarProdutosDestaque()
-      .pipe(
-        switchMap(() => this.categoriasService.atualizarProdutosMaisVendidos()),
-        switchMap(() => this.categoriasService.atualizarProdutosEmPromocao())
-      )
-      .subscribe(() => {
-        // Agora, os métodos em seu serviço foram concluídos e você pode chamar
-        // os métodos que fazem as chamadas HTTP para obter os dados desejados.
-        this.getProdutos();
-      });
-
-    }, 2500);
-
   }
 
   getProdutos() {

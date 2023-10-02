@@ -387,65 +387,83 @@ export class ServiceCategoriasService {
 
   //==================================================================================================================================//
   // API
-  atualizarCategoriasDaAPI() {
-    this.apiCategoriaService.buscarCategorias().subscribe(
-      (categoriasAPI) => {
+  async atualizarCategoriasDaAPI() {
+    try {
+      const categoriasAPI = await this.apiCategoriaService.buscarCategorias().toPromise();
+      if (categoriasAPI) {
         this.categoriasAPI = categoriasAPI;
-        console.log("1")
+        console.log("1");
 
         // Após obter as categorias da API, chame os métodos para atualizar produtos
-        this.atualizarProdutosDaAPI();
-      },
-      (error) => {
-        console.error('Erro ao buscar categorias da API', error);
+        await this.atualizarProdutosDaAPI();
+      } else {
+        console.error('Erro ao buscar categorias da API: categoriasAPI é undefined');
       }
-    );
+    } catch (error) {
+      console.error('Erro ao buscar categorias da API', error);
+    }
   }
 
-  atualizarProdutosDaAPI() {
-    this.apiProdutos.buscarProdutos().subscribe(
-      (produtosAPI) => {
+  async atualizarProdutosDaAPI() {
+    try {
+      const produtosAPI = await this.apiProdutos.buscarProdutos().toPromise();
+      if (produtosAPI) {
         this.produtosAPI = produtosAPI;
-        console.log("2")
+        console.log("2");
 
         // Após obter os produtos da API, chame o método para atualizar a posição dos produtos
-        this.atualizarPosicaoProdutosDaAPI();
-      },
-      (error) => {
-        console.error('Erro ao buscar produtos da API', error);
+        await this.atualizarPosicaoProdutosDaAPI();
+      } else {
+        console.error('Erro ao buscar produtos da API: produtosAPI é undefined');
       }
-    );
+    } catch (error) {
+      console.error('Erro ao buscar produtos da API', error);
+    }
   }
 
-  atualizarPosicaoProdutosDaAPI() {
-    this.apiProdutos.buscarPosicaoProdutos().subscribe(
-      (posicaoProdutosAPI) => {
+  async atualizarPosicaoProdutosDaAPI() {
+    try {
+      const posicaoProdutosAPI = await this.apiProdutos.buscarPosicaoProdutos().toPromise();
+      if (posicaoProdutosAPI) {
         this.posicaoProdutosAPI = posicaoProdutosAPI;
-        console.log("3")
-        // Após obter a posição dos produtos da API, chame os métodos para atualizar destaques, mais vendidos e promoções
-      },
-      (error) => {
-        console.error('Erro ao buscar posição de produtos da API', error);
+        console.log("3");
+
+        await this.atualizarProdutosDestaque();
+      } else {
+        console.error('Erro ao buscar posição de produtos da API: posicaoProdutosAPI é undefined');
       }
-    );
+    } catch (error) {
+      console.error('Erro ao buscar posição de produtos da API', error);
+    }
   }
 
-  atualizarProdutosDestaque() {
+  async atualizarProdutosDestaque() {
     // Primeiro, filtre os objetos em posicaoProdutosAPI onde posProdTp é igual a "1"
     const produtosEmDestaque = this.posicaoProdutosAPI
       .filter((posicao) => posicao.posProdTp === '1')
       .map((posicao) => posicao.prodId);
-
     // Em seguida, filtre os produtos em produtosAPI com base nos IDs encontrados anteriormente
     this.produtosDestaqueAPI = this.produtosAPI
       .filter((produto) => produtosEmDestaque.includes(produto.prodId));
-
-    // // console.log(this.produtosDestaqueAPI); // Adicione este console.log para verificar o conteúdo do array
-    console.log("5")
+      console.log("4")
+      await this.atualizarProdutosEmPromocao();
     return of(null);
   }
 
-  atualizarProdutosMaisVendidos() {
+  async atualizarProdutosEmPromocao() {
+    const produtosEmPromocao = this.posicaoProdutosAPI
+      .filter((posicao) => posicao.posProdTp === '3')
+      .map((posicao) => posicao.prodId);
+    // Em seguida, filtre os produtos em produtosAPI com base nos IDs encontrados anteriormente
+    this.produtosEmPromocaoAPI = this.produtosAPI
+      .filter((produto) => produtosEmPromocao.includes(produto.prodId));
+      console.log("5")
+      await this.atualizarProdutosMaisVendidos();
+    // // console.log(this.produtosEmPromocaoAPI); // Adicione este console.log para verificar o conteúdo do array
+    return of(null);
+  }
+
+  async atualizarProdutosMaisVendidos() {
     // Primeiro, filtre os objetos em posicaoProdutosAPI onde posProdTp é igual a "2"
     const produtosMaisVendidos = this.posicaoProdutosAPI
       .filter((posicao) => posicao.posProdTp === '2')
@@ -454,25 +472,14 @@ export class ServiceCategoriasService {
     // Em seguida, filtre os produtos em produtosAPI com base nos IDs encontrados anteriormente
     this.produtosMaisVendidosAPI = this.produtosAPI
       .filter((produto) => produtosMaisVendidos.includes(produto.prodId));
-
-    // // console.log(this.produtosMaisVendidosAPI); // Adicione este console.log para verificar o conteúdo do array
-    console.log("6")
+      console.log("6")
     return of(null);
   }
 
-  atualizarProdutosEmPromocao() {
-    // Primeiro, filtre os objetos em posicaoProdutosAPI onde posProdTp é igual a "3"
-    const produtosEmPromocao = this.posicaoProdutosAPI
-      .filter((posicao) => posicao.posProdTp === '3')
-      .map((posicao) => posicao.prodId);
 
-    // Em seguida, filtre os produtos em produtosAPI com base nos IDs encontrados anteriormente
-    this.produtosEmPromocaoAPI = this.produtosAPI
-      .filter((produto) => produtosEmPromocao.includes(produto.prodId));
 
-    // // console.log(this.produtosEmPromocaoAPI); // Adicione este console.log para verificar o conteúdo do array
-    console.log("7")
-    return of(null);
-  }
+
+
+
 
 }
