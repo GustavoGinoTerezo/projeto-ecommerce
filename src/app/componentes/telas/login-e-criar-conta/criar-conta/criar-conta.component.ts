@@ -17,7 +17,6 @@ export class CriarContaComponent {
   emailCadastroPrincipal!: string;
   emailCadastroSecundario!: string;
   nomeCompleto!: string;
-  cpfOuCnpj!: number;
   telefonePrincipal!: string;
   telefoneSecundario!: string;
   endereco!: string;

@@ -62,6 +62,11 @@
     align-items: center;
   }
 
+  .containerInputCep{
+    width: 100%;
+    align-items: center;
+  }
+
   /*área do lembre de mim*/
   .remember {
     display: flex;
@@ -118,6 +123,10 @@
 
   .tamanhoInputs{
     width: 49%;
+  }
+
+  .tamanhoInputsInteiro{
+    width: 100%;
   }
 }
 

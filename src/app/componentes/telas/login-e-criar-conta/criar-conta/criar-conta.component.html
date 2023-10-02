@@ -42,10 +42,7 @@
               </small>
             </div>
           </div>
-
-
         </div>
-
         <div class="emails">
           <div class="email field p-fluid mt-4 tamanhoInputsEmail">
             <div class="inputs">
@@ -79,7 +76,7 @@
         </div>
 
         <div class="infoPessoal">
-          <div class="email field p-fluid mt-4 tamanhoInputs">
+          <div class="email field p-fluid mt-4 tamanhoInputsInteiro">
             <div class="inputs">
               <span class="p-float-label">
                 <input
@@ -90,15 +87,6 @@
                   [(ngModel)]="nomeCompleto"
                 />
                 <label htmlFor="Nome completo">Nome completo</label>
-              </span>
-            </div>
-          </div>
-
-          <div class="email field p-fluid mt-4 tamanhoInputs">
-            <div class="inputs">
-              <span class="p-float-label">
-                <input pInputText type="text" [(ngModel)]="cpfOuCnpj" (keypress)="onKeyPress($event)" />
-                <label htmlFor="email">CPF ou CNPJ</label>
               </span>
             </div>
           </div>
@@ -121,6 +109,46 @@
           <div class="email field p-fluid mt-4 tamanhoInputs">
             <div class="inputs">
               <div class="containerInputEmailSec">
+                <div class="checkbox">
+                  <p-checkbox [(ngModel)]="checkboxTelefone" [binary]="true" inputId="binary"></p-checkbox>
+                </div>
+                <div class="inputEmailSec">
+                  <span class="p-float-label">
+                    <p-inputMask
+                      [disabled]="!checkboxTelefone"
+                      mask="(99) 99999-9999"
+                      [(ngModel)]="telefoneSecundario"
+                      id="telefoneSecundario"
+                      #telefonesecundario="ngModel"
+                      ></p-inputMask>
+                    <label htmlFor="Telefone alternativo">Telefone alternativo</label>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="email field p-fluid mt-4 tamanhoInputsInteiro">
+          <div class="inputs">
+            <span class="p-float-label">
+              <input
+                id="endereco"
+                name="endereco"
+                type="endereco"
+                pInputText
+                [(ngModel)]="endereco"
+              />
+              <label htmlFor="Endereço">Endereço</label>
+            </span>
+          </div>
+        </div>
+        <div class="endereco">
+          <div class="email field p-fluid mt-4 tamanhoInputs">
+            <div class="inputs">
+              <div class="containerInputCep">
                 <span class="p-float-label">
                   <p-inputMask mask="99999-999" [(ngModel)]="cep"></p-inputMask>
                   <label htmlFor="username">CEP</label>
@@ -128,29 +156,6 @@
               </div>
             </div>
           </div>
-
-        </div>
-
-        <div class="telefone">
-
-        </div>
-
-        <div class="endereco">
-          <div class="email field p-fluid mt-4 tamanhoInputs">
-            <div class="inputs">
-              <span class="p-float-label">
-                <input
-                  id="endereco"
-                  name="endereco"
-                  type="endereco"
-                  pInputText
-                  [(ngModel)]="endereco"
-                />
-                <label htmlFor="Endereço">Endereço</label>
-              </span>
-            </div>
-          </div>
-
           <div class="email field p-fluid mt-4 tamanhoInputs">
             <div class="inputs">
               <span class="p-float-label">
@@ -166,7 +171,6 @@
             </div>
           </div>
         </div>
-
         <div class="endereco">
           <div class="email field p-fluid mt-4 tamanhoInputs">
             <div class="inputs">
@@ -182,12 +186,10 @@
               </span>
             </div>
           </div>
-
           <div class="tamanhoInputs">
             <p-dropdown [options]="estado"  [showClear]="true" [(ngModel)]="estadoSelecionado" placeholder="Estado" optionLabel="nome"></p-dropdown>
           </div>
         </div>
-
         <div class="senhas">
           <div class="senha field p-fluid mt-4 tamanhoInputs">
             <div class="inputs">
@@ -239,10 +241,7 @@
             </div>
           </div>
         </div>
-
-
       </div>
-
       <div class="terms">
         <div class="checkbox-wrapper">
           <p-checkbox
@@ -251,7 +250,6 @@
             inputId="binary"
           ></p-checkbox>
         </div>
-
         <div class="desc">
           Aceito os
           <a class="a-login" href="opcoesCadastro" routerLink="/"
@@ -260,14 +258,12 @@
         </div>
         <!-- COLOCAR A ROTA PARA OS TERMOS NA ROUTERLINK ACIMA -->
       </div>
-
       <div class="divInputs">
         <p-button
           label="Cadastrar"
           [disabled]="
           !emailCadastroPrincipal ||
           !nomeCompleto ||
-          !cpfOuCnpj ||
           !telefonePrincipal ||
           !endereco ||
           !bairro ||
