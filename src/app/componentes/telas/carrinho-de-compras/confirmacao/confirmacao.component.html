@@ -45,7 +45,7 @@
             </div>
           </div>
 
-          <div class="containerEnderecoEntrega" *ngIf="usuario && usuario.length > 0">
+          <div class="containerEnderecoEntrega" *ngIf="enderecoEntregaSelecionado">
 
             <h2 class="h2">Endereço de entrega</h2>
 
@@ -55,23 +55,23 @@
             <hr class="hr">
 
             <div class="divNomeRua">
-              {{ usuario[0].rua }}
+              {{ enderecoEntregaSelecionado[0].endereco }}
             </div>
             <div class="divNumeroResidencia">
               <div class="labelNumeroResidencia">Número:</div>
-              <div class="dadoNumeroResidencia">{{ usuario[0].numeroResidencia }}</div>
+              <div class="dadoNumeroResidencia">{{ enderecoEntregaSelecionado[0].numeroResidencia }}</div>
             </div>
             <div class="divCidade">
               <div class="labelCidade">Cidade:</div>
-              <div class="dadoCidade">{{ usuario[0].cidade }}</div>
+              <div class="dadoCidade">{{ enderecoEntregaSelecionado[0].cidade }}</div>
             </div>
             <div class="divBairro">
               <div class="labelBairro">Bairro:</div>
-              <div class="dadoBairro">{{ usuario[0].bairro }}</div>
+              <div class="dadoBairro">{{ enderecoEntregaSelecionado[0].bairro }}</div>
             </div>
             <div class="divCEP">
               <div class="labelCep">CEP:</div>
-              <div class="dadoCEP">{{ usuario[0].cep }}</div>
+              <div class="dadoCEP">{{ enderecoEntregaSelecionado[0].cep }}</div>
             </div>
           </div>
         </div>
@@ -135,7 +135,7 @@
             Forma de pagamento:
           </div>
           <div *ngIf="formaPagamentoSelecionada" class="formaPagamento">
-            {{ formaPagamentoSelecionada.tipoPagamento }}
+            {{ formaPagamentoSelecionada[0].tipoPagamento }}
           </div>
           <br>
           <div class="dadoValorTotal">

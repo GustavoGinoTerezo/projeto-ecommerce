@@ -186,7 +186,7 @@ export class CarrinhoDeComprasComponent {
     const enderecoSelecionado = this.enderecoSelecionado.endId;
     const d880c83d159fd83056bf415dc345fdcbd5c642e26ca51703af13bc9db17838d2 = '9776a1b50191cae98292336600e0a7bd4263bf18b3d87c7dbb5cb3dd7f54438f';
 
-    // Criptografe o valor da forma de pagamento
+    // Criptografe o endereço selecionado
     const a8b12ace84b6e44cf9290c7a8d584d0f44a4ff2079add964f67e6e999e0045d6 = AES.encrypt(enderecoSelecionado.toString(), d880c83d159fd83056bf415dc345fdcbd5c642e26ca51703af13bc9db17838d2).toString();
 
     // Armazene o valor criptografado no sessionStorage

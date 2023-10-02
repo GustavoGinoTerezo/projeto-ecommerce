@@ -56,6 +56,9 @@ export class MeusDadosComponent {
       (enderecosEntregaAPI) => {
         this.enderecosEntrega = enderecosEntregaAPI;
         console.log(this.enderecosEntrega)
+
+
+        
       }
     );
 
