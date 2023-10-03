@@ -60,11 +60,11 @@
             <label for="binary">Lembre de mim</label>
           </div>
 
-          <a
-            class="a-login"
-            href="redefinirSenha"
-            >Esqueceu sua senha ?</a
-          >
+          <p-button
+            label="Esqueceu sua senha ?"
+            styleClass="p-button-link"
+            (onClick)="trocarSenha()"
+        ></p-button>
         </div>
 
         <p-button
@@ -79,15 +79,68 @@
         <hr class="horizontalRow">
       </div>
 
-      <p>
-        Não possui conta ?
-        <a class="a-login" href="opcoesCadastro" routerLink="/criar-conta"
-          >Criar uma conta</a
-        >
-      </p>
+
+        <div class="containerCriarConta">
+          <div class="labelNaoPossuiConta">
+            Não possui conta ?
+          </div>
+          <p-button
+              label="Criar conta"
+              styleClass="p-button-link"
+              (onClick)="navigateCriarConta()"
+          ></p-button>
+        </div>
 
     </div>
 
   </div>
 
 </div>
+
+<p-dialog
+  header="Digite seu email para redefinir a senha"
+  [(visible)]="visibleTrocarSenha"
+  [style]="{width: '550px'}"
+  [draggable]="false"
+  [resizable]="false"
+  [focusTrap]="true"
+  [closeOnEscape]="true"
+  [focusOnShow]="true"
+  >
+  <div class="containerInputRedefinirSenha">
+    <input pInputText
+      id="emailRedefinirSenha"
+      [(ngModel)]="emailRedefinicao"
+      placeholder="Insira seu email"
+      class="inputRedefinirSenha"
+      oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+      <p-button label="Enviar" (onClick)="redefinirSenha()"></p-button>
+  </div>
+</p-dialog>
+
+<p-dialog
+  header="Digite sua nova senha e a chave enviada ao seu email"
+  [(visible)]="visibleRedefinirSenha"
+  [style]="{width: '550px'}"
+  [draggable]="false"
+  [resizable]="false"
+  [focusTrap]="true"
+  [closeOnEscape]="true"
+  [focusOnShow]="true"
+  >
+  <div class="containerInputNovaSenha">
+    <input pInputText
+      id="novaSenha"
+      [(ngModel)]="novaSenha"
+      placeholder="Insira sua senha nova"
+      class="inputNovaSenha"
+      >
+    <input pInputText
+      id="accessToken"
+      [(ngModel)]="token"
+      placeholder="Insira a chave enviada ao seu email"
+      class="inputAccessToken"
+      >
+      <p-button label="Redefinir senha"></p-button>
+  </div>
+</p-dialog>

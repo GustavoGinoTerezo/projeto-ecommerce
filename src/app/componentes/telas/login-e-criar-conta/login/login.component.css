@@ -22,6 +22,20 @@
   margin-bottom: 1%;
 }
 
+.containerCriarConta{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.labelNaoPossuiConta{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+  margin-right: 10px;
+}
+
 .divLogin{
   display: flex;
   width: 100%;
@@ -94,3 +108,33 @@
   border: 1px solid rgba(0, 0, 0, 0.184);
 }
 
+.containerInputRedefinirSenha{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.containerInputNovaSenha{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.inputRedefinirSenha{
+  width: 80%;
+}
+
+.inputNovaSenha{
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.inputAccessToken{
+  width: 100%;
+  margin-bottom: 10px;
+}

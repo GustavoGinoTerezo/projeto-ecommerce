@@ -282,14 +282,18 @@
       </div>
 
 
-        <div class="divHaveAccount">
-          <p class="desc">
-            Já possui uma conta ?
-            <a class="a-login" href="opcoesCadastro" routerLink="/login"
-              >Login now</a
-            >
-          </p>
+      <div class="containerJaPossuiConta">
+        <div class="labelJaPossuiConta">
+          Já possui conta ?
         </div>
+        <p-button
+            label="Login now"
+            styleClass="p-button-link"
+            (onClick)="navigateLogin()"
+        ></p-button>
+      </div>
+
+
 
     </div>
 

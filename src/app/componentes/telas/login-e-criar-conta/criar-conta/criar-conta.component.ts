@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/serviceAPI-Registrar/service-api-registrar.service';
 
 interface Estado {
@@ -26,13 +27,10 @@ export class CriarContaComponent {
   passwordCadastroRepetir!: string;
   checked: boolean = false;
   cep!: number | null
-
   checkbox: boolean = false
   checkboxTelefone: boolean = false
-
   estado!: Estado[];
   estadoSelecionado!: Estado;
-
   emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   ngOnInit() {
@@ -70,6 +68,7 @@ export class CriarContaComponent {
 
   constructor(
     private registrar: ServiceApiRegistrarService,
+    private router: Router,
   ){}
 
   cadastrar(){
@@ -210,6 +209,8 @@ export class CriarContaComponent {
     return regex.test(email);
   }
 
-
+  navigateLogin(){
+    this.router.navigate(['/login']);
+  }
 
 }

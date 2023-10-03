@@ -15,8 +15,13 @@ import { AES } from 'crypto-ts';
 export class LoginComponent {
 
   emailLogin!: string;
+  emailRedefinicao!: string;
   passwordLogin!: string;
   checked: boolean = false;
+  visibleTrocarSenha: boolean = false;
+  visibleRedefinirSenha: boolean = false;
+  novaSenha!: string;
+  token!: string;
 
   constructor(
     private loginService: ServiceApiLoginService,
@@ -96,5 +101,16 @@ export class LoginComponent {
     });
   }
 
+  trocarSenha(){
+    this.visibleTrocarSenha = true;
+  }
 
+  redefinirSenha(){
+    this.visibleTrocarSenha = false;
+    this.visibleRedefinirSenha = true;
+  }
+
+  navigateCriarConta(){
+    this.router.navigate(['/criar-conta']);
+  }
 }
