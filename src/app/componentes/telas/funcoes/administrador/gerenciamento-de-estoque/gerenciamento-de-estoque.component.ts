@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import jsPDF from 'jspdf';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { Subscription } from 'rxjs';
 import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Categorias, ServiceCategoriasService, Produtos, CategoriaVazia, Entrada, Saida } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
@@ -25,6 +26,10 @@ interface UploadEvent {
 })
 export class GerenciamentoDeEstoqueComponent {
 
+  private inicializacaoConcluidaSubscription!: Subscription;
+  private categoriasSubscription!: Subscription;
+  private produtosSubscription!: Subscription;
+
   @ViewChild('dt') table!: Table;
   categorias: Categorias[] = [];
   originalQuantEntrada: Entrada[] = [];
@@ -42,28 +47,49 @@ export class GerenciamentoDeEstoqueComponent {
 
   ngOnInit(){
 
-    setTimeout(() => {
+    const start = sessionStorage.getItem('start')
 
-      this.categoriasService.getCategorias().subscribe(
-        (categoriasAPI) => {
-          this.categorias = categoriasAPI;
-        }
-      );
+    if(start){
+      this.carregarProdutos();
+    } else {
+      const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
 
-      this.categoriasService.getProdutos().subscribe(
-        (produtosAPI) => {
-          this.produtos = produtosAPI;
-        }
-      );
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarProdutos();
+        });
+      }
+    }
 
-      console.log(this.produtos)
-
-    }, 1500);
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('start');
+    });
 
     // this.originalQuantEntrada = [...this.mapProdutos[0]?.quantEntrada || []];
 
     // this.originalQuantSaida = [...this.mapProdutos[0]?.quantSaida || []];
 
+  }
+
+  ngOnDestroy() {
+
+    if (this.inicializacaoConcluidaSubscription) {
+      this.inicializacaoConcluidaSubscription.unsubscribe();
+    }
+
+    if (this.produtosSubscription) {
+      this.produtosSubscription.unsubscribe();
+    }
+
+  }
+
+  async carregarProdutos() {
+
+    this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
+      this.produtos = produtosAPI;
+    });
+
+    console.log(this.produtos)
   }
 
   filterTable(event: any) {
