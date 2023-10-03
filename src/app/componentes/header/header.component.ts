@@ -38,9 +38,7 @@ export class HeaderComponent {
   constructor(
     private categoriasService: ServiceCategoriasService,
     private router: Router
-  ){
-
-  }
+  ){}
 
   async ngOnInit(){
 
@@ -65,7 +63,6 @@ export class HeaderComponent {
   }
 
   ngOnDestroy() {
-    // Certifique-se de cancelar as subscrições no ngOnDestroy
     if (this.inicializacaoConcluidaSubscription) {
       this.inicializacaoConcluidaSubscription.unsubscribe();
     }

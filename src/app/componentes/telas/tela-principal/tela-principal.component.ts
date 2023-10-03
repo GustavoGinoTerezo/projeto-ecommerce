@@ -188,7 +188,7 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     });
 
     //================================================================================================================================//
-    //RELACIONADO COM AS IMAGENS
+    //RELACIONADO COM OS ANUNCIOS
     this.anunciosMaioresSubscription = this.anuncioService.getAnunciosMaiores().subscribe(
       (anunciosMaiores) => {
         this.anunciosMaiores = anunciosMaiores;
@@ -205,7 +205,6 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // Cancelar (unsubscribe) as subscrições no ngOnDestroy
     if (this.inicializacaoConcluidaSubscription) {
       this.inicializacaoConcluidaSubscription.unsubscribe();
     }
