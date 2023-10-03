@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Categorias, Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
   styleUrls: ['./categoria.component.css']
 })
-export class CategoriaComponent {
+export class CategoriaComponent implements OnInit, OnDestroy {
+
+  private inicializacaoConcluidaSubscription!: Subscription;
+  private categoriasSubscription!: Subscription;
+  private produtosSubscription!: Subscription;
 
   categoria: Categorias | undefined;
   nomeCategoria: string | null = null;
@@ -30,21 +35,52 @@ export class CategoriaComponent {
     private router: Router,
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    setTimeout(() => {
+    const start = sessionStorage.getItem('start')
 
-    this.categoriasService.getCategorias().subscribe(
-      (categoriasAPI) => {
-        this.categorias = categoriasAPI;
+    if(start){
+      this.carregarCategoriasEProdutosERouter();
+    } else {
+      const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
+
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarCategoriasEProdutosERouter();
+        });
       }
-    );
+    }
 
-    this.categoriasService.getProdutos().subscribe(
-      (produtosAPI) => {
-        this.produtos = produtosAPI
-      }
-    );
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('start');
+    });
+
+  }
+
+  ngOnDestroy() {
+    if (this.inicializacaoConcluidaSubscription) {
+      this.inicializacaoConcluidaSubscription.unsubscribe();
+    }
+
+    if (this.categoriasSubscription) {
+      this.categoriasSubscription.unsubscribe();
+    }
+
+    if (this.produtosSubscription) {
+      this.produtosSubscription.unsubscribe();
+    }
+
+  }
+
+  async carregarCategoriasEProdutosERouter() {
+    this.categoriasSubscription = this.categoriasService.getCategorias().subscribe(async (categoriasAPI) => {
+      this.categorias = categoriasAPI;
+    });
+
+    this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
+      this.produtos = produtosAPI;
+    });
+
 
     this.route.params.subscribe((params) => {
       this.nomeCategoria = params['nome'];
@@ -55,11 +91,8 @@ export class CategoriaComponent {
 
           // FILTRA E MOSTRA OS PRODUTOS DA CATEGORIA CORRESPONDENTE
           this.produtosDaCategoria = this.produtos.filter(produto => produto.catId === this.categoria!.catId);
-        }
-      });
-
-    }, 1500)
-
+      }
+    });
   }
 
   navigateToDetalheProduto(produto: Produtos) {

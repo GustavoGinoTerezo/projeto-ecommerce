@@ -186,6 +186,8 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
       sessionStorage.removeItem('start');
     });
 
+
+
     //================================================================================================================================//
     //RELACIONADO COM OS ANUNCIOS
     this.anunciosMaioresSubscription = this.anuncioService.getAnunciosMaiores().subscribe(

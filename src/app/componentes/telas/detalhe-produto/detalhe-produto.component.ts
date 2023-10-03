@@ -5,6 +5,7 @@ import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinh
 import { Categorias, Imagens, Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-detalhe-produto',
@@ -12,6 +13,10 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./detalhe-produto.component.css']
 })
 export class DetalheProdutoComponent implements OnInit {
+
+  private inicializacaoConcluidaSubscription!: Subscription;
+  private categoriasSubscription!: Subscription;
+  private produtosSubscription!: Subscription;
 
   categorias: Categorias[] = [];
   produtos: Produtos[] = [];
@@ -32,21 +37,54 @@ export class DetalheProdutoComponent implements OnInit {
     private carrinhoService: ServiceCarrinhoDeComprasService,
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    setTimeout(() => {
+    const start = sessionStorage.getItem('start')
 
-    this.categoriasService.getCategorias().subscribe(
-      (categoriasAPI) => {
-        this.categorias = categoriasAPI;
+    if(start){
+      this.carregarCategoriasEProdutosERouter();
+    } else {
+      const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
+
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarCategoriasEProdutosERouter();
+        });
       }
-    );
+    }
 
-    this.categoriasService.getProdutos().subscribe(
-      (produtosAPI) => {
-        this.produtos = produtosAPI
-      }
-    );
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('start');
+    });
+
+
+
+  }
+
+  ngOnDestroy() {
+    if (this.inicializacaoConcluidaSubscription) {
+      this.inicializacaoConcluidaSubscription.unsubscribe();
+    }
+
+    if (this.categoriasSubscription) {
+      this.categoriasSubscription.unsubscribe();
+    }
+
+    if (this.produtosSubscription) {
+      this.produtosSubscription.unsubscribe();
+    }
+
+  }
+
+  async carregarCategoriasEProdutosERouter() {
+    this.categoriasSubscription = this.categoriasService.getCategorias().subscribe(async (categoriasAPI) => {
+      this.categorias = categoriasAPI;
+    });
+
+    this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
+      this.produtos = produtosAPI;
+    });
+
 
     this.route.params.subscribe((params) => {
       this.nomeProduto = params['nome'];
@@ -58,9 +96,6 @@ export class DetalheProdutoComponent implements OnInit {
         this.nomeProdutoFormatado = this.produtoService.formatarNomeProduto(this.nomeProduto);
       }
     })
-
-    }, 1500)
-
   }
 
   getProdutoImages(): string[] {
