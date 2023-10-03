@@ -168,18 +168,18 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
 
   async ngOnInit(){
 
-    const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
-
-    if (inicializacaoConcluidaObservable) {
-      this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
-        this.carregarCategorias();
-      });
-    }
-
     const start = sessionStorage.getItem('start')
 
     if(start){
       this.carregarCategorias();
+    } else {
+      const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
+
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarCategorias();
+        });
+      }
     }
 
     window.addEventListener('beforeunload', () => {
