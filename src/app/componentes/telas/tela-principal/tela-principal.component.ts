@@ -164,8 +164,7 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     private anuncioService: ServiceAnunciosService,
     private carrinhoService: ServiceCarrinhoDeComprasService,
     private router: Router
-  ){
-  }
+  ){}
 
   async ngOnInit(){
 
