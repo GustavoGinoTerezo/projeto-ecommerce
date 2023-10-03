@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Anuncios, ServiceAnunciosService } from 'src/app/services/serviceAnuncios/service-anuncios.service';
 import { Banner, ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
 import { Categorias, ServiceCategoriasService, Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Router } from '@angular/router';
 import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
-import { switchMap } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 
@@ -14,7 +14,13 @@ import * as CryptoJS from 'crypto-js';
   templateUrl: './tela-principal.component.html',
   styleUrls: ['./tela-principal.component.css']
 })
-export class TelaPrincipalComponent {
+export class TelaPrincipalComponent implements OnInit, OnDestroy {
+
+  private inicializacaoConcluidaSubscription!: Subscription;
+  private anunciosMaioresSubscription!: Subscription;
+  private anunciosMenoresSubscription!: Subscription;
+  private bannerImagesSubscription!: Subscription;
+  private categoriasSubscription!: Subscription;
 
   //Relacionado aos produtos
   produtosDestaque: Produtos[] = [];
@@ -163,38 +169,74 @@ export class TelaPrincipalComponent {
 
   async ngOnInit(){
 
-    try {
-      await this.categoriasService.atualizarCategoriasDaAPI();
-      this.categoriasService.getCategorias().subscribe((categoriasAPI) => {
-        this.categorias = categoriasAPI;
-        console.log("7");
-        this.getProdutos();
+    const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
+
+    if (inicializacaoConcluidaObservable) {
+      this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
+        this.carregarCategorias();
       });
-    } catch (error) {
-      console.error('Erro ao buscar categorias e produtos', error);
     }
-    
+
+    const start = sessionStorage.getItem('start')
+
+    if(start){
+      this.carregarCategorias();
+    }
+
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('start');
+    });
+
     //================================================================================================================================//
     //RELACIONADO COM AS IMAGENS
-    this.anuncioService.getAnunciosMaiores().subscribe(
+    this.anunciosMaioresSubscription = this.anuncioService.getAnunciosMaiores().subscribe(
       (anunciosMaiores) => {
         this.anunciosMaiores = anunciosMaiores;
-    });
+      });
 
-    this.anuncioService.getAnunciosMenores().subscribe(
+    this.anunciosMenoresSubscription = this.anuncioService.getAnunciosMenores().subscribe(
       (anunciosMenores) => {
         this.anunciosMenores = anunciosMenores;
-    });
+      });
 
-    this.bannerService.getImages().subscribe((images) => {
+    this.bannerImagesSubscription = this.bannerService.getImages().subscribe((images) => {
       this.images = images;
     });
-
-
-
-    //================================================================================================================================//
-    //RELACIONADO COM OS PRODUTOS
   }
+
+  ngOnDestroy() {
+    // Cancelar (unsubscribe) as subscrições no ngOnDestroy
+    if (this.inicializacaoConcluidaSubscription) {
+      this.inicializacaoConcluidaSubscription.unsubscribe();
+    }
+
+    if (this.categoriasSubscription) {
+      this.categoriasSubscription.unsubscribe();
+    }
+
+    if (this.anunciosMaioresSubscription) {
+      this.anunciosMaioresSubscription.unsubscribe();
+    }
+
+    if (this.anunciosMenoresSubscription) {
+      this.anunciosMenoresSubscription.unsubscribe();
+    }
+
+    if (this.bannerImagesSubscription) {
+      this.bannerImagesSubscription.unsubscribe();
+    }
+  }
+
+  carregarCategorias() {
+    this.categoriasSubscription = this.categoriasService.getCategorias().subscribe((categoriasAPI) => {
+      this.categorias = categoriasAPI;
+      console.log("7");
+      this.getProdutos();
+    });
+  }
+
+  //================================================================================================================================//
+  //RELACIONADO COM OS PRODUTOS
 
   getProdutos() {
     // Aqui você pode chamar os métodos que fazem as chamadas HTTP após a conclusão dos métodos no serviço.
@@ -273,4 +315,6 @@ export class TelaPrincipalComponent {
       icon: 'pi pi-shopping-cart',
       detail: 'Produto adicionado ao carrinho!' });
   }
+
+
 }

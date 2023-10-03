@@ -1,9 +1,10 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
+import { Observable, Subject, map, of } from 'rxjs';
 import { ServiceAPICategoriaService } from '../servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
 import { HttpClient } from '@angular/common/http';
 import { ServiceUrlGlobalService } from '../servicesAPI/serviceUrlGlobal/service-url-global.service';
 import { ServiceAPIProdutoService } from '../servicesAPI/serviceAPI-Produto/service-api-produto.service';
+import { TelaPrincipalComponent } from 'src/app/componentes/telas/tela-principal/tela-principal.component';
 
 export interface CategoriaVazia extends Categorias {
   nome: '';
@@ -72,6 +73,8 @@ export class ServiceCategoriasService {
     private urlGlobal: ServiceUrlGlobalService,
     private http: HttpClient,
   ) { }
+
+  private inicializacaoConcluidaSubject = new Subject<void>();
 
   categorias: Categorias[] =
   [
@@ -473,8 +476,17 @@ export class ServiceCategoriasService {
     this.produtosMaisVendidosAPI = this.produtosAPI
       .filter((produto) => produtosMaisVendidos.includes(produto.prodId));
       console.log("6")
+
+      this.inicializacaoConcluidaSubject.next();
+      sessionStorage.setItem('start', 'ok')
+
     return of(null);
   }
+
+  getInicializacaoConcluida() {
+    return this.inicializacaoConcluidaSubject.asObservable();
+  }
+
 
 
 

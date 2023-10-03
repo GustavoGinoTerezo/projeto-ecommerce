@@ -23,7 +23,9 @@ export class AppComponent {
     private usuarioLogado: ServiceUsuarioLogadoService,
   ) {}
 
-  ngOnInit(){
+  async ngOnInit(){
+
+    // this.categoriasService.atualizarCategoriasDaAPI();
 
     this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
 

@@ -1,7 +1,8 @@
-import { MegaMenuItem, MenuItem } from 'primeng/api';
-import { Categorias, ServiceCategoriasService } from './../../services/serviceCategorias/service-categorias.service';
+import { MenuItem } from 'primeng/api';
+import { Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+
+  private inicializacaoConcluidaSubscription!: Subscription;
+  private categoriasSubscription!: Subscription;
 
   search!: string;
   categorias: Categorias[] = []
@@ -38,29 +42,58 @@ export class HeaderComponent {
 
   }
 
-  ngOnInit(){
+  async ngOnInit(){
 
-    // Aguarde um curto período de tempo antes de acessar as categorias
-    // ou utilize observables para lidar com a conclusão da chamada da API
-    setTimeout(() => {
-      this.categoriasService.getCategorias().subscribe(
-        (categoriasAPI) => {
-          this.categorias = categoriasAPI;
-        }
-      );
+    const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
 
-      this.menuItems = this.categorias.map((categoria: Categorias) => ({
-        label: categoria.nome,
-        command: () => this.navigateCategoria(categoria),
-      }));
-    }, 2000); // Aguarda 1 segundo (ajuste conforme necessário)
+    if (inicializacaoConcluidaObservable) {
+      this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
+        this.carregarCategorias();
+      });
+    }
 
+    const start = sessionStorage.getItem('start')
 
+    if(start){
+      this.carregarCategorias();
+    }
+
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('start');
+    });
+
+  }
+
+  ngOnDestroy() {
+    // Certifique-se de cancelar as subscrições no ngOnDestroy
+    if (this.inicializacaoConcluidaSubscription) {
+      this.inicializacaoConcluidaSubscription.unsubscribe();
+    }
+
+    if (this.categoriasSubscription) {
+      this.categoriasSubscription.unsubscribe();
+    }
+  }
+
+  async carregarCategorias() {
+    this.categoriasSubscription = this.categoriasService.getCategorias().subscribe(async (categoriasAPI) => {
+      this.categorias = categoriasAPI;
+
+      await this.categoriasMap();
+    });
+  }
+
+  async categoriasMap() {
+    this.menuItems = this.categorias.map((categoria: Categorias) => ({
+      label: categoria.nome,
+      command: () => this.navigateCategoria(categoria),
+    }));
   }
 
   navigateCategoria(categoria: Categorias) {
     const nomeFormatado = categoria.nome?.toLowerCase().replace(/\s+/g, '-');
     this.router.navigate(['/categoria', nomeFormatado]);
   }
+
 
 }
