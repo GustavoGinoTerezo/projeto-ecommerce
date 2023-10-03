@@ -18,6 +18,7 @@ import { PersonalizacaoComponent } from './componentes/telas/funcoes/administrad
 import { RelatoriosDeVendasEControleDePedidosComponent } from './componentes/telas/funcoes/administrador/relatorios-de-vendas-e-controle-de-pedidos/relatorios-de-vendas-e-controle-de-pedidos.component';
 import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-comentarios/gerenciamento-de-comentarios/gerenciamento-de-comentarios.component';
 import { GerenciamentoDeFornecedoresComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-fornecedores/gerenciamento-de-fornecedores.component';
+import { GerenciamentoDeEstadosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-estados/gerenciamento-de-estados/gerenciamento-de-estados.component';
 
 
 const routes: Routes = [
@@ -78,6 +79,10 @@ const routes: Routes = [
   {
     path: 'gerenciamento-de-estoque',
     component: GerenciamentoDeEstoqueComponent,
+  },
+  {
+    path: 'gerenciamento-de-estados',
+    component: GerenciamentoDeEstadosComponent,
   },
   {
     path: 'gerenciamento-de-fornecedores',

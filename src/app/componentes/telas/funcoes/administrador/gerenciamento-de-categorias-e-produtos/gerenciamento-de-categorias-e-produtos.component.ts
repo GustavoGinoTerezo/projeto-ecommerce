@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { CategoriaVazia, Categorias, PosicaoProdutos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { ServiceAPICategoriaService } from 'src/app/services/servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
@@ -28,16 +29,18 @@ interface UploadEvent {
 })
 export class GerenciamentoDeCategoriasEProdutosComponent {
 
+  private inicializacaoConcluidaSubscription!: Subscription;
+  private categoriasSubscription!: Subscription;
+  private produtosSubscription!: Subscription;
+  private posicaoProdutosSubscription!: Subscription;
+
   idCategoria!: number;
   categorias: Categorias[] = [];
   produtos: Produtos[] = [];
   posicaoProdutos: PosicaoProdutos[] = [];
-
   idProduto!: number;
   posProdId!: number;
-
   produtosFiltrados!: Produtos[];
-
   categoriasSelecionada!: Categorias;
   categoriasSelecionadaInput: Categorias | null = null;
   nomeProduto: string = '';
@@ -45,31 +48,23 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   descCompleta: string = '';
   descBreve: string = '';
   quantidadeProduto!: number | null
-
   selectedProductImages: any[] = [];
   selectedProductImagesTemplate: any[] = [];
   valorProdutoFormatted!: number | null;
   categoriasAdicionarSelecionadaInput: any;
   nomeCategoriaSelecionada!: string;
-
   pesoProduto!: number;
   alturaProduto!: number;
   larguraProduto!: number;
   comprimentoProduto!: number;
-
   adicionarCategoriaDisabled: boolean = false;
   adicionarProdutoDisabled: boolean = false;
-
   isDragOver = false;
-
   status!: Status[] ;
   layout!: Layout[] ;
-
   statusDesconhecido: Status = { nome: '', cod: '' };
   selectedStatus: Status | null = null;
-
   selectedLayout: Layout | null = null;
-
   categoriaVazia: CategoriaVazia = {
     nome: '',
   };
@@ -83,29 +78,23 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   ngOnInit(){
 
-    setTimeout(() => {
+    const start = sessionStorage.getItem('start')
 
-      this.categoriasService.getCategorias().subscribe(
-        (categoriasAPI) => {
-          this.categorias = categoriasAPI;
-        }
-      );
+    if(start){
+      this.carregarCategoriasEProdutosEPosicoes();
+    } else {
+      const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
 
-      this.categoriasService.getProdutos().subscribe(
-        (produtosAPI) => {
-          this.produtos = produtosAPI;
-        }
-      );
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarCategoriasEProdutosEPosicoes();
+        });
+      }
+    }
 
-      this.categoriasService.getPosicaoProdutos().subscribe(
-        (posicaoProdutosAPI) => {
-          this.posicaoProdutos = posicaoProdutosAPI;
-        }
-      );
-
-      this.produtosFiltrados = this.produtos
-
-    }, 1500);
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('start');
+    });
 
     this.status = [
       { nome: 'Disponível', cod: "1"},
@@ -119,6 +108,45 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       { nome: 'Mais vendidos', cod: "2"},
       { nome: 'Em promoção', cod: "3"},
     ];
+
+  }
+
+  ngOnDestroy() {
+
+    if (this.inicializacaoConcluidaSubscription) {
+      this.inicializacaoConcluidaSubscription.unsubscribe();
+    }
+
+    if (this.categoriasSubscription) {
+      this.categoriasSubscription.unsubscribe();
+    }
+
+    if (this.produtosSubscription) {
+      this.produtosSubscription.unsubscribe();
+    }
+
+    if (this.posicaoProdutosSubscription) {
+      this.posicaoProdutosSubscription.unsubscribe();
+    }
+
+
+  }
+
+  async carregarCategoriasEProdutosEPosicoes() {
+
+    this.categoriasSubscription = this.categoriasService.getCategorias().subscribe(async (categoriasAPI) => {
+      this.categorias = categoriasAPI;
+    });
+
+    this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
+      this.produtos = produtosAPI;
+    });
+
+    this.posicaoProdutosSubscription = this.categoriasService.getPosicaoProdutos().subscribe(async (posicaoProdutosAPI) => {
+      this.posicaoProdutos = posicaoProdutosAPI;
+    });
+
+    this.produtosFiltrados = this.produtos
 
   }
 

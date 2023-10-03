@@ -17,6 +17,11 @@ export const navbarData: INavbarData[] = [
     label: 'Gerenciamento de Estoque',
   },
   {
+    routerLink: 'gerenciamento-de-estados',
+    icon: 'fa-solid fa-earth-americas',
+    label: 'Gerenciamento de Estados',
+  },
+  {
     routerLink: 'gerenciamento-de-comentarios',
     icon: 'fa-solid fa-comment-dots',
     label: 'Gerenciamento de Comentários',
