@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pagamento',
@@ -11,6 +12,8 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./pagamento.component.css']
 })
 export class PagamentoComponent {
+
+  private formaPagamentoSubscription!: Subscription;
 
   items: MenuItem[] = [];
   formaPagamento: FormaPagamento[] = []
@@ -43,9 +46,8 @@ export class PagamentoComponent {
       }
     ];
 
-    this.formaPagamentoService.getFormaPagamento().subscribe(
-      (formaPagamento) => {
-        this.formaPagamento = formaPagamento;
+    this.formaPagamentoSubscription = this.formaPagamentoService.getFormaPagamento().subscribe(async (formaPagamento) => {
+      this.formaPagamento = formaPagamento;
     });
 
     const formaPagamentoAtiva = sessionStorage.getItem('p');
@@ -69,6 +71,12 @@ export class PagamentoComponent {
         // Defina a forma de pagamento selecionada para ativar o radiobutton correspondente
         this.formaPagamentoSelecionada = formaPagamentoSelecionada;
       }
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.formaPagamentoSubscription) {
+      this.formaPagamentoSubscription.unsubscribe();
     }
   }
 

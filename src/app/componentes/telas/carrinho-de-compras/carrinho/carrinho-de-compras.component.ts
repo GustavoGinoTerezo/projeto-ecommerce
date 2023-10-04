@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { CarrinhoDeCompra, ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './carrinho-de-compras.component.html',
   styleUrls: ['./carrinho-de-compras.component.css']
 })
-export class CarrinhoDeComprasComponent {
+export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
 
   private inicializacaoConcluidaSubscription!: Subscription;
   private enderecoCarregadoSubscription!: Subscription;
