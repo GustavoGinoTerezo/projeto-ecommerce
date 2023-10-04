@@ -27,7 +27,6 @@ interface UploadEvent {
 export class GerenciamentoDeEstoqueComponent {
 
   private inicializacaoConcluidaSubscription!: Subscription;
-  private categoriasSubscription!: Subscription;
   private produtosSubscription!: Subscription;
 
   @ViewChild('dt') table!: Table;

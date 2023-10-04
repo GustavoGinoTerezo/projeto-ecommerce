@@ -21,6 +21,9 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   private anunciosMenoresSubscription!: Subscription;
   private bannerImagesSubscription!: Subscription;
   private categoriasSubscription!: Subscription;
+  private produtosDestaqueSubscription!: Subscription;
+  private produtosMaisVendidosSubscription!: Subscription;
+  private produtosEmPromocaoSubscription!: Subscription;
 
   //Relacionado aos produtos
   produtosDestaque: Produtos[] = [];
@@ -206,6 +209,7 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+
     if (this.inicializacaoConcluidaSubscription) {
       this.inicializacaoConcluidaSubscription.unsubscribe();
     }
@@ -225,6 +229,18 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     if (this.bannerImagesSubscription) {
       this.bannerImagesSubscription.unsubscribe();
     }
+
+    if (this.produtosDestaqueSubscription) {
+      this.produtosDestaqueSubscription.unsubscribe();
+    }
+
+    if (this.produtosMaisVendidosSubscription) {
+      this.produtosMaisVendidosSubscription.unsubscribe();
+    }
+
+    if (this.produtosEmPromocaoSubscription) {
+      this.produtosEmPromocaoSubscription.unsubscribe();
+    }
   }
 
   carregarCategorias() {
@@ -240,17 +256,17 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
 
   getProdutos() {
     // Aqui você pode chamar os métodos que fazem as chamadas HTTP após a conclusão dos métodos no serviço.
-    this.categoriasService.getProdutosDestaque().subscribe((produtosDestaqueAPI) => {
+    this.produtosDestaqueSubscription = this.categoriasService.getProdutosDestaque().subscribe((produtosDestaqueAPI) => {
       this.produtosDestaque = produtosDestaqueAPI;
       console.log("8")
     });
 
-    this.categoriasService.getProdutosMaisVendidos().subscribe((produtosMaisVendidosAPI) => {
+    this.produtosMaisVendidosSubscription = this.categoriasService.getProdutosMaisVendidos().subscribe((produtosMaisVendidosAPI) => {
       this.produtosMaisVendidos = produtosMaisVendidosAPI;
       console.log("9")
     });
 
-    this.categoriasService.getProdutosEmPromocao().subscribe((produtosEmPromocaoAPI) => {
+    this.produtosEmPromocaoSubscription = this.categoriasService.getProdutosEmPromocao().subscribe((produtosEmPromocaoAPI) => {
       this.produtosEmPromocao = produtosEmPromocaoAPI;
       console.log("10")
     });

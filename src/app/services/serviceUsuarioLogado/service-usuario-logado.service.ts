@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Pedido } from '../servicePedido/service-pedido.service';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 import { ServiceApiUsuarioLogadoService } from '../servicesAPI/serviceAPI-UsuarioLogado/service-api-usuario-logado.service';
 import { ServiceApiEnderecosService } from '../servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
 import { ServiceApiTelefonesService } from '../servicesAPI/serviceAPI-Telefones/service-api-telefones.service';
@@ -44,6 +44,8 @@ export interface Telefone {
   providedIn: 'root'
 })
 export class ServiceUsuarioLogadoService {
+
+  private enderecosCarregadosSubject = new Subject<void>();
 
   private mostrarLateralUsuario = new BehaviorSubject<boolean>(false);
   private mostrarLateralAdministrador = new BehaviorSubject<boolean>(false);
@@ -149,6 +151,9 @@ export class ServiceUsuarioLogadoService {
 
               // console.log('Endereços do usuário logado (Cobrança):', this.enderecoCobrancaUsuarioLogadoAPI);
               // console.log('Endereços do usuário logado (Entrega):', this.enderecoEntregaUsuarioLogadoAPI);
+
+              sessionStorage.setItem('startEnderecos', 'ok')
+              this.enderecosCarregadosSubject.next();
             },
             (error) => {
               console.log("Erro ao buscar os endereços gerais", error);
@@ -250,6 +255,10 @@ export class ServiceUsuarioLogadoService {
   // Método para obter o valor como um observable
   getMostrarLateralAdministrador(): Observable<boolean> {
     return this.mostrarLateralAdministrador.asObservable();
+  }
+
+  getEnderecosCarregadosObservable() {
+    return this.enderecosCarregadosSubject.asObservable();
   }
 
 
