@@ -19,12 +19,14 @@ export class ConfirmacaoComponent implements OnInit{
   private inicializacaoConcluidaSubscription!: Subscription;
   private enderecoCarregadoSubscription!: Subscription;
   private enderecosEntregaSubscription!: Subscription;
+  private enderecosCobrancaSubscription!: Subscription;
   private formaPagamentoSubscription!: Subscription;
 
   items: MenuItem[] = [];
   carrinho: CarrinhoDeCompra[] = [];
   enderecosEntrega: EnderecoEntrega[] = []
   enderecoEntregaSelecionado: EnderecoEntrega[] = []
+  enderecoCobranca: any[] = []
   usuario: Usuario[] = [];
   valorTotal: number = 0;
   first: number = 0; // Primeiro item da página
@@ -120,6 +122,10 @@ export class ConfirmacaoComponent implements OnInit{
       this.enderecosEntregaSubscription.unsubscribe();
     }
 
+    if (this.enderecosCobrancaSubscription) {
+      this.enderecosCobrancaSubscription.unsubscribe();
+    }
+
     if (this.formaPagamentoSubscription) {
       this.formaPagamentoSubscription.unsubscribe();
     }
@@ -188,6 +194,13 @@ export class ConfirmacaoComponent implements OnInit{
         console.log("Fim do método carregarEnderecos")
         // Após carregar os endereços, chame o método para preencher o endereço selecionado
         await this.preencherEnderecoSelecionado();
+      });
+      this.enderecosCobrancaSubscription = this.usuarioService.getEnderecoCobrancaUsuarioLogado().subscribe(async (enderecoCobrancaAPI) => {
+        this.enderecoCobranca = enderecoCobrancaAPI;
+        console.log("Aqui é dentro do método getEnderecoCobrancaUsuarioLogado", this.enderecoCobranca);
+
+        console.log("Fim do método getEnderecoCobrancaUsuarioLogado")
+        // Após carregar os endereços, chame o método para preencher o endereço selecionado
       });
     } catch (error) {
       console.error("Erro ao carregar endereços", error);
