@@ -19,10 +19,32 @@
         </div>
         <p-slideMenu #menu [model]="menuItems" [popup]="true" [viewportHeight]="300" [menuWidth]="175"></p-slideMenu>
       </div>
-      <span class="p-input-icon-left">
-        <i class="fa-solid fa-magnifying-glass" style="color: green;"></i>
-        <input type="text" pInputText [(ngModel)]="search" class="input" />
-      </span>
+
+
+      <div class="test">
+        <div class="search-container">
+          <span class="p-input-icon-left">
+            <i class="fa-solid fa-magnifying-glass" style="color: green;"></i>
+            <input
+              type="text"
+              pInputText
+              [(ngModel)]="search"
+              class="input"
+              (input)="pesquisar()"
+              (focus)="mostrarLista = true"
+              (blur)="mostrarLista = false"
+            />
+          </span>
+          <ul *ngIf="mostrarLista" class="lista-produtos">
+            <li *ngFor="let produto of produtosFiltrados">{{ produto.nome }}</li>
+          </ul>
+        </div>
+      </div>
+
+
+
+
+
 
     </div>
 
@@ -36,42 +58,7 @@
 
   </div>
 
-  <!-- <hr class="horizontalRow"> -->
-  <!-- <div class="usuarios">
-    AQUI É O MENU DOS USUÁRIOS
-  </div>
 
-  <div class="administrador">
-    AQUI É O MENU DE ADMINISTRADOR
-  </div> -->
-
-  <!-- <div class="categorias">
-    <div class="botoesCategorias">
-      <p-carousel [value]="categorias" [showIndicators]="false" [numVisible]="7" [numScroll]="7" [circular]="true" [responsiveOptions]="responsiveOptions" class="carousel">
-        <ng-template pTemplate="item" let-categoria>
-          <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
-            <div>
-              <div class="car-buttons mt-5">
-                <div class="sidenav-nav">
-                  <div class="sidenav-nav-item">
-                    <a
-                      class="sidenav-nav-link"
-                      (click)="navigateCategoria(categoria)"
-                    >
-                      <i class="sidenav-link-icon" [class]="categoria.icon"></i>
-                      <span class="sidenav-link-text">
-                        {{categoria.nome}}
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </p-carousel>
-    </div>
-  </div> -->
 
 
 

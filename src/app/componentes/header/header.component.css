@@ -7,7 +7,10 @@
   background-color: var(--header-rodape);
 }
 
-
+.test{
+  width: 60%;
+  background-color: blue;
+}
 
 .menuBar{
   display: flex;
@@ -50,10 +53,27 @@
 
 .p-input-icon-left{
   display: flex;
-  height: 60%;
-  width: 60%;
+  height: 100%;
+  width: 100%;
 }
 
+.search-container {
+  position: relative;
+}
+
+.lista-produtos {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 9999; /* Certifique-se de que a lista esteja acima de outros elementos na tela */
+  background-color: blue;  border: 1px solid #ccc; /* Adicione uma borda se necessário */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-height: 200px; /* Defina a altura máxima da lista ou remova para que ela cresça conforme necessário */
+  overflow-y: auto; /* Adicione uma barra de rolagem vertical se a lista for longa */
+}
 
 
 .input{

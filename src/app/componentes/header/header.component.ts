@@ -1,5 +1,5 @@
 import { MenuItem } from 'primeng/api';
-import { Categorias, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
+import { Categorias, Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,9 +13,22 @@ export class HeaderComponent {
 
   private inicializacaoConcluidaSubscription!: Subscription;
   private categoriasSubscription!: Subscription;
+  private produtosSubscription!: Subscription;
 
   search!: string;
   categorias: Categorias[] = []
+  produtos = [
+    { nome: 'Produto 1' },
+    { nome: 'Produto 2' },
+    { nome: 'Produto 3' },
+    { nome: 'Produto 4' },
+    { nome: 'Produto 5' },
+    { nome: 'a' },
+    { nome: 'vd' },
+    { nome: 'd' },
+    { nome: 'Produto 6' },
+    // Adicione mais produtos conforme necessário
+  ];
   menuItems: MenuItem[] = [];
   responsiveOptions: any[] = [
     {
@@ -34,6 +47,8 @@ export class HeaderComponent {
         numScroll: 1
     }
   ]
+  produtosFiltrados: any[] = [];
+  mostrarLista = false;
 
   constructor(
     private categoriasService: ServiceCategoriasService,
@@ -46,12 +61,14 @@ export class HeaderComponent {
 
     if(start){
       this.carregarCategorias();
+      // this.carregarProdutos();
     } else {
       const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
 
       if (inicializacaoConcluidaObservable) {
         this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
           this.carregarCategorias();
+          // this.carregarProdutos();
         });
       }
     }
@@ -59,6 +76,9 @@ export class HeaderComponent {
     window.addEventListener('beforeunload', () => {
       sessionStorage.removeItem('start');
     });
+
+
+
 
   }
 
@@ -70,6 +90,10 @@ export class HeaderComponent {
     if (this.categoriasSubscription) {
       this.categoriasSubscription.unsubscribe();
     }
+
+    if (this.produtosSubscription) {
+      this.produtosSubscription.unsubscribe();
+    }
   }
 
   async carregarCategorias() {
@@ -78,6 +102,15 @@ export class HeaderComponent {
 
       await this.categoriasMap();
     });
+  }
+
+  async carregarProdutos() {
+
+    // this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
+    //   this.produtos = produtosAPI;
+    // });
+
+    console.log(this.produtos)
   }
 
   async categoriasMap() {
@@ -91,6 +124,19 @@ export class HeaderComponent {
     const nomeFormatado = categoria.nome?.toLowerCase().replace(/\s+/g, '-');
     this.router.navigate(['/categoria', nomeFormatado]);
   }
+
+  pesquisar() {
+    if (this.search) {
+      this.produtosFiltrados = this.produtos.filter(produto =>
+        produto.nome.toLowerCase().includes(this.search.toLowerCase())
+      );
+      this.mostrarLista = true;
+    } else {
+      this.produtosFiltrados = [];
+      this.mostrarLista = false;
+    }
+  }
+
 
 
 }
