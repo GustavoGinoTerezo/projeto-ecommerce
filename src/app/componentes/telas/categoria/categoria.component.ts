@@ -26,6 +26,8 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   produtos: Produtos[] = []
   produtosDaCategoria: Produtos[] = []
 
+  search!: string;
+
   constructor(
     private route: ActivatedRoute,
     private messageService: MessageService,
@@ -159,6 +161,25 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   formatarNomeProduto(produtos: string): string {
     return this.categoriasService.formatarNomeProduto(produtos);
   }
+
+  filtrarProdutos(): void {
+    if (!this.search || this.search.trim() === '') {
+      // Se o campo de pesquisa estiver vazio, redefina a lista de produtos
+      this.produtosDaCategoria = this.produtos;
+    } else {
+      const termoDePesquisa = this.search.toLowerCase().trim();
+      // Filtrar os produtos com base no termo de pesquisa
+      this.produtosDaCategoria = this.produtos.filter(produto => {
+        // Adicione aqui a lógica para verificar se o produto corresponde ao termo de pesquisa
+        // Por exemplo, pode verificar o nome ou a descrição do produto
+        return (
+          produto.nome!.toLowerCase().includes(termoDePesquisa) ||
+          produto.descBreve!.toLowerCase().includes(termoDePesquisa)
+        );
+      });
+    }
+  }
+
 
   get totalRecords(): number {
     return this.produtosDaCategoria?.length || 0;
