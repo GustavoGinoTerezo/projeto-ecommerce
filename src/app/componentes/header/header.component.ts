@@ -17,18 +17,7 @@ export class HeaderComponent {
 
   search!: string;
   categorias: Categorias[] = []
-  produtos = [
-    { nome: 'Produto 1' },
-    { nome: 'Produto 2' },
-    { nome: 'Produto 3' },
-    { nome: 'Produto 4' },
-    { nome: 'Produto 5' },
-    { nome: 'a' },
-    { nome: 'vd' },
-    { nome: 'd' },
-    { nome: 'Produto 6' },
-    // Adicione mais produtos conforme necessário
-  ];
+  produtos:  Produtos[] = [];
   menuItems: MenuItem[] = [];
   responsiveOptions: any[] = [
     {
@@ -61,14 +50,14 @@ export class HeaderComponent {
 
     if(start){
       this.carregarCategorias();
-      // this.carregarProdutos();
+      this.carregarProdutos();
     } else {
       const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
 
       if (inicializacaoConcluidaObservable) {
         this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
           this.carregarCategorias();
-          // this.carregarProdutos();
+          this.carregarProdutos();
         });
       }
     }
@@ -76,8 +65,6 @@ export class HeaderComponent {
     window.addEventListener('beforeunload', () => {
       sessionStorage.removeItem('start');
     });
-
-
 
 
   }
@@ -106,9 +93,9 @@ export class HeaderComponent {
 
   async carregarProdutos() {
 
-    // this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
-    //   this.produtos = produtosAPI;
-    // });
+    this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
+      this.produtos = produtosAPI;
+    });
 
     console.log(this.produtos)
   }
@@ -125,10 +112,17 @@ export class HeaderComponent {
     this.router.navigate(['/categoria', nomeFormatado]);
   }
 
+  navigateProduto(produto: Produtos) {
+    const nomeFormatado = produto.nome?.toLowerCase().replace(/\s+/g, '-');
+    this.router.navigate(['/detalhe-produto', nomeFormatado]);
+    this.mostrarLista = false
+    this.search = ''
+  }
+
   pesquisar() {
     if (this.search) {
       this.produtosFiltrados = this.produtos.filter(produto =>
-        produto.nome.toLowerCase().includes(this.search.toLowerCase())
+        produto.nome!.toLowerCase().includes(this.search.toLowerCase())
       );
       this.mostrarLista = true;
     } else {

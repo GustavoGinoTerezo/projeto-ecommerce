@@ -7,9 +7,8 @@
   background-color: var(--header-rodape);
 }
 
-.test{
+.containerSearch{
   width: 60%;
-  background-color: blue;
 }
 
 .menuBar{
@@ -61,18 +60,28 @@
   position: relative;
 }
 
+.produtoUnico{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 20px;
+  padding: 10px;
+  border-bottom: 1px solid  #ccc;
+  cursor: pointer;
+}
+
 .lista-produtos {
   position: absolute;
   top: 100%;
   left: 0;
   z-index: 9999; /* Certifique-se de que a lista esteja acima de outros elementos na tela */
-  background-color: blue;  border: 1px solid #ccc; /* Adicione uma borda se necessário */
+  background-color: white;
+  border: 1px solid #ccc; /* Adicione uma borda se necessário */
   list-style: none;
   padding: 0;
   margin: 0;
   width: 100%;
   max-height: 200px; /* Defina a altura máxima da lista ou remova para que ela cresça conforme necessário */
-  overflow-y: auto; /* Adicione uma barra de rolagem vertical se a lista for longa */
 }
 
 

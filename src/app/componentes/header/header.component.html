@@ -21,7 +21,7 @@
       </div>
 
 
-      <div class="test">
+      <div class="containerSearch">
         <div class="search-container">
           <span class="p-input-icon-left">
             <i class="fa-solid fa-magnifying-glass" style="color: green;"></i>
@@ -31,12 +31,10 @@
               [(ngModel)]="search"
               class="input"
               (input)="pesquisar()"
-              (focus)="mostrarLista = true"
-              (blur)="mostrarLista = false"
             />
           </span>
-          <ul *ngIf="mostrarLista" class="lista-produtos">
-            <li *ngFor="let produto of produtosFiltrados">{{ produto.nome }}</li>
+          <ul *ngIf="mostrarLista" class="lista-produtos scrollwrap">
+            <li *ngFor="let produto of produtosFiltrados" class="produtoUnico" (click)="navigateProduto(produto)">{{ produto.nome }}</li>
           </ul>
         </div>
       </div>
