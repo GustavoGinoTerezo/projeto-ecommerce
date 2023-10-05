@@ -7,6 +7,10 @@ import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { Subscription } from 'rxjs';
 
+interface Ordenar {
+  ordem: string;
+}
+
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
@@ -17,6 +21,9 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   private inicializacaoConcluidaSubscription!: Subscription;
   private categoriasSubscription!: Subscription;
   private produtosSubscription!: Subscription;
+
+  ordem: Ordenar[] = [];
+  ordemSelecionado: Ordenar | undefined;
 
   categoria: Categorias | undefined;
   nomeCategoria: string | null = null;
@@ -56,6 +63,15 @@ export class CategoriaComponent implements OnInit, OnDestroy {
     window.addEventListener('beforeunload', () => {
       sessionStorage.removeItem('start');
     });
+
+    this.ordem = [
+      { ordem: 'Valor crescente ($-$$)'},
+      { ordem: 'Valor decrescente ($$-$)'},
+      { ordem: 'Ordem alfabética (A-Z)'},
+      { ordem: 'Ordem alfabética (Z-A)'}
+   ];
+
+   this.ordenarProdutos();
 
   }
 
@@ -179,6 +195,31 @@ export class CategoriaComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  ordenarProdutos(): void {
+    if (this.ordemSelecionado) {
+      switch (this.ordemSelecionado.ordem) {
+        case 'Valor crescente ($-$$)':
+          this.produtosDaCategoria.sort((a, b) => (a.preco || 0) - (b.preco || 0));
+          break;
+        case 'Valor decrescente ($$-$)':
+          this.produtosDaCategoria.sort((a, b) => (b.preco || 0) - (a.preco || 0));
+          break;
+        case 'Ordem alfabética (A-Z)':
+          this.produtosDaCategoria.sort((a, b) => (a.nome || '').localeCompare(b.nome || ''));
+          break;
+        case 'Ordem alfabética (Z-A)':
+          this.produtosDaCategoria.sort((a, b) => (b.nome || '').localeCompare(a.nome || ''));
+          break;
+        default:
+          // Nenhuma ordenação selecionada
+          break;
+      }
+    }
+  }
+
+  
+
 
 
   get totalRecords(): number {

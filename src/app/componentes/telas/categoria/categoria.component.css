@@ -72,15 +72,36 @@
   border: 2px solid rgba(0, 0, 0, 0.462);
 }
 
+.containerInputSearch{
+  display: flex;
+  width: 50%;
+}
+
+.containerDropdown{
+  display: flex;
+}
+
+.p-input-icon-left{
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
 .divSearch{
   display: flex;
   padding: 10px;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.462);
   background-color: var(--background-das-divs-da-categoria);
+}
+
+.input{
+  margin-right: 10px;
+  width: 100%;
 }
 
 .categoriaEProdutos{
