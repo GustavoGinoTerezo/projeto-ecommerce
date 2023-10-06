@@ -308,6 +308,8 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
     return rendaGeral;
   }
 
+ 
+
 }
 
 

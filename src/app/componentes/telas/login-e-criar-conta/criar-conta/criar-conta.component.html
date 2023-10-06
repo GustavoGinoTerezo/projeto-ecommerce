@@ -76,7 +76,7 @@
         </div>
 
         <div class="infoPessoal">
-          <div class="email field p-fluid mt-4 tamanhoInputsInteiro">
+          <div class="email field p-fluid mt-4 tamanhoInputsNome">
             <div class="inputs">
               <span class="p-float-label">
                 <input
@@ -85,8 +85,24 @@
                   type="email"
                   pInputText
                   [(ngModel)]="nomeCompleto"
+                  (keypress)="onKeyPressWord($event)"
                 />
                 <label htmlFor="Nome completo">Nome completo</label>
+              </span>
+            </div>
+          </div>
+          <div class="email field p-fluid mt-4 tamanhoInputsCpfOuCnpj">
+            <div class="inputs">
+              <span class="p-float-label">
+                <input
+                  id="cpfOuCnpj"
+                  name="cpfOuCnpj"
+                  type="cpfOuCnpj"
+                  pInputText
+                  [(ngModel)]="cpfOuCnpj"
+                  (keypress)="onKeyPress($event)"
+                />
+                <label htmlFor="Nome completo">CPF ou CNPJ</label>
               </span>
             </div>
           </div>
@@ -106,6 +122,7 @@
               </span>
             </div>
           </div>
+
           <div class="email field p-fluid mt-4 tamanhoInputs">
             <div class="inputs">
               <div class="containerInputEmailSec">
@@ -129,21 +146,6 @@
           </div>
 
 
-        </div>
-
-        <div class="email field p-fluid mt-4 tamanhoInputsInteiro">
-          <div class="inputs">
-            <span class="p-float-label">
-              <input
-                id="endereco"
-                name="endereco"
-                type="endereco"
-                pInputText
-                [(ngModel)]="endereco"
-              />
-              <label htmlFor="Endereço">Endereço</label>
-            </span>
-          </div>
         </div>
         <div class="endereco">
           <div class="email field p-fluid mt-4 tamanhoInputs">
@@ -171,6 +173,7 @@
             </div>
           </div>
         </div>
+
         <div class="endereco">
           <div class="email field p-fluid mt-4 tamanhoInputs">
             <div class="inputs">
@@ -190,6 +193,57 @@
             <p-dropdown [options]="estado"  [showClear]="true" [(ngModel)]="estadoSelecionado" placeholder="Estado" optionLabel="nome"></p-dropdown>
           </div>
         </div>
+
+        <div class="email field p-fluid mt-4 tamanhoInputsInteiro">
+          <div class="inputs">
+            <span class="p-float-label">
+              <input
+                id="endereco"
+                name="endereco"
+                type="endereco"
+                pInputText
+                [(ngModel)]="endereco"
+              />
+              <label htmlFor="Endereço">Endereço</label>
+            </span>
+          </div>
+        </div>
+
+        <div class="endereco">
+          <div class="email field p-fluid mt-4 tamanhoInputs">
+            <div class="inputs">
+              <div class="containerInputCep">
+                <span class="p-float-label">
+                  <input
+                    id="complemento"
+                    name="complemento"
+                    type="complemento"
+                    pInputText
+                    [(ngModel)]="complemento"
+                  />
+              <label htmlFor="Endereço">Complemento</label>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="email field p-fluid mt-4 tamanhoInputs">
+            <div class="inputs">
+              <span class="p-float-label">
+                <input
+                  id="bairro"
+                  name="bairro"
+                  type="bairro"
+                  pInputText
+                  [(ngModel)]="numeroResidencia"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                />
+                <label htmlFor="Bairro">Nº da residência</label>
+              </span>
+            </div>
+          </div>
+        </div>
+
+
         <div class="senhas">
           <div class="senha field p-fluid mt-4 tamanhoInputs">
             <div class="inputs">

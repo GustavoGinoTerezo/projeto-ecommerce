@@ -4,14 +4,19 @@
     <h1 class="h1">Dados básicos</h1>
     <div class="divInput">
       <span class="p-float-label">
-        <input pInputText id="username" [(ngModel)]="usuario[0].nome" />
+        <input pInputText id="username" [(ngModel)]="usuario[0].nome" (keypress)="onKeyPressWord($event)"/>
         <label htmlFor="username">Nome completo</label>
       </span>
     </div>
     <div class="divInput">
       <span class="p-float-label">
-        <input pInputText id="username" [(ngModel)]="usuario[0].telefone" />
-        <label htmlFor="username">Telefone</label>
+        <p-inputMask
+          mask="(99) 99999-9999"
+          [(ngModel)]="usuario[0].telefone"
+          id="telefonePrincipal"
+          #telefoneprincipal="ngModel"
+          ></p-inputMask>
+        <label htmlFor="Telefone principal">Telefone</label>
       </span>
     </div>
     <div class="divInput">
@@ -25,29 +30,18 @@
         </span>
      </div>
     </div>
-    <div class="divInput">
-      <div class="p-inputgroup">
-        <span class="p-float-label">
-          <input [disabled]="true" pInputText id="username" [(ngModel)]="usuario[0].cpfOuCnpj" />
-          <label htmlFor="username">CPF</label>
-        </span>
-        <span class="p-inputgroup-addon">
-            <i class="fa-solid fa-lock"></i>
-        </span>
-     </div>
-    </div>
     <div class="containerBotoes">
-      <div class="botaoAlterarSenha">
-        <p-button (click)="showDialog('senha')" label="Alterar senha" styleClass="p-button-raised p-button-warning"></p-button>
+      <div class="botaoSalvarAlterações">
+        <p-button label="Salvar alterações" styleClass="p-button-raised p-button-success"></p-button>
       </div>
     </div>
     <hr class="hr">
     <div class="containerBotoesExcluirESalvarConta">
-      <div class="botaoAlterarEmail">
-        <p-button (click)="showDialogSalvar()" label="Salvar alterações" styleClass="p-button-raised p-button-success"></p-button>
+      <div class="botaoAlterarSenha">
+        <p-button (click)="showDialog('senha')" label="Alterar senha" styleClass="p-button-raised p-button-warning"></p-button>
       </div>
       <div class="botaoAlterarSenha">
-        <p-button label="Excluir conta" styleClass="p-button-raised p-button-danger"></p-button>
+        <p-button (click)="showDialog('email')" label="Alterar email" styleClass="p-button-raised"></p-button>
       </div>
     </div>
   </div>
@@ -170,7 +164,7 @@
 
   </div>
 
-  <p-dialog [focusTrap]="true" [closeOnEscape]="true" [draggable]="false" [resizable]="false" [(visible)]="dialogVisible" [style]="{ width: '50%', height: '65%' }">
+  <p-dialog [focusTrap]="true" [closeOnEscape]="true" [draggable]="false" [resizable]="false" [(visible)]="dialogVisible" [style]="{ width: '50%', height: '70%' }">
     <div class="containerGeralDialog">
       <div class="containerLabelAlterarEmail">
         <div>
@@ -188,111 +182,116 @@
       <div class="containerInputsDialog">
         <div class="divInput" *ngIf="dialogType === 'email'">
           <span class="p-float-label">
-            <input pInputText id="new-email" [(ngModel)]="newEmail" />
+            <input
+              pInputText
+              id="new-email"
+              [(ngModel)]="newEmail"
+              #newEmailInput="ngModel"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
             <label htmlFor="new-email">Digite seu novo e-mail</label>
           </span>
+          <small
+            *ngIf="
+            newEmailInput.invalid && (newEmailInput.dirty  || newEmailInput.touched)
+            "
+            class="p-error"
+          >
+            Formato de email inválido
+          </small>
         </div>
         <div class="divInput" *ngIf="dialogType === 'email'">
           <span class="p-float-label">
-            <input pInputText id="new-email" [(ngModel)]="newEmail" />
+            <input
+              pInputText
+              id="new-email"
+              [(ngModel)]="newEmailConfirm"
+              #newEmailConfirmInput="ngModel"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
             <label htmlFor="new-email">Confirme seu novo e-mail</label>
           </span>
+          <small
+            *ngIf="
+            newEmailConfirmInput.invalid && (newEmailConfirmInput.dirty  || newEmailConfirmInput.touched)
+            "
+            class="p-error"
+          >
+            Formato de email inválido
+          </small>
         </div>
         <div class="divInput" *ngIf="dialogType === 'email'">
           <span class="p-float-label">
-            <p-password id="current-password" [(ngModel)]="currentPassword" [feedback]="false" [toggleMask]="true"></p-password>
-            <label htmlFor="current-password">Digite sua senha</label>
+            <input pInputText id="token" [(ngModel)]="tokenEmail" />
+            <label htmlFor="token">Insira o código que foi enviado ao seu email atual</label>
           </span>
         </div>
 
         <div class="divInput" *ngIf="dialogType === 'senha'">
           <span class="p-float-label">
-            <p-password id="current-password" [(ngModel)]="currentPassword" [feedback]="false" [toggleMask]="true"></p-password>
-            <label htmlFor="current-password">Digite sua senha atual</label>
+            <p-password
+              id="password"
+              type="password"
+              name="password"
+              #passwordInput="ngModel"
+              [(ngModel)]="newPassword"
+              [feedback]="false"
+              [toggleMask]="true"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+            ></p-password>
+            <label htmlFor="current-password">Digite sua nova senha</label>
           </span>
+          <small
+                *ngIf="
+                passwordInput.invalid &&
+                  (passwordInput.dirty  || passwordInput.touched)
+                "
+                class="p-error"
+              >
+                Formato de senha invalido. A senha deve conter no mínimo 8
+                caracteres com pelo menos uma letra e um número.
+              </small>
         </div>
         <div class="divInput" *ngIf="dialogType === 'senha'">
           <span class="p-float-label">
-            <p-password id="new-password" [(ngModel)]="newPassword" [feedback]="false" [toggleMask]="true"></p-password>
-            <label htmlFor="new-password">Digite a nova senha</label>
+            <p-password
+              id="passwordRepetir"
+              type="passwordRepetir"
+              name="passwordRepetir"
+              #passwordInputConfirm="ngModel"
+              placeholder="Digite novamente sua senha"
+              [(ngModel)]="newPasswordConfirm"
+              [feedback]="false"
+              [toggleMask]="true"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+            ></p-password>
+            <label htmlFor="new-password">Confirme sua nova senha</label>
           </span>
+          <small *ngIf="newPassword != newPasswordConfirm" class="p-error">
+            As senhas devem ser iguais e atender ao formato de senha exigido.
+          </small>
         </div>
         <div class="divInput" *ngIf="dialogType === 'senha'">
           <span class="p-float-label">
-            <p-password id="confirm-new-password" [(ngModel)]="confirmNewPassword" [feedback]="false" [toggleMask]="true"></p-password>
-            <label htmlFor="confirm-new-password">Confirme a nova senha</label>
+            <input pInputText id="token" [(ngModel)]="tokenSenha" />
+            <label htmlFor="token">Insira o código que foi enviado ao seu email atual</label>
           </span>
         </div>
         <div class="botaoDialog">
-          <p-button (click)="alterarDados()" label="Enviar"></p-button>
+          <p-button
+            *ngIf="dialogType === 'senha'"
+            label="Alterar senha"
+            [disabled]="isButtonDisabledSenha()"
+          ></p-button>
+          <p-button
+            *ngIf="dialogType === 'email'"
+            label="Alterar email"
+            [disabled]="isButtonDisabled()"
+          ></p-button>
         </div>
       </div>
     </div>
   </p-dialog>
 
-  <p-dialog [focusTrap]="true" [closeOnEscape]="true" [draggable]="false" [resizable]="false" [(visible)]="dialogVisibleSalvar" [style]="{ width: '30%', height: '65%' }">
-    <div class="containerGeralDialog">
-      <div class="containerLabelAlterarMeusDados">
-        <div>
-          <i class="fa-solid fa-floppy-disk" style="font-size: 1.5rem"></i>
-        </div>
-        <div>
-          <h1 class="h1Dialog">Alterar meus dados</h1>
-        </div>
-      </div>
 
-      <div class="labelPreencherCampos" >
-        <div>
-          Para realizarmos a alteração dos dados, enviaremos um código para seu celular ou e-mail cadastrado.
-        </div>
-        <div class="opcaoDesejada">
-          Selecione a opção desejada:
-        </div>
-      </div>
-
-      <div class="containerFormarEnvios" >
-
-        <div class="envioEmail" *ngIf="usuario">
-          <div class="containerIconLabel">
-            <div>
-              <i class="fa-solid fa-envelope" style="font-size: 1.5rem"></i>
-            </div>
-            <div>
-              <h3 class="h1Dialog">Email</h3>
-            </div>
-            <br>
-            <div class="containerLabelEmail">
-              <div>Enviaremos o código para o email:</div>
-              <br>
-              <div class="labelEmail">
-                {{usuario[0].email}}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="envioSms" *ngIf="usuario">
-          <div class="containerIconLabel">
-            <div>
-              <i class="fa-solid fa-mobile-screen-button" style="font-size: 1.5rem"></i>
-            </div>
-            <div>
-              <h3 class="h1Dialog">SMS</h3>
-            </div>
-            <br>
-            <div class="containerLabelEmail">
-              <div>Enviaremos o código para o telefone:</div>
-              <br>
-              <div class="labelEmail">
-                {{usuario[0].telefone}}
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </p-dialog>
 
 </div>
 

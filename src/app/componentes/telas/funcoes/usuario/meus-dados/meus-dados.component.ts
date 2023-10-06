@@ -17,9 +17,9 @@ export class MeusDadosComponent {
   dialogVisibleSalvar: boolean = false;
   dialogType: 'email' | 'senha' = 'email';
   newEmail: string = '';
-  currentPassword: string = '';
+  newEmailConfirm: string = '';
   newPassword: string = '';
-  confirmNewPassword: string = '';
+  newPasswordConfirm: string = '';
   divEnderecos: boolean = true;
   divNovoEndereco: boolean = false
   id!: number;
@@ -34,6 +34,8 @@ export class MeusDadosComponent {
   enderecoEditando: EnderecoEntrega | null = null;
   buttonSalvarEnderecoNovoEndereco: boolean = false;
   buttonSalvarEnderecoEditar: boolean = false;
+  tokenEmail!: string;
+  tokenSenha!: string;
 
   novoEndereco: EnderecoEntrega = {
     identificacao: '',
@@ -58,7 +60,7 @@ export class MeusDadosComponent {
         console.log(this.enderecosEntrega)
 
 
-        
+
       }
     );
 
@@ -205,4 +207,42 @@ export class MeusDadosComponent {
     this.disableAddressFields = !!hasAddress;
   }
 
+  onKeyPressWord(event: KeyboardEvent): void {
+    const allowedCharacters = /[A-Za-zÀ-ÿ'\- ]/; // Permitir letras, acentos, apóstrofos e espaços
+    const inputChar = event.key;
+
+    if (!allowedCharacters.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
+  isPasswordValid(): boolean {
+    const regexPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return regexPattern.test(this.newPassword);
+  }
+
+  isEmailValid(): boolean {
+    const regexPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    return regexPattern.test(this.newEmail);
+  }
+
+  isButtonDisabledSenha(): boolean {
+    return (
+      !this.newPassword ||
+      !this.newPasswordConfirm ||
+      !this.tokenSenha ||
+      (this.newPassword !== this.newPasswordConfirm) ||
+      !this.isPasswordValid()
+    );
+  }
+
+  isButtonDisabled(): boolean {
+    return (
+      !this.newEmail ||
+      !this.newEmailConfirm ||
+      !this.tokenEmail ||
+      (this.newEmail !== this.newEmailConfirm) ||
+      !this.isEmailValid()
+    );
+  }
 }

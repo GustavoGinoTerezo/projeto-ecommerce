@@ -21,7 +21,7 @@
         <div class="containerInputs margem" *ngFor="let produto of produtosSelecionados; let i = index">
             <div class="containerExterno">
               <div class="p-float-label containerInterno">
-                <input pInputText inputId="integeronly" [(ngModel)]="quantidadeProdutos[i]" (ngModelChange)="onQuantidadeChange(produto, quantidadeProdutos[i])" class="inputQuantidade">
+                <input pInputText inputId="integeronly" [(ngModel)]="quantidadeProdutos[i]" (ngModelChange)="onQuantidadeChange(produto, quantidadeProdutos[i])" class="inputQuantidade" (keypress)="onKeyPress($event)">
                 <label htmlFor="number-input">Quantidade {{ produto.nome }}</label>
               </div>
             </div>

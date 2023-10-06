@@ -29,6 +29,10 @@
   margin-bottom: 15px;
 }
 
+.botaoSalvarAlterações{
+  width: 100%;
+}
+
 .containerBotoesExcluirESalvarConta{
   display: flex;
   width: 100%;
@@ -45,6 +49,10 @@
 }
 
 :host ::ng-deep .botaoAlterarEmail .p-button{
+  width: 100%;
+}
+
+:host ::ng-deep .botaoSalvarAlterações .p-button{
   width: 100%;
 }
 

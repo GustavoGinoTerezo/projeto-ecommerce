@@ -20,6 +20,7 @@ export class CriarContaComponent {
   nomeCompleto!: string;
   telefonePrincipal!: string;
   telefoneSecundario!: string;
+  cpfOuCnpj!: number;
   endereco!: string;
   bairro!: string;
   cidade!: string;
@@ -29,8 +30,10 @@ export class CriarContaComponent {
   cep!: number | null
   checkbox: boolean = false
   checkboxTelefone: boolean = false
+  numeroResidencia!: number;
   estado!: Estado[];
   estadoSelecionado!: Estado;
+  complemento!: string;
   emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   ngOnInit() {
@@ -194,6 +197,24 @@ export class CriarContaComponent {
     return telefone.replace(/\D/g, '');
   }
 
+  checkedRegex(email: string): boolean {
+    const regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    return regex.test(email);
+  }
+
+  navigateLogin(){
+    this.router.navigate(['/login']);
+  }
+
+  onKeyPressWord(event: KeyboardEvent): void {
+    const allowedCharacters = /[A-Za-zÀ-ÿ'\- ]/; // Permitir letras, acentos, apóstrofos e espaços
+    const inputChar = event.key;
+
+    if (!allowedCharacters.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
   onKeyPress(event: KeyboardEvent) {
     const allowedChars = /[0-9]/g; // Expressão regular para permitir apenas números
 
@@ -202,15 +223,6 @@ export class CriarContaComponent {
     if (!inputChar.match(allowedChars)) {
       event.preventDefault(); // Impede a entrada de caracteres não numéricos
     }
-  }
-
-  checkedRegex(email: string): boolean {
-    const regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-    return regex.test(email);
-  }
-
-  navigateLogin(){
-    this.router.navigate(['/login']);
   }
 
 }

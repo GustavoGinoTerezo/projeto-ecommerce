@@ -125,6 +125,14 @@
     width: 49%;
   }
 
+  .tamanhoInputsNome{
+    width: 60%;
+  }
+
+  .tamanhoInputsCpfOuCnpj{
+    width: 39%;
+  }
+
   .tamanhoInputsInteiro{
     width: 100%;
   }

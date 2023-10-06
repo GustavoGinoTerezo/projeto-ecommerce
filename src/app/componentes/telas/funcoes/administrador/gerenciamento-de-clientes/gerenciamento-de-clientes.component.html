@@ -6,28 +6,35 @@
         <span class="p-float-label">
           <input pInputText id="username"
           [(ngModel)]="nome"
+          (keypress)="onKeyPressWord($event)"
           />
           <label htmlFor="username"
           >Nome completo</label>
         </span>
-      </div>
-      <div class="divInputCpf">
-        <span class="p-float-label">
-          <input pInputText
-          id="username"
-          [(ngModel)]="cpfOuCnpj"
-          oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-          <label htmlFor="username">CPF ou CNPJ</label>
-        </span>
+
       </div>
     </div>
     <div class="containerEmailETelefone">
       <div class="divInputEmail">
         <span class="p-float-label">
-          <input pInputText id="username"
-          [(ngModel)]="email"/>
-          <label htmlFor="username">Email principal</label>
+          <input
+            pInputText
+            id="email"
+            name="email"
+            [(ngModel)]="email"
+            #emailInput="ngModel"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            />
+          <label htmlFor="email">Email principal</label>
         </span>
+        <small
+          *ngIf="
+          emailInput.invalid && (emailInput.dirty  || emailInput.touched)
+          "
+          class="p-error"
+        >
+          Formato de email inválido
+        </small>
       </div>
       <div class="divInputTelefone">
         <span class="p-float-label">
@@ -52,12 +59,24 @@
             <div class="containerInputEDropDown">
               <div class="divInputEmailAlternativo">
                 <span class="p-float-label">
-                  <input pInputText id="username"
-                  [(ngModel)]="emailAlternativo"
-                  />
-                  <label htmlFor="username"
-                  >Email alternativo</label>
+                  <input
+                    pInputText
+                    id="emailAlternativo"
+                    name="emailAlternativo"
+                    [(ngModel)]="emailAlternativo"
+                    #emailInputAlternativo="ngModel"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    />
+                  <label htmlFor="emailAlternativo">Email Alternativo</label>
                 </span>
+                <small
+                  *ngIf="
+                  emailInputAlternativo.invalid && (emailInputAlternativo.dirty  || emailInputAlternativo.touched)
+                  "
+                  class="p-error"
+                >
+                  Formato de email inválido
+                </small>
               </div>
               <div class="divDropDown">
                 <p-dropdown
@@ -236,6 +255,13 @@
         <label htmlFor="username">Nº da residência</label>
       </span>
     </div>
+    <div class="divInputComplemento">
+      <span class="p-float-label">
+        <input pInputText id="complemento"
+        [(ngModel)]="complemento"/>
+        <label htmlFor="complemento">Complemento</label>
+      </span>
+    </div>
   </div>
   </div>
 
@@ -338,6 +364,13 @@
             <label htmlFor="username">Nº da residência</label>
           </span>
         </div>
+        <div class="divInputComplemento">
+          <span class="p-float-label">
+            <input pInputText id="complemento"
+            [(ngModel)]="complementoEntrega"/>
+            <label htmlFor="complemento">Complemento</label>
+          </span>
+        </div>
       </div>
       <div class="containerBotoes" *ngIf="botaoDiv">
         <div class="divInputs">
@@ -383,25 +416,12 @@
     <hr class="hr2">
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
   <div class="containerBotoes">
       <div class="divInputs">
         <p-button label="Adicionar usuário"
         [disabled]="botaoDisabled ||
         !nome ||
         !email ||
-        !cpfOuCnpj ||
         !telefone ||
         !cep ||
         !cidade ||
@@ -455,7 +475,6 @@
               <tr>
                   <th>Nome</th>
                   <th>Email</th>
-                  <th>CPF ou CNPJ</th>
                   <th>Telefone</th>
                   <th>CEP</th>
               </tr>
@@ -464,11 +483,10 @@
             <tr [pSelectableRow]="usuario">
                 <td>{{ usuario?.nome }}</td>
                 <td>{{ usuario?.email }}</td>
-                <td>{{ usuario?.cpfOuCnpj }}</td>
                 <td>{{ usuario?.telefone }}</td>
                 <td>{{ usuario?.cep }}</td>
             </tr>
         </ng-template>
       </p-table>
   </div>
-</div>
+  </div>

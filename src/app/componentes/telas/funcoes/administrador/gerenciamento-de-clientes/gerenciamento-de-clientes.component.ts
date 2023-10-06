@@ -20,7 +20,6 @@ export class GerenciamentoDeClientesComponent {
 
   nome: string = '';
   email: string = '';
-  cpfOuCnpj!: number | null
   cep!: number | null
   telefone!: number | null
   cidade: string = '';
@@ -29,14 +28,14 @@ export class GerenciamentoDeClientesComponent {
   numeroResidencia!: number | null
   emailAlternativo: string = '';
   telefoneAlternativo!: number | null;
-
+  complemento!: string;
   identificacaoEndereco: string = '';
   cepEntrega!: number | null
   cidadeEntrega: string = '';
   bairroEntrega: string = '';
   ruaEntrega: string = '';
   numeroResidenciaEntrega!: number | null
-
+  complementoEntrega!: string;
   habilitarEmailAlternativo: boolean = false;
   habilitarTelefoneAlternativo: boolean = false;
   habilitarEnderecoEntrega: boolean = false;
@@ -62,13 +61,11 @@ export class GerenciamentoDeClientesComponent {
     } else {
       this.usuariosFiltrados = this.usuarios.filter(usuario => {
         const cepString = usuario.cep?.toString() || ''
-        const cpfOuCnpjString = usuario.cpfOuCnpj?.toString() || ''
         const telefoneString = usuario.telefone?.toString() || ''
         return (
           usuario.nome?.toLowerCase().includes(filterValue) ||
           usuario.email?.toLowerCase().includes(filterValue) ||
           cepString.includes(filterValue) ||
-          cpfOuCnpjString.includes(filterValue) ||
           telefoneString.includes(filterValue)
         );
       });
@@ -79,7 +76,6 @@ export class GerenciamentoDeClientesComponent {
     if (this.usuarioSelecionado) {
       this.nome = this.usuarioSelecionado.nome || '';
       this.email = this.usuarioSelecionado.email || '';
-      this.cpfOuCnpj = this.usuarioSelecionado.cep || null;
       this.cep = this.usuarioSelecionado.cep || null;
       this.telefone = this.usuarioSelecionado.telefone || null;
       this.numeroResidencia = this.usuarioSelecionado.numeroResidencia || null;
@@ -96,7 +92,6 @@ export class GerenciamentoDeClientesComponent {
   limparCampos() {
     this.nome = '';
     this.email = '';
-    this.cpfOuCnpj = null;
     this.telefone = null;
     this.cep = null;
     this.cidade = '';
@@ -125,6 +120,20 @@ export class GerenciamentoDeClientesComponent {
 
   limparCamposTelefoneAlternativo() {
     this.telefoneAlternativo = null;
+  }
+
+  onKeyPressWord(event: KeyboardEvent): void {
+    const allowedCharacters = /[A-Za-zÀ-ÿ'\- ]/; // Permitir letras, acentos, apóstrofos e espaços
+    const inputChar = event.key;
+
+    if (!allowedCharacters.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
+  checkedRegex(email: string): boolean {
+    const regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    return regex.test(email);
   }
 
 }

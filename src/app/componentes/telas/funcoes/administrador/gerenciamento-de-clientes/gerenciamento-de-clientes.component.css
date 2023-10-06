@@ -92,6 +92,15 @@
   margin-right: 5px;
 }
 
+.divInputComplemento{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+
+}
+
 .divInputRua{
   display: flex;
   flex-direction: column;
@@ -104,9 +113,10 @@
 .divInputNumeroResidencia{
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 35%;
   padding: 13px 0;
   margin-bottom: 15px;
+  margin-right: 5px;
 }
 
 .containerInputs{
