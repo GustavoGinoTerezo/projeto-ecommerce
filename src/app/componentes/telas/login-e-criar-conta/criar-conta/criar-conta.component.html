@@ -210,7 +210,7 @@
         </div>
 
         <div class="endereco">
-          <div class="email field p-fluid mt-4 tamanhoInputs">
+          <div class="email field p-fluid mt-4 tamanhoInputsComplemento">
             <div class="inputs">
               <div class="containerInputCep">
                 <span class="p-float-label">
@@ -226,7 +226,7 @@
               </div>
             </div>
           </div>
-          <div class="email field p-fluid mt-4 tamanhoInputs">
+          <div class="email field p-fluid mt-4 tamanhoInputsResidencia">
             <div class="inputs">
               <span class="p-float-label">
                 <input
@@ -314,24 +314,9 @@
       <div class="divInputs">
         <p-button
           label="Cadastrar"
-          [disabled]="
-          !emailCadastroPrincipal ||
-          !nomeCompleto ||
-          !telefonePrincipal ||
-          !endereco ||
-          !bairro ||
-          !cidade ||
-          !estado ||
-          (passwordCadastro !== passwordCadastroRepetir) ||
-          !passwordCadastro ||
-          !passwordCadastroRepetir ||
-          !checked ||
-          checkbox && !checkedRegex(emailCadastroSecundario) ||
-          checkboxTelefone && !telefoneSecundario
-          "
+          [disabled]="!isValid()"
           (onClick)="cadastrar()"
-          >
-        </p-button>
+        ></p-button>
       </div>
 
 

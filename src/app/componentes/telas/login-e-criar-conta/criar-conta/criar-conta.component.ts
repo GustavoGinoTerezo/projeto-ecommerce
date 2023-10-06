@@ -225,4 +225,39 @@ export class CriarContaComponent {
     }
   }
 
+  isValid(): boolean {
+    // Lógica para verificar todas as condições
+    if (
+      !this.emailCadastroPrincipal ||
+      !this.nomeCompleto ||
+      !this.cpfOuCnpj ||
+      !this.telefonePrincipal ||
+      !this.endereco ||
+      !this.bairro ||
+      !this.cidade ||
+      !this.estado ||
+      (this.passwordCadastro !== this.passwordCadastroRepetir) ||
+      !this.passwordCadastro ||
+      !this.passwordCadastroRepetir ||
+      !this.checked
+    ) {
+      return false;
+    }
+
+    if (this.checkbox) {
+      if (!this.checkedRegex(this.emailCadastroSecundario)) {
+        return false;
+      }
+    }
+
+    if (this.checkboxTelefone) {
+      if (!this.telefoneSecundario) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+
 }

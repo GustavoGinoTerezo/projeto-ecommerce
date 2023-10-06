@@ -130,11 +130,19 @@
   }
 
   .tamanhoInputsCpfOuCnpj{
-    width: 39%;
+    width: 38%;
   }
 
   .tamanhoInputsInteiro{
     width: 100%;
+  }
+
+  .tamanhoInputsComplemento{
+    width: 60%;
+  }
+
+  .tamanhoInputsResidencia{
+    width: 38%;
   }
 }
 
