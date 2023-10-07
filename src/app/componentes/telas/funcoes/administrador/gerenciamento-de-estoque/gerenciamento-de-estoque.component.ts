@@ -36,6 +36,7 @@ export class GerenciamentoDeEstoqueComponent {
   produtosSelecionados: any[] = []
   quantidadeProdutos: number[] = []
   produtos: Produtos[] = []
+  numeroNotaFiscal!: string;
 
   constructor(
     private categoriasService: ServiceCategoriasService,
@@ -174,5 +175,5 @@ export class GerenciamentoDeEstoqueComponent {
       event.preventDefault(); // Impede a entrada de caracteres não numéricos
     }
   }
-  
+
 }

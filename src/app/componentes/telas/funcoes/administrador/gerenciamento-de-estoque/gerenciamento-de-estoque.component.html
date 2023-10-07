@@ -12,7 +12,7 @@
         </span>
         </div>
         <div class="containerInput p-float-label">
-          <input class="inputQuant" pInputText type="text" /><label htmlFor="number-input">Número da nota fiscal</label>
+          <input class="inputQuant" [(ngModel)]="numeroNotaFiscal" pInputText type="text" /><label htmlFor="number-input">Número da nota fiscal</label>
         </div>
       </div>
 
@@ -30,7 +30,12 @@
 
 
       <div class="containerBotoes">
-        <p-button styleClass="p-button-success" label="Enviar Entrada" (click)="onEnviarEntrada()"></p-button>
+        <p-button
+          styleClass="p-button-success"
+          label="Enviar Entrada"
+          (click)="onEnviarEntrada()"
+        >
+        </p-button>
       </div>
 
     </div>

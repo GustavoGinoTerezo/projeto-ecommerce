@@ -233,22 +233,38 @@
   <div class="containerBotoesAdicionarProdutos">
     <div class="divInputs">
       <p-button label="Adicionar produto"
-      [disabled]="
-      adicionarProdutoDisabled ||
-      !nomeProduto ||
-      !categoriasSelecionadaInput ||
-      !valorProdutoFormatted ||
-      !selectedStatus ||
-      !selectedLayout ||
-      !descBreve ||
-      !descCompleta"
-      styleClass="p-button-raised p-button-success"
-      (onClick)="adicionarProduto()"
+        [disabled]="
+        adicionarProdutoDisabled ||
+        !nomeProduto ||
+        !pesoProduto ||
+        !alturaProduto ||
+        !larguraProduto ||
+        !comprimentoProduto ||
+        !categoriasSelecionadaInput ||
+        !valorProdutoFormatted ||
+        !selectedStatus ||
+        !selectedLayout ||
+        !descBreve ||
+        !descCompleta"
+        styleClass="p-button-raised p-button-success"
+        (onClick)="adicionarProduto()"
       ></p-button>
     </div>
     <div class="divInputs">
       <p-button label="Atualizar produto"
-      [disabled]="!adicionarProdutoDisabled"
+      [disabled]="
+        !adicionarProdutoDisabled ||
+        !nomeProduto ||
+        !pesoProduto ||
+        !alturaProduto ||
+        !larguraProduto ||
+        !comprimentoProduto ||
+        !categoriasSelecionadaInput ||
+        !valorProdutoFormatted ||
+        !selectedStatus ||
+        !selectedLayout ||
+        !descBreve ||
+        !descCompleta"
       styleClass="p-button-raised p-button-warning"
       (onClick)="atualizarProduto()"
       ></p-button>
@@ -262,14 +278,14 @@
     <div class="divInputs">
       <p-button
         label="Limpar campos"
-      [disabled]="
-      !nomeProduto ||
-      !categoriasSelecionadaInput ||
-      !valorProdutoFormatted ||
-      !selectedStatus ||
-      !selectedLayout ||
-      !descBreve ||
-      !descCompleta"
+        [disabled]="
+        !nomeProduto ||
+        !categoriasSelecionadaInput ||
+        !valorProdutoFormatted ||
+        !selectedStatus ||
+        !selectedLayout ||
+        !descBreve ||
+        !descCompleta"
         (click)="limparCampos()"
         styleClass="p-button-raised p-button-info"
       ></p-button>

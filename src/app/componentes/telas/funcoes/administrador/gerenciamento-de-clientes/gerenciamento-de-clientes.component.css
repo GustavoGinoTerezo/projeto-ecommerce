@@ -10,7 +10,7 @@
 .divInputNome{
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   padding: 13px 0;
   margin-right: 5px;
   margin-bottom: 15px;
@@ -79,6 +79,15 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divDropdownEstado{
+  display: flex;
+  flex-direction: column;
+  width: 35%;
   padding: 13px 0;
   margin-bottom: 15px;
 }

@@ -2,7 +2,11 @@ import { Usuario } from 'src/app/services/serviceUsuarioLogado/service-usuario-l
 import { Component } from '@angular/core';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 
-
+interface Estado {
+  nome: string;
+  uf: string;
+  icms: number;
+}
 
 @Component({
   selector: 'app-gerenciamento-de-clientes',
@@ -20,6 +24,7 @@ export class GerenciamentoDeClientesComponent {
 
   nome: string = '';
   email: string = '';
+  cpfOuCnpj!: number | null;
   cep!: number | null
   telefone!: number | null
   cidade: string = '';
@@ -40,11 +45,47 @@ export class GerenciamentoDeClientesComponent {
   habilitarTelefoneAlternativo: boolean = false;
   habilitarEnderecoEntrega: boolean = false;
 
+  estado!: Estado[];
+  estadoSelecionadoCobranca!: Estado;
+  estadoSelecionadoEntrega!: Estado;
+
+  emailValid: boolean = false;
+
   constructor(
     private usuariosService: ServiceUsuariosService,
   ){}
 
   ngOnInit(){
+
+    this.estado = [
+      { nome: 'Acre', uf: 'ac', icms: 0 },
+      { nome: 'Alagoas', uf: 'al', icms: 0 },
+      { nome: 'Amapá', uf: 'ap', icms: 0 },
+      { nome: 'Amazonas', uf: 'am', icms: 0 },
+      { nome: 'Bahia', uf: 'ba', icms: 0 },
+      { nome: 'Ceará', uf: 'ce', icms: 0 },
+      { nome: 'Distrito Federal', uf: 'df', icms: 0 },
+      { nome: 'Espírito Santo', uf: 'es', icms: 0 },
+      { nome: 'Goiás', uf: 'go', icms: 0 },
+      { nome: 'Maranhão', uf: 'ma', icms: 0 },
+      { nome: 'Mato Grosso', uf: 'mt', icms: 0 },
+      { nome: 'Mato Grosso do Sul', uf: 'ms', icms: 0 },
+      { nome: 'Minas Gerais', uf: 'mg', icms: 0 },
+      { nome: 'Pará', uf: 'pa', icms: 0 },
+      { nome: 'Paraíba', uf: 'pb', icms: 0 },
+      { nome: 'Paraná', uf: 'pr', icms: 0 },
+      { nome: 'Pernambuco', uf: 'pe', icms: 0 },
+      { nome: 'Piauí', uf: 'pi', icms: 0 },
+      { nome: 'Rio de Janeiro', uf: 'rj', icms: 0 },
+      { nome: 'Rio Grande do Norte', uf: 'rn', icms: 0 },
+      { nome: 'Rio Grande do Sul', uf: 'rs', icms: 0 },
+      { nome: 'Rondônia', uf: 'ro', icms: 0 },
+      { nome: 'Roraima', uf: 'rr', icms: 0 },
+      { nome: 'Santa Catarina', uf: 'sc', icms: 0 },
+      { nome: 'São Paulo', uf: 'sp', icms: 0 },
+      { nome: 'Sergipe', uf: 'se', icms: 0 },
+      { nome: 'Tocantins', uf: 'to', icms: 0}
+    ];
 
 
     this.usuariosService.getUsuarioTabela().then((data) => {
@@ -83,6 +124,8 @@ export class GerenciamentoDeClientesComponent {
       this.rua = this.usuarioSelecionado.rua || '';
       this.cidade = this.usuarioSelecionado.cidade || '';
 
+      this.validateEmail()
+
       this.botaoDisabled = true;
       this.botaoDiv = true;
 
@@ -91,6 +134,7 @@ export class GerenciamentoDeClientesComponent {
 
   limparCampos() {
     this.nome = '';
+    this.cpfOuCnpj = null;
     this.email = '';
     this.telefone = null;
     this.cep = null;
@@ -98,6 +142,7 @@ export class GerenciamentoDeClientesComponent {
     this.bairro = '';
     this.rua = '';
     this.numeroResidencia = null;
+    this.complemento = '';
 
     this.botaoDisabled = false;
     this.botaoDiv = false;
@@ -134,6 +179,21 @@ export class GerenciamentoDeClientesComponent {
   checkedRegex(email: string): boolean {
     const regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     return regex.test(email);
+  }
+
+  onKeyPress(event: KeyboardEvent) {
+    const allowedChars = /[0-9]/g; // Expressão regular para permitir apenas números
+
+    const inputChar = event.key;
+
+    if (!inputChar.match(allowedChars)) {
+      event.preventDefault(); // Impede a entrada de caracteres não numéricos
+    }
+  }
+
+  validateEmail() {
+    const emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    this.emailValid = emailPattern.test(this.email);
   }
 
 }

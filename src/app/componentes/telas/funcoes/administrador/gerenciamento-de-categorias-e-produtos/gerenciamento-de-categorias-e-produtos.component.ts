@@ -53,10 +53,12 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   valorProdutoFormatted!: number | null;
   categoriasAdicionarSelecionadaInput: any;
   nomeCategoriaSelecionada!: string;
-  pesoProduto!: number;
-  alturaProduto!: number;
-  larguraProduto!: number;
-  comprimentoProduto!: number;
+
+  pesoProduto!: number | null;
+  alturaProduto!: number | null;
+  larguraProduto!: number | null;
+  comprimentoProduto!: number | null;
+
   adicionarCategoriaDisabled: boolean = false;
   adicionarProdutoDisabled: boolean = false;
   isDragOver = false;
@@ -258,6 +260,10 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.adicionarProdutoDisabled = false;
     this.nomeProduto = '';
     this.valorProdutoFormatted = null;
+    this.pesoProduto = null;
+    this.alturaProduto = null;
+    this.larguraProduto = null;
+    this.comprimentoProduto = null;
     this.descCompleta = '';
     this.descBreve = '';
     this.quantidadeProduto = null;

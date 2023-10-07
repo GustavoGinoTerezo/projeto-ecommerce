@@ -11,7 +11,18 @@
           <label htmlFor="username"
           >Nome completo</label>
         </span>
-
+      </div>
+      <div class="divInputCpf">
+        <span class="p-float-label">
+          <input
+            pInputText
+            id="username"
+            [(ngModel)]="cpfOuCnpj"
+            (keypress)="onKeyPress($event)"
+          />
+          <label htmlFor="username"
+          >CPF ou CNPJ</label>
+        </span>
       </div>
     </div>
     <div class="containerEmailETelefone">
@@ -24,9 +35,10 @@
             [(ngModel)]="email"
             #emailInput="ngModel"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            />
+            (ngModelChange)="validateEmail()"
+          />
           <label htmlFor="email">Email principal</label>
-        </span>
+      </span>
         <small
           *ngIf="
           emailInput.invalid && (emailInput.dirty  || emailInput.touched)
@@ -228,6 +240,9 @@
         <label htmlFor="username">Cidade</label>
       </span>
     </div>
+    <div class="divDropdownEstado">
+      <p-dropdown [options]="estado"  [showClear]="true" [(ngModel)]="estadoSelecionadoCobranca" placeholder="Estado" optionLabel="nome"></p-dropdown>
+    </div>
   </div>
   <div class="containerBairroRuaENumeroResidencia">
     <div class="divInputBairro">
@@ -336,6 +351,9 @@
             <label htmlFor="username">Cidade</label>
           </span>
         </div>
+        <div class="divDropdownEstado">
+          <p-dropdown [options]="estado"  [showClear]="true" [(ngModel)]="estadoSelecionadoEntrega" placeholder="Estado" optionLabel="nome"></p-dropdown>
+        </div>
       </div>
       <div class="containerBairroRuaENumeroResidencia">
         <div class="divInputBairro">
@@ -419,20 +437,37 @@
   <div class="containerBotoes">
       <div class="divInputs">
         <p-button label="Adicionar usuário"
-        [disabled]="botaoDisabled ||
-        !nome ||
-        !email ||
-        !telefone ||
-        !cep ||
-        !cidade ||
-        !bairro ||
-        !rua ||
-        !numeroResidencia"  styleClass="p-button-raised p-button-success"></p-button>
+          [disabled]="botaoDisabled ||
+          !nome ||
+          !emailValid ||
+          !telefone ||
+          !cpfOuCnpj ||
+          !cep ||
+          !cidade ||
+          !bairro ||
+          !rua ||
+          !numeroResidencia ||
+          !estadoSelecionadoCobranca"
+          styleClass="p-button-raised p-button-success"
+        ></p-button>
+
       </div>
       <div class="divInputs">
         <p-button label="Atualizar usuário"
-        [disabled]="!botaoDisabled"
-        styleClass="p-button-raised p-button-warning"></p-button>
+          [disabled]="!botaoDisabled ||
+          !nome ||
+          !telefone ||
+          !cpfOuCnpj ||
+          !cep ||
+          !cidade ||
+          !bairro ||
+          !rua ||
+          !email ||
+          !emailValid ||
+          !numeroResidencia ||
+          !estadoSelecionadoCobranca"
+          styleClass="p-button-raised p-button-warning">
+        </p-button>
       </div>
       <div class="divInputs">
         <p-button label="Excluir conta"
