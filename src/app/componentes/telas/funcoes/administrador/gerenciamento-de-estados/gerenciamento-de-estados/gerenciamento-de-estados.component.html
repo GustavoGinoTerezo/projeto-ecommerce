@@ -11,7 +11,8 @@
     <div class="divInputUF">
       <span class="p-float-label">
         <input pInputText id="uf"
-        [(ngModel)]="uf"/>
+        [(ngModel)]="UfId"
+        [disabled]="atualizarOuExcluirId"/>
         <label htmlFor="uf">UF</label>
       </span>
     </div>
@@ -26,29 +27,34 @@
 
   <div class="containerBotoesAdicionarProdutos">
     <div class="divInputs">
-      <p-button label="Adicionar Estado"
-
+      <p-button
+        label="Adicionar Estado"
+        (onClick)="cadastrarEstado()"
+        [disabled]="desabilitarBotao || !nomeEstado || !UfId || !icms"
         styleClass="p-button-raised p-button-success"
-
       ></p-button>
     </div>
     <div class="divInputs">
-      <p-button label="Atualizar Estado"
-
-      styleClass="p-button-raised p-button-warning"
-
+      <p-button
+        label="Atualizar Estado"
+        [disabled]="!desabilitarBotao"
+        (onClick)="atualizarEstado()"
+        styleClass="p-button-raised p-button-warning"
       ></p-button>
     </div>
     <div class="divInputs">
-      <p-button label="Excluir Estado"
-
-      styleClass="p-button-raised p-button-danger"
+      <p-button
+        label="Excluir Estado"
+        [disabled]="!desabilitarBotao"
+        (onClick)="excluirEstado()"
+        styleClass="p-button-raised p-button-danger"
       ></p-button>
     </div>
     <div class="divInputs">
       <p-button
         label="Limpar campos"
-
+        [disabled]="!nomeEstado || !UfId || !icms"
+        (onClick)="limparCampos()"
         styleClass="p-button-raised p-button-info"
       ></p-button>
     </div>
@@ -80,14 +86,14 @@
         <tr>
           <th>Nome do Estado</th>
           <th>UF</th>
-          <th>ICMS</th>
+          <th>ICMS (%)</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-estado>
-        <tr [pSelectableRow]="estado" (click)="updateInputFieldsWithSelectedProduct()" >
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr [pSelectableRow]="estado" (click)="updateInputFieldsWithSelectedProduct(estado)" >
+          <td>{{estado.nome}}</td>
+          <td>{{estado.UfId}}</td>
+          <td>{{estado.icms}}</td>
         </tr>
       </ng-template>
     </p-table>

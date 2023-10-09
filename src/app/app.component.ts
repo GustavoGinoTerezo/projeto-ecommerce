@@ -25,11 +25,11 @@ export class AppComponent {
 
   async ngOnInit(){
 
-    this.categoriasService.atualizarCategoriasDaAPI();
+    // this.categoriasService.atualizarCategoriasDaAPI();
 
-    this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
+    // this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
 
-    this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
+    // this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
 
     this.ativarLateral();
 

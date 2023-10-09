@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ServiceApiEstadosService } from '../servicesAPI/serviceAPI-Estados/service-api-estados.service';
 
-interface Estado {
+export interface Estado {
   nome: string;
-  uf: string;
+  UfId: string;
   icms: number;
 }
 

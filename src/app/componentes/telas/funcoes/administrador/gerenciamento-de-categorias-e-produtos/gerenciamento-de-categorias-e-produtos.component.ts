@@ -210,7 +210,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.descBreve = produto.descBreve || '';
     this.descCompleta = produto.descCompleta || '';
 
-    this.adicionarProdutoDisabled = true;
     this.selectedProductImages = produto.imagem || [];
 
     // Adicione um console.log para registrar todos os campos

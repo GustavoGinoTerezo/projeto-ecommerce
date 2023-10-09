@@ -24,13 +24,13 @@ export class ServiceApiEstadosService {
     return this.http.post<any>(url, data);
   }
 
-  atualizarEstado(idEstado: number, novosDados: any) {
+  atualizarEstado(idEstado: string, novosDados: any) {
     const endpoint = `uf/${idEstado}`;
     const url = this.urlGlobal.url + endpoint;
     return this.http.put<any>(url, novosDados);
   }
 
-  excluirEstado(idEstado: number) {
+  excluirEstado(idEstado: string) {
     const endpoint = `uf/${idEstado}`;
     const url = this.urlGlobal.url + endpoint;
     return this.http.delete<any>(url);
