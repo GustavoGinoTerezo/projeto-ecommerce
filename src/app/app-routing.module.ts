@@ -19,6 +19,7 @@ import { RelatoriosDeVendasEControleDePedidosComponent } from './componentes/tel
 import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-comentarios/gerenciamento-de-comentarios/gerenciamento-de-comentarios.component';
 import { GerenciamentoDeFornecedoresComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-fornecedores/gerenciamento-de-fornecedores.component';
 import { GerenciamentoDeEstadosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-estados/gerenciamento-de-estados/gerenciamento-de-estados.component';
+import { GerenciamentoDeCaixasComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-caixas/gerenciamento-de-caixas/gerenciamento-de-caixas.component';
 
 
 const routes: Routes = [
@@ -95,6 +96,10 @@ const routes: Routes = [
   {
     path: 'personalizacao',
     component: PersonalizacaoComponent,
+  },
+  {
+    path: 'gerenciamento-de-caixas',
+    component: GerenciamentoDeCaixasComponent,
   },
   {
     path: 'gerenciamento-de-comentarios',

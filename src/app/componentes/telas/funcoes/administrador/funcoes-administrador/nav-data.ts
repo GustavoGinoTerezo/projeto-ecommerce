@@ -27,6 +27,11 @@ export const navbarData: INavbarData[] = [
     label: 'Gerenciamento de Comentários',
   },
   {
+    routerLink: 'gerenciamento-de-caixas',
+    icon: 'fa-solid fa-boxes-stacked',
+    label: 'Gerenciamento de Caixas',
+  },
+  {
     routerLink: 'gerenciamento-de-fornecedores',
     icon: 'fa-solid fa-building',
     label: 'Gerenciamento de Fornecedores',
