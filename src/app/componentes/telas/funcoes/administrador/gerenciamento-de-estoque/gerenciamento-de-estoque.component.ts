@@ -34,9 +34,11 @@ export class GerenciamentoDeEstoqueComponent {
   originalQuantEntrada: Entrada[] = [];
   originalQuantSaida: Saida[] = [];
   produtosSelecionados: any[] = []
-  quantidadeProdutos: number[] = []
+  quantidadeProdutos: (any | null)[] = [];
   produtos: Produtos[] = []
   numeroNotaFiscal!: string;
+  botaoEnviarDesabilitado: boolean = true;
+  quantidadePreenchida: { [key: number]: boolean } = {};
 
   constructor(
     private categoriasService: ServiceCategoriasService,
@@ -65,10 +67,6 @@ export class GerenciamentoDeEstoqueComponent {
       sessionStorage.removeItem('start');
     });
 
-    // this.originalQuantEntrada = [...this.mapProdutos[0]?.quantEntrada || []];
-
-    // this.originalQuantSaida = [...this.mapProdutos[0]?.quantSaida || []];
-
   }
 
   ngOnDestroy() {
@@ -84,12 +82,9 @@ export class GerenciamentoDeEstoqueComponent {
   }
 
   async carregarProdutos() {
-
     this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
       this.produtos = produtosAPI;
     });
-
-    console.log(this.produtos)
   }
 
   filterTable(event: any) {
@@ -149,10 +144,14 @@ export class GerenciamentoDeEstoqueComponent {
     return entrada - saida;
   }
 
-  onQuantidadeChange(produto: any, quantidade: number) {
-    console.log('id Produto', produto.prodId)
-    console.log('Nome do produto:', produto.nome);
-    console.log('Quantidade:', quantidade);
+  onQuantidadeChange(produto: any, quantidade: any | null, index: number) {
+    if (quantidade === "" || isNaN(quantidade as any)) {
+      this.quantidadeProdutos[index] = null;
+    } else {
+      this.quantidadeProdutos[index] = Number(quantidade); // Converta o valor para número
+    }
+
+    this.atualizarBotaoEnviar();
   }
 
   onEnviarEntrada() {
@@ -168,12 +167,25 @@ export class GerenciamentoDeEstoqueComponent {
 
   onKeyPress(event: KeyboardEvent) {
     const allowedChars = /[0-9]/g; // Expressão regular para permitir apenas números
-
     const inputChar = event.key;
-
     if (!inputChar.match(allowedChars)) {
       event.preventDefault(); // Impede a entrada de caracteres não numéricos
     }
   }
+
+  atualizarBotaoEnviar(): void {
+    const produtosSelecionadosVazios = this.quantidadeProdutos.some(qtd => qtd === undefined || qtd === null || qtd === 0);
+    // Verificar se todos os campos de quantidade estão preenchidos
+    const todosCamposQuantidadePreenchidos = this.produtosSelecionados.every((produto, i) => {
+      return this.quantidadeProdutos[i] !== undefined && this.quantidadeProdutos[i] !== null && this.quantidadeProdutos[i] !== 0;
+    });
+    if(!this.numeroNotaFiscal || !this.produtosSelecionados || this.produtosSelecionados.length === 0 ||
+      produtosSelecionadosVazios || !todosCamposQuantidadePreenchidos){
+        this.botaoEnviarDesabilitado = true
+      }else {
+        this.botaoEnviarDesabilitado = false
+      }
+  }
+
 
 }

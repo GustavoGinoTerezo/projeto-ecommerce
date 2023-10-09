@@ -12,21 +12,22 @@
         </span>
         </div>
         <div class="containerInput p-float-label">
-          <input class="inputQuant" [(ngModel)]="numeroNotaFiscal" pInputText type="text" /><label htmlFor="number-input">Número da nota fiscal</label>
+          <input class="inputQuant" (input)="atualizarBotaoEnviar()" [(ngModel)]="numeroNotaFiscal" pInputText type="text" /><label htmlFor="number-input">Número da nota fiscal</label>
         </div>
       </div>
 
 
       <div class="containerGeralInputs" *ngIf="produtosSelecionados">
         <div class="containerInputs margem" *ngFor="let produto of produtosSelecionados; let i = index">
-            <div class="containerExterno">
-              <div class="p-float-label containerInterno">
-                <input pInputText inputId="integeronly" [(ngModel)]="quantidadeProdutos[i]" (ngModelChange)="onQuantidadeChange(produto, quantidadeProdutos[i])" class="inputQuantidade" (keypress)="onKeyPress($event)">
-                <label htmlFor="number-input">Quantidade {{ produto.nome }}</label>
-              </div>
+          <div class="containerExterno">
+            <div class="p-float-label containerInterno">
+              <input pInputText inputId="integeronly" [(ngModel)]="quantidadeProdutos[i]" (ngModelChange)="onQuantidadeChange(produto, $event, i)" class="inputQuantidade" (keypress)="onKeyPress($event)" (input)="atualizarBotaoEnviar()">
+              <label htmlFor="number-input">Quantidade {{ produto.nome }}</label>
             </div>
+          </div>
         </div>
       </div>
+
 
 
       <div class="containerBotoes">
@@ -34,6 +35,7 @@
           styleClass="p-button-success"
           label="Enviar Entrada"
           (click)="onEnviarEntrada()"
+          [disabled]="botaoEnviarDesabilitado"
         >
         </p-button>
       </div>
