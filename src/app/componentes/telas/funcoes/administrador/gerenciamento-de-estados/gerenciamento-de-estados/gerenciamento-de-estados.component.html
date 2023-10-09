@@ -1,1 +1,95 @@
-<p>gerenciamento-de-estados works!</p>
+<div class="divGeral">
+  <h1>Gerenciamento de Estados</h1>
+  <div class="containerInputs">
+    <div class="divInputNomeEstado">
+      <span class="p-float-label">
+        <input pInputText id="nomeEstado"
+        [(ngModel)]="nomeEstado"/>
+        <label htmlFor="nomeEstado">Nome do Estado</label>
+      </span>
+    </div>
+    <div class="divInputUF">
+      <span class="p-float-label">
+        <input pInputText id="uf"
+        [(ngModel)]="uf"/>
+        <label htmlFor="uf">UF</label>
+      </span>
+    </div>
+    <div class="divInputICMS">
+      <span class="p-float-label">
+        <input pInputText id="icms"
+        [(ngModel)]="icms" (keypress)="onKeyPress($event)"/>
+        <label htmlFor="icms">ICMS (%)</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="containerBotoesAdicionarProdutos">
+    <div class="divInputs">
+      <p-button label="Adicionar Estado"
+
+        styleClass="p-button-raised p-button-success"
+
+      ></p-button>
+    </div>
+    <div class="divInputs">
+      <p-button label="Atualizar Estado"
+
+      styleClass="p-button-raised p-button-warning"
+
+      ></p-button>
+    </div>
+    <div class="divInputs">
+      <p-button label="Excluir Estado"
+
+      styleClass="p-button-raised p-button-danger"
+      ></p-button>
+    </div>
+    <div class="divInputs">
+      <p-button
+        label="Limpar campos"
+
+        styleClass="p-button-raised p-button-info"
+      ></p-button>
+    </div>
+  </div>
+  <div class="tabelaClientes">
+    <p-table
+      #dt
+      [value]="estados"
+      selectionMode="single"
+      [(selection)]="estadoSelecionado"
+      [rowHover]="true"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [paginator]="true"
+      [rows]="5"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="[5, 10, 15]"
+      [filterDelay]="0"
+    >
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="filterTable($event)" placeholder="Buscar Estado" />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nome do Estado</th>
+          <th>UF</th>
+          <th>ICMS</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-estado>
+        <tr [pSelectableRow]="estado" (click)="updateInputFieldsWithSelectedProduct()" >
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

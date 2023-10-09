@@ -27,9 +27,9 @@ export class AppComponent {
 
     this.categoriasService.atualizarCategoriasDaAPI();
 
-    // this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
+    this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
 
-    // this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
+    this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
 
     this.ativarLateral();
 
