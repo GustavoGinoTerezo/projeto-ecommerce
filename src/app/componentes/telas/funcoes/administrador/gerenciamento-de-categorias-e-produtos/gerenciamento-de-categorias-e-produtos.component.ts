@@ -53,7 +53,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   valorProdutoFormatted!: number | null;
   categoriasAdicionarSelecionadaInput: any;
   nomeCategoriaSelecionada!: string;
-
+  infoTecnica!: string;
   pesoProduto!: number | null;
   alturaProduto!: number | null;
   larguraProduto!: number | null;
@@ -426,7 +426,12 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       descCompleta: this.descCompleta,
       preco: this.valorProdutoFormatted,
       qtdEntrada: 0,
-      qtdSaida: 0
+      qtdSaida: 0,
+      informacaoTecnica: this.infoTecnica,
+      altura: this.alturaProduto,
+      largura: this.larguraProduto,
+      peso: this.pesoProduto,
+      comprimento: this.comprimentoProduto
     }
 
     this.apiProdutoService.cadastrarProduto(dataProduto).subscribe(
