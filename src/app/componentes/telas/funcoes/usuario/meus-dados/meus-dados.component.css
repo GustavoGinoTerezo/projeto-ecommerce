@@ -45,7 +45,7 @@
 }
 
 .botaoAlterarSenha{
-  width: 49%;
+  width: 100%;
 }
 
 :host ::ng-deep .botaoAlterarEmail .p-button{
