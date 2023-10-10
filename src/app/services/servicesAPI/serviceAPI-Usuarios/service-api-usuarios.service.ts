@@ -1,31 +1,31 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ServiceUrlGlobalService } from '../serviceUrlGlobal/service-url-global.service';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceApiTelefonesService {
+export class ServiceApiUsuariosService {
 
   constructor(
     private urlGlobal: ServiceUrlGlobalService,
     private http: HttpClient,
   ) {}
 
-  buscarTelefones() {
-    const endpoint = "telefone";
+  buscarUsuarios() {
+    const endpoint = "user";
     const url = this.urlGlobal.url + endpoint;
     return this.http.get<any[]>(url);
   }
 
-  atualizarTelefones(telefoneID: number, novosDados: any) {
-    const endpoint = `telefone/${telefoneID}`;
+  atualizarUsuario(userID: number, novosDados: any) {
+    const endpoint = `user/${userID}`;
     const url = this.urlGlobal.url + endpoint;
     return this.http.put<any>(url, novosDados);
   }
 
-  excluirTelefones(telefoneID: number) {
-    const endpoint = `telefone/${telefoneID}`;
+  excluirUsuario(userID: number) {
+    const endpoint = `user/${userID}`;
     const url = this.urlGlobal.url + endpoint;
     return this.http.delete<any>(url);
   }
