@@ -1,6 +1,7 @@
 import { Usuario } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
 import { Component } from '@angular/core';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
+import { Subscription } from 'rxjs';
 
 interface Estado {
   nome: string;
@@ -15,8 +16,10 @@ interface Estado {
 })
 export class GerenciamentoDeClientesComponent {
 
+  private usuariosSubscription!: Subscription;
+
   usuarios: Usuario[] = []
-  usuarioSelecionado!: Usuario;
+  usuarioSelecionado!: any;
   usuariosFiltrados: Usuario[] = []
 
   botaoDiv: boolean = false;
@@ -53,6 +56,7 @@ export class GerenciamentoDeClientesComponent {
 
   constructor(
     private usuariosService: ServiceUsuariosService,
+
   ){}
 
   ngOnInit(){
@@ -88,11 +92,34 @@ export class GerenciamentoDeClientesComponent {
     ];
 
 
-    this.usuariosService.getUsuarioTabela().then((data) => {
-      this.usuarios = data;
-      this.usuariosFiltrados = data;
-    });
+    // this.carregarUsuariosAPI()
 
+    // this.usuariosService.getUsuarioTabela().then((data) => {
+    //   this.usuarios = data;
+    //   this.usuariosFiltrados = data;
+    // });
+
+  }
+
+  ngOnDestroy(){
+
+    if (this.usuariosSubscription) {
+      this.usuariosSubscription.unsubscribe();
+    }
+
+  }
+
+  async carregarUsuariosAPI() {
+    await this.usuariosService.buscarUsuariosDaAPI();
+    this.carregarUsuarios();
+  }
+
+  carregarUsuarios() {
+    this.usuariosSubscription = this.usuariosService.getUsuarios().subscribe((usuariosAPI) => {
+      this.usuarios = usuariosAPI;
+      this.usuariosFiltrados = usuariosAPI;
+      console.log("Dentro da tela", this.usuarios)
+    });
   }
 
   filterTable(event: any) {
@@ -105,7 +132,7 @@ export class GerenciamentoDeClientesComponent {
         const telefoneString = usuario.telefone?.toString() || ''
         return (
           usuario.nome?.toLowerCase().includes(filterValue) ||
-          usuario.email?.toLowerCase().includes(filterValue) ||
+          usuario.emailprinc?.toLowerCase().includes(filterValue) ||
           cepString.includes(filterValue) ||
           telefoneString.includes(filterValue)
         );
@@ -116,7 +143,8 @@ export class GerenciamentoDeClientesComponent {
   updateInputFieldsWithSelectedUser() {
     if (this.usuarioSelecionado) {
       this.nome = this.usuarioSelecionado.nome || '';
-      this.email = this.usuarioSelecionado.email || '';
+      this.cpfOuCnpj = this.usuarioSelecionado.cpf || null;
+      this.email = this.usuarioSelecionado.emailprinc || '';
       this.cep = this.usuarioSelecionado.cep || null;
       this.telefone = this.usuarioSelecionado.telefone || null;
       this.numeroResidencia = this.usuarioSelecionado.numeroResidencia || null;

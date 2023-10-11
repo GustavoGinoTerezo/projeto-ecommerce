@@ -10,7 +10,7 @@ import * as CryptoJS from 'crypto-js';
 export interface Usuario {
   id?: number;
   nome?: string;
-  email?: string;
+  emailprinc?: string;
   cpfOuCnpj?: number;
   telefone?: number;
   cep?: number;
@@ -20,7 +20,6 @@ export interface Usuario {
   numeroResidencia?: number;
   enderecoEntrega?: EnderecoEntrega[];
   pedidos?: Pedido[];
-
 }
 
 export interface EnderecoEntrega {
@@ -83,7 +82,7 @@ export class ServiceUsuarioLogadoService {
   usuarioLogado: Usuario[] = [
     {
       nome: 'Teste',
-      email: 'teste@teste.com',
+      emailprinc: 'teste@teste.com',
       cpfOuCnpj: 99999999999,
       telefone: 99999999999,
       cep: 99999999,

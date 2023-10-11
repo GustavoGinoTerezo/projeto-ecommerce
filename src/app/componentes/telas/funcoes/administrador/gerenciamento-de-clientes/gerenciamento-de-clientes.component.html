@@ -508,18 +508,18 @@
       </ng-template>
           <ng-template pTemplate="header">
               <tr>
-                  <th>Nome</th>
-                  <th>Email</th>
-                  <th>Telefone</th>
-                  <th>CEP</th>
+                <th>Nome</th>
+                <th>CPF/CNPJ</th>
+                <th>Email</th>
+                <th>Telefone</th>
               </tr>
           </ng-template>
           <ng-template pTemplate="body" let-usuario>
             <tr [pSelectableRow]="usuario">
-                <td>{{ usuario?.nome }}</td>
-                <td>{{ usuario?.email }}</td>
-                <td>{{ usuario?.telefone }}</td>
-                <td>{{ usuario?.cep }}</td>
+              <td>{{ usuario?.nome }}</td>
+              <td>{{ usuario?.cpf}}</td>
+              <td>{{ usuario?.emailprinc }}</td>
+              <td>{{ usuario?.telefone }}</td>
             </tr>
         </ng-template>
       </p-table>

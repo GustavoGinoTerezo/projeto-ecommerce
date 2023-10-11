@@ -101,7 +101,7 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
 
         if (usuario) {
           exportItem.nomeCliente = usuario.nome || '';
-          exportItem.emailCliente = usuario.email || '';
+          exportItem.emailCliente = usuario.emailprinc || '';
           exportItem.telefoneCliente = usuario.telefone || '';
           exportItem.cpfCnpjCliente = usuario.cpfOuCnpj || '';
         } else {
@@ -296,7 +296,7 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
   }
 
   getUsuarioPorId(idUsuario: number) {
-    const usuarios = this.usuarioService.getUsuarios();
+    const usuarios = this.usuarioService.getUsuariosMocado();
     return usuarios.find(usuario => usuario.id === idUsuario);
   }
 
@@ -308,7 +308,7 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
     return rendaGeral;
   }
 
- 
+
 
 }
 
