@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 interface Estado {
   nome: string;
   uf: string;
-  icms: number;
 }
 
 @Component({
@@ -17,32 +16,48 @@ interface Estado {
 export class GerenciamentoDeClientesComponent {
 
   private usuariosSubscription!: Subscription;
+  private telefonesSubscription!: Subscription;
+  private emailsSubscription!: Subscription;
+  private enderecosSubscription!: Subscription;
 
-  usuarios: Usuario[] = []
+  usuarios: Usuario[] = [];
+  telefones: any[] = [];
+  emails: any[] = [];
+  enderecos: any[] = [];
+
+  telefonesFiltrados: any[] = [];
+  emailsFiltrados: any[] = [];
+  enderecosFiltradosEntrega: any[] = [];
+  enderecosFiltradosCobranca: any[] = [];
+  enderecoFiltradoSelecionado: any;
+  emailsFiltradoSelecionado: any
+
   usuarioSelecionado!: any;
-  usuariosFiltrados: Usuario[] = []
+  usuariosFiltrados: Usuario[] = [];
 
   botaoDiv: boolean = false;
   botaoDisabled!: boolean;
 
+  LoginId!: number;
   nome: string = '';
   email: string = '';
   cpfOuCnpj!: number | null;
-  cep!: number | null
-  telefone!: number | null
+  cep!: number | null;
+  telefone!: number | null;
   cidade: string = '';
   bairro: string = '';
   rua: string = '';
-  numeroResidencia!: number | null
+  numeroResidencia!: number | null;
   emailAlternativo: string = '';
   telefoneAlternativo!: number | null;
   complemento!: string;
+
   identificacaoEndereco: string = '';
   cepEntrega!: number | null
   cidadeEntrega: string = '';
   bairroEntrega: string = '';
   ruaEntrega: string = '';
-  numeroResidenciaEntrega!: number | null
+  numeroResidenciaEntrega!: number | null;
   complementoEntrega!: string;
   habilitarEmailAlternativo: boolean = false;
   habilitarTelefoneAlternativo: boolean = false;
@@ -62,35 +77,34 @@ export class GerenciamentoDeClientesComponent {
   ngOnInit(){
 
     this.estado = [
-      { nome: 'Acre', uf: 'ac', icms: 0 },
-      { nome: 'Alagoas', uf: 'al', icms: 0 },
-      { nome: 'Amapá', uf: 'ap', icms: 0 },
-      { nome: 'Amazonas', uf: 'am', icms: 0 },
-      { nome: 'Bahia', uf: 'ba', icms: 0 },
-      { nome: 'Ceará', uf: 'ce', icms: 0 },
-      { nome: 'Distrito Federal', uf: 'df', icms: 0 },
-      { nome: 'Espírito Santo', uf: 'es', icms: 0 },
-      { nome: 'Goiás', uf: 'go', icms: 0 },
-      { nome: 'Maranhão', uf: 'ma', icms: 0 },
-      { nome: 'Mato Grosso', uf: 'mt', icms: 0 },
-      { nome: 'Mato Grosso do Sul', uf: 'ms', icms: 0 },
-      { nome: 'Minas Gerais', uf: 'mg', icms: 0 },
-      { nome: 'Pará', uf: 'pa', icms: 0 },
-      { nome: 'Paraíba', uf: 'pb', icms: 0 },
-      { nome: 'Paraná', uf: 'pr', icms: 0 },
-      { nome: 'Pernambuco', uf: 'pe', icms: 0 },
-      { nome: 'Piauí', uf: 'pi', icms: 0 },
-      { nome: 'Rio de Janeiro', uf: 'rj', icms: 0 },
-      { nome: 'Rio Grande do Norte', uf: 'rn', icms: 0 },
-      { nome: 'Rio Grande do Sul', uf: 'rs', icms: 0 },
-      { nome: 'Rondônia', uf: 'ro', icms: 0 },
-      { nome: 'Roraima', uf: 'rr', icms: 0 },
-      { nome: 'Santa Catarina', uf: 'sc', icms: 0 },
-      { nome: 'São Paulo', uf: 'sp', icms: 0 },
-      { nome: 'Sergipe', uf: 'se', icms: 0 },
-      { nome: 'Tocantins', uf: 'to', icms: 0}
+      { nome: 'Acre', uf: 'ac'},
+      { nome: 'Alagoas', uf: 'al'},
+      { nome: 'Amapá', uf: 'ap'},
+      { nome: 'Amazonas', uf: 'am'},
+      { nome: 'Bahia', uf: 'ba'},
+      { nome: 'Ceará', uf: 'ce'},
+      { nome: 'Distrito Federal', uf: 'df'},
+      { nome: 'Espírito Santo', uf: 'es'},
+      { nome: 'Goiás', uf: 'go'},
+      { nome: 'Maranhão', uf: 'ma'},
+      { nome: 'Mato Grosso', uf: 'mt'},
+      { nome: 'Mato Grosso do Sul', uf: 'ms'},
+      { nome: 'Minas Gerais', uf: 'mg'},
+      { nome: 'Pará', uf: 'pa'},
+      { nome: 'Paraíba', uf: 'pb'},
+      { nome: 'Paraná', uf: 'pr'},
+      { nome: 'Pernambuco', uf: 'pe'},
+      { nome: 'Piauí', uf: 'pi'},
+      { nome: 'Rio de Janeiro', uf: 'rj'},
+      { nome: 'Rio Grande do Norte', uf: 'rn'},
+      { nome: 'Rio Grande do Sul', uf: 'rs'},
+      { nome: 'Rondônia', uf: 'ro'},
+      { nome: 'Roraima', uf: 'rr'},
+      { nome: 'Santa Catarina', uf: 'sc'},
+      { nome: 'São Paulo', uf: 'sp'},
+      { nome: 'Sergipe', uf: 'se'},
+      { nome: 'Tocantins', uf: 'to'}
     ];
-
 
     // this.carregarUsuariosAPI()
 
@@ -107,10 +121,22 @@ export class GerenciamentoDeClientesComponent {
       this.usuariosSubscription.unsubscribe();
     }
 
+    if (this.telefonesSubscription) {
+      this.telefonesSubscription.unsubscribe();
+    }
+
+    if (this.emailsSubscription) {
+      this.emailsSubscription.unsubscribe();
+    }
+
+    if (this.enderecosSubscription) {
+      this.enderecosSubscription.unsubscribe();
+    }
+
   }
 
   async carregarUsuariosAPI() {
-    await this.usuariosService.buscarUsuariosDaAPI();
+    await this.usuariosService.buscarDadosDaAPI();
     this.carregarUsuarios();
   }
 
@@ -118,7 +144,15 @@ export class GerenciamentoDeClientesComponent {
     this.usuariosSubscription = this.usuariosService.getUsuarios().subscribe((usuariosAPI) => {
       this.usuarios = usuariosAPI;
       this.usuariosFiltrados = usuariosAPI;
-      console.log("Dentro da tela", this.usuarios)
+    });
+    this.telefonesSubscription = this.usuariosService.getTelefones().subscribe((telefonesAPI) => {
+      this.telefones = telefonesAPI;
+    });
+    this.emailsSubscription = this.usuariosService.getEmail().subscribe((emailsAPI) => {
+      this.emails = emailsAPI;
+    });
+    this.enderecosSubscription = this.usuariosService.getEnderecos().subscribe((enderecosAPI) => {
+      this.enderecos = enderecosAPI;
     });
   }
 
@@ -145,12 +179,32 @@ export class GerenciamentoDeClientesComponent {
       this.nome = this.usuarioSelecionado.nome || '';
       this.cpfOuCnpj = this.usuarioSelecionado.cpf || null;
       this.email = this.usuarioSelecionado.emailprinc || '';
-      this.cep = this.usuarioSelecionado.cep || null;
-      this.telefone = this.usuarioSelecionado.telefone || null;
-      this.numeroResidencia = this.usuarioSelecionado.numeroResidencia || null;
-      this.bairro = this.usuarioSelecionado.bairro || '';
-      this.rua = this.usuarioSelecionado.rua || '';
-      this.cidade = this.usuarioSelecionado.cidade || '';
+
+      this.LoginId = this.usuarioSelecionado.LoginId;
+
+      if (this.LoginId) {
+        // Filtrar os arrays com base no id do usuário selecionado
+        this.emailsFiltrados = this.emails.filter(email => email.LoginId === this.LoginId);
+        this.telefonesFiltrados = this.telefones.filter(telefone => telefone.LoginId === this.LoginId);
+        this.enderecosFiltradosCobranca = this.enderecos.filter(endereco => endereco.LoginId === this.LoginId && endereco.tpcadastro === "1");
+        this.enderecosFiltradosEntrega = this.enderecos.filter(endereco => endereco.LoginId === this.LoginId && endereco.tpcadastro === "2");
+
+        if(this.enderecosFiltradosCobranca){
+          this.cep = this.enderecosFiltradosCobranca[0].cep
+          this.cidade = this.enderecosFiltradosCobranca[0].cidade
+
+          this.bairro = this.enderecosFiltradosCobranca[0].bairro
+          this.rua = this.enderecosFiltradosCobranca[0].endereco
+          this.numeroResidencia = this.enderecosFiltradosCobranca[0].numeroresidencia
+          this.complemento = this.enderecosFiltradosCobranca[0].complemento
+        }
+
+        console.log("Emails: ",this.emailsFiltrados)
+        console.log("Telefones: ",this.telefonesFiltrados)
+        console.log("Endereços Entrega: ",this.enderecosFiltradosEntrega)
+        console.log("Endereço Cobrança: ",this.enderecosFiltradosCobranca)
+      }
+
 
       this.validateEmail()
 
@@ -158,6 +212,20 @@ export class GerenciamentoDeClientesComponent {
       this.botaoDiv = true;
 
     }
+  }
+
+  enderecoEntregaSelecionado(event: any) {
+    this.identificacaoEndereco = event.value.identificacao;
+    this.cepEntrega = event.value.cep;
+    this.cidadeEntrega = event.value.cidade;
+    this.bairroEntrega = event.value.bairro;
+    this.ruaEntrega = event.value.endereco;
+    this.numeroResidenciaEntrega = event.value.numeroresidencia;
+    this.complementoEntrega = event.value.complemento
+  }
+
+  emailAlternativoSelecionado(event: any) {
+    this.emailAlternativo = event.value.email
   }
 
   limparCampos() {

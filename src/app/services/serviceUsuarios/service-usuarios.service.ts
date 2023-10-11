@@ -2,6 +2,9 @@ import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../serviceUsuarioLogado/service-usuario-logado.service';
 import { ServiceApiUsuariosService } from '../servicesAPI/serviceAPI-Usuarios/service-api-usuarios.service';
+import { ServiceApiTelefonesService } from '../servicesAPI/serviceAPI-Telefones/service-api-telefones.service';
+import { ServiceApiEmailsService } from '../servicesAPI/serviceAPI-Emails/service-api-emails.service';
+import { ServiceApiEnderecosService } from '../servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,10 @@ import { ServiceApiUsuariosService } from '../servicesAPI/serviceAPI-Usuarios/se
 export class ServiceUsuariosService {
 
   constructor(
-    private serviceUsuariosAPI: ServiceApiUsuariosService
+    private serviceUsuariosAPI: ServiceApiUsuariosService,
+    private serviceTelefonesAPI: ServiceApiTelefonesService,
+    private serviceEmailsAPI: ServiceApiEmailsService,
+    private serviceEnderecosAPI: ServiceApiEnderecosService,
   ){
 
   }
@@ -172,10 +178,29 @@ export class ServiceUsuariosService {
     },
   ]
 
-  usuariosAPI: Usuario[] = []
+  usuariosAPI: any[] = []
 
-  getUsuarios(): Observable<Usuario[]> {
+  telefonesAPI: any[] = []
+
+  emailAPI: any[] = []
+
+  enderecosAPI: any[] = []
+
+
+  getUsuarios(): Observable<any[]> {
     return of (this.usuariosAPI);
+  }
+
+  getTelefones(): Observable<any[]> {
+    return of (this.telefonesAPI);
+  }
+
+  getEmail(): Observable<any[]> {
+    return of (this.emailAPI);
+  }
+
+  getEnderecos(): Observable<any[]> {
+    return of (this.enderecosAPI);
   }
 
   getUsuariosMocado(): Usuario[] {
@@ -194,15 +219,61 @@ export class ServiceUsuariosService {
       const usuariosAPI = await this.serviceUsuariosAPI.buscarUsuarios().toPromise();
       if (usuariosAPI) {
         this.usuariosAPI = usuariosAPI;
-
-        console.log(this.usuariosAPI)
-
       } else {
-        console.error('Erro ao buscar categorias da API: categoriasAPI é undefined');
+        console.error('Erro ao buscar usuarios da API: usuarios é undefined');
       }
     } catch (error) {
-      console.error('Erro ao buscar categorias da API', error);
+      console.error('Erro ao buscar usuarios da API', error);
     }
   }
+
+  async buscarTelefonesDaAPI() {
+    try {
+      const telefonesAPI = await this.serviceTelefonesAPI.buscarTelefones().toPromise();
+      if (telefonesAPI) {
+        this.telefonesAPI = telefonesAPI;
+      } else {
+        console.error('Erro ao buscar telefones da API: telefones é undefined');
+      }
+    } catch (error) {
+      console.error('Erro ao buscar telefones da API', error);
+    }
+  }
+
+  async buscarEmailsDaAPI() {
+    try {
+      const emailsAPI = await this.serviceEmailsAPI.buscarEmails().toPromise();
+      if (emailsAPI) {
+        this.emailAPI = emailsAPI;
+      } else {
+        console.error('Erro ao buscar emails da API: telefones é undefined');
+      }
+    } catch (error) {
+      console.error('Erro ao buscar emails da API', error);
+    }
+  }
+
+  async buscarEnderecosDaAPI() {
+    try {
+      const enderecosAPI = await this.serviceEnderecosAPI.buscarEnderecos().toPromise();
+      if (enderecosAPI) {
+        this.enderecosAPI = enderecosAPI;
+      } else {
+        console.error('Erro ao buscar enderecos da API: enderecos é undefined');
+      }
+    } catch (error) {
+      console.error('Erro ao buscar enderecos da API', error);
+    }
+  }
+
+  async buscarDadosDaAPI() {
+    await this.buscarUsuariosDaAPI();
+    await this.buscarTelefonesDaAPI();
+    await this.buscarEmailsDaAPI();
+    await this.buscarEnderecosDaAPI();
+  }
+
+
+
 
 }

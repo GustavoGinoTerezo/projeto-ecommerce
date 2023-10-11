@@ -5,7 +5,6 @@ import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/service
 interface Estado {
   nome: string;
   uf: string;
-  icms: number;
 }
 
 @Component({
@@ -20,7 +19,7 @@ export class CriarContaComponent {
   nomeCompleto!: string;
   telefonePrincipal!: string;
   telefoneSecundario!: string;
-  cpfOuCnpj!: number;
+  cpfOuCnpj!: string;
   endereco!: string;
   bairro!: string;
   cidade!: string;
@@ -39,33 +38,33 @@ export class CriarContaComponent {
   ngOnInit() {
 
     this.estado = [
-      { nome: 'Acre', uf: 'ac', icms: 0 },
-      { nome: 'Alagoas', uf: 'al', icms: 0 },
-      { nome: 'Amapá', uf: 'ap', icms: 0 },
-      { nome: 'Amazonas', uf: 'am', icms: 0 },
-      { nome: 'Bahia', uf: 'ba', icms: 0 },
-      { nome: 'Ceará', uf: 'ce', icms: 0 },
-      { nome: 'Distrito Federal', uf: 'df', icms: 0 },
-      { nome: 'Espírito Santo', uf: 'es', icms: 0 },
-      { nome: 'Goiás', uf: 'go', icms: 0 },
-      { nome: 'Maranhão', uf: 'ma', icms: 0 },
-      { nome: 'Mato Grosso', uf: 'mt', icms: 0 },
-      { nome: 'Mato Grosso do Sul', uf: 'ms', icms: 0 },
-      { nome: 'Minas Gerais', uf: 'mg', icms: 0 },
-      { nome: 'Pará', uf: 'pa', icms: 0 },
-      { nome: 'Paraíba', uf: 'pb', icms: 0 },
-      { nome: 'Paraná', uf: 'pr', icms: 0 },
-      { nome: 'Pernambuco', uf: 'pe', icms: 0 },
-      { nome: 'Piauí', uf: 'pi', icms: 0 },
-      { nome: 'Rio de Janeiro', uf: 'rj', icms: 0 },
-      { nome: 'Rio Grande do Norte', uf: 'rn', icms: 0 },
-      { nome: 'Rio Grande do Sul', uf: 'rs', icms: 0 },
-      { nome: 'Rondônia', uf: 'ro', icms: 0 },
-      { nome: 'Roraima', uf: 'rr', icms: 0 },
-      { nome: 'Santa Catarina', uf: 'sc', icms: 0 },
-      { nome: 'São Paulo', uf: 'sp', icms: 0 },
-      { nome: 'Sergipe', uf: 'se', icms: 0 },
-      { nome: 'Tocantins', uf: 'to', icms: 0}
+      { nome: 'Acre', uf: 'ac'},
+      { nome: 'Alagoas', uf: 'al'},
+      { nome: 'Amapá', uf: 'ap'},
+      { nome: 'Amazonas', uf: 'am'},
+      { nome: 'Bahia', uf: 'ba'},
+      { nome: 'Ceará', uf: 'ce'},
+      { nome: 'Distrito Federal', uf: 'df'},
+      { nome: 'Espírito Santo', uf: 'es'},
+      { nome: 'Goiás', uf: 'go'},
+      { nome: 'Maranhão', uf: 'ma'},
+      { nome: 'Mato Grosso', uf: 'mt'},
+      { nome: 'Mato Grosso do Sul', uf: 'ms'},
+      { nome: 'Minas Gerais', uf: 'mg'},
+      { nome: 'Pará', uf: 'pa'},
+      { nome: 'Paraíba', uf: 'pb'},
+      { nome: 'Paraná', uf: 'pr'},
+      { nome: 'Pernambuco', uf: 'pe'},
+      { nome: 'Piauí', uf: 'pi'},
+      { nome: 'Rio de Janeiro', uf: 'rj'},
+      { nome: 'Rio Grande do Norte', uf: 'rn'},
+      { nome: 'Rio Grande do Sul', uf: 'rs'},
+      { nome: 'Rondônia', uf: 'ro'},
+      { nome: 'Roraima', uf: 'rr'},
+      { nome: 'Santa Catarina', uf: 'sc'},
+      { nome: 'São Paulo', uf: 'sp'},
+      { nome: 'Sergipe', uf: 'se'},
+      { nome: 'Tocantins', uf: 'to'}
     ];
   }
 
@@ -81,6 +80,7 @@ export class CriarContaComponent {
       senha: this.passwordCadastro,
       tpusuario: "0",
       emailprinc: this.emailCadastroPrincipal,
+      cpf: this.cpfOuCnpj,
     }
 
     this.registrar.registrar(dataLogin).subscribe(response => {
@@ -112,26 +112,17 @@ export class CriarContaComponent {
       }
 
 
-
-      // Supondo que a resposta contenha o ID do login
-
-      // const dataUf = {
-      //   UfId: this.estadoSelecionado.uf,
-      //   icms: this.estadoSelecionado.icms,
-      //   nome: this.estadoSelecionado.nome
-      // }
-
-      // this.registrar.registrarUf(dataUf).subscribe(response => {
-
-        // const ufId = response.UfId;
-
         const dataEnderecoCobranca = {
           LoginId: LoginId,
           tpcadastro: "1",
-          endereco: this.endereco,
-          cidade: this.cidade,
+          cep: this.cep,
           bairro: this.bairro,
-          // UfId: ufId
+          cidade: this.cidade,
+          // UfId: this.estadoSelecionado.uf
+          endereco: this.endereco,
+          complemento: this.complemento,
+          numeroresidencia: this.numeroResidencia,
+          identificacao: "Endereço de Cobrança"
         }
 
         this.registrar.registrarEndereco(dataEnderecoCobranca).subscribe(response => {
@@ -141,10 +132,14 @@ export class CriarContaComponent {
         const dataEnderecoEntrega = {
           LoginId: LoginId,
           tpcadastro: "2",
-          endereco: this.endereco,
-          cidade: this.cidade,
+          cep: this.cep,
           bairro: this.bairro,
-          // UfId: ufId
+          cidade: this.cidade,
+          // UfId: this.estadoSelecionado.uf
+          endereco: this.endereco,
+          complemento: this.complemento,
+          numeroresidencia: this.numeroResidencia,
+          identificacao: "Endereço de Entrega Padrão"
         }
 
         this.registrar.registrarEndereco(dataEnderecoEntrega).subscribe(response => {
@@ -190,6 +185,8 @@ export class CriarContaComponent {
         console.log("O campo telefoneSecundario está vazio, telefone alternativo não cadastrado.");
       }
 
+    }, (error) => {
+      console.log(error)
     });
   }
 

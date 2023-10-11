@@ -92,26 +92,26 @@
               </div>
               <div class="divDropDown">
                 <p-dropdown
-                  optionLabel="nome"
+                  [options]="emailsFiltrados"
+                  [(ngModel)]="emailsFiltradoSelecionado"
+                  (onChange)="emailAlternativoSelecionado($event)"
+                  optionLabel="email"
                   [filter]="true"
-                  filterBy="nome"
+                  filterBy="email"
                   [showClear]="true"
                   placeholder="Selecione o email alternativo"
                   *ngIf="botaoDiv"
                 >
-                <!-- [options]="categorias"
-                [(ngModel)]="categoriasAdicionarSelecionadaInput"
-                (onChange)="onCategoriaAdicionarSelect($event)" -->
-                  <!-- Selected Item Template -->
+
                   <ng-template pTemplate="selectedItem">
-                    <!-- <div class="flex align-items-center gap-2" *ngIf="categoriasAdicionarSelecionadaInput">
-                      <div>{{ categoriasAdicionarSelecionadaInput.nome }}</div>
-                    </div> -->
+                    <div class="flex align-items-center gap-2" *ngIf="emailsFiltradoSelecionado">
+                      <div>{{ emailsFiltradoSelecionado.email }}</div>
+                    </div>
                   </ng-template>
                   <!-- Item Template -->
-                  <ng-template let-categoria pTemplate="item">
+                  <ng-template let-email pTemplate="item">
                     <div class="flex align-items-center gap-2">
-                      <div>{{ categoria.nome }}</div>
+                      <div>{{ email.email }}</div>
                     </div>
                   </ng-template>
                 </p-dropdown>
@@ -241,7 +241,13 @@
       </span>
     </div>
     <div class="divDropdownEstado">
-      <p-dropdown [options]="estado"  [showClear]="true" [(ngModel)]="estadoSelecionadoCobranca" placeholder="Estado" optionLabel="nome"></p-dropdown>
+      <p-dropdown
+        [options]="estado"
+        [showClear]="true"
+        [(ngModel)]="estadoSelecionadoCobranca"
+        placeholder="Estado"
+        optionLabel="nome">
+      </p-dropdown>
     </div>
   </div>
   <div class="containerBairroRuaENumeroResidencia">
@@ -312,25 +318,25 @@
         </div>
         <div class="divDropDown">
           <p-dropdown
-            optionLabel="nome"
+            [options]="enderecosFiltradosEntrega"
+            [(ngModel)]="enderecoFiltradoSelecionado"
+            (onChange)="enderecoEntregaSelecionado($event)"
+            optionLabel="identificacao"
             [filter]="true"
-            filterBy="nome"
+            filterBy="identificacao"
             [showClear]="true"
             placeholder="Selecione o endereço de entrega"
           >
-          <!-- [options]="categorias"
-          [(ngModel)]="categoriasAdicionarSelecionadaInput"
-          (onChange)="onCategoriaAdicionarSelect($event)" -->
-            <!-- Selected Item Template -->
+          <!-- Selected Item Template -->
             <ng-template pTemplate="selectedItem">
-              <!-- <div class="flex align-items-center gap-2" *ngIf="categoriasAdicionarSelecionadaInput">
-                <div>{{ categoriasAdicionarSelecionadaInput.nome }}</div>
-              </div> -->
+              <div class="flex align-items-center gap-2" *ngIf="enderecoFiltradoSelecionado">
+                <div>{{ enderecoFiltradoSelecionado.identificacao }}</div>
+              </div>
             </ng-template>
             <!-- Item Template -->
-            <ng-template let-categoria pTemplate="item">
+            <ng-template let-endereco pTemplate="item">
               <div class="flex align-items-center gap-2">
-                <div>{{ categoria.nome }}</div>
+                <div>{{ endereco.identificacao }}</div>
               </div>
             </ng-template>
           </p-dropdown>
