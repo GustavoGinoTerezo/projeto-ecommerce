@@ -2,10 +2,16 @@ import { Usuario } from 'src/app/services/serviceUsuarioLogado/service-usuario-l
 import { Component } from '@angular/core';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 import { Subscription } from 'rxjs';
+import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/serviceAPI-Registrar/service-api-registrar.service';
 
 interface Estado {
   nome: string;
   uf: string;
+}
+
+interface TipoUsuario {
+  nome: string;
+  tipo: string;
 }
 
 @Component({
@@ -25,6 +31,9 @@ export class GerenciamentoDeClientesComponent {
   emails: any[] = [];
   enderecos: any[] = [];
 
+  passwordCadastro!: string;
+  passwordCadastroRepetir!: string;
+
   telefonesFiltrados: any[] = [];
   emailsFiltrados: any[] = [];
   enderecosFiltradosEntrega: any[] = [];
@@ -41,15 +50,15 @@ export class GerenciamentoDeClientesComponent {
   LoginId!: number;
   nome: string = '';
   email: string = '';
-  cpfOuCnpj!: number | null;
+  cpfOuCnpj!: string;
   cep!: number | null;
-  telefone!: number | null;
+  telefone!:  string;
   cidade: string = '';
   bairro: string = '';
   rua: string = '';
   numeroResidencia!: number | null;
   emailAlternativo: string = '';
-  telefoneAlternativo!: number | null;
+  telefoneAlternativo!: string;
   complemento!: string;
 
   identificacaoEndereco: string = '';
@@ -63,6 +72,10 @@ export class GerenciamentoDeClientesComponent {
   habilitarTelefoneAlternativo: boolean = false;
   habilitarEnderecoEntrega: boolean = false;
 
+  tipoUsuario!: TipoUsuario[];
+  tipoUsuarioSelecionado!: TipoUsuario;
+  dadoTipoUsuarioSelecionado!: string
+
   estado!: Estado[];
   estadoSelecionadoCobranca!: Estado;
   estadoSelecionadoEntrega!: Estado;
@@ -71,7 +84,7 @@ export class GerenciamentoDeClientesComponent {
 
   constructor(
     private usuariosService: ServiceUsuariosService,
-
+    private registrar: ServiceApiRegistrarService,
   ){}
 
   ngOnInit(){
@@ -105,6 +118,11 @@ export class GerenciamentoDeClientesComponent {
       { nome: 'Sergipe', uf: 'se'},
       { nome: 'Tocantins', uf: 'to'}
     ];
+
+    this.tipoUsuario = [
+      { nome: 'Cliente', tipo: '0'},
+      { nome: 'Administrador', tipo: '1' }
+    ]
 
     // this.carregarUsuariosAPI()
 
@@ -230,9 +248,9 @@ export class GerenciamentoDeClientesComponent {
 
   limparCampos() {
     this.nome = '';
-    this.cpfOuCnpj = null;
+    this.cpfOuCnpj = '';
     this.email = '';
-    this.telefone = null;
+    this.telefone = '';
     this.cep = null;
     this.cidade = '';
     this.bairro = '';
@@ -260,7 +278,7 @@ export class GerenciamentoDeClientesComponent {
   }
 
   limparCamposTelefoneAlternativo() {
-    this.telefoneAlternativo = null;
+    this.telefoneAlternativo = '';
   }
 
   onKeyPressWord(event: KeyboardEvent): void {
@@ -291,5 +309,142 @@ export class GerenciamentoDeClientesComponent {
     const emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     this.emailValid = emailPattern.test(this.email);
   }
+
+  removeFormatoTelefone(telefone: string): string {
+    return telefone.replace(/\D/g, '');
+  }
+
+  tipoUsuarioSelecionadoDropdown(event: any){
+    this.tipoUsuarioSelecionado = event.value
+    this.dadoTipoUsuarioSelecionado = event.value.tipo
+  }
+
+  // ========================================================= //
+  // API
+
+  cadastrarUsuario(){
+
+    const dataLogin = {
+      nome: this.nome,
+      senha: this.passwordCadastro,
+      tpusuario: this.dadoTipoUsuarioSelecionado,
+      emailprinc: this.email,
+      cpf: this.cpfOuCnpj,
+    }
+
+    this.registrar.registrar(dataLogin).subscribe(response => {
+
+      console.log("Usuário cadastrado com sucesso")
+
+      const LoginId = response.LoginId;
+
+      const telefonePrincipal = this.removeFormatoTelefone(this.telefone);
+
+      const dataTelefone = {
+        LoginId: LoginId,
+        telefone: telefonePrincipal,
+      }
+
+      this.registrar.registrarTelefone(dataTelefone).subscribe(response => {
+          console.log("Telefone adicionado com sucesso", response)
+        },
+        (error) => {
+          console.log("Erro ao cadastrar telefone principal", error)
+        }
+      );
+
+      if (this.habilitarEmailAlternativo === true && this.emailAlternativo) {
+
+        const dataEmailAlternativo = {
+          LoginId: LoginId,
+          email: this.emailAlternativo
+        };
+
+        this.registrar.registrarEmails(dataEmailAlternativo).subscribe(
+          (response) => {
+            console.log("Email alternativo cadastrado com sucesso", response);
+          },
+          (error) => {
+            console.log("Erro ao cadastrar email alternativo", error);
+          }
+        );
+      } else {
+        console.log("O campo emailCadastroSecundario está vazio, email alternativo não cadastrado.");
+      }
+
+      if (this.habilitarTelefoneAlternativo === true &&
+        this.telefoneAlternativo) {
+
+        const telefoneAlternativo = this.removeFormatoTelefone(this.telefoneAlternativo);
+
+        const dataTelefoneAlternativo = {
+          LoginId: LoginId,
+          telefone: telefoneAlternativo,
+        }
+
+        this.registrar.registrarTelefone(dataTelefoneAlternativo).subscribe(
+          (response) => {
+            console.log("Telefone alternativo cadastrado com sucesso", response);
+          },
+          (error) => {
+            console.log("Erro ao cadastrar telefone alternativo");
+          }
+        );
+      } else {
+        console.log("O campo telefoneSecundario está vazio, telefone alternativo não cadastrado.");
+      }
+
+      const dataEnderecoCobranca = {
+        LoginId: LoginId,
+        tpcadastro: "1",
+        cep: this.cep,
+        bairro: this.bairro,
+        cidade: this.cidade,
+        // UfId: this.estadoSelecionado.uf
+        endereco: this.rua,
+        complemento: this.complemento,
+        numeroresidencia: this.numeroResidencia,
+        identificacao: "Endereço de Cobrança"
+      }
+
+      this.registrar.registrarEndereco(dataEnderecoCobranca).subscribe(response => {
+        console.log("Endereço de cobrança adicionado com sucesso", response)
+      });
+
+      if(this.habilitarEnderecoEntrega === true &&
+        this.identificacaoEndereco &&
+        this.cepEntrega &&
+        this.cidadeEntrega &&
+        this.bairroEntrega &&
+        this.ruaEntrega &&
+        this.numeroResidenciaEntrega &&
+        this.complementoEntrega){
+
+        const dataEnderecoEntrega = {
+          LoginId: LoginId,
+          tpcadastro: "2",
+          cep: this.cepEntrega,
+          bairro: this.bairroEntrega,
+          cidade: this.cidadeEntrega,
+          // UfId: this.estadoSelecionado.uf
+          endereco: this.ruaEntrega,
+          complemento: this.complementoEntrega,
+          numeroresidencia: this.numeroResidenciaEntrega,
+          identificacao: this.identificacaoEndereco
+        }
+
+        this.registrar.registrarEndereco(dataEnderecoEntrega).subscribe(response => {
+          console.log("Endereço de entrega adicionado com sucesso", response)
+        },
+        (error) => {
+          console.log("Erro ao cadastrar endereço de entrega", error)
+        });
+      }
+    }, (error) => {
+      console.log("Erro ao cadastrar usuário", error)
+    });
+  }
+
+
 
 }

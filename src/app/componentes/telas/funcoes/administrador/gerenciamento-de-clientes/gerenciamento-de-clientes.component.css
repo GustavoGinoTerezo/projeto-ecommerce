@@ -22,6 +22,7 @@
   width: 30%;
   padding: 13px 0;
   margin-bottom: 15px;
+  margin-right: 5px;
 }
 
 .divInputEmail{
@@ -294,6 +295,36 @@
 .containerDosContainers{
   display: flex;
   flex-direction: column;
+}
+
+.senhas {
+  display: flex;
+  justify-content: space-between;
+}
+
+.senha {
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.inputs {
+  width: 100%;
+}
+
+.tamanhoInputs {
+  width: 49.7%;
+}
+
+.p-password {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.p-error{
+  display: flex;
+  max-width: 350px;
 }
 
 :host ::ng-deep .p-inputtext{
