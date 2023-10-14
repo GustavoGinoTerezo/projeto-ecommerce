@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 import { Subscription } from 'rxjs';
 import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/serviceAPI-Registrar/service-api-registrar.service';
+import { ServiceApiUsuariosService } from 'src/app/services/servicesAPI/serviceAPI-Usuarios/service-api-usuarios.service';
+import { ServiceApiEnderecosService } from 'src/app/services/servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
+import { ServiceApiEmailsService } from 'src/app/services/servicesAPI/serviceAPI-Emails/service-api-emails.service';
 
 interface Estado {
   nome: string;
@@ -49,6 +52,9 @@ export class GerenciamentoDeClientesComponent {
   botaoDisabledEntrega: boolean = false;
 
   LoginId!: number;
+  endIdCobranca!: number;
+  endIdEntrega!: number;
+
   nome: string = '';
   email: string = '';
   cpfOuCnpj!: string;
@@ -91,6 +97,9 @@ export class GerenciamentoDeClientesComponent {
   constructor(
     private usuariosService: ServiceUsuariosService,
     private registrar: ServiceApiRegistrarService,
+    private usuarioAPIService: ServiceApiUsuariosService,
+    private enderecosAPIService: ServiceApiEnderecosService,
+    private emailAPIService: ServiceApiEmailsService,
   ){}
 
   ngOnInit(){
@@ -214,6 +223,8 @@ export class GerenciamentoDeClientesComponent {
         this.enderecosFiltradosEntrega = this.enderecos.filter(endereco => endereco.LoginId === this.LoginId && endereco.tpcadastro === "2");
 
         if(this.enderecosFiltradosCobranca){
+          this.endIdCobranca = this.enderecosFiltradosCobranca[0].endId
+          
           this.cep = this.enderecosFiltradosCobranca[0].cep
           this.cidade = this.enderecosFiltradosCobranca[0].cidade
 
@@ -229,6 +240,9 @@ export class GerenciamentoDeClientesComponent {
         console.log("Endereço Cobrança: ",this.enderecosFiltradosCobranca)
       }
 
+      console.log("ID do usuário:",this.LoginId)
+      console.log("ID do End cobrança:", this.endIdCobranca)
+      
 
       this.validateEmail()
 
@@ -269,15 +283,13 @@ export class GerenciamentoDeClientesComponent {
   }
 
   emailAlternativoAtualizarValid(): boolean {
-    
-    if (!this.habilitarBotaoEmailAlternativo || !this.checkedRegex(this.emailAlternativo)) {
-      return false;
+    if (!this.emailAlternativo) {
+      return true; // Se o emailAlternativo não está preenchido, retorne true
+    } else if (!this.checkedRegex(this.emailAlternativo)) {
+      return true; // Se o emailAlternativo não cumpre o regex, retorne true
     }
-    
-    return true;
-
+    return false; // Se o emailAlternativo está preenchido e cumpre o regex, retorne false
   }
-
   
 
   limparCampos() {
@@ -351,7 +363,7 @@ export class GerenciamentoDeClientesComponent {
   }
 
   checkedRegex(email: string): boolean {
-    const regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    const regex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
   }
 
@@ -366,7 +378,7 @@ export class GerenciamentoDeClientesComponent {
   }
 
   validateEmail() {
-    const emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     this.emailValid = emailPattern.test(this.email);
   }
 
@@ -427,6 +439,14 @@ export class GerenciamentoDeClientesComponent {
 
     return true;
   }
+
+  private atualizarPagina() {
+    //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
+    setTimeout(() => {
+      location.reload();
+    }, 2000);
+  }
+
 
   // ========================================================= //
   // API
@@ -554,8 +574,88 @@ export class GerenciamentoDeClientesComponent {
     });
 
     this.habilitarDropdownEnderecosEntrega = false
+    this.atualizarPagina();
   }
 
+  atualizarUsuario(){
+
+    const LoginId = this.LoginId
+    const endIdCobranca = this.endIdCobranca
+
+    const novoDataLogin = {
+      nome: this.nome,
+      tpusuario: this.dadoTipoUsuarioSelecionado,
+      emailprinc: this.email,
+      cpf: this.cpfOuCnpj,
+    }
+
+    this.usuarioAPIService.atualizarUsuario(LoginId, novoDataLogin).subscribe((response) => {
+      console.log("Usuário atualizado com sucesso", response)
+
+      const novoDataEndCobranca = {
+        tpcadastro: "1",
+        cep: this.cep,
+        cidade: this.cidade,
+        bairro: this.bairro,
+        // UfId: this.estadoSelecionado.uf
+        endereco: this.rua,
+        numeroresidencia: this.numeroResidencia,
+        complemento: this.complemento,
+      }
+
+      this.enderecosAPIService.atualizarEnderecos(endIdCobranca, novoDataEndCobranca).subscribe((response) => {
+        console.log("Endereço de cobrança atualizado com sucesso", response)
+      },
+      (error) => {
+        console.log("Erro ao atualizar endereço de cobrança", error)
+      })
+    },
+    (error) => {
+      console.log("Erro ao atualizar Usuário", error)
+    })
+
+    this.atualizarPagina();
+
+  }
+
+  cadastrarEmailAlternativo(){
+
+    const LoginId = this.LoginId
+
+    const dataEmailAlternativo = {
+      LoginId: LoginId,
+      email: this.emailAlternativo
+    };
+
+    this.registrar.registrarEmails(dataEmailAlternativo).subscribe(
+      (response) => {
+        console.log("Email alternativo cadastrado com sucesso", response);
+      },
+      (error) => {
+        console.log("Erro ao cadastrar email alternativo", error);
+      }
+    );
+
+    this.atualizarPagina();
+  }
+
+  atualizarEmailAlternativo(){
+
+    const emailId = this.emailsFiltradoSelecionado.emailId
+
+    const dataNovoEmailAlternativo = {
+      email: this.emailAlternativo
+    }
+
+    this.emailAPIService.atualizarEmails(emailId, dataNovoEmailAlternativo).subscribe((response) => {
+      console.log("Email alternativo atualizado com sucesso", response)
+    },
+    (error) => {
+      console.log("Erro ao atualizar email alternativo", error)
+    })
+
+    this.atualizarPagina();
+  }
 
 
 }

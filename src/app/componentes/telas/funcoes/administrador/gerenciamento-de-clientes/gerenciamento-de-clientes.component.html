@@ -44,7 +44,7 @@
             name="email"
             [(ngModel)]="email"
             #emailInput="ngModel"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
             (ngModelChange)="validateEmail()"
           />
           <label htmlFor="email">Email principal</label>
@@ -139,7 +139,8 @@
                     name="emailAlternativo"
                     [(ngModel)]="emailAlternativo"
                     #emailInputAlternativo="ngModel"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                    (ngModelChange)="validateEmail()"
                     />
                   <label htmlFor="emailAlternativo">Email Alternativo</label>
                 </span>
@@ -185,12 +186,14 @@
                   <p-button label="Adicionar"
                   styleClass="p-button-raised p-button-success"
                   [disabled]="!emailAlternativoValid()"
+                  (onClick)="cadastrarEmailAlternativo()"
                   ></p-button>
                 </div>
                 <div class="divInputs">
                   <p-button label="Atualizar"
                   styleClass="p-button-raised p-button-warning"
-                  [disabled]="!emailAlternativoAtualizarValid()"></p-button>
+                  [disabled]="emailAlternativoAtualizarValid() ||!habilitarBotaoEmailAlternativo"
+                  (onClick)="atualizarEmailAlternativo()"></p-button>
                 </div>
               </div>
               <div class="divBotoes botoes">
@@ -546,8 +549,10 @@
           !rua ||
           !numeroResidencia ||
           !complemento"
+          
           styleClass="p-button-raised p-button-warning">
         </p-button>
+        <!-- (onClick)="atualizarUsuario()" -->
       </div>
       <div class="divInputs">
         <p-button label="Excluir conta"
