@@ -38,13 +38,13 @@ export class GerenciamentoDeClientesComponent {
   emailsFiltrados: any[] = [];
   enderecosFiltradosEntrega: any[] = [];
   enderecosFiltradosCobranca: any[] = [];
-  enderecoFiltradoSelecionado: any;
-  emailsFiltradoSelecionado: any
+  enderecoFiltradoSelecionado: any | null = null;
+  emailsFiltradoSelecionado: any | null = null;
 
   usuarioSelecionado!: any;
   usuariosFiltrados: Usuario[] = [];
 
-  botaoDiv: boolean = false;
+  botaoDiv: boolean = true;
   botaoDisabled!: boolean;
 
   LoginId!: number;
@@ -68,17 +68,22 @@ export class GerenciamentoDeClientesComponent {
   ruaEntrega: string = '';
   numeroResidenciaEntrega!: number | null;
   complementoEntrega!: string;
+
   habilitarEmailAlternativo: boolean = false;
   habilitarTelefoneAlternativo: boolean = false;
-  habilitarEnderecoEntrega: boolean = false;
+  habilitarEnderecoEntrega: boolean = true;
+  habilitarDropdownEnderecosEntrega: boolean =  true;
+  habilitarPassword: boolean = false
+  habilitarBotaoEmailAlternativo = false
+  habilitarBotaoTelefoneAlternativo = false
 
   tipoUsuario!: TipoUsuario[];
-  tipoUsuarioSelecionado!: TipoUsuario;
+  tipoUsuarioSelecionado: TipoUsuario | null = null;
   dadoTipoUsuarioSelecionado!: string
 
   estado!: Estado[];
-  estadoSelecionadoCobranca!: Estado;
-  estadoSelecionadoEntrega!: Estado;
+  estadoSelecionadoCobranca: Estado | null = null;
+  estadoSelecionadoEntrega: Estado | null = null;
 
   emailValid: boolean = false;
 
@@ -226,6 +231,9 @@ export class GerenciamentoDeClientesComponent {
 
       this.validateEmail()
 
+      this.habilitarDropdownEnderecosEntrega = false
+      this.habilitarPassword = true
+
       this.botaoDisabled = true;
       this.botaoDiv = true;
 
@@ -244,20 +252,63 @@ export class GerenciamentoDeClientesComponent {
 
   emailAlternativoSelecionado(event: any) {
     this.emailAlternativo = event.value.email
+    this.habilitarBotaoEmailAlternativo = true
   }
+
+  emailAlternativoValid(): boolean {
+    
+    if (this.habilitarBotaoEmailAlternativo || !this.checkedRegex(this.emailAlternativo)) {
+      return false;
+    }
+    
+    return true;
+
+  }
+
+  emailAlternativoAtualizarValid(): boolean {
+    
+    if (!this.habilitarBotaoEmailAlternativo || !this.checkedRegex(this.emailAlternativo)) {
+      return false;
+    }
+    
+    return true;
+
+  }
+
+  
 
   limparCampos() {
     this.nome = '';
     this.cpfOuCnpj = '';
+    this.tipoUsuarioSelecionado = null
     this.email = '';
     this.telefone = '';
+    this.passwordCadastro = ''
+    this.passwordCadastroRepetir = ''
+    this.emailAlternativo = ''
+    this.telefoneAlternativo = ''
     this.cep = null;
     this.cidade = '';
+    this.estadoSelecionadoCobranca = null
     this.bairro = '';
     this.rua = '';
     this.numeroResidencia = null;
     this.complemento = '';
 
+    this.identificacaoEndereco = '';
+    this.enderecoFiltradoSelecionado = null;
+    this.cepEntrega = null;
+    this.cidadeEntrega = '';
+    this.estadoSelecionadoEntrega = null;
+    this.bairroEntrega = '';
+    this.ruaEntrega = '';
+    this.numeroResidenciaEntrega = null;
+    this.complementoEntrega = ''
+
+
+    this.habilitarPassword = false
+
+    this.habilitarDropdownEnderecosEntrega = true
     this.botaoDisabled = false;
     this.botaoDiv = false;
 
@@ -265,16 +316,21 @@ export class GerenciamentoDeClientesComponent {
 
   limparCamposEnderecoEntrega() {
     this.identificacaoEndereco = '';
+    this.enderecoFiltradoSelecionado = null;
     this.cepEntrega = null;
     this.cidadeEntrega = '';
+    this.estadoSelecionadoEntrega = null;
     this.bairroEntrega = '';
     this.ruaEntrega = '';
     this.numeroResidenciaEntrega = null;
+    this.complementoEntrega = ''
 
   }
 
   limparCamposEmailAlternativo() {
     this.emailAlternativo = '';
+    this.habilitarBotaoEmailAlternativo = false;
+    this.emailsFiltradoSelecionado = null;
   }
 
   limparCamposTelefoneAlternativo() {
@@ -317,6 +373,55 @@ export class GerenciamentoDeClientesComponent {
   tipoUsuarioSelecionadoDropdown(event: any){
     this.tipoUsuarioSelecionado = event.value
     this.dadoTipoUsuarioSelecionado = event.value.tipo
+  }
+
+  isValid(): boolean {
+    // Lógica para verificar todas as condições
+    if (
+      !this.nome ||
+      !this.cpfOuCnpj ||
+      !this.dadoTipoUsuarioSelecionado ||
+      !this.emailValid ||
+      !this.telefone ||
+      !this.passwordCadastro ||
+      !this.passwordCadastroRepetir ||
+      (this.passwordCadastro !== this.passwordCadastroRepetir) ||
+      !this.cep ||
+      !this.cidade ||
+      !this.estadoSelecionadoCobranca ||
+      !this.bairro ||
+      !this.rua ||
+      !this.numeroResidencia ||
+      !this.complemento
+    ) {
+      return false;
+    }
+
+
+    if (this.habilitarEmailAlternativo === true && !this.emailAlternativo) {
+      if (!this.checkedRegex(this.emailAlternativo)) {
+        return false;
+      }
+    }
+
+    if(this.habilitarTelefoneAlternativo === true &&
+      !this.telefoneAlternativo) {
+        return false;
+    }
+
+    if(this.habilitarEnderecoEntrega === true && 
+      !this.identificacaoEndereco ||
+      !this.cepEntrega ||
+      !this.cidadeEntrega ||
+      !this.estadoSelecionadoEntrega ||
+      !this.bairroEntrega ||
+      !this.ruaEntrega ||
+      !this.numeroResidenciaEntrega ||
+      !this.complementoEntrega){
+        return false;
+      }
+
+    return true;
   }
 
   // ========================================================= //
@@ -443,6 +548,8 @@ export class GerenciamentoDeClientesComponent {
     }, (error) => {
       console.log("Erro ao cadastrar usuário", error)
     });
+
+    this.habilitarDropdownEnderecosEntrega = false
   }
 
 

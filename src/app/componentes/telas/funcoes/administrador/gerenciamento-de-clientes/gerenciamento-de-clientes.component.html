@@ -76,6 +76,7 @@
               #passwordInputCadastro="ngModel"
               placeholder="Digite sua senha"
               [(ngModel)]="passwordCadastro"
+              [disabled]="habilitarPassword"
               [feedback]="false"
               [toggleMask]="true"
               pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
@@ -103,6 +104,7 @@
               name="passwordRepetir"
               #passwordInputCadastroRepetir="ngModel"
               [(ngModel)]="passwordCadastroRepetir"
+              [disabled]="habilitarPassword"
               [feedback]="false"
               [toggleMask]="true"
               pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
@@ -182,23 +184,24 @@
                 <div class="divInputs">
                   <p-button label="Adicionar"
                   styleClass="p-button-raised p-button-success"
-                  [disabled]="!emailAlternativo"
+                  [disabled]="!emailAlternativoValid()"
                   ></p-button>
                 </div>
                 <div class="divInputs">
                   <p-button label="Atualizar"
                   styleClass="p-button-raised p-button-warning"
-                  [disabled]="!emailAlternativo"></p-button>
+                  [disabled]="!emailAlternativoAtualizarValid()"></p-button>
                 </div>
               </div>
               <div class="divBotoes botoes">
                 <div class="divInputs">
                   <p-button label="Excluir"
                   styleClass="p-button-raised p-button-danger"
-                  [disabled]="!emailAlternativo"></p-button>
+                  [disabled]="!habilitarBotaoEmailAlternativo ||!emailAlternativo"></p-button>
                 </div>
                 <div class="divInputs">
                   <p-button label="Limpar campos"
+                  [disabled]="!emailAlternativo"
                   (click)="limparCamposEmailAlternativo()"
                   styleClass="p-button-raised p-button-info"
                   ></p-button>
@@ -263,14 +266,14 @@
                 <div class="divInputs">
                   <p-button label="Atualizar"
                   styleClass="p-button-raised p-button-warning"
-                  [disabled]="!telefoneAlternativo"></p-button>
+                  [disabled]="!habilitarBotaoTelefoneAlternativo ||!telefoneAlternativo"></p-button>
                 </div>
               </div>
               <div class="divBotoes botoes">
                 <div class="divInputs">
                   <p-button label="Excluir"
                   styleClass="p-button-raised p-button-danger"
-                  [disabled]="!telefoneAlternativo"></p-button>
+                  [disabled]="!habilitarBotaoTelefoneAlternativo ||!telefoneAlternativo"></p-button>
                 </div>
                 <div class="divInputs">
                   <p-button label="Limpar campos"
@@ -382,6 +385,7 @@
             [(ngModel)]="enderecoFiltradoSelecionado"
             (onChange)="enderecoEntregaSelecionado($event)"
             optionLabel="identificacao"
+            [disabled]="habilitarDropdownEnderecosEntrega"
             [filter]="true"
             filterBy="identificacao"
             [showClear]="true"
@@ -504,27 +508,11 @@
       <div class="divInputs">
         <p-button 
           label="Adicionar usuário"
-          [disabled]="botaoDisabled ||
-          !nome ||
-          !cpfOuCnpj ||
-          !dadoTipoUsuarioSelecionado ||
-          !emailValid ||
-          !telefone ||
-          !passwordCadastro ||
-          !passwordCadastroRepetir ||
-          (passwordCadastro !== passwordCadastroRepetir) ||
-          !cep ||
-          !cidade ||
-          !estadoSelecionadoCobranca ||
-          !bairro ||
-          !rua ||
-          !numeroResidencia ||
-          !complemento
-          "
+          [disabled]="!isValid()"
           styleClass="p-button-raised p-button-success"
-          (onClick)="cadastrarUsuario()"
+          
         ></p-button>
-
+        <!-- (onClick)="cadastrarUsuario()" -->
         
 
       </div>
@@ -532,16 +520,18 @@
         <p-button label="Atualizar usuário"
           [disabled]="!botaoDisabled ||
           !nome ||
-          !telefone ||
           !cpfOuCnpj ||
-          !cep ||
-          !cidade ||
-          !bairro ||
-          !rua ||
+          !tipoUsuarioSelecionado ||
           !email ||
           !emailValid ||
+          !telefone ||
+          !cep ||
+          !cidade ||
+          !estadoSelecionadoCobranca ||
+          !bairro ||
+          !rua ||
           !numeroResidencia ||
-          !estadoSelecionadoCobranca"
+          !complemento"
           styleClass="p-button-raised p-button-warning">
         </p-button>
       </div>
