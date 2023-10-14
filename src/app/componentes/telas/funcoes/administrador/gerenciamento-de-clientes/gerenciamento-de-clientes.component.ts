@@ -44,8 +44,9 @@ export class GerenciamentoDeClientesComponent {
   usuarioSelecionado!: any;
   usuariosFiltrados: Usuario[] = [];
 
-  botaoDiv: boolean = true;
-  botaoDisabled!: boolean;
+  botaoDiv: boolean = false;
+  botaoDisabled: boolean = false;
+  botaoDisabledEntrega: boolean = false;
 
   LoginId!: number;
   nome: string = '';
@@ -71,7 +72,7 @@ export class GerenciamentoDeClientesComponent {
 
   habilitarEmailAlternativo: boolean = false;
   habilitarTelefoneAlternativo: boolean = false;
-  habilitarEnderecoEntrega: boolean = true;
+  habilitarEnderecoEntrega: boolean = false;
   habilitarDropdownEnderecosEntrega: boolean =  true;
   habilitarPassword: boolean = false
   habilitarBotaoEmailAlternativo = false
@@ -129,7 +130,7 @@ export class GerenciamentoDeClientesComponent {
       { nome: 'Administrador', tipo: '1' }
     ]
 
-    // this.carregarUsuariosAPI()
+    this.carregarUsuariosAPI()
 
     // this.usuariosService.getUsuarioTabela().then((data) => {
     //   this.usuarios = data;
@@ -248,6 +249,8 @@ export class GerenciamentoDeClientesComponent {
     this.ruaEntrega = event.value.endereco;
     this.numeroResidenciaEntrega = event.value.numeroresidencia;
     this.complementoEntrega = event.value.complemento
+
+    this.botaoDisabledEntrega = true;
   }
 
   emailAlternativoSelecionado(event: any) {
@@ -325,6 +328,7 @@ export class GerenciamentoDeClientesComponent {
     this.numeroResidenciaEntrega = null;
     this.complementoEntrega = ''
 
+    this.botaoDisabledEntrega = false
   }
 
   limparCamposEmailAlternativo() {

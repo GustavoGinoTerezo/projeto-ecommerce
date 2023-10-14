@@ -463,38 +463,52 @@
       <div class="containerBotoes" *ngIf="botaoDiv">
         <div class="divInputs">
           <p-button label="Adicionar endereço"
-          [disabled]="!botaoDisabled ||
+          [disabled]="botaoDisabledEntrega ||
           !identificacaoEndereco ||
           !cepEntrega ||
           !cidadeEntrega ||
+          !estadoSelecionadoEntrega ||
           !bairroEntrega ||
           !ruaEntrega ||
-          !numeroResidenciaEntrega"  styleClass="p-button-raised p-button-success"></p-button>
+          !numeroResidenciaEntrega ||
+          !complementoEntrega"  styleClass="p-button-raised p-button-success"></p-button>
         </div>
         <div class="divInputs">
           <p-button label="Atualizar endereço"
-          [disabled]="!botaoDisabled ||
+          [disabled]="!botaoDisabledEntrega ||
           !identificacaoEndereco ||
           !cepEntrega ||
           !cidadeEntrega ||
+          !estadoSelecionadoEntrega ||
           !bairroEntrega ||
           !ruaEntrega ||
-          !numeroResidenciaEntrega"
+          !numeroResidenciaEntrega ||
+          !complementoEntrega"
           styleClass="p-button-raised p-button-warning"></p-button>
         </div>
         <div class="divInputs">
           <p-button label="Excluir endereço"
-          [disabled]="!botaoDisabled ||
+          [disabled]="!botaoDisabledEntrega ||
           !identificacaoEndereco ||
           !cepEntrega ||
           !cidadeEntrega ||
+          !estadoSelecionadoEntrega ||
           !bairroEntrega ||
           !ruaEntrega ||
-          !numeroResidenciaEntrega"
+          !numeroResidenciaEntrega ||
+          !complementoEntrega"
           styleClass="p-button-raised p-button-danger"></p-button>
         </div>
         <div class="divInputs">
           <p-button label="Limpar campos"
+          [disabled]="!identificacaoEndereco &&
+          !cepEntrega &&
+          !cidadeEntrega &&
+          !estadoSelecionadoEntrega &&
+          !bairroEntrega &&
+          !ruaEntrega &&
+          !numeroResidenciaEntrega &&
+          !complementoEntrega"
           (click)="limparCamposEnderecoEntrega()"
           styleClass="p-button-raised p-button-info"
           ></p-button>
@@ -542,6 +556,31 @@
       </div>
       <div class="divInputs">
         <p-button label="Limpar campos"
+        [disabled]="
+        !nome &&
+        !cpfOuCnpj &&
+        !tipoUsuarioSelecionado &&
+        !email &&
+        !telefone &&
+        !passwordCadastro &&
+        !passwordCadastroRepetir &&
+        !cep &&
+        !cidade &&
+        !estadoSelecionadoCobranca &&
+        !bairro &&
+        !rua &&
+        !numeroResidencia &&
+        !complemento && 
+        !identificacaoEndereco &&
+        !cepEntrega &&
+        !cidadeEntrega &&
+        !estadoSelecionadoEntrega &&
+        !bairroEntrega &&
+        !ruaEntrega &&
+        !numeroResidenciaEntrega &&
+        !complementoEntrega &&
+        !telefoneAlternativo &&
+        !emailAlternativo"
         (click)="limparCampos()"
         styleClass="p-button-raised p-button-info"
         ></p-button>
