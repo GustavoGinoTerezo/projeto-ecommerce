@@ -260,7 +260,8 @@
         !selectedStatus ||
         !selectedLayout ||
         !descBreve ||
-        !descCompleta"
+        !descCompleta ||
+        !informacaoTecnica"
         styleClass="p-button-raised p-button-success"
         (onClick)="adicionarProduto()"
       ></p-button>
@@ -268,25 +269,39 @@
     <div class="divInputs">
       <p-button label="Atualizar produto"
       [disabled]="
-        !adicionarProdutoDisabled ||
-        !nomeProduto ||
-        !pesoProduto ||
-        !alturaProduto ||
-        !larguraProduto ||
-        !comprimentoProduto ||
-        !categoriasSelecionadaInput ||
-        !valorProdutoFormatted ||
-        !selectedStatus ||
-        !selectedLayout ||
-        !descBreve ||
-        !descCompleta"
+      !adicionarProdutoDisabled ||
+      !nomeProduto ||
+      !pesoProduto ||
+      !alturaProduto ||
+      !larguraProduto ||
+      !comprimentoProduto ||
+      !categoriasSelecionadaInput ||
+      !valorProdutoFormatted ||
+      !selectedStatus ||
+      !selectedLayout ||
+      !descBreve ||
+      !descCompleta ||
+      !informacaoTecnica"
       styleClass="p-button-raised p-button-warning"
       (onClick)="atualizarProduto()"
       ></p-button>
     </div>
     <div class="divInputs">
       <p-button label="Excluir produto"
-      [disabled]="!adicionarProdutoDisabled"
+      [disabled]="
+      !adicionarProdutoDisabled ||
+      !nomeProduto ||
+      !pesoProduto ||
+      !alturaProduto ||
+      !larguraProduto ||
+      !comprimentoProduto ||
+      !categoriasSelecionadaInput ||
+      !valorProdutoFormatted ||
+      !selectedStatus ||
+      !selectedLayout ||
+      !descBreve ||
+      !descCompleta ||
+      !informacaoTecnica"
       styleClass="p-button-raised p-button-danger"
       (onClick)="excluirProduto()"></p-button>
     </div>
@@ -294,13 +309,18 @@
       <p-button
         label="Limpar campos"
         [disabled]="
-        !nomeProduto ||
-        !categoriasSelecionadaInput ||
-        !valorProdutoFormatted ||
-        !selectedStatus ||
-        !selectedLayout ||
-        !descBreve ||
-        !descCompleta"
+        !nomeProduto &&
+        !pesoProduto &&
+        !alturaProduto &&
+        !larguraProduto &&
+        !comprimentoProduto &&
+        !categoriasSelecionadaInput &&
+        !valorProdutoFormatted &&
+        !selectedStatus &&
+        !selectedLayout &&
+        !descBreve &&
+        !descCompleta &&
+        !informacaoTecnica"
         (click)="limparCampos()"
         styleClass="p-button-raised p-button-info"
       ></p-button>
