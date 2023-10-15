@@ -44,6 +44,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   categoriasSelecionada!: Categorias;
   categoriasSelecionadaInput: Categorias | null = null;
   nomeProduto: string = '';
+  informacaoTecnica: string = '';
   valorProduto!: number | null
   descCompleta: string = '';
   descBreve: string = '';
@@ -53,7 +54,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   valorProdutoFormatted!: number | null;
   categoriasAdicionarSelecionadaInput: any;
   nomeCategoriaSelecionada!: string;
-  infoTecnica!: string;
   pesoProduto!: number | null;
   alturaProduto!: number | null;
   larguraProduto!: number | null;
@@ -182,6 +182,12 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.nomeProduto = produto.nome || '';
     // Encontre a categoria correspondente ou defina como null
     this.categoriasSelecionadaInput = this.categorias.find(categoria => categoria.catId === produto.catId) || null;
+    
+    this.pesoProduto = produto.peso || null;
+    this.alturaProduto = produto.altura || null;
+    this.larguraProduto = produto.largura || null;
+    this.comprimentoProduto = produto.comprimento || null;
+
     this.valorProduto = produto.preco || null;
     this.valorProdutoFormatted = this.formatCurrency(this.valorProduto!);
     // Encontre o status correspondente ou use o status "desconhecido" como padrão
@@ -209,6 +215,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     }
     this.descBreve = produto.descBreve || '';
     this.descCompleta = produto.descCompleta || '';
+    this.informacaoTecnica = produto.informacaoTecnica || '';
 
     this.selectedProductImages = produto.imagem || [];
 
@@ -216,8 +223,13 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     console.log('Campos atualizados:', {
       idProduto: this.idProduto,
       nomeProduto: this.nomeProduto,
+      altura: this.alturaProduto,
+      largura: this.larguraProduto,
+      peso: this.pesoProduto,
+      comprimento: this.comprimentoProduto,
       descBreve: this.descBreve,
       descCompleta: this.descCompleta,
+      informacaoTecnica: this.informacaoTecnica,
       valorProduto: this.valorProduto,
       valorProdutoFormatted: this.valorProdutoFormatted,
       adicionarProdutoDisabled: this.adicionarProdutoDisabled,
@@ -362,6 +374,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     ((response) => {
       this.showSuccess(mensagemSucesso)
       console.log("Categoria adicionada com sucesso", response)
+      this.atualizarPagina();
     },
     (error) => {
       this.showError(mensagemErro)
@@ -369,7 +382,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     }
     )
 
-    this.atualizarPagina();
+    
 
   }
 
@@ -427,7 +440,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       preco: this.valorProdutoFormatted,
       qtdEntrada: 0,
       qtdSaida: 0,
-      informacaoTecnica: this.infoTecnica,
+      informacaoTecnica: this.informacaoTecnica,
       altura: this.alturaProduto,
       largura: this.larguraProduto,
       peso: this.pesoProduto,
@@ -488,6 +501,11 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       descBreve: this.descBreve,
       descCompleta: this.descCompleta,
       preco: this.valorProdutoFormatted,
+      informacaoTecnica: this.informacaoTecnica,
+      altura: this.alturaProduto,
+      largura: this.larguraProduto,
+      peso: this.pesoProduto,
+      comprimento: this.comprimentoProduto
     }
 
     this.apiProdutoService.atualizarProduto(this.idProduto, dataProduto).subscribe(

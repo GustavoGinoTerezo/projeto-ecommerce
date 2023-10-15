@@ -27,7 +27,11 @@ export interface Produtos {
   qtdSaida?: Saida[];
   descBreve?: string;
   descCompleta?: string;
-  especificacaoTecnica?: string;
+  informacaoTecnica?: string;
+  altura?: number;
+  largura?: number;
+  peso?: number;
+  comprimento?: number;
   comentariosProduto?: ComentariosProdutos[];
   comentariosPendentes?: ComentariosProdutos[];
 }
@@ -154,7 +158,7 @@ export class ServiceCategoriasService {
           ],
           descBreve: 'Descrição breve do MJ 15-30-15',
           descCompleta: 'Descrição completa do produto MJ 15-30-15',
-          especificacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
+          informacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
           comentariosProduto: [
           {
             comentario: 'Gostei do produto'
@@ -187,7 +191,7 @@ export class ServiceCategoriasService {
       preco: 1234.10,
       descBreve: 'Descrição breve do MJ 15-30-15',
       descCompleta: 'Descrição completa do MJ 15-30-15',
-      especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
+      informacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
       comentariosProduto: [
         {
           comentario: 'Gostei do produto'
@@ -213,7 +217,7 @@ export class ServiceCategoriasService {
       preco: 1234.10,
       descBreve: 'Descrição breve do MJ 15-30-15',
       descCompleta: 'Descrição completa do MJ 15-30-15',
-      especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
+      informacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
       comentariosProduto: [
         {
           comentario: 'Gostei do produto'
@@ -240,7 +244,7 @@ export class ServiceCategoriasService {
       preco: 1234.10,
       descBreve: 'Descrição breve do MJ 15-30-15',
       descCompleta: 'Descrição completa do MJ 15-30-15',
-      especificacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
+      informacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
       comentariosProduto: [
         {
           comentario: 'Gostei do produto'
