@@ -6,6 +6,7 @@ import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/service
 import { ServiceApiUsuariosService } from 'src/app/services/servicesAPI/serviceAPI-Usuarios/service-api-usuarios.service';
 import { ServiceApiEnderecosService } from 'src/app/services/servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
 import { ServiceApiEmailsService } from 'src/app/services/servicesAPI/serviceAPI-Emails/service-api-emails.service';
+import { ServiceApiTelefonesService } from 'src/app/services/servicesAPI/serviceAPI-Telefones/service-api-telefones.service';
 
 interface Estado {
   nome: string;
@@ -47,7 +48,7 @@ export class GerenciamentoDeClientesComponent {
   usuarioSelecionado!: any;
   usuariosFiltrados: Usuario[] = [];
 
-  botaoDiv: boolean = false;
+  botaoDiv: boolean = true;
   botaoDisabled: boolean = false;
   botaoDisabledEntrega: boolean = false;
 
@@ -76,9 +77,9 @@ export class GerenciamentoDeClientesComponent {
   numeroResidenciaEntrega!: number | null;
   complementoEntrega!: string;
 
-  habilitarEmailAlternativo: boolean = false;
-  habilitarTelefoneAlternativo: boolean = false;
-  habilitarEnderecoEntrega: boolean = false;
+  habilitarEmailAlternativo: boolean = true;
+  habilitarTelefoneAlternativo: boolean = true;
+  habilitarEnderecoEntrega: boolean = true;
   habilitarDropdownEnderecosEntrega: boolean =  true;
   habilitarPassword: boolean = false
   habilitarBotaoEmailAlternativo = false
@@ -100,6 +101,7 @@ export class GerenciamentoDeClientesComponent {
     private usuarioAPIService: ServiceApiUsuariosService,
     private enderecosAPIService: ServiceApiEnderecosService,
     private emailAPIService: ServiceApiEmailsService,
+    private telefoneAPIService: ServiceApiTelefonesService,
   ){}
 
   ngOnInit(){
@@ -139,7 +141,7 @@ export class GerenciamentoDeClientesComponent {
       { nome: 'Administrador', tipo: '1' }
     ]
 
-    this.carregarUsuariosAPI()
+    // this.carregarUsuariosAPI()
 
     // this.usuariosService.getUsuarioTabela().then((data) => {
     //   this.usuarios = data;
@@ -240,10 +242,6 @@ export class GerenciamentoDeClientesComponent {
         console.log("Endereço Cobrança: ",this.enderecosFiltradosCobranca)
       }
 
-      console.log("ID do usuário:",this.LoginId)
-      console.log("ID do End cobrança:", this.endIdCobranca)
-      
-
       this.validateEmail()
 
       this.habilitarDropdownEnderecosEntrega = false
@@ -290,7 +288,6 @@ export class GerenciamentoDeClientesComponent {
     }
     return false; // Se o emailAlternativo está preenchido e cumpre o regex, retorne false
   }
-  
 
   limparCampos() {
     this.nome = '';
@@ -440,17 +437,17 @@ export class GerenciamentoDeClientesComponent {
     return true;
   }
 
-  private atualizarPagina() {
+  private async atualizarPagina() {
     //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
     setTimeout(() => {
       location.reload();
     }, 2000);
   }
 
-
   // ========================================================= //
   // API
 
+  // USER
   cadastrarUsuario(){
 
     const dataLogin = {
@@ -575,6 +572,7 @@ export class GerenciamentoDeClientesComponent {
 
     this.habilitarDropdownEnderecosEntrega = false
     this.atualizarPagina();
+    
   }
 
   atualizarUsuario(){
@@ -605,6 +603,7 @@ export class GerenciamentoDeClientesComponent {
 
       this.enderecosAPIService.atualizarEnderecos(endIdCobranca, novoDataEndCobranca).subscribe((response) => {
         console.log("Endereço de cobrança atualizado com sucesso", response)
+        this.atualizarPagina();
       },
       (error) => {
         console.log("Erro ao atualizar endereço de cobrança", error)
@@ -614,10 +613,37 @@ export class GerenciamentoDeClientesComponent {
       console.log("Erro ao atualizar Usuário", error)
     })
 
-    this.atualizarPagina();
+    
 
   }
 
+  async excluirLogin() {
+    console.log("4")
+    try {
+        const LoginId = this.LoginId;
+        const response = await this.usuarioAPIService.excluirUsuario(LoginId).toPromise();
+        console.log("Usuário excluído com sucesso", response);
+    } catch (error) {
+        console.log("Erro ao excluir o usuário", error);
+        // Trate o erro ou rejeite a Promise, se necessário
+    }
+  }
+
+  async excluirUsuario() {
+    try {
+        await this.excluirTodosEmailsAlternativo();
+        await this.excluirTodosEnderecos();
+        await this.excluirTodosTelefonesAlternativo();
+        await this.excluirLogin();
+        await this.atualizarPagina();
+        console.log('Usuário excluído com sucesso');
+    } catch (error) {
+        console.error('Erro ao excluir o usuário:', error);
+    }
+  }
+
+  // ========================================================= //
+  // EMAIL
   cadastrarEmailAlternativo(){
 
     const LoginId = this.LoginId
@@ -630,13 +656,14 @@ export class GerenciamentoDeClientesComponent {
     this.registrar.registrarEmails(dataEmailAlternativo).subscribe(
       (response) => {
         console.log("Email alternativo cadastrado com sucesso", response);
+        this.atualizarPagina();
       },
       (error) => {
         console.log("Erro ao cadastrar email alternativo", error);
       }
     );
 
-    this.atualizarPagina();
+    
   }
 
   atualizarEmailAlternativo(){
@@ -649,13 +676,196 @@ export class GerenciamentoDeClientesComponent {
 
     this.emailAPIService.atualizarEmails(emailId, dataNovoEmailAlternativo).subscribe((response) => {
       console.log("Email alternativo atualizado com sucesso", response)
+      this.atualizarPagina();
     },
     (error) => {
       console.log("Erro ao atualizar email alternativo", error)
     })
 
-    this.atualizarPagina();
+    
   }
 
+  async excluirTodosEmailsAlternativo() {
+    console.log("1");
+    for (let i = 0; i < this.emailsFiltrados.length; i++) {
+        console.log(this.emailsFiltrados[i].emailId);
+        try {
+            await this.emailAPIService.excluirEmails(this.emailsFiltrados[i].emailId).toPromise();
+            console.log("Email alternativo excluído com sucesso");
+        } catch (error) {
+            console.log("Erro ao excluir o email alternativo", error);
+            // Trate o erro ou rejeite a Promise, se necessário
+        }
+    }
+  }
+
+  excluirUnicoEmailAlternativo(){
+
+    const emailId = this.emailsFiltradoSelecionado.emailId
+
+    this.emailAPIService.excluirEmails(emailId).subscribe((response) => {
+      console.log("Email alternativo excluído com sucesso.", response)
+      this.atualizarPagina();
+    },
+    (error) => {
+      console.log("Erro ao excluir endereço alternativo", error)
+    })
+
+  }
+
+  // ========================================================= //
+  // TELEFONE
+  cadastrarTelefoneAlternativo(){
+
+    const LoginId = this.LoginId
+
+    const dataTelefoneAlternativo = {
+      LoginId: LoginId,
+      telefone: this.telefoneAlternativo
+    };
+
+    this.registrar.registrarTelefone(dataTelefoneAlternativo).subscribe(
+      (response) => {
+        console.log("Telefone alternativo cadastrado com sucesso", response);
+        this.atualizarPagina();
+      },
+      (error) => {
+        console.log("Erro ao cadastrar Telefone alternativo", error);
+      }
+    );
+  }
+
+  // atualizarTelefoneAlternativo(){
+
+  //   const emailId = this.emailsFiltradoSelecionado.emailId
+
+  //   const dataNovoEmailAlternativo = {
+  //     email: this.emailAlternativo
+  //   }
+
+  //   this.emailAPIService.atualizarEmails(emailId, dataNovoEmailAlternativo).subscribe((response) => {
+  //     console.log("Email alternativo atualizado com sucesso", response)
+  //   },
+  //   (error) => {
+  //     console.log("Erro ao atualizar email alternativo", error)
+  //   })
+
+  //   this.atualizarPagina();
+  // }
+
+  async excluirTodosTelefonesAlternativo() {
+    console.log("3");
+    for (let i = 0; i < this.telefonesFiltrados.length; i++) {
+        console.log(this.telefonesFiltrados[i].contId);
+        try {
+            await this.telefoneAPIService.excluirTelefones(this.telefonesFiltrados[i].contId).toPromise();
+            console.log("Telefone alternativo excluído com sucesso");
+        } catch (error) {
+            console.log("Erro ao excluir o telefone alternativo", error);
+            // Trate o erro ou rejeite a Promise, se necessário
+        }
+    }
+  }
+
+  // excluirUnicoTelefoneAlternativo(){}
+
+  // ========================================================= //
+  // ENDEREÇO
+  
+  cadastrarEnderecoEntrega(){
+
+    const LoginId = this.LoginId
+
+    const dataEnderecoEntrega = {
+      LoginId: LoginId,
+      tpcadastro: "2",
+      identificacao: this.identificacaoEndereco,
+      cep: this.cepEntrega,
+      cidade: this.cidadeEntrega,
+      // UfId: this.estadoSelecionado.uf
+      bairro: this.bairroEntrega,
+      endereco: this.ruaEntrega,
+      numeroresidencia: this.numeroResidenciaEntrega,
+      complemento: this.complementoEntrega
+    }
+
+    this.registrar.registrarEndereco(dataEnderecoEntrega).subscribe(response => {
+      console.log("Endereço de entrega adicionado com sucesso")
+      this.atualizarPagina();
+    },
+    (error) => {
+      console.log("Erro ao adicionar endereço de entrega", error)
+    });
+
+    
+  }
+
+  atualizarEnderecoEntrega(){
+
+    const endId = this.enderecoFiltradoSelecionado.endId
+
+    const dataNovoEnderecoEntrega = {
+      identificacao: this.identificacaoEndereco,
+      cep: this.cepEntrega,
+      cidade: this.cidadeEntrega,
+      // UfId: this.estadoSelecionado.uf
+      bairro: this.bairroEntrega,
+      endereco: this.ruaEntrega,
+      numeroresidencia: this.numeroResidenciaEntrega,
+      complemento: this.complementoEntrega
+    }
+
+    this.enderecosAPIService.atualizarEnderecos(endId, dataNovoEnderecoEntrega).subscribe((response) => {
+      console.log("Endereço de entrega atualizado com sucesso", response)
+      this.atualizarPagina();
+    },
+    (error) => {
+      console.log("Erro ao atualizar endereço de entrega", error)
+    })
+
+    
+  }
+
+  async excluirTodosEnderecos() {
+    console.log("2");
+    for (let i = 0; i < this.enderecosFiltradosEntrega.length; i++) {
+        console.log(this.enderecosFiltradosEntrega[i].endId);
+        try {
+            await this.enderecosAPIService.excluirEnderecos(this.enderecosFiltradosEntrega[i].endId).toPromise();
+            console.log("Endereço de entrega excluído com sucesso");
+        } catch (error) {
+            console.log("Erro ao excluir o endereço de entrega", error);
+            // Trate o erro ou rejeite a Promise, se necessário
+        }
+    }
+
+    console.log("Endereço de Cobrança:");
+    for (let i = 0; i < this.enderecosFiltradosCobranca.length; i++) {
+        console.log(this.enderecosFiltradosCobranca[i].endId);
+        try {
+            await this.enderecosAPIService.excluirEnderecos(this.enderecosFiltradosCobranca[i].endId).toPromise();
+            console.log("Endereço de cobrança excluído com sucesso");
+        } catch (error) {
+            console.log("Erro ao excluir o endereço de cobrança", error);
+            // Trate o erro ou rejeite a Promise, se necessário
+        }
+    }
+  }
+
+  excluirUnicoEnderecoEntrega(){
+
+    const endId = this.enderecoFiltradoSelecionado.endId
+
+    this.enderecosAPIService.excluirEnderecos(endId).subscribe((response) => {
+      console.log("Endereço de entrega excluído com sucesso", response)
+      this.atualizarPagina();
+    },
+    (error) => {
+      console.log("Erro ao excluir endereço de entrega", error)
+    })
+
+  }
+
+  // ========================================================= //
 
 }

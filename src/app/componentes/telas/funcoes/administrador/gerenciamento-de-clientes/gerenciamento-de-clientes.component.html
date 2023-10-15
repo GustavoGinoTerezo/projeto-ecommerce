@@ -193,14 +193,17 @@
                   <p-button label="Atualizar"
                   styleClass="p-button-raised p-button-warning"
                   [disabled]="emailAlternativoAtualizarValid() ||!habilitarBotaoEmailAlternativo"
-                  (onClick)="atualizarEmailAlternativo()"></p-button>
+                  (onClick)="atualizarEmailAlternativo()"
+                  ></p-button>
                 </div>
               </div>
               <div class="divBotoes botoes">
                 <div class="divInputs">
                   <p-button label="Excluir"
                   styleClass="p-button-raised p-button-danger"
-                  [disabled]="!habilitarBotaoEmailAlternativo ||!emailAlternativo"></p-button>
+                  [disabled]="!habilitarBotaoEmailAlternativo ||!emailAlternativo"
+                  (onClick)="excluirUnicoEmailAlternativo()"
+                  ></p-button>
                 </div>
                 <div class="divInputs">
                   <p-button label="Limpar campos"
@@ -474,7 +477,11 @@
           !bairroEntrega ||
           !ruaEntrega ||
           !numeroResidenciaEntrega ||
-          !complementoEntrega"  styleClass="p-button-raised p-button-success"></p-button>
+          !complementoEntrega"  styleClass="p-button-raised p-button-success"
+          (onClick)="cadastrarEnderecoEntrega()"
+          ></p-button>
+          
+
         </div>
         <div class="divInputs">
           <p-button label="Atualizar endereço"
@@ -487,7 +494,10 @@
           !ruaEntrega ||
           !numeroResidenciaEntrega ||
           !complementoEntrega"
+          (onClick)="atualizarEnderecoEntrega()"
           styleClass="p-button-raised p-button-warning"></p-button>
+          
+
         </div>
         <div class="divInputs">
           <p-button label="Excluir endereço"
@@ -500,7 +510,9 @@
           !ruaEntrega ||
           !numeroResidenciaEntrega ||
           !complementoEntrega"
-          styleClass="p-button-raised p-button-danger"></p-button>
+          styleClass="p-button-raised p-button-danger"
+          (onClick)="excluirUnicoEnderecoEntrega()"
+          ></p-button>
         </div>
         <div class="divInputs">
           <p-button label="Limpar campos"
@@ -527,9 +539,9 @@
           label="Adicionar usuário"
           [disabled]="!isValid()"
           styleClass="p-button-raised p-button-success"
-          
+          (onClick)="cadastrarUsuario()"  
         ></p-button>
-        <!-- (onClick)="cadastrarUsuario()" -->
+        
         
 
       </div>
@@ -549,16 +561,22 @@
           !rua ||
           !numeroResidencia ||
           !complemento"
-          
+          (onClick)="atualizarUsuario()"  
           styleClass="p-button-raised p-button-warning">
         </p-button>
-        <!-- (onClick)="atualizarUsuario()" -->
+        
       </div>
+
       <div class="divInputs">
         <p-button label="Excluir conta"
         [disabled]="!botaoDisabled"
-        styleClass="p-button-raised p-button-danger"></p-button>
+        styleClass="p-button-raised p-button-danger"
+        (onClick)="excluirUsuario()"
+        ></p-button>
+        
+
       </div>
+
       <div class="divInputs">
         <p-button label="Limpar campos"
         [disabled]="
