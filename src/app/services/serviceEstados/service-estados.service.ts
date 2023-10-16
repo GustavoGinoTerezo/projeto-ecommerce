@@ -31,7 +31,6 @@ export class ServiceEstadosService {
       const estadosAPI = await this.apiEstadosService.buscarEstados().toPromise();
       if (estadosAPI) {
         this.estadosAPI = estadosAPI;
-        console.log("1");
       } else {
         console.error('Erro ao buscar estados da API: estadosAPI é undefined');
       }
