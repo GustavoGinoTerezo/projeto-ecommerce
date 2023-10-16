@@ -6,6 +6,7 @@ import { Categorias, Imagens, Produtos, ServiceCategoriasService } from 'src/app
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { Subscription } from 'rxjs';
+import { ServiceApiComentariosService } from 'src/app/services/servicesAPI/serviceAPI-Comentarios/service-api-comentarios.service';
 
 @Component({
   selector: 'app-detalhe-produto',
@@ -35,6 +36,7 @@ export class DetalheProdutoComponent implements OnInit {
     private produtoService: ServiceCategoriasService,
     private categoriasService: ServiceCategoriasService,
     private carrinhoService: ServiceCarrinhoDeComprasService,
+    private comentariosAPIService: ServiceApiComentariosService,
   ) {}
 
   async ngOnInit() {
@@ -156,19 +158,19 @@ export class DetalheProdutoComponent implements OnInit {
 
   adicionarComentario() {
     // Verifique se o novoComentario não está vazio
-    if (!this.novoComentario.trim()) {
-      this.messageService.add({ severity: 'warn', summary: 'Aviso', detail: 'Digite um comentário.' });
-      return;
+    
+    const dataComentario = {
+      prodId: this.produto?.prodId,
+      mensagem: this.novoComentario,
+      aprovado: 0
     }
 
-    // Adicione o comentário pendente ao array de comentários pendentes do produto
-    if (this.produto) {
-      if (!this.produto.comentariosPendentes) {
-        this.produto.comentariosPendentes = [];
-      }
-
-      this.produto.comentariosPendentes.push({ comentario: this.novoComentario });
-    }
+    this.comentariosAPIService.cadastrarComentario(dataComentario).subscribe((response) => {
+      console.log("Comentário cadastrado para análise", response)
+    },
+    (error) => {
+      console.log("Erro ao cadastrar comentário", error)
+    })
 
     // Limpe o campo de entrada
     this.novoComentario = '';

@@ -83,7 +83,7 @@
     <!-- Campo de entrada para adicionar um novo comentário -->
     <div class="containerInputComentario">
       <input class="inputQuant" pInputText type="text" placeholder="Adicionar comentário" [(ngModel)]="novoComentario" />
-      <p-button icon="fa-solid fa-check" class="botaoEnviarComentario" (onClick)="adicionarComentario()"></p-button>
+      <p-button icon="fa-solid fa-check" class="botaoEnviarComentario" (onClick)="adicionarComentario()" [disabled]="!novoComentario"></p-button>
     </div>
   </div>
 </div>

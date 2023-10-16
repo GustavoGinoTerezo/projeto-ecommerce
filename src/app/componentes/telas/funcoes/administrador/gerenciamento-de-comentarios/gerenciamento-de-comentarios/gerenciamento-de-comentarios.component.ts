@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Produtos, ServiceCategoriasService, ComentariosProdutos } from 'src/app/services/serviceCategorias/service-categorias.service';
+import { Comentarios, ServiceComentariosService } from 'src/app/services/serviceComentarios/service-comentarios.service';
+import { ServiceApiComentariosService } from 'src/app/services/servicesAPI/serviceAPI-Comentarios/service-api-comentarios.service';
 
 @Component({
   selector: 'app-gerenciamento-de-comentarios',
@@ -8,60 +11,82 @@ import { Produtos, ServiceCategoriasService, ComentariosProdutos } from 'src/app
 })
 export class GerenciamentoDeComentariosComponent  {
 
-  produtosComComentariosPendentes: Produtos[] = [];
-  lista: boolean = true;
-  comentariosCarregados: boolean = false; // Controle adicional
+  private comentariosSubscription!: Subscription;
 
-  constructor(private produtoService: ServiceCategoriasService) {}
+  produtosComComentariosPendentes: any[] = [];
+  comentariosCarregados: boolean = false; // Controle adicional
+  comentariosAPI: Comentarios[] = []
+
+  constructor(
+    private comentariosService: ServiceComentariosService,
+    private comentariosAPIService: ServiceApiComentariosService,
+    ) {}
 
   ngOnInit() {
-    // Obtém produtos com comentários pendentes
-    this.produtoService.getProdutosComComentariosPendentes().subscribe(produtos => {
-      this.produtosComComentariosPendentes = produtos;
-      this.comentariosCarregados = true; // Marca os comentários como carregados
-      this.atualizarLista();
+    
+
+    this.carregarComentariosAPI();
+
+    
+  }
+
+  ngOnDestroy() {
+
+    if (this.comentariosSubscription) {
+      this.comentariosSubscription.unsubscribe();
+    }
+
+  }
+
+  async carregarComentariosAPI() {
+    await this.comentariosService.atualizarComentariosDaAPI();
+    await this.carregarComentarios();
+  }
+
+  async carregarComentarios() {
+    this.comentariosSubscription = this.comentariosService.getComentarios().subscribe((comentariosAPI) => {
+      this.produtosComComentariosPendentes = comentariosAPI.filter(comentario => comentario.aprovado === 0);
+      this.comentariosCarregados = true;
     });
   }
 
-  aprovarComentario(produto: Produtos, comentario: ComentariosProdutos) {
-    const index = produto.comentariosPendentes?.indexOf(comentario);
-    if (index !== undefined && index !== -1) {
-      produto.comentariosPendentes?.splice(index, 1);
-      produto.comentariosProduto?.push(comentario);
+  aprovarComentario(comentario: any) {
+  
+    const comentarioId = comentario.comentarioId
+
+    const comentarioAprovado = {
+      aprovado: "1"
     }
 
-    // Verificar se há comentários pendentes em todos os produtos
-    const hasPendingComments = this.produtosComComentariosPendentes.some(p => p.comentariosPendentes?.length! > 0);
-
-    // Definir this.lista como false se não houver mais comentários pendentes
-    if (!hasPendingComments) {
-      this.lista = false;
-    }
-
-    this.atualizarLista();
+    this.comentariosAPIService.atualizarComentario(comentarioId, comentarioAprovado).subscribe((response) => {
+      console.log("Comentário aprovado com sucesso", response);
+      // Encontre o índice do comentário no array e remova-o
+      const index = this.produtosComComentariosPendentes.findIndex(item => item.comentarioId === comentarioId);
+      if (index !== -1) {
+        this.produtosComComentariosPendentes.splice(index, 1);
+      }
+    },
+    (error) => {
+      console.log("Erro ao aprovar comentário", error);
+    })
   }
 
 
   // Função para rejeitar um comentário
-  rejeitarComentario(produto: Produtos, comentario: ComentariosProdutos) {
-    const index = produto.comentariosPendentes?.indexOf(comentario);
-    if (index !== undefined && index !== -1) {
-      produto.comentariosPendentes?.splice(index, 1);
-    }
+  rejeitarComentario(comentario: any) {
+    
+    const comentarioId = comentario.comentarioId
 
-    // Verificar se há comentários pendentes em todos os produtos
-    const hasPendingComments = this.produtosComComentariosPendentes.some(p => p.comentariosPendentes?.length! > 0);
-
-    // Definir this.lista como false se não houver mais comentários pendentes
-    if (!hasPendingComments) {
-      this.lista = false;
-    }
-
-    this.atualizarLista();
+    this.comentariosAPIService.excluirComentario(comentarioId).subscribe((response) => {
+      console.log("Comentário excluído com sucesso", response)
+      const index = this.produtosComComentariosPendentes.findIndex(item => item.comentarioId === comentarioId);
+      if (index !== -1) {
+        this.produtosComComentariosPendentes.splice(index, 1);
+      }
+    },
+    (error) => {
+      console.log("Erro ao excluir comentário", error)
+    })
   }
 
-  private atualizarLista() {
-    // Definir this.lista com base no controle de comentários carregados
-    this.lista = this.comentariosCarregados && this.produtosComComentariosPendentes.some(p => p.comentariosPendentes?.length! > 0);
-  }
 }
