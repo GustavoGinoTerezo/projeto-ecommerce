@@ -37,7 +37,7 @@
     <div class="divInputs">
       <p-button
         label="Atualizar Estado"
-        [disabled]="!desabilitarBotao"
+        [disabled]="!desabilitarBotao || !nomeEstado || !UfId || !icms"
         (onClick)="atualizarEstado()"
         styleClass="p-button-raised p-button-warning"
       ></p-button>
@@ -45,7 +45,7 @@
     <div class="divInputs">
       <p-button
         label="Excluir Estado"
-        [disabled]="!desabilitarBotao"
+        [disabled]="!desabilitarBotao || !nomeEstado || !UfId || !icms"
         (onClick)="excluirEstado()"
         styleClass="p-button-raised p-button-danger"
       ></p-button>

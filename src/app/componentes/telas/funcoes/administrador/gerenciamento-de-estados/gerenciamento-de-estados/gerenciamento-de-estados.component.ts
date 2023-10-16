@@ -28,7 +28,7 @@ export class GerenciamentoDeEstadosComponent {
 
   ngOnInit(){
 
-    // this.carregarEstadosAPI()
+    this.carregarEstadosAPI()
 
   }
 
