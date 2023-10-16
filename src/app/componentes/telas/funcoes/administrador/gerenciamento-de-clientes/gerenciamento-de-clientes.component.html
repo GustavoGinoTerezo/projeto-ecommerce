@@ -569,7 +569,20 @@
 
       <div class="divInputs">
         <p-button label="Excluir conta"
-        [disabled]="!botaoDisabled"
+        [disabled]="!botaoDisabled ||
+          !nome ||
+          !cpfOuCnpj ||
+          !tipoUsuarioSelecionado ||
+          !email ||
+          !emailValid ||
+          !telefone ||
+          !cep ||
+          !cidade ||
+          !estadoSelecionadoCobranca ||
+          !bairro ||
+          !rua ||
+          !numeroResidencia ||
+          !complemento"
         styleClass="p-button-raised p-button-danger"
         (onClick)="excluirUsuario()"
         ></p-button>

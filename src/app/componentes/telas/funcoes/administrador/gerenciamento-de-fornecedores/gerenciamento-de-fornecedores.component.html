@@ -5,27 +5,26 @@
         <div class="divInputNome">
           <span class="p-float-label">
             <input pInputText id="username" [(ngModel)]="nomeFornecedor" />
-            <label htmlFor="username">Nome do fornecedor</label>
+            <label htmlFor="username">Razão social</label>
           </span>
         </div>
-
       </div>
       <div class="containerPrecoEStatus">
-        <div class="divInputPreco">
+        <div class="divInputCNPJ">
           <span class="p-float-label">
             <p-inputMask mask="99.999.999/9999-99" [(ngModel)]="cnpj" id="CNPJ"></p-inputMask>
             <label htmlFor="CPNJ">CNPJ do fornecedor</label>
           </span>
         </div>
-        <div class="divInputDropDown">
+        <div class="divInputInscricaoEstadual">
           <span class="p-float-label">
-            <p-inputMask mask="(99) 99999-9999" [(ngModel)]="telefone" id="telefone"></p-inputMask>
-            <label htmlFor="telefone">Telefone do fornecedor</label>
-        </span>
+            <input pInputText id="username"  [(ngModel)]="inscricaoEstadual" />
+            <label htmlFor="username">Inscrição Estadual</label>
+          </span>
         </div>
       </div>
       <div class="containerNomeProdutoECategoria">
-        <div class="divInputNome">
+        <div class="divInputEmail">
           <span class="p-float-label">
             <input
               id="emailPrincipal"
@@ -47,11 +46,68 @@
                 Formato de email inválido
           </small>
         </div>
-
+        <div class="divInputTelefone">
+          <span class="p-float-label">
+            <p-inputMask mask="(99) 99999-9999" [(ngModel)]="telefone" id="telefone"></p-inputMask>
+            <label htmlFor="telefone">Telefone do fornecedor</label>
+        </span>
+        </div>
+      </div>
+      <div class="containerCepECidade">
+        <div class="divInputCep">
+          <span class="p-float-label">
+            <p-inputMask mask="99999-999" [(ngModel)]="cep"></p-inputMask>
+            <label htmlFor="username">CEP</label>
+          </span>
+        </div>
+        <div class="divInputCidade">
+          <span class="p-float-label">
+            <input pInputText id="cidade"
+            [(ngModel)]="cidade"/>
+            <label htmlFor="username">Cidade</label>
+          </span>
+        </div>
+        <div class="divDropdownEstado">
+          <p-dropdown
+            [options]="estado"
+            [showClear]="true"
+            [(ngModel)]="estadoSelecionado"
+            placeholder="Estado"
+            optionLabel="nome">
+          </p-dropdown>
+        </div>
+      </div>
+      <div class="containerBairroRuaENumeroResidencia">
+        <div class="divInputBairro">
+          <span class="p-float-label">
+            <input pInputText id="bairro"
+            [(ngModel)]="bairro"/>
+            <label htmlFor="username">Bairro</label>
+          </span>
+        </div>
+        <div class="divInputRua">
+          <span class="p-float-label">
+            <input pInputText
+            id="rua"
+            [(ngModel)]="rua"
+            >
+            <label htmlFor="username">Rua</label>
+          </span>
+        </div>
+        <div class="divInputNumeroResidencia">
+          <span class="p-float-label">
+            <input pInputText
+            id="numeroresidencia"
+            [(ngModel)]="numeroEmpresa"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <label htmlFor="username">Nº da empresa</label>
+          </span>
+        </div>
+        
       </div>
       <div class="containerDescs">
         <div class="containerDescricoes">
-          <div class="divInputCidade">
+          <div class="divInputDescCompleta">
             <span class="p-float-label">
               <textarea
                 id="float-input"
@@ -73,28 +129,53 @@
     <div class="containerBotoesAdicionarProdutos">
       <div class="divInputs">
         <p-button label="Adicionar Fornecedor"
-
+        [disabled]="habilitarBotao()"
+        (onClick)="cadastrarFornecedor()"
         styleClass="p-button-raised p-button-success"
 
         ></p-button>
       </div>
       <div class="divInputs">
         <p-button label="Atualizar Fornecedor"
-
-        styleClass="p-button-raised p-button-warning"
+          [disabled]="desabilitarBotao ||
+          !this.nomeFornecedor ||
+          !this.cnpj ||
+          !this.inscricaoEstadual ||
+          !this.emailCadastroFornecedor ||
+          !this.telefone ||
+          !this.cep  ||
+          !this.cidade ||
+          !this.bairro ||
+          !this.rua ||
+          !this.numeroEmpresa ||
+          !this.descricaoFornecedor "
+          styleClass="p-button-raised p-button-warning"
+          (onClick)="atualizarFornecedor()"
 
         ></p-button>
       </div>
       <div class="divInputs">
         <p-button label="Excluir Fornecedor"
-
-        styleClass="p-button-raised p-button-danger"
+          [disabled]="desabilitarBotao ||
+          !this.nomeFornecedor ||
+          !this.cnpj ||
+          !this.inscricaoEstadual ||
+          !this.emailCadastroFornecedor ||
+          !this.telefone ||
+          !this.cep  ||
+          !this.cidade ||
+          !this.bairro ||
+          !this.rua ||
+          !this.numeroEmpresa ||
+          !this.descricaoFornecedor "
+          styleClass="p-button-raised p-button-danger"
+          (onClick)="excluirFornecedor()"
         ></p-button>
       </div>
       <div class="divInputs">
         <p-button
           label="Limpar campos"
-
+          (onClick)="limparCampos()"
 
           styleClass="p-button-raised p-button-info"
         ></p-button>
@@ -103,9 +184,9 @@
     <div class="tabelaClientes">
       <p-table
         #dt
-
+        [value]="fornecedores"
         selectionMode="single"
-
+        [(selection)]="fornecedoreSelecionado"
         [rowHover]="true"
         [tableStyle]="{ 'min-width': '50rem' }"
         [paginator]="true"
@@ -123,24 +204,24 @@
               pInputText
               type="text"
 
-              placeholder="Buscar Produto" />
+              placeholder="Buscar empresa" />
             </span>
           </div>
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th>Nome do fornecedor</th>
+            <th>Razão Social</th>
             <th>CNPJ</th>
             <th>Telefone</th>
             <th>Email</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-produto>
-          <tr [pSelectableRow]="produto" >
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <ng-template pTemplate="body" let-fornecedor>
+          <tr [pSelectableRow]="fornecedor" (click)="updateInputFieldsWithSelectedFornecedor(fornecedor)">
+            <td>{{fornecedor.nomeFornecedor}}</td>
+            <td>{{fornecedor.cnpj}}</td>
+            <td>{{fornecedor.telefone}}</td>
+            <td>{{fornecedor.email}}</td>
           </tr>
         </ng-template>
       </p-table>

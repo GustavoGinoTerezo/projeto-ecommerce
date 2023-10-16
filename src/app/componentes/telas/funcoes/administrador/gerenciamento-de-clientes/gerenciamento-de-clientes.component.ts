@@ -141,7 +141,7 @@ export class GerenciamentoDeClientesComponent {
       { nome: 'Administrador', tipo: '1' }
     ]
 
-    // this.carregarUsuariosAPI()
+    this.carregarUsuariosAPI()
 
     // this.usuariosService.getUsuarioTabela().then((data) => {
     //   this.usuarios = data;

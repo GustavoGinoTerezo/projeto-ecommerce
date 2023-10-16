@@ -7,10 +7,35 @@
   border-radius: 6px;
 }
 
+.divInputEmail {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
 .divInputNome {
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.divInputInscricaoEstadual {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.divInputNumeroEmpresa {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
   padding: 13px 0;
   margin-bottom: 15px;
 }
@@ -23,16 +48,17 @@
   margin-bottom: 15px;
 }
 
-.divInputPreco {
-  width: 49%;
+.divInputCNPJ {
+  width: 50%;
   padding: 13px 0;
   margin-bottom: 15px;
+  margin-right: 5px;
 }
 
-.divInputDropDown {
+.divInputTelefone {
   display: flex;
   flex-direction: column;
-  width: 49%;
+  width: 30%;
   padding: 13px 0;
   margin-bottom: 15px;
 }
@@ -84,19 +110,13 @@
   height: 100%;
 }
 
-.divInputCep {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 15px;
-  padding-bottom: 13px;
-}
 
-.divInputCidade {
+.divInputDescCompleta {
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: 13px 0;
+  margin-bottom: 10px;
 }
 
 .containerInputs {
@@ -152,7 +172,7 @@
   width: 100%;
 }
 
-:host ::ng-deep .divInputCidade .p-inputtext {
+:host ::ng-deep .divInputDescCompleta .p-inputtext {
   width: 100%;
   min-height: 220px;
   max-height: 220px;
@@ -167,3 +187,76 @@
 }
 
 
+.divInputCep {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputCidade {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+
+
+.divDropdownEstado {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.divInputBairro {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputRua {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputNumeroResidencia {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.divInputComplemento {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+}
+
+.containerCepECidade {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.containerBairroRuaENumeroResidencia {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}

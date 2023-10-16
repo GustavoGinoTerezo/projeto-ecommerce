@@ -98,6 +98,9 @@ export class GerenciamentoDeEstadosComponent {
     }
   }
 
+  //==================================================================================================================================//
+  // API
+
   cadastrarEstado(){
 
     const dataEstado = {
@@ -153,7 +156,6 @@ export class GerenciamentoDeEstadosComponent {
       }
     );
   }
-
 
   private atualizarPagina() {
     //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
