@@ -7,6 +7,7 @@ import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { Subscription } from 'rxjs';
 import { ServiceApiComentariosService } from 'src/app/services/servicesAPI/serviceAPI-Comentarios/service-api-comentarios.service';
+import { ServiceComentariosService } from 'src/app/services/serviceComentarios/service-comentarios.service';
 
 @Component({
   selector: 'app-detalhe-produto',
@@ -18,10 +19,12 @@ export class DetalheProdutoComponent implements OnInit {
   private inicializacaoConcluidaSubscription!: Subscription;
   private categoriasSubscription!: Subscription;
   private produtosSubscription!: Subscription;
+  private comentariosSubscription!: Subscription;
 
   categorias: Categorias[] = [];
   produtos: Produtos[] = [];
   produto: Produtos | undefined;
+  comentario: any[] = []
 
   nomeProduto: string | null = null;
 
@@ -37,6 +40,7 @@ export class DetalheProdutoComponent implements OnInit {
     private categoriasService: ServiceCategoriasService,
     private carrinhoService: ServiceCarrinhoDeComprasService,
     private comentariosAPIService: ServiceApiComentariosService,
+    private comentariosService: ServiceComentariosService,
   ) {}
 
   async ngOnInit() {
@@ -44,13 +48,15 @@ export class DetalheProdutoComponent implements OnInit {
     const start = sessionStorage.getItem('start')
 
     if(start){
-      this.carregarCategoriasEProdutosERouter();
+      await this.carregarCategoriasEProdutosERouter();
+      await this.carregarComentariosAPI()
     } else {
       const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
 
       if (inicializacaoConcluidaObservable) {
-        this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(() => {
-          this.carregarCategoriasEProdutosERouter();
+        this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(async () => {
+          await this.carregarCategoriasEProdutosERouter();
+          await this.carregarComentariosAPI();
         });
       }
     }
@@ -59,11 +65,10 @@ export class DetalheProdutoComponent implements OnInit {
       sessionStorage.removeItem('start');
     });
 
-
-
   }
 
   ngOnDestroy() {
+
     if (this.inicializacaoConcluidaSubscription) {
       this.inicializacaoConcluidaSubscription.unsubscribe();
     }
@@ -76,6 +81,22 @@ export class DetalheProdutoComponent implements OnInit {
       this.produtosSubscription.unsubscribe();
     }
 
+    if (this.comentariosSubscription) {
+      this.comentariosSubscription.unsubscribe();
+    }
+
+  }
+
+  async carregarComentariosAPI() {
+    await this.comentariosService.atualizarComentariosDaAPI();
+    await this.carregarComentarios();
+  }
+
+  async carregarComentarios() {
+    this.comentariosSubscription = this.comentariosService.getComentarios().subscribe((comentariosAPI) => {
+      this.comentario = comentariosAPI.filter(comentario => comentario.aprovado === 1 && comentario.prodId === this.produto!.prodId);
+      console.log(this.comentario)
+    });
   }
 
   async carregarCategoriasEProdutosERouter() {
@@ -174,6 +195,7 @@ export class DetalheProdutoComponent implements OnInit {
 
     // Limpe o campo de entrada
     this.novoComentario = '';
+
   }
 
 }

@@ -66,15 +66,17 @@
   </div>
 
   <div *ngIf="produto" class="containerComentarios">
-    <h1 class="divH1">
+    <h1 *ngIf="comentario.length > 0"  class="divH1" >
       COMENTÁRIOS DOS USUÁRIOS
+    </h1>
+    <h1 *ngIf="comentario.length === 0" class="divH1">
+      SEM COMENTÁRIOS SOBRE O PRODUTO
     </h1>
 
     <h2 class="divComentariosUsuarios">
-      <div *ngFor="let comentario of produto?.comentariosProduto" class="comentarioIndividual">
-        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+      <div *ngFor="let comentario of comentario" class="comentarioIndividual">
         <div class="comentario">
-          {{ comentario?.comentario }}
+          {{ comentario.mensagem }}
         </div>
       </div>
     </h2>
@@ -86,6 +88,8 @@
       <p-button icon="fa-solid fa-check" class="botaoEnviarComentario" (onClick)="adicionarComentario()" [disabled]="!novoComentario"></p-button>
     </div>
   </div>
+
+ 
 </div>
 
 <p-toast
