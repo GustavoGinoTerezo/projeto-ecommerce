@@ -12,6 +12,7 @@
       <span class="p-float-label">
         <input pInputText id="uf"
         [(ngModel)]="UfId"
+        (ngModelChange)="transformarParaMaiusculas()"
         [disabled]="atualizarOuExcluirId"/>
         <label htmlFor="uf">UF</label>
       </span>

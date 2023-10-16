@@ -28,7 +28,7 @@ export class GerenciamentoDeEstadosComponent {
 
   ngOnInit(){
 
-    this.carregarEstadosAPI()
+    // this.carregarEstadosAPI()
 
   }
 
@@ -70,6 +70,10 @@ export class GerenciamentoDeEstadosComponent {
     this.desabilitarBotao = true
     this.atualizarOuExcluirId = true
 
+  }
+
+  transformarParaMaiusculas() {
+    this.UfId = this.UfId.toUpperCase();
   }
 
   limparCampos(){
