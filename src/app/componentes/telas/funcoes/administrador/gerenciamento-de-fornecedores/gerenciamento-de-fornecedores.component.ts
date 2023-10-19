@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Estado, ServiceEstadosService } from 'src/app/services/serviceEstados/service-estados.service';
 import { ServiceFornecedoresService } from 'src/app/services/serviceFornecedores/service-fornecedores.service';
 import { ServiceApiFornecedoresService } from 'src/app/services/servicesAPI/serviceAPI-Fornecedores/service-api-fornecedores.service';
 
-interface Estado {
+interface EstadoLocal {
   nome: string;
   uf: string;
 }
@@ -17,6 +18,7 @@ interface Estado {
 export class GerenciamentoDeFornecedoresComponent {
 
   private fornecedoresSubscription!: Subscription;
+  private estadosSubscription!: Subscription;
 
   fornecedores: any[] = [];
   fornecedoreSelecionado!: any[]
@@ -39,14 +41,17 @@ export class GerenciamentoDeFornecedoresComponent {
   telefoneAlternativo!: string;
   complemento!: string;
 
-  estado!: Estado[];
-  estadoSelecionado: Estado | null = null;
+  estado!: EstadoLocal[];
+  estadoSelecionado: EstadoLocal | null = null;
 
   desabilitarBotao: boolean = true
 
+  estadosAPI: Estado[] = []
+
   constructor(
     private fornecedoresAPIService: ServiceApiFornecedoresService,
-    private fornecedoresService: ServiceFornecedoresService
+    private fornecedoresService: ServiceFornecedoresService,
+    private serviceEstado: ServiceEstadosService,
   ){}
 
   ngOnInit(){
@@ -80,9 +85,10 @@ export class GerenciamentoDeFornecedoresComponent {
       { nome: 'Sergipe', uf: 'SE'},
       { nome: 'Tocantins', uf: 'TO'}
     ];
-    
 
     // this.carregarFornecedoresAPI()
+
+    // this.carregarEstadosAPI()
 
   }
 
@@ -90,6 +96,11 @@ export class GerenciamentoDeFornecedoresComponent {
 
     if (this.fornecedoresSubscription) {
       this.fornecedoresSubscription.unsubscribe();
+    }
+
+    
+    if (this.estadosSubscription) {
+      this.estadosSubscription.unsubscribe();
     }
 
   }
@@ -103,6 +114,18 @@ export class GerenciamentoDeFornecedoresComponent {
     this.fornecedoresSubscription = this.fornecedoresService.getFornecedores().subscribe((fornecedoresAPI) => {
       this.fornecedores = fornecedoresAPI;
       console.log(this.fornecedores)
+    });
+  }
+
+  async carregarEstadosAPI() {
+    await this.serviceEstado.atualizarEstadosDaAPI();
+    this.carregarEstados();
+  }
+
+  carregarEstados() {
+    this.estadosSubscription = this.serviceEstado.getEstados().subscribe((estadosAPI) => {
+      this.estadosAPI = estadosAPI;
+      console.log(this.estadosAPI)
     });
   }
 
@@ -179,53 +202,75 @@ export class GerenciamentoDeFornecedoresComponent {
 
   cadastrarFornecedor(){
 
-    const dataFornecedor = {
-      endereco: this.rua,
-      cidade: this.cidade,
-      bairro: this.bairro,
-      // UfId: this.estadoSelecionado!.uf,
-      inscricaoEstadual: this.inscricaoEstadual,
-      cnpj: this.cnpj,
-      descricao: this.descricaoFornecedor,
-      numEmpresa: this.numeroEmpresa,
-      cep: this.cep,
-    }
-    
-    this.fornecedoresAPIService.cadastrarFornecedores(dataFornecedor).subscribe((response) => {
-      console.log("Fornecedor cadastrado com sucesso", response)
-      this.atualizarPagina()
-    }, 
-    (error) => {
-      console.log("Erro ao cadastrar fornecedor", error)
-    })
+    if (this.estadoSelecionado) {
+      const estadoEncontrado = this.estadosAPI.find(
+        (estado) => estado.UfId === this.estadoSelecionado!.uf
+      );
 
-    
+      if (estadoEncontrado) {
+        
+        const dataFornecedor = {
+          endereco: this.rua,
+          cidade: this.cidade,
+          bairro: this.bairro,
+          UfId: this.estadoSelecionado!.uf,
+          inscricaoEstadual: this.inscricaoEstadual,
+          cnpj: this.cnpj,
+          descricao: this.descricaoFornecedor,
+          numEmpresa: this.numeroEmpresa,
+          cep: this.cep,
+        }
+        
+        this.fornecedoresAPIService.cadastrarFornecedores(dataFornecedor).subscribe((response) => {
+          console.log("Fornecedor cadastrado com sucesso", response)
+          this.atualizarPagina()
+        }, 
+        (error) => {
+          console.log("Erro ao cadastrar fornecedor", error)
+        })
+
+      } else {
+        console.log('Estado selecionado não está na lista de estados válidos.');
+      }
+    }
 
   }
 
   atualizarFornecedor(){
 
-    const fornecedorId = this.fornecedorId;
+    if (this.estadoSelecionado) {
+      const estadoEncontrado = this.estadosAPI.find(
+        (estado) => estado.UfId === this.estadoSelecionado!.uf
+      );
 
-    const novoDataFornecedor = {
-      endereco: this.rua,
-      cidade: this.cidade,
-      bairro: this.bairro,
-      // UfId: this.estadoSelecionado!.uf,
-      inscricaoEstadual: this.inscricaoEstadual,
-      cnpj: this.cnpj,
-      descricao: this.descricaoFornecedor,
-      numEmpresa: this.numeroEmpresa,
-      cep: this.cep,
+      if (estadoEncontrado) {
+
+        const fornecedorId = this.fornecedorId;
+
+        const novoDataFornecedor = {
+          endereco: this.rua,
+          cidade: this.cidade,
+          bairro: this.bairro,
+          UfId: this.estadoSelecionado!.uf,
+          inscricaoEstadual: this.inscricaoEstadual,
+          cnpj: this.cnpj,
+          descricao: this.descricaoFornecedor,
+          numEmpresa: this.numeroEmpresa,
+          cep: this.cep,
+        }
+
+        this.fornecedoresAPIService.atualizarFornecedores(fornecedorId, novoDataFornecedor).subscribe((response) => {
+          console.log("Fornecedor atualzado com sucesso", response)
+          this.atualizarPagina()
+        },
+        (error) => {
+          console.log("Erro ao atualizar fornecedor", error)
+        })
+
+      } else {
+        console.log('Estado selecionado não está na lista de estados válidos.');
+      }
     }
-
-    this.fornecedoresAPIService.atualizarFornecedores(fornecedorId, novoDataFornecedor).subscribe((response) => {
-      console.log("Fornecedor atualzado com sucesso", response)
-      this.atualizarPagina()
-    },
-    (error) => {
-      console.log("Erro ao atualizar fornecedor", error)
-    })
 
   }
 

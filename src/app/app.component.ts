@@ -82,4 +82,6 @@ ativarLateral() {
 
   // p - forma de pagamento
   // es - endereço selecionado
+
+  
 }

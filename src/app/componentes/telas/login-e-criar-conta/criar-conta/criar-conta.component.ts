@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import { Estado, ServiceEstadosService } from 'src/app/services/serviceEstados/service-estados.service';
 import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/serviceAPI-Registrar/service-api-registrar.service';
 
-interface Estado {
+interface EstadoLocal {
   nome: string;
   uf: string;
 }
@@ -13,6 +16,8 @@ interface Estado {
   styleUrls: ['./criar-conta.component.css']
 })
 export class CriarContaComponent {
+
+  private estadosSubscription!: Subscription;
 
   emailCadastroPrincipal!: string;
   emailCadastroSecundario!: string;
@@ -30,10 +35,19 @@ export class CriarContaComponent {
   checkbox: boolean = false
   checkboxTelefone: boolean = false
   numeroResidencia!: number;
-  estado!: Estado[];
-  estadoSelecionado!: Estado;
+  estado!: EstadoLocal[];
+  estadoSelecionado!: EstadoLocal;
   complemento!: string;
   emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  estadosAPI: Estado[] = []
+
+  constructor(
+    private registrar: ServiceApiRegistrarService,
+    private router: Router,
+    private serviceEstado: ServiceEstadosService,
+    private messageService: MessageService
+  ){}
 
   ngOnInit() {
 
@@ -66,129 +80,157 @@ export class CriarContaComponent {
       { nome: 'Sergipe', uf: 'SE'},
       { nome: 'Tocantins', uf: 'TO'}
     ];
-    
+
+    // this.carregarEstadosAPI()
+        
   }
 
-  constructor(
-    private registrar: ServiceApiRegistrarService,
-    private router: Router,
-  ){}
+  ngOnDestroy() {
+
+    if (this.estadosSubscription) {
+      this.estadosSubscription.unsubscribe();
+    }
+
+  }
+  
+  async carregarEstadosAPI() {
+    await this.serviceEstado.atualizarEstadosDaAPI();
+    this.carregarEstados();
+  }
+
+  carregarEstados() {
+    this.estadosSubscription = this.serviceEstado.getEstados().subscribe((estadosAPI) => {
+      this.estadosAPI = estadosAPI;
+
+      console.log(this.estadosAPI)
+    });
+  }
 
   cadastrar(){
 
-    const dataLogin = {
-      nome: this.nomeCompleto,
-      senha: this.passwordCadastro,
-      tpusuario: "0",
-      emailprinc: this.emailCadastroPrincipal,
-      cpf: this.cpfOuCnpj,
-    }
-
-    this.registrar.registrar(dataLogin).subscribe(response => {
-
-      console.log("Usuário cadastrado com sucesso")
-
-      const LoginId = response.LoginId;
-      const access_token = response.access_token;
-
-      console.log(access_token)
-      console.log(LoginId)
-
-      if (this.emailCadastroSecundario) {
-        const dataEmailAlternativo = {
-          LoginId: LoginId,
-          email: this.emailCadastroSecundario
-        };
-
-        this.registrar.registrarEmails(dataEmailAlternativo).subscribe(
-          (response) => {
-            console.log("Email alternativo cadastrado com sucesso", response);
-          },
-          (error) => {
-            console.log("Erro ao cadastrar email alternativo");
-          }
-        );
-      } else {
-        console.log("O campo emailCadastroSecundario está vazio, email alternativo não cadastrado.");
-      }
-
-
-        const dataEnderecoCobranca = {
-          LoginId: LoginId,
-          tpcadastro: "1",
-          cep: this.cep,
-          bairro: this.bairro,
-          cidade: this.cidade,
-          // UfId: this.estadoSelecionado.uf
-          endereco: this.endereco,
-          complemento: this.complemento,
-          numeroresidencia: this.numeroResidencia,
-          identificacao: "Endereço de Cobrança"
-        }
-
-        this.registrar.registrarEndereco(dataEnderecoCobranca).subscribe(response => {
-          console.log("Endereço de cobrança adicionado com sucesso")
-        });
-
-        const dataEnderecoEntrega = {
-          LoginId: LoginId,
-          tpcadastro: "2",
-          cep: this.cep,
-          bairro: this.bairro,
-          cidade: this.cidade,
-          // UfId: this.estadoSelecionado.uf
-          endereco: this.endereco,
-          complemento: this.complemento,
-          numeroresidencia: this.numeroResidencia,
-          identificacao: "Endereço de Entrega Padrão"
-        }
-
-        this.registrar.registrarEndereco(dataEnderecoEntrega).subscribe(response => {
-          console.log("Endereço de entrega adicionado com sucesso")
-        });
-
-
-      // })
-
-      const telefonePrincipal = this.removeFormatoTelefone(this.telefonePrincipal);
-
-      const dataTelefone = {
-        LoginId: LoginId,
-        telefone: telefonePrincipal,
-      }
-
-      this.registrar.registrarTelefone(dataTelefone).subscribe(result => {
-        console.log("Telefone adicionado com sucesso")
-      },
-      (error) => {
-        console.log("Erro ao cadastrar telefone principal")
-      }
+    if (this.estadoSelecionado) {
+      const estadoEncontrado = this.estadosAPI.find(
+        (estado) => estado.UfId === this.estadoSelecionado.uf
       );
 
-      if (this.telefoneSecundario) {
-
-        const telefoneAlternativo = this.removeFormatoTelefone(this.telefoneSecundario);
-
-      const dataTelefoneAlternativo = {
-        LoginId: LoginId,
-        telefone: telefoneAlternativo,
-      }
-
-        this.registrar.registrarTelefone(dataTelefoneAlternativo).subscribe(
-          (response) => {
-            console.log("Telefone alternativo cadastrado com sucesso", response);
+      if (estadoEncontrado) {
+        
+        const dataLogin = {
+          nome: this.nomeCompleto,
+          senha: this.passwordCadastro,
+          tpusuario: "0",
+          emailprinc: this.emailCadastroPrincipal,
+          cpf: this.cpfOuCnpj,
+        }
+    
+        this.registrar.registrar(dataLogin).subscribe(response => {
+    
+          console.log("Usuário cadastrado com sucesso")
+    
+          const LoginId = response.LoginId;
+          const access_token = response.access_token;
+    
+          console.log(access_token)
+          console.log(LoginId)
+    
+          if (this.emailCadastroSecundario) {
+            const dataEmailAlternativo = {
+              LoginId: LoginId,
+              email: this.emailCadastroSecundario
+            };
+    
+            this.registrar.registrarEmails(dataEmailAlternativo).subscribe(
+              (response) => {
+                console.log("Email alternativo cadastrado com sucesso", response);
+              },
+              (error) => {
+                console.log("Erro ao cadastrar email alternativo");
+              }
+            );
+          } else {
+            console.log("O campo emailCadastroSecundario está vazio, email alternativo não cadastrado.");
+          }
+    
+    
+            const dataEnderecoCobranca = {
+              LoginId: LoginId,
+              tpcadastro: "1",
+              cep: this.cep,
+              bairro: this.bairro,
+              cidade: this.cidade,
+              UfId: this.estadoSelecionado.uf,
+              endereco: this.endereco,
+              complemento: this.complemento,
+              numeroresidencia: this.numeroResidencia,
+              identificacao: "Endereço de Cobrança"
+            }
+    
+            this.registrar.registrarEndereco(dataEnderecoCobranca).subscribe(response => {
+              console.log("Endereço de cobrança adicionado com sucesso")
+            });
+    
+            const dataEnderecoEntrega = {
+              LoginId: LoginId,
+              tpcadastro: "2",
+              cep: this.cep,
+              bairro: this.bairro,
+              cidade: this.cidade,
+              UfId: this.estadoSelecionado.uf,
+              endereco: this.endereco,
+              complemento: this.complemento,
+              numeroresidencia: this.numeroResidencia,
+              identificacao: "Endereço de Entrega Padrão"
+            }
+    
+            this.registrar.registrarEndereco(dataEnderecoEntrega).subscribe(response => {
+              console.log("Endereço de entrega adicionado com sucesso")
+            });
+        
+          const telefonePrincipal = this.removeFormatoTelefone(this.telefonePrincipal);
+    
+          const dataTelefone = {
+            LoginId: LoginId,
+            telefone: telefonePrincipal,
+          }
+    
+          this.registrar.registrarTelefone(dataTelefone).subscribe(result => {
+            console.log("Telefone adicionado com sucesso")
           },
           (error) => {
-            console.log("Erro ao cadastrar telefone alternativo");
+            console.log("Erro ao cadastrar telefone principal")
           }
-        );
+          );
+    
+          if (this.telefoneSecundario) {
+    
+            const telefoneAlternativo = this.removeFormatoTelefone(this.telefoneSecundario);
+    
+          const dataTelefoneAlternativo = {
+            LoginId: LoginId,
+            telefone: telefoneAlternativo,
+          }
+    
+            this.registrar.registrarTelefone(dataTelefoneAlternativo).subscribe(
+              (response) => {
+                console.log("Telefone alternativo cadastrado com sucesso", response);
+              },
+              (error) => {
+                console.log("Erro ao cadastrar telefone alternativo");
+              }
+            );
+          } else {
+            console.log("O campo telefoneSecundario está vazio, telefone alternativo não cadastrado.");
+          }
+    
+        }, (error) => {
+          console.log(error)
+        });
       } else {
-        console.log("O campo telefoneSecundario está vazio, telefone alternativo não cadastrado.");
+        console.log('Estado selecionado não está na lista de estados válidos.');
       }
+    }
 
-    }, (error) => {
-      console.log(error)
-    });
+    
   }
 
   removeFormatoTelefone(telefone: string): string {
@@ -256,6 +298,8 @@ export class CriarContaComponent {
 
     return true;
   }
+
+
 
 
 }
