@@ -5,9 +5,13 @@ import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs';
 import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Categorias, ServiceCategoriasService, Produtos, CategoriaVazia, Entrada, Saida } from 'src/app/services/serviceCategorias/service-categorias.service';
+import { ServiceEstadosService } from 'src/app/services/serviceEstados/service-estados.service';
+import { ServiceFornecedoresService } from 'src/app/services/serviceFornecedores/service-fornecedores.service';
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 import { ServiceAPICategoriaService } from 'src/app/services/servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
+import { ServiceApiFornecedoresService } from 'src/app/services/servicesAPI/serviceAPI-Fornecedores/service-api-fornecedores.service';
+import { ServiceApiNotaFiscalService } from 'src/app/services/servicesAPI/serviceAPI-NotaFiscal/service-api-nota-fiscal.service';
 import { ServiceAPIProdutoService } from 'src/app/services/servicesAPI/serviceAPI-Produto/service-api-produto.service';
 
 interface City {
@@ -28,6 +32,7 @@ export class GerenciamentoDeEstoqueComponent {
 
   private inicializacaoConcluidaSubscription!: Subscription;
   private produtosSubscription!: Subscription;
+  private fornecedoresSubscription!: Subscription;
 
   @ViewChild('dt') table!: Table;
   categorias: Categorias[] = [];
@@ -40,11 +45,16 @@ export class GerenciamentoDeEstoqueComponent {
   botaoEnviarDesabilitado: boolean = true;
   quantidadePreenchida: { [key: number]: boolean } = {};
 
+  fornecedores: any[] = [];
+  fornecedorSelecionado: any[] = [];
+  fornecedorId!: number;
+
   constructor(
     private categoriasService: ServiceCategoriasService,
     private messageService: MessageService,
-    private apiCategoriaService: ServiceAPICategoriaService,
-    private apiProdutoService: ServiceAPIProdutoService,
+    private fornecedoresService: ServiceFornecedoresService,
+    private notaFiscalAPIService: ServiceApiNotaFiscalService,
+    private produtosAPIService: ServiceAPIProdutoService,
   ){}
 
   ngOnInit(){
@@ -67,6 +77,8 @@ export class GerenciamentoDeEstoqueComponent {
       sessionStorage.removeItem('start');
     });
 
+    this.carregarFornecedoresAPI()
+
   }
 
   ngOnDestroy() {
@@ -79,11 +91,27 @@ export class GerenciamentoDeEstoqueComponent {
       this.produtosSubscription.unsubscribe();
     }
 
+    if (this.fornecedoresSubscription) {
+      this.fornecedoresSubscription.unsubscribe();
+    }
+
   }
 
   async carregarProdutos() {
     this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
       this.produtos = produtosAPI;
+    });
+  }
+
+  async carregarFornecedoresAPI() {
+    await this.fornecedoresService.atualizarFornecedoresDaAPI();
+    this.carregarFornecedores();
+  }
+
+  carregarFornecedores() {
+    this.fornecedoresSubscription = this.fornecedoresService.getFornecedores().subscribe((fornecedoresAPI) => {
+      this.fornecedores = fornecedoresAPI;
+      console.log(this.fornecedores)
     });
   }
 
@@ -154,15 +182,58 @@ export class GerenciamentoDeEstoqueComponent {
     this.atualizarBotaoEnviar();
   }
 
+  onFornecedorSelect(event: any) {
+    this.fornecedorSelecionado = event.value;
+    this.fornecedorId = event.value.FornecedorId || '';
+  }
+
   onEnviarEntrada() {
-    // Loop através dos produtos selecionados e suas respectivas quantidades
-    for (let i = 0; i < this.produtosSelecionados.length; i++) {
-      const produto = this.produtosSelecionados[i];
-      const quantidade = this.quantidadeProdutos[i];
-      console.log('id Produto', produto.prodId)
-      console.log('Nome do produto:', produto.nome);
-      console.log('Quantidade:', quantidade);
-    }
+    
+      const dataNotaFiscalCabeca = {
+        FornecedorId: this.fornecedorId,
+        numeroNota: this.numeroNotaFiscal,
+      }
+
+      this.notaFiscalAPIService.cadastrarNotaEntradaCabeca(dataNotaFiscalCabeca).subscribe((response) => {
+        console.log("Nota Fiscal Cabeça cadastrada com sucesso", response)
+
+        const idNfEntrada = response.NfEntradaID
+
+        for (let i = 0; i < this.produtosSelecionados.length; i++) {
+          const produto = this.produtosSelecionados[i];
+          const quantidade = this.quantidadeProdutos[i];
+
+        const dataNotaFiscalCorpo = {
+          NfEntradaID: idNfEntrada,
+          prodId: produto.prodId,
+          preco: produto.preco,
+          quantidade: quantidade
+        }
+
+        this.notaFiscalAPIService.cadastrarNotaEntradaCorpo(dataNotaFiscalCorpo).subscribe((response) => {
+          console.log("Nota Fiscal Corpo cadastrada com sucesso", response)
+
+          const dataQuantidadeEntradaProduto = {
+            qtdEntrada: produto.qtdEntrada + quantidade
+          }
+
+          this.produtosAPIService.atualizarProduto(produto.prodId, dataQuantidadeEntradaProduto).subscribe((response) => {
+            console.log("Quantidade do produto atualizada com sucesso", response)
+          },
+          (error) => {
+            console.log("Erro ao atualizar quantidade do produto", error)  
+          })
+          },
+          (error) => {
+            console.log("Erro ao cadastrar Nota Fiscal Corpo", error)
+          })
+        }
+      },
+      (error) => {
+        console.log("Erro ao cadastrar Nota Fiscal Cabeça", error)
+      })
+
+    
   }
 
   onKeyPress(event: KeyboardEvent) {

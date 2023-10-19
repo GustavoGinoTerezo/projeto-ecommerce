@@ -80,185 +80,6 @@ export class ServiceCategoriasService {
 
   private inicializacaoConcluidaSubject = new Subject<void>();
 
-  categorias: Categorias[] =
-  [
-    {
-      nome: 'Boost',
-      produtos: [
-        {
-          nome: 'mj-15-30-15',
-          imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
-            },
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512-12321.jpg',
-            },
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-US-Boost-15-30-15-12278-12321.jpg',
-            },
-
-          ],
-          preco: 1234.10,
-          qtdEntrada: [
-            {
-              quantEntrada: 10,
-              dataEntrada: '10/05/2023',
-            },
-            {
-              quantEntrada: 15,
-              dataEntrada: '11/05/2023',
-            },
-            {
-              quantEntrada: 10,
-              dataEntrada: '12/05/2023',
-            },
-            {
-              quantEntrada: 15,
-              dataEntrada: '13/05/2023',
-            },
-            {
-              quantEntrada: 10,
-              dataEntrada: '14/05/2023',
-            },
-            {
-              quantEntrada: 15,
-              dataEntrada: '15/05/2023',
-            },
-            {
-              quantEntrada: 10,
-              dataEntrada: '16/05/2023',
-            },
-            {
-              quantEntrada: 15,
-              dataEntrada: '17/05/2023',
-            },
-            {
-              quantEntrada: 10,
-              dataEntrada: '18/05/2023',
-            },
-            {
-              quantEntrada: 15,
-              dataEntrada: '19/05/2023',
-            },
-            {
-              quantEntrada: 15,
-              dataEntrada: '10/06/2023',
-            },
-          ],
-          qtdSaida: [
-            {
-              quantSaida: 5,
-              dataSaida: '10/05/2023',
-            },
-            {
-              quantSaida: 15,
-              dataSaida: '11/05/2023',
-            },
-          ],
-          descBreve: 'Descrição breve do MJ 15-30-15',
-          descCompleta: 'Descrição completa do produto MJ 15-30-15',
-          informacaoTecnica: 'Especificação Técnica do Produto MJ 15-30-15',
-          comentariosProduto: [
-          {
-            comentario: 'Gostei do produto'
-          },
-          {
-            comentario: 'Produto mediano'
-          },
-          {
-            comentario: 'Amei a compra'
-          },
-          ],
-          comentariosPendentes: [
-            {
-              comentario: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-            }
-          ]
-        },
-      ]
-    },
-  ];
-
-  produtosDestaque: Produtos[] = [
-    {
-      nome: 'mj-15-30-15',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
-            },
-          ],
-      preco: 1234.10,
-      descBreve: 'Descrição breve do MJ 15-30-15',
-      descCompleta: 'Descrição completa do MJ 15-30-15',
-      informacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-  ];
-
-  produtosMaisVendidos: Produtos[] = [
-    {
-      nome: 'mj-15-30-15',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descBreve: 'Descrição breve do MJ 15-30-15',
-      descCompleta: 'Descrição completa do MJ 15-30-15',
-      informacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-
-  ]
-
-  produtosEmPromocao: Produtos[] = [
-    {
-      nome: 'mj-15-30-15',
-      imagem: [
-            {
-              imagem: 'assets/produtos/Plant-Prod-MJ-15-30-15-Boost-10512.jpg',
-            }
-          ],
-      preco: 1234.10,
-      descBreve: 'Descrição breve do MJ 15-30-15',
-      descCompleta: 'Descrição completa do MJ 15-30-15',
-      informacaoTecnica: 'Especificação Técnica do MJ 15-30-15',
-      comentariosProduto: [
-        {
-          comentario: 'Gostei do produto'
-        },
-        {
-          comentario: 'Produto mediano'
-        },
-        {
-          comentario: 'Amei a compra'
-        }
-      ]
-    },
-  ]
-
   categoriasAPI: Categorias[] = [];
 
   produtosAPI: Produtos[] = []
@@ -271,40 +92,40 @@ export class ServiceCategoriasService {
 
   produtosEmPromocaoAPI: Produtos[] = [];
 
-  produtosMocado: Produtos[] = [
-    {
-      prodId: 0,
-      nome: "Teste",
-      qtdEntrada: [{
-        quantEntrada: 10,
-        dataEntrada: "10/10/2023"
-      }],
-      qtdSaida: [{
-        quantSaida: 5,
-        dataSaida: "11/10/2023"
-      }],
-    },
-    {
-      prodId: 1,
-      nome: "Teste1",
-    },
-    {
-      prodId: 2,
-      nome: "Teste2",
-    },
-    {
-      prodId: 3,
-      nome: "Teste3",
-    },
-    {
-      prodId: 4,
-      nome: "Teste4",
-    },
-    {
-      prodId: 5,
-      nome: "Teste5",
-    },
-  ]
+  // produtosMocado: Produtos[] = [
+  //   {
+  //     prodId: 0,
+  //     nome: "Teste",
+  //     qtdEntrada: [{
+  //       quantEntrada: 10,
+  //       dataEntrada: "10/10/2023"
+  //     }],
+  //     qtdSaida: [{
+  //       quantSaida: 5,
+  //       dataSaida: "11/10/2023"
+  //     }],
+  //   },
+  //   {
+  //     prodId: 1,
+  //     nome: "Teste1",
+  //   },
+  //   {
+  //     prodId: 2,
+  //     nome: "Teste2",
+  //   },
+  //   {
+  //     prodId: 3,
+  //     nome: "Teste3",
+  //   },
+  //   {
+  //     prodId: 4,
+  //     nome: "Teste4",
+  //   },
+  //   {
+  //     prodId: 5,
+  //     nome: "Teste5",
+  //   },
+  // ]
 
 
 
@@ -381,16 +202,8 @@ export class ServiceCategoriasService {
     const nomeFormatado = partesNome[0].toUpperCase() + ' ' + partesNome.slice(1).join('-');
     return nomeFormatado;
   }
-  //==================================================================================================================================//
-  getProdutosComComentariosPendentes(): Observable<Produtos[]> {
-    const produtosComComentariosPendentes = this.categorias.reduce((result, categoria) => {
-      return result.concat(
-        categoria!.produtos!.filter(produto => produto.comentariosPendentes && produto.comentariosPendentes.length > 0)
-      );
-    }, [] as Produtos[]);
-
-    return of(produtosComComentariosPendentes);
-  }
+  
+  
 
   //==================================================================================================================================//
   // API

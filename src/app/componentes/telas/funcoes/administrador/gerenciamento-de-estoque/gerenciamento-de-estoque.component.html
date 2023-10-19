@@ -11,6 +11,15 @@
             <label for="ms-cities">Selecione os produtos</label>
         </span>
         </div>
+        <div class="containerDropdown">
+          <p-dropdown 
+            [options]="fornecedores" 
+            [(ngModel)]="fornecedorSelecionado" 
+            optionLabel="cnpj"
+            (onChange)="onFornecedorSelect($event)"
+            placeholder="Selecione o fornecedor">
+          </p-dropdown>
+        </div>
         <div class="containerInput p-float-label">
           <input class="inputQuant" (input)="atualizarBotaoEnviar()" [(ngModel)]="numeroNotaFiscal" pInputText type="text" /><label htmlFor="number-input">Número da nota fiscal</label>
         </div>
