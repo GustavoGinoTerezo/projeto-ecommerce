@@ -7,6 +7,7 @@ import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/serv
 import { Categorias, ServiceCategoriasService, Produtos, CategoriaVazia, Entrada, Saida } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { ServiceEstadosService } from 'src/app/services/serviceEstados/service-estados.service';
 import { ServiceFornecedoresService } from 'src/app/services/serviceFornecedores/service-fornecedores.service';
+import { ServiceNotaFiscalService } from 'src/app/services/serviceNotaFiscal/service-nota-fiscal.service';
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 import { ServiceAPICategoriaService } from 'src/app/services/servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
@@ -33,6 +34,7 @@ export class GerenciamentoDeEstoqueComponent {
   private inicializacaoConcluidaSubscription!: Subscription;
   private produtosSubscription!: Subscription;
   private fornecedoresSubscription!: Subscription;
+  private notaFiscalCorpoSubscription!: Subscription;
 
   @ViewChild('dt') table!: Table;
   categorias: Categorias[] = [];
@@ -49,12 +51,15 @@ export class GerenciamentoDeEstoqueComponent {
   fornecedorSelecionado: any[] = [];
   fornecedorId!: number;
 
+  notafiscalCorpo: any[] = []
+
   constructor(
     private categoriasService: ServiceCategoriasService,
     private messageService: MessageService,
     private fornecedoresService: ServiceFornecedoresService,
     private notaFiscalAPIService: ServiceApiNotaFiscalService,
     private produtosAPIService: ServiceAPIProdutoService,
+    private notaFiscalService: ServiceNotaFiscalService,
   ){}
 
   ngOnInit(){
@@ -77,7 +82,9 @@ export class GerenciamentoDeEstoqueComponent {
       sessionStorage.removeItem('start');
     });
 
-    this.carregarFornecedoresAPI()
+    // this.carregarFornecedoresAPI()
+
+    this.carregarNotaFiscalCorpoAPI()
 
   }
 
@@ -93,6 +100,10 @@ export class GerenciamentoDeEstoqueComponent {
 
     if (this.fornecedoresSubscription) {
       this.fornecedoresSubscription.unsubscribe();
+    }
+
+    if (this.notaFiscalCorpoSubscription) {
+      this.notaFiscalCorpoSubscription.unsubscribe();
     }
 
   }
@@ -115,6 +126,31 @@ export class GerenciamentoDeEstoqueComponent {
     });
   }
 
+  async carregarNotaFiscalCorpoAPI() {
+    await this.notaFiscalService.atualizarNotaFiscalCorpoDaAPI();
+    this.carregarNotaFiscalCorpo();
+  }
+
+  carregarNotaFiscalCorpo() {
+    this.notaFiscalCorpoSubscription = this.notaFiscalService.getNotaFiscalCorpo().subscribe((notaFiscalCorpoAPI) => {
+      this.notafiscalCorpo = notaFiscalCorpoAPI;
+      console.log(this.notafiscalCorpo)
+    });
+  }
+
+  getNotasFiscaisCorpoForProduct(prodId: number): any[] {
+    return this.notafiscalCorpo.filter((nota) => nota.prodId === prodId);
+  }
+  
+  formatarData(dataString: string): string {
+    const data = new Date(dataString);
+    const dia = data.getDate().toString().padStart(2, '0');
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Lembre-se de que o mês começa em 0 (janeiro) no JavaScript
+    const ano = data.getFullYear();
+  
+    return `${dia}/${mes}/${ano}`;
+  }
+  
   filterTable(event: any) {
     const filterValue = event.target.value.toLowerCase(); // Obtém o valor do campo de pesquisa em minúsculas
     this.table.filter(filterValue, 'nome', 'contains'); // Aplica o filtro na coluna 'nome' que contém o valor
@@ -138,7 +174,6 @@ export class GerenciamentoDeEstoqueComponent {
   //     }
   //   });
   // }
-
 
   // filtrarDataSaida(event: any) {
   //   const filterValue = event.target.value.toLowerCase();
@@ -257,6 +292,5 @@ export class GerenciamentoDeEstoqueComponent {
         this.botaoEnviarDesabilitado = false
       }
   }
-
 
 }

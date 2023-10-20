@@ -35,7 +35,6 @@ export class AppComponent {
 
   }
 
-
 // ====================================================================================== //
 // CONTROLE DE ACESSO //
 
@@ -71,17 +70,10 @@ ativarLateral() {
   }
 }
 
-
 // ====================================================================================== //
 
   acaoDoBotao() {
     window.open('https://api.whatsapp.com/send?phone=5519989937300', '_blank');
   }
-
-  // SESSIONSTORAGE VARIÁVEIS
-
-  // p - forma de pagamento
-  // es - endereço selecionado
-
-  
+ 
 }
