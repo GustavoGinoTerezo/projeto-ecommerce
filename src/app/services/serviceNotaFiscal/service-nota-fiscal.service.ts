@@ -18,6 +18,10 @@ export class ServiceNotaFiscalService {
     return of (this.notaFiscalCorpo);
   }
 
+  getNotaFiscalCabeca(): Observable<any[]> {
+    return of (this.notaFiscalCabeca);
+  }
+
   //==================================================================================================================================//
   // API
 
@@ -31,6 +35,19 @@ export class ServiceNotaFiscalService {
       }
     } catch (error) {
       console.error('Erro ao buscar NotaFiscalCorpo da API', error);
+    }
+  }
+  
+  async atualizarNotaFiscalCabecaDaAPI() {
+    try {
+      const notaFiscalCabecaAPI = await this.notaFiscalAPIService.buscarNotaEntradaCabeca().toPromise();
+      if (notaFiscalCabecaAPI) {
+        this.notaFiscalCabeca = notaFiscalCabecaAPI;
+      } else {
+        console.error('Erro ao buscar NotaFiscalCabeca da API: NotaFiscalCabeca é undefined');
+      }
+    } catch (error) {
+      console.error('Erro ao buscar NotaFiscalCabeca da API', error);
     }
   }
   

@@ -63,7 +63,6 @@
     [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[5, 10, 15]"
     dataKey="nome"
-
   >
     <ng-template pTemplate="caption">
         <div class="table-header">
@@ -111,7 +110,7 @@
                 <div class="table-header">
                   <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" placeholder="Buscar data de entrada" />
+                    <input  pInputText type="text" placeholder="Buscar data de entrada" />
                     <!-- (input)="filtrarDataEntrada($event)" -->
                   </span>
                 </div>
@@ -129,7 +128,7 @@
                   <td p-sortField="dataEntrada">{{ formatarData(nota.createdAt) }}</td>
                   <td>{{ nota.quantidade }}</td>
                   <td>{{ nota.NotaEntradaCabeca.numeroNota}}</td>
-                  <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
+                  <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark" (onClick)="excluirEntrada(nota)"></p-button></td>
                 </tr>
               </ng-template>
               <ng-template pTemplate="emptymessage">
@@ -188,7 +187,87 @@
 
   </p-table>
 
+  <hr class="hr">
 
+  <h1>Gerenciamento de Notas</h1>
+  <div class="containerGerenciamentoDeNotas">
+
+    <div class="containerInputsEButtoesNotas">
+      <div class="containerInputEBotao margem">
+        <div class="inputNumeroNota p-inputgroup">
+          <input [disabled]="ativarBotoes ||
+          !numeroNotaFiscalGerenciamento" class="inputQuant" type="text" [(ngModel)]="numeroNotaFiscalGerenciamento" pInputText placeholder="Número da nota fiscal" />
+          <button [disabled]="ativarBotoes ||
+          !numeroNotaFiscalGerenciamento" type="button" pButton (click)="limparCampoNotaFiscal()" icon="fa-solid fa-circle-xmark fa-xl" styleClass="p-button-warn"></button>
+        </div>
+        <div class="containerBotoesNota">
+          <div class="divBotao botaoMargem">
+            <p-button
+              styleClass="p-button-warning"
+              label="Atualizar Nota"
+              (onClick)="atualizarNotaFiscal()"
+              [disabled]="ativarBotoes ||
+              !numeroNotaFiscalGerenciamento"
+            >
+            </p-button>
+          </div>
+          <div class="divBotao">
+            <p-button
+              styleClass="p-button-danger"
+              label="Excluir Nota"
+              (onClick)="excluirNotaFiscal()"
+              [disabled]="ativarBotoes ||
+              !numeroNotaFiscalGerenciamento"
+            >
+            </p-button>
+          </div>
+        </div>
+      </div>
+
+
+      
+
+    </div>
+
+  </div>
+
+  <p-table
+    #dtNotas
+    [value]="notaFiscalCabeca"
+    [rowHover]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    dataKey="numeroNota"
+  >
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+          <div class="input">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="filterTableNotas($event)" placeholder="Buscar Nota Fiscal" />
+            </span>
+          </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 5rem"></th>
+        <th>Data de entrada</th>
+        <th>Número da Nota Fiscal</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-nota>
+      <tr [pSelectableRow]="nota" (click)="atualizarInputComNotaSelecionado(nota)">
+        <td>
+        </td>
+        <td>{{ formatarData(nota.createdAt) }}</td>
+        <td>{{ nota.numeroNota }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
 
 

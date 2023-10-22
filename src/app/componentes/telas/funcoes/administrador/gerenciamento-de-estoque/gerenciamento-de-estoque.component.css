@@ -31,7 +31,13 @@
   justify-content: space-between;
   width: 100%;
   height: 100%;
+}
 
+.containerGerenciamentoDeNotas{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
 }
 
 .containerEntrada{
@@ -40,11 +46,37 @@
   width: 100%;
 }
 
+.containerInputsEButtoesNotas{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.containerBotoesNota{
+  width: 100%;
+  display: flex;
+  margin-top: 15px;
+}
+
 .containerDropdownInput{
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin-right: 5px;
+}
+
+.containerInputEBotao{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputNumeroNota{
+  width: 100%;
+}
+
+.divBotao{
+  width: 100%;
 }
 
 .containerGeralInputs{
@@ -107,8 +139,18 @@
   width: 100%;
 }
 
+
+:host ::ng-deep .divBotao .p-button{
+  width: 100%;
+}
+
+
 .h2{
   margin-bottom: 15px;
+}
+
+.botaoMargem{
+  margin-right: 5px;
 }
 
 .margem{
@@ -116,5 +158,11 @@
 }
 
 :host ::ng-deep .p-dropdown {
+  width: 100%;
+}
+
+.hr{
+  margin-top: 15px;
+  margin-bottom: 15px;
   width: 100%;
 }

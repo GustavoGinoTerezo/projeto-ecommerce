@@ -27,13 +27,13 @@ export class ServiceApiNotaFiscalService {
     return this.http.post<any>(url, data);
   }
 
-  atualizarNotaEntradaCabeca(idNotaEntradaCabeca: number, novosDados: any) {
+  atualizarNotaEntradaCabeca(idNotaEntradaCabeca: number | null, novosDados: any) {
     const endpoint = `notaentradacabeca/${idNotaEntradaCabeca}`;
     const url = this.urlGlobal.url + endpoint;
     return this.http.put<any>(url, novosDados);
   }
 
-  excluirNotaEntradaCabeca(idNotaEntradaCabeca: number) {
+  excluirNotaEntradaCabeca(idNotaEntradaCabeca: number | null) {
     const endpoint = `notaentradacabeca/${idNotaEntradaCabeca}`;
     const url = this.urlGlobal.url + endpoint;
     return this.http.delete<any>(url);
