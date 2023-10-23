@@ -1,1 +1,150 @@
-<p>gerenciamento-de-caixas works!</p>
+<div class="divGeral">
+    <h1>Gerenciamento de Caixas</h1>
+    <div class="containerInputs">
+      <div class="containerInputsCima">
+        <div class="divInputNomeCaixa">
+          <span class="p-float-label">
+            <input pInputText id="nomeCaixa"
+            [(ngModel)]="nomeCaixa"/>
+            <label htmlFor="nomeCaixa">Nome da Caixa</label>
+          </span>
+        </div>
+        <div class="divInputPeso">
+          <span class="p-float-label">
+            <input pInputText id="peso"
+            [(ngModel)]="peso"
+            (keypress)="onKeyPress($event)"/>
+            <label htmlFor="peso">Peso da Caixa (kg)</label>
+          </span>
+        </div>
+      </div>
+      <div class="containerDimensoes">
+        <div class="divInputBaixo">
+          <span class="p-float-label">
+            <input pInputText id="altura"
+            [(ngModel)]="altura"
+            (keypress)="onKeyPress($event)"/>
+            <label htmlFor="altura">Altura da Caixa (cm)</label>
+          </span>
+        </div>
+        <div class="divInputBaixo">
+          <span class="p-float-label">
+            <input pInputText id="largura"
+            [(ngModel)]="largura"
+            (keypress)="onKeyPress($event)"/>
+            <label htmlFor="largura">Largura da Caixa (cm)</label>
+          </span>
+        </div>
+        <div class="divInputBaixo">
+          <span class="p-float-label">
+            <input pInputText id="comprimento"
+            [(ngModel)]="comprimento"
+            (keypress)="onKeyPress($event)"/>
+            <label htmlFor="comprimento">Comprimento da Caixa (cm)</label>
+          </span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="containerBotoesAdicionarCaixa">
+      <div class="divInputs">
+        <p-button
+          label="Adicionar Caixa"
+          [disabled]="ativarBotoes ||
+          !nomeCaixa ||
+          !peso ||
+          !altura ||
+          !largura ||
+          !comprimento"
+          (onClick)="cadastrarCaixa()"
+          styleClass="p-button-raised p-button-success"
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button
+          label="Atualizar Caixa"
+          [disabled]="!ativarBotoes ||
+          !nomeCaixa ||
+          !peso ||
+          !altura ||
+          !largura ||
+          !comprimento"
+          (onClick)="atualizarCaixa()"
+          styleClass="p-button-raised p-button-warning"
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button
+          label="Excluir Caixa"
+          [disabled]="!ativarBotoes ||
+          !nomeCaixa ||
+          !peso ||
+          !altura ||
+          !largura ||
+          !comprimento"
+          (onClick)="excluirCaixa()"
+          styleClass="p-button-raised p-button-danger"
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button
+          label="Limpar campos"
+          [disabled]="!nomeCaixa &&
+          !peso &&
+          !altura &&
+          !largura &&
+          !comprimento"
+          (onClick)="limparCampos()"
+          styleClass="p-button-raised p-button-info"
+        ></p-button>
+        
+      </div>
+    </div>
+    <div class="tabelaClientes">
+      
+      <p-table
+        #dt
+        [value]="caixas"
+        [(selection)]="caixaSelecionada"
+        selectionMode="single"
+        [rowHover]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[5, 10, 15]"
+        [filterDelay]="0"
+      >
+        <ng-template pTemplate="caption">
+          <div class="table-header">
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText (input)="filterTable($event)" type="text" placeholder="Buscar caixa" />
+              
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome da Caixa</th>
+            <th>Peso da Caixa (kg)</th>
+            <th>Altura da Caixa (cm)</th>
+            <th>Largura da Caixa (cm)</th>
+            <th>Comprimento da Caixa (cm)</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-caixa>
+          <tr [pSelectableRow]="caixa" (click)="atualizarCamposComCaixaSelecionada(caixa)">
+            
+            <td>{{caixa.nome}}</td>
+            <td>{{caixa.peso}}</td>
+            <td>{{caixa.altura}}</td>
+            <td>{{caixa.largura}}</td>
+            <td>{{caixa.comprimento}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  
