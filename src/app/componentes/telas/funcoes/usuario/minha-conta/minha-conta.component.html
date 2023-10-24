@@ -1,19 +1,19 @@
 <div class="divGeral">
 
-  <div class="divInformacao" *ngIf="informacaoUsuario">
+  <div class="divInformacao" *ngIf="usuarioLogadoAPI && this.usuarioLogadoAPI.length > 0">
     <div class="containerImgEInfo">
       <div class="containerImg">
         <p-avatar class="avatar" size="xlarge" icon="fa-solid fa-user" styleClass="mr-2" shape="circle"></p-avatar>
       </div>
       <div class="containerInformacao">
-        <h1 class="h1">{{informacaoUsuario[0].nome}}</h1>
-        <h2 class="h2">{{informacaoUsuario[0].emailprinc}}</h2>
+        <h1 class="h1">{{usuarioLogadoAPI[0].nome}}</h1>
+        <h2 class="h2">{{usuarioLogadoAPI[0].emailprinc}}</h2>
       </div>
     </div>
     <div class="botao">
     <p-button
       icon="fa-solid fa-gear fa-xl" styleClass="p-button-rounded p-button-warning p-button-text"
-      (click)="navigateMeusDados()"
+      (onClick)="navigateMeusDados()"
       >
     </p-button>
     </div>
@@ -54,7 +54,7 @@
         label="Ver todos os pedidos"
         icon="fa-solid fa-dolly"
         styleClass="p-button-outlined p-button-warning"
-        (click)="navigateTodosOsPedido()"
+        (onClick)="navigateTodosOsPedido()"
         >
       </p-button>
     </div>

@@ -51,7 +51,7 @@ export class MeusDadosComponent {
   ) {}
 
   ngOnInit() {
-    this.usuario = this.usuarioService.getUsuario();
+    this.usuario = this.usuarioService.getUsuarioMocado();
     this.checkIfAddressFieldsShouldBeDisabled();
 
     this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe(

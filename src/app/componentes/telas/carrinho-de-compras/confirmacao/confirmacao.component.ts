@@ -76,7 +76,7 @@ export class ConfirmacaoComponent implements OnInit{
 
     this.carregarFormaPagamento();
 
-    this.usuario = this.usuarioService.getUsuario();
+    this.usuario = this.usuarioService.getUsuarioMocado();
 
     this.items = [
         {

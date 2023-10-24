@@ -12,4 +12,10 @@ export class ServiceApiUsuarioLogadoService {
     private http: HttpClient,
   ) {}
 
+  buscarUsuario(userID: number) {
+    const endpoint = `user/${userID}`;
+    const url = this.urlGlobal.url + endpoint;
+    return this.http.get<any>(url);
+  }
+
 }

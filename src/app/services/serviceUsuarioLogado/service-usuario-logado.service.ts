@@ -44,6 +44,8 @@ export interface Telefone {
 })
 export class ServiceUsuarioLogadoService {
 
+  private inicializacaoUserConcluidaSubject = new Subject<void>();
+
   private enderecosCarregadosSubject = new Subject<void>();
 
   private mostrarLateralUsuario = new BehaviorSubject<boolean>(false);
@@ -55,7 +57,7 @@ export class ServiceUsuarioLogadoService {
   constructor(
     private apiEnderecos: ServiceApiEnderecosService,
     private apiTelefones: ServiceApiTelefonesService,
-
+    private apiUsuario: ServiceApiUsuarioLogadoService
   ) {
 
     const b3dc20a9c71655e6aacd4eca882ee40db9840b7ee63449ec3d4c489d90f97acd = sessionStorage.getItem(this.localStorageKeyUser);
@@ -97,15 +99,19 @@ export class ServiceUsuarioLogadoService {
     }
   ]
 
-  usuarioLogadoAPI: Usuario[] = []
+  usuarioLogadoAPI: any[] = []
   enderecosAPI: any[] = []
   enderecoCobrancaUsuarioLogadoAPI: any[] = []
   enderecoEntregaUsuarioLogadoAPI: any[] = []
   telefonesAPI: Telefone[] = []
   telefonesUsuarioLogadoAPI: Telefone[] = []
 
-  getUsuario(): Usuario[] {
+  getUsuarioMocado(): Usuario[] {
     return this.usuarioLogado;
+  }
+
+  getUsuario(): Observable<any[]> {
+    return of (this.usuarioLogadoAPI);
   }
 
   adicionarEndereco(usuarioIndex: number, novoEndereco: EnderecoEntrega): void {
@@ -219,7 +225,6 @@ export class ServiceUsuarioLogadoService {
     }
   }
 
-
   getTelefonesUsuarioLogado(): Observable<any[]> {
     return of (this.telefonesUsuarioLogadoAPI);
   }
@@ -260,5 +265,42 @@ export class ServiceUsuarioLogadoService {
     return this.enderecosCarregadosSubject.asObservable();
   }
 
+  // ====================================================================================== //
 
+  async atualizarUsuarioAPI(){
+
+    const e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01 = sessionStorage.getItem('u')
+    const ef88b713413e01ff4fc0a3ccb4037c9e5e0f864915876375ef66eef5801e1bee = '3a5fcd67e16707188a6dd213303761fd530fed07434b8641044460fd9fdde581'
+    
+    if(e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01){
+
+      const userIDStorage = CryptoJS.AES.decrypt(e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01, ef88b713413e01ff4fc0a3ccb4037c9e5e0f864915876375ef66eef5801e1bee);
+
+      if (userIDStorage.sigBytes > 0) {
+        const userID = JSON.parse(userIDStorage.toString(CryptoJS.enc.Utf8));
+      
+      try {
+        const usuarioAPI = await this.apiUsuario.buscarUsuario(userID).toPromise();
+        if (usuarioAPI) {
+          this.usuarioLogadoAPI = usuarioAPI;
+
+          this.inicializacaoUserConcluidaSubject.next();
+          sessionStorage.setItem('startUser', 'ok')
+        } else {
+          console.error('Erro ao buscar usuarioAPI da API: usuarioAPI é undefined');
+        }
+      } catch (error) {
+        console.error('Erro ao buscar usuário da API', error);
+      }
+      }
+     
+    }
+  }
+
+  getInicializacaoConcluida() {
+    return this.inicializacaoUserConcluidaSubject.asObservable();
+  }
+  
 }
+
+
