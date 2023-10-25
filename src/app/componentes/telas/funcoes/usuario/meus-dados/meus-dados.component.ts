@@ -7,6 +7,7 @@ import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { ServiceApiUsuarioLogadoService } from 'src/app/services/servicesAPI/serviceAPI-UsuarioLogado/service-api-usuario-logado.service';
 import { ServiceApiUsuariosService } from 'src/app/services/servicesAPI/serviceAPI-Usuarios/service-api-usuarios.service';
+import { ServiceApiEnderecosService } from 'src/app/services/servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
 
 interface EstadoLocal {
   nome: string;
@@ -46,7 +47,7 @@ export class MeusDadosComponent {
   nome!: string;
   telefone!:string;
 
-  id!: number;
+  endId!: number;
   identificacao!: string;
   cep!: number | null
   cidade!: string;
@@ -55,12 +56,14 @@ export class MeusDadosComponent {
   numero!: number | null;
   complemento!: string;
   disableAddressFields!: boolean;
-  enderecoEditando: EnderecoEntrega | null = null;
   buttonSalvarEnderecoNovoEndereco: boolean = false;
   buttonSalvarEnderecoEditar: boolean = false;
   tokenEmail!: string;
   tokenSenha!: string;
   
+  originalAddress: any = {}; // Vai armazenar o endereço original
+
+
   estado!: EstadoLocal[];
   estadoSelecionado: EstadoLocal | null = null;
   estadosAPI: Estado[] = []
@@ -75,6 +78,7 @@ export class MeusDadosComponent {
     private registrar: ServiceApiRegistrarService,
     private serviceEstado: ServiceEstadosService,
     private usuarioAPIService: ServiceApiUsuariosService,
+    private serviceAPIEndereco: ServiceApiEnderecosService,
   ) {}
 
   ngOnInit() {
@@ -143,7 +147,7 @@ export class MeusDadosComponent {
       { nome: 'Tocantins', uf: 'TO'}
     ];
 
-    // this.carregarEstadosAPI()
+    this.carregarEstadosAPI()
 
   }
 
@@ -245,18 +249,85 @@ export class MeusDadosComponent {
     this.divNovoEndereco = true;
     this.divEnderecos = false;
     this.isEditAddress = true;
+  
+    this.originalAddress = { ...address }; // Armazena o endereço original
+  
+    this.endId = address.endId
+    this.identificacao = address.identificacao;
+    this.cep = address.cep;
+    this.bairro = address.bairro;
+    this.cidade = address.cidade;
+    this.endereco = address.endereco;
+    this.numero = address.numeroresidencia;
+    this.complemento = address.complemento;
+  }
 
-    this.identificacao = address.identificacao
-    this.cep = address.cep
-    this.bairro = address.bairro
-    this.cidade = address.cidade
-    this.endereco = address.endereco
-    this.numero = address.numeroresidencia
-    this.complemento = address.complemento
+  checkAddressChanges(): boolean {
+
+    if(
+      this.identificacao !== this.originalAddress.identificacao ||
+      this.cep !== this.originalAddress.cep ||
+      this.bairro !== this.originalAddress.bairro ||
+      this.cidade !== this.originalAddress.cidade ||
+      this.endereco !== this.originalAddress.endereco ||
+      this.numero !== this.originalAddress.numeroresidencia ||
+      this.complemento !== this.originalAddress.complemento
+      ){
+        return false
+      }
+    return true
+  }
+
+  checkFieldEmpty(): boolean{
+
+    if(
+      !this.identificacao ||
+      !this.cep ||
+      !this.bairro ||
+      !this.cidade ||
+      !this.endereco ||
+      !this.numero ||
+      !this.complemento
+    ){
+      return true
+    }
+
+    return false
+
   }
 
   salvarEdicao() {
     
+    if (this.estadoSelecionado) {
+      const estadoEncontrado = this.estadosAPI.find(
+        (estado) => estado.UfId === this.estadoSelecionado!.uf
+      );
+
+      if (estadoEncontrado) {
+
+        const endId = this.endId
+
+        const dataAtualizarEndereçoEntrega = {
+          endereco: this.endereco,
+          cidade: this.cidade,
+          bairro: this.bairro,
+          UfId: this.estadoSelecionado!.uf,
+          identificacao: this.identificacao,
+          cep: this.cep,
+          numeroresidencia: this.numero,
+          complemento: this.complemento
+        }
+
+        this.serviceAPIEndereco.atualizarEnderecos(endId, dataAtualizarEndereçoEntrega).subscribe((response) => {
+          console.log("Endereço de entrega atualizado com sucesso", response)
+        },
+        (error) => {
+          console.log("Erro ao atualizar o endereço de entrega", error)
+        })
+      } else {
+        console.log('Estado selecionado não está na lista de estados válidos.');
+      }
+    }
   }
 
   adicionarEndereco() {
@@ -413,5 +484,7 @@ export class MeusDadosComponent {
     
 
   }
+
+  
 
 }

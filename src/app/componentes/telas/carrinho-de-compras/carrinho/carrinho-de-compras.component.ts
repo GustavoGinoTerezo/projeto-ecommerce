@@ -28,7 +28,7 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
   items: MenuItem[] = [];
   valorTotal: number = 0;
   produtos: Produtos[] = []
-  enderecosEntrega: EnderecoEntrega[] = []
+  enderecosEntrega: any[] = []
   enderecoSelecionado: any;
   checkbox!: string;
   firstEndereco: number = 0;

@@ -155,7 +155,7 @@
           ></p-button>
         </div>
         <div class="botaoSalvarEndereco">
-          <p-button (click)="salvarEdicao()" *ngIf="buttonSalvarEnderecoEditar" label="Salvar edição" styleClass="p-button-raised p-button-success"></p-button>
+          <p-button (click)="salvarEdicao()" *ngIf="buttonSalvarEnderecoEditar" label="Salvar alterações" styleClass="p-button-raised p-button-success" [disabled]="checkAddressChanges() || checkFieldEmpty()"></p-button>
         </div>
       </div>
     </div>
