@@ -283,6 +283,7 @@ export class ServiceUsuarioLogadoService {
         const usuarioAPI = await this.apiUsuario.buscarUsuario(userID).toPromise();
         if (usuarioAPI) {
           this.usuarioLogadoAPI = usuarioAPI;
+          console.log(this.usuarioLogadoAPI)
 
           this.inicializacaoUserConcluidaSubject.next();
           sessionStorage.setItem('startUser', 'ok')

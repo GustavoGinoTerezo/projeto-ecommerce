@@ -79,6 +79,8 @@ export class FuncoesUsuarioComponent {
     sessionStorage.removeItem('p')
     sessionStorage.removeItem('at')
     sessionStorage.removeItem('es')
+    sessionStorage.removeItem('startEnderecos')
+    sessionStorage.removeItem('startUser')
 
   }
 

@@ -72,6 +72,7 @@ export class LoginComponent {
 
           this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
           this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
+          this.usuarioLogado.atualizarUsuarioAPI()
 
           // ====================================================================================== //
           // CONTROLE DE ACESSO //
