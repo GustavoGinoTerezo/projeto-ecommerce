@@ -114,17 +114,6 @@ export class ServiceUsuarioLogadoService {
     return of (this.usuarioLogadoAPI);
   }
 
-  adicionarEndereco(usuarioIndex: number, novoEndereco: EnderecoEntrega): void {
-    if (usuarioIndex >= 0 && usuarioIndex < this.usuarioLogado.length) {
-      const usuario = this.usuarioLogado[usuarioIndex];
-      if (usuario.enderecoEntrega) {
-        usuario.enderecoEntrega.push(novoEndereco);
-      } else {
-        usuario.enderecoEntrega = [novoEndereco];
-      }
-    }
-  }
-
   // ====================================================================================== //
 
   atualizarEnderecoUsuarioLogadoAPI() {
@@ -153,9 +142,6 @@ export class ServiceUsuarioLogadoService {
 
               // Filtra endereços com tpCadastro igual a "2" para o array enderecoEntregaUsuarioLogadoAPI
               this.enderecoEntregaUsuarioLogadoAPI = enderecosAPI.filter((endereco) => endereco.LoginId === idUsuario && endereco.tpcadastro === "2");
-
-              // console.log('Endereços do usuário logado (Cobrança):', this.enderecoCobrancaUsuarioLogadoAPI);
-              // console.log('Endereços do usuário logado (Entrega):', this.enderecoEntregaUsuarioLogadoAPI);
 
               sessionStorage.setItem('startEnderecos', 'ok')
               this.enderecosCarregadosSubject.next();

@@ -31,7 +31,7 @@ export class AppComponent {
 
     // this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
 
-    // this.usuarioLogado.atualizarUsuarioAPI();
+    this.usuarioLogado.atualizarUsuarioAPI();
 
     this.ativarLateral();
 

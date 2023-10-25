@@ -1,5 +1,15 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Estado, ServiceEstadosService } from 'src/app/services/serviceEstados/service-estados.service';
 import { EnderecoEntrega, ServiceUsuarioLogadoService, Usuario } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
+import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/serviceAPI-Registrar/service-api-registrar.service';
+import { AES } from 'crypto-ts';
+import * as CryptoJS from 'crypto-js';
+
+interface EstadoLocal {
+  nome: string;
+  uf: string;
+}
 
 @Component({
   selector: 'app-meus-dados',
@@ -8,9 +18,15 @@ import { EnderecoEntrega, ServiceUsuarioLogadoService, Usuario } from 'src/app/s
 })
 export class MeusDadosComponent {
 
-  enderecosEntrega: EnderecoEntrega[] = []
+  private usuarioSubscription!: Subscription;
+  private enderecosSubscription!: Subscription;
+  private inicializacaoUserConcluidaSubject!: Subscription;
+  private inicializacaoEnderecoConcluidaSubject!: Subscription;
+  private estadosSubscription!: Subscription;
 
-  usuario: Usuario[] = [];
+  enderecosEntrega: any[] = []
+
+  usuario: any[] = [];
   first: number = 0;
   rows: number = 3;
   dialogVisible: boolean = false;
@@ -27,7 +43,7 @@ export class MeusDadosComponent {
   cep!: number | null
   cidade!: string;
   bairro!: string;
-  logradouro!: string;
+  endereco!: string;
   numero!: number | null;
   complemento!: string;
   disableAddressFields!: boolean;
@@ -36,47 +52,141 @@ export class MeusDadosComponent {
   buttonSalvarEnderecoEditar: boolean = false;
   tokenEmail!: string;
   tokenSenha!: string;
+  
+  estado!: EstadoLocal[];
+  estadoSelecionado: EstadoLocal | null = null;
+  estadosAPI: Estado[] = []
 
-  novoEndereco: EnderecoEntrega = {
-    identificacao: '',
-    cep: 0,
-    cidade: '',
-    bairro: '',
-    endereco: '',
-    numeroResidencia: 0
-  };
+  isEditAddress = false;
 
   constructor(
-    private usuarioService: ServiceUsuarioLogadoService
+    private usuarioService: ServiceUsuarioLogadoService,
+    private registrar: ServiceApiRegistrarService,
+    private serviceEstado: ServiceEstadosService,
   ) {}
 
   ngOnInit() {
-    this.usuario = this.usuarioService.getUsuarioMocado();
-    this.checkIfAddressFieldsShouldBeDisabled();
 
-    this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe(
-      (enderecosEntregaAPI) => {
-        this.enderecosEntrega = enderecosEntregaAPI;
-        console.log(this.enderecosEntrega)
+    const startEnderecos = sessionStorage.getItem('startEnderecos')
+    const startUser = sessionStorage.getItem('startUser')
 
+    if(startEnderecos){
+      this.carregarEnderecos();
+    } else {
+      const inicializacaoConcluidaEnderecosObservable = this.usuarioService.getEnderecosCarregadosObservable();
 
-
+      if (inicializacaoConcluidaEnderecosObservable) {
+        this.inicializacaoEnderecoConcluidaSubject = inicializacaoConcluidaEnderecosObservable.subscribe(() => {
+          this.carregarEnderecos();
+        });
       }
-    );
+    }
 
+    if(startUser){
+      this.carregarUsuario();
+    } else {
+      const inicializacaoConcluidaObservable = this.usuarioService.getInicializacaoConcluida();
+
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoUserConcluidaSubject = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarUsuario();
+        });
+      }
+    }
+
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('startUser');
+      sessionStorage.removeItem('startEnderecos');
+    });
+
+    this.estado = [
+      { nome: 'Acre', uf: 'AC'},
+      { nome: 'Alagoas', uf: 'AL'},
+      { nome: 'Amapá', uf: 'AP'},
+      { nome: 'Amazonas', uf: 'AM'},
+      { nome: 'Bahia', uf: 'BA'},
+      { nome: 'Ceará', uf: 'CE'},
+      { nome: 'Distrito Federal', uf: 'DF'},
+      { nome: 'Espírito Santo', uf: 'ES'},
+      { nome: 'Goiás', uf: 'GO'},
+      { nome: 'Maranhão', uf: 'MA'},
+      { nome: 'Mato Grosso', uf: 'MT'},
+      { nome: 'Mato Grosso do Sul', uf: 'MS'},
+      { nome: 'Minas Gerais', uf: 'MG'},
+      { nome: 'Pará', uf: 'PA'},
+      { nome: 'Paraíba', uf: 'PB'},
+      { nome: 'Paraná', uf: 'PR'},
+      { nome: 'Pernambuco', uf: 'PE'},
+      { nome: 'Piauí', uf: 'PI'},
+      { nome: 'Rio de Janeiro', uf: 'RJ'},
+      { nome: 'Rio Grande do Norte', uf: 'RN'},
+      { nome: 'Rio Grande do Sul', uf: 'RS'},
+      { nome: 'Rondônia', uf: 'RO'},
+      { nome: 'Roraima', uf: 'RR'},
+      { nome: 'Santa Catarina', uf: 'SC'},
+      { nome: 'São Paulo', uf: 'SP'},
+      { nome: 'Sergipe', uf: 'SE'},
+      { nome: 'Tocantins', uf: 'TO'}
+    ];
+
+    // this.carregarEstadosAPI()
+
+  }
+
+  ngOnDestroy() {
+
+    if (this.inicializacaoUserConcluidaSubject) {
+      this.inicializacaoUserConcluidaSubject.unsubscribe();
+    }
+
+    if (this.inicializacaoEnderecoConcluidaSubject) {
+      this.inicializacaoEnderecoConcluidaSubject.unsubscribe();
+    }
+
+    if (this.usuarioSubscription) {
+      this.usuarioSubscription.unsubscribe();
+    }
+
+    if (this.enderecosSubscription) {
+      this.enderecosSubscription.unsubscribe();
+    }
+
+    if (this.estadosSubscription) {
+      this.estadosSubscription.unsubscribe();
+    }
+
+  }
+
+  carregarUsuario() {
+    this.usuarioSubscription = this.usuarioService.getUsuario().subscribe((usuarioAPI) => {
+      this.usuario = [usuarioAPI];
+      console.log("1")
+    });
+  }
+
+  carregarEnderecos() {
+    this.enderecosSubscription = this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe((enderecosEntregaAPI) => {
+      this.enderecosEntrega = enderecosEntregaAPI;
+      console.log("2")
+    });
+  }
+
+  async carregarEstadosAPI() {
+    await this.serviceEstado.atualizarEstadosDaAPI();
+    this.carregarEstados();
+  }
+
+  carregarEstados() {
+    this.estadosSubscription = this.serviceEstado.getEstados().subscribe((estadosAPI) => {
+      this.estadosAPI = estadosAPI;
+
+      console.log(this.estadosAPI)
+    });
   }
 
   onPageChange(event: any): void {
     this.first = event.first;
     this.rows = event.rows;
-  }
-
-  calculateTotalRecords(): number {
-    let total = 0;
-    for (const usuario of this.usuario) {
-      total += usuario.enderecoEntrega?.length || 0;
-    }
-    return total;
   }
 
   showDialog(type: 'email' | 'senha') {
@@ -101,6 +211,8 @@ export class MeusDadosComponent {
     this.divNovoEndereco = true;
     this.divEnderecos = false;
     this.buttonSalvarEnderecoNovoEndereco = true;
+
+    this.isEditAddress = false;
   }
 
   showDialogEnderecos(){
@@ -108,87 +220,82 @@ export class MeusDadosComponent {
     this.divEnderecos = true;
     this.buttonSalvarEnderecoNovoEndereco = false;
     this.buttonSalvarEnderecoEditar = false;
+
+    this.resetAddressFields()
   }
 
   editAddress(address: any) {
     this.buttonSalvarEnderecoEditar = true;
     this.divNovoEndereco = true;
     this.divEnderecos = false;
+    this.isEditAddress = true;
 
-    // if (this.usuario[0]?.enderecoEntrega) {
-    //   const enderecoEditIndex = this.usuario[0].enderecoEntrega.findIndex(
-    //     (endereco) => endereco.identificacao === address.identificacao
-    //   );
-
-    //   if (enderecoEditIndex !== -1) {
-    //     this.enderecoEditando = this.usuario[0].enderecoEntrega[enderecoEditIndex];
-
-    //     // Preencha os campos do formulário com os valores editados
-    //     this.identificacao = this.enderecoEditando.identificacao || '';
-    //     this.cep = this.enderecoEditando.cep || null;
-    //     this.cidade = this.enderecoEditando.cidade || '';
-    //     this.bairro = this.enderecoEditando.bairro || '';
-    //     this.logradouro = this.enderecoEditando.endereco || '';
-    //     this.numero = this.enderecoEditando.numeroResidencia || null;
-
-    //     // Alternar para a visualização de edição de endereço
-
-    //   }
-    // }
+    this.identificacao = address.identificacao
+    this.cep = address.cep
+    this.bairro = address.bairro
+    this.cidade = address.cidade
+    this.endereco = address.endereco
+    this.numero = address.numeroresidencia
+    this.complemento = address.complemento
   }
 
   salvarEdicao() {
-    if (this.usuario[0]?.enderecoEntrega) {
-      const enderecoEditIndex = this.usuario[0].enderecoEntrega.findIndex(
-        (endereco) => endereco === this.enderecoEditando
+    
+  }
+
+  adicionarEndereco() {
+    
+    if (this.estadoSelecionado) {
+      const estadoEncontrado = this.estadosAPI.find(
+        (estado) => estado.UfId === this.estadoSelecionado!.uf
       );
 
-      if (enderecoEditIndex !== -1) {
-        const enderecoEditado = this.usuario[0].enderecoEntrega[enderecoEditIndex];
+      if (estadoEncontrado) {
 
-        // Atualize os campos do endereço editado
-        enderecoEditado.identificacao = this.identificacao;
-        enderecoEditado.cep = this.cep!;
-        enderecoEditado.cidade = this.cidade;
-        enderecoEditado.bairro = this.bairro;
-        enderecoEditado.endereco = this.logradouro;
-        enderecoEditado.numeroResidencia = this.numero!;
+        const e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01 = sessionStorage.getItem('u')
+        const ef88b713413e01ff4fc0a3ccb4037c9e5e0f864915876375ef66eef5801e1bee = '3a5fcd67e16707188a6dd213303761fd530fed07434b8641044460fd9fdde581'
+        
+        if(e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01){
 
-        // Redefina os campos do endereço após a edição
-        this.resetAddressFields();
+          const userIDStorage = CryptoJS.AES.decrypt(e3ab87bbcb7de65067ed3f1fa313aa98b10ee3e1b3f6d6240170508e2ff9df01, ef88b713413e01ff4fc0a3ccb4037c9e5e0f864915876375ef66eef5801e1bee);
 
-        // Alternar de volta para a visualização de endereços
-        this.divNovoEndereco = false;
-        this.divEnderecos = true;
-        this.buttonSalvarEnderecoEditar = false;
+          if (userIDStorage.sigBytes > 0) {
+            const LoginId = JSON.parse(userIDStorage.toString(CryptoJS.enc.Utf8)); 
+    
+            const dataEnderecoEntrega = {
+              LoginId: LoginId,
+              tpcadastro: "2",
+              cep: this.cep,
+              bairro: this.bairro,
+              cidade: this.cidade,
+              UfId: this.estadoSelecionado.uf,
+              endereco: this.endereco,
+              complemento: this.complemento,
+              numeroresidencia: this.numero,
+              identificacao: this.identificacao,
+            }
+        
+            this.registrar.registrarEndereco(dataEnderecoEntrega).subscribe(response => {
+              console.log("Endereço de entrega adicionado com sucesso", response)
+
+              // Redefina os campos do endereço
+              this.resetAddressFields();
+
+              // Alternar de volta para a visualização de endereços
+              this.divNovoEndereco = false;
+              this.divEnderecos = true;
+              this.buttonSalvarEnderecoEditar = false;
+              this.buttonSalvarEnderecoNovoEndereco = false;
+            },
+            (error) => {
+              console.log("Erro ao cadastrar novo endereço de entrega", error)
+            });
+          }
+        }
+      } else {
+        console.log('Estado selecionado não está na lista de estados válidos.');
       }
     }
-  }
-
-  salvarEndereco() {
-    const endereco: EnderecoEntrega = {
-      identificacao: this.identificacao,
-      cep: this.cep!,
-      cidade: this.cidade,
-      bairro: this.bairro,
-      endereco: this.logradouro,
-      numeroResidencia: this.numero!
-    };
-
-    this.usuarioService.adicionarEndereco(0, endereco);
-
-    // Redefina os campos do endereço
-    this.resetAddressFields();
-
-    // Alternar de volta para a visualização de endereços
-    this.divNovoEndereco = false;
-    this.divEnderecos = true;
-    this.buttonSalvarEnderecoEditar = false;
-    this.buttonSalvarEnderecoNovoEndereco = false;
-  }
-
-  onCepInput() {
-    this.checkIfAddressFieldsShouldBeDisabled();
   }
 
   resetAddressFields() {
@@ -196,15 +303,10 @@ export class MeusDadosComponent {
     this.cep = null;
     this.cidade = '';
     this.bairro = '';
-    this.logradouro = '';
+    this.endereco = '';
     this.numero = null;
     this.complemento = '';
-    this.checkIfAddressFieldsShouldBeDisabled();
-  }
-
-  checkIfAddressFieldsShouldBeDisabled() {
-    const hasAddress = this.usuario?.[0]?.enderecoEntrega?.[0]?.cep || this.cep;
-    this.disableAddressFields = !!hasAddress;
+    this.estadoSelecionado = null
   }
 
   onKeyPressWord(event: KeyboardEvent): void {
@@ -244,5 +346,27 @@ export class MeusDadosComponent {
       (this.newEmail !== this.newEmailConfirm) ||
       !this.isEmailValid()
     );
+  }
+
+  get totalRecords(): number {
+    return this.enderecosEntrega?.length || 0;
+  }
+
+  ativarBotaoAdicionarEndereco(): boolean {
+
+    if(
+      !this.identificacao ||
+      !this.cep ||
+      !this.cidade ||
+      !this.bairro ||
+      !this.endereco ||
+      !this.estadoSelecionado ||
+      !this.numero ||
+      !this.complemento
+    ){
+      return true
+    }
+
+    return false
   }
 }

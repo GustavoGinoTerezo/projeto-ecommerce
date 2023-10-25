@@ -1,6 +1,6 @@
 <div class="divGeral">
 
-  <div class="containerDados" *ngIf="usuario">
+  <div class="containerDados" *ngIf="usuario && this.usuario.length > 0">
     <h1 class="h1">Dados básicos</h1>
     <div class="divInput">
       <span class="p-float-label">
@@ -12,10 +12,13 @@
       <span class="p-float-label">
         <p-inputMask
           mask="(99) 99999-9999"
-          [(ngModel)]="usuario[0].telefone"
+          
           id="telefonePrincipal"
-          #telefoneprincipal="ngModel"
+          
+          
           ></p-inputMask>
+          <!-- #telefoneprincipal="ngModel" -->
+          <!-- [(ngModel)]="usuario[0].telefone" -->
         <label htmlFor="Telefone principal">Telefone</label>
       </span>
     </div>
@@ -59,7 +62,7 @@
             </div>
           </div>
           <div class="labelRuaEResidencia">
-            {{endereco.endereco}}, {{endereco.numeroResidencia}}
+            {{endereco.endereco}}, {{endereco.numeroresidencia}}
           </div>
           <div class="labelCidadeEBairro">
             {{endereco.cidade}} - {{endereco.bairro}}
@@ -69,7 +72,7 @@
           </div>
         </div>
       </div>
-      <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="calculateTotalRecords()">
+      <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords">
       </p-paginator>
     </div>
 
@@ -77,7 +80,7 @@
       <div class="containerBotaoEH1">
         <p-button  (onClick)="showDialogEnderecos()"  class="botaoVoltar"
         icon="fa-solid fa-chevron-left" styleClass="p-button-rounded p-button-text"></p-button>
-        <div class="labelCadastrarNovoEnd">Cadastrar novo endereço</div>
+        <div class="labelCadastrarNovoEnd">{{ isEditAddress ? 'Editar endereço' : 'Cadastrar novo endereço' }}</div>
       </div>
       <div class="divInput">
         <div class="p-inputgroup">
@@ -91,50 +94,48 @@
         <div class="divInput cep">
           <div class="p-inputgroup">
             <span class="p-float-label">
-              <input pInputText id="cep" [(ngModel)]="cep" (input)="onCepInput()" />
-              <label htmlFor="cep">CEP</label>
+              <p-inputMask mask="99999-999" [(ngModel)]="cep"></p-inputMask>
+              <label htmlFor="username">CEP</label>
             </span>
           </div>
         </div>
         <div class="divInput">
           <div class="p-inputgroup">
             <span class="p-float-label">
-              <input pInputText id="cidade" [(ngModel)]="cidade" [disabled]="disableAddressFields" />
-              <label htmlFor="cidade">Cidade</label>
+              <input pInputText id="bairro" [(ngModel)]="bairro" [disabled]="disableAddressFields" />
+              <label htmlFor="bairro">Bairro</label>
             </span>
-            <span class="p-inputgroup-addon">
-              <i class="fa-solid fa-lock"></i>
-          </span>
           </div>
         </div>
       </div>
-      <div class="divInput">
-        <div class="p-inputgroup">
-          <span class="p-float-label">
-            <input pInputText id="bairro" [(ngModel)]="bairro" [disabled]="disableAddressFields" />
-            <label htmlFor="bairro">Bairro</label>
-          </span>
-          <span class="p-inputgroup-addon">
-            <i class="fa-solid fa-lock"></i>
-        </span>
+      <div class="containerCidadeEstado">
+        <div class="divInput">
+          <div class="p-inputgroup">
+            <span class="p-float-label">
+              <input pInputText id="cidade" [(ngModel)]="cidade" [disabled]="disableAddressFields" />
+              <label htmlFor="cidade">Cidade</label>
+            </span>
+          </div>
+        </div>
+        <div class="divEstado">
+          <p-dropdown [options]="estado"  [showClear]="true" [(ngModel)]="estadoSelecionado" placeholder="Estado" optionLabel="nome"></p-dropdown>
         </div>
       </div>
       <div class="divInput">
         <div class="p-inputgroup">
           <span class="p-float-label">
-            <input pInputText id="logradouro" [(ngModel)]="logradouro" [disabled]="disableAddressFields" />
-            <label htmlFor="logradouro">Logradouro</label>
+            <input pInputText id="logradouro" [(ngModel)]="endereco" [disabled]="disableAddressFields" />
+            <label htmlFor="logradouro">Endereço</label>
           </span>
-          <span class="p-inputgroup-addon">
-            <i class="fa-solid fa-lock"></i>
-        </span>
+         
         </div>
       </div>
       <div class="NumeroEComplemento">
         <div class="divInput numero">
           <div class="p-inputgroup">
             <span class="p-float-label">
-              <input pInputText id="numero" [(ngModel)]="numero" />
+              <input pInputText id="numero" [(ngModel)]="numero" 
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')"/>
               <label htmlFor="numero">Número</label>
             </span>
           </div>
@@ -150,7 +151,9 @@
       </div>
       <div>
         <div class="botaoSalvarEndereco">
-          <p-button (click)="salvarEndereco()" *ngIf="buttonSalvarEnderecoNovoEndereco" label="Salvar endereço" styleClass="p-button-raised p-button-success"></p-button>
+          <p-button (click)="adicionarEndereco()" *ngIf="buttonSalvarEnderecoNovoEndereco" label="Adicionar endereço" styleClass="p-button-raised p-button-success"
+          [disabled]="ativarBotaoAdicionarEndereco()"
+          ></p-button>
         </div>
         <div class="botaoSalvarEndereco">
           <p-button (click)="salvarEdicao()" *ngIf="buttonSalvarEnderecoEditar" label="Salvar edição" styleClass="p-button-raised p-button-success"></p-button>
