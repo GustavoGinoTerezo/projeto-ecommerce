@@ -4,7 +4,7 @@
     <h1 class="h1">Dados básicos</h1>
     <div class="divInput">
       <span class="p-float-label">
-        <input pInputText id="username" [(ngModel)]="usuario[0].nome" (keypress)="onKeyPressWord($event)"/>
+        <input pInputText id="username" [(ngModel)]="nome" (input)="onInputFieldChange()" (keypress)="onKeyPressWord($event)"/>
         <label htmlFor="username">Nome completo</label>
       </span>
     </div>
@@ -12,7 +12,6 @@
       <span class="p-float-label">
         <p-inputMask
           mask="(99) 99999-9999"
-          
           id="telefonePrincipal"
           
           
@@ -35,7 +34,7 @@
     </div>
     <div class="containerBotoes">
       <div class="botaoSalvarAlterações">
-        <p-button label="Salvar alterações" styleClass="p-button-raised p-button-success"></p-button>
+        <p-button label="Salvar alterações" [disabled]="isButtonSalvarDisabled" (onClick)="atualizarUsuario()" styleClass="p-button-raised p-button-success"></p-button>
       </div>
     </div>
     <hr class="hr">

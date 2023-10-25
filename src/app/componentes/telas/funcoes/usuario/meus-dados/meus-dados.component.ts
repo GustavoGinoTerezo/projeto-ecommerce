@@ -5,6 +5,8 @@ import { EnderecoEntrega, ServiceUsuarioLogadoService, Usuario } from 'src/app/s
 import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/serviceAPI-Registrar/service-api-registrar.service';
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
+import { ServiceApiUsuarioLogadoService } from 'src/app/services/servicesAPI/serviceAPI-UsuarioLogado/service-api-usuario-logado.service';
+import { ServiceApiUsuariosService } from 'src/app/services/servicesAPI/serviceAPI-Usuarios/service-api-usuarios.service';
 
 interface EstadoLocal {
   nome: string;
@@ -27,6 +29,8 @@ export class MeusDadosComponent {
   enderecosEntrega: any[] = []
 
   usuario: any[] = [];
+  usuarioOriginal: any | null = null; // Substitua 'any' pelo tipo 'Usuario'
+
   first: number = 0;
   rows: number = 3;
   dialogVisible: boolean = false;
@@ -38,6 +42,10 @@ export class MeusDadosComponent {
   newPasswordConfirm: string = '';
   divEnderecos: boolean = true;
   divNovoEndereco: boolean = false
+
+  nome!: string;
+  telefone!:string;
+
   id!: number;
   identificacao!: string;
   cep!: number | null
@@ -59,16 +67,22 @@ export class MeusDadosComponent {
 
   isEditAddress = false;
 
+  isButtonSalvarDisabled = true;
+
+
   constructor(
     private usuarioService: ServiceUsuarioLogadoService,
     private registrar: ServiceApiRegistrarService,
     private serviceEstado: ServiceEstadosService,
+    private usuarioAPIService: ServiceApiUsuariosService,
   ) {}
 
   ngOnInit() {
 
     const startEnderecos = sessionStorage.getItem('startEnderecos')
     const startUser = sessionStorage.getItem('startUser')
+
+    this.isButtonSalvarDisabled = true;
 
     if(startEnderecos){
       this.carregarEnderecos();
@@ -160,9 +174,11 @@ export class MeusDadosComponent {
   carregarUsuario() {
     this.usuarioSubscription = this.usuarioService.getUsuario().subscribe((usuarioAPI) => {
       this.usuario = [usuarioAPI];
-      console.log("1")
+      this.usuarioOriginal = { ...usuarioAPI }; 
+      this.nome = this.usuario[0].nome;
     });
   }
+  
 
   carregarEnderecos() {
     this.enderecosSubscription = this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe((enderecosEntregaAPI) => {
@@ -369,4 +385,33 @@ export class MeusDadosComponent {
 
     return false
   }
+
+  onInputFieldChange() {
+    if (this.usuarioOriginal) {
+      const usuarioAtual = this.nome;
+      const nomeAlterado = this.usuarioOriginal.nome !== usuarioAtual;
+  
+      this.isButtonSalvarDisabled = !(nomeAlterado);
+    }
+  }
+  
+  atualizarUsuario(){
+    
+    const LoginId = this.usuario[0].LoginId
+
+    const dataAtualizarUser = {
+      nome: this.nome
+    }
+
+    this.usuarioAPIService.atualizarUsuario(LoginId, dataAtualizarUser).subscribe((response) =>
+    {
+      console.log("Nome do usuário atualizado com sucesso", response)
+    },
+    (error) => {
+      console.log("Erro ao atualizar o nome do usuário", error)
+    })
+    
+
+  }
+
 }
