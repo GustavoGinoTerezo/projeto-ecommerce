@@ -147,9 +147,9 @@ export class GerenciamentoDeClientesComponent {
       { nome: 'Administrador', tipo: '1' }
     ]
 
-    // this.carregarUsuariosAPI()
+    this.carregarUsuariosAPI()
 
-    // this.carregarEstadosAPI()
+    this.carregarEstadosAPI()
 
   }
 
@@ -253,6 +253,8 @@ export class GerenciamentoDeClientesComponent {
           this.cep = this.enderecosFiltradosCobranca[0].cep
           this.cidade = this.enderecosFiltradosCobranca[0].cidade
 
+          this.estadoSelecionadoCobranca = this.estado.find(estado => estado.uf === this.enderecosFiltradosCobranca[0].UfId) || null;
+
           this.bairro = this.enderecosFiltradosCobranca[0].bairro
           this.rua = this.enderecosFiltradosCobranca[0].endereco
           this.numeroResidencia = this.enderecosFiltradosCobranca[0].numeroresidencia
@@ -277,6 +279,8 @@ export class GerenciamentoDeClientesComponent {
   }
 
   enderecoEntregaSelecionado(event: any) {
+    console.log(event.value)
+    
     this.identificacaoEndereco = event.value.identificacao;
     this.cepEntrega = event.value.cep;
     this.cidadeEntrega = event.value.cidade;
@@ -284,6 +288,9 @@ export class GerenciamentoDeClientesComponent {
     this.ruaEntrega = event.value.endereco;
     this.numeroResidenciaEntrega = event.value.numeroresidencia;
     this.complementoEntrega = event.value.complemento
+    this.estadoSelecionadoEntrega = this.estado.find(estado => estado.uf === event.value.UfId) || null
+
+    
 
     this.botaoDisabledEntrega = true;
   }

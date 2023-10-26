@@ -26,13 +26,11 @@ export class GerenciamentoDeFornecedoresComponent {
   
   nomeFornecedor!: string;
   cnpj!: string;
-  emailCadastroFornecedor!: string;
   descricaoFornecedor!: string;
   numeroEmpresa!: string;
   inscricaoEstadual!: string;
 
   cep!: string;
-  telefone!:  string;
   cidade: string = '';
   bairro: string = '';
   rua: string = '';
@@ -86,9 +84,9 @@ export class GerenciamentoDeFornecedoresComponent {
       { nome: 'Tocantins', uf: 'TO'}
     ];
 
-    // this.carregarFornecedoresAPI()
+    this.carregarFornecedoresAPI()
 
-    // this.carregarEstadosAPI()
+    this.carregarEstadosAPI()
 
   }
 
@@ -136,8 +134,6 @@ export class GerenciamentoDeFornecedoresComponent {
     this.nomeFornecedor = fornecedor.nome;
     this.cnpj = fornecedor.cnpj;
     this.inscricaoEstadual = fornecedor.inscricaoEstadual;
-    this.emailCadastroFornecedor = fornecedor.email;
-    this.telefone = fornecedor.telefone;
     this.cep = fornecedor.cep;
     this.cidade = fornecedor.cidade;
     this.bairro = fornecedor.bairro;
@@ -145,6 +141,7 @@ export class GerenciamentoDeFornecedoresComponent {
     this.numeroEmpresa = fornecedor.numEmpresa;
     this.descricaoFornecedor = fornecedor.descricao;
     
+    this.estadoSelecionado = this.estado.find(estado => estado.uf === fornecedor.UfId) || null;
     
     this.desabilitarBotao = false
 
@@ -156,8 +153,6 @@ export class GerenciamentoDeFornecedoresComponent {
       !this.nomeFornecedor ||
       !this.cnpj ||
       !this.inscricaoEstadual ||
-      !this.emailCadastroFornecedor ||
-      !this.telefone ||
       !this.cep  ||
       !this.cidade ||
       !this.bairro ||
@@ -177,8 +172,6 @@ export class GerenciamentoDeFornecedoresComponent {
     this.nomeFornecedor = '';
     this.cnpj =  '' ;
     this.inscricaoEstadual = '';
-    this.emailCadastroFornecedor = '';
-    this.telefone = '';
     this.cep = '';
     this.cidade = '';
     this.bairro = '';
