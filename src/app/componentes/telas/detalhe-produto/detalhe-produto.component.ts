@@ -8,6 +8,8 @@ import * as CryptoJS from 'crypto-js';
 import { Subscription } from 'rxjs';
 import { ServiceApiComentariosService } from 'src/app/services/servicesAPI/serviceAPI-Comentarios/service-api-comentarios.service';
 import { ServiceComentariosService } from 'src/app/services/serviceComentarios/service-comentarios.service';
+import { ServiceFornecedoresService } from 'src/app/services/serviceFornecedores/service-fornecedores.service';
+import { ServiceNotaFiscalService } from 'src/app/services/serviceNotaFiscal/service-nota-fiscal.service';
 
 @Component({
   selector: 'app-detalhe-produto',
@@ -20,27 +22,38 @@ export class DetalheProdutoComponent implements OnInit {
   private categoriasSubscription!: Subscription;
   private produtosSubscription!: Subscription;
   private comentariosSubscription!: Subscription;
+  private fornecedoresSubscription!: Subscription;
+  private notaFiscalCorpoSubscription!: Subscription;
 
   categorias: Categorias[] = [];
   produtos: Produtos[] = [];
-  produto: Produtos | undefined;
+  produto: any | undefined;
   comentario: any[] = []
 
   nomeProduto: string | null = null;
+
+  prodId!: number;
 
   nomeProdutoFormatado: string | null = null;
   produtoDaCategoria!: Produtos;
   cep!: string;
   novoComentario: string = '';
 
+  fornecedores: any[] = [];
+
+  descricaoFornecedor!: string
+
+  notaFiscalCorpo: any[] = []
+
   constructor(
     private route: ActivatedRoute,
     private messageService: MessageService,
     private produtoService: ServiceCategoriasService,
     private categoriasService: ServiceCategoriasService,
-    private carrinhoService: ServiceCarrinhoDeComprasService,
     private comentariosAPIService: ServiceApiComentariosService,
     private comentariosService: ServiceComentariosService,
+    private fornecedoresService: ServiceFornecedoresService,
+    private notaFiscalService: ServiceNotaFiscalService,
   ) {}
 
   async ngOnInit() {
@@ -49,7 +62,8 @@ export class DetalheProdutoComponent implements OnInit {
 
     if(start){
       await this.carregarCategoriasEProdutosERouter();
-      await this.carregarComentariosAPI()
+      await this.carregarComentariosAPI();
+      await this.carregarNotaFiscalCorpoAPI();
     } else {
       const inicializacaoConcluidaObservable = this.categoriasService.getInicializacaoConcluida();
 
@@ -57,6 +71,7 @@ export class DetalheProdutoComponent implements OnInit {
         this.inicializacaoConcluidaSubscription = inicializacaoConcluidaObservable.subscribe(async () => {
           await this.carregarCategoriasEProdutosERouter();
           await this.carregarComentariosAPI();
+          await this.carregarNotaFiscalCorpoAPI();
         });
       }
     }
@@ -84,6 +99,15 @@ export class DetalheProdutoComponent implements OnInit {
     if (this.comentariosSubscription) {
       this.comentariosSubscription.unsubscribe();
     }
+    
+    if (this.fornecedoresSubscription) {
+      this.fornecedoresSubscription.unsubscribe();
+    }
+
+    if (this.notaFiscalCorpoSubscription) {
+      this.notaFiscalCorpoSubscription.unsubscribe();
+    }
+
 
   }
 
@@ -96,6 +120,59 @@ export class DetalheProdutoComponent implements OnInit {
     this.comentariosSubscription = this.comentariosService.getComentarios().subscribe((comentariosAPI) => {
       this.comentario = comentariosAPI.filter(comentario => comentario.aprovado === 1 && comentario.prodId === this.produto!.prodId);
       console.log(this.comentario)
+    });
+  }
+
+  async carregarFornecedoresAPI() {
+    await this.fornecedoresService.atualizarFornecedoresDaAPI();
+    await this.carregarFornecedores();
+    await this.carregarInfomacaoFornecedor();
+  }
+
+  async carregarFornecedores() {
+    this.fornecedoresSubscription = this.fornecedoresService.getFornecedores().subscribe((fornecedoresAPI) => {
+      this.fornecedores = fornecedoresAPI;
+    });
+  }
+
+  async carregarInfomacaoFornecedor(){
+
+    const objetoNotaFiscal = this.encontrarObjetoNaNotaFiscal(this.prodId);
+  
+      if (objetoNotaFiscal) {
+        console.log("Objeto da nota fiscal correspondente:", objetoNotaFiscal);
+  
+        // Obtenha o FornecedorId do objeto da nota fiscal
+        const fornecedorId = objetoNotaFiscal.NotaEntradaCabeca.FornecedorId;
+  
+        // Use o FornecedorId para encontrar o fornecedor correspondente no array de fornecedores
+        const fornecedorCorrespondente = this.encontrarFornecedorPorId(fornecedorId);
+  
+        if (fornecedorCorrespondente) {
+          console.log("Fornecedor correspondente:", fornecedorCorrespondente);
+          
+          this.descricaoFornecedor = fornecedorCorrespondente.descricao
+
+        } else {
+          console.log("Nenhum fornecedor correspondente encontrado.");
+        }
+      } else {
+        console.log("Nenhum objeto correspondente na nota fiscal encontrado.");
+      }
+
+  }
+
+  async carregarNotaFiscalCorpoAPI() {
+    await this.notaFiscalService.atualizarNotaFiscalCorpoDaAPI();
+    await this.carregarNotaFiscalCorpo();
+    await this.carregarFornecedoresAPI();
+  }
+
+  async carregarNotaFiscalCorpo() {
+    this.notaFiscalCorpoSubscription = this.notaFiscalService.getNotaFiscalCorpo().subscribe((notaFiscalCorpoAPI) => {
+      this.notaFiscalCorpo = notaFiscalCorpoAPI;
+  
+     
     });
   }
 
@@ -116,9 +193,19 @@ export class DetalheProdutoComponent implements OnInit {
         const nomeOriginal = this.nomeProduto.replace(/-/g, ' ');
         this.produto = this.produtoService.obterProdutoPorNome(nomeOriginal);
 
+        this.prodId = this.produto.prodId
+
         this.nomeProdutoFormatado = this.produtoService.formatarNomeProduto(this.nomeProduto);
       }
     })
+  }
+
+  encontrarFornecedorPorId(fornecedorId: number) {
+    return this.fornecedores.find((fornecedor) => fornecedor.FornecedorId === fornecedorId);
+  }
+
+  encontrarObjetoNaNotaFiscal(prodId: number) {
+    return this.notaFiscalCorpo.find((item) => item.prodId === prodId);
   }
 
   getProdutoImages(): string[] {

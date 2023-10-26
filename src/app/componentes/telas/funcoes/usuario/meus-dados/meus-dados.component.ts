@@ -182,7 +182,6 @@ export class MeusDadosComponent {
       this.nome = this.usuario[0].nome;
     });
   }
-  
 
   carregarEnderecos() {
     this.enderecosSubscription = this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe((enderecosEntregaAPI) => {
@@ -260,6 +259,8 @@ export class MeusDadosComponent {
     this.endereco = address.endereco;
     this.numero = address.numeroresidencia;
     this.complemento = address.complemento;
+    this.estadoSelecionado = this.estado.find(estado => estado.uf === address.UfId) || null;
+
   }
 
   checkAddressChanges(): boolean {

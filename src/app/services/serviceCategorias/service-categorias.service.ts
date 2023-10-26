@@ -153,7 +153,7 @@ export class ServiceCategoriasService {
     return of (this.posicaoProdutosAPI)
   }
 
-  obterProdutoPorNome(nome: string): Categorias | undefined {
+  obterProdutoPorNome(nome: string): any | undefined {
     return this.produtosAPI.find(
       (produto) => produto.nome && produto.nome.toLowerCase() === nome.toLowerCase()
     );

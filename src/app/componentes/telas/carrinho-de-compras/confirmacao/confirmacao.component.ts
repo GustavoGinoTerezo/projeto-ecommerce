@@ -21,13 +21,15 @@ export class ConfirmacaoComponent implements OnInit{
   private enderecosEntregaSubscription!: Subscription;
   private enderecosCobrancaSubscription!: Subscription;
   private formaPagamentoSubscription!: Subscription;
+  private usuarioSubscription!: Subscription;
+  private inicializacaoUserConcluidaSubject!: Subscription;
 
   items: MenuItem[] = [];
   carrinho: CarrinhoDeCompra[] = [];
   enderecosEntrega: EnderecoEntrega[] = []
-  enderecoEntregaSelecionado: EnderecoEntrega[] = []
+  enderecoEntregaSelecionado: any[] = []
   enderecoCobranca: any[] = []
-  usuario: Usuario[] = [];
+  usuario: any[] = [];
   valorTotal: number = 0;
   first: number = 0; // Primeiro item da página
   rows: number = 5; // Número de itens por página
@@ -49,6 +51,7 @@ export class ConfirmacaoComponent implements OnInit{
 
     const start = sessionStorage.getItem('start')
     const startEnderecos = sessionStorage.getItem('startEnderecos')
+    const startUser = sessionStorage.getItem('startUser')
 
     if(start){
       this.carregarProdutos();
@@ -74,9 +77,20 @@ export class ConfirmacaoComponent implements OnInit{
       }
     }
 
+    if(startUser){
+      this.carregarUsuario();
+    } else {
+      const inicializacaoConcluidaObservable = this.usuarioService.getInicializacaoConcluida();
+
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoUserConcluidaSubject = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarUsuario();
+        });
+      }
+    }
+
     this.carregarFormaPagamento();
 
-    this.usuario = this.usuarioService.getUsuarioMocado();
 
     this.items = [
         {
@@ -100,6 +114,7 @@ export class ConfirmacaoComponent implements OnInit{
     window.addEventListener('beforeunload', () => {
       sessionStorage.removeItem('start');
       sessionStorage.removeItem('startEnderecos');
+      sessionStorage.removeItem('startUser');
     });
 
   }
@@ -128,6 +143,10 @@ export class ConfirmacaoComponent implements OnInit{
 
     if (this.formaPagamentoSubscription) {
       this.formaPagamentoSubscription.unsubscribe();
+    }
+
+    if (this.usuarioSubscription) {
+      this.usuarioSubscription.unsubscribe();
     }
 
   }
@@ -205,6 +224,12 @@ export class ConfirmacaoComponent implements OnInit{
     } catch (error) {
       console.error("Erro ao carregar endereços", error);
     }
+  }
+
+  carregarUsuario() {
+    this.usuarioSubscription = this.usuarioService.getUsuario().subscribe((usuarioAPI) => {
+      this.usuario = [usuarioAPI];
+    });
   }
 
   async preencherEnderecoSelecionado() {
