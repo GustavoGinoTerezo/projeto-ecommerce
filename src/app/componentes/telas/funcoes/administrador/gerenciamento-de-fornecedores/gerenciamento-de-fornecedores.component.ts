@@ -84,9 +84,9 @@ export class GerenciamentoDeFornecedoresComponent {
       { nome: 'Tocantins', uf: 'TO'}
     ];
 
-    this.carregarFornecedoresAPI()
+    // this.carregarFornecedoresAPI()
 
-    this.carregarEstadosAPI()
+    // this.carregarEstadosAPI()
 
   }
 

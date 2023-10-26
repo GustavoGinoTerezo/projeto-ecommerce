@@ -147,7 +147,7 @@ export class MeusDadosComponent {
       { nome: 'Tocantins', uf: 'TO'}
     ];
 
-    this.carregarEstadosAPI()
+    // this.carregarEstadosAPI()
 
   }
 

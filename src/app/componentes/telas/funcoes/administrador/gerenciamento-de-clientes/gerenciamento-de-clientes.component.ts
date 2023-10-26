@@ -147,9 +147,9 @@ export class GerenciamentoDeClientesComponent {
       { nome: 'Administrador', tipo: '1' }
     ]
 
-    this.carregarUsuariosAPI()
+    // this.carregarUsuariosAPI()
 
-    this.carregarEstadosAPI()
+    // this.carregarEstadosAPI()
 
   }
 

@@ -25,7 +25,7 @@ export class GerenciamentoDeComentariosComponent  {
   ngOnInit() {
     
 
-    this.carregarComentariosAPI();
+    // this.carregarComentariosAPI();
 
     
   }
