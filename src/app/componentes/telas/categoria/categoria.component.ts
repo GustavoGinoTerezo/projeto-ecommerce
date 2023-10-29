@@ -37,10 +37,8 @@ export class CategoriaComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private messageService: MessageService,
     private produtoService: ServiceCategoriasService,
     private categoriasService: ServiceCategoriasService,
-    private carrinhoService: ServiceCarrinhoDeComprasService,
     private router: Router,
   ) {}
 
@@ -163,16 +161,9 @@ export class CategoriaComponent implements OnInit, OnDestroy {
       sessionStorage.setItem('c', b031d16372c388ed5c4462fe1e968adaaa821c5ab62e3b20497569ffe802b0cb);
 
       // Exiba uma mensagem ou realize outras ações necessárias
-      this.showProdutoAdicionadoAoCarrinho();
     }
   }
 
-  showProdutoAdicionadoAoCarrinho() {
-    this.messageService.add({
-      severity: 'success',
-      icon: 'pi pi-shopping-cart',
-      detail: 'Produto adicionado ao carrinho!' });
-  }
 
   formatarNomeProduto(produtos: string): string {
     return this.categoriasService.formatarNomeProduto(produtos);

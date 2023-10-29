@@ -73,7 +73,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   constructor(
     private categoriasService: ServiceCategoriasService,
-    private messageService: MessageService,
     private apiCategoriaService: ServiceAPICategoriaService,
     private apiProdutoService: ServiceAPIProdutoService,
   ){}
@@ -339,26 +338,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     const category = this.categorias.find(c => c.catId === catId);
     return category ? category.nome || 'Desconhecida' : 'Desconhecida';
   }
-
-  //===============================================================================================//
-  //MENSAGENS TOAST
-
-  showSuccess(mensagemSucesso: string) {
-    this.messageService.add({ severity:   'success', detail: mensagemSucesso, life: 1600});
-  }
-
-  showInfo() {
-    this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
-  }
-
-  showWarn() {
-    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
-  }
-
-  showError(mensagemErro: string) {
-    this.messageService.add({ severity: 'error', detail: mensagemErro });
-  }
-
+ 
   //===============================================================================================//
   //API CATEGORIA
 
@@ -372,12 +352,10 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
     this.apiCategoriaService.cadastrarCategoria(dataCadastrarCategoria).subscribe
     ((response) => {
-      this.showSuccess(mensagemSucesso)
       console.log("Categoria adicionada com sucesso", response)
       this.atualizarPagina();
     },
     (error) => {
-      this.showError(mensagemErro)
       console.log("Erro ao adicionar a categoria", error)
     }
     )
@@ -398,11 +376,9 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.apiCategoriaService.atualizarCategoria(this.idCategoria, novoNomeCategoria).subscribe(
       (response) => {
         console.log("Categoria atualizada com sucesso", response);
-        this.showSuccess(mensagemSucesso)
         this.atualizarPagina();
       },
       (error) => {
-        this.showError(mensagemErro)
         console.error("Erro ao atualizar a categoria", error)
       }
     );
@@ -416,11 +392,9 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.apiCategoriaService.excluirCategoria(this.idCategoria).subscribe(
       (response) => {
         console.log("Categoria excluída com sucesso", response);
-        this.showSuccess(mensagemSucesso)
         this.atualizarPagina();
       },
       (error) => {
-        this.showError(mensagemErro)
         console.error("Erro ao excluir a categoria", error);
       }
     );

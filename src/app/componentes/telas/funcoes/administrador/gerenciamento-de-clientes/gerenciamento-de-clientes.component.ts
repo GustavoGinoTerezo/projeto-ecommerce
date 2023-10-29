@@ -8,6 +8,7 @@ import { ServiceApiEnderecosService } from 'src/app/services/servicesAPI/service
 import { ServiceApiEmailsService } from 'src/app/services/servicesAPI/serviceAPI-Emails/service-api-emails.service';
 import { ServiceApiTelefonesService } from 'src/app/services/servicesAPI/serviceAPI-Telefones/service-api-telefones.service';
 import { Estado, ServiceEstadosService } from 'src/app/services/serviceEstados/service-estados.service';
+import { AppComponent } from 'src/app/app.component';
 
 interface EstadoLocal {
   nome: string;
@@ -107,6 +108,7 @@ export class GerenciamentoDeClientesComponent {
     private emailAPIService: ServiceApiEmailsService,
     private telefoneAPIService: ServiceApiTelefonesService,
     private serviceEstado: ServiceEstadosService,
+    private appToast: AppComponent,
   ){}
 
   ngOnInit(){
@@ -480,6 +482,7 @@ export class GerenciamentoDeClientesComponent {
   // USER
   cadastrarUsuario(){
 
+
     if (this.estadoSelecionadoCobranca) {
       const estadoEncontrado = this.estadosAPI.find(
         (estado) => estado.UfId === this.estadoSelecionadoCobranca!.uf
@@ -497,8 +500,6 @@ export class GerenciamentoDeClientesComponent {
     
         this.registrar.registrar(dataLogin).subscribe(response => {
     
-          console.log("Usuário cadastrado com sucesso")
-    
           const LoginId = response.LoginId;
     
           const telefonePrincipal = this.removeFormatoTelefone(this.telefone);
@@ -512,7 +513,12 @@ export class GerenciamentoDeClientesComponent {
               console.log("Telefone adicionado com sucesso", response)
             },
             (error) => {
-              console.log("Erro ao cadastrar telefone principal", error)
+              const tipo = 'error'
+              const titulo = ''
+              const mensagem = 'Erro ao cadastrar o telefone principal.'
+              const icon = 'fa-solid fa-face-frown'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
             }
           );
     
@@ -528,7 +534,12 @@ export class GerenciamentoDeClientesComponent {
                 console.log("Email alternativo cadastrado com sucesso", response);
               },
               (error) => {
-                console.log("Erro ao cadastrar email alternativo", error);
+                const tipo = 'error'
+                const titulo = ''
+                const mensagem = 'Erro ao cadastrar o email alternativo.'
+                const icon = 'fa-solid fa-face-frown'
+
+                this.appToast.toast(tipo, titulo, mensagem, icon);
               }
             );
           } else {
@@ -550,7 +561,12 @@ export class GerenciamentoDeClientesComponent {
                 console.log("Telefone alternativo cadastrado com sucesso", response);
               },
               (error) => {
-                console.log("Erro ao cadastrar telefone alternativo");
+                const tipo = 'error'
+                const titulo = ''
+                const mensagem = 'Erro ao cadastrar o telefone alternativo.'
+                const icon = 'fa-solid fa-face-frown'
+
+                this.appToast.toast(tipo, titulo, mensagem, icon);
               }
             );
           } else {
@@ -600,19 +616,41 @@ export class GerenciamentoDeClientesComponent {
               console.log("Endereço de entrega adicionado com sucesso", response)
             },
             (error) => {
-              console.log("Erro ao cadastrar endereço de entrega", error)
+              const tipo = 'error'
+              const titulo = ''
+              const mensagem = 'Erro ao cadastrar o endereço de entrega.'
+              const icon = 'fa-solid fa-face-frown'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
             });
           }
         }, (error) => {
-          console.log("Erro ao cadastrar usuário", error)
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'Erro ao cadastrar usuário.'
+          const icon = 'fa-solid fa-face-frown'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
         });
     
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Usuário cadastrado com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.habilitarDropdownEnderecosEntrega = false
         this.atualizarPagina();
 
 
       } else {
-        console.log('Estado selecionado não está na lista de estados válidos.');
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'O estado selecionado para o usuário não está cadastrado.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     }
     
@@ -652,19 +690,41 @@ export class GerenciamentoDeClientesComponent {
           }
 
           this.enderecosAPIService.atualizarEnderecos(endIdCobranca, novoDataEndCobranca).subscribe((response) => {
-            console.log("Endereço de cobrança atualizado com sucesso", response)
+            
+            const tipo = 'success'
+            const titulo = ''
+            const mensagem = 'Usuário atualizado com sucesso.'
+            const icon = 'fa-solid fa-check'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
+
             this.atualizarPagina();
           },
           (error) => {
-            console.log("Erro ao atualizar endereço de cobrança", error)
+            const tipo = 'error'
+            const titulo = ''
+            const mensagem = 'Erro ao atualizar o endereço de cobrança.'
+            const icon = 'fa-solid fa-face-frown'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
           })
         },
         (error) => {
-          console.log("Erro ao atualizar Usuário", error)
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'Erro ao atualizar o usuário.'
+          const icon = 'fa-solid fa-face-frown'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
         })
 
       } else {
-        console.log('Estado selecionado não está na lista de estados válidos.');
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'O estado selecionado para o usuário não está cadastrado.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     }
 
@@ -675,10 +735,21 @@ export class GerenciamentoDeClientesComponent {
     try {
         const LoginId = this.LoginId;
         const response = await this.usuarioAPIService.excluirUsuario(LoginId).toPromise();
-        console.log("Usuário excluído com sucesso", response);
+
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Usuário excluído com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
     } catch (error) {
-        console.log("Erro ao excluir o usuário", error);
-        // Trate o erro ou rejeite a Promise, se necessário
+
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Problema ao excluir o usuário.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
     }
   }
 
@@ -689,9 +760,8 @@ export class GerenciamentoDeClientesComponent {
         await this.excluirTodosTelefonesAlternativo();
         await this.excluirLogin();
         await this.atualizarPagina();
-        console.log('Usuário excluído com sucesso');
     } catch (error) {
-        console.error('Erro ao excluir o usuário:', error);
+        
     }
   }
 
@@ -708,11 +778,23 @@ export class GerenciamentoDeClientesComponent {
 
     this.registrar.registrarEmails(dataEmailAlternativo).subscribe(
       (response) => {
-        console.log("Email alternativo cadastrado com sucesso", response);
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Email alternativo cadastrado com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.atualizarPagina();
       },
       (error) => {
-        console.log("Erro ao cadastrar email alternativo", error);
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao cadastrar o email alternativo'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     );
 
@@ -728,11 +810,23 @@ export class GerenciamentoDeClientesComponent {
     }
 
     this.emailAPIService.atualizarEmails(emailId, dataNovoEmailAlternativo).subscribe((response) => {
-      console.log("Email alternativo atualizado com sucesso", response)
+      
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Email alternativo atualizado com sucesso.'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
       this.atualizarPagina();
     },
     (error) => {
-      console.log("Erro ao atualizar email alternativo", error)
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Erro ao atualizar email alternativo.'
+      const icon = 'fa-solid fa-face-frown'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
     })
 
     
@@ -744,9 +838,21 @@ export class GerenciamentoDeClientesComponent {
         console.log(this.emailsFiltrados[i].emailId);
         try {
             await this.emailAPIService.excluirEmails(this.emailsFiltrados[i].emailId).toPromise();
-            console.log("Email alternativo excluído com sucesso");
+            
+            const tipo = 'success'
+            const titulo = ''
+            const mensagem = 'Email alternativo excluído com sucesso.'
+            const icon = 'fa-solid fa-check'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
+
         } catch (error) {
-            console.log("Erro ao excluir o email alternativo", error);
+            const tipo = 'error'
+            const titulo = ''
+            const mensagem = 'Erro ao excluir o email alternativo.'
+            const icon = 'fa-solid fa-face-frown'
+    
+            this.appToast.toast(tipo, titulo, mensagem, icon);
             // Trate o erro ou rejeite a Promise, se necessário
         }
     }
@@ -757,11 +863,23 @@ export class GerenciamentoDeClientesComponent {
     const emailId = this.emailsFiltradoSelecionado.emailId
 
     this.emailAPIService.excluirEmails(emailId).subscribe((response) => {
-      console.log("Email alternativo excluído com sucesso.", response)
+      
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Email alternativo excluído com sucesso.'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
       this.atualizarPagina();
     },
     (error) => {
-      console.log("Erro ao excluir endereço alternativo", error)
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Erro ao excluir o email alternativo.'
+      const icon = 'fa-solid fa-face-frown'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
     })
 
   }
@@ -779,11 +897,23 @@ export class GerenciamentoDeClientesComponent {
 
     this.registrar.registrarTelefone(dataTelefoneAlternativo).subscribe(
       (response) => {
-        console.log("Telefone alternativo cadastrado com sucesso", response);
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Telefone alternativo cadastrado com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.atualizarPagina();
       },
       (error) => {
-        console.log("Erro ao cadastrar Telefone alternativo", error);
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao cadastrar o telefone alternativo.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     );
   }
@@ -812,9 +942,21 @@ export class GerenciamentoDeClientesComponent {
         console.log(this.telefonesFiltrados[i].contId);
         try {
             await this.telefoneAPIService.excluirTelefones(this.telefonesFiltrados[i].contId).toPromise();
-            console.log("Telefone alternativo excluído com sucesso");
+            
+            const tipo = 'success'
+            const titulo = ''
+            const mensagem = 'Telefone alternativo excluído com sucesso.'
+            const icon = 'fa-solid fa-check'
+    
+            this.appToast.toast(tipo, titulo, mensagem, icon);
+
         } catch (error) {
-            console.log("Erro ao excluir o telefone alternativo", error);
+            const tipo = 'error'
+            const titulo = ''
+            const mensagem = 'Erro ao excluir o telefone alternativo.'
+            const icon = 'fa-solid fa-face-frown'
+    
+            this.appToast.toast(tipo, titulo, mensagem, icon);
             // Trate o erro ou rejeite a Promise, se necessário
         }
     }
@@ -849,14 +991,29 @@ export class GerenciamentoDeClientesComponent {
         }
     
         this.registrar.registrarEndereco(dataEnderecoEntrega).subscribe(response => {
-          console.log("Endereço de entrega adicionado com sucesso")
+          const tipo = 'success'
+          const titulo = ''
+          const mensagem = 'Endereço de entrega cadastrado com sucesso.'
+          const icon = 'fa-solid fa-check'
+  
+          this.appToast.toast(tipo, titulo, mensagem, icon);
           this.atualizarPagina();
         },
         (error) => {
-          console.log("Erro ao adicionar endereço de entrega", error)
+          const tipo = 'success'
+          const titulo = ''
+          const mensagem = 'Erro ao cadastrar endereço de entrega.'
+          const icon = 'fa-solid fa-face-frown'
+  
+          this.appToast.toast(tipo, titulo, mensagem, icon);
         });
       } else {
-        console.log('Estado selecionado não está na lista de estados válidos.');
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'O estado selecionado para o usuário não está cadastrado.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     }
     
@@ -884,15 +1041,30 @@ export class GerenciamentoDeClientesComponent {
         }
 
         this.enderecosAPIService.atualizarEnderecos(endId, dataNovoEnderecoEntrega).subscribe((response) => {
-          console.log("Endereço de entrega atualizado com sucesso", response)
+          const tipo = 'success'
+          const titulo = ''
+          const mensagem = 'Endereço de entrega atualizado com sucesso.'
+          const icon = 'fa-solid fa-check'
+  
+          this.appToast.toast(tipo, titulo, mensagem, icon);
           this.atualizarPagina();
         },
         (error) => {
-          console.log("Erro ao atualizar endereço de entrega", error)
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'Erro ao atualizar o endereço de entrega.'
+          const icon = 'fa-solid fa-face-frown'
+  
+          this.appToast.toast(tipo, titulo, mensagem, icon);
         })
 
       } else {
-        console.log('Estado selecionado não está na lista de estados válidos.');
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'O estado selecionado para o usuário não está cadastrado.'
+          const icon = 'fa-solid fa-face-frown'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     }
 
@@ -908,10 +1080,19 @@ export class GerenciamentoDeClientesComponent {
         console.log(this.enderecosFiltradosEntrega[i].endId);
         try {
             await this.enderecosAPIService.excluirEnderecos(this.enderecosFiltradosEntrega[i].endId).toPromise();
-            console.log("Endereço de entrega excluído com sucesso");
+            const tipo = 'success'
+            const titulo = ''
+            const mensagem = 'Endereço de entrega excluído com sucesso.'
+            const icon = 'fa-solid fa-check'
+    
+            this.appToast.toast(tipo, titulo, mensagem, icon);
         } catch (error) {
-            console.log("Erro ao excluir o endereço de entrega", error);
-            // Trate o erro ou rejeite a Promise, se necessário
+            const tipo = 'error'
+            const titulo = ''
+            const mensagem = 'Erro ao excluir o endereço de entrega.'
+            const icon = 'fa-solid fa-face-frown'
+    
+            this.appToast.toast(tipo, titulo, mensagem, icon);
         }
     }
 
@@ -920,9 +1101,19 @@ export class GerenciamentoDeClientesComponent {
         console.log(this.enderecosFiltradosCobranca[i].endId);
         try {
             await this.enderecosAPIService.excluirEnderecos(this.enderecosFiltradosCobranca[i].endId).toPromise();
-            console.log("Endereço de cobrança excluído com sucesso");
+            const tipo = 'success'
+            const titulo = ''
+            const mensagem = 'Endereço de cobrança excluído com sucesso.'
+            const icon = 'fa-solid fa-check'
+    
+            this.appToast.toast(tipo, titulo, mensagem, icon);
         } catch (error) {
-            console.log("Erro ao excluir o endereço de cobrança", error);
+            const tipo = 'error'
+            const titulo = ''
+            const mensagem = 'Erro ao excluir o endereço de cobrança.'
+            const icon = 'fa-solid fa-face-frown'
+    
+            this.appToast.toast(tipo, titulo, mensagem, icon);
             // Trate o erro ou rejeite a Promise, se necessário
         }
     }
@@ -933,11 +1124,21 @@ export class GerenciamentoDeClientesComponent {
     const endId = this.enderecoFiltradoSelecionado.endId
 
     this.enderecosAPIService.excluirEnderecos(endId).subscribe((response) => {
-      console.log("Endereço de entrega excluído com sucesso", response)
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Endereço de entrega excluído com sucesso.'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
       this.atualizarPagina();
     },
     (error) => {
-      console.log("Erro ao excluir endereço de entrega", error)
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Erro ao excluir o endereço de entrega.'
+      const icon = 'fa-solid fa-face-frown'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
     })
 
   }

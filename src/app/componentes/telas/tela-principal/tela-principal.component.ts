@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { MessageService } from 'primeng/api';
 import { Anuncios, ServiceAnunciosService } from 'src/app/services/serviceAnuncios/service-anuncios.service';
 import { Banner, ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
@@ -160,12 +161,12 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private messageService: MessageService,
     private serviceProdutosDestaque: ServiceCategoriasService,
     private bannerService: ServiceBannerService,
     private categoriasService: ServiceCategoriasService,
     private anuncioService: ServiceAnunciosService,
     private carrinhoService: ServiceCarrinhoDeComprasService,
+    private appToast: AppComponent,
     private router: Router
   ){}
 
@@ -303,7 +304,14 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
           // Converta o resultado descriptografado de volta em um array
           carrinho = JSON.parse(a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.toString(CryptoJS.enc.Utf8));
         } catch (error) {
-          // Em caso de erro na análise JSON, inicialize o carrinho como um array vazio
+          
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'Erro ao adicionar o produto ao carrinho. Tente novamente mais tarde.'
+          const icon = 'fa-solid fa-face-frown'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
+
           carrinho = [];
         }
       }
@@ -321,16 +329,16 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
       sessionStorage.setItem('c', b031d16372c388ed5c4462fe1e968adaaa821c5ab62e3b20497569ffe802b0cb);
 
       // Exiba uma mensagem ou realize outras ações necessárias
-      this.showProdutoAdicionadoAoCarrinho();
+
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Produto adicionado ao carrinho'
+      const icon = 'fa-solid fa-cart-shopping'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
     }
   }
 
-  showProdutoAdicionadoAoCarrinho() {
-    this.messageService.add({
-      severity: 'success',
-      icon: 'pi pi-shopping-cart',
-      detail: 'Produto adicionado ao carrinho!' });
-  }
 
 
 }

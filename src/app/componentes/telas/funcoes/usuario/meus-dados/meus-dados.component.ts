@@ -8,6 +8,7 @@ import * as CryptoJS from 'crypto-js';
 import { ServiceApiUsuarioLogadoService } from 'src/app/services/servicesAPI/serviceAPI-UsuarioLogado/service-api-usuario-logado.service';
 import { ServiceApiUsuariosService } from 'src/app/services/servicesAPI/serviceAPI-Usuarios/service-api-usuarios.service';
 import { ServiceApiEnderecosService } from 'src/app/services/servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
+import { AppComponent } from 'src/app/app.component';
 
 interface EstadoLocal {
   nome: string;
@@ -79,6 +80,7 @@ export class MeusDadosComponent {
     private serviceEstado: ServiceEstadosService,
     private usuarioAPIService: ServiceApiUsuariosService,
     private serviceAPIEndereco: ServiceApiEnderecosService,
+    private appToast: AppComponent,
   ) {}
 
   ngOnInit() {
@@ -220,9 +222,6 @@ export class MeusDadosComponent {
   }
 
   alterarDados() {
-    // Implemente a lógica para alterar o email ou a senha aqui
-    // Use this.dialogType para distinguir entre email e senha
-    // Feche o diálogo quando a alteração for concluída
     this.dialogVisible = false;
   }
 
@@ -249,7 +248,7 @@ export class MeusDadosComponent {
     this.divEnderecos = false;
     this.isEditAddress = true;
   
-    this.originalAddress = { ...address }; // Armazena o endereço original
+    this.originalAddress = { ...address };
   
     this.endId = address.endId
     this.identificacao = address.identificacao;
@@ -320,13 +319,28 @@ export class MeusDadosComponent {
         }
 
         this.serviceAPIEndereco.atualizarEnderecos(endId, dataAtualizarEndereçoEntrega).subscribe((response) => {
-          console.log("Endereço de entrega atualizado com sucesso", response)
+          const tipo = 'success'
+          const titulo = ''
+          const mensagem = 'Endereço atualizado com sucesso'
+          const icon = 'fa-solid fa-check'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
         },
         (error) => {
-          console.log("Erro ao atualizar o endereço de entrega", error)
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'Ocorreu algum problema ao atualizar o endereço de entrega. Tente novamente mais tarde.'
+          const icon = 'fa-solid fa-face-frown'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
         })
       } else {
-        console.log('Estado selecionado não está na lista de estados válidos.');
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'O estado selecionado ainda não está disponível para atendimento. Entre em contato conosco para mais informações.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     }
   }
@@ -364,7 +378,13 @@ export class MeusDadosComponent {
             }
         
             this.registrar.registrarEndereco(dataEnderecoEntrega).subscribe(response => {
-              console.log("Endereço de entrega adicionado com sucesso", response)
+              
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Endereço cadastrado com sucesso.'
+              const icon = 'fa-solid fa-check'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
 
               // Redefina os campos do endereço
               this.resetAddressFields();
@@ -376,12 +396,24 @@ export class MeusDadosComponent {
               this.buttonSalvarEnderecoNovoEndereco = false;
             },
             (error) => {
-              console.log("Erro ao cadastrar novo endereço de entrega", error)
+              
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Ocorreu alguma problema ao cadastrar o novo endereço. Tente novamente mais tarde.'
+              const icon = 'fa-solid fa-face-frown'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
+
             });
           }
         }
       } else {
-        console.log('Estado selecionado não está na lista de estados válidos.');
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'O estado selecionado ainda não está disponível para atendimento. Entre em contato conosco para mais informações.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     }
   }
@@ -477,10 +509,21 @@ export class MeusDadosComponent {
 
     this.usuarioAPIService.atualizarUsuario(LoginId, dataAtualizarUser).subscribe((response) =>
     {
-      console.log("Nome do usuário atualizado com sucesso", response)
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Atualização efetuada com sucesso.'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
     },
     (error) => {
-      console.log("Erro ao atualizar o nome do usuário", error)
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Ocorreu um problema ao atualizar o seu perfil. Tente novamente mais tarde.'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
     })
     
 

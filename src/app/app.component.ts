@@ -4,6 +4,7 @@ import { ServiceCategoriasService } from './services/serviceCategorias/service-c
 import { ServiceUsuarioLogadoService } from './services/serviceUsuarioLogado/service-usuario-logado.service';
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,10 @@ export class AppComponent {
     private categoriasService: ServiceCategoriasService,
     private mostrarLateraisService: ServiceUsuarioLogadoService,
     private usuarioLogado: ServiceUsuarioLogadoService,
+    private messageService: MessageService,
   ) {}
+
+  tipo!: string;
 
   async ngOnInit(){
 
@@ -34,6 +38,7 @@ export class AppComponent {
     // this.usuarioLogado.atualizarUsuarioAPI();
 
     this.ativarLateral();
+
 
   }
 
@@ -76,6 +81,10 @@ export class AppComponent {
 
   acaoDoBotao() {
     window.open('https://api.whatsapp.com/send?phone=5519989937300', '_blank');
+  }
+
+  toast( tipo: string, titulo: string, mensagem: string, icon: string ) {
+    this.messageService.add({ severity: tipo, summary: titulo, detail: mensagem, icon: icon });
   }
  
 }

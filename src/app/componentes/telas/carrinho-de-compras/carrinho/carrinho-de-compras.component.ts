@@ -39,7 +39,6 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
 
   constructor(
     private categoriasService: ServiceCategoriasService,
-    private messageService: MessageService,
     private usuarioService: ServiceUsuarioLogadoService,
     private router: Router,
     ) {}
@@ -291,7 +290,6 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
       this.carrinho = this.carrinho.filter((carrinhoItem) => carrinhoItem.nomeProduto !== item.nomeProduto);
 
       this.calcularValorTotal();
-      this.showProdutoRemovidoCarrinho();
     }
   }
 
@@ -330,13 +328,6 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
     return this.categoriasService.formatarNomeProduto(produtos);
   }
 
-  showProdutoRemovidoCarrinho() {
-    this.messageService.add({
-      severity: 'error',
-      icon: 'pi pi-trash',
-
-      detail: 'Produto removido do carrinho!' });
-  }
 
   get totalRecords(): number {
     return this.carrinho?.length || 0;

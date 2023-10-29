@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { Estado, ServiceEstadosService } from 'src/app/services/serviceEstados/service-estados.service';
 import { ServiceApiRegistrarService } from 'src/app/services/servicesAPI/serviceAPI-Registrar/service-api-registrar.service';
 
@@ -46,7 +47,8 @@ export class CriarContaComponent {
     private registrar: ServiceApiRegistrarService,
     private router: Router,
     private serviceEstado: ServiceEstadosService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private appToast: AppComponent
   ){}
 
   ngOnInit() {
@@ -203,7 +205,7 @@ export class CriarContaComponent {
     
           if (this.telefoneSecundario) {
     
-            const telefoneAlternativo = this.removeFormatoTelefone(this.telefoneSecundario);
+          const telefoneAlternativo = this.removeFormatoTelefone(this.telefoneSecundario);
     
           const dataTelefoneAlternativo = {
             LoginId: LoginId,
@@ -224,13 +226,37 @@ export class CriarContaComponent {
     
         }, (error) => {
           console.log(error)
+
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'Problema ao cadastrar. Tente novamente mais tarde.'
+          const icon = 'fa-solid fa-face-frown'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
         });
       } else {
-        console.log('Estado selecionado não está na lista de estados válidos.');
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'O estado selecionado ainda não está disponível para atendimento. Entre em contato conosco para mais informações.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     }
 
-    
+
+    const tipo = 'success'
+    const titulo = ''
+    const mensagem = 'Cadastro efetuado com sucesso'
+    const icon = 'fa-solid fa-check'
+
+    this.appToast.toast(tipo, titulo, mensagem, icon);
+
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 2000); 
+
+
   }
 
   removeFormatoTelefone(telefone: string): string {
