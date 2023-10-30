@@ -7,6 +7,7 @@ import * as CryptoJS from 'crypto-js';
 import { ServiceUsuarioLogadoService, EnderecoEntrega } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-carrinho-de-compras',
@@ -41,6 +42,7 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
     private categoriasService: ServiceCategoriasService,
     private usuarioService: ServiceUsuarioLogadoService,
     private router: Router,
+    private appToast: AppComponent,
     ) {}
 
   ngOnInit(): void {
@@ -316,12 +318,26 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
 
     // Atualize o sessionStorage com o novo array de IDs criptografado
     sessionStorage.setItem('c', AES.encrypt(JSON.stringify(carrinhoIds), a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb).toString());
+
+    const tipo = 'success'
+    const titulo = ''
+    const mensagem = 'Produto removido do carrinho.'
+    const icon = 'fa-solid fa-check'
+
+    this.appToast.toast(tipo, titulo, mensagem, icon);
   }
 
   removerTodosOsProdutos() {
     this.carrinho = []; // Limpa o array de carrinho para remover todos os produtos
     sessionStorage.removeItem('c');
     sessionStorage.removeItem('p');
+
+    const tipo = 'success'
+    const titulo = ''
+    const mensagem = 'Todos produtos removidos do carrinho.'
+    const icon = 'fa-solid fa-check'
+
+    this.appToast.toast(tipo, titulo, mensagem, icon);
   }
 
   formatarNomeProduto(produtos: string): string {

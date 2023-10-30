@@ -10,6 +10,7 @@ import { ServiceApiComentariosService } from 'src/app/services/servicesAPI/servi
 import { ServiceComentariosService } from 'src/app/services/serviceComentarios/service-comentarios.service';
 import { ServiceFornecedoresService } from 'src/app/services/serviceFornecedores/service-fornecedores.service';
 import { ServiceNotaFiscalService } from 'src/app/services/serviceNotaFiscal/service-nota-fiscal.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-detalhe-produto',
@@ -53,6 +54,7 @@ export class DetalheProdutoComponent implements OnInit {
     private comentariosService: ServiceComentariosService,
     private fornecedoresService: ServiceFornecedoresService,
     private notaFiscalService: ServiceNotaFiscalService,
+    private appToast: AppComponent,
   ) {}
 
   async ngOnInit() {
@@ -234,7 +236,12 @@ export class DetalheProdutoComponent implements OnInit {
           // Converta o resultado descriptografado de volta em um array
           carrinho = JSON.parse(a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.toString(CryptoJS.enc.Utf8));
         } catch (error) {
-          // Em caso de erro na análise JSON, inicialize o carrinho como um array vazio
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'Erro ao adicionar o produto ao carrinho. Tente novamente mais tarde.'
+          const icon = 'fa-solid fa-face-frown'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
           carrinho = [];
         }
       }
@@ -252,6 +259,13 @@ export class DetalheProdutoComponent implements OnInit {
       sessionStorage.setItem('c', b031d16372c388ed5c4462fe1e968adaaa821c5ab62e3b20497569ffe802b0cb);
 
     }
+
+    const tipo = 'success'
+    const titulo = ''
+    const mensagem = 'Produto adicionado ao carrinho'
+    const icon = 'fa-solid fa-cart-shopping'
+
+    this.appToast.toast(tipo, titulo, mensagem, icon);
   }
 
   adicionarComentario() {
@@ -264,10 +278,22 @@ export class DetalheProdutoComponent implements OnInit {
     }
 
     this.comentariosAPIService.cadastrarComentario(dataComentario).subscribe((response) => {
-      console.log("Comentário cadastrado para análise", response)
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Comentário enviado para análise.'
+      const icon = 'fa-solid fa-check'
+  
+      this.appToast.toast(tipo, titulo, mensagem, icon);
     },
     (error) => {
-      console.log("Erro ao cadastrar comentário", error)
+      
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Erro ao enviar comentário.'
+      const icon = 'fa-solid fa-face-frown'
+  
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
     })
 
     // Limpe o campo de entrada
