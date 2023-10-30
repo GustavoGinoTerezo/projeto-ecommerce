@@ -339,6 +339,4 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     }
   }
 
-
-
 }

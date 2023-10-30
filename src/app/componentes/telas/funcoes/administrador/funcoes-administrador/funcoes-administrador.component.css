@@ -1,16 +1,15 @@
 .sidenav {
   background-color: var(--container-interno-cards-produtos);
-  transition: all 0.1s ease;
+  transition: all 0.3s ease; 
   z-index: 1;
   top: 0;
-  width: 100%;
+  width: 100%; 
   height: 100%;
   box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+  position: absolute; 
+  right: 0; 
 }
 
-.sidenav-collapsed {
-  width: 100%;
-}
 
 .sidenav-nav {
   list-style: none;
@@ -22,6 +21,7 @@
 }
 
 .sidenav-nav-item {
+  display: flex;
   width: 100%;
   height: 80px;
   margin-bottom: 0.625rem;
@@ -32,7 +32,6 @@
 .sidenav-nav-link {
   display: flex;
   align-items: center;
-  height: 80px;
   min-width: 3rem;
   text-decoration: none;
   border-radius: 0.313rem;
@@ -64,5 +63,27 @@
   background-color: var(--hover-background-botoes);
 }
 
+@media (max-width: 1250px) {
+  .sidenav-link-text {
+    display: none;
+  }
 
+  .sidenav-nav-item {
+    height: 3rem;
+  }
+
+  .sidenav-nav {
+    padding: 1.2rem;
+  }
+
+  .sidenav {
+    width: 5.7rem; 
+  }
+}
+
+@media (min-width: 1251px) {
+  .sidenav-link-text {
+    display: block; 
+  }
+}
 
