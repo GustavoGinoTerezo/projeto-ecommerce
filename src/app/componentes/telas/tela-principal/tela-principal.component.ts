@@ -39,20 +39,20 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
 
   responsiveOptions: any[] = [
     {
-      breakpoint: '1199px',
+      breakpoint: '1860px',
+      numVisible: 3,
+      numScroll: 1
+    },
+    {
+      breakpoint: '1430px',
       numVisible: 2,
       numScroll: 1
     },
     {
-      breakpoint: '991px',
-      numVisible: 2,
-      numScroll: 1
-    },
-    {
-      breakpoint: '767px',
+      breakpoint: '1000px',
       numVisible: 1,
       numScroll: 1
-  }
+    }
   ];
 
   responsiveOptionsBanner: any[] = [
@@ -83,34 +83,14 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
 
   responsiveOptionsEmPromocao: any[] = [
     {
-      breakpoint: '4000px',
-      numVisible: 6,
+      breakpoint: '1780px',
+      numVisible: 2,
       numScroll: 1
     },
     {
-      breakpoint: '3500px',
-      numVisible: 5,
+      breakpoint: '1250px',
+      numVisible: 1,
       numScroll: 1
-    },
-    {
-      breakpoint: '3100px',
-      numVisible: 4,
-      numScroll: 1
-    },
-    {
-      breakpoint: '2300px',
-      numVisible: 3,
-      numScroll: 1
-    },
-    {
-        breakpoint: '1800px',
-        numVisible: 2,
-        numScroll: 1
-    },
-    {
-        breakpoint: '1230px',
-        numVisible: 1,
-        numScroll: 1
     },
 
 

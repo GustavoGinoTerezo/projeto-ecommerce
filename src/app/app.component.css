@@ -10,7 +10,7 @@
 
 .header {
   height: 10%;
-  min-height: 100px;
+  min-height: 140px;
 }
 
 .containerGeral {
@@ -53,6 +53,83 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.668);
 }
 
+.hamburguer {
+  position: fixed;
+  top: 140px;
+  transition: 0.3s all ease;
+  cursor: pointer;
+}
+
 .rodape {
   padding-top: 13px;
+}
+
+.sidenav-nav {
+  padding: 4px;
+  margin: 0;
+  flex-direction: column;
+  align-items: center;
+
+  .sidenav-nav-item{
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    .sidenav-nav-link{
+      display: flex;
+      align-items: center;
+      height: 40px;
+      overflow: hidden;
+      min-height: 40px;
+      max-height: 40px;
+      width: 100%;
+      text-decoration: none;
+      border-radius: 0.313rem;
+      transition: all .3s ease;
+      cursor: pointer;
+      background-color: var(--background-botoes);
+
+      .sidenav-link-icon{
+        font-size: 22px;
+        width: 2rem;
+        min-width: 2rem;
+        margin: 0 0.6rem;
+        text-align: center;
+        color: var(--textos-e-icones-botoes);
+      }
+
+      .sidenav-link-text{
+        margin-left: 5px;
+        margin-right: 10px;
+        word-wrap: break-word;
+        color: var(--textos-e-icones-botoes);
+      }
+    }
+
+    .sidenav-nav-link:hover{
+      background-color: var(--hover-background-botoes);
+    }
+  }
+}
+
+
+@media (max-width: 600px){
+
+  .divUsuario,
+  .divAdministrador{
+    display: none;
+  }
+
+  .corpo {
+    width: 100%;
+  }
+
+}
+
+@media (min-width: 600px){
+
+  .hamburguer {
+    display: none;
+  }
+
 }

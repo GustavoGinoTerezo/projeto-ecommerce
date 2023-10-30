@@ -4,7 +4,7 @@ import { ServiceCategoriasService } from './services/serviceCategorias/service-c
 import { ServiceUsuarioLogadoService } from './services/serviceUsuarioLogado/service-usuario-logado.service';
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +16,8 @@ export class AppComponent {
 
   mostrarLateralUsuario: boolean = true;
   mostrarLateralAdministrador: boolean = true;
+
+  menuItems: MenuItem[] = [];
 
   constructor(
     private router: Router,

@@ -2,8 +2,10 @@
 
   <div class="menuBar">
     <div class="divLogoESearch">
-      <img class="img" src="assets/logo.png" alt="logo" routerLink="tela-principal">
-      <div>
+      <div class="containerImg">
+        <img class="img" src="assets/logo.png" alt="logo" routerLink="tela-principal">
+      </div>
+      <div class="containerSidenav">
         <div class="sidenav-nav">
           <div class="sidenav-nav-item">
             <a
@@ -20,7 +22,9 @@
         <p-slideMenu #menu [model]="menuItems" [popup]="true" [viewportHeight]="300" [menuWidth]="175"></p-slideMenu>
       </div>
 
+    </div>
 
+    <div class="containerSearchButtons">
       <div class="containerSearch">
         <div class="search-container">
           <span class="p-input-icon-left">
@@ -38,18 +42,11 @@
           </ul>
         </div>
       </div>
-
-
-
-
-
-
-    </div>
-
-    <div class="divBotoes">
-      <button style="color: white;" class="fa-solid fa-right-to-bracket fa-lg backgroundBotoes" title="Login" routerLink="/login"></button>
-      <button style="color: white;" class="fa-solid fa-cart-shopping fa-lg backgroundBotoes" title="Carrinho de compra" routerLink="carrinho-de-compra"></button>
-      <button style="color: white;" class="fa-solid fa-phone fa-lg backgroundBotoes" title="Informações de contato"></button>
+      <div class="divBotoes">
+        <button style="color: white;" class="fa-solid fa-right-to-bracket fa-lg backgroundBotoes" title="Login" routerLink="/login"></button>
+        <button style="color: white;" class="fa-solid fa-cart-shopping fa-lg backgroundBotoes" title="Carrinho de compra" routerLink="carrinho-de-compra"></button>
+        <button style="color: white;" class="fa-solid fa-phone fa-lg backgroundBotoes" title="Informações de contato"></button>
+      </div>
     </div>
 
 

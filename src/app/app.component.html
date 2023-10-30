@@ -29,4 +29,22 @@
   </p-button>
 </div>
 
+
+<div class="hamburguer">
+  <div class="containerSidenav">
+    <div class="sidenav-nav">
+      <div class="sidenav-nav-item">
+        <a
+          class="sidenav-nav-link"
+          (click)="menu.toggle($event)"
+        >
+          <i class="sidenav-link-icon fa-solid fa-bars"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-slideMenu #menu [model]="menuItems" [popup]="true" [viewportHeight]="300" [menuWidth]="175"></p-slideMenu>
+
 <p-toast [style]="{ 'top': '100px' }"></p-toast>
