@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { ServiceEstadosService, Estado } from 'src/app/services/serviceEstados/service-estados.service';
 import { ServiceApiEstadosService } from 'src/app/services/servicesAPI/serviceAPI-Estados/service-api-estados.service';
 
@@ -23,7 +24,8 @@ export class GerenciamentoDeEstadosComponent {
 
   constructor(
     private serviceEstados: ServiceEstadosService,
-    private serviceEstadosAPI: ServiceApiEstadosService
+    private serviceEstadosAPI: ServiceApiEstadosService,
+    private appToast: AppComponent,
   ){}
 
   ngOnInit(){
@@ -115,11 +117,26 @@ export class GerenciamentoDeEstadosComponent {
 
     this.serviceEstadosAPI.cadastrarEstado(dataEstado).subscribe(
       (response) => {
-        console.log("Estado adicionado com sucesso", response)
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Estado cadastrado com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
+
         this.atualizarPagina();
       },
       (error) => {
-        console.log("Erro ao cadastrar estado", error)
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao excluir estado selecionado.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       }
     )
   }
@@ -131,32 +148,54 @@ export class GerenciamentoDeEstadosComponent {
       icms: this.icms
     }
 
-    const mensagemSucesso = "Categoria atualizada com sucesso."
-    const mensagemErro = "Erro ao atualizar a categoria."
-
     this.serviceEstadosAPI.atualizarEstado(this.UfId, atualizarDataEstado).subscribe(
       (response) => {
-        console.log("Estado atualizada com sucesso", response);
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Estado atualizado com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.atualizarPagina();
       },
       (error) => {
-        console.error("Erro ao atualizar o Estado", error)
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao atualizar o estado selecionado.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       }
     );
   }
 
   excluirEstado() {
 
-    const mensagemSucesso = "Categoria excluída com sucesso."
-    const mensagemErro = "Erro ao excluir a categoria."
-
     this.serviceEstadosAPI.excluirEstado(this.UfId).subscribe(
       (response) => {
-        console.log("Estado excluído com sucesso", response);
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Estado excluído com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.atualizarPagina();
       },
       (error) => {
-        console.error("Erro ao excluir o Estado", error);
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao atualizar o estado selecionado.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       }
     );
   }

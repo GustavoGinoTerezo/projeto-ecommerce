@@ -3,6 +3,7 @@ import jsPDF from 'jspdf';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Categorias, ServiceCategoriasService, Produtos, CategoriaVazia, Entrada, Saida } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { ServiceEstadosService } from 'src/app/services/serviceEstados/service-estados.service';
@@ -70,6 +71,7 @@ export class GerenciamentoDeEstoqueComponent {
     private notaFiscalAPIService: ServiceApiNotaFiscalService,
     private produtosAPIService: ServiceAPIProdutoService,
     private notaFiscalService: ServiceNotaFiscalService,
+    private appToast: AppComponent,
   ){}
 
   ngOnInit(){
@@ -244,19 +246,41 @@ export class GerenciamentoDeEstoqueComponent {
           }
 
           this.produtosAPIService.atualizarProduto(produto.prodId, dataQuantidadeEntradaProduto).subscribe((response) => {
-            console.log("Quantidade do produto atualizada com sucesso", response)
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Entrada efetuada com sucesso.'
+              const icon = 'fa-solid fa-check'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
           },
           (error) => {
-            console.log("Erro ao atualizar quantidade do produto", error)  
+            
+            const tipo = 'error'
+            const titulo = ''
+            const mensagem = 'Erro ao dar entrada no produto.'
+            const icon = 'fa-solid fa-face-frown'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
+
           })
           },
           (error) => {
-            console.log("Erro ao cadastrar Nota Fiscal Corpo", error)
+            const tipo = 'error'
+            const titulo = ''
+            const mensagem = 'Erro ao cadastrar nota fiscal corpo.'
+            const icon = 'fa-solid fa-face-frown'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
           })
         }
       },
       (error) => {
-        console.log("Erro ao cadastrar Nota Fiscal Cabeça", error)
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao cadastrar nota fiscal cabeça.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       })
 
     
@@ -271,10 +295,22 @@ export class GerenciamentoDeEstoqueComponent {
     }
 
     this.notaFiscalAPIService.atualizarNotaEntradaCabeca(nfId, dataNovoNumeroNotaFiscal).subscribe((response) => {
-      console.log("NotaFiscalCabeca atualizada com sucesso", response)
+      
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Nota fiscal atualizada com sucesso.'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
     },
     (error) => {
-      console.log("Erro ao atualizar NotaFiscalCabeca", error)
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Erro ao atualizar nota fiscal.'
+      const icon = 'fa-solid fa-face-frown'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
     })
 
   }
@@ -292,10 +328,22 @@ export class GerenciamentoDeEstoqueComponent {
       const nfId = this.nfEntradaId 
 
       this.notaFiscalAPIService.excluirNotaEntradaCabeca(nfId).subscribe((response) => {
-        console.log("NotaFiscalCabeca excluida com sucesso", response)
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Nota fiscal excluída com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       },
       (error) => {
-        console.log("Erro ao excluir NotaFiscalCabeca", error)
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao excluir nota fiscal.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       })
     } else {
       // Se houver produtos relacionados, exiba uma mensagem de erro ou tome a ação apropriada.
@@ -319,13 +367,25 @@ export class GerenciamentoDeEstoqueComponent {
       }
 
       this.produtosAPIService.atualizarProduto(prodId, dataQuantidadeEntradaProduto).subscribe((response) => {
-        console.log("Quantidade do produto atualizada com sucesso", response)
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Entrada do produto excluída com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       },
       (error) => {
-        console.log("Erro ao atualizar quantidade do produto", error)  
-      })
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Erro ao excluir entrada do produto.'
+        const icon = 'fa-solid fa-face-frown'
 
-      
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+      })
+   
     },
     (error) => {
       console.log("Erro ao excluir NotaFiscalCorpo", error)

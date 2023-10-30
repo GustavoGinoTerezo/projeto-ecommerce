@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { Estado, ServiceEstadosService } from 'src/app/services/serviceEstados/service-estados.service';
 import { ServiceFornecedoresService } from 'src/app/services/serviceFornecedores/service-fornecedores.service';
 import { ServiceApiFornecedoresService } from 'src/app/services/servicesAPI/serviceAPI-Fornecedores/service-api-fornecedores.service';
@@ -50,6 +51,7 @@ export class GerenciamentoDeFornecedoresComponent {
     private fornecedoresAPIService: ServiceApiFornecedoresService,
     private fornecedoresService: ServiceFornecedoresService,
     private serviceEstado: ServiceEstadosService,
+    private appToast: AppComponent,
   ){}
 
   ngOnInit(){
@@ -215,15 +217,35 @@ export class GerenciamentoDeFornecedoresComponent {
         }
         
         this.fornecedoresAPIService.cadastrarFornecedores(dataFornecedor).subscribe((response) => {
-          console.log("Fornecedor cadastrado com sucesso", response)
+          
+          const tipo = 'success'
+          const titulo = ''
+          const mensagem = 'Fornecedor cadastrado com sucesso.'
+          const icon = 'fa-solid fa-check'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
+
           this.atualizarPagina()
         }, 
         (error) => {
-          console.log("Erro ao cadastrar fornecedor", error)
+          
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'Erro ao cadastrar fornecedor.'
+          const icon = 'fa-solid fa-face-frown'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
+
         })
 
       } else {
-        console.log('Estado selecionado não está na lista de estados válidos.');
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'O estado selecionado não está cadastrado no sistema.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     }
 
@@ -253,15 +275,37 @@ export class GerenciamentoDeFornecedoresComponent {
         }
 
         this.fornecedoresAPIService.atualizarFornecedores(fornecedorId, novoDataFornecedor).subscribe((response) => {
-          console.log("Fornecedor atualzado com sucesso", response)
+          
+          const tipo = 'success'
+          const titulo = ''
+          const mensagem = 'Fornecedor atualizado com sucesso.'
+          const icon = 'fa-solid fa-check'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
+
+
           this.atualizarPagina()
         },
         (error) => {
-          console.log("Erro ao atualizar fornecedor", error)
+          
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'Erro ao atualizar o fornecedor.'
+          const icon = 'fa-solid fa-face-frown'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
+
         })
 
       } else {
-        console.log('Estado selecionado não está na lista de estados válidos.');
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'O estado selecionado não está cadastrado no sistema.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       }
     }
 
@@ -276,7 +320,12 @@ export class GerenciamentoDeFornecedoresComponent {
       this.atualizarPagina()
     },
     (error) => {
-      console.log("Erro ao excluir fornecedor", error)
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Erro ao excluir o fornecedor.'
+      const icon = 'fa-solid fa-face-frown'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
     })
   }
 

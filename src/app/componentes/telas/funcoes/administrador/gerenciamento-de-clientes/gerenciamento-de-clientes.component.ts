@@ -143,7 +143,6 @@ export class GerenciamentoDeClientesComponent {
       { nome: 'Tocantins', uf: 'TO'}
     ];
     
-
     this.tipoUsuario = [
       { nome: 'Cliente', tipo: '0'},
       { nome: 'Administrador', tipo: '1' }

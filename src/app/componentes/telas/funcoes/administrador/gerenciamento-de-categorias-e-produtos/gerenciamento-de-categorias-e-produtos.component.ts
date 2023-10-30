@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { CategoriaVazia, Categorias, PosicaoProdutos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { ServiceAPICategoriaService } from 'src/app/services/servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
@@ -75,6 +76,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     private categoriasService: ServiceCategoriasService,
     private apiCategoriaService: ServiceAPICategoriaService,
     private apiProdutoService: ServiceAPIProdutoService,
+    private appToast: AppComponent,
   ){}
 
   ngOnInit(){
@@ -129,7 +131,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     if (this.posicaoProdutosSubscription) {
       this.posicaoProdutosSubscription.unsubscribe();
     }
-
 
   }
 
@@ -352,11 +353,25 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
     this.apiCategoriaService.cadastrarCategoria(dataCadastrarCategoria).subscribe
     ((response) => {
-      console.log("Categoria adicionada com sucesso", response)
+      
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Categoria adicionada com sucesso.'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
       this.atualizarPagina();
     },
     (error) => {
-      console.log("Erro ao adicionar a categoria", error)
+      
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Erro ao adicionar categoria.'
+      const icon = 'fa-solid fa-face-frown'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
     }
     )
 
@@ -370,32 +385,54 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       nome: this.nomeCategoriaSelecionada
     }
 
-    const mensagemSucesso = "Categoria atualizada com sucesso."
-    const mensagemErro = "Erro ao atualizar a categoria."
+    
 
     this.apiCategoriaService.atualizarCategoria(this.idCategoria, novoNomeCategoria).subscribe(
       (response) => {
-        console.log("Categoria atualizada com sucesso", response);
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Categoria atualizada com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.atualizarPagina();
       },
       (error) => {
-        console.error("Erro ao atualizar a categoria", error)
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao atualizar categoria.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
     );
   }
 
   excluirCategoria() {
 
-    const mensagemSucesso = "Categoria excluída com sucesso."
-    const mensagemErro = "Erro ao excluir a categoria."
-
     this.apiCategoriaService.excluirCategoria(this.idCategoria).subscribe(
       (response) => {
-        console.log("Categoria excluída com sucesso", response);
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Categoria excluída com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.atualizarPagina();
       },
       (error) => {
-        console.error("Erro ao excluir a categoria", error);
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao excluir categoria.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       }
     );
   }
@@ -434,11 +471,22 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
         this.apiProdutoService.cadastrarPosicaoProduto(dataPosProduto).subscribe(
           (response) => {
-            console.log("Posição do produto cadastrada com sucesso", response)
+            const tipo = 'success'
+            const titulo = ''
+            const mensagem = 'Produto cadastrado com sucesso.'
+            const icon = 'fa-solid fa-check'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
+
             this.atualizarPagina();
           },
           (error) => {
-            console.log("Erro no cadastro da posição do produto", error)
+            const tipo = 'error'
+            const titulo = ''
+            const mensagem = 'Erro ao cadastrar o produto.'
+            const icon = 'fa-solid fa-face-frown'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
           }
         )
 
@@ -484,10 +532,24 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
     this.apiProdutoService.atualizarProduto(this.idProduto, dataProduto).subscribe(
       (response) => {
-        console.log("Produto atualizado com sucesso", response)
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Produto atualizado com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       },
       (error) => {
-        console.log("Erro ao atualizar produto.")
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao atualizar o produto.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       }
     )
 
@@ -510,11 +572,22 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.apiProdutoService.excluirPosicaoProduto(this.posProdId).subscribe((response) => {
       console.log("Posição do produto excluída com sucesso", response)
       this.apiProdutoService.excluirProduto(this.idProduto).subscribe((response) => {
-        console.log("Produto excluído com sucesso", response)
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Produto excluído com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.atualizarPagina();
       },
       (error) => {
-        console.log("Erro ao excluir o produto.", error)
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao excluir produto.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
       }
       )
     },

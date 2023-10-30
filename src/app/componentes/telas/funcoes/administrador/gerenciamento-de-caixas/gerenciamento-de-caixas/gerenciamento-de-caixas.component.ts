@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { ServiceCaixaService } from 'src/app/services/serviceCaixa/service-caixa.service';
 import { ServiceApiCaixaService } from 'src/app/services/servicesAPI/serviceAPI-Caixa/service-api-caixa.service';
 
@@ -29,6 +30,7 @@ export class GerenciamentoDeCaixasComponent {
   constructor(
     private caixasService: ServiceCaixaService,
     private caixasAPIService: ServiceApiCaixaService,
+    private appToast: AppComponent,
   ){}
 
   ngOnInit(){
@@ -77,11 +79,25 @@ export class GerenciamentoDeCaixasComponent {
 
     this.caixasAPIService.cadastrarCaixa(dataCaixa).subscribe(
       (response) => {
-        console.log("Caixa adicionada com sucesso", response)
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Caixa cadastrada com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.atualizarPagina();
       },
       (error) => {
-        console.log("Erro ao cadastrar caixa", error)
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao cadastrar caixa.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       }
     )
   }
@@ -100,11 +116,25 @@ export class GerenciamentoDeCaixasComponent {
 
     this.caixasAPIService.atualizarCaixa(caixaId, atualizarDataCaixa).subscribe(
       (response) => {
-        console.log("Caixa atualizada com sucesso", response);
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Caixa atualizada com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.atualizarPagina();
       },
       (error) => {
-        console.error("Erro ao atualizar a Caixa", error)
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao atualizar caixa.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
       }
     );
   }
@@ -115,11 +145,25 @@ export class GerenciamentoDeCaixasComponent {
 
     this.caixasAPIService.excluirCaixa(caixaId).subscribe(
       (response) => {
-        console.log("Caixa excluída com sucesso", response);
+        
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Caixa excluída com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
         this.atualizarPagina();
       },
       (error) => {
-        console.error("Erro ao excluir a Caixa", error);
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao excluir caixa.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+      
       }
     );
   }
