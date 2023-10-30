@@ -110,7 +110,21 @@
   color: #f3f3f3;
 }
 
+@media (min-width: 1251px) {
+  .sidenav-link-text {
+    display: block; 
+  }
+}
 
+@media (max-width: 1250px) {
+  .sidenav-link-text {
+    display: none;
+  }
+
+  .sidenav-collapsed {
+    width: 5rem;
+  }
+}
 
 
 
