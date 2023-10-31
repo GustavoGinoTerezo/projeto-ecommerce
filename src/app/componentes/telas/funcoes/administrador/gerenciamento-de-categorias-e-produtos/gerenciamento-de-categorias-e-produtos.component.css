@@ -83,6 +83,16 @@
   margin-right: 5px;
 }
 
+.containerPesoAltura{
+  display: flex;
+  width: 100%;
+}
+
+.containerLarguraComprimento{
+  display: flex;
+  width: 100%;
+}
+
 .containerUploadFoto{
   display: flex;
   flex-direction: column;
@@ -191,9 +201,7 @@
 }
 
 .divInputs{
-  justify-content: center;
-  align-items: center;
-  width: 50%;
+  width: 100%;
   padding: 0 10px;
 }
 
@@ -232,11 +240,71 @@
   margin-top: 25px;
 }
 
+.containerBotoesUm{
+  width: 100%;
+  display: flex;
+  
+}
+
+.containerBotoesDois{
+  width: 100%;
+  display: flex;
+}
+
+@media(max-width: 800px) {
+
+  .containerBotoes{
+    flex-direction: column;
+  }
+
+  .containerBotoesAdicionarProdutos{
+    flex-direction: column;
+  }
+
+  .containerBotoesUm{
+    margin-bottom: 15px;
+  }
+
+  .containerDimensionamento{
+    flex-direction: column;
+  }
+
+  .containerDescEFotos{
+    flex-direction: column;
+  }
+
+  .fileUploadFotos{
+    margin-bottom: 15px;
+  }
+
+}
+
 
 @media (max-width: 600px) {
 
   .divGeral{
     margin-top: 42px;
-
   }
+
+  .containerPrecoEStatus{
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .divInputPreco{
+    width: 100%;
+  }
+
+  .divInputDropDown{
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .containerNomeProdutoECategoria{
+    flex-direction: column;
+  }
+
 }

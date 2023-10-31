@@ -40,37 +40,41 @@
   </div>
 
   <div class="containerBotoes">
-    <div class="divInputs">
-      <p-button
-        label="Adicionar categoria"
-        [disabled]="adicionarCategoriaDisabled || categoriasAdicionarSelecionadaInput || !nomeCategoriaSelecionada"
-        styleClass="p-button-raised p-button-success"
-        (onClick)="adicionarCategoria()"
-      ></p-button>
+    <div class="containerBotoesUm">
+      <div class="divInputs">
+        <p-button
+          label="Adicionar categoria"
+          [disabled]="adicionarCategoriaDisabled || categoriasAdicionarSelecionadaInput || !nomeCategoriaSelecionada"
+          styleClass="p-button-raised p-button-success"
+          (onClick)="adicionarCategoria()"
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button
+          label="Atualizar categoria"
+          [disabled]="!categoriasAdicionarSelecionadaInput"
+          styleClass="p-button-raised p-button-warning"
+          (onClick)="atualizarCategoria()"
+        ></p-button>
+      </div>
     </div>
-    <div class="divInputs">
-      <p-button
-        label="Atualizar categoria"
-        [disabled]="!categoriasAdicionarSelecionadaInput"
-        styleClass="p-button-raised p-button-warning"
-        (onClick)="atualizarCategoria()"
-      ></p-button>
-    </div>
-    <div class="divInputs">
-      <p-button
-        label="Excluir categoria"
-        [disabled]="!categoriasAdicionarSelecionadaInput"
-        styleClass="p-button-raised p-button-danger"
-        (onClick)="excluirCategoria()"
-      ></p-button>
-    </div>
-    <div class="divInputs">
-      <p-button
-        label="Limpar campos"
-        [disabled]="!nomeCategoriaSelecionada"
-        (click)="limparCamposCategoriaNova()"
-        styleClass="p-button-raised p-button-info"
-      ></p-button>
+    <div class="containerBotoesDois">
+      <div class="divInputs">
+        <p-button
+          label="Excluir categoria"
+          [disabled]="!categoriasAdicionarSelecionadaInput"
+          styleClass="p-button-raised p-button-danger"
+          (onClick)="excluirCategoria()"
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button
+          label="Limpar campos"
+          [disabled]="!nomeCategoriaSelecionada"
+          (click)="limparCamposCategoriaNova()"
+          styleClass="p-button-raised p-button-info"
+        ></p-button>
+      </div>
     </div>
   </div>
 
@@ -108,29 +112,33 @@
       </div>
     </div>
     <div class="containerDimensionamento">
-      <div class="divInputPeso">
-        <span class="p-float-label">
-          <input pInputText id="peso" [(ngModel)]="pesoProduto" (keypress)="onKeyPress($event)" />
-          <label htmlFor="peso">Peso do produto (kg)</label>
-        </span>
+      <div class="containerPesoAltura">
+        <div class="divInputPeso">
+          <span class="p-float-label">
+            <input pInputText id="peso" [(ngModel)]="pesoProduto" (keypress)="onKeyPress($event)" />
+            <label htmlFor="peso">Peso do produto (kg)</label>
+          </span>
+        </div>
+        <div class="divInputAltura">
+          <span class="p-float-label">
+            <input pInputText id="altura" [(ngModel)]="alturaProduto" (keypress)="onKeyPress($event)"/>
+            <label htmlFor="altura">Altura do produto (cm)</label>
+          </span>
+        </div>
       </div>
-      <div class="divInputAltura">
-        <span class="p-float-label">
-          <input pInputText id="altura" [(ngModel)]="alturaProduto" (keypress)="onKeyPress($event)"/>
-          <label htmlFor="altura">Altura do produto (cm)</label>
-        </span>
-      </div>
-      <div class="divInputLargura">
-        <span class="p-float-label">
-          <input pInputText id="largura" [(ngModel)]="larguraProduto" (keypress)="onKeyPress($event)"/>
-          <label htmlFor="largura">Largura do produto (cm)</label>
-        </span>
-      </div>
-      <div class="divInputComprimento">
-        <span class="p-float-label">
-          <input pInputText id="comprimento" [(ngModel)]="comprimentoProduto" (keypress)="onKeyPress($event)"/>
-          <label htmlFor="comprimento">Comprimento do produto (cm)</label>
-        </span>
+      <div class="containerLarguraComprimento">
+        <div class="divInputLargura">
+          <span class="p-float-label">
+            <input pInputText id="largura" [(ngModel)]="larguraProduto" (keypress)="onKeyPress($event)"/>
+            <label htmlFor="largura">Largura do produto (cm)</label>
+          </span>
+        </div>
+        <div class="divInputComprimento">
+          <span class="p-float-label">
+            <input pInputText id="comprimento" [(ngModel)]="comprimentoProduto" (keypress)="onKeyPress($event)"/>
+            <label htmlFor="comprimento">Comprimento do produto (cm)</label>
+          </span>
+        </div>
       </div>
     </div>
     <div class="containerPrecoEStatus">
@@ -246,10 +254,31 @@
     </div>
   </div>
   <div class="containerBotoesAdicionarProdutos">
-    <div class="divInputs">
-      <p-button label="Adicionar produto"
+    <div class="containerBotoesUm">
+      <div class="divInputs">
+        <p-button label="Adicionar produto"
+          [disabled]="
+          adicionarProdutoDisabled ||
+          !nomeProduto ||
+          !pesoProduto ||
+          !alturaProduto ||
+          !larguraProduto ||
+          !comprimentoProduto ||
+          !categoriasSelecionadaInput ||
+          !valorProdutoFormatted ||
+          !selectedStatus ||
+          !selectedLayout ||
+          !descBreve ||
+          !descCompleta ||
+          !informacaoTecnica"
+          styleClass="p-button-raised p-button-success"
+          (onClick)="adicionarProduto()"
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button label="Atualizar produto"
         [disabled]="
-        adicionarProdutoDisabled ||
+        !adicionarProdutoDisabled ||
         !nomeProduto ||
         !pesoProduto ||
         !alturaProduto ||
@@ -262,68 +291,51 @@
         !descBreve ||
         !descCompleta ||
         !informacaoTecnica"
-        styleClass="p-button-raised p-button-success"
-        (onClick)="adicionarProduto()"
-      ></p-button>
+        styleClass="p-button-raised p-button-warning"
+        (onClick)="atualizarProduto()"
+        ></p-button>
+      </div>
     </div>
-    <div class="divInputs">
-      <p-button label="Atualizar produto"
-      [disabled]="
-      !adicionarProdutoDisabled ||
-      !nomeProduto ||
-      !pesoProduto ||
-      !alturaProduto ||
-      !larguraProduto ||
-      !comprimentoProduto ||
-      !categoriasSelecionadaInput ||
-      !valorProdutoFormatted ||
-      !selectedStatus ||
-      !selectedLayout ||
-      !descBreve ||
-      !descCompleta ||
-      !informacaoTecnica"
-      styleClass="p-button-raised p-button-warning"
-      (onClick)="atualizarProduto()"
-      ></p-button>
-    </div>
-    <div class="divInputs">
-      <p-button label="Excluir produto"
-      [disabled]="
-      !adicionarProdutoDisabled ||
-      !nomeProduto ||
-      !pesoProduto ||
-      !alturaProduto ||
-      !larguraProduto ||
-      !comprimentoProduto ||
-      !categoriasSelecionadaInput ||
-      !valorProdutoFormatted ||
-      !selectedStatus ||
-      !selectedLayout ||
-      !descBreve ||
-      !descCompleta ||
-      !informacaoTecnica"
-      styleClass="p-button-raised p-button-danger"
-      (onClick)="excluirProduto()"></p-button>
-    </div>
-    <div class="divInputs">
-      <p-button
-        label="Limpar campos"
+    <div class="containerBotoesDois">
+      <div class="divInputs">
+        <p-button label="Excluir produto"
         [disabled]="
-        !nomeProduto &&
-        !pesoProduto &&
-        !alturaProduto &&
-        !larguraProduto &&
-        !comprimentoProduto &&
-        !categoriasSelecionadaInput &&
-        !valorProdutoFormatted &&
-        !selectedStatus &&
-        !selectedLayout &&
-        !descBreve &&
-        !descCompleta &&
+        !adicionarProdutoDisabled ||
+        !nomeProduto ||
+        !pesoProduto ||
+        !alturaProduto ||
+        !larguraProduto ||
+        !comprimentoProduto ||
+        !categoriasSelecionadaInput ||
+        !valorProdutoFormatted ||
+        !selectedStatus ||
+        !selectedLayout ||
+        !descBreve ||
+        !descCompleta ||
         !informacaoTecnica"
-        (click)="limparCampos()"
-        styleClass="p-button-raised p-button-info"
-      ></p-button>
+        styleClass="p-button-raised p-button-danger"
+        (onClick)="excluirProduto()"></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button
+          label="Limpar campos"
+          [disabled]="
+          !nomeProduto &&
+          !pesoProduto &&
+          !alturaProduto &&
+          !larguraProduto &&
+          !comprimentoProduto &&
+          !categoriasSelecionadaInput &&
+          !valorProdutoFormatted &&
+          !selectedStatus &&
+          !selectedLayout &&
+          !descBreve &&
+          !descCompleta &&
+          !informacaoTecnica"
+          (click)="limparCampos()"
+          styleClass="p-button-raised p-button-info"
+        ></p-button>
+      </div>
     </div>
   </div>
   <div class="tabelaClientes">
