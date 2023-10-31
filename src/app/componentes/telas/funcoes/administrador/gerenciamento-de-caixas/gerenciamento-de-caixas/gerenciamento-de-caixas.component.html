@@ -47,57 +47,61 @@
     </div>
   
     <div class="containerBotoesAdicionarCaixa">
-      <div class="divInputs">
-        <p-button
-          label="Adicionar Caixa"
-          [disabled]="ativarBotoes ||
-          !nomeCaixa ||
-          !peso ||
-          !altura ||
-          !largura ||
-          !comprimento"
-          (onClick)="cadastrarCaixa()"
-          styleClass="p-button-raised p-button-success"
-        ></p-button>
+      <div class="containerBotoesUm">
+        <div class="divInputs espacamento">
+          <p-button
+            label="Adicionar Caixa"
+            [disabled]="ativarBotoes ||
+            !nomeCaixa ||
+            !peso ||
+            !altura ||
+            !largura ||
+            !comprimento"
+            (onClick)="cadastrarCaixa()"
+            styleClass="p-button-raised p-button-success"
+          ></p-button>
+        </div>
+        <div class="divInputs">
+          <p-button
+            label="Atualizar Caixa"
+            [disabled]="!ativarBotoes ||
+            !nomeCaixa ||
+            !peso ||
+            !altura ||
+            !largura ||
+            !comprimento"
+            (onClick)="atualizarCaixa()"
+            styleClass="p-button-raised p-button-warning"
+          ></p-button>
+        </div>
       </div>
-      <div class="divInputs">
-        <p-button
-          label="Atualizar Caixa"
-          [disabled]="!ativarBotoes ||
-          !nomeCaixa ||
-          !peso ||
-          !altura ||
-          !largura ||
-          !comprimento"
-          (onClick)="atualizarCaixa()"
-          styleClass="p-button-raised p-button-warning"
-        ></p-button>
-      </div>
-      <div class="divInputs">
-        <p-button
-          label="Excluir Caixa"
-          [disabled]="!ativarBotoes ||
-          !nomeCaixa ||
-          !peso ||
-          !altura ||
-          !largura ||
-          !comprimento"
-          (onClick)="excluirCaixa()"
-          styleClass="p-button-raised p-button-danger"
-        ></p-button>
-      </div>
-      <div class="divInputs">
-        <p-button
-          label="Limpar campos"
-          [disabled]="!nomeCaixa &&
-          !peso &&
-          !altura &&
-          !largura &&
-          !comprimento"
-          (onClick)="limparCampos()"
-          styleClass="p-button-raised p-button-info"
-        ></p-button>
+      <div class="containerBotoesDois">
+        <div class="divInputs espacamento">
+          <p-button
+            label="Excluir Caixa"
+            [disabled]="!ativarBotoes ||
+            !nomeCaixa ||
+            !peso ||
+            !altura ||
+            !largura ||
+            !comprimento"
+            (onClick)="excluirCaixa()"
+            styleClass="p-button-raised p-button-danger"
+          ></p-button>
+        </div>
+        <div class="divInputs">
+          <p-button
+            label="Limpar campos"
+            [disabled]="!nomeCaixa &&
+            !peso &&
+            !altura &&
+            !largura &&
+            !comprimento"
+            (onClick)="limparCampos()"
+            styleClass="p-button-raised p-button-info"
+          ></p-button>
         
+        </div>
       </div>
     </div>
     <div class="tabelaClientes">

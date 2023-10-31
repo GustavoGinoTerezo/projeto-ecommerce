@@ -1,88 +1,135 @@
 .divGeral {
-    display: flex;
+  display: flex;
+  width: 100%;
+  padding: 13px;
+  flex-direction: column;
+  background-color: var(--container-externo-cards-produtos);
+  border-radius: 6px;
+}
+
+.containerInputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.containerInputsCima{
+  width: 100%;
+  display: flex;
+}
+
+.divInputNomeCaixa {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+
+.divInputBaixo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputPeso {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  padding: 13px 0;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}
+
+.divInputs {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.containerBotoesAdicionarCaixa {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabelaClientes {
+  margin-top: 30px;
+}
+
+.containerDimensoes{
+  display: flex;
+  width: 100%;
+}
+
+.containerBotoesUm{
+  display: flex;
+  width: 100%;
+}
+
+.containerBotoesDois{
+  display: flex;
+  width: 100%;
+}
+
+:host ::ng-deep .p-inputtext {
+  width: 100%;
+}
+
+:host ::ng-deep .divInputs .p-button {
+  width: 100%;
+}
+
+@media (max-width: 980px){
+
+  .divInputPeso{
     width: 100%;
-    padding: 13px;
-    flex-direction: column;
-    background-color: var(--container-externo-cards-produtos);
-    border-radius: 6px;
   }
-  
-  .containerInputs {
-    display: flex;
+
+}
+
+
+@media (max-width: 750px) {
+
+  .containerBotoesUm{
     flex-direction: column;
+  }
+
+  .containerBotoesDois{
+    flex-direction: column;
+  }
+
+  .espacamento {
+    margin-bottom: 15px;
+  }
+
+  .containerDimensoes{
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .divGeral{
+    margin-top: 42px;
+  }
+
+  .divInputNomeCaixa{
     width: 100%;
-    justify-content: space-between;
   }
 
   .containerInputsCima{
-    width: 100%;
-    display: flex;
-  }
-  
-  .divInputNomeCaixa {
-    display: flex;
     flex-direction: column;
-    width: 80%;
-    padding: 13px 0;
-    margin-bottom: 15px;
-    margin-right: 5px;
   }
-  
-  
-  .divInputBaixo {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 13px 0;
-    margin-bottom: 15px;
-    margin-right: 5px;
-  }
+}
 
-  .divInputPeso {
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-    padding: 13px 0;
-    margin-bottom: 15px;
-    margin-right: 5px;
-  }
-  
-  .divInputs {
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    padding: 0 10px;
-  }
-  
-  .containerBotoesAdicionarCaixa {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .tabelaClientes {
-    margin-top: 30px;
-  }
-  
-  .containerDimensoes{
-    display: flex;
-    width: 100%;
-  }
-
-  :host ::ng-deep .p-inputtext {
-    width: 100%;
-  }
-  
-  :host ::ng-deep .divInputs .p-button {
-    width: 100%;
-  }
-  
-  @media (max-width: 600px) {
-
-    .divGeral{
-      margin-top: 42px;
-  
-    }
-  }
