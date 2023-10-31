@@ -12,27 +12,29 @@
           >Nome completo</label>
         </span>
       </div>
-      <div class="divInputCpf">
-        <span class="p-float-label">
-          <input
-            pInputText
-            id="cpfoucnpj"
-            [(ngModel)]="cpfOuCnpj"
-            (keypress)="onKeyPress($event)"
-          />
-          <label htmlFor="username"
-          >CPF ou CNPJ</label>
-        </span>
-      </div>
-      <div class="divDropdownEstado">
-        <p-dropdown
-          [options]="tipoUsuario"
-          [showClear]="true"
-          [(ngModel)]="tipoUsuarioSelecionado"
-          (onChange)="tipoUsuarioSelecionadoDropdown($event)"
-          placeholder="Tipo de usuário"
-          optionLabel="nome">
-        </p-dropdown>
+      <div class="containerCpfEstado">
+        <div class="divInputCpf">
+          <span class="p-float-label">
+            <input
+              pInputText
+              id="cpfoucnpj"
+              [(ngModel)]="cpfOuCnpj"
+              (keypress)="onKeyPress($event)"
+            />
+            <label htmlFor="username"
+            >CPF ou CNPJ</label>
+          </span>
+        </div>
+        <div class="divDropdownEstado">
+          <p-dropdown
+            [options]="tipoUsuario"
+            [showClear]="true"
+            [(ngModel)]="tipoUsuarioSelecionado"
+            (onChange)="tipoUsuarioSelecionadoDropdown($event)"
+            placeholder="Tipo de usuário"
+            optionLabel="nome">
+          </p-dropdown>
+        </div>
       </div>
     </div>
     <div class="containerEmailETelefone">

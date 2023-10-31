@@ -19,7 +19,7 @@
 .divInputCpf{
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 100%;
   padding: 13px 0;
   margin-bottom: 15px;
   margin-right: 5px;
@@ -88,7 +88,7 @@
 .divDropdownEstado{
   display: flex;
   flex-direction: column;
-  width: 35%;
+  width: 100%;
   padding: 13px 0;
   margin-bottom: 15px;
 }
@@ -327,6 +327,10 @@
   max-width: 350px;
 }
 
+.containerCpfEstado{
+  display: flex;
+}
+
 :host ::ng-deep .p-inputtext{
   width: 100%;
 }
@@ -349,4 +353,25 @@
     margin-top: 42px;
 
   }
+}
+
+@media (max-width: 960px) {
+
+  .divInputTelefone{
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 1220px) {
+
+  .divInputNome{
+    width: 100%;
+  }
+
+  .containerNomeECpf{
+    flex-direction: column;
+  }
+
+
 }

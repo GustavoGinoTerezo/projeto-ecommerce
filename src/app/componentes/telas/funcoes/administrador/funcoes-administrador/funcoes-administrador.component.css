@@ -30,6 +30,7 @@
 
 .sidenav-nav-link {
   display: flex;
+  width: 100%;
   align-items: center;
   min-width: 3rem;
   text-decoration: none;
@@ -69,6 +70,11 @@
 
   .sidenav-nav-item {
     height: 3rem;
+    width: 3rem;
+  }
+
+  .sidenav-link-icon{
+    padding-right: 3px;
   }
 
   .sidenav-nav {
