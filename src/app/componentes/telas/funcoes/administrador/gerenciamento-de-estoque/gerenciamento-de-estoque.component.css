@@ -166,3 +166,11 @@
   margin-bottom: 15px;
   width: 100%;
 }
+
+@media (max-width: 600px) {
+
+  .divGeral{
+    margin-top: 42px;
+
+  }
+}

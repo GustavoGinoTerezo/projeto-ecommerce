@@ -71,3 +71,11 @@
   font-size: 30px;
   font-weight: 600;
 }
+
+@media (max-width: 600px) {
+
+  .divGeral{
+    margin-top: 42px;
+
+  }
+}

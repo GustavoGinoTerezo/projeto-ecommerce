@@ -60,6 +60,15 @@
   cursor: pointer;
 }
 
+.hamburguerAdmin {
+  position: fixed;
+  top: 140px;
+  right: 10px;
+  transition: 0.3s all ease;
+  cursor: pointer;
+}
+
+
 .rodape {
   padding-top: 13px;
 }
@@ -129,6 +138,10 @@
 @media (min-width: 600px){
 
   .hamburguer {
+    display: none;
+  }
+
+  .hamburguerAdmin {
     display: none;
   }
 

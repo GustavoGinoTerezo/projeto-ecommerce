@@ -158,3 +158,10 @@ hr{
   }
 }
 
+@media (max-width: 600px) {
+
+  .divGeral{
+    margin-top: 42px;
+
+  }
+}

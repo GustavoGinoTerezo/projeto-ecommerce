@@ -319,3 +319,11 @@
 .labelCadastrarNovoEnd{
   font-size: 24px;
 }
+
+@media (max-width: 600px) {
+
+  .divGeral{
+    margin-top: 42px;
+
+  }
+}

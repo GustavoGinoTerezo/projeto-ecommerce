@@ -18,6 +18,7 @@ export class AppComponent {
   mostrarLateralAdministrador: boolean = true;
 
   menuItems: MenuItem[] = [];
+  menuItemsAdmin: MenuItem[] = []
 
   constructor(
     private router: Router,
@@ -38,6 +39,65 @@ export class AppComponent {
     // this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
 
     // this.usuarioLogado.atualizarUsuarioAPI();
+
+    this.menuItems = [
+      {
+        label: 'Minha conta',
+        routerLink: 'minha-conta',
+      },
+      {
+        label: 'Meus dados',
+        routerLink: 'meus-dados',
+      },
+      {
+        label: 'Meus pedidos',
+        routerLink: 'meus-pedidos',
+      },
+      {
+        label: 'Logout',
+        command: () => this.logout(),
+      },
+    ]
+
+    this.menuItemsAdmin = [
+      {
+        routerLink: 'gerenciamento-de-clientes',
+        label: 'Gerenciamento de Clientes',
+      },
+      {
+        routerLink: 'gerenciamento-de-categorias-e-produtos',
+        label: 'Gerenciamento de Categorias e Produtos',
+      },
+      {
+        routerLink: 'gerenciamento-de-estoque',
+        label: 'Gerenciamento de Estoque',
+      },
+      {
+        routerLink: 'gerenciamento-de-estados',
+        label: 'Gerenciamento de Estados',
+      },
+      {
+        routerLink: 'gerenciamento-de-comentarios',
+        label: 'Gerenciamento de Comentários',
+      },
+      {
+        routerLink: 'gerenciamento-de-caixas',
+        label: 'Gerenciamento de Caixas',
+      },
+      {
+        routerLink: 'gerenciamento-de-fornecedores',
+        label: 'Gerenciamento de Fornecedores',
+      },
+      {
+        routerLink: 'relatorio-de-vendas-e-controle-de-pedidos',
+        label: 'Relatório de Vendas e Controle de Pedidos',
+      },
+      {
+        routerLink: 'personalizacao',
+        label: 'Personalização',
+      },
+      
+    ]
 
     this.ativarLateral();
 
@@ -89,4 +149,21 @@ export class AppComponent {
     this.messageService.add({ severity: tipo, summary: titulo, detail: mensagem, icon: icon });
   }
  
+  logout() {
+    this.router.navigate(['/tela-principal']);
+    this.mostrarLateraisService.setMostrarLateralUsuario(false);
+    this.mostrarLateraisService.setMostrarLateralAdministrador(false);
+
+    sessionStorage.removeItem('t')
+    sessionStorage.removeItem('u')
+    sessionStorage.removeItem('c')
+    sessionStorage.removeItem('lu')
+    sessionStorage.removeItem('la')
+    sessionStorage.removeItem('p')
+    sessionStorage.removeItem('at')
+    sessionStorage.removeItem('es')
+    sessionStorage.removeItem('startEnderecos')
+    sessionStorage.removeItem('startUser')
+
+  }
 }
