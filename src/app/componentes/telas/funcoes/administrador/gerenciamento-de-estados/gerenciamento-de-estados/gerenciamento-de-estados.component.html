@@ -8,56 +8,62 @@
         <label htmlFor="nomeEstado">Nome do Estado</label>
       </span>
     </div>
-    <div class="divInputUF">
-      <span class="p-float-label">
-        <input pInputText id="uf"
-        [(ngModel)]="UfId"
-        (ngModelChange)="transformarParaMaiusculas()"
-        [disabled]="atualizarOuExcluirId"/>
-        <label htmlFor="uf">UF</label>
-      </span>
-    </div>
-    <div class="divInputICMS">
-      <span class="p-float-label">
-        <input pInputText id="icms"
-        [(ngModel)]="icms" (keypress)="onKeyPress($event)"/>
-        <label htmlFor="icms">ICMS (%)</label>
-      </span>
+    <div class="containerUFICMS">
+      <div class="divInputUF">
+        <span class="p-float-label">
+          <input pInputText id="uf"
+          [(ngModel)]="UfId"
+          (ngModelChange)="transformarParaMaiusculas()"
+          [disabled]="atualizarOuExcluirId"/>
+          <label htmlFor="uf">UF</label>
+        </span>
+      </div>
+      <div class="divInputICMS">
+        <span class="p-float-label">
+          <input pInputText id="icms"
+          [(ngModel)]="icms" (keypress)="onKeyPress($event)"/>
+          <label htmlFor="icms">ICMS (%)</label>
+        </span>
+      </div>
     </div>
   </div>
 
   <div class="containerBotoesAdicionarProdutos">
-    <div class="divInputs">
-      <p-button
-        label="Adicionar Estado"
-        (onClick)="cadastrarEstado()"
-        [disabled]="desabilitarBotao || !nomeEstado || !UfId || !icms"
-        styleClass="p-button-raised p-button-success"
-      ></p-button>
+    <div class="containerBotoesUm">
+      <div class="divInputs espacamento">
+        <p-button
+          label="Adicionar Estado"
+          (onClick)="cadastrarEstado()"
+          [disabled]="desabilitarBotao || !nomeEstado || !UfId || !icms"
+          styleClass="p-button-raised p-button-success"
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button
+          label="Atualizar Estado"
+          [disabled]="!desabilitarBotao || !nomeEstado || !UfId || !icms"
+          (onClick)="atualizarEstado()"
+          styleClass="p-button-raised p-button-warning"
+        ></p-button>
+      </div>
     </div>
-    <div class="divInputs">
-      <p-button
-        label="Atualizar Estado"
-        [disabled]="!desabilitarBotao || !nomeEstado || !UfId || !icms"
-        (onClick)="atualizarEstado()"
-        styleClass="p-button-raised p-button-warning"
-      ></p-button>
-    </div>
-    <div class="divInputs">
-      <p-button
-        label="Excluir Estado"
-        [disabled]="!desabilitarBotao || !nomeEstado || !UfId || !icms"
-        (onClick)="excluirEstado()"
-        styleClass="p-button-raised p-button-danger"
-      ></p-button>
-    </div>
-    <div class="divInputs">
-      <p-button
-        label="Limpar campos"
-        [disabled]="!nomeEstado || !UfId || !icms"
-        (onClick)="limparCampos()"
-        styleClass="p-button-raised p-button-info"
-      ></p-button>
+    <div class="containerBotoesDois">
+      <div class="divInputs espacamento">
+        <p-button
+          label="Excluir Estado"
+          [disabled]="!desabilitarBotao || !nomeEstado || !UfId || !icms"
+          (onClick)="excluirEstado()"
+          styleClass="p-button-raised p-button-danger"
+        ></p-button>
+      </div>
+      <div class="divInputs">
+        <p-button
+          label="Limpar campos"
+          [disabled]="!nomeEstado || !UfId || !icms"
+          (onClick)="limparCampos()"
+          styleClass="p-button-raised p-button-info"
+        ></p-button>
+      </div>
     </div>
   </div>
   <div class="tabelaClientes">
