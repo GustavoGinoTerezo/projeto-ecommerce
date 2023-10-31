@@ -61,10 +61,15 @@
 .divInputCep{
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 60%;
   padding: 13px 0;
   margin-bottom: 15px;
   margin-right: 5px;
+}
+
+.containerNumeroComplemento{
+  display: flex;
+  width: 100%;
 }
 
 .divInputSelecao{
@@ -204,12 +209,12 @@
 .containerGeralEmailAlternativo{
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
   margin-right: 5px;
 }
 
 .containerGeralTelefoneAlternativo{
-  width: 100%;
+  width: 50%;
   display: flex;
   flex-direction: column;
 }
@@ -266,10 +271,21 @@
   margin-top: 15px;
 }
 
+.espacamento{
+  margin-bottom: 15px;
+}
+
 .divInputs{
   justify-content: center;
   align-items: center;
   width: 50%;
+  padding: 0 10px;
+}
+
+.widthBotao{
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   padding: 0 10px;
 }
 
@@ -347,6 +363,41 @@
   width: 100%;
 }
 
+.containerCidadeEstado{
+  display: flex;
+  width: 100%;
+}
+
+.containerCepCidadeEntrega{
+  display: flex;
+  width: 100%;
+}
+
+.containerBairroRuaEntrega{
+  width: 100%;
+  display: flex;
+}
+
+.containerBairroRua{
+  display: flex;
+  width: 100%;
+}
+
+.containerNumeroComplementoEntrega{
+  width: 100%;
+  display: flex;
+}
+
+.containerBotoesUm{
+  width: 100%;
+  display: flex;
+}
+
+.containerBotoesDois{
+  width: 100%;
+  display: flex;
+}
+
 @media (max-width: 600px) {
 
   .divGeral{
@@ -359,6 +410,38 @@
 
   .divInputTelefone{
     width: 100%;
+  }
+
+  .containerCepECidade{
+    flex-direction: column;
+  }
+
+  .divInputCidade{
+    margin-right: 0;
+  }
+
+  .divInputCep{
+    width: 40%;
+  }
+
+  .containerBairroRuaENumeroResidencia{
+    flex-direction: column;
+  }
+
+  .containerSelecaoEndereco{
+    flex-direction: column;
+  }
+
+  .containerBotoes{
+    flex-direction: column;
+  }
+
+  .containerBotoesUm{
+    margin-bottom: 15px;
+  }
+
+  .divBotoes{
+    flex-direction: column;
   }
 
 }

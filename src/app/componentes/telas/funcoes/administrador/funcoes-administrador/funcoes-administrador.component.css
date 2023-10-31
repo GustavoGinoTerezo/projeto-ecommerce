@@ -63,6 +63,8 @@
   background-color: var(--hover-background-botoes);
 }
 
+
+
 @media (max-width: 1250px) {
   .sidenav-link-text {
     display: none;

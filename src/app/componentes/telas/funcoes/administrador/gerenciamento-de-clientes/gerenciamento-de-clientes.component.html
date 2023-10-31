@@ -184,14 +184,14 @@
             </div>
             <div class="containerBotoesAlternativo" *ngIf="botaoDiv">
               <div class="divBotoes">
-                <div class="divInputs">
+                <div class="widthBotao espacamento">
                   <p-button label="Adicionar"
                   styleClass="p-button-raised p-button-success"
                   [disabled]="!emailAlternativoValid()"
                   (onClick)="cadastrarEmailAlternativo()"
                   ></p-button>
                 </div>
-                <div class="divInputs">
+                <div class="widthBotao">
                   <p-button label="Atualizar"
                   styleClass="p-button-raised p-button-warning"
                   [disabled]="emailAlternativoAtualizarValid() ||!habilitarBotaoEmailAlternativo"
@@ -200,14 +200,14 @@
                 </div>
               </div>
               <div class="divBotoes botoes">
-                <div class="divInputs">
+                <div class="widthBotao espacamento">
                   <p-button label="Excluir"
                   styleClass="p-button-raised p-button-danger"
                   [disabled]="!habilitarBotaoEmailAlternativo ||!emailAlternativo"
                   (onClick)="excluirUnicoEmailAlternativo()"
                   ></p-button>
                 </div>
-                <div class="divInputs">
+                <div class="widthBotao">
                   <p-button label="Limpar campos"
                   [disabled]="!emailAlternativo"
                   (click)="limparCamposEmailAlternativo()"
@@ -266,24 +266,24 @@
             </div>
             <div class="containerBotoesAlternativo" *ngIf="botaoDiv">
               <div class="divBotoes">
-                <div class="divInputs">
+                <div class="widthBotao espacamento">
                   <p-button label="Adicionar"
                   styleClass="p-button-raised p-button-success"
                   [disabled]="!telefoneAlternativo"></p-button>
                 </div>
-                <div class="divInputs">
+                <div class="widthBotao">
                   <p-button label="Atualizar"
                   styleClass="p-button-raised p-button-warning"
                   [disabled]="!habilitarBotaoTelefoneAlternativo ||!telefoneAlternativo"></p-button>
                 </div>
               </div>
               <div class="divBotoes botoes">
-                <div class="divInputs">
+                <div class="widthBotao espacamento">
                   <p-button label="Excluir"
                   styleClass="p-button-raised p-button-danger"
                   [disabled]="!habilitarBotaoTelefoneAlternativo ||!telefoneAlternativo"></p-button>
                 </div>
-                <div class="divInputs">
+                <div class="widthBotao">
                   <p-button label="Limpar campos"
                   (click)="limparCamposTelefoneAlternativo()"
                   styleClass="p-button-raised p-button-info"
@@ -298,61 +298,68 @@
   <hr class="hr">
   <h2>Endereço de cobrança</h2>
   <div class="containerCepECidade">
-    <div class="divInputCep">
-      <span class="p-float-label">
-        <p-inputMask mask="99999-999" [(ngModel)]="cep"></p-inputMask>
-        <label htmlFor="username">CEP</label>
-      </span>
+    <div class="containerCidadeEstado">
+      <div class="divInputCep">
+        <span class="p-float-label">
+          <p-inputMask mask="99999-999" [(ngModel)]="cep"></p-inputMask>
+          <label htmlFor="username">CEP</label>
+        </span>
+      </div>
+      <div class="divInputCidade">
+        <span class="p-float-label">
+          <input pInputText id="cidade"
+          [(ngModel)]="cidade"/>
+          <label htmlFor="username">Cidade</label>
+        </span>
+      </div>
     </div>
-    <div class="divInputCidade">
-      <span class="p-float-label">
-        <input pInputText id="cidade"
-        [(ngModel)]="cidade"/>
-        <label htmlFor="username">Cidade</label>
-      </span>
-    </div>
-    <div class="divDropdownEstado">
-      <p-dropdown
-        [options]="estado"
-        [showClear]="true"
-        [(ngModel)]="estadoSelecionadoCobranca"
-        placeholder="Estado"
-        optionLabel="nome">
-      </p-dropdown>
-    </div>
+      <div class="divDropdownEstado">
+        <p-dropdown
+          [options]="estado"
+          [showClear]="true"
+          [(ngModel)]="estadoSelecionadoCobranca"
+          placeholder="Estado"
+          optionLabel="nome">
+        </p-dropdown>
+      </div>
+
   </div>
   <div class="containerBairroRuaENumeroResidencia">
-    <div class="divInputBairro">
-      <span class="p-float-label">
-        <input pInputText id="bairro"
-        [(ngModel)]="bairro"/>
-        <label htmlFor="username">Bairro</label>
-      </span>
+    <div class="containerBairroRua">
+      <div class="divInputBairro">
+        <span class="p-float-label">
+          <input pInputText id="bairro"
+          [(ngModel)]="bairro"/>
+          <label htmlFor="username">Bairro</label>
+        </span>
+      </div>
+      <div class="divInputRua">
+        <span class="p-float-label">
+          <input pInputText
+          id="rua"
+          [(ngModel)]="rua"
+          >
+          <label htmlFor="username">Rua</label>
+        </span>
+      </div>
     </div>
-    <div class="divInputRua">
-      <span class="p-float-label">
-        <input pInputText
-        id="rua"
-        [(ngModel)]="rua"
-        >
-        <label htmlFor="username">Rua</label>
-      </span>
-    </div>
-    <div class="divInputNumeroResidencia">
-      <span class="p-float-label">
-        <input pInputText
-        id="numeroresidencia"
-        [(ngModel)]="numeroResidencia"
-        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-        <label htmlFor="username">Nº da residência</label>
-      </span>
-    </div>
-    <div class="divInputComplemento">
-      <span class="p-float-label">
-        <input pInputText id="complemento"
-        [(ngModel)]="complemento"/>
-        <label htmlFor="complemento">Complemento</label>
-      </span>
+    <div class="containerNumeroComplemento">
+      <div class="divInputNumeroResidencia">
+        <span class="p-float-label">
+          <input pInputText
+          id="numeroresidencia"
+          [(ngModel)]="numeroResidencia"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+          <label htmlFor="username">Nº da residência</label>
+        </span>
+      </div>
+      <div class="divInputComplemento">
+        <span class="p-float-label">
+          <input pInputText id="complemento"
+          [(ngModel)]="complemento"/>
+          <label htmlFor="complemento">Complemento</label>
+        </span>
+      </div>
     </div>
   </div>
   </div>
@@ -415,215 +422,221 @@
         </div>
       </div>
       <div class="containerCepECidade">
-        <div class="divInputCep">
-          <span class="p-float-label">
-            <p-inputMask mask="99999-999" [(ngModel)]="cepEntrega"
-            ></p-inputMask>
-            <label htmlFor="username">CEP</label>
-          </span>
-        </div>
-        <div class="divInputCidade">
-          <span class="p-float-label">
-            <input pInputText id="username"
-            [(ngModel)]="cidadeEntrega"/>
-            <label htmlFor="username">Cidade</label>
-          </span>
+        <div class="containerCepCidadeEntrega">
+          <div class="divInputCep">
+            <span class="p-float-label">
+              <p-inputMask mask="99999-999" [(ngModel)]="cepEntrega"
+              ></p-inputMask>
+              <label htmlFor="username">CEP</label>
+            </span>
+          </div>
+          <div class="divInputCidade">
+            <span class="p-float-label">
+              <input pInputText id="username"
+              [(ngModel)]="cidadeEntrega"/>
+              <label htmlFor="username">Cidade</label>
+            </span>
+          </div>
         </div>
         <div class="divDropdownEstado">
           <p-dropdown [options]="estado"  [showClear]="true" [(ngModel)]="estadoSelecionadoEntrega" placeholder="Estado" optionLabel="nome"></p-dropdown>
         </div>
       </div>
       <div class="containerBairroRuaENumeroResidencia">
-        <div class="divInputBairro">
-          <span class="p-float-label">
-            <input pInputText id="username"
-            [(ngModel)]="bairroEntrega"
-            />
-            <label htmlFor="username">Bairro</label>
-          </span>
+        <div class="containerBairroRuaEntrega">
+          <div class="divInputBairro">
+            <span class="p-float-label">
+              <input pInputText id="username"
+              [(ngModel)]="bairroEntrega"
+              />
+              <label htmlFor="username">Bairro</label>
+            </span>
+          </div>
+          <div class="divInputRua">
+            <span class="p-float-label">
+              <input pInputText
+              id="username"
+              [(ngModel)]="ruaEntrega"
+              >
+              <label htmlFor="username">Rua</label>
+            </span>
+          </div>
         </div>
-        <div class="divInputRua">
-          <span class="p-float-label">
-            <input pInputText
-            id="username"
-            [(ngModel)]="ruaEntrega"
-            >
-            <label htmlFor="username">Rua</label>
-          </span>
-        </div>
-        <div class="divInputNumeroResidencia">
-          <span class="p-float-label">
-            <input pInputText
-            id="username"
-            [(ngModel)]="numeroResidenciaEntrega"
-            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-            <label htmlFor="username">Nº da residência</label>
-          </span>
-        </div>
-        <div class="divInputComplemento">
-          <span class="p-float-label">
-            <input pInputText id="complemento"
-            [(ngModel)]="complementoEntrega"/>
-            <label htmlFor="complemento">Complemento</label>
-          </span>
+        <div class="containerNumeroComplementoEntrega">
+          <div class="divInputNumeroResidencia">
+            <span class="p-float-label">
+              <input pInputText
+              id="username"
+              [(ngModel)]="numeroResidenciaEntrega"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+              <label htmlFor="username">Nº da residência</label>
+            </span>
+          </div>
+          <div class="divInputComplemento">
+            <span class="p-float-label">
+              <input pInputText id="complemento"
+              [(ngModel)]="complementoEntrega"/>
+              <label htmlFor="complemento">Complemento</label>
+            </span>
+          </div>
         </div>
       </div>
       <div class="containerBotoes" *ngIf="botaoDiv">
-        <div class="divInputs">
-          <p-button label="Adicionar endereço"
-          [disabled]="botaoDisabledEntrega ||
-          !identificacaoEndereco ||
-          !cepEntrega ||
-          !cidadeEntrega ||
-          !estadoSelecionadoEntrega ||
-          !bairroEntrega ||
-          !ruaEntrega ||
-          !numeroResidenciaEntrega ||
-          !complementoEntrega"  styleClass="p-button-raised p-button-success"
-          (onClick)="cadastrarEnderecoEntrega()"
-          ></p-button>
-          
-
-        </div>
-        <div class="divInputs">
-          <p-button label="Atualizar endereço"
-          [disabled]="!botaoDisabledEntrega ||
-          !identificacaoEndereco ||
-          !cepEntrega ||
-          !cidadeEntrega ||
-          !estadoSelecionadoEntrega ||
-          !bairroEntrega ||
-          !ruaEntrega ||
-          !numeroResidenciaEntrega ||
-          !complementoEntrega"
-          (onClick)="atualizarEnderecoEntrega()"
-          styleClass="p-button-raised p-button-warning"></p-button>
-          
-
-        </div>
-        <div class="divInputs">
-          <p-button label="Excluir endereço"
-          [disabled]="!botaoDisabledEntrega ||
-          !identificacaoEndereco ||
-          !cepEntrega ||
-          !cidadeEntrega ||
-          !estadoSelecionadoEntrega ||
-          !bairroEntrega ||
-          !ruaEntrega ||
-          !numeroResidenciaEntrega ||
-          !complementoEntrega"
-          styleClass="p-button-raised p-button-danger"
-          (onClick)="excluirUnicoEnderecoEntrega()"
-          ></p-button>
-        </div>
-        <div class="divInputs">
-          <p-button label="Limpar campos"
-          [disabled]="!identificacaoEndereco &&
-          !cepEntrega &&
-          !cidadeEntrega &&
-          !estadoSelecionadoEntrega &&
-          !bairroEntrega &&
-          !ruaEntrega &&
-          !numeroResidenciaEntrega &&
-          !complementoEntrega"
-          (click)="limparCamposEnderecoEntrega()"
-          styleClass="p-button-raised p-button-info"
-          ></p-button>
-        </div>
+          <div class="containerBotoesUm">
+            <div class="divInputs">
+              <p-button label="Adicionar endereço"
+              [disabled]="botaoDisabledEntrega ||
+              !identificacaoEndereco ||
+              !cepEntrega ||
+              !cidadeEntrega ||
+              !estadoSelecionadoEntrega ||
+              !bairroEntrega ||
+              !ruaEntrega ||
+              !numeroResidenciaEntrega ||
+              !complementoEntrega"  styleClass="p-button-raised p-button-success"
+              (onClick)="cadastrarEnderecoEntrega()"
+              ></p-button>
+            </div>
+            <div class="divInputs">
+              <p-button label="Atualizar endereço"
+              [disabled]="!botaoDisabledEntrega ||
+              !identificacaoEndereco ||
+              !cepEntrega ||
+              !cidadeEntrega ||
+              !estadoSelecionadoEntrega ||
+              !bairroEntrega ||
+              !ruaEntrega ||
+              !numeroResidenciaEntrega ||
+              !complementoEntrega"
+              (onClick)="atualizarEnderecoEntrega()"
+              styleClass="p-button-raised p-button-warning"></p-button>
+            
+            </div>
+          </div>
+          <div class="containerBotoesDois">
+            <div class="divInputs">
+              <p-button label="Excluir endereço"
+              [disabled]="!botaoDisabledEntrega ||
+              !identificacaoEndereco ||
+              !cepEntrega ||
+              !cidadeEntrega ||
+              !estadoSelecionadoEntrega ||
+              !bairroEntrega ||
+              !ruaEntrega ||
+              !numeroResidenciaEntrega ||
+              !complementoEntrega"
+              styleClass="p-button-raised p-button-danger"
+              (onClick)="excluirUnicoEnderecoEntrega()"
+              ></p-button>
+            </div>
+            <div class="divInputs">
+              <p-button label="Limpar campos"
+              [disabled]="!identificacaoEndereco &&
+              !cepEntrega &&
+              !cidadeEntrega &&
+              !estadoSelecionadoEntrega &&
+              !bairroEntrega &&
+              !ruaEntrega &&
+              !numeroResidenciaEntrega &&
+              !complementoEntrega"
+              (click)="limparCamposEnderecoEntrega()"
+              styleClass="p-button-raised p-button-info"
+              ></p-button>
+            </div>
+          </div>
       </div>
     </div>
     <hr class="hr2">
   </div>
 
   <div class="containerBotoes">
-      <div class="divInputs">
-        <p-button 
-          label="Adicionar usuário"
-          [disabled]="!isValid()"
-          styleClass="p-button-raised p-button-success"
-          (onClick)="cadastrarUsuario()"  
-        ></p-button>
+      <div class="containerBotoesUm">
+        <div class="divInputs">
+          <p-button
+            label="Adicionar usuário"
+            [disabled]="!isValid()"
+            styleClass="p-button-raised p-button-success"
+            (onClick)="cadastrarUsuario()"
+          ></p-button>
         
         
-
+        </div>
+        <div class="divInputs">
+          <p-button label="Atualizar usuário"
+            [disabled]="!botaoDisabled ||
+            !nome ||
+            !cpfOuCnpj ||
+            !tipoUsuarioSelecionado ||
+            !email ||
+            !emailValid ||
+            !telefone ||
+            !cep ||
+            !cidade ||
+            !estadoSelecionadoCobranca ||
+            !bairro ||
+            !rua ||
+            !numeroResidencia ||
+            !complemento"
+            (onClick)="atualizarUsuario()"
+            styleClass="p-button-raised p-button-warning">
+          </p-button>
+        
+        </div>
       </div>
-      <div class="divInputs">
-        <p-button label="Atualizar usuário"
+      <div class="containerBotoesDois">
+        <div class="divInputs">
+          <p-button label="Excluir conta"
           [disabled]="!botaoDisabled ||
-          !nome ||
-          !cpfOuCnpj ||
-          !tipoUsuarioSelecionado ||
-          !email ||
-          !emailValid ||
-          !telefone ||
-          !cep ||
-          !cidade ||
-          !estadoSelecionadoCobranca ||
-          !bairro ||
-          !rua ||
-          !numeroResidencia ||
-          !complemento"
-          (onClick)="atualizarUsuario()"  
-          styleClass="p-button-raised p-button-warning">
-        </p-button>
+            !nome ||
+            !cpfOuCnpj ||
+            !tipoUsuarioSelecionado ||
+            !email ||
+            !emailValid ||
+            !telefone ||
+            !cep ||
+            !cidade ||
+            !estadoSelecionadoCobranca ||
+            !bairro ||
+            !rua ||
+            !numeroResidencia ||
+            !complemento"
+          styleClass="p-button-raised p-button-danger"
+          (onClick)="excluirUsuario()"
+          ></p-button>
         
+        </div>
+        <div class="divInputs">
+          <p-button label="Limpar campos"
+          [disabled]="
+          !nome &&
+          !cpfOuCnpj &&
+          !tipoUsuarioSelecionado &&
+          !email &&
+          !telefone &&
+          !passwordCadastro &&
+          !passwordCadastroRepetir &&
+          !cep &&
+          !cidade &&
+          !estadoSelecionadoCobranca &&
+          !bairro &&
+          !rua &&
+          !numeroResidencia &&
+          !complemento &&
+          !identificacaoEndereco &&
+          !cepEntrega &&
+          !cidadeEntrega &&
+          !estadoSelecionadoEntrega &&
+          !bairroEntrega &&
+          !ruaEntrega &&
+          !numeroResidenciaEntrega &&
+          !complementoEntrega &&
+          !telefoneAlternativo &&
+          !emailAlternativo"
+          (click)="limparCampos()"
+          styleClass="p-button-raised p-button-info"
+          ></p-button>
+        </div>
       </div>
-
-      <div class="divInputs">
-        <p-button label="Excluir conta"
-        [disabled]="!botaoDisabled ||
-          !nome ||
-          !cpfOuCnpj ||
-          !tipoUsuarioSelecionado ||
-          !email ||
-          !emailValid ||
-          !telefone ||
-          !cep ||
-          !cidade ||
-          !estadoSelecionadoCobranca ||
-          !bairro ||
-          !rua ||
-          !numeroResidencia ||
-          !complemento"
-        styleClass="p-button-raised p-button-danger"
-        (onClick)="excluirUsuario()"
-        ></p-button>
-        
-
-      </div>
-
-      <div class="divInputs">
-        <p-button label="Limpar campos"
-        [disabled]="
-        !nome &&
-        !cpfOuCnpj &&
-        !tipoUsuarioSelecionado &&
-        !email &&
-        !telefone &&
-        !passwordCadastro &&
-        !passwordCadastroRepetir &&
-        !cep &&
-        !cidade &&
-        !estadoSelecionadoCobranca &&
-        !bairro &&
-        !rua &&
-        !numeroResidencia &&
-        !complemento && 
-        !identificacaoEndereco &&
-        !cepEntrega &&
-        !cidadeEntrega &&
-        !estadoSelecionadoEntrega &&
-        !bairroEntrega &&
-        !ruaEntrega &&
-        !numeroResidenciaEntrega &&
-        !complementoEntrega &&
-        !telefoneAlternativo &&
-        !emailAlternativo"
-        (click)="limparCampos()"
-        styleClass="p-button-raised p-button-info"
-        ></p-button>
-      </div>
-
   </div>
   <div class="tabelaClientes">
 

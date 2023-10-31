@@ -51,7 +51,7 @@ export class GerenciamentoDeClientesComponent {
   usuarioSelecionado!: any;
   usuariosFiltrados: Usuario[] = [];
 
-  botaoDiv: boolean = false;
+  botaoDiv: boolean = true;
   botaoDisabled: boolean = false;
   botaoDisabledEntrega: boolean = false;
 
@@ -80,8 +80,8 @@ export class GerenciamentoDeClientesComponent {
   numeroResidenciaEntrega!: number | null;
   complementoEntrega!: string;
 
-  habilitarEmailAlternativo: boolean = false;
-  habilitarTelefoneAlternativo: boolean = false;
+  habilitarEmailAlternativo: boolean = true;
+  habilitarTelefoneAlternativo: boolean = true;
   habilitarEnderecoEntrega: boolean = false;
   habilitarDropdownEnderecosEntrega: boolean =  true;
   habilitarPassword: boolean = false
