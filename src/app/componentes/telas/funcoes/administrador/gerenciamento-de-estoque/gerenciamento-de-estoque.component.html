@@ -5,20 +5,22 @@
     <div class="containerEntrada">
       <h2 class="h2">Entrada de produto</h2>
       <div class="containerDropdownInput margem">
-        <div class="containerDropdown">
-          <span class="p-float-label">
-            <p-multiSelect [options]="produtos" [(ngModel)]="produtosSelecionados" optionLabel="nome" ></p-multiSelect>
-            <label for="ms-cities">Selecione os produtos</label>
-        </span>
-        </div>
-        <div class="containerDropdown">
-          <p-dropdown 
-            [options]="fornecedores" 
-            [(ngModel)]="fornecedorSelecionado" 
-            optionLabel="cnpj"
-            (onChange)="onFornecedorSelect($event)"
-            placeholder="Selecione o fornecedor">
-          </p-dropdown>
+        <div class="containerDropdowns">
+          <div class="containerDropdown">
+            <span class="p-float-label">
+              <p-multiSelect [options]="produtos" [(ngModel)]="produtosSelecionados" optionLabel="nome" ></p-multiSelect>
+              <label for="ms-cities">Selecione os produtos</label>
+          </span>
+          </div>
+          <div class="containerDropdown">
+            <p-dropdown
+              [options]="fornecedores"
+              [(ngModel)]="fornecedorSelecionado"
+              optionLabel="cnpj"
+              (onChange)="onFornecedorSelect($event)"
+              placeholder="Selecione o fornecedor">
+            </p-dropdown>
+          </div>
         </div>
         <div class="containerInput p-float-label">
           <input class="inputQuant" (input)="atualizarBotaoEnviar()" [(ngModel)]="numeroNotaFiscal" pInputText type="text" /><label htmlFor="number-input">Número da nota fiscal</label>

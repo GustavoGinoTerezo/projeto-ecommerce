@@ -106,16 +106,22 @@
 
 .inputQuantidade{
   width: 98%;
-
 }
 
 .containerDropdown{
-  width: 33%;
+  width: 49.5%;
+}
+
+.containerDropdowns{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 5px;
 }
 
 .containerInput{
   display: flex;
-  width: 33%;
+  width: 50%;
 }
 
 :host ::ng-deep .p-multiselect{
@@ -167,6 +173,19 @@
   width: 100%;
 }
 
+@media (max-width: 920px) {
+
+  .containerDropdownInput{
+    flex-direction: column;
+  }
+
+  .containerInput{
+    width: 100%;
+    margin-top: 15px;
+  }
+
+}
+
 @media (max-width: 600px) {
 
   .divGeral{
@@ -174,3 +193,4 @@
 
   }
 }
+
