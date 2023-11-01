@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  
 }
 
 .containerProduto{
@@ -71,7 +71,7 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   border-left: 2px solid rgba(0, 0, 0, 0.462);
   border-bottom: 2px solid rgba(0, 0, 0, 0.462);
   border-bottom-left-radius: 8px;
@@ -220,7 +220,7 @@ img:hover{
   margin-left: 5px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 880px) {
 
   .containerImagemEDescEPreco{
     flex-direction: column;
@@ -254,4 +254,10 @@ img:hover{
 
 }
 
+@media (max-width: 600px) {
 
+  .divGeral{
+    margin-top: 42px;
+
+  }
+}

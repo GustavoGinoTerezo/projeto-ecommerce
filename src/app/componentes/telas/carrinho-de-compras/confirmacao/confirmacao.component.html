@@ -82,20 +82,24 @@
         <hr class="hr">
 
         <div *ngFor="let produto of carrinho | slice:first:first + rows" class="containerProduto">
-          <div class="containerImg">
-            <img class="img" [src]="produto.imagemProduto" alt="Imagem do produto">
+          <div class="containerImgNome">
+            <div class="containerImg">
+              <img class="img" [src]="produto.imagemProduto" alt="Imagem do produto">
+            </div>
+            <div class="containerNomeProduto">
+               {{produto.nomeProduto}}
+            </div>
           </div>
-          <div class="containerNomeProduto">
-             {{produto.nomeProduto}}
-          </div>
-          <div class="containerQuantidade">
-            <div class="labelQuantidade">Quant.</div>
-            <div class="dadoQuantidade">{{ produto.quantidade }}</div>
-          </div>
-          <div class="containerPreco">
-            <div class="labelValorProduto">Valor do prod.</div>
-            <div class="dadoProduto">
-              R$ {{ calcularValorItem(produto).toFixed(2) }}
+          <div class="containerQuantPreco">
+            <div class="containerQuantidade">
+              <div class="labelQuantidade">Quant.</div>
+              <div class="dadoQuantidade">{{ produto.quantidade }}</div>
+            </div>
+            <div class="containerPreco">
+              <div class="labelValorProduto">Valor do prod.</div>
+              <div class="dadoProduto">
+                R$ {{ calcularValorItem(produto).toFixed(2) }}
+              </div>
             </div>
           </div>
         </div>
