@@ -122,7 +122,6 @@
   display: flex;
   width: 30%;
   height: 100%;
-  max-height: 500px;
   padding: 10px;
   background-color: var(--container-externo-cards-produtos);
   border-radius: 6px;
@@ -132,8 +131,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-height: 500px;
-  justify-content: center;
+  height: 100%;
   padding: 15px;
   background-color: var(--container-interno-cards-produtos);
   border-radius: 6px;
@@ -154,8 +152,8 @@
 
 .valorTotalProdutos{
   display: flex;
+  flex-direction: column;
   width: 100%;
-  align-items: center;
   justify-content: space-between;
   padding: 10px;
   margin-top: 10px;
@@ -173,7 +171,7 @@
 .valorFrete{
   display: flex;
   width: 100%;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   padding: 10px;
   border-bottom-left-radius: 8px;
@@ -204,6 +202,7 @@
 .pMenor{
   font-size: 15px;
   font-weight: 400;
+  margin-bottom: 15px;
 }
 
 .pMaior{
@@ -337,110 +336,7 @@
   align-items: center;
 }
 
-@media (max-width: 900px) {
 
-  .divGeral{
-    flex-direction: column;
-  }
-
-  .containerProdutosEValorTotal{
-    flex-direction: column;
-  }
-
-  .containerValorTotal{
-    margin-top: 5px;
-    width: 100%;
-  }
-
-}
-
-@media (max-width: 660px) {
-
-  .labelFrete{
-    justify-content: center;
-  }
-
-
-  .inputFreteEBotoes{
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .divNaoLembroOCep{
-
-    width: 100%;
-    align-items: center;
-    margin-top: 15px;
-  }
-
-  .divRemoverProdutos{
-    flex-direction: column;
-  }
-
-  .divLabelProdutos{
-    display: none;
-  }
-
-  .containerImagemENome{
-    flex-direction: column;
-  }
-
-  .img{
-    width: 100%;
-    height: 100%;
-  }
-
-  .containerInformaçoesProduto{
-    flex-direction: column;
-  }
-
-}
-
-@media (max-width: 395px) {
-
- .divSteps{
-  display: none;
- }
-}
-
-
-@media (max-width: 420px) {
-
-  .containerQuantPrecoExcluir{
-    flex-direction: column;
-  }
-
-  .divInputEBotao{
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .quantidade{
-    justify-content: space-between;
-    width: 100%;
-    padding: 0;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-right: 15px;
-  }
-
-  :host ::ng-deep .p-inputmask{
-    width: 100%;
-  }
-
-  .margem{
-    margin-right: 0px;
-    margin-bottom: 10px;
-  }
-
-  .botao-excluir{
-    width: 100%;
-  }
-
-  .buttonEnviar{
-    width: 100%;
-  }
-}
 
 
 .containerEnderecoLoop {
@@ -497,4 +393,132 @@
   margin-bottom: 5px;
   font-size: 16px;
   font-weight: 500;
+}
+
+@media (max-width: 900px) {
+
+  .divGeral{
+    flex-direction: column;
+  }
+
+  
+
+  .containerValorTotal{
+    margin-top: 5px;
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 830px) {
+
+  .containerInformaçoesProduto{
+    flex-direction: column;
+  }
+
+  .divLabelProdutos{
+    display: none;
+  }
+
+  .divRemoverProdutos{
+    flex-direction: column;
+  }
+
+  .labelFrete{
+    justify-content: center;
+  }
+
+
+  .inputFreteEBotoes{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .divNaoLembroOCep{
+
+    width: 100%;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .containerImagemENome{
+    flex-direction: column;
+  }
+
+  .img{
+    width: 200px;
+    height: 200px;
+  }
+
+}
+
+
+
+@media (max-width: 660px) {
+
+  
+
+  
+
+}
+
+@media (max-width: 395px) {
+
+ .divSteps{
+  display: none;
+ }
+}
+
+@media (max-width: 420px) {
+
+  .containerQuantPrecoExcluir{
+    flex-direction: column;
+  }
+
+  .divInputEBotao{
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .quantidade{
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+  }
+
+  :host ::ng-deep .p-inputmask{
+    width: 100%;
+  }
+
+  .margem{
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
+
+  .botao-excluir{
+    width: 100%;
+  }
+
+  .buttonEnviar{
+    width: 100%;
+  }
+}
+
+@media (max-width: 1100px) {
+
+  .containerProdutosEValorTotal{
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .divGeral{
+    margin-top: 42px;
+
+  }
 }
