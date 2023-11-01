@@ -8,11 +8,13 @@
 
   <div class="categoriaEProdutos">
     <div class="divCarousel">
-      <p-carousel [value]="categorias" orientation="vertical" [numVisible]="4" [numScroll]="4" [circular]="true" [showIndicators]="false" class="carousel carousel-alto">
-        <ng-template pTemplate="item" let-categoria >
-          <div class="containerCategoria" (click)="navigateCategoria(categoria)">
-            <div>{{categoria.nome}}</div>
-            <img [src]="categoria.imagem" alt="imagem da categoria" class="imgCarousel">
+      <div class="labelProduto">
+        Produtos
+      </div>
+      <p-carousel [value]="produtos" orientation="vertical" [numVisible]="5" [numScroll]="5" [circular]="true" [showIndicators]="false" class="carousel carousel-alto">
+        <ng-template pTemplate="item" let-produto >
+          <div class="containerCategoria" (click)="navigateToDetalheProduto(produto)">
+            <div>{{produto.nome}}</div>    
           </div>
         </ng-template>
       </p-carousel>
