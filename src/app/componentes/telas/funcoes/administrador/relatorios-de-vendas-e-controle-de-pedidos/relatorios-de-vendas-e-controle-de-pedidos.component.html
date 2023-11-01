@@ -22,13 +22,13 @@
   >
     <ng-template pTemplate="caption">
       <div class="containerCaption">
-        <div class="divBotaoPDF">
+        <div class="divBotaoPDF espacamento">
           <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdfAll()" class="p-button-warning mr-2" label="PDF completo do relátorio de vendas" pTooltip="PDF" tooltipPosition="bottom"></button>
         </div>
         <div class="divInputSearch">
           <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" (input)="filterTable($event)" placeholder="Buscar" />
+            <input pInputText class="inputSearch" type="text" (input)="filterTable($event)" placeholder="Buscar" />
           </span>
         </div>
       </div>
