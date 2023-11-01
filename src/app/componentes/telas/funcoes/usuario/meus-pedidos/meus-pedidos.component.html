@@ -53,7 +53,7 @@
                   </div>
                   <div class="containerFormaPagamento">
                     <div class="containerRastreio">
-                      <div>
+                      <div class="espacamento">
                         <p-button label="Nota fiscal" icon="fa-solid fa-file-invoice-dollar fa-xl" styleClass="p-button-outlined"></p-button>
                       </div>
                       <div>
@@ -101,13 +101,15 @@
                       <div class="divNomeProduto">
                         <div class="labelNomeProduto">{{produto.nomeProduto}}</div>
                       </div>
-                      <div class="divQuantidadeProduto">
-                        <div class="labelQuantidade margemLabel">Quantidade</div>
-                        <div class="quantidadeProdutoDado">{{produto.quantidade}}</div>
-                      </div>
-                      <div class="divValorProduto">
-                        <div class="labelValorProduto margemLabel">Valor do(s) produto(s)</div>
-                        <div class="valorProdutoDado">R$ {{ calcularValorItem(produto).toFixed(2) }}</div>
+                      <div class="containerQuantValor">
+                        <div class="divQuantidadeProduto">
+                          <div class="labelQuantidade margemLabel">Quantidade</div>
+                          <div class="quantidadeProdutoDado">{{produto.quantidade}}</div>
+                        </div>
+                        <div class="divValorProduto">
+                          <div class="labelValorProduto margemLabel">Valor do(s) produto(s)</div>
+                          <div class="valorProdutoDado">R$ {{ calcularValorItem(produto).toFixed(2) }}</div>
+                        </div>
                       </div>
                     </div>
                     <hr class="hr">
