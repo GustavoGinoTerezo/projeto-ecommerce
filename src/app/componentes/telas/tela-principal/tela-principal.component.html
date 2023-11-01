@@ -26,12 +26,10 @@
             <div >
               <div class="containerInterno">
                 <div class="divCarouselInterno">
-                  <p-carousel [value]="anunciosMaiores" [showIndicators]="false" [circular]="true">
-                    <!-- [value]="produtos.imagem" -->
+                  <p-carousel [value]="produtos.imagem" [showIndicators]="false" [circular]="true">
                     <ng-template pTemplate="item" let-imagem>
                       <div class="containerImagem">
-                        <img src="assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg" alt="imagem produto" class="img" (click)="navigateProduto(produtos)">
-                        <!-- [src]="imagem.imagem" -->
+                        <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateProduto(produtos)">
                       </div>
                     </ng-template>
                   </p-carousel>
@@ -101,12 +99,10 @@
             <div >
               <div class="containerInterno">
                 <div class="divCarouselInterno">
-                  <p-carousel [value]="anunciosMaiores" [showIndicators]="false" [circular]="true">
-                    <!-- [value]="produtos.imagem" -->
+                  <p-carousel [value]="produtos.imagem" [showIndicators]="false" [circular]="true">
                     <ng-template pTemplate="item" let-imagem>
                       <div class="containerImagem">
-                        <img src="assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg" alt="imagem produto" class="img" (click)="navigateProduto(produtos)">
-                        <!-- [src]="imagem.imagem" -->
+                        <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateProduto(produtos)">
                       </div>
                     </ng-template>
                   </p-carousel>
@@ -165,12 +161,10 @@
             <div >
               <div class="containerInterno">
                 <div class="divCarouselInterno">
-                  <p-carousel  [value]="anunciosMaiores"  [showIndicators]="false" [circular]="true">
-                    <!-- [value]="produtos.imagem" -->
+                  <p-carousel  [value]="produtos.imagem" [showIndicators]="false" [circular]="true">
                     <ng-template pTemplate="item" let-imagem>
                       <div class="containerImagem">
-                        <img  src="assets/produtos/Plant-Prod-MJ-4-31-37-Finisher-12255.jpg" alt="imagem produto" class="img" (click)="navigateProduto(produtos)">
-                        <!-- [src]="imagem.imagem" -->
+                        <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateProduto(produtos)">
                       </div>
                     </ng-template>
                   </p-carousel>
