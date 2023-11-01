@@ -26,6 +26,7 @@
   padding: 13px 0;
   margin-bottom: 15px;
   margin-left: 5px;
+  width: 100%;
 }
 
 .containerBotoes{
@@ -48,6 +49,11 @@
 
 .botaoAlterarEmail{
   width: 49%;
+}
+
+.cepLargura{
+  display: flex;
+  width: 100%;
 }
 
 .botaoAlterarSenha{
@@ -319,6 +325,57 @@
 .labelCadastrarNovoEnd{
   font-size: 24px;
 }
+
+:host ::ng-deep .p-dropdown{
+  width: 100%;
+}
+
+@media (max-width: 980px) {
+
+  .cepECidade{
+    flex-direction: column;
+  }
+
+  .cep{
+    width: 100%;
+  }  
+
+  .containerCidadeEstado{
+    flex-direction: column;
+  }
+
+  .divEstado{
+    margin-left: 0;
+  }
+
+  .NumeroEComplemento{
+    flex-direction: column;
+  }
+
+  .numero{
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 800px) {
+
+  .divGeral{
+   
+    flex-direction: column;
+
+  }
+
+  .containerDados{
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .containerEnderecos{
+    width: 100%;
+  }
+}
+
 
 @media (max-width: 600px) {
 
