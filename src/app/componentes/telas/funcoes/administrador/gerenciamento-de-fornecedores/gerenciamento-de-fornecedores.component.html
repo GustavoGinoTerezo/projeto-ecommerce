@@ -23,19 +23,21 @@
           </span>
         </div>
       </div>
-      <div class="containerCepECidade">
-        <div class="divInputCep">
-          <span class="p-float-label">
-            <p-inputMask mask="99999-999" [(ngModel)]="cep"></p-inputMask>
-            <label htmlFor="username">CEP</label>
-          </span>
-        </div>
-        <div class="divInputCidade">
-          <span class="p-float-label">
-            <input pInputText id="cidade"
-            [(ngModel)]="cidade"/>
-            <label htmlFor="username">Cidade</label>
-          </span>
+      <div class="containerCepECidadeEstado">
+        <div class="containerCepCidade">
+          <div class="divInputCep">
+            <span class="p-float-label">
+              <p-inputMask mask="99999-999" [(ngModel)]="cep"></p-inputMask>
+              <label htmlFor="username">CEP</label>
+            </span>
+          </div>
+          <div class="divInputCidade">
+            <span class="p-float-label">
+              <input pInputText id="cidade"
+              [(ngModel)]="cidade"/>
+              <label htmlFor="username">Cidade</label>
+            </span>
+          </div>
         </div>
         <div class="divDropdownEstado">
           <p-dropdown
@@ -55,23 +57,25 @@
             <label htmlFor="username">Bairro</label>
           </span>
         </div>
-        <div class="divInputRua">
-          <span class="p-float-label">
-            <input pInputText
-            id="rua"
-            [(ngModel)]="rua"
-            >
-            <label htmlFor="username">Rua</label>
-          </span>
-        </div>
-        <div class="divInputNumeroResidencia">
-          <span class="p-float-label">
-            <input pInputText
-            id="numeroresidencia"
-            [(ngModel)]="numeroEmpresa"
-            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-            <label htmlFor="username">Nº da empresa</label>
-          </span>
+        <div class="containerRuaNumeroEmpresa">
+          <div class="divInputRua">
+            <span class="p-float-label">
+              <input pInputText
+              id="rua"
+              [(ngModel)]="rua"
+              >
+              <label htmlFor="username">Rua</label>
+            </span>
+          </div>
+          <div class="divInputNumeroResidencia">
+            <span class="p-float-label">
+              <input pInputText
+              id="numeroresidencia"
+              [(ngModel)]="numeroEmpresa"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+              <label htmlFor="username">Nº da empresa</label>
+            </span>
+          </div>
         </div>
         
       </div>
@@ -97,54 +101,55 @@
 
     </div>
     <div class="containerBotoesAdicionarProdutos">
-      <div class="divInputs">
-        <p-button label="Adicionar Fornecedor"
-        [disabled]="habilitarBotao()"
-        (onClick)="cadastrarFornecedor()"
-        styleClass="p-button-raised p-button-success"
-
-        ></p-button>
+      <div class="containerBotoesUm">
+        <div class="divInputs espacamento">
+          <p-button label="Adicionar Fornecedor"
+          [disabled]="habilitarBotao()"
+          (onClick)="cadastrarFornecedor()"
+          styleClass="p-button-raised p-button-success"
+          ></p-button>
+        </div>
+        <div class="divInputs">
+          <p-button label="Atualizar Fornecedor"
+            [disabled]="desabilitarBotao ||
+            !this.nomeFornecedor ||
+            !this.cnpj ||
+            !this.inscricaoEstadual ||
+            !this.cep  ||
+            !this.cidade ||
+            !this.bairro ||
+            !this.rua ||
+            !this.numeroEmpresa ||
+            !this.descricaoFornecedor "
+            styleClass="p-button-raised p-button-warning"
+            (onClick)="atualizarFornecedor()"
+          ></p-button>
+        </div>
       </div>
-      <div class="divInputs">
-        <p-button label="Atualizar Fornecedor"
-          [disabled]="desabilitarBotao ||
-          !this.nomeFornecedor ||
-          !this.cnpj ||
-          !this.inscricaoEstadual ||
-          !this.cep  ||
-          !this.cidade ||
-          !this.bairro ||
-          !this.rua ||
-          !this.numeroEmpresa ||
-          !this.descricaoFornecedor "
-          styleClass="p-button-raised p-button-warning"
-          (onClick)="atualizarFornecedor()"
-
-        ></p-button>
-      </div>
-      <div class="divInputs">
-        <p-button label="Excluir Fornecedor"
-          [disabled]="desabilitarBotao ||
-          !this.nomeFornecedor ||
-          !this.cnpj ||
-          !this.inscricaoEstadual ||
-          !this.cep  ||
-          !this.cidade ||
-          !this.bairro ||
-          !this.rua ||
-          !this.numeroEmpresa ||
-          !this.descricaoFornecedor "
-          styleClass="p-button-raised p-button-danger"
-          (onClick)="excluirFornecedor()"
-        ></p-button>
-      </div>
-      <div class="divInputs">
-        <p-button
-          label="Limpar campos"
-          (onClick)="limparCampos()"
-
-          styleClass="p-button-raised p-button-info"
-        ></p-button>
+      <div class="containerBotoesDois">
+        <div class="divInputs espacamento">
+          <p-button label="Excluir Fornecedor"
+            [disabled]="desabilitarBotao ||
+            !this.nomeFornecedor ||
+            !this.cnpj ||
+            !this.inscricaoEstadual ||
+            !this.cep  ||
+            !this.cidade ||
+            !this.bairro ||
+            !this.rua ||
+            !this.numeroEmpresa ||
+            !this.descricaoFornecedor "
+            styleClass="p-button-raised p-button-danger"
+            (onClick)="excluirFornecedor()"
+          ></p-button>
+        </div>
+        <div class="divInputs ">
+          <p-button
+            label="Limpar campos"
+            (onClick)="limparCampos()"
+            styleClass="p-button-raised p-button-info"
+          ></p-button>
+        </div>
       </div>
     </div>
     <div class="tabelaClientes">

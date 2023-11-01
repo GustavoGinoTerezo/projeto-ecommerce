@@ -156,7 +156,7 @@
 .divInputs {
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 100%;
   padding: 0 10px;
 }
 
@@ -249,16 +249,70 @@
   margin-bottom: 15px;
 }
 
-.containerCepECidade {
+.containerCepECidadeEstado {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.containerCepCidade{
+  display: flex;
+  width: 100%;
 }
 
 .containerBairroRuaENumeroResidencia {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.containerRuaNumeroEmpresa{
+  display: flex;
+  width: 100%;
+}
+
+.containerBotoesUm{
+  width: 100%;
+  display: flex;
+}
+
+.containerBotoesDois{
+  width: 100%;
+  display: flex;
+}
+
+@media (max-width: 980px) {
+
+  .containerCepECidadeEstado{
+    flex-direction: column;
+  }
+
+  .divInputCep{
+    width: 100%;
+  }
+
+  .divDropdownEstado{
+    width: 100%;
+  }
+
+  .containerBairroRuaENumeroResidencia{
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 880px) {
+
+  .containerBotoesUm{
+    flex-direction: column;
+  }
+
+  .containerBotoesDois{
+    flex-direction: column;
+  }
+
+  .espacamento{
+    margin-bottom: 15px;
+  }
 }
 
 @media (max-width: 600px) {
