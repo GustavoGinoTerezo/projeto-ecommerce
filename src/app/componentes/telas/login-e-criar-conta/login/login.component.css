@@ -26,6 +26,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 5px;
 }
 
 .labelNaoPossuiConta{
@@ -67,11 +68,15 @@
     margin-bottom: 25px;
   }
 
+  .espacamento{
+    margin-bottom: 15px;
+  }
+
   /*área do lembre de mim*/
   .remember {
     display: flex;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     justify-content: space-between;
   }
 
