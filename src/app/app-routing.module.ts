@@ -20,6 +20,8 @@ import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes
 import { GerenciamentoDeFornecedoresComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-fornecedores/gerenciamento-de-fornecedores.component';
 import { GerenciamentoDeEstadosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-estados/gerenciamento-de-estados/gerenciamento-de-estados.component';
 import { GerenciamentoDeCaixasComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-caixas/gerenciamento-de-caixas/gerenciamento-de-caixas.component';
+import { GuardaRotaUsuario } from './guarda-de-rota/guarda-de-rota';
+import { GuardaRotaAdmin } from './guarda-de-rota/guarda-rota-admin';
 
 
 const routes: Routes = [
@@ -55,59 +57,73 @@ const routes: Routes = [
   {
     path: 'pagamento',
     component: PagamentoComponent,
+    canActivate: [GuardaRotaUsuario]
   },
   {
     path: 'confirmacao',
     component: ConfirmacaoComponent,
+    canActivate: [GuardaRotaUsuario]
   },
   {
     path: 'minha-conta',
     component: MinhaContaComponent,
     pathMatch: 'full',
+    canActivate: [GuardaRotaUsuario]
   },
   {
     path: 'meus-dados',
     component: MeusDadosComponent,
+    canActivate: [GuardaRotaUsuario]
   },
   {
     path: 'meus-pedidos',
     component: MeusPedidosComponent,
+    canActivate: [GuardaRotaUsuario]
   },
   {
     path: 'gerenciamento-de-categorias-e-produtos',
     component: GerenciamentoDeCategoriasEProdutosComponent,
+    canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-estoque',
     component: GerenciamentoDeEstoqueComponent,
+    canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-estados',
     component: GerenciamentoDeEstadosComponent,
+    canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-fornecedores',
     component: GerenciamentoDeFornecedoresComponent,
+    canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-clientes',
     component: GerenciamentoDeClientesComponent,
+    canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'personalizacao',
     component: PersonalizacaoComponent,
+    canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-caixas',
     component: GerenciamentoDeCaixasComponent,
+    canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-comentarios',
     component: GerenciamentoDeComentariosComponent,
+    canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'relatorio-de-vendas-e-controle-de-pedidos',
     component: RelatoriosDeVendasEControleDePedidosComponent,
+    canActivate: [GuardaRotaAdmin]
   },
 ];
 
