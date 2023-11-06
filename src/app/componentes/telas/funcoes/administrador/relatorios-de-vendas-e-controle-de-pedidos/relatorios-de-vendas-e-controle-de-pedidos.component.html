@@ -200,7 +200,7 @@
 <p-dialog
   header="Solicitar transportadora"
   [(visible)]="visibleTransportadora"
-  [style]="{width: '550px'}"
+  [style]="{width: '50%', height: '100%'}"
   [draggable]="false"
   [resizable]="false"
   [focusTrap]="true"
@@ -208,7 +208,245 @@
   [focusOnShow]="true"
   >
 
-  <div></div>
-  <div></div>
+  <div>
+
+    <hr>
+    <h2>Pedido</h2>
+
+    <div class="tipoPedido">
+      <p-dropdown
+        [options]="tipoPedido"
+        [showClear]="true"
+        [(ngModel)]="tipoPedidoSelecionado"
+        placeholder="Tipo de pedido"
+        optionLabel="nome"
+        >
+      </p-dropdown>
+      
+    </div>
+
+    <div class="valorMercPesoMerc">
+
+      <div class="tamanhoInputs espacoInput">
+        <span class="p-float-label">
+          <input pInputText id="numerocliente"
+          [(ngModel)]="valorMercadoria"
+          (keypress)="onKeyPress($event)" (input)="onValorProdutoInput"
+          class="input"
+          />
+          <label htmlFor="username">Valor da mercadoria</label>
+        </span>
+      </div>
+
+      <div class="tamanhoInputs">
+        <span class="p-float-label">
+          <input pInputText id="pesomercadoria"
+          [(ngModel)]="pesoMercadoria"
+          (keypress)="onKeyPress($event)" (input)="onValorProdutoInput"
+          class="input"
+          />
+          <label htmlFor="pesomercadoria">Peso da mercadoria</label>
+        </span>
+      </div>
+
+    </div>
+    <div class="valorMercPesoMerc" *ngIf="pessoaJuridica">
+
+      <div class="tamanhoInputs espacoInput">
+        <span class="p-float-label">
+          <input pInputText id="chavenf"
+          [(ngModel)]="chaveNf"
+          
+          class="input"
+          />
+          <label htmlFor="chavenf">Chave da Nota fiscal</label>
+        </span>
+      </div>
+
+      <div class="tamanhoInputs espacoInput">
+        <span class="p-float-label">
+          <input pInputText id="numeronf"
+          [(ngModel)]="numeroNf"
+          
+          class="input"
+          />
+          <label htmlFor="numeronf">Número da Nota fiscal</label>
+        </span>
+      </div>
+
+      <div class="tamanhoInputs">
+        <span class="p-float-label">
+          <input pInputText id="serienf"
+          [(ngModel)]="serieNf"
+          
+          class="input"
+          />
+          <label htmlFor="serienf">Série da Nota fiscal</label>
+        </span>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <h2>Destinatário - Tipo</h2>
+    
+    <div class="divisaoInput espacamentoFim">
+      <div class="tamanhoswitch">
+        <p-inputSwitch id="switch1" [(ngModel)]="pessoaFisica" (click)="togglePessoaFisica()"></p-inputSwitch>
+        <label class="labelswitch" for="switch1">Pessoa física</label>
+      </div>
+      <div class="tamanhoswitch">
+        <p-inputSwitch id="switch2" [(ngModel)]="pessoaJuridica" (click)="togglePessoaJuridica()"></p-inputSwitch>
+        <label class="labelswitch" for="switch2">Pessoa jurídica</label>
+      </div>
+      
+    </div>
+    
+    <hr>
+
+    <h2>Destinatário - Endereço</h2>
+
+    <div class="divisaoInput">
+      <div class="tamanhoInputs espacoInput">
+        <span class="p-float-label">
+          <input pInputText id="logradouro"
+          [(ngModel)]="logradouro"
+          class="input"
+          />
+          <label htmlFor="logradouro">Logradouro</label>
+        </span>
+      </div>
+      <div class="tamanhoInputs">
+        <span class="p-float-label">
+          <input pInputText id="numero"
+          [(ngModel)]="numero"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+          class="input"
+          />
+          <label htmlFor="numero">Número</label>
+        </span>
+      </div>
+    </div>
+    <div class="divisaoInput">
+      <div class="tamanhoInputs espacoInput">
+        <span class="p-float-label">
+          <input pInputText id="bairro"
+          [(ngModel)]="bairro"
+          
+          class="input"
+          />
+          <label htmlFor="bairro">Bairro</label>
+        </span>
+      </div>
+      <div class="tamanhoInputs">
+        <div class="containerInputCep">
+          <span class="p-float-label">
+            <p-inputMask mask="99999-999" [(ngModel)]="cep"></p-inputMask>
+            <label htmlFor="cep">CEP</label>
+          </span>
+        </div>
+      </div>
+    </div> 
+    <div class="divisaoInput espacamentoFim">
+      <div class="tamanhoInputs espacoInput">
+        <span class="p-float-label">
+          <input pInputText id="cidade"
+          [(ngModel)]="cidade"
+          class="input"
+          />
+          <label htmlFor="cidade">Cidade</label>
+        </span>
+      </div>
+      <div class="tamanhoInputs">
+        <p-dropdown
+          [options]="estado"
+          [showClear]="true"
+          [(ngModel)]="estadoSelecionado"
+          placeholder="Estado"
+          optionLabel="nome">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <hr>
+
+    <h2>Volumes para o envio</h2>
+
+    <span class="p-float-label marginTop">
+      <p-inputNumber [(ngModel)]="quantidadeCaixas" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100"> </p-inputNumber>
+      <label htmlFor="number-input">Quantidade de caixas</label>
+    </span>
+
+    <div *ngFor="let index of generateRange(quantidadeCaixas); let i = index">
+      
+      <div class="inputsVolume">
+        <div class="tamanhoInputs inputEspacamento">
+          <span class="p-float-label">
+            <input pInputText id="numero"
+            [(ngModel)]="numero"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            class="input"
+            />
+            <label htmlFor="numero">Peso do volume (caixa)</label>
+          </span>
+        </div>
+        <div class="tamanhoInputs inputEspacamento">
+          <span class="p-float-label">
+            <input pInputText id="numero"
+            [(ngModel)]="numero"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            class="input"
+            />
+            <label htmlFor="numero">Altura do volume (caixa)</label>
+          </span>
+        </div>
+        <div class="tamanhoInputs">
+          <span class="p-float-label">
+            <input pInputText id="numero"
+            [(ngModel)]="numero"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            class="input"
+            />
+            <label htmlFor="numero">Largura do volume (caixa)</label>
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <div class="tamanhoInputs">
+          <span class="p-float-label">
+            <input pInputText id="numero"
+            [(ngModel)]="numero"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            class="input"
+            />
+            <label htmlFor="numero">Comprimento do volume (caixa)</label>
+          </span>
+        </div>
+
+        <div>
+          <p-dropdown
+            [options]="tipoVolume"
+            [showClear]="true"
+            [(ngModel)]="estadoSelecionado"
+            placeholder="Tipo de volume"
+            optionLabel="tipo">
+          </p-dropdown>
+        </div>
+      </div>
+      
+
+
+    </div>
+
+
+    <hr>
+
+  </div>
+
+  <div>
+
+  </div>
 
 </p-dialog>

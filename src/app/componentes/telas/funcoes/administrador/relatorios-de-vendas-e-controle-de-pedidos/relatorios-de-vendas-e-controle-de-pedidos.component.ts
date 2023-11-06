@@ -14,6 +14,16 @@ interface Column {
   customExportHeader?: string;
 }
 
+interface TipoVolume {
+  tipo: string;
+  caracter: string;
+}
+
+interface EstadoLocal {
+  nome: string;
+  uf: string;
+}
+
 interface ExportColumn {
   title: string;
   dataKey: string;
@@ -42,10 +52,44 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
     { title: 'Total do produto', dataKey: 'totalProduto' },
   ];
   visibleNotaFiscal: boolean = false;
-  visibleTransportadora: boolean = false;
+  visibleTransportadora: boolean = true;
   selectedProductImages: any[] = [];
   numeroDoPedido!: string;
   numeroNotaFiscal!: number
+
+  tipoPedido!: any[];
+  tipoPedidoSelecionado: any | null = null;
+
+  valorMercadoria!: number | null;
+  pesoMercadoria!: number | null;
+
+  chaveNf!: string;
+  numeroNf!: string;
+  serieNf!: string;
+
+  nomeCliente!: string;
+  cpfOuCnpj!: string;
+  telefone!: string;
+  email!: string;
+
+  pessoaFisica!: boolean
+  pessoaJuridica!: boolean
+
+  logradouro!: string;
+  numero!: string;
+  bairro!: string;
+  cep!: string;
+  cidade!: string;
+
+  estado!: EstadoLocal[];
+  estadoSelecionado: EstadoLocal | null = null;
+
+  quantidadeCaixas!: number;
+
+  caixaValues: string[] = [];
+
+  tipoVolume!: TipoVolume[]
+  tipoVolumeSelecionado: TipoVolume[] | null = null;
 
   constructor(
     private pedidoService: ServicePedidoService,
@@ -53,6 +97,59 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
     ) {}
 
   ngOnInit() {
+    
+    this.tipoPedido = [
+      {
+        nome: "Declaração",
+        tipo: "D"
+      },
+      {
+        nome: "Nota fiscal",
+        tipo: "N"
+      }
+    ];
+
+    this.tipoVolume = [
+      {
+        tipo: 'Caixa',
+        caracter: 'C'
+      },
+      {
+        tipo: 'Envelope',
+        caracter: 'E'
+      }
+    ]
+
+    this.estado = [
+      { nome: 'Acre', uf: 'AC'},
+      { nome: 'Alagoas', uf: 'AL'},
+      { nome: 'Amapá', uf: 'AP'},
+      { nome: 'Amazonas', uf: 'AM'},
+      { nome: 'Bahia', uf: 'BA'},
+      { nome: 'Ceará', uf: 'CE'},
+      { nome: 'Distrito Federal', uf: 'DF'},
+      { nome: 'Espírito Santo', uf: 'ES'},
+      { nome: 'Goiás', uf: 'GO'},
+      { nome: 'Maranhão', uf: 'MA'},
+      { nome: 'Mato Grosso', uf: 'MT'},
+      { nome: 'Mato Grosso do Sul', uf: 'MS'},
+      { nome: 'Minas Gerais', uf: 'MG'},
+      { nome: 'Pará', uf: 'PA'},
+      { nome: 'Paraíba', uf: 'PB'},
+      { nome: 'Paraná', uf: 'PR'},
+      { nome: 'Pernambuco', uf: 'PE'},
+      { nome: 'Piauí', uf: 'PI'},
+      { nome: 'Rio de Janeiro', uf: 'RJ'},
+      { nome: 'Rio Grande do Norte', uf: 'RN'},
+      { nome: 'Rio Grande do Sul', uf: 'RS'},
+      { nome: 'Rondônia', uf: 'RO'},
+      { nome: 'Roraima', uf: 'RR'},
+      { nome: 'Santa Catarina', uf: 'SC'},
+      { nome: 'São Paulo', uf: 'SP'},
+      { nome: 'Sergipe', uf: 'SE'},
+      { nome: 'Tocantins', uf: 'TO'}
+    ];
+    
     this.pedidos = this.pedidoService.getPedido();
 
     this.exportColumns = this.cols.map((col) => ({ title: col.customExportHeader || col.header, dataKey: col.field }));
@@ -308,7 +405,42 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
     return rendaGeral;
   }
 
+  onKeyPress(event: KeyboardEvent): void {
+    const allowedCharacters = /[0-9.]/; // Permitir números e ponto (.)
+    const inputChar = String.fromCharCode(event.charCode);
 
+    if (!allowedCharacters.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
+  onValorProdutoInput(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement).value;
+    const sanitizedValue = inputValue.replace(/,/g, '.'); // Substituir todas as vírgulas por ponto (.)
+
+    // Verificar se há um valor válido antes de formatar
+    if (sanitizedValue !== null && sanitizedValue !== '') {
+      const parsedValue = parseFloat(sanitizedValue);
+      this.valorMercadoria = isNaN(parsedValue) ? null : parsedValue;
+    } else {
+      this.valorMercadoria = null;
+    }
+  }
+
+  togglePessoaFisica() {
+    this.pessoaFisica = true;
+    this.pessoaJuridica = false;
+  }
+
+  togglePessoaJuridica() {
+    this.pessoaJuridica = true;
+    this.pessoaFisica = false;
+  }  
+
+  generateRange(n: number): number[] {
+    return Array.from({ length: n }, (_, i) => i);
+  }
+  
 
 }
 
