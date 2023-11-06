@@ -142,7 +142,6 @@
       cursor: pointer;
       padding: 10px;
 
-
       .sidenav-link-icon{
         font-size: 22px;
         width: 2rem;
@@ -159,8 +158,29 @@
       }
     }
 
+    .sidenav-nav-link-indisponivel{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 3rem; /* Tamanho da altura dos botões */
+      overflow: hidden;
+      min-height: 3rem;
+      max-height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.205);
+      text-decoration: none;
+      border-radius: 0.313rem;
+      transition: all .3s ease;
+      cursor: pointer;
+      padding: 10px;
+    }
+
     .sidenav-nav-link:hover{
       background-color: var(--hover-background-botoes);
+    }
+    
+    .sidenav-nav-link-indisponivel:hover{
+      background-color: rgba(0, 0, 0, 0.332);
     }
   }
 }

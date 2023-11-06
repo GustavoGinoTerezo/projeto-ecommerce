@@ -23,8 +23,8 @@ export interface Produtos {
   imagem?: Imagens[];
   preco?: number;
   status?: Status[];
-  qtdEntrada?: Entrada[];
-  qtdSaida?: Saida[];
+  qtdEntrada?: any;
+  qtdSaida?: any;
   descBreve?: string;
   descCompleta?: string;
   informacaoTecnica?: string;

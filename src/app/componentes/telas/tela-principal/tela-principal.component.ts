@@ -240,6 +240,7 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     this.produtosDestaqueSubscription = this.categoriasService.getProdutosDestaque().subscribe((produtosDestaqueAPI) => {
       this.produtosDestaque = produtosDestaqueAPI;
       console.log("8")
+      console.log(this.produtosDestaque)
     });
 
     this.produtosMaisVendidosSubscription = this.categoriasService.getProdutosMaisVendidos().subscribe((produtosMaisVendidosAPI) => {
@@ -268,7 +269,12 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   }
 
   adicionarAoCarrinho(produto: Produtos): void {
-    // Recupere o carrinho criptografado do sessionStorage
+
+    const saldo = produto.qtdEntrada - produto.qtdSaida
+
+    if(saldo > 0) {
+      
+      // Recupere o carrinho criptografado do sessionStorage
     const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
     const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
 
@@ -317,6 +323,19 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
 
       this.appToast.toast(tipo, titulo, mensagem, icon);
     }
+
+    } else {
+
+      const tipo = 'error';
+      const titulo = '';
+      const mensagem = 'Produto sem estoque.';
+      const icon = 'fa-solid fa-face-frown';
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
+    }
+
+    
   }
 
 }
