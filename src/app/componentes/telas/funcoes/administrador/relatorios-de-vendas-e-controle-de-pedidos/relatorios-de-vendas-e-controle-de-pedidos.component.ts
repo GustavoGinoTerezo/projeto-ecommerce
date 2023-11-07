@@ -3,10 +3,24 @@ import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/serv
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
-import jsPDF from 'jspdf'; // Importe jsPDF dessa forma
-import 'jspdf-autotable'; // Importe jspdf-autotable
+import jsPDF from 'jspdf'; 
+import 'jspdf-autotable'; 
 import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
+import { Subscription } from 'rxjs';
+import { ServiceApiCaixaService } from 'src/app/services/servicesAPI/serviceAPI-Caixa/service-api-caixa.service';
+import { ServiceCaixaService } from 'src/app/services/serviceCaixa/service-caixa.service';
+
+interface Caixa {
+  peso: number;
+  altura: number;
+  largura: number;
+  comprimento: number;
+  tipo: string;
+  produto: string;
+  valor: number;
+  quantidade: number;
+}
 
 interface Column {
   field: string;
@@ -35,6 +49,8 @@ interface ExportColumn {
   styleUrls: ['./relatorios-de-vendas-e-controle-de-pedidos.component.css']
 })
 export class RelatoriosDeVendasEControleDePedidosComponent {
+
+  private caixasSubscription!: Subscription;
 
   pedidos!: Pedido[];
   carrinho: CarrinhoDeCompra[] = [];
@@ -88,16 +104,29 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
 
   caixaValues: string[] = [];
 
+  pesoVolume: (any | null)[] = [];
+  alturaVolume: (any | null)[] = [];
+  larguraVolume: (any | null)[] = [];
+  compVolume: (any | null)[] = [];
+  nomeConteudoVolume: (any | null)[] = [];
+  valorConteudoVolume: (any | null)[] = [];
+
   tipoVolume!: TipoVolume[]
-  tipoVolumeSelecionado: TipoVolume[] | null = null;
+  tipoVolumeSelecionado: TipoVolume[] = [];
+
+  caixas: any[] = []
+  caixaSelecionada: any[] = []
 
   constructor(
     private pedidoService: ServicePedidoService,
-    private usuarioService: ServiceUsuariosService
+    private usuarioService: ServiceUsuariosService,
+    private caixasService: ServiceCaixaService,
     ) {}
 
   ngOnInit() {
     
+    // this.carregarCaixasAPI()
+
     this.tipoPedido = [
       {
         nome: "Declaração",
@@ -153,6 +182,26 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
     this.pedidos = this.pedidoService.getPedido();
 
     this.exportColumns = this.cols.map((col) => ({ title: col.customExportHeader || col.header, dataKey: col.field }));
+
+  }
+
+  ngOnDestroy() {
+
+    if (this.caixasSubscription) {
+      this.caixasSubscription.unsubscribe();
+    }
+
+  }
+
+  async carregarCaixasAPI() {
+    await this.caixasService.atualizarCaixasDaAPI();
+    this.carregarCaixas();
+  }
+
+  carregarCaixas() {
+    this.caixasSubscription = this.caixasService.getCaixas().subscribe((caixasAPI) => {
+      this.caixas = caixasAPI;
+    });
   }
 
   filterTable(event: any) {
@@ -442,6 +491,72 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
   }
   
 
+  gerarJSON() {
+
+    const jsonPedido = {
+      pedido: {
+        tipo: "D", 
+        numeroCli: "104", 
+        vlrMerc: 0, 
+        pesoMerc: 0,
+      },
+      origem: "nome-plataforma",
+      remetente: {
+        nome: "Loja do João",
+        cnpjCpf: "99999999978052",
+        endereco: {
+          logradouro: "Roque Petroni Júnior",
+          numero: "1021",
+          complemento: "SL 50A",
+          bairro: "Jardim das Acácias",
+          cep: "04707000",
+          cidade: "São Paulo",
+          uf: "SP",
+        },
+        contato: "Sr. João",
+        email: "contato@lojadojoao.com.br",
+        telefone: "1170707070",
+        celular: "11970707070",
+      },
+      destinatario: {
+        nome: "Maria da Silva",
+        cnpjCpf: "", 
+        endereco: {
+          logradouro: "Rua Dentista Barreto",
+          numero: "99",
+          complemento: "",
+          bairro: "Vila Carrão",
+          cep: "03420000",
+          cidade: "São Paulo",
+          uf: "SP",
+        },
+        contato: "Maria",
+        email: "maria70707070@gmail.com",
+        telefone: "", 
+        celular: "1160606060",
+      },
+      produtos: [] as Caixa[], 
+      referencia: "kangu_R_30227267999958_3_02472064000110",
+      servicos: ["P", "R"],
+    };
+  
+    for (let i = 0; i < this.quantidadeCaixas; i++) {
+      const caixa: Caixa = {
+        peso: this.pesoVolume[i],
+        altura: this.alturaVolume[i],
+        largura: this.larguraVolume[i],
+        comprimento: this.compVolume[i],
+        tipo: this.tipoVolumeSelecionado[i].caracter,
+        produto: this.nomeConteudoVolume[i],
+        valor: this.valorConteudoVolume[i],
+        quantidade: 1, // Defina a quantidade apropriada
+      };
+      jsonPedido.produtos.push(caixa);
+    }
+  
+    console.log(JSON.stringify(jsonPedido, null, 2));
+  }
+ 
 }
 
 

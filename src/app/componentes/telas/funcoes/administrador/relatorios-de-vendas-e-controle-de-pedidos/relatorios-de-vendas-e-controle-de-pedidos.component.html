@@ -380,11 +380,25 @@
 
     <div *ngFor="let index of generateRange(quantidadeCaixas); let i = index">
       
+      <h2>Caixa {{i + 1}}</h2>
+
+      <div class="containerCaixaRegistrada">
+        <div class="tamanhoInputs">
+          <p-dropdown
+            [options]="caixas"
+            [showClear]="true"
+            [(ngModel)]="caixaSelecionada[i]"
+            placeholder="Caixas cadastradas"
+            optionLabel="nome">
+          </p-dropdown>
+        </div>
+      </div>
+
       <div class="inputsVolume">
         <div class="tamanhoInputs inputEspacamento">
           <span class="p-float-label">
             <input pInputText id="numero"
-            [(ngModel)]="numero"
+            [(ngModel)]="pesoVolume[i]"
             oninput="this.value = this.value.replace(/[^0-9]/g, '')"
             class="input"
             />
@@ -394,7 +408,7 @@
         <div class="tamanhoInputs inputEspacamento">
           <span class="p-float-label">
             <input pInputText id="numero"
-            [(ngModel)]="numero"
+            [(ngModel)]="alturaVolume[i]"
             oninput="this.value = this.value.replace(/[^0-9]/g, '')"
             class="input"
             />
@@ -404,7 +418,7 @@
         <div class="tamanhoInputs">
           <span class="p-float-label">
             <input pInputText id="numero"
-            [(ngModel)]="numero"
+            [(ngModel)]="larguraVolume[i]"
             oninput="this.value = this.value.replace(/[^0-9]/g, '')"
             class="input"
             />
@@ -413,11 +427,11 @@
         </div>
       </div>
 
-      <div>
-        <div class="tamanhoInputs">
+      <div class="containerComprimTipoVolume">
+        <div class="tamanhoInputs espacoInput">
           <span class="p-float-label">
             <input pInputText id="numero"
-            [(ngModel)]="numero"
+            [(ngModel)]="compVolume[i]"
             oninput="this.value = this.value.replace(/[^0-9]/g, '')"
             class="input"
             />
@@ -425,23 +439,44 @@
           </span>
         </div>
 
-        <div>
+        <div class="tamanhoInputs">
           <p-dropdown
             [options]="tipoVolume"
             [showClear]="true"
-            [(ngModel)]="estadoSelecionado"
+            [(ngModel)]="tipoVolumeSelecionado[i]"
             placeholder="Tipo de volume"
             optionLabel="tipo">
           </p-dropdown>
         </div>
       </div>
       
+      <div class="containerNomeConteudoValorConteudo">
+        <div class="tamanhoInputs espacoInput">
+          <span class="p-float-label">
+            <input pInputText id="numero"
+            [(ngModel)]="nomeConteudoVolume[i]"
+            class="input"
+            />
+            <label htmlFor="numero">Nome do conteúdo do volume</label>
+          </span>
+        </div>
+        <div class="tamanhoInputs">
+          <span class="p-float-label">
+            <input pInputText id="numero"
+            [(ngModel)]="valorConteudoVolume[i]"
+            class="input"
+            (keypress)="onKeyPress($event)"
+            />
+            <label htmlFor="numero">Valor do conteúdo do volume</label>
+          </span>
+        </div>
+      </div>
 
+      <hr>
 
     </div>
 
-
-    <hr>
+    <p-button (onClick)="gerarJSON()"></p-button>
 
   </div>
 

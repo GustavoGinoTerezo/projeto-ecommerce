@@ -112,7 +112,6 @@
 }
 
 .inputEspacamento{
-  margin-bottom: 35px;
   margin-right: 15px;
 }
 
@@ -132,6 +131,7 @@
 .inputsVolume{
   width: 100%;
   display: flex;
+  margin-bottom: 35px;
 }
 
 .tipoPedido{
@@ -139,8 +139,25 @@
   margin-bottom: 35px;
 }
 
+.containerCaixaRegistrada{
+  width: 100%;
+  margin-bottom: 35px;
+}
+
 .input{
   width: 100%;
+}
+
+.containerComprimTipoVolume{
+  width: 100%;
+  display: flex;
+  margin-bottom: 35px;
+}
+
+.containerNomeConteudoValorConteudo{
+  width: 100%;
+  display: flex;
+  margin-bottom: 35px;
 }
 
 .valorMercPesoMerc{
@@ -159,6 +176,8 @@
   width: 100%;
   margin-top: 35px;
 }
+
+
 
 @media (max-width: 980px) {
 
