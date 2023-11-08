@@ -167,6 +167,13 @@
   margin-bottom: 35px;
 }
 
+.chaveNumeroSerieNf{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 35px;
+}
+
 .espacamentoFim{
   margin-bottom: 35px;
 }
@@ -177,10 +184,47 @@
   margin-top: 35px;
 }
 
+.switchs{
+  display: flex;
+  width: 100%;
+  margin-top: 35px;
+}
+
 .containerBotoes{
   display: flex;
   margin-top: 35px;
   width: 100%;
+}
+
+@media (max-width: 1440px) {
+
+  .chaveNumeroSerieNf{
+    flex-direction: column;
+  }
+
+  .marginWidth {
+    margin-bottom: 35px;
+  }
+
+  .valorMercPesoMerc{
+    flex-direction: column;
+  }
+
+  .divisaoInput{
+    flex-direction: column;
+  }
+
+  .inputsVolume{
+    flex-direction: column;
+  }
+
+  .containerComprimTipoVolume{
+    flex-direction: column;
+  }
+
+  .containerNomeConteudoValorConteudo{
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 980px) {
@@ -202,6 +246,10 @@
     width: 100%;
     display: flex;
   }
+
+}
+
+@media (max-width: 700px) {
 
 }
 

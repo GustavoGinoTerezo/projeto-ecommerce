@@ -227,7 +227,7 @@
 
     <div class="valorMercPesoMerc">
 
-      <div class="tamanhoInputs espacoInput">
+      <div class="tamanhoInputs espacoInput marginWidth">
         <span class="p-float-label">
           <input pInputText id="numerocliente"
           [(ngModel)]="valorMercadoria"
@@ -250,9 +250,9 @@
       </div>
 
     </div>
-    <div class="valorMercPesoMerc" *ngIf="pessoaJuridica">
+    <div class="chaveNumeroSerieNf" *ngIf="pessoaJuridica">
 
-      <div class="tamanhoInputs espacoInput">
+      <div class="tamanhoInputs espacoInput marginWidth">
         <span class="p-float-label">
           <input pInputText id="chavenf"
           [(ngModel)]="chaveNf"
@@ -263,7 +263,7 @@
         </span>
       </div>
 
-      <div class="tamanhoInputs espacoInput">
+      <div class="tamanhoInputs espacoInput marginWidth">
         <span class="p-float-label">
           <input pInputText id="numeronf"
           [(ngModel)]="numeroNf"
@@ -291,7 +291,7 @@
 
     <h2>Destinatário - Tipo</h2>
     
-    <div class="divisaoInput espacamentoFim">
+    <div class="switchs espacamentoFim">
       <div class="tamanhoswitch">
         <p-inputSwitch id="switch1" [(ngModel)]="pessoaFisica" (click)="togglePessoaFisica()"></p-inputSwitch>
         <label class="labelswitch" for="switch1">Pessoa física</label>
@@ -308,7 +308,7 @@
     <h2>Destinatário - Endereço</h2>
 
     <div class="divisaoInput">
-      <div class="tamanhoInputs espacoInput">
+      <div class="tamanhoInputs espacoInput marginWidth">
         <span class="p-float-label">
           <input pInputText id="logradouro"
           [(ngModel)]="logradouro"
@@ -329,7 +329,7 @@
       </div>
     </div>
     <div class="divisaoInput">
-      <div class="tamanhoInputs espacoInput">
+      <div class="tamanhoInputs espacoInput marginWidth">
         <span class="p-float-label">
           <input pInputText id="bairro"
           [(ngModel)]="bairro"
@@ -348,8 +348,8 @@
         </div>
       </div>
     </div> 
-    <div class="divisaoInput espacamentoFim">
-      <div class="tamanhoInputs espacoInput">
+    <div class="divisaoInput espacamentoFim ">
+      <div class="tamanhoInputs espacoInput marginWidth">
         <span class="p-float-label">
           <input pInputText id="cidade"
           [(ngModel)]="cidade"
@@ -396,7 +396,7 @@
       </div>
 
       <div class="inputsVolume">
-        <div class="tamanhoInputs inputEspacamento">
+        <div class="tamanhoInputs inputEspacamento marginWidth">
           <span class="p-float-label">
             <input pInputText id="numero"
             [(ngModel)]="pesoVolume[i]"
@@ -406,7 +406,7 @@
             <label htmlFor="numero">Peso do volume (caixa)</label>
           </span>
         </div>
-        <div class="tamanhoInputs inputEspacamento">
+        <div class="tamanhoInputs inputEspacamento marginWidth">
           <span class="p-float-label">
             <input pInputText id="numero"
             [(ngModel)]="alturaVolume[i]"
@@ -429,7 +429,7 @@
       </div>
 
       <div class="containerComprimTipoVolume">
-        <div class="tamanhoInputs espacoInput">
+        <div class="tamanhoInputs espacoInput marginWidth">
           <span class="p-float-label">
             <input pInputText id="numero"
             [(ngModel)]="compVolume[i]"
@@ -452,7 +452,7 @@
       </div>
       
       <div class="containerNomeConteudoValorConteudo">
-        <div class="tamanhoInputs espacoInput">
+        <div class="tamanhoInputs espacoInput marginWidth">
           <span class="p-float-label">
             <input pInputText id="numero"
             [(ngModel)]="nomeConteudoVolume[i]"
