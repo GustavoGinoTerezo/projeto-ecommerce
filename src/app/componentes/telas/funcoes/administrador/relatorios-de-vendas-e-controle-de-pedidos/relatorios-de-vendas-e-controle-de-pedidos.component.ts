@@ -100,7 +100,7 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
   estado!: EstadoLocal[];
   estadoSelecionado: EstadoLocal | null = null;
 
-  quantidadeCaixas!: number;
+  quantidadeCaixas: number = 0;
 
   caixaValues: string[] = [];
 
@@ -116,6 +116,8 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
 
   caixas: any[] = []
   caixaSelecionada: any[] = []
+
+  selectedIndex: number = 0; 
 
   constructor(
     private pedidoService: ServicePedidoService,
@@ -490,7 +492,6 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
     return Array.from({ length: n }, (_, i) => i);
   }
   
-
   gerarJSON() {
 
     const jsonPedido = {
@@ -556,7 +557,95 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
   
     console.log(JSON.stringify(jsonPedido, null, 2));
   }
+  
+  caixaSelecionadaEvent(event: any, index: number) {
+    
+    this.alturaVolume[index] = event.value.altura;
+    this.larguraVolume[index] = event.value.largura;
+    this.compVolume[index] = event.value.comprimento;
+        
+  }
+
+  limparCampos(){
+
+    this.tipoPedidoSelecionado = null;
+    this.valorMercadoria = null;
+    this.pesoMercadoria = null;
+    this.chaveNf = '';
+    this.numeroNf = '';
+    this.serieNf = '';
+    this.logradouro = '';
+    this.numero = '';
+    this.bairro = '';
+    this.cep = '';
+    this.cidade = '';
+    this.quantidadeCaixas = 0;
+    this.pesoVolume = [];
+    this.alturaVolume = [];
+    this.larguraVolume = [];
+    this.compVolume = [];
+    this.nomeConteudoVolume = [];
+    this.valorConteudoVolume = [];
+    this.pessoaFisica = false;
+    this.pessoaJuridica = false;
+    this.estadoSelecionado = null;
+    this.caixaSelecionada = [];
+    this.tipoVolumeSelecionado = [];
+    
+  }
  
+  validarBotao(): boolean {
+    
+    if(
+      this.validarInputs() || 
+      this.validarInputPessoaJuridica() ||
+      this.quantidadeCaixas === 0
+    ){
+        return true
+    }
+
+    return false
+
+  }
+
+  validarInputs(): boolean {
+    if(
+      !this.tipoPedidoSelecionado ||
+      !this.valorMercadoria ||
+      !this.pesoMercadoria ||
+      !this.logradouro ||
+      !this.numero ||
+      !this.bairro ||
+      !this.cep ||
+      !this.cidade ||
+      !this.estadoSelecionado ||
+      !this.pesoVolume ||
+      !this.alturaVolume ||
+      !this.larguraVolume ||
+      (!this.pessoaFisica && !this.pessoaJuridica) ||
+      !this.compVolume ||
+      !this.nomeConteudoVolume ||
+      !this.valorConteudoVolume ||
+      !this.tipoVolumeSelecionado ||
+      !this.alturaVolume ||
+      !this.compVolume ||
+      !this.larguraVolume ||
+      !this.nomeConteudoVolume ||
+      !this.valorConteudoVolume
+    ){
+      return true
+    }
+    return false
+  }
+
+  validarInputPessoaJuridica(): boolean {
+
+    if(this.pessoaJuridica && !this.chaveNf || !this.numeroNf || !this.serieNf){
+      return true
+    }
+    return false
+  }
+  
 }
 
 

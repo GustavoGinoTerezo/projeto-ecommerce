@@ -388,6 +388,7 @@
             [options]="caixas"
             [showClear]="true"
             [(ngModel)]="caixaSelecionada[i]"
+            (onChange)="caixaSelecionadaEvent($event, i)"
             placeholder="Caixas cadastradas"
             optionLabel="nome">
           </p-dropdown>
@@ -476,7 +477,10 @@
 
     </div>
 
-    <p-button (onClick)="gerarJSON()"></p-button>
+    <div class="containerBotoes">
+      <p-button class="espacoInput" label="Enviar solicitação" (onClick)="gerarJSON()" [disabled]="validarBotao()"></p-button>
+      <p-button (onClick)="limparCampos()" label="Limpar campos" ></p-button>
+    </div>
 
   </div>
 

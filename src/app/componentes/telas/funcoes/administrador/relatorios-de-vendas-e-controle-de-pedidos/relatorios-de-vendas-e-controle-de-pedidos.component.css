@@ -177,7 +177,11 @@
   margin-top: 35px;
 }
 
-
+.containerBotoes{
+  display: flex;
+  margin-top: 35px;
+  width: 100%;
+}
 
 @media (max-width: 980px) {
 
@@ -228,3 +232,4 @@
   }
 
 }
+
