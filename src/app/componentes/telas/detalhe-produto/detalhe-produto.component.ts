@@ -12,6 +12,16 @@ import { ServiceFornecedoresService } from 'src/app/services/serviceFornecedores
 import { ServiceNotaFiscalService } from 'src/app/services/serviceNotaFiscal/service-nota-fiscal.service';
 import { AppComponent } from 'src/app/app.component';
 
+interface Caixa {
+  peso: number;
+  altura: number;
+  largura: number;
+  comprimento: number;
+  tipo: string;
+  produto: string;
+  valor: number;
+}
+
 @Component({
   selector: 'app-detalhe-produto',
   templateUrl: './detalhe-produto.component.html',
@@ -80,6 +90,8 @@ export class DetalheProdutoComponent implements OnInit {
     window.addEventListener('beforeunload', () => {
       sessionStorage.removeItem('start');
     });
+
+    
 
   }
 
@@ -184,6 +196,7 @@ export class DetalheProdutoComponent implements OnInit {
 
     this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
       this.produtos = produtosAPI;
+      
     });
 
 
@@ -197,6 +210,8 @@ export class DetalheProdutoComponent implements OnInit {
         this.prodId = this.produto.prodId
 
         this.nomeProdutoFormatado = this.produtoService.formatarNomeProduto(this.nomeProduto);
+
+        console.log(this.produto)
       }
     })
   }
@@ -300,6 +315,34 @@ export class DetalheProdutoComponent implements OnInit {
     this.novoComentario = '';
 
   }
+
+  gerarFrete() {
+
+    const cepDestinoSemHifen = this.cep.replace('-', '');
+  
+    const jsonPedido = {
+      cepOrigem: "04707000",
+      cepDestino: cepDestinoSemHifen,
+      origem: "nome-plataforma",
+      produtos: [] as Caixa[], 
+      servicos: ["E", "X", "R"],
+    };
+  
+    const caixa: Caixa = {
+      peso: this.produto.peso,
+      altura: this.produto.altura,
+      largura: this.produto.largura,
+      comprimento: this.produto.comprimento,
+      tipo: "C",
+      produto: "Fertilizante",
+      valor: this.produto.preco
+    };
+  
+    jsonPedido.produtos.push(caixa);
+  
+    console.log(jsonPedido);
+  }
+  
 
 }
 
