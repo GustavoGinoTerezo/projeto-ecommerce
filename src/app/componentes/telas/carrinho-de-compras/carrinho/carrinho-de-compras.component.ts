@@ -9,11 +9,22 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
 
+interface Caixa {
+  peso?: number;
+  altura?: number;
+  largura?: number;
+  comprimento?: number;
+  tipo?: string;
+  produto?: string;
+  valor?: number;
+}
+
 @Component({
   selector: 'app-carrinho-de-compras',
   templateUrl: './carrinho-de-compras.component.html',
   styleUrls: ['./carrinho-de-compras.component.css']
 })
+
 export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
 
   private inicializacaoConcluidaSubscription!: Subscription;
@@ -148,8 +159,6 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
     this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
       this.produtos = produtosAPI;
 
-      console.log("Produtos", this.produtos)
-
       const carrinhoMap: { [id: number]: CarrinhoDeCompra } = {};
 
         this.carrinhoIds.forEach((produtoId: any) => {
@@ -162,6 +171,10 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
               // Caso contrário, crie um novo item no carrinho
               carrinhoMap[produtoId] = {
                 prodId: produtoEncontrado.prodId,
+                altura: produtoEncontrado.altura,
+                largura: produtoEncontrado.largura,
+                comprimento: produtoEncontrado.comprimento,
+                peso: produtoEncontrado.peso,
                 nomeProduto: produtoEncontrado.nome,
                 preco: produtoEncontrado.preco,
                 quantidade: 1, // Defina a quantidade inicial como 1
@@ -180,7 +193,40 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
 
   }
 
+  gerarFrete() {
 
+    const cepDestinoSemHifen = this.cep.replace('-', '');
+  
+    const jsonPedido = {
+      cepOrigem: "04707000",
+      cepDestino: cepDestinoSemHifen,
+      origem: "nome-plataforma",
+      produtos: [] as Caixa[],
+      servicos: ["E", "X", "R"],
+    };
+  
+    // Iterate over each product in the cart
+    for (const item of this.carrinho) {
+      // Create a Caixa object for each quantity of the product
+      for (let i = 0; i < item.quantidade!; i++) {
+        const caixa: Caixa = {
+          peso: item.peso,
+          altura: item.altura,
+          largura: item.largura,
+          comprimento: item.comprimento,
+          tipo: "C",
+          produto: item.nomeProduto,
+          valor: item.preco,
+        };
+  
+        // Add the Caixa object to the produtos array
+        jsonPedido.produtos.push(caixa);
+      }
+    }
+  
+    console.log(jsonPedido);
+  }
+  
   carregarEnderecos(){
     this.enderecosEntregaSubscription = this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe(async (enderecosEntregaAPI) => {
       this.enderecosEntrega = enderecosEntregaAPI;
@@ -189,10 +235,113 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
   }
 
   selecionarEndereco(endereco: EnderecoEntrega): void {
+    
     this.enderecoSelecionado = endereco;
-    console.log(this.enderecoSelecionado)
+
+    const cepDestinoSemHifen = this.enderecoSelecionado.cep.replace('-', '');
+
+    const jsonPedido = {
+      cepOrigem: "04707000",
+      cepDestino: cepDestinoSemHifen,
+      origem: "nome-plataforma",
+      produtos: [] as Caixa[],
+      servicos: ["E", "X", "R"],
+    };
+  
+    // Iterate over each product in the cart
+    for (const item of this.carrinho) {
+      // Create a Caixa object for each quantity of the product
+      for (let i = 0; i < item.quantidade!; i++) {
+        const caixa: Caixa = {
+          peso: item.peso,
+          altura: item.altura,
+          largura: item.largura,
+          comprimento: item.comprimento,
+          tipo: "C",
+          produto: item.nomeProduto,
+          valor: item.preco,
+        };
+  
+        // Add the Caixa object to the produtos array
+        jsonPedido.produtos.push(caixa);
+      }
+    }
+  
+    console.log(jsonPedido);
+
   }
 
+  atualizarFrete() {
+        
+    if(this.cep) {
+
+      const cepDestinoSemHifen = this.cep.replace('-', '');
+
+      const jsonPedido = {
+        cepOrigem: "04707000",
+        cepDestino: cepDestinoSemHifen,
+        origem: "nome-plataforma",
+        produtos: [] as Caixa[],
+        servicos: ["E", "X", "R"],
+      };
+    
+      // Iterate over each product in the cart
+      for (const item of this.carrinho) {
+        // Create a Caixa object for each quantity of the product
+        for (let i = 0; i < item.quantidade!; i++) {
+          const caixa: Caixa = {
+            peso: item.peso,
+            altura: item.altura,
+            largura: item.largura,
+            comprimento: item.comprimento,
+            tipo: "C",
+            produto: item.nomeProduto,
+            valor: item.preco,
+          };
+    
+          // Add the Caixa object to the produtos array
+          jsonPedido.produtos.push(caixa);
+        }
+      }
+    
+      console.log(jsonPedido);
+    }
+
+    if(this.enderecoSelecionado.cep){
+
+      const cepDestinoSemHifen = this.enderecoSelecionado.cep.replace('-', '');
+  
+      const jsonPedido = {
+        cepOrigem: "04707000",
+        cepDestino: cepDestinoSemHifen,
+        origem: "nome-plataforma",
+        produtos: [] as Caixa[],
+        servicos: ["E", "X", "R"],
+      };
+    
+      // Iterate over each product in the cart
+      for (const item of this.carrinho) {
+        // Create a Caixa object for each quantity of the product
+        for (let i = 0; i < item.quantidade!; i++) {
+          const caixa: Caixa = {
+            peso: item.peso,
+            altura: item.altura,
+            largura: item.largura,
+            comprimento: item.comprimento,
+            tipo: "C",
+            produto: item.nomeProduto,
+            valor: item.preco,
+          };
+    
+          // Add the Caixa object to the produtos array
+          jsonPedido.produtos.push(caixa);
+        }
+      }
+    
+      console.log(jsonPedido);
+    }
+  }
+  
   atualizarQuantidade(item: CarrinhoDeCompra, newValue: number): void {
     // Encontre o produto correspondente no array de produtos
     const produtoEncontrado = this.produtos.find((produto) => produto.nome === item.nomeProduto);
@@ -239,10 +388,12 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
       item.quantidade = newValue;
       // Recalcule o valor total
       this.calcularValorTotal();
+      this.atualizarFrete()
     }
   }
 
   navegarPagamento(){
+
     const enderecoSelecionado = this.enderecoSelecionado.endId;
     const d880c83d159fd83056bf415dc345fdcbd5c642e26ca51703af13bc9db17838d2 = '9776a1b50191cae98292336600e0a7bd4263bf18b3d87c7dbb5cb3dd7f54438f';
 
@@ -254,7 +405,6 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
 
     this.router.navigate(['/pagamento']);
   }
-
 
   onPageChange(event: any): void {
     this.firstProduto = event.first;
@@ -294,7 +444,6 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
       this.calcularValorTotal();
     }
   }
-
 
   removeProdutoDoSessionStorage(produtoId: number): void {
     const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
@@ -343,7 +492,6 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
   formatarNomeProduto(produtos: string): string {
     return this.categoriasService.formatarNomeProduto(produtos);
   }
-
 
   get totalRecords(): number {
     return this.carrinho?.length || 0;

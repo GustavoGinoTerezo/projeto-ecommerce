@@ -401,15 +401,9 @@
     flex-direction: column;
   }
 
-}
-
-@media (max-width: 900px) {
-
   .divGeral{
     flex-direction: column;
   }
-
-  
 
   .containerValorTotal{
     margin-top: 5px;
