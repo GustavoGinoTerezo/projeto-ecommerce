@@ -238,78 +238,24 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
     
     this.enderecoSelecionado = endereco;
 
-    const cepDestinoSemHifen = this.enderecoSelecionado.cep.replace('-', '');
-
-    const jsonPedido = {
-      cepOrigem: "04707000",
-      cepDestino: cepDestinoSemHifen,
-      origem: "nome-plataforma",
-      produtos: [] as Caixa[],
-      servicos: ["E", "X", "R"],
-    };
-  
-    // Iterate over each product in the cart
-    for (const item of this.carrinho) {
-      // Create a Caixa object for each quantity of the product
-      for (let i = 0; i < item.quantidade!; i++) {
-        const caixa: Caixa = {
-          peso: item.peso,
-          altura: item.altura,
-          largura: item.largura,
-          comprimento: item.comprimento,
-          tipo: "C",
-          produto: item.nomeProduto,
-          valor: item.preco,
-        };
-  
-        // Add the Caixa object to the produtos array
-        jsonPedido.produtos.push(caixa);
-      }
-    }
-  
-    console.log(jsonPedido);
+    this.atualizarFreteLogado()
 
   }
 
   atualizarFrete() {
         
     if(this.cep) {
-
-      const cepDestinoSemHifen = this.cep.replace('-', '');
-
-      const jsonPedido = {
-        cepOrigem: "04707000",
-        cepDestino: cepDestinoSemHifen,
-        origem: "nome-plataforma",
-        produtos: [] as Caixa[],
-        servicos: ["E", "X", "R"],
-      };
-    
-      // Iterate over each product in the cart
-      for (const item of this.carrinho) {
-        // Create a Caixa object for each quantity of the product
-        for (let i = 0; i < item.quantidade!; i++) {
-          const caixa: Caixa = {
-            peso: item.peso,
-            altura: item.altura,
-            largura: item.largura,
-            comprimento: item.comprimento,
-            tipo: "C",
-            produto: item.nomeProduto,
-            valor: item.preco,
-          };
-    
-          // Add the Caixa object to the produtos array
-          jsonPedido.produtos.push(caixa);
-        }
-      }
-    
-      console.log(jsonPedido);
+      this.atualizarFreteNaoLogado()
     }
 
     if(this.enderecoSelecionado.cep){
+      this.atualizarFreteLogado()
+    }
+  }
 
-      const cepDestinoSemHifen = this.enderecoSelecionado.cep.replace('-', '');
+  atualizarFreteLogado(){
+
+    const cepDestinoSemHifen = this.enderecoSelecionado.cep.replace('-', '');
   
       const jsonPedido = {
         cepOrigem: "04707000",
@@ -339,7 +285,42 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
       }
     
       console.log(jsonPedido);
-    }
+
+  }
+
+  atualizarFreteNaoLogado(){
+
+    const cepDestinoSemHifen = this.cep.replace('-', '');
+
+      const jsonPedido = {
+        cepOrigem: "04707000",
+        cepDestino: cepDestinoSemHifen,
+        origem: "nome-plataforma",
+        produtos: [] as Caixa[],
+        servicos: ["E", "X", "R"],
+      };
+    
+      // Iterate over each product in the cart
+      for (const item of this.carrinho) {
+        // Create a Caixa object for each quantity of the product
+        for (let i = 0; i < item.quantidade!; i++) {
+          const caixa: Caixa = {
+            peso: item.peso,
+            altura: item.altura,
+            largura: item.largura,
+            comprimento: item.comprimento,
+            tipo: "C",
+            produto: item.nomeProduto,
+            valor: item.preco,
+          };
+    
+          // Add the Caixa object to the produtos array
+          jsonPedido.produtos.push(caixa);
+        }
+      }
+    
+      console.log(jsonPedido);
+
   }
   
   atualizarQuantidade(item: CarrinhoDeCompra, newValue: number): void {

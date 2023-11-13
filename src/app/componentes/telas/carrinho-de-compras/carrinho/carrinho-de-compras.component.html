@@ -18,7 +18,7 @@
           <div class="inputFreteEBotoes">
             <div class="divInputEBotao margem">
               <p-inputMask mask="99999-999" [(ngModel)]="cep" placeholder="CEP" class="margem"></p-inputMask>
-              <p-button (onClick)="gerarFrete()" label="Enviar" styleClass="p-button-outlined" class="buttonEnviar"></p-button>
+              <p-button (onClick)="gerarFrete()" label="Enviar" [disabled]="!cep" styleClass="p-button-outlined" class="buttonEnviar"></p-button>
             </div>
             <div class="divNaoLembroOCep">
               <p-button label="Não lembro do meu cep" styleClass="p-button-link" class="buttonNaoLembroOCep"></p-button>

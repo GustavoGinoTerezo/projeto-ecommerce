@@ -68,7 +68,7 @@ export class RelatoriosDeVendasEControleDePedidosComponent {
     { title: 'Total do produto', dataKey: 'totalProduto' },
   ];
   visibleNotaFiscal: boolean = false;
-  visibleTransportadora: boolean = true;
+  visibleTransportadora: boolean = false;
   selectedProductImages: any[] = [];
   numeroDoPedido!: string;
   numeroNotaFiscal!: number
