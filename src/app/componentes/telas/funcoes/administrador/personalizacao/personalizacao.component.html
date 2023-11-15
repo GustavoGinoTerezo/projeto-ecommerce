@@ -1,1 +1,25 @@
-<p>personalizacao works!</p>
+<div class="divGeral">
+    <div class="labelDoNomeDoProjeto">
+          Personalize as cores do ecommerce
+      </div>
+    <div class="DivP" >
+        <div class="pickers1">
+            <div >
+                <h1 class="labels"> Escolha uma cor secundária: </h1>
+            </div>       
+            <p-colorPicker class="picker" [(ngModel)]="cor1" (onChange)="atualizarCor1($event)"></p-colorPicker>
+        </div>
+        <div class="pickers2">
+            <div >
+                <h1 class="labels"> Escolha outra cor secundária: </h1>
+            </div>
+            <p-colorPicker  class="picker" [(ngModel)]="cor2" (onChange)="atualizarCor2($event)"></p-colorPicker>
+        </div>
+        <div class="pickers3">
+            <div >
+                <h1 class="labels"> Escolha a cor de fundo: </h1>
+            </div>
+            <p-colorPicker  class="picker" [(ngModel)]="cor3" (onChange)="atualizarCor3($event)"></p-colorPicker>
+        </div>
+    </div>
+</div>
