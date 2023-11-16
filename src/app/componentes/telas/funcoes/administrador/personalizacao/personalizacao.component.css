@@ -15,49 +15,287 @@
   height: 100%;
 }
 
+.containerPickersDiv1{
+  display: flex;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.containerPickersDiv2{
+  display: flex;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.containerInternoPickers1{
+  width: 100%;
+  margin-right: 5px;
+}
+
+.containerInternoPickers2{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.colorPickerLabel{
+  display: flex;
+  align-items: center;
+}
+
+.labelCor{
+  margin-left: 5px;
+  font-size: large;
+  font-weight: 600;
+}
+
+h2{
+  margin-bottom: 2px;
+}
+
 .pickers1{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
+  margin-right: 5px;
 }
 
 .pickers2{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
+  margin-right: 5px;
 }
 
 .pickers3{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
 }
 
 .pickers4{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
+  margin-bottom: 5px;
 }
 
 .pickers5{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
+  margin-bottom: 5px;
 }
 
 .pickers6{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
 }
 
 .pickers7{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
+  margin-bottom: 5px;
 }
 
 .pickers8{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
+  margin-bottom: 5px;
 }
 
 .pickers9{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
 }
 
 .pickers10{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
 }
 
 .pickers11{
-  
+  padding: 5px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.329);
 }
 
-.picker{
+.sidenav-nav {
+  list-style: none;
+  padding: 0.938rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidenav-nav-item {
+  width: 100%;
+  margin-bottom: 0.625rem;
+  margin-right: 10px;
+  background-color: var(--background-botoes);
+  border-radius: 0.313rem;
+}
+
+.sidenav-nav-link {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  min-width: 3rem;
+  text-decoration: none;
+  border-radius: 0.313rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.sidenav-link-icon {
+  font-size: 22px;
+  min-width: 2rem;
+  margin: 0 0.6rem;
+  text-align: center;
+  color: var(--textos-e-icones-botoes);
+}
+
+.sidenav-link-text {
+  color: var(--textos-e-icones-botoes);
+  word-wrap: break-word;
+  width: 50%;
+}
+
+.sidenav-nav-link:hover {
+  background-color: var(--hover-background-botoes);
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 80%;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease all;
+  background-color: var(--container-externo-cards-produtos);
+  border: 1px solid var(--borda-dos-containers);
+  border-radius: 8px;
+
+}
+
+.container:hover{
+  scale: 1.02;
+  transition: 0.3s ease all;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.668);
+}
+
+.containerInterno{
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--container-interno-cards-produtos);
+}
+
+.divCategoria{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  font-size: 30px;
+  font-weight: 500;
+  background-color: var(--background-das-divs-da-categoria);
+  border-radius: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.462);
+}
+
+.containerValorTotal{
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: var(--background-das-divs-da-categoria);
+}
+
+.labelValorTotal{
+  font-weight: 300;
+}
+
+.dadoValorTotal{
+  font-weight: 500;
+  margin-left: 25px;
+  font-size: 25px;
+  color: var(--cor-valor-total);
+}
+
+.formaPagamento{
+  font-weight: 500;
+} 
+
+hr{
+  width: 100%;
+}
+
+@media (max-width: 980px){
+
+  .containerPickersDiv2{
+    flex-direction: column;
+  }  
+
+  .pickers6 {
+    margin-bottom: 5px;
+  }
+
+  .pickers9 {
+    margin-bottom: 5px;
+  }
+
+  .pickers10 {
+    margin-bottom: 5px;
+  }
+
+  .pickers11 {
+    margin-bottom: 5px;
+  }
+
+}
+
+@media (max-width: 570px){
+
+  .containerPickersDiv1{
+    flex-direction: column;
+  }
+
+  .pickers1{
+    margin-bottom: 5px;
+  }
+
+  .pickers2{
+    margin-bottom: 5px;
+  }
+
 }

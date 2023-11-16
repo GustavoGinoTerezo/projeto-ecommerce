@@ -3,93 +3,207 @@
         Personalize as cores do ecommerce
     </h1>
     <div class="DivP">
-        <!-- Colorpicker 1 -->
-        <div class="pickers1">
-            <div>
-                <div class="labels">Escolha uma cor secundária:</div>
+        
+        <div class="containerPickersDiv1">
+            <!-- Colorpicker 1 -->
+            <div class="pickers1">
+                <div>
+                    <h2>Background</h2>
+                </div>
+                <div class="colorPickerLabel">
+                    <p-colorPicker class="picker" [(ngModel)]="cor1" (onChange)="atualizarCor1($event)"></p-colorPicker>
+                    <div class="labelCor">{{cor1}}</div>
+                </div>
             </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor1" (onChange)="atualizarCor1($event)"></p-colorPicker>
+            <!-- Colorpicker 2 -->
+            <div class="pickers2">
+                <div>
+                    <h2>Header e Rodapé</h2>
+                </div>
+                <div class="colorPickerLabel">
+                    <p-colorPicker class="picker" [(ngModel)]="cor2" (onChange)="atualizarCor2($event)"></p-colorPicker>
+                    <div class="labelCor">{{cor2}}</div>
+                </div>
+            </div>
+            <!-- Colorpicker 3 -->
+            <div class="pickers3">
+                <div>
+                    <h2>Scrollbar</h2>
+                </div>
+                <div class="colorPickerLabel">
+                    <p-colorPicker class="picker" [(ngModel)]="cor3" (onChange)="atualizarCor3($event)"></p-colorPicker>
+                    <div class="labelCor">{{cor3}}</div>
+                </div>
+            </div>
         </div>
 
-        <!-- Colorpicker 2 -->
-        <div class="pickers2">
-            <div>
-                <div class="labels">Escolha outra cor secundária:</div>
+        <div class="containerPickersDiv2">
+            
+            <div class="containerInternoPickers1">
+                <!-- Colorpicker 4 -->
+                <div class="pickers4">
+                    <div>
+                        <h2>Textos e Icones dos botões</h2>
+                    </div>
+                    <div class="colorPickerLabel">
+                        <p-colorPicker class="picker" [(ngModel)]="cor4" (onChange)="atualizarCor4($event)"></p-colorPicker>
+                        <div class="labelCor">{{cor4}}</div>
+                    </div>
+                </div>
+                <!-- Colorpicker 5 -->
+                <div class="pickers5">
+                    <div>
+                        <h2>Background dos botões</h2>
+                    </div>
+                    <div class="colorPickerLabel">
+                        <p-colorPicker class="picker" [(ngModel)]="cor5" (onChange)="atualizarCor5($event)"></p-colorPicker>
+                        <div class="labelCor">{{cor5}}</div>
+                    </div>
+                </div>
+                <!-- Colorpicker 6 -->
+                <div class="pickers6">
+                    <div>
+                        <h2>Hover do background os botões</h2>
+                    </div>
+                    <div class="colorPickerLabel">
+                        <p-colorPicker class="picker" [(ngModel)]="cor6" (onChange)="atualizarCor6($event)"></p-colorPicker>
+                        <div class="labelCor">{{cor6}}</div>
+                    </div>
+                </div>
             </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor2" (onChange)="atualizarCor2($event)"></p-colorPicker>
-        </div>
 
-        <!-- Colorpicker 3 -->
-        <div class="pickers3">
-            <div>
-                <div class="labels">Escolha a cor de fundo:</div>
+            <div class="containerInternoPickers2">
+                <ul class="sidenav-nav">
+                    <li class="sidenav-nav-item">
+                        <a
+                            class="sidenav-nav-link"
+                            routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                        >
+                            <i class="sidenav-link-icon fa-solid    fa-right-from-bracket"></i>
+                            <span class="sidenav-link-text" @fadeInOut >
+                                Logout  
+                            </span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor3" (onChange)="atualizarCor3($event)"></p-colorPicker>
-        </div>
 
-        <!-- Colorpicker 4 -->
-        <div class="pickers4">
-            <div>
-                <div class="labels">Escolha uma cor adicional:</div>
-            </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor4" (onChange)="atualizarCor4($event)"></p-colorPicker>
         </div>
-
-        <!-- Colorpicker 5 -->
-        <div class="pickers5">
-            <div>
-                <div class="labels">Escolha outra cor adicional:</div>
-            </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor5" (onChange)="atualizarCor5($event)"></p-colorPicker>
-        </div>
-
-        <!-- Colorpicker 6 -->
-        <div class="pickers6">
-            <div>
-                <div class="labels">Escolha a cor principal:</div>
-            </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor6" (onChange)="atualizarCor6($event)"></p-colorPicker>
-        </div>
-
+            
         <!-- Colorpicker 7 -->
-        <div class="pickers7">
-            <div>
-                <div class="labels">Escolha uma cor de destaque:</div>
+        <div class="containerPickersDiv2">
+            <div class="containerInternoPickers1">
+                <div class="pickers7">
+                        <div>
+                            <h2>Cor externa dos cards</h2>
+                        </div>
+                        <div class="colorPickerLabel">
+                            <p-colorPicker class="picker" [(ngModel)]="cor7" (onChange)="atualizarCor7($event)"></p-colorPicker>
+                            <div class="labelCor">{{cor7}}</div>
+                        </div>
+                </div>
+                <!-- Colorpicker 8 -->
+                <div class="pickers8">
+                    <div>
+                        <h2>Cor interna dos cards</h2>
+                    </div>
+                    <div class="colorPickerLabel">
+                        <p-colorPicker class="picker" [(ngModel)]="cor8" (onChange)="atualizarCor8($event)"></p-colorPicker>
+                        <div class="labelCor">{{cor8}}</div>
+                    </div>
+                </div>
+                <!-- Colorpicker 9 -->
+                <div class="pickers9">
+                    <div>
+                        <h2>Borda dos cards</h2>
+                    </div>
+                    <div class="colorPickerLabel">
+                        <p-colorPicker class="picker" [(ngModel)]="cor9" (onChange)="atualizarCor9($event)"></p-colorPicker>
+                        <div class="labelCor">{{cor9}}</div>
+                    </div>
+                </div>
             </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor7" (onChange)="atualizarCor7($event)"></p-colorPicker>
-        </div>
 
-        <!-- Colorpicker 8 -->
-        <div class="pickers8">
-            <div>
-                <div class="labels">Escolha uma cor de realce:</div>
+            <div class="containerInternoPickers2">
+                <div class="container">
+                    <div >
+                      <div class="containerInterno">
+                        <div class="tamanhoDivs">
+                          <div class="nome margem">
+                            Produto A
+                          </div>
+                        </div>
+                        <div class="tamanhoDivs">
+                          <div class="descricao margem">
+                            Desc. Breve
+                          </div>
+                        </div>
+                        <div class="preco margem">
+                          R$ 99.99
+                        </div>
+                      </div>
+                    </div>
+                  </div>
             </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor8" (onChange)="atualizarCor8($event)"></p-colorPicker>
-        </div>
-
-        <!-- Colorpicker 9 -->
-        <div class="pickers9">
-            <div>
-                <div class="labels">Escolha uma cor de contraste:</div>
-            </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor9" (onChange)="atualizarCor9($event)"></p-colorPicker>
         </div>
 
         <!-- Colorpicker 10 -->
-        <div class="pickers10">
-            <div>
-                <div class="labels">Escolha uma cor de texto:</div>
+        <div class="containerPickersDiv2">
+            <div class="containerInternoPickers1">
+                <div class="pickers10">
+                    <div>
+                        <h2>Background da Categoria especifica e Valor Total</h2>
+                    </div>
+                    <div class="colorPickerLabel">
+                        <p-colorPicker class="picker" [(ngModel)]="cor10" (onChange)="atualizarCor10($event)"></p-colorPicker>
+                        <div class="labelCor">{{cor10}}</div>
+                    </div>
+                </div>
             </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor10" (onChange)="atualizarCor10($event)"></p-colorPicker>
+            <div class="containerInternoPickers2">
+                <div class="divCategoria">
+                    Categoria A
+                </div>
+            </div>
         </div>
 
         <!-- Colorpicker 11 -->
-        <div class="pickers11">
-            <div>
-                <div class="labels">Escolha uma cor de borda:</div>
+        <div class="containerPickersDiv2">
+            <div class="containerInternoPickers1">
+                <div class="pickers11">
+                    <div>
+                        <h2>Cor da Fonte do card de Valor Total</h2>
+                    </div>
+                    <div class="colorPickerLabel">
+                        <p-colorPicker class="picker" [(ngModel)]="cor11" (onChange)="atualizarCor11($event)"></p-colorPicker>
+                        <div class="labelCor">{{cor11}}</div>
+                    </div>
+                </div>
             </div>
-            <p-colorPicker class="picker" [(ngModel)]="cor11" (onChange)="atualizarCor11($event)"></p-colorPicker>
+            <div class="containerInternoPickers2">
+
+                <div class="containerValorTotal">
+                    <div>
+                        <div class="labelValorTotal">
+                          Forma de pagamento:
+                        </div>
+                        <div class="formaPagamento">
+                          PIX
+                        </div>
+                    </div>
+                    <div class="dadoValorTotal">
+                      R$ 9999.99
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
+
+    <hr>
+
+    <h1>
+        Banners
+    </h1>
 </div>
