@@ -1,25 +1,95 @@
 <div class="divGeral">
-    <div class="labelDoNomeDoProjeto">
-          Personalize as cores do ecommerce
-      </div>
-    <div class="DivP" >
+    <h1>
+        Personalize as cores do ecommerce
+    </h1>
+    <div class="DivP">
+        <!-- Colorpicker 1 -->
         <div class="pickers1">
-            <div >
-                <h1 class="labels"> Escolha uma cor secundária: </h1>
-            </div>       
+            <div>
+                <div class="labels">Escolha uma cor secundária:</div>
+            </div>
             <p-colorPicker class="picker" [(ngModel)]="cor1" (onChange)="atualizarCor1($event)"></p-colorPicker>
         </div>
+
+        <!-- Colorpicker 2 -->
         <div class="pickers2">
-            <div >
-                <h1 class="labels"> Escolha outra cor secundária: </h1>
+            <div>
+                <div class="labels">Escolha outra cor secundária:</div>
             </div>
-            <p-colorPicker  class="picker" [(ngModel)]="cor2" (onChange)="atualizarCor2($event)"></p-colorPicker>
+            <p-colorPicker class="picker" [(ngModel)]="cor2" (onChange)="atualizarCor2($event)"></p-colorPicker>
         </div>
+
+        <!-- Colorpicker 3 -->
         <div class="pickers3">
-            <div >
-                <h1 class="labels"> Escolha a cor de fundo: </h1>
+            <div>
+                <div class="labels">Escolha a cor de fundo:</div>
             </div>
-            <p-colorPicker  class="picker" [(ngModel)]="cor3" (onChange)="atualizarCor3($event)"></p-colorPicker>
+            <p-colorPicker class="picker" [(ngModel)]="cor3" (onChange)="atualizarCor3($event)"></p-colorPicker>
         </div>
+
+        <!-- Colorpicker 4 -->
+        <div class="pickers4">
+            <div>
+                <div class="labels">Escolha uma cor adicional:</div>
+            </div>
+            <p-colorPicker class="picker" [(ngModel)]="cor4" (onChange)="atualizarCor4($event)"></p-colorPicker>
+        </div>
+
+        <!-- Colorpicker 5 -->
+        <div class="pickers5">
+            <div>
+                <div class="labels">Escolha outra cor adicional:</div>
+            </div>
+            <p-colorPicker class="picker" [(ngModel)]="cor5" (onChange)="atualizarCor5($event)"></p-colorPicker>
+        </div>
+
+        <!-- Colorpicker 6 -->
+        <div class="pickers6">
+            <div>
+                <div class="labels">Escolha a cor principal:</div>
+            </div>
+            <p-colorPicker class="picker" [(ngModel)]="cor6" (onChange)="atualizarCor6($event)"></p-colorPicker>
+        </div>
+
+        <!-- Colorpicker 7 -->
+        <div class="pickers7">
+            <div>
+                <div class="labels">Escolha uma cor de destaque:</div>
+            </div>
+            <p-colorPicker class="picker" [(ngModel)]="cor7" (onChange)="atualizarCor7($event)"></p-colorPicker>
+        </div>
+
+        <!-- Colorpicker 8 -->
+        <div class="pickers8">
+            <div>
+                <div class="labels">Escolha uma cor de realce:</div>
+            </div>
+            <p-colorPicker class="picker" [(ngModel)]="cor8" (onChange)="atualizarCor8($event)"></p-colorPicker>
+        </div>
+
+        <!-- Colorpicker 9 -->
+        <div class="pickers9">
+            <div>
+                <div class="labels">Escolha uma cor de contraste:</div>
+            </div>
+            <p-colorPicker class="picker" [(ngModel)]="cor9" (onChange)="atualizarCor9($event)"></p-colorPicker>
+        </div>
+
+        <!-- Colorpicker 10 -->
+        <div class="pickers10">
+            <div>
+                <div class="labels">Escolha uma cor de texto:</div>
+            </div>
+            <p-colorPicker class="picker" [(ngModel)]="cor10" (onChange)="atualizarCor10($event)"></p-colorPicker>
+        </div>
+
+        <!-- Colorpicker 11 -->
+        <div class="pickers11">
+            <div>
+                <div class="labels">Escolha uma cor de borda:</div>
+            </div>
+            <p-colorPicker class="picker" [(ngModel)]="cor11" (onChange)="atualizarCor11($event)"></p-colorPicker>
+        </div>
+
     </div>
 </div>
