@@ -40,7 +40,6 @@ export class PersonalizacaoComponent {
 
   constructor(private colorService: ServiceColorPickerService ) {}
 
-  //ligando a cor escolhida até styles.css
   ngOnInit() {
 
     this.tipoBanner = [
@@ -115,16 +114,13 @@ export class PersonalizacaoComponent {
   }
 
   ngOnDestroy() {
-    // Cancela a inscrição ao destruir o componente
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  //Atualizando cores
   atualizarCor1(novaCor: any) {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon1(corSelecionada);
-
     }
   }
 
@@ -132,7 +128,6 @@ export class PersonalizacaoComponent {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon2(corSelecionada);
-
     }
   }
 
@@ -140,7 +135,6 @@ export class PersonalizacaoComponent {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon3(corSelecionada);
-
     }
   }
 
@@ -148,7 +142,6 @@ export class PersonalizacaoComponent {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon4(corSelecionada);
-
     }
   }
 
@@ -156,7 +149,6 @@ export class PersonalizacaoComponent {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon5(corSelecionada);
-
     }
   }
 
@@ -164,7 +156,6 @@ export class PersonalizacaoComponent {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon6(corSelecionada);
-
     }
   }
 
@@ -172,7 +163,6 @@ export class PersonalizacaoComponent {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon7(corSelecionada);
-
     }
   }
 
@@ -180,7 +170,6 @@ export class PersonalizacaoComponent {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon8(corSelecionada);
-
     }
   }
 
@@ -188,7 +177,6 @@ export class PersonalizacaoComponent {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon9(corSelecionada);
-
     }
   }
 
@@ -196,7 +184,6 @@ export class PersonalizacaoComponent {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon10(corSelecionada);
-
     }
   }
 
@@ -204,7 +191,6 @@ export class PersonalizacaoComponent {
     if (novaCor && novaCor.value) {
       const corSelecionada = novaCor.value;
       this.colorService.atualizarTon11(corSelecionada);
-
     }
   }
 
@@ -226,10 +212,6 @@ export class PersonalizacaoComponent {
   
   atualizarInputComBannerSelecionado (banner: any) {
     
-    // this.nfEntradaId = nota.NfEntradaID
-    // this.numeroNotaFiscalGerenciamento = nota.numeroNota
-
-    // this.ativarBotoes = false
   }
 
 }
