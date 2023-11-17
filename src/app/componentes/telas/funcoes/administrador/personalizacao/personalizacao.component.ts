@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Table } from 'primeng/table';
+import { Subscription } from 'rxjs';
 import { ServiceColorPickerService } from 'src/app/services/serviceColorPicker/service-color-picker.service';
+
+interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
+}
 
 @Component({
   selector: 'app-personalizacao',
@@ -7,6 +14,10 @@ import { ServiceColorPickerService } from 'src/app/services/serviceColorPicker/s
   styleUrls: ['./personalizacao.component.css']
 })
 export class PersonalizacaoComponent {
+
+  private subscriptions: Subscription[] = [];
+
+  @ViewChild('banners') banners!: Table;
 
   cor1: string = ''; 
   cor2: string = '';
@@ -20,64 +31,92 @@ export class PersonalizacaoComponent {
   cor10: string = '';
   cor11: string = '';
 
+  uploadedFiles: any[] = [];
+
+  tipoBanner!: any[]
+  tipoBannerSelecionado: any;
+
+  bannersAPI!: any[]
+
   constructor(private colorService: ServiceColorPickerService ) {}
 
   //ligando a cor escolhida até styles.css
   ngOnInit() {
-    this.colorService.ton1$.subscribe(novaCor => {
+
+    this.tipoBanner = [
+      {
+        tipo: 0,
+        nome: "Principal"
+      },
+      {
+        tipo: 1,
+        nome: "Intermediário"
+      },
+      {
+        tipo: 2,
+        nome: "Pequeno"
+      }
+    ]
+
+    this.subscriptions.push(this.colorService.ton1$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
       estilo.setProperty('--background', novaCor);
-    });
+    }));
 
-    this.colorService.ton2$.subscribe(novaCor => {
+    this.subscriptions.push(this.colorService.ton2$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--header-rodape', novaCor);
-    });
+      estilo.setProperty('--background', novaCor);
+    }));
 
-    this.colorService.ton3$.subscribe(novaCor => {
+    this.subscriptions.push(this.colorService.ton3$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--scrollbar', novaCor);
-    });
+      estilo.setProperty('--background', novaCor);
+    }));
 
-    this.colorService.ton4$.subscribe(novaCor => {
+    this.subscriptions.push(this.colorService.ton4$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--textos-e-icones-botoes', novaCor);
-    });
+      estilo.setProperty('--background', novaCor);
+    }));
 
-    this.colorService.ton5$.subscribe(novaCor => {
+    this.subscriptions.push(this.colorService.ton5$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background-botoes', novaCor);
-    });
+      estilo.setProperty('--background', novaCor);
+    }));
 
-    this.colorService.ton6$.subscribe(novaCor => {
+    this.subscriptions.push(this.colorService.ton6$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--hover-background-botoes', novaCor);
-    });
+      estilo.setProperty('--background', novaCor);
+    }));
 
-    this.colorService.ton7$.subscribe(novaCor => {
+    this.subscriptions.push(this.colorService.ton7$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--container-externo-cards-produtos', novaCor);
-    });
+      estilo.setProperty('--background', novaCor);
+    }));
 
-    this.colorService.ton8$.subscribe(novaCor => {
+    this.subscriptions.push(this.colorService.ton8$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--container-interno-cards-produtos', novaCor);
-    });
+      estilo.setProperty('--background', novaCor);
+    }));
 
-    this.colorService.ton9$.subscribe(novaCor => {
+    this.subscriptions.push(this.colorService.ton9$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--borda-dos-containers', novaCor);
-    });
+      estilo.setProperty('--background', novaCor);
+    }));
 
-    this.colorService.ton10$.subscribe(novaCor => {
+    this.subscriptions.push(this.colorService.ton10$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background-das-divs-da-categoria', novaCor);
-    });
+      estilo.setProperty('--background', novaCor);
+    }));
 
-    this.colorService.ton11$.subscribe(novaCor => {
+    this.subscriptions.push(this.colorService.ton11$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--cor-valor-total', novaCor);
-    });
+      estilo.setProperty('--background', novaCor);
+    }));
+  }
+
+  ngOnDestroy() {
+    // Cancela a inscrição ao destruir o componente
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   //Atualizando cores
@@ -167,6 +206,30 @@ export class PersonalizacaoComponent {
       this.colorService.atualizarTon11(corSelecionada);
 
     }
+  }
+
+  onUpload(event:UploadEvent) {
+    for(let file of event.files) {
+        this.uploadedFiles.push(file);
+    }
+  }
+  
+  bannerSelecionado(event: any) {
+    this.tipoBannerSelecionado = event.value;
+  }
+
+  filterTableBanners(event: any) {
+    const filterValue = event.target.value.toLowerCase(); // Obtém o valor do campo de pesquisa em minúsculas
+    this.banners.filter(filterValue, 'nome', 'contains'); // Aplica o filtro na coluna 'nome' que contém o valor
+  }
+
+  
+  atualizarInputComBannerSelecionado (banner: any) {
+    
+    // this.nfEntradaId = nota.NfEntradaID
+    // this.numeroNotaFiscalGerenciamento = nota.numeroNota
+
+    // this.ativarBotoes = false
   }
 
 }

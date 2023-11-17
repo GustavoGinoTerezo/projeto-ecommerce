@@ -204,6 +204,86 @@
     <hr>
 
     <h1>
-        Banners
+        Gerenciamento de Banners
     </h1>
+    <div class="divTipoBannerEUploader">
+        <div class="divDropDown">
+            <p-dropdown
+              [options]="tipoBanner"
+              [(ngModel)]="tipoBannerSelecionado"
+              (onChange)="bannerSelecionado($event)"
+              optionLabel="nome"
+              filterBy="nome"
+              placeholder="Selecione o tipo do banner"
+            >
+              <!-- Selected Item Template -->
+              <ng-template pTemplate="selectedItem">
+                <div class="flex align-items-center gap-2" *ngIf="tipoBannerSelecionado">
+                  <div>{{ tipoBannerSelecionado.nome }}</div>
+                </div>
+              </ng-template>
+              <!-- Item Template -->
+              <ng-template let-tipoBanner pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                  <div>{{ tipoBanner.nome }}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+        </div>
+        <div>
+            <p-fileUpload chooseIcon="fa-solid fa-plus" chooseLabel="Selecionar" name="demo[]" (onUpload)="onUpload($event)" [multiple]="true" accept="image/*">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload>
+        </div>
+    </div>
+
+    <div class="tabelaBanners">
+        <div>
+            <p-table
+                #banners
+                [value]="bannersAPI"
+                [rowHover]="true"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                [paginator]="true"
+                [rows]="5"
+                [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[5, 10, 15]"
+                dataKey="nome"
+            >
+                <ng-template pTemplate="caption">
+                    <div class="table-header">
+                    <div class="input">
+                        <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="filterTableBanners($event)" placeholder="Buscar Banner" />
+                        </span>
+                    </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 5rem"></th>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Excluir</th>
+                </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-banner>
+                <tr [pSelectableRow]="banner" (click)="atualizarInputComBannerSelecionado(banner)">
+                    <td>
+                    </td>
+                    <td>{{ banner.nome }}</td>
+                    <td>{{ banner.tipo }}</td>
+                    <td>
+                        <p-button styleClass="p-button-danger" icon="fa-solid fa-xmark" ></p-button>
+                    </td>
+                </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
 </div>
