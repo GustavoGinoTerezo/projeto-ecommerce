@@ -400,7 +400,7 @@
             [(ngModel)]="enderecoFiltradoSelecionado"
             (onChange)="enderecoEntregaSelecionado($event)"
             optionLabel="identificacao"
-            [disabled]="habilitarDropdownEnderecosEntrega"
+            [disabled]="!habilitarDropdownEnderecosEntrega"
             [filter]="true"
             filterBy="identificacao"
             [showClear]="true"

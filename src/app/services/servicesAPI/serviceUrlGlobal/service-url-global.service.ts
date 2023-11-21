@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 export class ServiceUrlGlobalService {
 
-  url: string = 'https://plum-important-adder.cyclic.app/';
+  url: string = 'http://62.72.1.71:3333/';
 
   constructor() { }
 }

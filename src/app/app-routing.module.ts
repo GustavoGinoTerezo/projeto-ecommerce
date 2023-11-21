@@ -22,6 +22,7 @@ import { GerenciamentoDeEstadosComponent } from './componentes/telas/funcoes/adm
 import { GerenciamentoDeCaixasComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-caixas/gerenciamento-de-caixas/gerenciamento-de-caixas.component';
 import { GuardaRotaUsuario } from './guarda-de-rota/guarda-de-rota';
 import { GuardaRotaAdmin } from './guarda-de-rota/guarda-rota-admin';
+import { ConclusaoDeCompraComponent } from './componentes/telas/carrinho-de-compras/conclusao-de-compra/conclusao-de-compra.component';
 
 
 const routes: Routes = [
@@ -62,6 +63,11 @@ const routes: Routes = [
   {
     path: 'confirmacao',
     component: ConfirmacaoComponent,
+    canActivate: [GuardaRotaUsuario]
+  },
+  {
+    path: 'conclusao-da-compra',
+    component: ConclusaoDeCompraComponent,
     canActivate: [GuardaRotaUsuario]
   },
   {

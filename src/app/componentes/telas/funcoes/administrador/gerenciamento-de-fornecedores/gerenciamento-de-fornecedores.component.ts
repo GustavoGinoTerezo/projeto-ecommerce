@@ -86,9 +86,9 @@ export class GerenciamentoDeFornecedoresComponent {
       { nome: 'Tocantins', uf: 'TO'}
     ];
 
-    // this.carregarFornecedoresAPI()
+    this.carregarFornecedoresAPI()
 
-    // this.carregarEstadosAPI()
+    this.carregarEstadosAPI()
 
   }
 
@@ -133,7 +133,7 @@ export class GerenciamentoDeFornecedoresComponent {
 
     this.fornecedorId = fornecedor.FornecedorId
 
-    this.nomeFornecedor = fornecedor.nome;
+    this.nomeFornecedor = fornecedor.nomefornecedor;
     this.cnpj = fornecedor.cnpj;
     this.inscricaoEstadual = fornecedor.inscricaoEstadual;
     this.cep = fornecedor.cep;
@@ -205,6 +205,7 @@ export class GerenciamentoDeFornecedoresComponent {
       if (estadoEncontrado) {
         
         const dataFornecedor = {
+          nomefornecedor: this.nomeFornecedor,
           endereco: this.rua,
           cidade: this.cidade,
           bairro: this.bairro,
@@ -263,6 +264,7 @@ export class GerenciamentoDeFornecedoresComponent {
         const fornecedorId = this.fornecedorId;
 
         const novoDataFornecedor = {
+          nomefornecedor: this.nomeFornecedor,
           endereco: this.rua,
           cidade: this.cidade,
           bairro: this.bairro,

@@ -330,4 +330,5 @@ export class ConfirmacaoComponent implements OnInit{
   get totalRecords(): number {
     return this.carrinho?.length || 0;
   }
+
 }
