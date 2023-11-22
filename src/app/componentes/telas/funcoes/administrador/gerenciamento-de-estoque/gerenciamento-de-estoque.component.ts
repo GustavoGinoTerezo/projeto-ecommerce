@@ -94,11 +94,11 @@ export class GerenciamentoDeEstoqueComponent {
       sessionStorage.removeItem('start');
     });
 
-    this.carregarFornecedoresAPI()
+    // this.carregarFornecedoresAPI()
 
-    this.carregarNotaFiscalCorpoAPI()
+    // this.carregarNotaFiscalCorpoAPI()
 
-    this.carregarNotaFiscalCabecaAPI()
+    // this.carregarNotaFiscalCabecaAPI()
   }
 
   ngOnDestroy() {

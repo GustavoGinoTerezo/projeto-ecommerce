@@ -68,7 +68,7 @@ const routes: Routes = [
   {
     path: 'conclusao-da-compra',
     component: ConclusaoDeCompraComponent,
-    canActivate: [GuardaRotaUsuario]
+    
   },
   {
     path: 'minha-conta',
