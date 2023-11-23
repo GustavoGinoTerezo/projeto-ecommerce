@@ -64,52 +64,52 @@ export class PersonalizacaoComponent {
 
     this.subscriptions.push(this.colorService.ton2$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
+      estilo.setProperty('--header-rodape', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton3$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
+      estilo.setProperty('--scrollbar', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton4$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
+      estilo.setProperty('--textos-e-icones-botoes', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton5$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
+      estilo.setProperty('--background-botoes', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton6$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
+      estilo.setProperty('--hover-background-botoes', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton7$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
+      estilo.setProperty('--container-externo-cards-produtos', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton8$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
+      estilo.setProperty('--container-interno-cards-produtos', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton9$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
+      estilo.setProperty('--borda-dos-containers', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton10$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
+      estilo.setProperty('--background-das-divs-da-categoria', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton11$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
+      estilo.setProperty('--cor-valor-total', novaCor);
     }));
   }
 
