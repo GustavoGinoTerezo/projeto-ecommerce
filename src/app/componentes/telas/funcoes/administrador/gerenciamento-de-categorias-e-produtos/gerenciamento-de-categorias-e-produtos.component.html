@@ -212,7 +212,7 @@
         <div class="containerUploadFoto">
           <div class="fileUploadFotos scrollwrap">
             <p-fileUpload
-            chooseLabel="Adicionar"
+            chooseLabel="Selecionar"
             chooseIcon="fa-solid fa-plus"
             cancelLabel="Cancelar"
             [showUploadButton]="false"
@@ -238,7 +238,17 @@
           </div>
 
           <div class="fileUploadFormulacao scrollwrap">
-            <p-fileUpload chooseLabel="Adicionar" chooseIcon="fa-solid fa-plus"  cancelLabel="Cancelar" [showUploadButton]="false" name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*" [maxFileSize]="100000000">
+            <p-fileUpload 
+              chooseLabel="Selecionar" 
+              chooseIcon="fa-solid fa-plus"  
+              cancelLabel="Cancelar" 
+              [showUploadButton]="false" 
+              name="myfile[]" 
+              url="https://www.primefaces.org/cdn/api/upload.php" 
+              [multiple]="true" 
+              accept="image/*" 
+              [maxFileSize]="100000000"
+              (onSelect)="onUploadFormulacao($event)">
                 <ng-template pTemplate="toolbar">
                   <div class="labelFotos">
                     Escolher formulação do produto
@@ -250,7 +260,6 @@
             </p-fileUpload>
           </div>
         </div>
-
     </div>
   </div>
   <div class="containerBotoesAdicionarProdutos">
@@ -277,44 +286,45 @@
       </div>
       <div class="divInputs">
         <p-button label="Atualizar produto"
-        [disabled]="
-        !adicionarProdutoDisabled ||
-        !nomeProduto ||
-        !pesoProduto ||
-        !alturaProduto ||
-        !larguraProduto ||
-        !comprimentoProduto ||
-        !categoriasSelecionadaInput ||
-        !valorProdutoFormatted ||
-        !selectedStatus ||
-        !selectedLayout ||
-        !descBreve ||
-        !descCompleta ||
-        !informacaoTecnica"
-        styleClass="p-button-raised p-button-warning"
-        (onClick)="atualizarProduto()"
+          [disabled]="
+          !adicionarProdutoDisabled ||
+          !nomeProduto ||
+          !pesoProduto ||
+          !alturaProduto ||
+          !larguraProduto ||
+          !comprimentoProduto ||
+          !categoriasSelecionadaInput ||
+          !valorProdutoFormatted ||
+          !selectedStatus ||
+          !selectedLayout ||
+          !descBreve ||
+          !descCompleta ||
+          !informacaoTecnica"
+          styleClass="p-button-raised p-button-warning"
+          (onClick)="atualizarProduto()"
         ></p-button>
       </div>
     </div>
     <div class="containerBotoesDois">
       <div class="divInputs">
         <p-button label="Excluir produto"
-        [disabled]="
-        !adicionarProdutoDisabled ||
-        !nomeProduto ||
-        !pesoProduto ||
-        !alturaProduto ||
-        !larguraProduto ||
-        !comprimentoProduto ||
-        !categoriasSelecionadaInput ||
-        !valorProdutoFormatted ||
-        !selectedStatus ||
-        !selectedLayout ||
-        !descBreve ||
-        !descCompleta ||
-        !informacaoTecnica"
-        styleClass="p-button-raised p-button-danger"
-        (onClick)="excluirProduto()"></p-button>
+          [disabled]="
+          !adicionarProdutoDisabled ||
+          !nomeProduto ||
+          !pesoProduto ||
+          !alturaProduto ||
+          !larguraProduto ||
+          !comprimentoProduto ||
+          !categoriasSelecionadaInput ||
+          !valorProdutoFormatted ||
+          !selectedStatus ||
+          !selectedLayout ||
+          !descBreve ||
+          !descCompleta ||
+          !informacaoTecnica"
+          styleClass="p-button-raised p-button-danger"
+          (onClick)="excluirProduto()">
+        </p-button>
       </div>
       <div class="divInputs">
         <p-button
@@ -352,6 +362,7 @@
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [rowsPerPageOptions]="[5, 10, 15]"
       [filterDelay]="0"
+      dataKey="nome"
     >
       <ng-template pTemplate="caption">
         <div class="table-header">
@@ -363,17 +374,95 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
+          <th></th>
           <th>Produto</th>
           <th>Status</th>
           <th>Categoria</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-produto>
+      <ng-template pTemplate="body" let-produto let-expanded="expanded">
         <tr [pSelectableRow]="produto" (click)="updateInputFieldsWithSelectedProduct(produto)" >
+          <td>
+            <button type="button" pButton pRipple [pRowToggler]="produto" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+          </td>
           <td>{{ produto?.nome }}</td>
           <td>{{ mapStatusName(produto?.status) }}</td>
           <td>{{ mapCategoryName(produto?.catId) }}</td>
         </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-produto>
+        <tr>
+          <td colspan="8">
+            <div class="p-3">
+              <p-table
+              [paginator]="true"
+              [rowsPerPageOptions]="[5, 10, 15]"
+              [rows]="5"
+              >
+                <ng-template pTemplate="caption">
+                  <div class="table-header">
+                    <div>
+                      Fotos do produto
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Imagem</th>
+                    <th>Excluir imagem</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-nota>
+                  <tr>
+                    <td></td>
+                    <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="6">Nenhuma imagem do produto.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="8">
+            <div class="p-3">
+              <p-table
+              [paginator]="true"
+              [rowsPerPageOptions]="[5, 10, 15]"
+              [rows]="5">
+                <ng-template pTemplate="caption">
+                  <div class="table-header">
+                    <div>
+                      Formulação do produto
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Formulação</th>
+                    <th>Excluir formulação</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-saida>
+                  <tr>
+                    <td></td>
+                    <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="6">Nenhuma formulação do produto.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </td>
+        </tr>
+  
       </ng-template>
     </p-table>
   </div>

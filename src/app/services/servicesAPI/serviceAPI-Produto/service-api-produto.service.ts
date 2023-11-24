@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ServiceUrlGlobalService } from '../serviceUrlGlobal/service-url-global.service';
 
@@ -75,7 +75,7 @@ export class ServiceAPIProdutoService {
     return this.http.get<any[]>(url);
   }
 
-  cadastrarFotosProduto(data: any) {
+  cadastrarFotosProduto(data: FormData) {
     const endpoint = "prodfoto";
     const url = this.urlGlobal.url + endpoint;
     return this.http.post<any>(url, data);

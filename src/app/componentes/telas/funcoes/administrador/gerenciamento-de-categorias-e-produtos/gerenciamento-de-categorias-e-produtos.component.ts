@@ -34,10 +34,12 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   private categoriasSubscription!: Subscription;
   private produtosSubscription!: Subscription;
   private posicaoProdutosSubscription!: Subscription;
+  private fotosProdutosSubscription!: Subscription;
 
   idCategoria!: number;
   categorias: Categorias[] = [];
   produtos: Produtos[] = [];
+  fotosProdutos: any[] = [];
   posicaoProdutos: PosicaoProdutos[] = [];
   idProduto!: number;
   posProdId!: number;
@@ -51,6 +53,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   descBreve: string = '';
   quantidadeProduto!: number | null
   selectedProductImages: any[] = [];
+  selectedProductImagesFormulacao: any[] = [];
   selectedProductImagesTemplate: any[] = [];
   valorProdutoFormatted!: number | null;
   categoriasAdicionarSelecionadaInput: any;
@@ -132,6 +135,10 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       this.posicaoProdutosSubscription.unsubscribe();
     }
 
+    if (this.fotosProdutosSubscription) {
+      this.fotosProdutosSubscription.unsubscribe();
+    }
+
   }
 
   async carregarCategoriasEProdutosEPosicoes() {
@@ -146,6 +153,12 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
     this.posicaoProdutosSubscription = this.categoriasService.getPosicaoProdutos().subscribe(async (posicaoProdutosAPI) => {
       this.posicaoProdutos = posicaoProdutosAPI;
+    });
+
+    this.fotosProdutosSubscription = this.categoriasService.getFotosProdutos().subscribe(async (fotosProdutosAPI) => {
+      this.fotosProdutos = fotosProdutosAPI;
+
+      console.log(this.fotosProdutos)
     });
 
     this.produtosFiltrados = this.produtos
@@ -320,13 +333,41 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     }, 2000);
   }
 
-  onUpload(event:UploadEvent) {
-    for (let file of event.files) {
-      this.selectedProductImages.push(file);
-    }
-    console.log(this.selectedProductImages)
+  getBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
   }
 
+  onUpload(event: UploadEvent) {
+    for (let file of event.files) {
+      this.getBase64(file).then((base64Data: string) => {
+        const imageData = {
+          name: file.name,
+          base64: base64Data,
+          file: file, // Adicionando o objeto File ao imageData
+        };
+        this.selectedProductImages.push(imageData);
+      });
+    }
+  }
+
+  onUploadFormulacao(event: UploadEvent) {
+    for (let file of event.files) {
+      this.getBase64(file).then((base64Data: string) => {
+        const imageData = {
+          name: file.name,
+          base64: base64Data,
+          file: file,
+        };
+        this.selectedProductImagesFormulacao.push(imageData);
+      });
+    }
+  }
+  
   mapStatusName(statusCod: string): string {
     const status = this.status.find(s => s.cod === statusCod);
     return status ? status.nome : 'Desconhecido'; // Retorna "Desconhecido" se não encontrar um status correspondente
@@ -490,23 +531,57 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
           }
         )
 
-        // for(const imagem of this.selectedProductImages){
-        //   const dataFotosProduto = {
-        //     prodId: prodId,
-        //     prodFotoTp: 1,
-        //     imgfomulacao: imagem.name.toString()
-        //   }
+        for (const imageData of this.selectedProductImages) {
+          const dataFotosProduto = new FormData();
+          dataFotosProduto.append('prodId', prodId);
+          dataFotosProduto.append('prodFotoTp', '1');
+          dataFotosProduto.append('file', imageData.file);
+      
+          this.apiProdutoService.cadastrarFotosProduto(dataFotosProduto).subscribe(
+            (response) => {
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Foto cadastrada com sucesso.'
+              const icon = 'fa-solid fa-check'
 
-        //   this.apiProdutoService.cadastrarFotosProduto(dataFotosProduto).subscribe(
-        //     (response) => {
-        //       console.log("Foto do produto cadastrada com sucesso", response)
-        //     },
-        //     (error) => {
-        //       console.log("Erro no cadastro da foto do produto", error)
-        //     }
-        //   )
-        // };
+              this.appToast.toast(tipo, titulo, mensagem, icon);
+            }, 
+            (error) => {
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Erro ao cadastrar foto.'
+              const icon = 'fa-solid fa-check'
 
+              this.appToast.toast(tipo, titulo, mensagem, icon);
+            }
+          );
+        }
+
+        for (const imageDataFormulacao of this.selectedProductImagesFormulacao) {
+          const dataFotosProdutoFormulacao = new FormData();
+          dataFotosProdutoFormulacao.append('prodId', prodId);
+          dataFotosProdutoFormulacao.append('prodFotoTp', '2');
+          dataFotosProdutoFormulacao.append('file', imageDataFormulacao.file);
+      
+          this.apiProdutoService.cadastrarFotosProduto(dataFotosProdutoFormulacao).subscribe(
+            (response) => {
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Foto cadastrada com sucesso.'
+              const icon = 'fa-solid fa-check'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
+            }, 
+            (error) => {
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Erro ao cadastrar foto.'
+              const icon = 'fa-solid fa-check'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
+            }
+          );
+        }
       },
       (error) => {
         console.log("Erro ao cadastrar produto", error)
@@ -597,5 +672,11 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     )
 
   }
+
+  
+  
+
+  
+  
 
 }

@@ -84,6 +84,8 @@ export class ServiceCategoriasService {
 
   produtosAPI: Produtos[] = []
 
+  fotosAPI: any[] = []
+
   posicaoProdutosAPI: PosicaoProdutos[] = []
 
   produtosDestaqueAPI: Produtos[] = [];
@@ -190,6 +192,14 @@ export class ServiceCategoriasService {
     return of (this.produtosEmPromocaoAPI);
   }
 
+  //==================================================================================================================================//
+  //PRODUTOS EM PROMOÇÃO
+
+  getFotosProdutos(): Observable<Produtos[]> {
+    return of (this.fotosAPI);
+  }
+  
+  //==================================================================================================================================//
   //MUDAR A URL COM O NOME DO PRODUTO
   obterProdutoPorNomeEmPromocao(nome: string): Produtos | undefined {
     return this.produtosEmPromocaoAPI.find(
@@ -202,8 +212,7 @@ export class ServiceCategoriasService {
     const nomeFormatado = partesNome[0].toUpperCase() + ' ' + partesNome.slice(1).join('-');
     return nomeFormatado;
   }
-  
-  
+
 
   //==================================================================================================================================//
   // API
@@ -293,22 +302,30 @@ export class ServiceCategoriasService {
     this.produtosMaisVendidosAPI = this.produtosAPI
       .filter((produto) => produtosMaisVendidos.includes(produto.prodId));
       console.log("6")
-
-      this.inicializacaoConcluidaSubject.next();
-      sessionStorage.setItem('start', 'ok')
-
+      await this.atualizarFotosProdutosDaAPI();
+      
     return of(null);
+  }
+
+  async atualizarFotosProdutosDaAPI() {
+    try {
+      const produtosFotosAPI = await this.apiProdutos.buscarFotosProdutos().toPromise();
+      if (produtosFotosAPI) {
+        this.fotosAPI = produtosFotosAPI;
+        console.log("7");
+        console.log(this.fotosAPI)
+        this.inicializacaoConcluidaSubject.next();
+        sessionStorage.setItem('start', 'ok')
+      } else {
+        console.error('Erro ao buscar produtos da API: produtosAPI é undefined');
+      }
+    } catch (error) {
+      console.error('Erro ao buscar produtos da API', error);
+    }
   }
 
   getInicializacaoConcluida() {
     return this.inicializacaoConcluidaSubject.asObservable();
   }
-
-
-
-
-
-
-
 
 }

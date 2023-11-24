@@ -80,8 +80,8 @@ export class GerenciamentoDeClientesComponent {
   numeroResidenciaEntrega!: number | null;
   complementoEntrega!: string;
 
-  habilitarEmailAlternativo: boolean = true;
-  habilitarTelefoneAlternativo: boolean = true;
+  habilitarEmailAlternativo: boolean = false;
+  habilitarTelefoneAlternativo: boolean = false;
   habilitarEnderecoEntrega: boolean = false;
   habilitarDropdownEnderecosEntrega: boolean =  true;
   habilitarPassword: boolean = false

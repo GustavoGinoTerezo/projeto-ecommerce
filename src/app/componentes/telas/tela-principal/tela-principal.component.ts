@@ -227,7 +227,7 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   carregarCategorias() {
     this.categoriasSubscription = this.categoriasService.getCategorias().subscribe((categoriasAPI) => {
       this.categorias = categoriasAPI;
-      console.log("7");
+      console.log("8");
       this.getProdutos();
     });
   }
@@ -239,18 +239,18 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     // Aqui você pode chamar os métodos que fazem as chamadas HTTP após a conclusão dos métodos no serviço.
     this.produtosDestaqueSubscription = this.categoriasService.getProdutosDestaque().subscribe((produtosDestaqueAPI) => {
       this.produtosDestaque = produtosDestaqueAPI;
-      console.log("8")
+      console.log("9")
       console.log(this.produtosDestaque)
     });
 
     this.produtosMaisVendidosSubscription = this.categoriasService.getProdutosMaisVendidos().subscribe((produtosMaisVendidosAPI) => {
       this.produtosMaisVendidos = produtosMaisVendidosAPI;
-      console.log("9")
+      console.log("10")
     });
 
     this.produtosEmPromocaoSubscription = this.categoriasService.getProdutosEmPromocao().subscribe((produtosEmPromocaoAPI) => {
       this.produtosEmPromocao = produtosEmPromocaoAPI;
-      console.log("10")
+      console.log("11")
     });
   }
 
