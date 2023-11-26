@@ -7,10 +7,10 @@
     </h1>
     <div class="containerImagemEDescEPreco">
       <div class="imgContainer">
-        <p-carousel [value]="getProdutoImages()" [numVisible]="1" [numScroll]="1" [circular]="true" [showIndicators]="false">
+        <p-carousel [value]="getImagensProduto(produto)" [numVisible]="1" [numScroll]="1" [circular]="true" [showIndicators]="false">
           <ng-template pTemplate="item" let-imagem>
             <div class="containerImagem">
-              <img [src]="imagem" alt="imagem produto" class="img">
+              <img [src]="getImagemURL(imagem)" alt="imagem produto" class="img">
             </div>
           </ng-template>
         </p-carousel>

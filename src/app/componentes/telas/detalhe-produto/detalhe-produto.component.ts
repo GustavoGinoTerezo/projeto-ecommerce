@@ -11,6 +11,7 @@ import { ServiceComentariosService } from 'src/app/services/serviceComentarios/s
 import { ServiceFornecedoresService } from 'src/app/services/serviceFornecedores/service-fornecedores.service';
 import { ServiceNotaFiscalService } from 'src/app/services/serviceNotaFiscal/service-nota-fiscal.service';
 import { AppComponent } from 'src/app/app.component';
+import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrlGlobal/service-url-global.service';
 
 interface Caixa {
   peso: number;
@@ -35,6 +36,7 @@ export class DetalheProdutoComponent implements OnInit {
   private comentariosSubscription!: Subscription;
   private fornecedoresSubscription!: Subscription;
   private notaFiscalCorpoSubscription!: Subscription;
+  private fotosProdutosSubscription!: Subscription;
 
   categorias: Categorias[] = [];
   produtos: Produtos[] = [];
@@ -56,6 +58,8 @@ export class DetalheProdutoComponent implements OnInit {
 
   notaFiscalCorpo: any[] = []
 
+  fotosProdutos: any[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private produtoService: ServiceCategoriasService,
@@ -63,8 +67,10 @@ export class DetalheProdutoComponent implements OnInit {
     private comentariosAPIService: ServiceApiComentariosService,
     private comentariosService: ServiceComentariosService,
     private fornecedoresService: ServiceFornecedoresService,
+    private urlGlobal: ServiceUrlGlobalService,
     private notaFiscalService: ServiceNotaFiscalService,
     private appToast: AppComponent,
+    
   ) {}
 
   async ngOnInit() {
@@ -121,6 +127,9 @@ export class DetalheProdutoComponent implements OnInit {
       this.notaFiscalCorpoSubscription.unsubscribe();
     }
 
+    if (this.fotosProdutosSubscription) {
+      this.fotosProdutosSubscription.unsubscribe();
+    }
 
   }
 
@@ -197,6 +206,10 @@ export class DetalheProdutoComponent implements OnInit {
     this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
       this.produtos = produtosAPI;
       
+    });
+
+    this.fotosProdutosSubscription = this.categoriasService.getFotosProdutos().subscribe(async (fotosProdutosAPI) => {
+      this.fotosProdutos = fotosProdutosAPI;
     });
 
 
@@ -343,6 +356,16 @@ export class DetalheProdutoComponent implements OnInit {
     console.log(jsonPedido);
   }
   
+  getImagensProduto(produto: Produtos): any[] {
+    const idProduto = produto.prodId;
+    return this.fotosProdutos.filter((foto) => foto.prodId === idProduto);
+  }
+
+  getImagemURL(imagem: any): string {
+    const url = this.urlGlobal.url;
+    const endpoint = 'fotos/';
+    return `${url}${endpoint}${imagem.imgfomulacao}`;
+  }
 
 }
 

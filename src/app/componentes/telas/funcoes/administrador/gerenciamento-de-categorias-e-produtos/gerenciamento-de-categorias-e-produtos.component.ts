@@ -83,7 +83,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   expandSelectedProductId: number | null = null;
 
-
   constructor(
     private categoriasService: ServiceCategoriasService,
     private fotoService: ServiceAPIProdutoService,
@@ -633,6 +632,8 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   atualizarProduto(){
 
+    const prodId = this.idProduto
+
     const dataProduto = {
       catId: this.idCategoria,
       nome: this.nomeProduto,
@@ -647,7 +648,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       comprimento: this.comprimentoProduto
     }
 
-    this.apiProdutoService.atualizarProduto(this.idProduto, dataProduto).subscribe(
+    this.apiProdutoService.atualizarProduto(prodId, dataProduto).subscribe(
       (response) => {
         
         const tipo = 'success'
@@ -656,6 +657,58 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
         const icon = 'fa-solid fa-check'
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
+
+        for (const imageData of this.selectedProductImages) {
+          const dataFotosProduto = new FormData();
+          dataFotosProduto.append('prodId', prodId.toString());
+          dataFotosProduto.append('prodFotoTp', '1');
+          dataFotosProduto.append('file', imageData.file);
+      
+          this.apiProdutoService.cadastrarFotosProduto(dataFotosProduto).subscribe(
+            (response) => {
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Foto cadastrada com sucesso.'
+              const icon = 'fa-solid fa-check'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
+            }, 
+            (error) => {
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Erro ao cadastrar foto.'
+              const icon = 'fa-solid fa-check'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
+            }
+          );
+        }
+
+        for (const imageDataFormulacao of this.selectedProductImagesFormulacao) {
+          const dataFotosProdutoFormulacao = new FormData();
+          dataFotosProdutoFormulacao.append('prodId', prodId.toString());
+          dataFotosProdutoFormulacao.append('prodFotoTp', '2');
+          dataFotosProdutoFormulacao.append('file', imageDataFormulacao.file);
+      
+          this.apiProdutoService.cadastrarFotosProduto(dataFotosProdutoFormulacao).subscribe(
+            (response) => {
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Foto cadastrada com sucesso.'
+              const icon = 'fa-solid fa-check'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
+            }, 
+            (error) => {
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Erro ao cadastrar foto.'
+              const icon = 'fa-solid fa-check'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
+            }
+          );
+        }
 
       },
       (error) => {
@@ -670,18 +723,19 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
       }
     )
 
-    const dataPosicaoProduto = {
-      posProdTp: this.selectedLayout!.cod
-    }
+      const dataPosicaoProduto = {
+        posProdTp: this.selectedLayout!.cod
+      }
 
-    this.apiProdutoService.atualizarPosicaoProduto(this.posProdId, dataPosicaoProduto).subscribe((response) => {
-      console.log("Posição do produto atualizada com sucesso", response)
-      this.atualizarPagina();
-    },
-    (error) => {
-      console.log("Erro ao atualizar posição do produto.", error)
-    }
+      this.apiProdutoService.atualizarPosicaoProduto(this.posProdId, dataPosicaoProduto).subscribe((response) => {
+        console.log("Posição do produto atualizada com sucesso", response)
+        this.atualizarPagina();
+      },
+      (error) => {
+        console.log("Erro ao atualizar posição do produto.", error)
+      }
     )
+    
   }
 
   excluirProduto(){
