@@ -6,7 +6,7 @@ import { CriarContaComponent } from './componentes/telas/login-e-criar-conta/cri
 import { TelaPrincipalComponent } from './componentes/telas/tela-principal/tela-principal.component';
 import { DetalheProdutoComponent } from './componentes/telas/detalhe-produto/detalhe-produto.component';
 import { CategoriaComponent } from './componentes/telas/categoria/categoria.component';
-import { CarrinhoDeComprasComponent } from './componentes/telas/carrinho-de-compras/carrinho/carrinho-de-compras.component';
+import { CarrinhoDeComprasComponent } from './componentes/telas/carrinho-de-compras/carrinho-de-compras/carrinho-de-compras.component';
 import { ConfirmacaoComponent } from './componentes/telas/carrinho-de-compras/confirmacao/confirmacao.component';
 import { MinhaContaComponent } from './componentes/telas/funcoes/usuario/minha-conta/minha-conta.component';
 import { MeusDadosComponent } from './componentes/telas/funcoes/usuario/meus-dados/meus-dados.component';

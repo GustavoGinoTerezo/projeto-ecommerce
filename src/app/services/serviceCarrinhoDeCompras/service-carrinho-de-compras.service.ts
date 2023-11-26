@@ -20,7 +20,7 @@ export class ServiceCarrinhoDeComprasService {
 
   constructor() { }
 
-  carrinhoDeCompra: CarrinhoDeCompra[] = [];
+  carrinhoDeCompra: any[] = [];
 
   getCarrinhoDeCompra(): CarrinhoDeCompra[] {
     return this.carrinhoDeCompra;
