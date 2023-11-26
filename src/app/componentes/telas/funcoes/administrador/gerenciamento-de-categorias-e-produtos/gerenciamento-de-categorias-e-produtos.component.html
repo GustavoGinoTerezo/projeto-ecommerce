@@ -362,6 +362,7 @@
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [rowsPerPageOptions]="[5, 10, 15]"
       [filterDelay]="0"
+      (onRowCollapse)="onRowCollapse()"
       dataKey="nome"
     >
       <ng-template pTemplate="caption">
@@ -374,30 +375,28 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th></th>
           <th>Produto</th>
           <th>Status</th>
           <th>Categoria</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-produto let-expanded="expanded">
-        <tr [pSelectableRow]="produto" (click)="updateInputFieldsWithSelectedProduct(produto)" >
-          <td>
-            <button type="button" pButton pRipple [pRowToggler]="produto" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-          </td>
+        <tr [pSelectableRow]="produto"  [pRowToggler]="produto" (click)="updateInputFieldsWithSelectedProduct(produto)">
           <td>{{ produto?.nome }}</td>
           <td>{{ mapStatusName(produto?.status) }}</td>
           <td>{{ mapCategoryName(produto?.catId) }}</td>
         </tr>
       </ng-template>
       <ng-template pTemplate="rowexpansion" let-produto>
-        <tr>
+        <tr *ngIf="expandSelectedProductId === produto.prodId">
           <td colspan="8">
             <div class="p-3">
               <p-table
+              [value]="tipo1Fotos"
               [paginator]="true"
               [rowsPerPageOptions]="[5, 10, 15]"
               [rows]="5"
+              dataKey="prodId"
               >
                 <ng-template pTemplate="caption">
                   <div class="table-header">
@@ -412,10 +411,10 @@
                     <th>Excluir imagem</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-nota>
+                <ng-template pTemplate="body" let-imagem>
                   <tr>
-                    <td></td>
-                    <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
+                    <td><img class="img" [src]="pegarImagemURL(imagem)" alt="Imagem"></td>
+                    <td><p-button (onClick)="excluirFotoPorID(imagem)" styleClass="p-button-danger" icon="fa-solid fa-trash"></p-button></td>
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
@@ -427,13 +426,16 @@
             </div>
           </td>
         </tr>
-        <tr>
+        <tr *ngIf="expandSelectedProductId === produto.prodId">
           <td colspan="8">
             <div class="p-3">
               <p-table
+              [value]="tipo2Fotos"
               [paginator]="true"
               [rowsPerPageOptions]="[5, 10, 15]"
-              [rows]="5">
+              [rows]="5"
+              dataKey="prodId"
+              >
                 <ng-template pTemplate="caption">
                   <div class="table-header">
                     <div>
@@ -447,10 +449,10 @@
                     <th>Excluir formulação</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-saida>
+                <ng-template pTemplate="body" let-imagemFormulacao>
                   <tr>
-                    <td></td>
-                    <td><p-button styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button></td>
+                    <td><img class="img" [src]="pegarImagemURL(imagemFormulacao)" alt="Imagem"></td>
+                    <td><p-button (onClick)="excluirFotoPorID(imagemFormulacao)" styleClass="p-button-danger" icon="fa-solid fa-trash"></p-button></td>
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="emptymessage">

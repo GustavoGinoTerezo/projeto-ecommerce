@@ -7,6 +7,7 @@ import { CategoriaVazia, Categorias, PosicaoProdutos, ServiceCategoriasService }
 import { Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { ServiceAPICategoriaService } from 'src/app/services/servicesAPI/serviceAPI-Categoria/service-api-categoria.service';
 import { ServiceAPIProdutoService } from 'src/app/services/servicesAPI/serviceAPI-Produto/service-api-produto.service';
+import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrlGlobal/service-url-global.service';
 
 interface Status {
   nome: string;
@@ -75,10 +76,20 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     nome: '',
   };
 
+  tipo1Fotos: any[] = [];
+  tipo2Fotos: any[] = [];
+
+  produtoSelecionado: any;
+
+  expandSelectedProductId: number | null = null;
+
+
   constructor(
     private categoriasService: ServiceCategoriasService,
+    private fotoService: ServiceAPIProdutoService,
     private apiCategoriaService: ServiceAPICategoriaService,
     private apiProdutoService: ServiceAPIProdutoService,
+    private urlGlobal: ServiceUrlGlobalService,
     private appToast: AppComponent,
   ){}
 
@@ -158,7 +169,17 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.fotosProdutosSubscription = this.categoriasService.getFotosProdutos().subscribe(async (fotosProdutosAPI) => {
       this.fotosProdutos = fotosProdutosAPI;
 
-      console.log(this.fotosProdutos)
+      this.tipo1Fotos = [];
+      this.tipo2Fotos = [];
+
+      // Separate photos based on their types
+      this.fotosProdutos.forEach((foto) => {
+        if (foto.prodFotoTp === '1') {
+          this.tipo1Fotos.push(foto);
+        } else if (foto.prodFotoTp === '2') {
+          this.tipo2Fotos.push(foto);
+        }
+      });
     });
 
     this.produtosFiltrados = this.produtos
@@ -184,6 +205,14 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
     this.idProduto = produto.prodId!;
     this.idCategoria = produto.catId!;
+
+    this.expandSelectedProductId = produto.prodId!;
+
+    this.produtoSelecionado = produto;
+
+    // Filtrar fotos com base no produto selecionado
+    this.tipo1Fotos = [...this.fotosProdutos.filter(photo => photo.prodId === this.produtoSelecionado.prodId && photo.prodFotoTp === '1')];
+    this.tipo2Fotos = [...this.fotosProdutos.filter(photo => photo.prodId === this.produtoSelecionado.prodId && photo.prodFotoTp === '2')];
 
     // Encontre o objeto correspondente em posicaoProdutos usando o prodId
     const posicaoProdutoEncontrado = this.posicaoProdutos.find(posicao => posicao.prodId === this.idProduto);
@@ -381,6 +410,19 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     return category ? category.nome || 'Desconhecida' : 'Desconhecida';
   }
  
+  onRowCollapse() {
+    this.expandSelectedProductId = null;
+  }
+  
+  pegarImagemURL(imagem: any): string {
+    const url = this.urlGlobal.url;
+    const endpoint = 'fotos/';
+
+    const imgFormulacao = imagem.imgfomulacao;
+
+    return `${url}${endpoint}${imgFormulacao}`;
+  }
+
   //===============================================================================================//
   //API CATEGORIA
 
@@ -673,7 +715,29 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   }
 
+  //===============================================================================================//  
+  //API FOTOS
+
+  excluirFotoPorID(imagem: any): void {
+
+    this.fotoService.excluirFotosProduto(imagem.prodFotoId).subscribe(
+      (response) => {
+        console.log("Foto por ID excluída com sucesso", response);
   
+        // Remova a foto do tipo1Fotos
+        this.tipo1Fotos = this.tipo1Fotos.filter(foto => foto.prodFotoId !== imagem.prodFotoId);
+  
+        // Remova a foto do tipo2Fotos
+        this.tipo2Fotos = this.tipo2Fotos.filter(foto => foto.prodFotoId !== imagem.prodFotoId);
+      },
+      (error) => {
+        console.log("Erro ao excluir foto por ID", error);
+      }
+    );
+  }
+  
+  //===============================================================================================//  
+
   
 
   
