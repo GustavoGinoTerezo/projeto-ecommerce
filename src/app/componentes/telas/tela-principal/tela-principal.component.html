@@ -28,10 +28,10 @@
             <div >
               <div class="containerInterno">
                 <div class="divCarouselInterno">
-                  <p-carousel [value]="produto.imagem" [showIndicators]="false" [circular]="true">
+                  <p-carousel [value]="getImagensProduto(produto)" [showIndicators]="false" [circular]="true">
                     <ng-template pTemplate="item" let-imagem>
                       <div class="containerImagem">
-                        <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateProduto(produto)">
+                        <img [src]="getImagemURL(imagem)" alt="imagem produto" class="img" (click)="navigateProduto(produto)">
                       </div>
                     </ng-template>
                   </p-carousel>
@@ -101,10 +101,10 @@
             <div >
               <div class="containerInterno">
                 <div class="divCarouselInterno">
-                  <p-carousel [value]="produto.imagem" [showIndicators]="false" [circular]="true">
+                  <p-carousel [value]="getImagensProduto(produto)" [showIndicators]="false" [circular]="true">
                     <ng-template pTemplate="item" let-imagem>
                       <div class="containerImagem">
-                        <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateProduto(produto)">
+                        <img [src]="getImagemURL(imagem)" alt="imagem produto" class="img" (click)="navigateProduto(produto)">
                       </div>
                     </ng-template>
                   </p-carousel>
@@ -164,10 +164,10 @@
             <div >
               <div class="containerInterno">
                 <div class="divCarouselInterno">
-                  <p-carousel  [value]="produto.imagem" [showIndicators]="false" [circular]="true">
+                  <p-carousel  [value]="getImagensProduto(produto)" [showIndicators]="false" [circular]="true">
                     <ng-template pTemplate="item" let-imagem>
                       <div class="containerImagem">
-                        <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateProduto(produto)">
+                        <img [src]="getImagemURL(imagem)" alt="imagem produto" class="img" (click)="navigateProduto(produto)">
                       </div>
                     </ng-template>
                   </p-carousel>

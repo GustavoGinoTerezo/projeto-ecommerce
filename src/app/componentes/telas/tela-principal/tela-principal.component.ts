@@ -9,6 +9,7 @@ import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinh
 import { Subscription, switchMap } from 'rxjs';
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
+import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrlGlobal/service-url-global.service';
 
 @Component({
   selector: 'app-tela-principal',
@@ -25,6 +26,7 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   private produtosDestaqueSubscription!: Subscription;
   private produtosMaisVendidosSubscription!: Subscription;
   private produtosEmPromocaoSubscription!: Subscription;
+  private fotosProdutosSubscription!: Subscription;
 
   //Relacionado aos produtos
   produtosDestaque: Produtos[] = [];
@@ -36,6 +38,10 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   images: Banner[] = [];
   anunciosMaiores: Anuncios[] = [];
   anunciosMenores: Anuncios[] = [];
+
+  fotosProdutos: any[] = [];
+  tipo1Fotos: any[] = [];
+
 
   responsiveOptions: any[] = [
     {
@@ -146,6 +152,7 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     private categoriasService: ServiceCategoriasService,
     private anuncioService: ServiceAnunciosService,
     private carrinhoService: ServiceCarrinhoDeComprasService,
+    private urlGlobal: ServiceUrlGlobalService,
     private appToast: AppComponent,
     private router: Router
   ){}
@@ -222,6 +229,10 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     if (this.produtosEmPromocaoSubscription) {
       this.produtosEmPromocaoSubscription.unsubscribe();
     }
+
+    if (this.fotosProdutosSubscription) {
+      this.fotosProdutosSubscription.unsubscribe();
+    }
   }
 
   carregarCategorias() {
@@ -251,6 +262,18 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     this.produtosEmPromocaoSubscription = this.categoriasService.getProdutosEmPromocao().subscribe((produtosEmPromocaoAPI) => {
       this.produtosEmPromocao = produtosEmPromocaoAPI;
       console.log("11")
+    });
+
+    this.fotosProdutosSubscription = this.categoriasService.getFotosProdutos().subscribe(async (fotosProdutosAPI) => {
+      this.fotosProdutos = fotosProdutosAPI;
+
+      this.tipo1Fotos = [];
+
+      this.fotosProdutos.forEach((foto) => {
+        if (foto.prodFotoTp === '1') {
+          this.tipo1Fotos.push(foto);
+        }
+      });
     });
   }
 
@@ -336,6 +359,17 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     }
 
     
+  }
+
+  getImagensProduto(produto: Produtos): any[] {
+    const idProduto = produto.prodId;
+    return this.tipo1Fotos.filter((foto) => foto.prodId === idProduto);
+  }
+
+  getImagemURL(imagem: any): string {
+    const url = this.urlGlobal.url;
+    const endpoint = 'fotos/';
+    return `${url}${endpoint}${imagem.imgfomulacao}`;
   }
 
 }
