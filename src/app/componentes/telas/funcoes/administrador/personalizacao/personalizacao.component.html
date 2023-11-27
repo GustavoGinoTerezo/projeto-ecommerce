@@ -247,6 +247,7 @@
             <div class="divInputs">
                 <p-button label="Adicionar"
                   styleClass="p-button-raised p-button-success"
+                  [disabled]="bannersFotos.length === 0 || !tipoBannerSelecionado"
                   (click)="adicionarBanner()"
                 ></p-button>
               </div>

@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { MessageService } from 'primeng/api';
-import { Anuncios, ServiceAnunciosService } from 'src/app/services/serviceAnuncios/service-anuncios.service';
-import { Banner, ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
+import { ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
 import { Categorias, ServiceCategoriasService, Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Router } from '@angular/router';
 import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
@@ -38,8 +37,9 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
 
   //Relacionado as Imagens
   imagens: any[] = [];
-  anunciosMaiores: Anuncios[] = [];
-  anunciosMenores: Anuncios[] = [];
+  imagensTipo0: any[] = [];
+  imagensTipo1: any[] = [];
+  imagensTipo2: any[] = [];
 
   fotosProdutos: any[] = [];
   tipo1Fotos: any[] = [];
@@ -150,7 +150,6 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   constructor(
     private bannerService: ServiceBannerService,
     private categoriasService: ServiceCategoriasService,
-    private anuncioService: ServiceAnunciosService,
     private urlGlobal: ServiceUrlGlobalService,
     private appToast: AppComponent,
     private router: Router
@@ -230,10 +229,19 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   carregarBanners() {
     this.bannerService.getBanners().subscribe(banners => {
       this.imagens = banners
-
-      console.log("Banners: ", this.imagens)
+      
+      // Filtrar imagens com tpbanner igual a 0
+      this.imagensTipo0 = this.imagens.filter(imagem => imagem.tpbanner === '0');
+  
+      // Filtrar imagens com tpbanner igual a 1
+      this.imagensTipo1 = this.imagens.filter(imagem => imagem.tpbanner === '1');
+  
+      // Filtrar imagens com tpbanner igual a 2
+      this.imagensTipo2 = this.imagens.filter(imagem => imagem.tpbanner === '2');
+  
     });
   }
+  
 
   carregarCategorias() {
     this.categoriasSubscription = this.categoriasService.getCategorias().subscribe((categoriasAPI) => {
@@ -261,14 +269,6 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     this.produtosEmPromocaoSubscription = this.categoriasService.getProdutosEmPromocao().subscribe((produtosEmPromocaoAPI) => {
       this.produtosEmPromocao = produtosEmPromocaoAPI;
       console.log("11")
-    });
-
-    this.anunciosMaioresSubscription = this.anuncioService.getAnunciosMaiores().subscribe((anunciosMaiores) => {
-      this.anunciosMaiores = anunciosMaiores;
-    });
-
-    this.anunciosMenoresSubscription = this.anuncioService.getAnunciosMenores().subscribe((anunciosMenores) => {
-      this.anunciosMenores = anunciosMenores;
     });
 
     this.bannerImagesSubscription = this.bannerService.getBanners().subscribe((imagens) => {
@@ -369,7 +369,6 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
 
     }
 
-    
   }
 
   getImagensProduto(produto: Produtos): any[] {

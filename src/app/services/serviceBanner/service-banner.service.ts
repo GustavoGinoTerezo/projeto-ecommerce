@@ -2,25 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ServiceApiBannerService } from '../servicesAPI/serviceAPI-Banner/service-api-banner.service';
 
-export interface Banner {
-  imagem: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceBannerService {
 
-  // banner: Banner[] = [
-  //   {
-  //     imagem: 'assets/produtos/teste.jpg'
-  //   },
-  //   {
-  //     imagem: 'assets/produtos/Cannabis_Farming.jpg'
-  //   },
-  // ]
-
-  private bannersAPISubject = new BehaviorSubject<Banner[]>([]);
+  private bannersAPISubject = new BehaviorSubject<any[]>([]);
   bannersAPI$ = this.bannersAPISubject.asObservable();
 
   private inicializacaoConcluidaSubject = new BehaviorSubject<boolean>(false);
@@ -30,7 +17,7 @@ export class ServiceBannerService {
     private apiBannerService: ServiceApiBannerService
   ) { }
 
-  getBanners(): Observable<Banner[]> {
+  getBanners(): Observable<any[]> {
     return this.bannersAPI$;
   }
 

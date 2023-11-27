@@ -142,6 +142,13 @@ export class PersonalizacaoComponent {
 
   }
 
+  private atualizarPagina() {
+    //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
+    setTimeout(() => {
+      location.reload();
+    }, 2000);
+  }
+
   carregarBanners() {
     this.bannerService.getBanners().subscribe(banners => {
       this.bannersAPI = banners
@@ -160,8 +167,6 @@ export class PersonalizacaoComponent {
     const tipoEncontrado = this.tipoBanner.find(t => t.tipo.toString() === tipo);
     return tipoEncontrado ? tipoEncontrado.nome : ''; 
   }
-
-  
 
   atualizarCor1(novaCor: any) {
     if (novaCor && novaCor.value) {
@@ -278,6 +283,8 @@ export class PersonalizacaoComponent {
           const icon = 'fa-solid fa-check'
 
           this.appToast.toast(tipo, titulo, mensagem, icon);
+
+          this.atualizarPagina();
         }, 
         (error) => {
           const tipo = 'error'
@@ -322,11 +329,6 @@ export class PersonalizacaoComponent {
   bannerSelecionado(event: any) {
     this.tipoBannerSelecionado = event.value;
     this.tpbanner = event.value.tipo
-  }
-
-  filterTableBanners(event: any) {
-    const filterValue = event.target.value.toLowerCase(); // Obtém o valor do campo de pesquisa em minúsculas
-    this.banners.filter(filterValue, 'nome', 'contains'); // Aplica o filtro na coluna 'nome' que contém o valor
   }
 
 }
