@@ -7,6 +7,7 @@ import { EnderecoEntrega, ServiceUsuarioLogadoService, Usuario } from 'src/app/s
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { Subscription } from 'rxjs';
+import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrlGlobal/service-url-global.service';
 
 @Component({
   selector: 'app-confirmacao',
@@ -23,6 +24,7 @@ export class ConfirmacaoComponent implements OnInit{
   private formaPagamentoSubscription!: Subscription;
   private usuarioSubscription!: Subscription;
   private inicializacaoUserConcluidaSubject!: Subscription;
+  private fotosProdutosSubscription!: Subscription;
 
   items: MenuItem[] = [];
   carrinho: CarrinhoDeCompra[] = [];
@@ -40,10 +42,14 @@ export class ConfirmacaoComponent implements OnInit{
   enderecoEntregaSelecionadoId!: number
   formaPagamentoId!: number;
 
+  fotosProdutos: any[] = [];
+  tipo1Fotos: any[] = [];
+
   constructor(
     private carrinhoService: ServiceCarrinhoDeComprasService,
     private categoriasService: ServiceCategoriasService,
     private usuarioService: ServiceUsuarioLogadoService,
+    private urlGlobal: ServiceUrlGlobalService,
     private formaPagamentoService: FormaPagamentoService,
   ){}
 
@@ -125,6 +131,10 @@ export class ConfirmacaoComponent implements OnInit{
       this.inicializacaoConcluidaSubscription.unsubscribe();
     }
 
+    if (this.inicializacaoUserConcluidaSubject) {
+      this.inicializacaoUserConcluidaSubject.unsubscribe();
+    }
+
     if (this.produtosSubscription) {
       this.produtosSubscription.unsubscribe();
     }
@@ -147,6 +157,10 @@ export class ConfirmacaoComponent implements OnInit{
 
     if (this.usuarioSubscription) {
       this.usuarioSubscription.unsubscribe();
+    }
+
+    if (this.fotosProdutosSubscription) {
+      this.fotosProdutosSubscription.unsubscribe();
     }
 
   }
@@ -198,6 +212,18 @@ export class ConfirmacaoComponent implements OnInit{
         this.carrinho = Object.values(carrinhoMap);
 
         console.log("Carrinho: ", this.carrinho)
+
+        this.fotosProdutosSubscription = this.categoriasService.getFotosProdutos().subscribe(async (fotosProdutosAPI) => {
+          this.fotosProdutos = fotosProdutosAPI;
+    
+          this.tipo1Fotos = [];
+    
+          this.fotosProdutos.forEach((foto) => {
+            if (foto.prodFotoTp === '1') {
+              this.tipo1Fotos.push(foto);
+            }
+          });
+        });
 
         this.calcularValorTotal();
     });
@@ -330,5 +356,24 @@ export class ConfirmacaoComponent implements OnInit{
   get totalRecords(): number {
     return this.carrinho?.length || 0;
   }
+
+  getImagemProduto(item: any): string {
+    const imagensProduto = this.getImagensProduto(item);
+    const primeiraImagem = imagensProduto.length > 0 ? imagensProduto[0] : null;
+  
+    return primeiraImagem ? this.getImagemURL(primeiraImagem) : ''; // Retorna a URL da primeira imagem ou uma string vazia se não houver imagem.
+  }
+  
+  getImagensProduto(produto: any): any[] {
+    const idProduto = produto.prodId;
+    return this.tipo1Fotos.filter((foto) => foto.prodId === idProduto);
+  }
+  
+  getImagemURL(imagem: any): string {
+    const url = this.urlGlobal.url;
+    const endpoint = 'fotos/';
+    return `${url}${endpoint}${imagem.imgfomulacao}`;
+  }
+
 
 }

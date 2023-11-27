@@ -84,7 +84,7 @@
         <div *ngFor="let produto of carrinho | slice:first:first + rows" class="containerProduto">
           <div class="containerImgNome">
             <div class="containerImg">
-              <img class="img" [src]="produto.imagemProduto" alt="Imagem do produto">
+              <img class="img" [src]="getImagemProduto(produto)"  alt="Imagem do produto">
             </div>
             <div class="containerNomeProduto">
                {{produto.nomeProduto}}

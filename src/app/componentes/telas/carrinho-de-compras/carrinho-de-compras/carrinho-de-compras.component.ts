@@ -8,6 +8,7 @@ import { ServiceUsuarioLogadoService, EnderecoEntrega } from 'src/app/services/s
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
+import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrlGlobal/service-url-global.service';
 
 interface Caixa {
   peso?: number;
@@ -31,10 +32,11 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
   private enderecoCarregadoSubscription!: Subscription;
   private produtosSubscription!: Subscription;
   private enderecosEntregaSubscription!: Subscription;
+  private fotosProdutosSubscription!: Subscription;
 
   carrinho: CarrinhoDeCompra[] = [];
-  firstProduto: number = 0; // Primeiro item da página
-  rowsProduto: number = 5; // Número de itens por página
+  firstProduto: number = 0; 
+  rowsProduto: number = 5; 
   cep!: string;
   quantidade: number = 1;
   items: MenuItem[] = [];
@@ -49,9 +51,13 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
   mostrarFreteOuEndereco!: boolean;
   carrinhoIds: number[] = []
 
+  fotosProdutos: any[] = [];
+  tipo1Fotos: any[] = [];
+
   constructor(
     private categoriasService: ServiceCategoriasService,
     private usuarioService: ServiceUsuarioLogadoService,
+    private urlGlobal: ServiceUrlGlobalService,
     private router: Router,
     private appToast: AppComponent,
     ) {}
@@ -152,6 +158,10 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
       this.enderecosEntregaSubscription.unsubscribe();
     }
 
+    if (this.fotosProdutosSubscription) {
+      this.fotosProdutosSubscription.unsubscribe();
+    }
+
   }
 
   async carregarProdutos() {
@@ -187,6 +197,18 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
         this.carrinho = Object.values(carrinhoMap);
 
         console.log("Carrinho: ", this.carrinho)
+
+        this.fotosProdutosSubscription = this.categoriasService.getFotosProdutos().subscribe(async (fotosProdutosAPI) => {
+          this.fotosProdutos = fotosProdutosAPI;
+    
+          this.tipo1Fotos = [];
+    
+          this.fotosProdutos.forEach((foto) => {
+            if (foto.prodFotoTp === '1') {
+              this.tipo1Fotos.push(foto);
+            }
+          });
+        });
 
         this.calcularValorTotal();
     });
@@ -480,6 +502,24 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
 
   get totalRecordsEnderecos(): number {
     return this.enderecosEntrega?.length || 0;
+  }
+
+  getImagemProduto(item: any): string {
+    const imagensProduto = this.getImagensProduto(item);
+    const primeiraImagem = imagensProduto.length > 0 ? imagensProduto[0] : null;
+  
+    return primeiraImagem ? this.getImagemURL(primeiraImagem) : ''; // Retorna a URL da primeira imagem ou uma string vazia se não houver imagem.
+  }
+  
+  getImagensProduto(produto: any): any[] {
+    const idProduto = produto.prodId;
+    return this.tipo1Fotos.filter((foto) => foto.prodId === idProduto);
+  }
+  
+  getImagemURL(imagem: any): string {
+    const url = this.urlGlobal.url;
+    const endpoint = 'fotos/';
+    return `${url}${endpoint}${imagem.imgfomulacao}`;
   }
 
 }

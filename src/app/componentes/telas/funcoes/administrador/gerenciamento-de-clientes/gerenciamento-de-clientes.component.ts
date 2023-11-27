@@ -83,7 +83,7 @@ export class GerenciamentoDeClientesComponent {
   habilitarEmailAlternativo: boolean = false;
   habilitarTelefoneAlternativo: boolean = false;
   habilitarEnderecoEntrega: boolean = false;
-  habilitarDropdownEnderecosEntrega: boolean =  true;
+  habilitarDropdownEnderecosEntrega: boolean =  false;
   habilitarPassword: boolean = false
   habilitarBotaoEmailAlternativo = false
   habilitarBotaoTelefoneAlternativo = false
@@ -148,9 +148,9 @@ export class GerenciamentoDeClientesComponent {
       { nome: 'Administrador', tipo: '1' }
     ]
 
-    // this.carregarUsuariosAPI()
+    this.carregarUsuariosAPI()
 
-    // this.carregarEstadosAPI()
+    this.carregarEstadosAPI()
 
   }
 
@@ -270,7 +270,7 @@ export class GerenciamentoDeClientesComponent {
 
       this.validateEmail()
 
-      this.habilitarDropdownEnderecosEntrega = false
+      this.habilitarDropdownEnderecosEntrega = true
       this.habilitarPassword = true
 
       this.botaoDisabled = true;

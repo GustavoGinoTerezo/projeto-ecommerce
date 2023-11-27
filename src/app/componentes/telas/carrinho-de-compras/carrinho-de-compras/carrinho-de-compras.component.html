@@ -86,7 +86,7 @@
         <div *ngFor="let item of carrinho | slice:firstProduto:firstProduto + rowsProduto" class="item-carrinho">
           <div class="containerInformaçoesProduto">
             <div class="containerImagemENome">
-              <img class="img" [src]="item.imagemProduto" alt="imagem produto">
+              <img class="img" [src]="getImagemProduto(item)" alt="imagem produto">
               <div class="nome-produto">
                 {{ item.nomeProduto ? formatarNomeProduto(item.nomeProduto) : '' }}
               </div>
