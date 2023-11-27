@@ -640,7 +640,7 @@ export class GerenciamentoDeClientesComponent {
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
         this.habilitarDropdownEnderecosEntrega = false
-        this.atualizarPagina();
+        
 
 
       } else {
@@ -697,7 +697,7 @@ export class GerenciamentoDeClientesComponent {
 
             this.appToast.toast(tipo, titulo, mensagem, icon);
 
-            this.atualizarPagina();
+            
           },
           (error) => {
             const tipo = 'error'
@@ -758,7 +758,7 @@ export class GerenciamentoDeClientesComponent {
         await this.excluirTodosEnderecos();
         await this.excluirTodosTelefonesAlternativo();
         await this.excluirLogin();
-        await this.atualizarPagina();
+        
     } catch (error) {
         
     }
@@ -785,7 +785,7 @@ export class GerenciamentoDeClientesComponent {
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
-        this.atualizarPagina();
+        
       },
       (error) => {
         const tipo = 'error'
@@ -817,7 +817,7 @@ export class GerenciamentoDeClientesComponent {
 
       this.appToast.toast(tipo, titulo, mensagem, icon);
 
-      this.atualizarPagina();
+      
     },
     (error) => {
       const tipo = 'success'
@@ -870,7 +870,7 @@ export class GerenciamentoDeClientesComponent {
 
       this.appToast.toast(tipo, titulo, mensagem, icon);
 
-      this.atualizarPagina();
+      
     },
     (error) => {
       const tipo = 'error'
@@ -904,7 +904,7 @@ export class GerenciamentoDeClientesComponent {
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
-        this.atualizarPagina();
+        
       },
       (error) => {
         const tipo = 'error'
@@ -932,7 +932,7 @@ export class GerenciamentoDeClientesComponent {
   //     console.log("Erro ao atualizar email alternativo", error)
   //   })
 
-  //   this.atualizarPagina();
+  //   
   // }
 
   async excluirTodosTelefonesAlternativo() {
@@ -996,7 +996,7 @@ export class GerenciamentoDeClientesComponent {
           const icon = 'fa-solid fa-check'
   
           this.appToast.toast(tipo, titulo, mensagem, icon);
-          this.atualizarPagina();
+          
         },
         (error) => {
           const tipo = 'success'
@@ -1046,7 +1046,7 @@ export class GerenciamentoDeClientesComponent {
           const icon = 'fa-solid fa-check'
   
           this.appToast.toast(tipo, titulo, mensagem, icon);
-          this.atualizarPagina();
+          
         },
         (error) => {
           const tipo = 'error'
@@ -1129,7 +1129,7 @@ export class GerenciamentoDeClientesComponent {
       const icon = 'fa-solid fa-check'
 
       this.appToast.toast(tipo, titulo, mensagem, icon);
-      this.atualizarPagina();
+      
     },
     (error) => {
       const tipo = 'error'

@@ -87,7 +87,7 @@ export class GerenciamentoDeCaixasComponent {
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
-        this.atualizarPagina();
+        
       },
       (error) => {
         
@@ -124,7 +124,7 @@ export class GerenciamentoDeCaixasComponent {
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
-        this.atualizarPagina();
+        
       },
       (error) => {
         
@@ -153,7 +153,7 @@ export class GerenciamentoDeCaixasComponent {
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
-        this.atualizarPagina();
+        
       },
       (error) => {
         

@@ -284,7 +284,6 @@ export class PersonalizacaoComponent {
 
           this.appToast.toast(tipo, titulo, mensagem, icon);
 
-          this.atualizarPagina();
         }, 
         (error) => {
           const tipo = 'error'
