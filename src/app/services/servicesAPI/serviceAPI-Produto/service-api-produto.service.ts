@@ -81,12 +81,6 @@ export class ServiceAPIProdutoService {
     return this.http.post<any>(url, data);
   }
 
-  atualizarFotosProduto(prodFotoId: number, novosDados: any) {
-    const endpoint = `prodfoto/${prodFotoId}`;
-    const url = this.urlGlobal.url + endpoint;
-    return this.http.put<any>(url, novosDados);
-  }
-
   excluirFotosProduto(prodFotoId: number) {
     const endpoint = `prodfoto/${prodFotoId}`;
     const url = this.urlGlobal.url + endpoint;

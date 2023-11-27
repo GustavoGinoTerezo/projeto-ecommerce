@@ -3,10 +3,10 @@
 <div class="divGeral">
 
   <div class="containerBanner">
-    <p-carousel class="carousel-banner" [value]="images" [autoplayInterval]="7000" [showIndicators]="false" [numVisible]="1" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptionsBanner" >
-      <ng-template pTemplate="item" let-images>
+    <p-carousel class="carousel-banner" [value]="imagens" [autoplayInterval]="7000" [showIndicators]="false" [numVisible]="1" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptionsBanner" >
+      <ng-template pTemplate="item" let-imagens>
         <div class="imgBannerContainer">
-          <img [src]="images.imagem" class="imgBanner"/>
+          <img [src]="getImagemBanner(imagens)" class="imgBanner"/>
         </div>
       </ng-template>
     </p-carousel>

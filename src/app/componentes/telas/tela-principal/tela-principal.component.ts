@@ -6,7 +6,7 @@ import { Banner, ServiceBannerService } from 'src/app/services/serviceBanner/ser
 import { Categorias, ServiceCategoriasService, Produtos } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Router } from '@angular/router';
 import { ServiceCarrinhoDeComprasService } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
-import { Subscription, switchMap } from 'rxjs';
+import { Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrlGlobal/service-url-global.service';
@@ -28,6 +28,8 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   private produtosEmPromocaoSubscription!: Subscription;
   private fotosProdutosSubscription!: Subscription;
 
+  private destroy$ = new Subject<void>();
+
   //Relacionado aos produtos
   produtosDestaque: Produtos[] = [];
   produtosMaisVendidos: Produtos[] = [];
@@ -35,13 +37,12 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   categorias: Categorias[] = [];
 
   //Relacionado as Imagens
-  images: Banner[] = [];
+  imagens: any[] = [];
   anunciosMaiores: Anuncios[] = [];
   anunciosMenores: Anuncios[] = [];
 
   fotosProdutos: any[] = [];
   tipo1Fotos: any[] = [];
-
 
   responsiveOptions: any[] = [
     {
@@ -147,11 +148,9 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private serviceProdutosDestaque: ServiceCategoriasService,
     private bannerService: ServiceBannerService,
     private categoriasService: ServiceCategoriasService,
     private anuncioService: ServiceAnunciosService,
-    private carrinhoService: ServiceCarrinhoDeComprasService,
     private urlGlobal: ServiceUrlGlobalService,
     private appToast: AppComponent,
     private router: Router
@@ -177,23 +176,12 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
       sessionStorage.removeItem('start');
     });
 
-
-
-    //================================================================================================================================//
-    //RELACIONADO COM OS ANUNCIOS
-    this.anunciosMaioresSubscription = this.anuncioService.getAnunciosMaiores().subscribe(
-      (anunciosMaiores) => {
-        this.anunciosMaiores = anunciosMaiores;
+    this.bannerService.inicializacaoConcluida$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.carregarBanners();
       });
-
-    this.anunciosMenoresSubscription = this.anuncioService.getAnunciosMenores().subscribe(
-      (anunciosMenores) => {
-        this.anunciosMenores = anunciosMenores;
-      });
-
-    this.bannerImagesSubscription = this.bannerService.getImages().subscribe((images) => {
-      this.images = images;
-    });
+    
   }
 
   ngOnDestroy() {
@@ -233,6 +221,18 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     if (this.fotosProdutosSubscription) {
       this.fotosProdutosSubscription.unsubscribe();
     }
+
+    this.destroy$.next();
+    this.destroy$.complete();
+
+  }
+
+  carregarBanners() {
+    this.bannerService.getBanners().subscribe(banners => {
+      this.imagens = banners
+
+      console.log("Banners: ", this.imagens)
+    });
   }
 
   carregarCategorias() {
@@ -247,11 +247,10 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   //RELACIONADO COM OS PRODUTOS
 
   getProdutos() {
-    // Aqui você pode chamar os métodos que fazem as chamadas HTTP após a conclusão dos métodos no serviço.
+
     this.produtosDestaqueSubscription = this.categoriasService.getProdutosDestaque().subscribe((produtosDestaqueAPI) => {
       this.produtosDestaque = produtosDestaqueAPI;
       console.log("9")
-      console.log(this.produtosDestaque)
     });
 
     this.produtosMaisVendidosSubscription = this.categoriasService.getProdutosMaisVendidos().subscribe((produtosMaisVendidosAPI) => {
@@ -262,6 +261,20 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     this.produtosEmPromocaoSubscription = this.categoriasService.getProdutosEmPromocao().subscribe((produtosEmPromocaoAPI) => {
       this.produtosEmPromocao = produtosEmPromocaoAPI;
       console.log("11")
+    });
+
+    this.anunciosMaioresSubscription = this.anuncioService.getAnunciosMaiores().subscribe(
+      (anunciosMaiores) => {
+        this.anunciosMaiores = anunciosMaiores;
+      });
+
+    this.anunciosMenoresSubscription = this.anuncioService.getAnunciosMenores().subscribe(
+      (anunciosMenores) => {
+        this.anunciosMenores = anunciosMenores;
+      });
+
+    this.bannerImagesSubscription = this.bannerService.getBanners().subscribe((imagens) => {
+      this.imagens = imagens;
     });
 
     this.fotosProdutosSubscription = this.categoriasService.getFotosProdutos().subscribe(async (fotosProdutosAPI) => {
@@ -370,6 +383,12 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
     const url = this.urlGlobal.url;
     const endpoint = 'fotos/';
     return `${url}${endpoint}${imagem.imgfomulacao}`;
+  }
+
+  getImagemBanner(imagem: any): string {
+    const url = this.urlGlobal.url;
+    const endpoint = 'fotos/';
+    return `${url}${endpoint}${imagem.nomefoto}`;
   }
 
 }

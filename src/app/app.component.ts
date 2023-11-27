@@ -5,6 +5,7 @@ import { ServiceUsuarioLogadoService } from './services/serviceUsuarioLogado/ser
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { MenuItem, MessageService } from 'primeng/api';
+import { ServiceBannerService } from './services/serviceBanner/service-banner.service';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent {
     private router: Router,
     private categoriasService: ServiceCategoriasService,
     private mostrarLateraisService: ServiceUsuarioLogadoService,
+    private bannersService: ServiceBannerService,
     private usuarioLogado: ServiceUsuarioLogadoService,
     private messageService: MessageService,
   ) {}
@@ -34,11 +36,13 @@ export class AppComponent {
 
     this.categoriasService.atualizarCategoriasDaAPI();
 
-    this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
+    this.bannersService.atualizarBannerDaAPI();
 
-    this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
+    // this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
 
-    this.usuarioLogado.atualizarUsuarioAPI();
+    // this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
+
+    // this.usuarioLogado.atualizarUsuarioAPI();
 
     this.menuItems = [
       {

@@ -74,8 +74,6 @@ export class ServiceCategoriasService {
   constructor(
     private apiCategoriaService: ServiceAPICategoriaService,
     private apiProdutos: ServiceAPIProdutoService,
-    private urlGlobal: ServiceUrlGlobalService,
-    private http: HttpClient,
   ) { }
 
   private inicializacaoConcluidaSubject = new Subject<void>();
@@ -93,44 +91,6 @@ export class ServiceCategoriasService {
   produtosMaisVendidosAPI: Produtos[] = [];
 
   produtosEmPromocaoAPI: Produtos[] = [];
-
-  // produtosMocado: Produtos[] = [
-  //   {
-  //     prodId: 0,
-  //     nome: "Teste",
-  //     qtdEntrada: [{
-  //       quantEntrada: 10,
-  //       dataEntrada: "10/10/2023"
-  //     }],
-  //     qtdSaida: [{
-  //       quantSaida: 5,
-  //       dataSaida: "11/10/2023"
-  //     }],
-  //   },
-  //   {
-  //     prodId: 1,
-  //     nome: "Teste1",
-  //   },
-  //   {
-  //     prodId: 2,
-  //     nome: "Teste2",
-  //   },
-  //   {
-  //     prodId: 3,
-  //     nome: "Teste3",
-  //   },
-  //   {
-  //     prodId: 4,
-  //     nome: "Teste4",
-  //   },
-  //   {
-  //     prodId: 5,
-  //     nome: "Teste5",
-  //   },
-  // ]
-
-
-
 
   //==================================================================================================================================//
 
@@ -212,7 +172,6 @@ export class ServiceCategoriasService {
     const nomeFormatado = partesNome[0].toUpperCase() + ' ' + partesNome.slice(1).join('-');
     return nomeFormatado;
   }
-
 
   //==================================================================================================================================//
   // API
