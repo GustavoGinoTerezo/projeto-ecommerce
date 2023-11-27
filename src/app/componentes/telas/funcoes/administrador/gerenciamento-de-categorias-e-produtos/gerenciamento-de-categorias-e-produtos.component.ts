@@ -443,7 +443,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
       this.appToast.toast(tipo, titulo, mensagem, icon);
 
-      this.atualizarPagina();
+      
     },
     (error) => {
       
@@ -479,7 +479,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
-        this.atualizarPagina();
+        
       },
       (error) => {
         const tipo = 'error'
@@ -504,7 +504,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
-        this.atualizarPagina();
+        
       },
       (error) => {
         
@@ -560,7 +560,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
             this.appToast.toast(tipo, titulo, mensagem, icon);
 
-            this.atualizarPagina();
+            
           },
           (error) => {
             const tipo = 'error'
@@ -707,10 +707,24 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
               this.appToast.toast(tipo, titulo, mensagem, icon);
             }
+
+            
           );
         }
 
-      },
+        const dataPosicaoProduto = {
+          posProdTp: this.selectedLayout!.cod
+        }
+  
+        this.apiProdutoService.atualizarPosicaoProduto(this.posProdId, dataPosicaoProduto).subscribe((response) => {
+          console.log("Posição do produto atualizada com sucesso", response)
+          
+        },
+        (error) => {
+          console.log("Erro ao atualizar posição do produto.", error)
+        }
+        
+      )},
       (error) => {
         
         const tipo = 'error'
@@ -721,20 +735,11 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
       }
+
+      
     )
 
-      const dataPosicaoProduto = {
-        posProdTp: this.selectedLayout!.cod
-      }
-
-      this.apiProdutoService.atualizarPosicaoProduto(this.posProdId, dataPosicaoProduto).subscribe((response) => {
-        console.log("Posição do produto atualizada com sucesso", response)
-        this.atualizarPagina();
-      },
-      (error) => {
-        console.log("Erro ao atualizar posição do produto.", error)
-      }
-    )
+    
     
   }
 
@@ -743,16 +748,18 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.apiProdutoService.excluirPosicaoProduto(this.posProdId).subscribe((response) => {
       console.log("Posição do produto excluída com sucesso", response)
 
-      // Filtrar fotos associadas ao produto que será excluído
-      const fotosDoProduto = this.fotosProdutos.filter((foto) => foto.idProduto === this.idProduto);
+      const fotosDoProduto = this.fotosProdutos.filter((foto) => foto.prodId === this.idProduto);
 
-      // Excluir cada foto associada ao produto usando o método existente
+        // Excluir cada foto associada ao produto usando o método existente
       fotosDoProduto.forEach((foto) => {
         this.excluirFotoPorID(foto);
       });
 
       this.apiProdutoService.excluirProduto(this.idProduto).subscribe((response) => {
         
+        this.produtos = this.produtos.filter((produto) => produto.prodId !== this.idProduto);
+
+
         const tipo = 'success'
         const titulo = ''
         const mensagem = 'Produto excluído com sucesso.'
@@ -760,7 +767,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
-        this.atualizarPagina();
       },
       (error) => {
         const tipo = 'error'

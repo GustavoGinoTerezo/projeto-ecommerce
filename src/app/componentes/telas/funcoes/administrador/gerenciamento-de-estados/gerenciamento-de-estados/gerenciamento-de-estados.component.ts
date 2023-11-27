@@ -126,7 +126,7 @@ export class GerenciamentoDeEstadosComponent {
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
 
-        this.atualizarPagina();
+        
       },
       (error) => {
         
@@ -158,7 +158,7 @@ export class GerenciamentoDeEstadosComponent {
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
-        this.atualizarPagina();
+        
       },
       (error) => {
         
@@ -185,7 +185,7 @@ export class GerenciamentoDeEstadosComponent {
 
         this.appToast.toast(tipo, titulo, mensagem, icon);
 
-        this.atualizarPagina();
+        
       },
       (error) => {
         
@@ -200,10 +200,5 @@ export class GerenciamentoDeEstadosComponent {
     );
   }
 
-  private atualizarPagina() {
-    //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
-    setTimeout(() => {
-      location.reload();
-    }, 2000);
-  }
+ 
 }
