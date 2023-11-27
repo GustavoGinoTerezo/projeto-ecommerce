@@ -263,15 +263,13 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
       console.log("11")
     });
 
-    this.anunciosMaioresSubscription = this.anuncioService.getAnunciosMaiores().subscribe(
-      (anunciosMaiores) => {
-        this.anunciosMaiores = anunciosMaiores;
-      });
+    this.anunciosMaioresSubscription = this.anuncioService.getAnunciosMaiores().subscribe((anunciosMaiores) => {
+      this.anunciosMaiores = anunciosMaiores;
+    });
 
-    this.anunciosMenoresSubscription = this.anuncioService.getAnunciosMenores().subscribe(
-      (anunciosMenores) => {
-        this.anunciosMenores = anunciosMenores;
-      });
+    this.anunciosMenoresSubscription = this.anuncioService.getAnunciosMenores().subscribe((anunciosMenores) => {
+      this.anunciosMenores = anunciosMenores;
+    });
 
     this.bannerImagesSubscription = this.bannerService.getBanners().subscribe((imagens) => {
       this.imagens = imagens;

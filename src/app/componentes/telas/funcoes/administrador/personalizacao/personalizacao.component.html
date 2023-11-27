@@ -231,13 +231,25 @@
             </p-dropdown>
         </div>
         <div>
-            <p-fileUpload chooseIcon="fa-solid fa-plus" chooseLabel="Selecionar" name="demo[]" (onUpload)="onUpload($event)" [multiple]="true" accept="image/*">
-                <ng-template pTemplate="content">
-                    <ul *ngIf="uploadedFiles.length">
-                        <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
-                    </ul>
-                </ng-template>
+            <p-fileUpload 
+                chooseLabel="Selecionar"
+                chooseIcon="fa-solid fa-plus"
+                cancelLabel="Cancelar"
+                [showUploadButton]="false"
+                name="myfile[]"
+                [multiple]="true"
+                accept="image/*"
+                [maxFileSize]="100000000"
+                (onSelect)="onUpload($event)">
             </p-fileUpload>
+        </div>
+        <div class="containerBotoesBanners">
+            <div class="divInputs">
+                <p-button label="Adicionar"
+                  styleClass="p-button-raised p-button-success"
+                  (click)="adicionarBanner()"
+                ></p-button>
+              </div>
         </div>
     </div>
 
@@ -255,31 +267,22 @@
                 dataKey="nome"
             >
                 <ng-template pTemplate="caption">
-                    <div class="table-header">
-                    <div class="input">
-                        <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="filterTableBanners($event)" placeholder="Buscar Banner" />
-                        </span>
-                    </div>
-                    </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                 <tr>
                     <th style="width: 5rem"></th>
-                    <th>Nome</th>
+                    <th>Banner</th>
                     <th>Tipo</th>
                     <th>Excluir</th>
                 </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-banner>
-                <tr [pSelectableRow]="banner" (click)="atualizarInputComBannerSelecionado(banner)">
+                <tr [pSelectableRow]="banner">
+                    <td></td>
+                    <td class="tdTemplate"><img class="img" [src]="getImagemBanner(banner)" alt=""></td>
+                    <td>{{getTipoBanner(banner.tpbanner)}}</td>
                     <td>
-                    </td>
-                    <td>{{ banner.nome }}</td>
-                    <td>{{ banner.tipo }}</td>
-                    <td>
-                        <p-button styleClass="p-button-danger" icon="fa-solid fa-xmark" ></p-button>
+                        <p-button (onClick)="excluirBannerPorID(banner)" styleClass="p-button-danger" icon="fa-solid fa-xmark"></p-button>
                     </td>
                 </tr>
                 </ng-template>

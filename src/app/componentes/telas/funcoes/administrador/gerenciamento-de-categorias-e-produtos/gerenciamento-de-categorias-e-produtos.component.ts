@@ -700,10 +700,10 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
               this.appToast.toast(tipo, titulo, mensagem, icon);
             }, 
             (error) => {
-              const tipo = 'success'
+              const tipo = 'error'
               const titulo = ''
               const mensagem = 'Erro ao cadastrar foto.'
-              const icon = 'fa-solid fa-check'
+              const icon = 'fa-solid fa-face-frown'
 
               this.appToast.toast(tipo, titulo, mensagem, icon);
             }

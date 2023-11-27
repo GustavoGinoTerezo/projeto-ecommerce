@@ -271,6 +271,32 @@ hr{
   margin-bottom: 5px;
 }
 
+:host ::ng-deep .divInputs .p-button{
+  width: 100%;
+}
+
+.divInputs{
+  width: 100%;
+}
+
+.espacamentoBotao{
+  margin-right: 10px;
+}
+
+.containerBotoesBanners{
+  display: flex;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.tdTemplate{
+  width: 300px;
+}
+
+.img{
+  width: 200px;
+}
+
 :host ::ng-deep .p-dropdown{
   width: 100%;
 }

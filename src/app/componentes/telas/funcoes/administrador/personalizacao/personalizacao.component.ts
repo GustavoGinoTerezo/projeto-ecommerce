@@ -1,7 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
+import { ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
 import { ServiceColorPickerService } from 'src/app/services/serviceColorPicker/service-color-picker.service';
+import { ServiceApiBannerService } from 'src/app/services/servicesAPI/serviceAPI-Banner/service-api-banner.service';
+import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrlGlobal/service-url-global.service';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -17,6 +21,8 @@ export class PersonalizacaoComponent {
 
   private subscriptions: Subscription[] = [];
 
+  private destroy$ = new Subject<void>();
+
   @ViewChild('banners') banners!: Table;
 
   cor1: string = ''; 
@@ -31,14 +37,22 @@ export class PersonalizacaoComponent {
   cor10: string = '';
   cor11: string = '';
 
-  uploadedFiles: any[] = [];
+  bannersFotos: any[] = [];
 
   tipoBanner!: any[]
   tipoBannerSelecionado: any;
 
+  tpbanner!: string;
+
   bannersAPI!: any[]
 
-  constructor(private colorService: ServiceColorPickerService ) {}
+  constructor(
+    private colorService: ServiceColorPickerService,
+    private bannerService: ServiceBannerService,
+    private bannerServiceAPI: ServiceApiBannerService,
+    private urlGlobal: ServiceUrlGlobalService,
+    private appToast: AppComponent,
+    ) {}
 
   ngOnInit() {
 
@@ -89,12 +103,12 @@ export class PersonalizacaoComponent {
 
     this.subscriptions.push(this.colorService.ton7$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--container-externo-cards-produtos', novaCor);
+      estilo.setProperty('--container-externo-cards-Banners', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton8$.subscribe(novaCor => {
       const estilo = document.documentElement.style;
-      estilo.setProperty('--container-interno-cards-produtos', novaCor);
+      estilo.setProperty('--container-interno-cards-Banners', novaCor);
     }));
 
     this.subscriptions.push(this.colorService.ton9$.subscribe(novaCor => {
@@ -111,11 +125,43 @@ export class PersonalizacaoComponent {
       const estilo = document.documentElement.style;
       estilo.setProperty('--cor-valor-total', novaCor);
     }));
+
+    this.bannerService.inicializacaoConcluida$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.carregarBanners();
+      });
   }
 
   ngOnDestroy() {
+    
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
+
+    this.destroy$.next();
+    this.destroy$.complete();
+
   }
+
+  carregarBanners() {
+    this.bannerService.getBanners().subscribe(banners => {
+      this.bannersAPI = banners
+
+      console.log(this.bannersAPI)
+    });
+  }
+
+  getImagemBanner(imagem: any): string {
+    const url = this.urlGlobal.url;
+    const endpoint = 'fotos/';
+    return `${url}${endpoint}${imagem.nomefoto}`;
+  }
+
+  getTipoBanner(tipo: string): string {
+    const tipoEncontrado = this.tipoBanner.find(t => t.tipo.toString() === tipo);
+    return tipoEncontrado ? tipoEncontrado.nome : ''; 
+  }
+
+  
 
   atualizarCor1(novaCor: any) {
     if (novaCor && novaCor.value) {
@@ -194,24 +240,93 @@ export class PersonalizacaoComponent {
     }
   }
 
-  onUpload(event:UploadEvent) {
-    for(let file of event.files) {
-        this.uploadedFiles.push(file);
+  getBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  onUpload(event: UploadEvent) {
+    for (let file of event.files) {
+      this.getBase64(file).then((base64Data: string) => {
+        const imageData = {
+          name: file.name,
+          base64: base64Data,
+          file: file, 
+        };
+        this.bannersFotos.push(imageData);
+      });
     }
   }
+
+  adicionarBanner(){
+
+    for (const imageData of this.bannersFotos) {
+      const dataFotosBanner = new FormData();
+      dataFotosBanner.append('nome', imageData.name);
+      dataFotosBanner.append('file', imageData.file);
+      dataFotosBanner.append('tpbanner', this.tpbanner);
   
+      this.bannerServiceAPI.cadastrarFotosBanner(dataFotosBanner).subscribe(
+        (response) => {
+          const tipo = 'success'
+          const titulo = ''
+          const mensagem = 'Banner cadastrado com sucesso.'
+          const icon = 'fa-solid fa-check'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
+        }, 
+        (error) => {
+          const tipo = 'error'
+          const titulo = ''
+          const mensagem = 'Erro ao cadastrar Banner.'
+          const icon = 'fa-solid fa-face-frown'
+
+          this.appToast.toast(tipo, titulo, mensagem, icon);
+        }
+      );
+    }
+  }
+
+  excluirBannerPorID(banner: any): void {
+
+    this.bannerServiceAPI.excluirFotosBanner(banner.bannerId).subscribe(
+      (response) => {
+
+        this.bannersAPI = this.bannersAPI.filter(foto => foto.bannerId !== banner.bannerId);
+
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Banner excluído com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+      },
+      (error) => {
+        
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Erro ao excluir banner.'
+        const icon = 'fa-solid fa-face-frown'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+
+      }
+    );
+
+  }
+
   bannerSelecionado(event: any) {
     this.tipoBannerSelecionado = event.value;
+    this.tpbanner = event.value.tipo
   }
 
   filterTableBanners(event: any) {
     const filterValue = event.target.value.toLowerCase(); // Obtém o valor do campo de pesquisa em minúsculas
     this.banners.filter(filterValue, 'nome', 'contains'); // Aplica o filtro na coluna 'nome' que contém o valor
-  }
-
-  
-  atualizarInputComBannerSelecionado (banner: any) {
-    
   }
 
 }
