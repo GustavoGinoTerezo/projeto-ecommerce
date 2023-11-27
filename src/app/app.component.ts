@@ -36,7 +36,7 @@ export class AppComponent {
 
     this.categoriasService.atualizarCategoriasDaAPI();
 
-    this.bannersService.atualizarBannerDaAPI();
+    // this.bannersService.atualizarBannerDaAPI();
 
     // this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
 

@@ -742,7 +742,17 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
     this.apiProdutoService.excluirPosicaoProduto(this.posProdId).subscribe((response) => {
       console.log("Posição do produto excluída com sucesso", response)
+
+      // Filtrar fotos associadas ao produto que será excluído
+      const fotosDoProduto = this.fotosProdutos.filter((foto) => foto.idProduto === this.idProduto);
+
+      // Excluir cada foto associada ao produto usando o método existente
+      fotosDoProduto.forEach((foto) => {
+        this.excluirFotoPorID(foto);
+      });
+
       this.apiProdutoService.excluirProduto(this.idProduto).subscribe((response) => {
+        
         const tipo = 'success'
         const titulo = ''
         const mensagem = 'Produto excluído com sucesso.'
