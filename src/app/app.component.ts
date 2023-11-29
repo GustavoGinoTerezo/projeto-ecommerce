@@ -40,33 +40,33 @@ export class AppComponent {
 
     // this.categoriasService.atualizarCategoriasDaAPI();
 
-    // this.colorService.buscarCoresDaAPI()
-    //   .then(() => {
-    //     return this.colorService.getCores().toPromise();
-    //   })
-    //   .then((coresAPI) => {
-    //     if (coresAPI !== undefined && coresAPI.length > 0) {
-    //       const cores = JSON.parse(coresAPI[0].cor) as any;
+    this.colorService.buscarCoresDaAPI()
+      .then(() => {
+        return this.colorService.getCores().toPromise();
+      })
+      .then((coresAPI) => {
+        if (coresAPI !== undefined && coresAPI.length > 0) {
+          const cores = JSON.parse(coresAPI[0].cor) as any;
 
-    //       this.colorService.atualizarTon1(cores.cor1);
-    //       this.colorService.atualizarTon2(cores.cor2);
-    //       this.colorService.atualizarTon3(cores.cor3);
-    //       this.colorService.atualizarTon4(cores.cor4);
-    //       this.colorService.atualizarTon5(cores.cor5);
-    //       this.colorService.atualizarTon6(cores.cor6);
-    //       this.colorService.atualizarTon7(cores.cor7);
-    //       this.colorService.atualizarTon8(cores.cor8);
-    //       this.colorService.atualizarTon9(cores.cor9);
-    //       this.colorService.atualizarTon10(cores.cor10);
-    //       this.colorService.atualizarTon11(cores.cor11);
+          this.colorService.atualizarTon1(cores.cor1);
+          this.colorService.atualizarTon2(cores.cor2);
+          this.colorService.atualizarTon3(cores.cor3);
+          this.colorService.atualizarTon4(cores.cor4);
+          this.colorService.atualizarTon5(cores.cor5);
+          this.colorService.atualizarTon6(cores.cor6);
+          this.colorService.atualizarTon7(cores.cor7);
+          this.colorService.atualizarTon8(cores.cor8);
+          this.colorService.atualizarTon9(cores.cor9);
+          this.colorService.atualizarTon10(cores.cor10);
+          this.colorService.atualizarTon11(cores.cor11);
 
-    //     } else {
-    //       console.error("getCores retornou undefined");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Erro ao buscar cores da API:", error);
-    //   });
+        } else {
+          console.error("getCores retornou undefined");
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar cores da API:", error);
+      });
 
     // this.bannersService.atualizarBannerDaAPI();
 
