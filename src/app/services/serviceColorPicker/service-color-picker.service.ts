@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { ServiceApiCoresService } from '../servicesAPI/serviceAPI-Cores/service-api-cores.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceColorPickerService {
 
-  constructor() { }
+  constructor(
+    private serviceApiCores: ServiceApiCoresService
+  ) { }
+
+  cores: any[] = []
 
   //Declarando os tons como observaveis
   private ton1 = new BehaviorSubject<string>('');
@@ -85,4 +90,22 @@ export class ServiceColorPickerService {
   atualizarTon11(novaCor: string) {
     this.ton11.next(novaCor);
   }
+
+  getCores(): Observable<any[]> {
+    return of (this.cores);
+  }
+
+  async buscarCoresDaAPI() {
+    try {
+      const coresAPI = await this.serviceApiCores.buscarCores().toPromise();
+      if (coresAPI) {
+        this.cores = coresAPI;
+      } else {
+        console.error('Erro ao buscar cores da API: coresAPI é undefined');
+      }
+    } catch (error) {
+      console.error('Erro ao buscar cores da API', error);
+    }
+  }
+
 }

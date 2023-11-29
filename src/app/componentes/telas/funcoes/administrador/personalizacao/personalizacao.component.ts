@@ -5,6 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 import { ServiceBannerService } from 'src/app/services/serviceBanner/service-banner.service';
 import { ServiceColorPickerService } from 'src/app/services/serviceColorPicker/service-color-picker.service';
 import { ServiceApiBannerService } from 'src/app/services/servicesAPI/serviceAPI-Banner/service-api-banner.service';
+import { ServiceApiCoresService } from 'src/app/services/servicesAPI/serviceAPI-Cores/service-api-cores.service';
 import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrlGlobal/service-url-global.service';
 
 interface UploadEvent {
@@ -48,6 +49,7 @@ export class PersonalizacaoComponent {
 
   constructor(
     private colorService: ServiceColorPickerService,
+    private colorAPIService: ServiceApiCoresService,
     private bannerService: ServiceBannerService,
     private bannerServiceAPI: ServiceApiBannerService,
     private urlGlobal: ServiceUrlGlobalService,
@@ -140,13 +142,6 @@ export class PersonalizacaoComponent {
     this.destroy$.next();
     this.destroy$.complete();
 
-  }
-
-  private atualizarPagina() {
-    //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
-    setTimeout(() => {
-      location.reload();
-    }, 2000);
   }
 
   carregarBanners() {
@@ -329,5 +324,34 @@ export class PersonalizacaoComponent {
     this.tipoBannerSelecionado = event.value;
     this.tpbanner = event.value.tipo
   }
+
+  atualizarCores() {
+
+    const coresObj = {
+      cor: {
+        cor1: this.cor1,
+        cor2: this.cor2,
+        cor3: this.cor3,
+        cor4: this.cor4,
+        cor5: this.cor5,
+        cor6: this.cor6,
+        cor7: this.cor7,
+        cor8: this.cor8,
+        cor9: this.cor9,
+        cor10: this.cor10,
+        cor11: this.cor11
+      }
+    };
+  
+    this.colorAPIService.atualizarCor(1,coresObj).subscribe((response) => {
+      console.log("Cores atualizadas com sucesso", response);
+    }, 
+    (error) => {
+      console.log("Erro ao atualizar as cores", error)
+    })
+
+  
+  }
+  
 
 }
