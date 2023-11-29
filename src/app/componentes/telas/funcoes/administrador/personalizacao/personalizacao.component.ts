@@ -20,7 +20,7 @@ interface UploadEvent {
 })
 export class PersonalizacaoComponent {
 
-  private subscriptions: Subscription[] = [];
+  
 
   private destroy$ = new Subject<void>();
 
@@ -73,60 +73,33 @@ export class PersonalizacaoComponent {
       }
     ]
 
-    this.subscriptions.push(this.colorService.ton1$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--background', novaCor);
-    }));
+    this.colorService.buscarCoresDaAPI()
+      .then(() => {
+        return this.colorService.getCores().toPromise();
+      })
+      .then((coresAPI) => {
+        if (coresAPI !== undefined && coresAPI.length > 0) {
+          const cores = JSON.parse(coresAPI[0].cor) as any;
 
-    this.subscriptions.push(this.colorService.ton2$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--header-rodape', novaCor);
-    }));
+          this.cor1 = cores.cor1;
+          this.cor2 = cores.cor2;
+          this.cor3 = cores.cor3;
+          this.cor4 = cores.cor4;
+          this.cor5 = cores.cor5;
+          this.cor6 = cores.cor6;
+          this.cor7 = cores.cor7;
+          this.cor8 = cores.cor8;
+          this.cor9 = cores.cor9;
+          this.cor10 = cores.cor10;
+          this.cor11 = cores.cor11;
 
-    this.subscriptions.push(this.colorService.ton3$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--scrollbar', novaCor);
-    }));
-
-    this.subscriptions.push(this.colorService.ton4$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--textos-e-icones-botoes', novaCor);
-    }));
-
-    this.subscriptions.push(this.colorService.ton5$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--background-botoes', novaCor);
-    }));
-
-    this.subscriptions.push(this.colorService.ton6$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--hover-background-botoes', novaCor);
-    }));
-
-    this.subscriptions.push(this.colorService.ton7$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--container-externo-cards-Banners', novaCor);
-    }));
-
-    this.subscriptions.push(this.colorService.ton8$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--container-interno-cards-Banners', novaCor);
-    }));
-
-    this.subscriptions.push(this.colorService.ton9$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--borda-dos-containers', novaCor);
-    }));
-
-    this.subscriptions.push(this.colorService.ton10$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--background-das-divs-da-categoria', novaCor);
-    }));
-
-    this.subscriptions.push(this.colorService.ton11$.subscribe(novaCor => {
-      const estilo = document.documentElement.style;
-      estilo.setProperty('--cor-valor-total', novaCor);
-    }));
+        } else {
+          console.error("getCores retornou undefined");
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar cores da API:", error);
+      });
 
     this.bannerService.inicializacaoConcluida$
       .pipe(takeUntil(this.destroy$))
@@ -136,8 +109,6 @@ export class PersonalizacaoComponent {
   }
 
   ngOnDestroy() {
-    
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
 
     this.destroy$.next();
     this.destroy$.complete();

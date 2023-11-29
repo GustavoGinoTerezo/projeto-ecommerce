@@ -91,6 +91,9 @@ export class ServiceColorPickerService {
     this.ton11.next(novaCor);
   }
 
+  // ================================================================================= //
+  // API
+
   getCores(): Observable<any[]> {
     return of (this.cores);
   }

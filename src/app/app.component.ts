@@ -6,6 +6,8 @@ import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { MenuItem, MessageService } from 'primeng/api';
 import { ServiceBannerService } from './services/serviceBanner/service-banner.service';
+import { Subscription, concatMap } from 'rxjs';
+import { ServiceColorPickerService } from './services/serviceColorPicker/service-color-picker.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,8 @@ import { ServiceBannerService } from './services/serviceBanner/service-banner.se
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ecommerce';
+  
+  private subscriptions: Subscription[] = [];
 
   mostrarLateralUsuario: boolean = true;
   mostrarLateralAdministrador: boolean = true;
@@ -21,20 +24,49 @@ export class AppComponent {
   menuItems: MenuItem[] = [];
   menuItemsAdmin: MenuItem[] = []
 
+  coresAPI: any = {} as any;
+
   constructor(
     private router: Router,
     private categoriasService: ServiceCategoriasService,
     private mostrarLateraisService: ServiceUsuarioLogadoService,
     private bannersService: ServiceBannerService,
     private usuarioLogado: ServiceUsuarioLogadoService,
+    private colorService: ServiceColorPickerService,
     private messageService: MessageService,
   ) {}
 
-  tipo!: string;
-
   async ngOnInit(){
 
-    this.categoriasService.atualizarCategoriasDaAPI();
+    // this.categoriasService.atualizarCategoriasDaAPI();
+
+    // this.colorService.buscarCoresDaAPI()
+    //   .then(() => {
+    //     return this.colorService.getCores().toPromise();
+    //   })
+    //   .then((coresAPI) => {
+    //     if (coresAPI !== undefined && coresAPI.length > 0) {
+    //       const cores = JSON.parse(coresAPI[0].cor) as any;
+
+    //       this.colorService.atualizarTon1(cores.cor1);
+    //       this.colorService.atualizarTon2(cores.cor2);
+    //       this.colorService.atualizarTon3(cores.cor3);
+    //       this.colorService.atualizarTon4(cores.cor4);
+    //       this.colorService.atualizarTon5(cores.cor5);
+    //       this.colorService.atualizarTon6(cores.cor6);
+    //       this.colorService.atualizarTon7(cores.cor7);
+    //       this.colorService.atualizarTon8(cores.cor8);
+    //       this.colorService.atualizarTon9(cores.cor9);
+    //       this.colorService.atualizarTon10(cores.cor10);
+    //       this.colorService.atualizarTon11(cores.cor11);
+
+    //     } else {
+    //       console.error("getCores retornou undefined");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Erro ao buscar cores da API:", error);
+    //   });
 
     // this.bannersService.atualizarBannerDaAPI();
 
@@ -105,10 +137,75 @@ export class AppComponent {
 
     this.ativarLateral();
 
+    // ========================================================================================
+    // FUNCIONALIDADES RELACIONADAS A PERSONALIZAÇÃO DAS CORES
+
+
+    this.subscriptions.push(this.colorService.ton1$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--background', novaCor);
+    }));
+
+    this.subscriptions.push(this.colorService.ton2$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--header-rodape', novaCor);
+    }));
+
+    this.subscriptions.push(this.colorService.ton3$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--scrollbar', novaCor);
+    }));
+
+    this.subscriptions.push(this.colorService.ton4$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--textos-e-icones-botoes', novaCor);
+    }));
+
+    this.subscriptions.push(this.colorService.ton5$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--background-botoes', novaCor);
+    }));
+
+    this.subscriptions.push(this.colorService.ton6$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--hover-background-botoes', novaCor);
+    }));
+
+    this.subscriptions.push(this.colorService.ton7$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--container-externo-cards-produtos', novaCor);
+    }));
+
+    this.subscriptions.push(this.colorService.ton8$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--container-interno-cards-produtos', novaCor);
+    }));
+
+    this.subscriptions.push(this.colorService.ton9$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--borda-dos-containers', novaCor);
+    }));
+
+    this.subscriptions.push(this.colorService.ton10$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--background-das-divs-da-categoria', novaCor);
+    }));
+
+    this.subscriptions.push(this.colorService.ton11$.subscribe(novaCor => {
+      const estilo = document.documentElement.style;
+      estilo.setProperty('--cor-valor-total', novaCor);
+    }));
+
   }
 
 // ====================================================================================== //
 // CONTROLE DE ACESSO //
+
+  ngOnDestroy(){
+
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+
+  }
 
   ativarLateral() {
 
