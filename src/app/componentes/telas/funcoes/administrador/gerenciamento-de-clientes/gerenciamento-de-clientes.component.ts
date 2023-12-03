@@ -63,7 +63,9 @@ export class GerenciamentoDeClientesComponent {
   email: string = '';
   cpfOuCnpj!: string;
   cep!: number | null;
-  telefone!:  string;
+  telefone!: '';
+  telefonesAlternativos: any[] = []
+  telefoneAlternativoSelecionadoInput: any;
   cidade: string = '';
   bairro: string = '';
   rua: string = '';
@@ -191,6 +193,7 @@ export class GerenciamentoDeClientesComponent {
     });
     this.telefonesSubscription = this.usuariosService.getTelefones().subscribe((telefonesAPI) => {
       this.telefones = telefonesAPI;
+      console.log("Telefones", this.telefones)
     });
     this.emailsSubscription = this.usuariosService.getEmail().subscribe((emailsAPI) => {
       this.emails = emailsAPI;
@@ -231,6 +234,7 @@ export class GerenciamentoDeClientesComponent {
   }
 
   updateInputFieldsWithSelectedUser() {
+    
     if (this.usuarioSelecionado) {
       this.nome = this.usuarioSelecionado.nome || '';
       this.cpfOuCnpj = this.usuarioSelecionado.cpf || null;
@@ -245,6 +249,20 @@ export class GerenciamentoDeClientesComponent {
         // Filtrar os arrays com base no id do usuário selecionado
         this.emailsFiltrados = this.emails.filter(email => email.LoginId === this.LoginId);
         this.telefonesFiltrados = this.telefones.filter(telefone => telefone.LoginId === this.LoginId);
+
+        const telefonesComTipo1 = this.telefonesFiltrados.filter(telefone => telefone.tptelefone === "1");
+
+        if (telefonesComTipo1.length > 0) {
+          this.telefone = telefonesComTipo1[0].telefone;
+        } else {
+          // Caso não haja nenhum telefone com tptelefone === "1"
+          this.telefone = ''; // ou qualquer valor padrão desejado
+        }
+
+
+            // Filtrar telefones com tptelefone igual a 2 em um array
+        this.telefonesAlternativos = this.telefonesFiltrados.filter(telefone => telefone.tptelefone === "2");
+
         this.enderecosFiltradosCobranca = this.enderecos.filter(endereco => endereco.LoginId === this.LoginId && endereco.tpcadastro === "1");
         this.enderecosFiltradosEntrega = this.enderecos.filter(endereco => endereco.LoginId === this.LoginId && endereco.tpcadastro === "2");
 
@@ -298,6 +316,11 @@ export class GerenciamentoDeClientesComponent {
 
   emailAlternativoSelecionado(event: any) {
     this.emailAlternativo = event.value.email
+    this.habilitarBotaoEmailAlternativo = true
+  }
+
+  telefoneAlternativoSelecionado(event: any) {
+    this.telefoneAlternativo = event.value.telefone
     this.habilitarBotaoEmailAlternativo = true
   }
 
@@ -481,7 +504,6 @@ export class GerenciamentoDeClientesComponent {
   // USER
   cadastrarUsuario(){
 
-
     if (this.estadoSelecionadoCobranca) {
       const estadoEncontrado = this.estadosAPI.find(
         (estado) => estado.UfId === this.estadoSelecionadoCobranca!.uf
@@ -500,12 +522,15 @@ export class GerenciamentoDeClientesComponent {
         this.registrar.registrar(dataLogin).subscribe(response => {
     
           const LoginId = response.LoginId;
+
+          console.log(LoginId)
     
           const telefonePrincipal = this.removeFormatoTelefone(this.telefone);
     
           const dataTelefone = {
             LoginId: LoginId,
             telefone: telefonePrincipal,
+            tptelefone: "1"
           }
     
           this.registrar.registrarTelefone(dataTelefone).subscribe(response => {
@@ -553,6 +578,7 @@ export class GerenciamentoDeClientesComponent {
             const dataTelefoneAlternativo = {
               LoginId: LoginId,
               telefone: telefoneAlternativo,
+              tptelefone: "2"
             }
     
             this.registrar.registrarTelefone(dataTelefoneAlternativo).subscribe(
