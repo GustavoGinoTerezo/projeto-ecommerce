@@ -241,7 +241,6 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   
     });
   }
-  
 
   carregarCategorias() {
     this.categoriasSubscription = this.categoriasService.getCategorias().subscribe((categoriasAPI) => {
@@ -257,18 +256,30 @@ export class TelaPrincipalComponent implements OnInit, OnDestroy {
   getProdutos() {
 
     this.produtosDestaqueSubscription = this.categoriasService.getProdutosDestaque().subscribe((produtosDestaqueAPI) => {
-      this.produtosDestaque = produtosDestaqueAPI;
-      console.log("9")
+      // Verificar se produtosDestaqueAPI é definido antes de filtrar
+      if (produtosDestaqueAPI) {
+        // Filtrar os produtos com status igual a 1 e 2
+        this.produtosDestaque = produtosDestaqueAPI.filter(produto => typeof produto.status === 'string' && (produto.status === '1' || produto.status === '2'));
+        console.log("9");
+      }
     });
 
     this.produtosMaisVendidosSubscription = this.categoriasService.getProdutosMaisVendidos().subscribe((produtosMaisVendidosAPI) => {
-      this.produtosMaisVendidos = produtosMaisVendidosAPI;
-      console.log("10")
+      // Verificar se produtosMaisVendidosAPI é definido antes de filtrar
+      if (produtosMaisVendidosAPI) {
+        // Filtrar os produtos com status igual a 1 e 2
+        this.produtosMaisVendidos = produtosMaisVendidosAPI.filter(produto => typeof produto.status === 'string' && (produto.status === '1' || produto.status === '2'));
+        console.log("10");
+      }
     });
 
     this.produtosEmPromocaoSubscription = this.categoriasService.getProdutosEmPromocao().subscribe((produtosEmPromocaoAPI) => {
-      this.produtosEmPromocao = produtosEmPromocaoAPI;
-      console.log("11")
+      // Verificar se produtosEmPromocaoAPI é definido antes de filtrar
+      if (produtosEmPromocaoAPI) {
+        // Filtrar os produtos com status igual a 1 e 2
+        this.produtosEmPromocao = produtosEmPromocaoAPI.filter(produto => typeof produto.status === 'string' && (produto.status === '1' || produto.status === '2'));
+        console.log("11");
+      }
     });
 
     this.bannerImagesSubscription = this.bannerService.getBanners().subscribe((imagens) => {

@@ -201,11 +201,11 @@
               </div>
               <div class="divBotoes botoes">
                 <div class="widthBotao espacamento">
-                  <p-button label="Excluir"
+                  <!-- <p-button label="Excluir"
                   styleClass="p-button-raised p-button-danger"
                   [disabled]="!habilitarBotaoEmailAlternativo ||!emailAlternativo"
                   (onClick)="excluirUnicoEmailAlternativo()"
-                  ></p-button>
+                  ></p-button> -->
                 </div>
                 <div class="widthBotao">
                   <p-button label="Limpar campos"
@@ -267,23 +267,29 @@
                 <div class="widthBotao espacamento">
                   <p-button label="Adicionar"
                   styleClass="p-button-raised p-button-success"
-                  [disabled]="!telefoneAlternativo"></p-button>
+                  [disabled]="!telefoneAlternativo ||
+                  telefoneAlternativoSelecionadoInput"
+                  (onClick)="cadastrarTelefoneAlternativo()"></p-button>
                 </div>
                 <div class="widthBotao">
                   <p-button label="Atualizar"
                   styleClass="p-button-raised p-button-warning"
-                  [disabled]="!habilitarBotaoTelefoneAlternativo ||!telefoneAlternativo"></p-button>
+                  [disabled]="!telefoneAlternativo ||
+                  !telefoneAlternativoSelecionadoInput"
+                  (onClick)="atualizarTelefoneAlternativo()"></p-button>
                 </div>
               </div>
               <div class="divBotoes botoes">
                 <div class="widthBotao espacamento">
-                  <p-button label="Excluir"
+                  <!-- <p-button label="Excluir"
                   styleClass="p-button-raised p-button-danger"
-                  [disabled]="!habilitarBotaoTelefoneAlternativo ||!telefoneAlternativo"></p-button>
+                  [disabled]="!telefoneAlternativo ||
+                  !telefoneAlternativoSelecionadoInput"></p-button> -->
                 </div>
                 <div class="widthBotao">
                   <p-button label="Limpar campos"
                   (click)="limparCamposTelefoneAlternativo()"
+                  [disabled]="!telefoneAlternativo"
                   styleClass="p-button-raised p-button-info"
                   ></p-button>
                 </div>
@@ -512,8 +518,8 @@
             </div>
           </div>
           <div class="containerBotoesDois">
-            <div class="divInputs">
-              <p-button label="Excluir endereço"
+            <div class="divInputs"> 
+              <!-- <p-button label="Excluir endereço"
               [disabled]="!botaoDisabledEntrega ||
               !identificacaoEndereco ||
               !cepEntrega ||
@@ -525,7 +531,7 @@
               !complementoEntrega"
               styleClass="p-button-raised p-button-danger"
               (onClick)="excluirUnicoEnderecoEntrega()"
-              ></p-button>
+              ></p-button> -->
             </div>
             <div class="divInputs">
               <p-button label="Limpar campos"
@@ -583,7 +589,7 @@
       </div>
       <div class="containerBotoesDois">
         <div class="divInputs">
-          <p-button label="Excluir conta"
+          <!-- <p-button label="Excluir conta"
           [disabled]="!botaoDisabled ||
             !nome ||
             !cpfOuCnpj ||
@@ -600,7 +606,7 @@
             !complemento"
           styleClass="p-button-raised p-button-danger"
           (onClick)="excluirUsuario()"
-          ></p-button>
+          ></p-button> -->
         
         </div>
         <div class="divInputs">
@@ -665,7 +671,6 @@
                 <th>Nome</th>
                 <th>CPF/CNPJ</th>
                 <th>Email</th>
-                <th>Telefone</th>
               </tr>
           </ng-template>
           <ng-template pTemplate="body" let-usuario>
@@ -673,7 +678,6 @@
               <td>{{ usuario?.nome }}</td>
               <td>{{ usuario?.cpf}}</td>
               <td>{{ usuario?.emailprinc }}</td>
-              <td>{{ usuario?.telefone }}</td>
             </tr>
         </ng-template>
       </p-table>

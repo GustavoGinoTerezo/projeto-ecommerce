@@ -64,8 +64,10 @@ export class GerenciamentoDeClientesComponent {
   cpfOuCnpj!: string;
   cep!: number | null;
   telefone!: '';
+  telefoneId!: number;
   telefonesAlternativos: any[] = []
   telefoneAlternativoSelecionadoInput: any;
+  telefoneAltenativoIdSelecionado!: number;
   cidade: string = '';
   bairro: string = '';
   rua: string = '';
@@ -254,6 +256,7 @@ export class GerenciamentoDeClientesComponent {
 
         if (telefonesComTipo1.length > 0) {
           this.telefone = telefonesComTipo1[0].telefone;
+          this.telefoneId = telefonesComTipo1[0].contId;
         } else {
           // Caso não haja nenhum telefone com tptelefone === "1"
           this.telefone = ''; // ou qualquer valor padrão desejado
@@ -322,6 +325,7 @@ export class GerenciamentoDeClientesComponent {
   telefoneAlternativoSelecionado(event: any) {
     this.telefoneAlternativo = event.value.telefone
     this.habilitarBotaoEmailAlternativo = true
+    this.telefoneAltenativoIdSelecionado = event.value.contId
   }
 
   emailAlternativoValid(): boolean {
@@ -402,6 +406,7 @@ export class GerenciamentoDeClientesComponent {
 
   limparCamposTelefoneAlternativo() {
     this.telefoneAlternativo = '';
+    this.telefoneAlternativoSelecionadoInput = null;
   }
 
   onKeyPressWord(event: KeyboardEvent): void {
@@ -489,13 +494,6 @@ export class GerenciamentoDeClientesComponent {
       }
 
     return true;
-  }
-
-  private async atualizarPagina() {
-    //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
-    setTimeout(() => {
-      location.reload();
-    }, 2000);
   }
 
   // ========================================================= //
@@ -716,13 +714,26 @@ export class GerenciamentoDeClientesComponent {
 
           this.enderecosAPIService.atualizarEnderecos(endIdCobranca, novoDataEndCobranca).subscribe((response) => {
             
-            const tipo = 'success'
-            const titulo = ''
-            const mensagem = 'Usuário atualizado com sucesso.'
-            const icon = 'fa-solid fa-check'
+            const telefone = this.removeFormatoTelefone(this.telefone)
 
-            this.appToast.toast(tipo, titulo, mensagem, icon);
+            const novoTelefone = {
+              telefone: telefone
+            }
 
+            this.telefoneAPIService.atualizarTelefones(this.telefoneId, novoTelefone).subscribe((response) => {
+              console.log("Telefone atualizado com sucesso", response)
+
+              const tipo = 'success'
+              const titulo = ''
+              const mensagem = 'Usuário atualizado com sucesso.'
+              const icon = 'fa-solid fa-check'
+
+              this.appToast.toast(tipo, titulo, mensagem, icon);
+
+            },
+            (error) => {
+              console.log("Erro ao atualizar telefone", error)
+            })
             
           },
           (error) => {
@@ -915,9 +926,12 @@ export class GerenciamentoDeClientesComponent {
 
     const LoginId = this.LoginId
 
+    const telefoneAlternativo = this.removeFormatoTelefone(this.telefoneAlternativo);
+
     const dataTelefoneAlternativo = {
       LoginId: LoginId,
-      telefone: this.telefoneAlternativo
+      telefone: telefoneAlternativo,
+      tptelefone: '2'
     };
 
     this.registrar.registrarTelefone(dataTelefoneAlternativo).subscribe(
@@ -943,23 +957,24 @@ export class GerenciamentoDeClientesComponent {
     );
   }
 
-  // atualizarTelefoneAlternativo(){
+  atualizarTelefoneAlternativo(){
 
-  //   const emailId = this.emailsFiltradoSelecionado.emailId
+    const contId = this.telefoneAltenativoIdSelecionado
 
-  //   const dataNovoEmailAlternativo = {
-  //     email: this.emailAlternativo
-  //   }
+    const telefoneAlternativo = this.removeFormatoTelefone(this.telefoneAlternativo);
 
-  //   this.emailAPIService.atualizarEmails(emailId, dataNovoEmailAlternativo).subscribe((response) => {
-  //     console.log("Email alternativo atualizado com sucesso", response)
-  //   },
-  //   (error) => {
-  //     console.log("Erro ao atualizar email alternativo", error)
-  //   })
+    const dataNovoEmailAlternativo = {
+      telefone: telefoneAlternativo
+    }
 
-  //   
-  // }
+    this.telefoneAPIService.atualizarTelefones(contId, dataNovoEmailAlternativo).subscribe((response) => {
+      console.log("Telefone alternativo atualizado com sucesso", response)
+    },
+    (error) => {
+      console.log("Erro ao atualizar Telefone alternativo", error)
+    })
+    
+  }
 
   async excluirTodosTelefonesAlternativo() {
     console.log("3");
@@ -1169,5 +1184,7 @@ export class GerenciamentoDeClientesComponent {
   }
 
   // ========================================================= //
+
+  
 
 }
