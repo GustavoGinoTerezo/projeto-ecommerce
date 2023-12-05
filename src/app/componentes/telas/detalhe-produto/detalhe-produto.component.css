@@ -10,7 +10,7 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: var(--background-das-divs-da-categoria);
+  background-color: var(--container-externo-cards-produtos);
   border-radius: 8px;
   margin-bottom: 15px;
 }
@@ -142,7 +142,7 @@ img:hover{
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: var(--background-das-divs-da-categoria);
+  background-color: var(--container-externo-cards-produtos);
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 15px;
@@ -163,7 +163,7 @@ img:hover{
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: var(--background-das-divs-da-categoria);
+  background-color: var(--container-externo-cards-produtos);
   border-radius: 8px;
   padding: 20px;
   border: 2px solid rgba(0, 0, 0, 0.462);
@@ -218,6 +218,84 @@ img:hover{
 
 .botaoEnviarComentario{
   margin-left: 5px;
+}
+
+.sidenav-nav {
+  display: flex;
+  width: 100%;
+  max-width: 150px;
+  padding: 4px;
+  justify-content: center;
+  margin: 0;
+  flex-direction: column;
+  align-items: center;
+
+  .sidenav-nav-item{
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+
+    .sidenav-nav-link{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 3rem; /* Tamanho da altura dos botões */
+      overflow: hidden;
+      min-height: 3rem;
+      max-height: 100%;
+      width: 100%;
+      background-color: var(--background-botoes);
+      text-decoration: none;
+      border-radius: 0.313rem;
+      transition: all .3s ease;
+      cursor: pointer;
+      padding: 10px;
+
+
+      .sidenav-link-icon{
+        font-size: 22px;
+        width: 2rem;
+        min-width: 2rem;
+        text-align: center;
+        color: var(--textos-e-icones-botoes);
+      }
+
+      .sidenav-link-text{
+        font-size: 20px;
+        margin-left: 5px;
+        word-wrap: break-word;
+        color: var(--textos-e-icones-botoes);
+      }
+
+      
+    }
+
+    .sidenav-nav-link-indisponivel{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 3rem; /* Tamanho da altura dos botões */
+      overflow: hidden;
+      min-height: 3rem;
+      max-height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.205);
+      text-decoration: none;
+      border-radius: 0.313rem;
+      transition: all .3s ease;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .sidenav-nav-link:hover{
+      background-color: var(--hover-background-botoes);
+    }
+
+    .sidenav-nav-link-indisponivel:hover{
+      background-color: rgba(0, 0, 0, 0.332);
+    }
+  }
 }
 
 @media (max-width: 880px) {

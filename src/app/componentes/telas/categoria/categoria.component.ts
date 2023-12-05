@@ -6,6 +6,8 @@ import { Categorias, Produtos, ServiceCategoriasService } from 'src/app/services
 import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
+import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrlGlobal/service-url-global.service';
 
 interface Ordenar {
   ordem: string;
@@ -21,6 +23,7 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   private inicializacaoConcluidaSubscription!: Subscription;
   private categoriasSubscription!: Subscription;
   private produtosSubscription!: Subscription;
+  private fotosProdutosSubscription!: Subscription;
 
   ordem: Ordenar[] = [];
   ordemSelecionado: Ordenar | undefined;
@@ -29,16 +32,21 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   nomeCategoria: string | null = null;
   categorias: Categorias[] = [];
   first: number = 0; // Primeiro item da página
-  rows: number = 8; // Número de itens por página
+  rows: number = 9; // Número de itens por página
   produtos: Produtos[] = []
   produtosDaCategoria: Produtos[] = []
+  fotosProdutos: any[] = [];
 
   search!: string;
+
+  tipo1Fotos: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private produtoService: ServiceCategoriasService,
     private categoriasService: ServiceCategoriasService,
+    private urlGlobal: ServiceUrlGlobalService,
+    private appToast: AppComponent,
     private router: Router,
   ) {}
 
@@ -94,9 +102,21 @@ export class CategoriaComponent implements OnInit, OnDestroy {
     });
 
     this.produtosSubscription = this.categoriasService.getProdutos().subscribe(async (produtosAPI) => {
-      this.produtos = produtosAPI;
+      this.produtos = produtosAPI.filter(produto => typeof produto.status === 'string' && (produto.status === '1' || produto.status === '2'));;
     });
 
+    this.fotosProdutosSubscription = this.categoriasService.getFotosProdutos().subscribe(async (fotosProdutosAPI) => {
+      this.fotosProdutos = fotosProdutosAPI;
+
+      this.tipo1Fotos = [];
+
+      this.fotosProdutos.forEach((foto) => {
+        if (foto.prodFotoTp === '1') {
+          this.tipo1Fotos.push(foto);
+        }
+      });
+      console.log("Tipo1Fotos: ",this.tipo1Fotos)
+    });
 
     this.route.params.subscribe((params) => {
       this.nomeCategoria = params['nome'];
@@ -106,7 +126,7 @@ export class CategoriaComponent implements OnInit, OnDestroy {
         this.categoria = this.produtoService.obterCategoriaPorNome(nomeOriginal);
 
           // FILTRA E MOSTRA OS PRODUTOS DA CATEGORIA CORRESPONDENTE
-          this.produtosDaCategoria = this.produtos.filter(produto => produto.catId === this.categoria!.catId);
+          this.produtosDaCategoria = this.produtos.filter(produto => produto.catId === this.categoria!.catId && typeof produto.status === 'string' && (produto.status === '1' || produto.status === '2'));
       }
     });
   }
@@ -127,6 +147,10 @@ export class CategoriaComponent implements OnInit, OnDestroy {
   }
 
   adicionarAoCarrinho(produto: Produtos): void {
+
+    const saldo = produto.qtdEntrada - produto.qtdSaida
+
+    if(saldo > 0) {
     // Recupere o carrinho criptografado do sessionStorage
     const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
     const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
@@ -161,9 +185,26 @@ export class CategoriaComponent implements OnInit, OnDestroy {
       sessionStorage.setItem('c', b031d16372c388ed5c4462fe1e968adaaa821c5ab62e3b20497569ffe802b0cb);
 
       // Exiba uma mensagem ou realize outras ações necessárias
+
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Produto adicionado ao carrinho'
+      const icon = 'fa-solid fa-cart-shopping'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+    }
+
+    } else {
+
+      const tipo = 'error';
+      const titulo = '';
+      const mensagem = 'Produto sem estoque';
+      const icon = 'fa-solid fa-face-frown';
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
     }
   }
-
 
   formatarNomeProduto(produtos: string): string {
     return this.categoriasService.formatarNomeProduto(produtos);
@@ -209,13 +250,24 @@ export class CategoriaComponent implements OnInit, OnDestroy {
     }
   }
 
-  
-
-
-
   get totalRecords(): number {
     return this.produtosDaCategoria?.length || 0;
   }
+
+  getImagensProduto(produto: Produtos): any[] {
+    const idProduto = produto.prodId;
+    return this.tipo1Fotos.filter((foto) => foto.prodId === idProduto);
+  }
+
+  getImagemURL(imagem: any): string {
+    const url = this.urlGlobal.url;
+    const endpoint = 'fotos/';
+    return `${url}${endpoint}${imagem.imgfomulacao}`;
+  }
+
+  
+
+
 }
 
 

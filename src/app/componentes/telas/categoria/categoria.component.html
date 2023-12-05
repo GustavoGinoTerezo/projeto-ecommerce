@@ -50,9 +50,11 @@
                 <div>
                   <div class="containerInterno">
                     <div class="divCarouselImagens">
-                      <p-carousel [value]="produto.imagem || []" [showIndicators]="false" [numVisible]="1" [numScroll]="1" [circular]="true">
+                      <p-carousel [value]="getImagensProduto(produto)" [showIndicators]="false" [numVisible]="1" [numScroll]="1" [circular]="true">
                         <ng-template let-imagem pTemplate="item">
-                          <img [src]="imagem.imagem" alt="imagem produto" class="img" (click)="navigateToDetalheProduto(produto)">
+                          <div class="containerImagem">
+                            <img [src]="getImagemURL(imagem)" alt="imagem produto" class="img" (click)="navigateToDetalheProduto(produto)">
+                          </div>
                         </ng-template>
                       </p-carousel>
                     </div>
@@ -81,10 +83,10 @@
                   </div>
                   <div class="sidenav-nav" (click)="adicionarAoCarrinho(produto)">
                     <div class="sidenav-nav-item">
-                      <a class="sidenav-nav-link" >
+                      <a [ngClass]="{'sidenav-nav-link-indisponivel': produto.qtdEntrada - produto.qtdSaida === 0}" class="sidenav-nav-link" >
                         <i class="sidenav-link-icon fa-solid fa-cart-shopping fa-lg"></i>
                         <span class="sidenav-link-text">
-                          <div>Comprar</div>
+                          <div>{{ produto.qtdEntrada - produto.qtdSaida === 0 ? 'Sem Estoque' : 'Comprar' }}</div>
                         </span>
                       </a>
                     </div>
@@ -95,7 +97,7 @@
           </div>
         </div>
         <div class="paginator">
-          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[8, 16, 24]">
+          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[9, 18]">
           </p-paginator>
         </div>
       </div>

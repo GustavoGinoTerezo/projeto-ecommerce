@@ -42,8 +42,15 @@
           <h2 class="preco">
             R$ {{ produto?.preco?.toFixed(2) }}
           </h2>
-          <div class="botao">
-            <p-button (click)="adicionarAoCarrinho(produto || produtoDaCategoria)">Adicionar ao carrinho</p-button>
+          <div class="sidenav-nav" (click)="adicionarAoCarrinho(produto)">
+            <div class="sidenav-nav-item">
+              <a [ngClass]="{'sidenav-nav-link-indisponivel': produto.qtdEntrada - produto.qtdSaida === 0}" class="sidenav-nav-link" >
+                <i class="sidenav-link-icon fa-solid fa-cart-shopping fa-lg"></i>
+                <span class="sidenav-link-text">
+                  <div>{{ produto.qtdEntrada - produto.qtdSaida === 0 ? 'Sem Estoque' : 'Comprar' }}</div>
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

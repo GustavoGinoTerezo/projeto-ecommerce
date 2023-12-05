@@ -248,6 +248,11 @@ export class DetalheProdutoComponent implements OnInit {
   }
 
   adicionarAoCarrinho(produto: Produtos): void {
+
+    const saldo = produto.qtdEntrada - produto.qtdSaida
+
+    if(saldo > 0) {
+
     // Recupere o carrinho criptografado do sessionStorage
     const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
     const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
@@ -273,6 +278,7 @@ export class DetalheProdutoComponent implements OnInit {
           carrinho = [];
         }
       }
+      
     }
 
     // Verifique se o produto possui um ID válido antes de adicioná-lo ao carrinho
@@ -286,14 +292,26 @@ export class DetalheProdutoComponent implements OnInit {
       // Salve o carrinho criptografado no sessionStorage
       sessionStorage.setItem('c', b031d16372c388ed5c4462fe1e968adaaa821c5ab62e3b20497569ffe802b0cb);
 
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Produto adicionado ao carrinho'
+      const icon = 'fa-solid fa-cart-shopping'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
     }
 
-    const tipo = 'success'
-    const titulo = ''
-    const mensagem = 'Produto adicionado ao carrinho'
-    const icon = 'fa-solid fa-cart-shopping'
+    } else {
 
-    this.appToast.toast(tipo, titulo, mensagem, icon);
+      const tipo = 'error';
+      const titulo = '';
+      const mensagem = 'Produto sem estoque';
+      const icon = 'fa-solid fa-face-frown';
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+
+    }
+
   }
 
   adicionarComentario() {

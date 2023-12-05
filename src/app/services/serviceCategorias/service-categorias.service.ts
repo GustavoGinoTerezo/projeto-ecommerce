@@ -107,7 +107,7 @@ export class ServiceCategoriasService {
   //==================================================================================================================================//
   //PRODUTOS
 
-  getProdutos(): Observable<Categorias[]> {
+  getProdutos(): Observable<any[]> {
     return of (this.produtosAPI);
   }
 
