@@ -60,18 +60,18 @@
     </div>
     <div class="containerBotoesDois">
       <div class="divInputs">
-        <p-button
+        <!-- <p-button
           label="Excluir categoria"
           [disabled]="!categoriasAdicionarSelecionadaInput"
           styleClass="p-button-raised p-button-danger"
           (onClick)="excluirCategoria()"
-        ></p-button>
+        ></p-button> -->
       </div>
       <div class="divInputs">
         <p-button
           label="Limpar campos"
           [disabled]="!nomeCategoriaSelecionada"
-          (click)="limparCamposCategoriaNova()"
+          (onClick)="limparCamposCategoriaNova()"
           styleClass="p-button-raised p-button-info"
         ></p-button>
       </div>
@@ -261,7 +261,7 @@
         </div>
 
         <div class="botaoAdicionarFotos">
-          <p-button label="Adicionar fotos"></p-button>
+          <p-button (onClick)="adicionarFotoAoProduto()" [disabled]="selectedProductImages.length === 0 && selectedProductImagesFormulacao.length === 0" *ngIf="habilitarBotao" label="Adicionar fotos"></p-button>
         </div>
       </div>
     </div>
@@ -311,7 +311,7 @@
     </div>
     <div class="containerBotoesDois">
       <div class="divInputs">
-        <p-button label="Excluir produto"
+        <!-- <p-button label="Excluir produto"
           [disabled]="
           !adicionarProdutoDisabled ||
           !nomeProduto ||
@@ -328,7 +328,7 @@
           !informacaoTecnica"
           styleClass="p-button-raised p-button-danger"
           (onClick)="excluirProduto()">
-        </p-button>
+        </p-button> -->
       </div>
       <div class="divInputs">
         <p-button
@@ -346,7 +346,7 @@
           !descBreve &&
           !descCompleta &&
           !informacaoTecnica"
-          (click)="limparCampos()"
+          (onClick)="limparCampos()"
           styleClass="p-button-raised p-button-info"
         ></p-button>
       </div>

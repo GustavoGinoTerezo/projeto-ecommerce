@@ -83,6 +83,8 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   expandSelectedProductId: number | null = null;
 
+  habilitarBotao: boolean = false;
+
   constructor(
     private categoriasService: ServiceCategoriasService,
     private fotoService: ServiceAPIProdutoService,
@@ -201,6 +203,7 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   updateInputFieldsWithSelectedProduct(produto: Produtos) {
     this.adicionarProdutoDisabled = true;
+    this.habilitarBotao = true;
 
     this.idProduto = produto.prodId!;
     this.idCategoria = produto.catId!;
@@ -322,7 +325,9 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
     this.categoriasSelecionadaInput = null;
     this.selectedStatus = null;
     this.selectedLayout = null;
-    this.selectedProductImages = []
+    this.selectedProductImages = [];
+    this.informacaoTecnica = '';
+    this.habilitarBotao = false;
   }
 
   limparCamposCategoriaNova() {
@@ -352,13 +357,6 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
   onDragLeave(event: Event): void {
     event.preventDefault();
     this.isDragOver = false;
-  }
-
-  private atualizarPagina() {
-    //RECARREGAR PÁGINA PARA ATUALIZAR VALORES DO ARRAY
-    setTimeout(() => {
-      location.reload();
-    }, 2000);
   }
 
   getBase64(file: File): Promise<string> {
@@ -787,6 +785,75 @@ export class GerenciamentoDeCategoriasEProdutosComponent {
 
   //===============================================================================================//  
   //API FOTOS
+
+  adicionarFotoAoProduto(){
+
+    if(this.selectedProductImages.length > 0){
+
+      const prodId = this.idProduto.toString();
+
+      for (const imageData of this.selectedProductImages) {
+        const dataFotosProduto = new FormData();
+        dataFotosProduto.append('prodId', prodId);
+        dataFotosProduto.append('prodFotoTp', '1');
+        dataFotosProduto.append('file', imageData.file);
+    
+        this.apiProdutoService.cadastrarFotosProduto(dataFotosProduto).subscribe(
+          (response) => {
+            const tipo = 'success'
+            const titulo = ''
+            const mensagem = 'Foto cadastrada com sucesso.'
+            const icon = 'fa-solid fa-check'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
+          }, 
+          (error) => {
+            const tipo = 'success'
+            const titulo = ''
+            const mensagem = 'Erro ao cadastrar foto.'
+            const icon = 'fa-solid fa-check'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
+          }
+        );
+      }
+
+    }
+
+    if(this.selectedProductImagesFormulacao.length > 0){
+
+      const prodId = this.idProduto.toString();
+
+      for (const imageDataFormulacao of this.selectedProductImagesFormulacao) {
+
+        const dataFotosProdutoFormulacao = new FormData();
+        dataFotosProdutoFormulacao.append('prodId', prodId);
+        dataFotosProdutoFormulacao.append('prodFotoTp', '2');
+        dataFotosProdutoFormulacao.append('file', imageDataFormulacao.file);
+    
+        this.apiProdutoService.cadastrarFotosProduto(dataFotosProdutoFormulacao).subscribe(
+          (response) => {
+            const tipo = 'success'
+            const titulo = ''
+            const mensagem = 'Foto cadastrada com sucesso.'
+            const icon = 'fa-solid fa-check'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
+          }, 
+          (error) => {
+            const tipo = 'success'
+            const titulo = ''
+            const mensagem = 'Erro ao cadastrar foto.'
+            const icon = 'fa-solid fa-check'
+
+            this.appToast.toast(tipo, titulo, mensagem, icon);
+          }
+        );
+      }
+
+
+    }
+  }
 
   excluirFotoPorID(imagem: any): void {
 
