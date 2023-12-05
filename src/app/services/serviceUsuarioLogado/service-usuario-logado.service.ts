@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Pedido } from '../servicePedido/service-pedido.service';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of, switchMap, take } from 'rxjs';
 import { ServiceApiUsuarioLogadoService } from '../servicesAPI/serviceAPI-UsuarioLogado/service-api-usuario-logado.service';
 import { ServiceApiEnderecosService } from '../servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
 import { ServiceApiTelefonesService } from '../servicesAPI/serviceAPI-Telefones/service-api-telefones.service';
@@ -45,7 +45,7 @@ export interface Telefone {
 export class ServiceUsuarioLogadoService {
 
   private inicializacaoUserConcluidaSubject = new Subject<void>();
-
+  private telefoneCarregadoSubject = new Subject<void>();
   private enderecosCarregadosSubject = new Subject<void>();
 
   private mostrarLateralUsuario = new BehaviorSubject<boolean>(false);
@@ -194,7 +194,7 @@ export class ServiceUsuarioLogadoService {
               // Filtra telefones com o mesmo idUsuario
               this.telefonesUsuarioLogadoAPI = telefonesAPI.filter((telefone) => telefone.LoginId === idUsuario);
 
-              // console.log('Telefones do usuário logado:', this.telefonesUsuarioLogadoAPI);
+              this.telefoneCarregadoSubject.next();
             },
             (error) => {
               console.log("Erro ao buscar os telefones gerais", error);
@@ -212,7 +212,13 @@ export class ServiceUsuarioLogadoService {
   }
 
   getTelefonesUsuarioLogado(): Observable<any[]> {
-    return of (this.telefonesUsuarioLogadoAPI);
+    // Agora, este método retornará um Observable que completa quando a atualização estiver finalizada
+    return this.telefoneCarregadoSubject.asObservable().pipe(
+      // Espera até que o sinal de atualização esteja completo
+      take(1),
+      // Em seguida, emite os telefones do usuário logado
+      switchMap(() => of(this.telefonesUsuarioLogadoAPI))
+    );
   }
 
   // ====================================================================================== //

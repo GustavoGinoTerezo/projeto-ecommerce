@@ -9,6 +9,7 @@ import { ServiceApiUsuarioLogadoService } from 'src/app/services/servicesAPI/ser
 import { ServiceApiUsuariosService } from 'src/app/services/servicesAPI/serviceAPI-Usuarios/service-api-usuarios.service';
 import { ServiceApiEnderecosService } from 'src/app/services/servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
 import { AppComponent } from 'src/app/app.component';
+import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 
 interface EstadoLocal {
   nome: string;
@@ -27,11 +28,16 @@ export class MeusDadosComponent {
   private inicializacaoUserConcluidaSubject!: Subscription;
   private inicializacaoEnderecoConcluidaSubject!: Subscription;
   private estadosSubscription!: Subscription;
+  private telefonesSubscription!: Subscription;
 
   enderecosEntrega: any[] = []
 
   usuario: any[] = [];
   usuarioOriginal: any | null = null; // Substitua 'any' pelo tipo 'Usuario'
+
+  telefones: any[] = []
+  telefonesFiltrados: any[] = [];
+  telefoneId!: number;
 
   first: number = 0;
   rows: number = 3;
@@ -46,8 +52,9 @@ export class MeusDadosComponent {
   divNovoEndereco: boolean = false
 
   nome!: string;
-  telefone!:string;
-
+  telefone!: string;
+  telefoneAPI: any[] = []
+  LoginId!: number;
   endId!: number;
   identificacao!: string;
   cep!: number | null
@@ -64,7 +71,6 @@ export class MeusDadosComponent {
   
   originalAddress: any = {}; // Vai armazenar o endereço original
 
-
   estado!: EstadoLocal[];
   estadoSelecionado: EstadoLocal | null = null;
   estadosAPI: Estado[] = []
@@ -73,17 +79,21 @@ export class MeusDadosComponent {
 
   isButtonSalvarDisabled = true;
 
-
   constructor(
     private usuarioService: ServiceUsuarioLogadoService,
     private registrar: ServiceApiRegistrarService,
     private serviceEstado: ServiceEstadosService,
     private usuarioAPIService: ServiceApiUsuariosService,
     private serviceAPIEndereco: ServiceApiEnderecosService,
+    private usuariosService: ServiceUsuariosService,
     private appToast: AppComponent,
   ) {}
 
   ngOnInit() {
+
+    this.usuarioService.atualizarTelefonesUsuarioLogadoAPI();
+
+    this.carregarTelefone();
 
     const startEnderecos = sessionStorage.getItem('startEnderecos')
     const startUser = sessionStorage.getItem('startUser')
@@ -175,20 +185,33 @@ export class MeusDadosComponent {
       this.estadosSubscription.unsubscribe();
     }
 
+    if (this.telefonesSubscription) {
+      this.telefonesSubscription.unsubscribe();
+    }
+
   }
 
   carregarUsuario() {
+
     this.usuarioSubscription = this.usuarioService.getUsuario().subscribe((usuarioAPI) => {
       this.usuario = [usuarioAPI];
+      this.LoginId = this.usuario[0].LoginId
       this.usuarioOriginal = { ...usuarioAPI }; 
       this.nome = this.usuario[0].nome;
     });
   }
 
+  carregarTelefone(){
+    this.telefonesSubscription = this.usuarioService.getTelefonesUsuarioLogado().subscribe((telefoneAPI) => {
+      this.telefone = telefoneAPI[0].telefone
+      console.log(this.telefone)
+    })
+  }
+ 
+
   carregarEnderecos() {
     this.enderecosSubscription = this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe((enderecosEntregaAPI) => {
       this.enderecosEntrega = enderecosEntregaAPI;
-      console.log("2")
     });
   }
 
@@ -528,7 +551,5 @@ export class MeusDadosComponent {
     
 
   }
-
-  
 
 }
