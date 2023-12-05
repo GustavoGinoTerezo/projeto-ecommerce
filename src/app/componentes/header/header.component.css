@@ -94,7 +94,10 @@
   width: 180px;
   height: 100%;
   align-items: center;
-  justify-content: space-around;
+}
+
+.espacamento{
+  margin-left: 10px;
 }
 
 

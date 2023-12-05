@@ -23,6 +23,7 @@ export class FuncoesUsuarioComponent {
   constructor(
     private router: Router,
     private mostrarLateraisService: ServiceUsuarioLogadoService,
+    private usuarioLogadoService: ServiceUsuarioLogadoService,
     ){}
 
   @Output() onToggleSidenav: EventEmitter<SideNavToggle> = new EventEmitter();
@@ -70,6 +71,7 @@ export class FuncoesUsuarioComponent {
     this.router.navigate([route]);
     this.mostrarLateraisService.setMostrarLateralUsuario(false);
     this.mostrarLateraisService.setMostrarLateralAdministrador(false);
+    this.usuarioLogadoService.atualizarMostrarBotaoLogin(true);
 
     sessionStorage.removeItem('t')
     sessionStorage.removeItem('u')

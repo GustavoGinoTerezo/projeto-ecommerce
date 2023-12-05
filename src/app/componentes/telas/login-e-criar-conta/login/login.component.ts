@@ -27,6 +27,7 @@ export class LoginComponent {
     private loginService: ServiceApiLoginService,
     private router: Router,
     private mostrarLateraisService: ServiceUsuarioLogadoService,
+    private usuarioLogadoService: ServiceUsuarioLogadoService,
     private ativarLateralService: AppComponent,
     private apiEnderecos: ServiceApiEnderecosService,
     private apiUsuarioLogado: ServiceApiUsuarioLogadoService,
@@ -82,12 +83,14 @@ export class LoginComponent {
               this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
               this.mostrarLateraisService.setMostrarLateralUsuario(true);
               this.ativarLateralService.ativarLateral();
+              this.usuarioLogadoService.atualizarMostrarBotaoLogin(false);
 
             } else if (response.tpusuario === "1") {
               this.router.navigateByUrl('/tela-principal'); //navegação para a tela principal
               this.mostrarLateraisService.setMostrarLateralAdministrador(true);
               this.mostrarLateraisService.setMostrarLateralUsuario(true);
               this.ativarLateralService.ativarLateral();
+              this.usuarioLogadoService.atualizarMostrarBotaoLogin(false);
             }
           }
         } else {

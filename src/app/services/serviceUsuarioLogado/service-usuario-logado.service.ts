@@ -48,6 +48,10 @@ export class ServiceUsuarioLogadoService {
   private telefoneCarregadoSubject = new Subject<void>();
   private enderecosCarregadosSubject = new Subject<void>();
 
+  private mostrarBotaoLoginSubject = new BehaviorSubject<boolean>(true);
+
+  mostrarBotaoLogin$ = this.mostrarBotaoLoginSubject.asObservable();
+
   private mostrarLateralUsuario = new BehaviorSubject<boolean>(false);
   private mostrarLateralAdministrador = new BehaviorSubject<boolean>(false);
   // Obtenha o nome da chave para o Local Storage
@@ -294,6 +298,10 @@ export class ServiceUsuarioLogadoService {
     return this.inicializacaoUserConcluidaSubject.asObservable();
   }
   
+  atualizarMostrarBotaoLogin(valor: boolean) {
+    this.mostrarBotaoLoginSubject.next(valor);
+  }
+
 }
 
 

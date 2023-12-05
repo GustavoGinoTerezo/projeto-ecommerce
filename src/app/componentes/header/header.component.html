@@ -43,9 +43,9 @@
         </div>
       </div>
       <div class="divBotoes">
-        <button style="color: white;" class="fa-solid fa-right-to-bracket fa-lg backgroundBotoes" title="Login" routerLink="/login"></button>
-        <button style="color: white;" class="fa-solid fa-cart-shopping fa-lg backgroundBotoes" title="Carrinho de compra" routerLink="carrinho-de-compra"></button>
-        <button style="color: white;" class="fa-solid fa-phone fa-lg backgroundBotoes" title="Informações de contato"></button>
+        <button *ngIf="mostrarBotaoLogin" style="color: white;" class="fa-solid fa-right-to-bracket fa-lg backgroundBotoes" title="Login" routerLink="/login"></button>
+        <button style="color: white;" class="espacamento fa-solid fa-cart-shopping fa-lg backgroundBotoes" title="Carrinho de compra" routerLink="carrinho-de-compra"></button>
+        <button style="color: white;" class="espacamento fa-solid fa-phone fa-lg backgroundBotoes" title="Informações de contato"></button>
       </div>
     </div>
 

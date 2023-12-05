@@ -2,7 +2,8 @@ import { MenuItem } from 'primeng/api';
 import { Categorias, Produtos, ServiceCategoriasService } from 'src/app/services/serviceCategorias/service-categorias.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, async } from 'rxjs';
+import { ServiceUsuarioLogadoService } from 'src/app/services/serviceUsuarioLogado/service-usuario-logado.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class HeaderComponent {
   private inicializacaoConcluidaSubscription!: Subscription;
   private categoriasSubscription!: Subscription;
   private produtosSubscription!: Subscription;
+  private mostrarBotaoLoginSubscription!: Subscription;
 
   search!: string;
   categorias: Categorias[] = []
@@ -39,12 +41,27 @@ export class HeaderComponent {
   produtosFiltrados: any[] = [];
   mostrarLista = false;
 
+  mostrarBotaoLogin!: boolean ;
+
   constructor(
     private categoriasService: ServiceCategoriasService,
+    private usuarioLogadoService: ServiceUsuarioLogadoService,
     private router: Router
   ){}
 
   async ngOnInit(){
+
+    const startUser = sessionStorage.getItem('startUser')
+
+    if(startUser){
+      this.usuarioLogadoService.atualizarMostrarBotaoLogin(false);
+    }
+    
+    this.mostrarBotaoLoginSubscription = this.usuarioLogadoService.mostrarBotaoLogin$.subscribe(
+      (valor) => {
+        this.mostrarBotaoLogin = valor;
+      }
+    );
 
     const start = sessionStorage.getItem('start')
 
@@ -80,6 +97,10 @@ export class HeaderComponent {
 
     if (this.produtosSubscription) {
       this.produtosSubscription.unsubscribe();
+    }
+
+    if (this.mostrarBotaoLoginSubscription) {
+      this.mostrarBotaoLoginSubscription.unsubscribe();
     }
   }
 
