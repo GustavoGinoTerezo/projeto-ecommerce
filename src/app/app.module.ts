@@ -64,6 +64,7 @@ import { GerenciamentoDeComentariosComponent } from './componentes/telas/funcoes
 import { GerenciamentoDeFornecedoresComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-fornecedores/gerenciamento-de-fornecedores.component';
 import { GerenciamentoDeEstadosComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-estados/gerenciamento-de-estados/gerenciamento-de-estados.component';
 import { GerenciamentoDeCaixasComponent } from './componentes/telas/funcoes/administrador/gerenciamento-de-caixas/gerenciamento-de-caixas/gerenciamento-de-caixas.component';
+import { EntreEmContatoComponent } from './componentes/telas/entre-em-contato/entre-em-contato.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { GerenciamentoDeCaixasComponent } from './componentes/telas/funcoes/admi
     GerenciamentoDeFornecedoresComponent,
     GerenciamentoDeEstadosComponent,
     GerenciamentoDeCaixasComponent,
+    EntreEmContatoComponent,
   ],
   imports: [
     BrowserModule,

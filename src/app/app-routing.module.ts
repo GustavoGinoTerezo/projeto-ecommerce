@@ -24,6 +24,7 @@ import { GuardaRotaUsuario } from './guarda-de-rota/guarda-de-rota';
 import { GuardaRotaAdmin } from './guarda-de-rota/guarda-rota-admin';
 import { ConclusaoDeCompraComponent } from './componentes/telas/carrinho-de-compras/conclusao-de-compra/conclusao-de-compra.component';
 import { GuardaRotaCarrinho } from './guarda-de-rota/guarda-de-rota-carrinho';
+import { EntreEmContatoComponent } from './componentes/telas/entre-em-contato/entre-em-contato.component';
 
 
 const routes: Routes = [
@@ -86,6 +87,10 @@ const routes: Routes = [
     path: 'meus-pedidos',
     component: MeusPedidosComponent,
     canActivate: [GuardaRotaUsuario]
+  },
+  {
+    path: 'contato',
+    component: EntreEmContatoComponent,
   },
   {
     path: 'gerenciamento-de-categorias-e-produtos',
