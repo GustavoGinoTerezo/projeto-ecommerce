@@ -10,4 +10,15 @@
 
 .containerLink{
   cursor: pointer;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.containerLinkUnico{
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.categoria{
+  margin-bottom: 5px;
 }

@@ -1,15 +1,13 @@
 <div class="divGeral">
 
   <div class="containerLink">
-    <div href="" routerLink="/">Categoria</div>
-    <div href="" routerLink="/">Categoria</div>
-    <div href="" routerLink="/">Categoria</div>
+    <div class="categoria" *ngFor="let categoria of categorias" (click)="navigateCategoria(categoria)">{{ categoria.nome }}</div>
   </div>
   <div class="containerLink">
     <div href="" routerLink="/contato">Entre em contato</div>
   </div>
-  <div class="containerLink">
-    <div href="" routerLink="/">Email</div>
+  <div class="containerLinkUnico">
+    <div>teste@teste.com</div>
   </div>
   <div class="containerLink">
     <div href="" routerLink="/">Termos e condições</div>
