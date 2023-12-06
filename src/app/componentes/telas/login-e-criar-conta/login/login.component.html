@@ -102,8 +102,8 @@
       [(ngModel)]="emailRedefinicao"
       placeholder="Insira seu email"
       class="inputRedefinirSenha"
-      oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-      <p-button label="Enviar" (onClick)="redefinirSenha()"></p-button>
+      >
+      <p-button label="Enviar" [disabled]="!emailRedefinicao" (onClick)="redefinirSenha()"></p-button>
   </div>
 </p-dialog>
 
@@ -118,18 +118,37 @@
   [focusOnShow]="true"
   >
   <div class="containerInputNovaSenha">
-    <input pInputText
-      id="novaSenha"
-      [(ngModel)]="novaSenha"
-      placeholder="Insira sua senha nova"
-      class="inputNovaSenha"
-      >
+    <div class="senhaContainer">
+      <span class="p-float-label">
+        <p-password
+          id="password"
+          type="password"
+          name="password"
+          #passwordInput="ngModel"
+          [(ngModel)]="novaSenha"
+          [feedback]="false"
+          [toggleMask]="true"
+          pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+        ></p-password>
+        <label htmlFor="current-password">Digite sua nova senha</label>
+      </span>
+      <small
+                *ngIf="
+                passwordInput.invalid &&
+                  (passwordInput.dirty  || passwordInput.touched)
+                "
+                class="p-error"
+              >
+                Formato de senha invalido. A senha deve conter no mínimo 8
+                caracteres com pelo menos uma letra e um número.
+        </small>
+    </div>
     <input pInputText
       id="accessToken"
       [(ngModel)]="token"
       placeholder="Insira a chave enviada ao seu email"
       class="inputAccessToken"
       >
-      <p-button label="Redefinir senha"></p-button>
+      <p-button (onClick)="alterarSenha()" [disabled]="!novaSenha || !token || !senhaValida()" label="Redefinir senha"></p-button>
   </div>
 </p-dialog>

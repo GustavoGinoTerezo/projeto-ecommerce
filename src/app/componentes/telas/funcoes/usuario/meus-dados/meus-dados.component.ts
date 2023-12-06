@@ -250,7 +250,7 @@ export class MeusDadosComponent {
     this.serviceRedefinirSenha.solicitarRedefinirSenha(email).subscribe((response) => {
       const tipo = 'success'
       const titulo = ''
-      const mensagem = 'Token de acesso enviado para o email'
+      const mensagem = 'Token de redefinição de senha enviado para o email'
       const icon = 'fa-solid fa-check'
 
       this.appToast.toast(tipo, titulo, mensagem, icon);

@@ -143,3 +143,24 @@
   width: 100%;
   margin-bottom: 10px;
 }
+
+.senhaContainer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+:host ::ng-deep .p-password{
+  width: 100%;
+}
+
+:host ::ng-deep .p-inputtext{
+  width: 100%;
+}
+
+.containerInputNovaSenha{
+  width: 100%;
+  flex-direction: column;
+}

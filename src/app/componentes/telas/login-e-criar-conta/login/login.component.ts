@@ -6,6 +6,7 @@ import { ServiceApiEnderecosService } from 'src/app/services/servicesAPI/service
 import { ServiceApiLoginService } from 'src/app/services/servicesAPI/serviceAPI-Login/service-api-login.service';
 import { ServiceApiUsuarioLogadoService } from 'src/app/services/servicesAPI/serviceAPI-UsuarioLogado/service-api-usuario-logado.service';
 import { AES } from 'crypto-ts';
+import { ServiceAPIRedefinirSenhaService } from 'src/app/services/servicesAPI/serviceAPI-RedefinirSenha/service-api-redefinir-senha.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent {
   passwordLogin!: string;
   checked: boolean = false;
   visibleTrocarSenha: boolean = false;
-  visibleRedefinirSenha: boolean = false;
+  visibleRedefinirSenha: boolean = true;
   novaSenha!: string;
   token!: string;
 
@@ -29,7 +30,9 @@ export class LoginComponent {
     private mostrarLateraisService: ServiceUsuarioLogadoService,
     private usuarioLogadoService: ServiceUsuarioLogadoService,
     private ativarLateralService: AppComponent,
+    private serviceRedefinirSenha: ServiceAPIRedefinirSenhaService,
     private apiEnderecos: ServiceApiEnderecosService,
+    private appToast: AppComponent,
     private apiUsuarioLogado: ServiceApiUsuarioLogadoService,
     private usuarioLogado: ServiceUsuarioLogadoService,
   ){}
@@ -112,9 +115,64 @@ export class LoginComponent {
   redefinirSenha(){
     this.visibleTrocarSenha = false;
     this.visibleRedefinirSenha = true;
+
+    const email = {
+      emailprinc: this.emailRedefinicao
+    }
+
+    this.serviceRedefinirSenha.solicitarRedefinirSenha(email).subscribe((response) => {
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Token de redefinição de senha enviado para o email'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+    },
+    (error) => {
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Erro ao enviar o token para o email'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+    })
+
+  }
+
+  alterarSenha(){
+
+    const dataNovaSenha = {
+      email: this.emailRedefinicao,
+      token: this.token,
+      novaSenha: this.novaSenha
+    }
+
+    this.serviceRedefinirSenha.alterarSenha(dataNovaSenha).subscribe((response) => {
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Senha alterada com sucesso'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+    },
+    (error) => {
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Erro alterar a senha'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+    })
+
   }
 
   navigateCriarConta(){
     this.router.navigate(['/criar-conta']);
+  }
+
+  senhaValida(): boolean {
+    // Verifica se a senha atende ao regex
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return regex.test(this.novaSenha);
   }
 }
