@@ -11,6 +11,7 @@ import { ServiceApiEnderecosService } from 'src/app/services/servicesAPI/service
 import { AppComponent } from 'src/app/app.component';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
 import { ServiceApiTelefonesService } from 'src/app/services/servicesAPI/serviceAPI-Telefones/service-api-telefones.service';
+import { ServiceAPIRedefinirSenhaService } from 'src/app/services/servicesAPI/serviceAPI-RedefinirSenha/service-api-redefinir-senha.service';
 
 interface EstadoLocal {
   nome: string;
@@ -56,6 +57,7 @@ export class MeusDadosComponent {
   telefone!: string;
   telefoneAPI: any[] = []
   LoginId!: number;
+  email!: string;
   endId!: number;
   identificacao!: string;
   cep!: number | null
@@ -85,6 +87,7 @@ export class MeusDadosComponent {
     private telefoneAPIService: ServiceApiTelefonesService,
     private registrar: ServiceApiRegistrarService,
     private serviceEstado: ServiceEstadosService,
+    private serviceRedefinirSenha: ServiceAPIRedefinirSenhaService,
     private usuarioAPIService: ServiceApiUsuariosService,
     private serviceAPIEndereco: ServiceApiEnderecosService,
     private usuariosService: ServiceUsuariosService,
@@ -197,6 +200,7 @@ export class MeusDadosComponent {
 
     this.usuarioSubscription = this.usuarioService.getUsuario().subscribe((usuarioAPI) => {
       this.usuario = [usuarioAPI];
+      this.email = this.usuario[0].emailprinc
       this.LoginId = this.usuario[0].LoginId
       this.usuarioOriginal = { ...usuarioAPI }; 
       this.nome = this.usuario[0].nome;
@@ -238,6 +242,54 @@ export class MeusDadosComponent {
     this.dialogType = type;
     this.dialogVisible = true;
     this.dialogVisibleSalvar = false;
+
+    const email = {
+      emailprinc: this.email
+    };
+
+    this.serviceRedefinirSenha.solicitarRedefinirSenha(email).subscribe((response) => {
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Token de acesso enviado para o email'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+    },
+    (error) => {
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Erro ao enviar o token para o email'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+    })
+  }
+
+  alterarSenha(){
+
+    const dataNovaSenha = {
+      email: this.email,
+      token: this.tokenSenha,
+      novaSenha: this.newPassword
+    }
+
+    this.serviceRedefinirSenha.alterarSenha(dataNovaSenha).subscribe((response) => {
+      const tipo = 'success'
+      const titulo = ''
+      const mensagem = 'Senha alterada com sucesso'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+    },
+    (error) => {
+      const tipo = 'error'
+      const titulo = ''
+      const mensagem = 'Erro alterar a senha'
+      const icon = 'fa-solid fa-check'
+
+      this.appToast.toast(tipo, titulo, mensagem, icon);
+    })
+
   }
 
   showDialogSalvar() {

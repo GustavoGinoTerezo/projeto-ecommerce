@@ -37,7 +37,7 @@
     <hr class="hr">
     <div class="containerBotoesExcluirESalvarConta">
       <div class="botaoAlterarSenha">
-        <p-button (click)="showDialog('senha')" label="Alterar senha" styleClass="p-button-raised p-button-warning"></p-button>
+        <p-button (onClick)="showDialog('senha')" label="Alterar senha" styleClass="p-button-raised p-button-warning"></p-button>
       </div>
     </div>
   </div>
@@ -276,11 +276,7 @@
             *ngIf="dialogType === 'senha'"
             label="Alterar senha"
             [disabled]="isButtonDisabledSenha()"
-          ></p-button>
-          <p-button
-            *ngIf="dialogType === 'email'"
-            label="Alterar email"
-            [disabled]="isButtonDisabled()"
+            (onClick)="alterarSenha()"
           ></p-button>
         </div>
       </div>
