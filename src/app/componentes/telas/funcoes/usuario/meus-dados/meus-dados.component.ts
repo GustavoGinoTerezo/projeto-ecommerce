@@ -10,6 +10,7 @@ import { ServiceApiUsuariosService } from 'src/app/services/servicesAPI/serviceA
 import { ServiceApiEnderecosService } from 'src/app/services/servicesAPI/serviceAPI-Enderecos/service-api-enderecos.service';
 import { AppComponent } from 'src/app/app.component';
 import { ServiceUsuariosService } from 'src/app/services/serviceUsuarios/service-usuarios.service';
+import { ServiceApiTelefonesService } from 'src/app/services/servicesAPI/serviceAPI-Telefones/service-api-telefones.service';
 
 interface EstadoLocal {
   nome: string;
@@ -81,6 +82,7 @@ export class MeusDadosComponent {
 
   constructor(
     private usuarioService: ServiceUsuarioLogadoService,
+    private telefoneAPIService: ServiceApiTelefonesService,
     private registrar: ServiceApiRegistrarService,
     private serviceEstado: ServiceEstadosService,
     private usuarioAPIService: ServiceApiUsuariosService,
@@ -204,10 +206,9 @@ export class MeusDadosComponent {
   carregarTelefone(){
     this.telefonesSubscription = this.usuarioService.getTelefonesUsuarioLogado().subscribe((telefoneAPI) => {
       this.telefone = telefoneAPI[0].telefone
-      console.log(this.telefone)
+      this.telefoneId = telefoneAPI[0].contId
     })
   }
- 
 
   carregarEnderecos() {
     this.enderecosSubscription = this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe((enderecosEntregaAPI) => {
@@ -516,15 +517,22 @@ export class MeusDadosComponent {
   onInputFieldChange() {
     if (this.usuarioOriginal) {
       const usuarioAtual = this.nome;
+      const telefoneAtual = this.telefone; // Supondo que você tenha uma variável telefone no seu componente
       const nomeAlterado = this.usuarioOriginal.nome !== usuarioAtual;
+      const telefonePreenchido = telefoneAtual.length == 11;
   
-      this.isButtonSalvarDisabled = !(nomeAlterado);
+      this.isButtonSalvarDisabled = !(nomeAlterado || telefonePreenchido);
     }
   }
-  
+ 
+  removeFormatoTelefone(telefone: string): string {
+    return telefone.replace(/\D/g, '');
+  }
+
   atualizarUsuario(){
     
     const LoginId = this.usuario[0].LoginId
+    const telefoneId = this.telefoneId
 
     const dataAtualizarUser = {
       nome: this.nome
@@ -532,6 +540,28 @@ export class MeusDadosComponent {
 
     this.usuarioAPIService.atualizarUsuario(LoginId, dataAtualizarUser).subscribe((response) =>
     {
+
+      const dataAtualizarTelefone = {
+        telefone: this.removeFormatoTelefone(this.telefone)
+      }
+
+      this.telefoneAPIService.atualizarTelefones(telefoneId, dataAtualizarTelefone).subscribe((response) => {
+        const tipo = 'success'
+        const titulo = ''
+        const mensagem = 'Atualização do telefone efetuada com sucesso.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+      },
+      (error) => {
+        const tipo = 'error'
+        const titulo = ''
+        const mensagem = 'Ocorreu um problema ao atualizar o seu telefone. Tente novamente mais tarde.'
+        const icon = 'fa-solid fa-check'
+
+        this.appToast.toast(tipo, titulo, mensagem, icon);
+      })
+
       const tipo = 'success'
       const titulo = ''
       const mensagem = 'Atualização efetuada com sucesso.'

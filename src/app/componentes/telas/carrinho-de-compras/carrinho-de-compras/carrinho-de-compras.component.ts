@@ -58,11 +58,14 @@ export class CarrinhoDeComprasComponent implements OnInit, OnDestroy{
     private categoriasService: ServiceCategoriasService,
     private usuarioService: ServiceUsuarioLogadoService,
     private urlGlobal: ServiceUrlGlobalService,
+    private carrinhoEstadoService: ServiceCarrinhoDeComprasService,
     private router: Router,
     private appToast: AppComponent,
     ) {}
 
   ngOnInit(): void {
+
+    this.carrinhoEstadoService.setCarrinhoVisitado();
 
     const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
     const startEnderecos = sessionStorage.getItem('startEnderecos')

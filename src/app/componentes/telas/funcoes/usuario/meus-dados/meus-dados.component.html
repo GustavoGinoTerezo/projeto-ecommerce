@@ -31,7 +31,7 @@
     </div>
     <div class="containerBotoes">
       <div class="botaoSalvarAlterações">
-        <p-button label="Salvar alterações" [disabled]="isButtonSalvarDisabled" (onClick)="atualizarUsuario()" styleClass="p-button-raised p-button-success"></p-button>
+        <p-button label="Salvar alterações" [disabled]="isButtonSalvarDisabled || !nome || !telefone" (onClick)="atualizarUsuario()" styleClass="p-button-raised p-button-success"></p-button>
       </div>
     </div>
     <hr class="hr">

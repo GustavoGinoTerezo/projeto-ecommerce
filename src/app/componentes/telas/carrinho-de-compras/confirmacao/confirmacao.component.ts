@@ -25,6 +25,7 @@ export class ConfirmacaoComponent implements OnInit{
   private usuarioSubscription!: Subscription;
   private inicializacaoUserConcluidaSubject!: Subscription;
   private fotosProdutosSubscription!: Subscription;
+  private telefonesSubscription!: Subscription;
 
   items: MenuItem[] = [];
   carrinho: CarrinhoDeCompra[] = [];
@@ -45,6 +46,10 @@ export class ConfirmacaoComponent implements OnInit{
   fotosProdutos: any[] = [];
   tipo1Fotos: any[] = [];
 
+  telefone!: string;
+  telefoneAPI: any[] = [];
+  telefoneId!: number;
+
   constructor(
     private carrinhoService: ServiceCarrinhoDeComprasService,
     private categoriasService: ServiceCategoriasService,
@@ -54,6 +59,10 @@ export class ConfirmacaoComponent implements OnInit{
   ){}
 
   ngOnInit() {
+
+    this.usuarioService.atualizarTelefonesUsuarioLogadoAPI();
+
+    this.carregarTelefone();
 
     const start = sessionStorage.getItem('start')
     const startEnderecos = sessionStorage.getItem('startEnderecos')
@@ -163,6 +172,12 @@ export class ConfirmacaoComponent implements OnInit{
       this.fotosProdutosSubscription.unsubscribe();
     }
 
+  }
+
+  carregarTelefone(){
+    this.telefonesSubscription = this.usuarioService.getTelefonesUsuarioLogado().subscribe((telefoneAPI) => {
+      this.telefone = telefoneAPI[0].telefone
+    })
   }
 
   async carregarProdutos() {

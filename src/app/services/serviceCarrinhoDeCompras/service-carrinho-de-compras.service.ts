@@ -18,19 +18,14 @@ export interface CarrinhoDeCompra {
 })
 export class ServiceCarrinhoDeComprasService {
 
-  constructor() { }
+  private carrinhoVisitado = false;
 
-  carrinhoDeCompra: any[] = [];
-
-  getCarrinhoDeCompra(): CarrinhoDeCompra[] {
-    return this.carrinhoDeCompra;
+  setCarrinhoVisitado(): void {
+    this.carrinhoVisitado = true;
   }
 
-  limparCarrinho(): void {
-    this.carrinhoDeCompra = [];
+  isCarrinhoVisitado(): boolean {
+    return this.carrinhoVisitado;
   }
-
-
-
 
 }
