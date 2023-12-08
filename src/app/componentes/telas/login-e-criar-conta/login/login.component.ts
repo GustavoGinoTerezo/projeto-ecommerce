@@ -20,7 +20,7 @@ export class LoginComponent {
   passwordLogin!: string;
   checked: boolean = false;
   visibleTrocarSenha: boolean = false;
-  visibleRedefinirSenha: boolean = true;
+  visibleRedefinirSenha: boolean = false;
   novaSenha!: string;
   token!: string;
 
