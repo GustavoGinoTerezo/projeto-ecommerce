@@ -60,17 +60,17 @@ const routes: Routes = [
   {
     path: 'pagamento',
     component: PagamentoComponent,
-    canActivate: [GuardaRotaUsuario, GuardaRotaCarrinho]
+    canActivate: [GuardaRotaUsuario, ]
   },
   {
     path: 'confirmacao',
     component: ConfirmacaoComponent,
-    canActivate: [GuardaRotaUsuario, GuardaRotaCarrinho]
+    canActivate: [GuardaRotaUsuario, ]
   },
   {
     path: 'conclusao-da-compra',
     component: ConclusaoDeCompraComponent,
-    canActivate: [GuardaRotaUsuario, GuardaRotaCarrinho]
+    canActivate: [GuardaRotaUsuario, ]
   },
   {
     path: 'minha-conta',

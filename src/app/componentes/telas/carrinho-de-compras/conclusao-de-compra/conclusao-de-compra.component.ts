@@ -12,17 +12,23 @@ export class ConclusaoDeCompraComponent {
 
   ngOnInit() {
 
+    
+  }
+
+  picPay(){
+  
     const paymentData = {
-      referenceId: '102039',
-      callbackUrl: 'http://localhost/mockVtexPostCallback/?httpStatus=200',
-      expiresAt: '2020-12-12T15:53:00+05:00',
-      returnUrl: 'http://www.picpay.com/#transacaoConcluida',
-      value: 10,
-      additionalInfo: [null],
+      referenceId: "teste5",
+      callbackUrl: "http://localhost:4200/meus-pedidos/callback",
+      returnUrl: "http://localhost:4200/meus-pedidos",
+      value: 0.01,
+      expiresAt: "2024-05-01T16:00:00-03:00",
       buyer: {
-        firstName: 'João',
-        lastName: 'dos Testes',
-        document: '010.091.001-91'
+          firstName: "João",
+          lastName: "Da Silva",
+          document: "0",
+          email: "teste@picpay.com",
+          phone: "+55 27 12345-6789"
       }
     };
 
@@ -38,6 +44,15 @@ export class ConclusaoDeCompraComponent {
           console.error(error);
         }
       );
+
+  }
+
+  teste(){
+    console.log("Pagamento aprovado")
+  }
+
+  pagBank(){
+    
   }
 
 }

@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
 })
 export class ServiceAPIPicPayService {
 
-  private picpayToken: string = 'sua_chave_de_integracao';
+  private picpayToken: string = '76f43389-429e-40de-8964-cf154f4e3024';
   private apiUrl: string = 'https://appws.picpay.com/ecommerce/public/payments';
 
   constructor(private http: HttpClient) {}
 
   requisicaoPagamentoPicPay(paymentData: any): Observable<any> {
     const headers = new HttpHeaders({
-      'x-picpay-token': this.picpayToken,
+      'x-picpay-token': '76f43389-429e-40de-8964-cf154f4e3024',
       'Content-Type': 'application/json'
     });
 

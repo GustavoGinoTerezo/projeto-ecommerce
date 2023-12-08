@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CarrinhoDeCompra } from 'src/app/services/serviceCarrinhoDeCompras/service-carrinho-de-compras.service';
 import { Pedido, ServicePedidoService } from 'src/app/services/servicePedido/service-pedido.service';
 import { PedidoPaginatorState } from 'src/app/services/servicePedido/service-pedido.service';
@@ -26,6 +27,8 @@ export class MeusPedidosComponent {
   events: EventItem[];
   valorTotal: number = 0;
 
+  callback: any[] = []
+
   currentPage = 0;
 
   first: number = 0; // Primeiro item da página
@@ -38,6 +41,7 @@ export class MeusPedidosComponent {
 
   constructor(
     private pedidoService: ServicePedidoService,
+    private route: ActivatedRoute,
   ){
 
     this.events = [
@@ -87,6 +91,12 @@ export class MeusPedidosComponent {
 
 
   ngOnInit(){
+
+    this.route.params.subscribe((params) => {
+      this.callback = params['callback'];
+
+      console.log(this.callback)
+    })
 
     this.pedidos = this.pedidoService.getPedido();
 

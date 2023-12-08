@@ -83,7 +83,7 @@ export class CriarContaComponent {
       { nome: 'Tocantins', uf: 'TO'}
     ];
 
-    // this.carregarEstadosAPI()
+    this.carregarEstadosAPI()
         
   }
 
