@@ -38,7 +38,7 @@ export class AppComponent {
 
   async ngOnInit(){
 
-    // this.categoriasService.atualizarCategoriasDaAPI();
+    this.categoriasService.atualizarCategoriasDaAPI();
 
     this.colorService.buscarCoresDaAPI()
       .then(() => {
@@ -68,13 +68,13 @@ export class AppComponent {
         console.error("Erro ao buscar cores da API:", error);
       });
 
-    // this.bannersService.atualizarBannerDaAPI();
+    this.bannersService.atualizarBannerDaAPI();
 
-    // this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
+    this.usuarioLogado.atualizarEnderecoUsuarioLogadoAPI()
 
-    // this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
+    this.usuarioLogado.atualizarTelefonesUsuarioLogadoAPI()
 
-    // this.usuarioLogado.atualizarUsuarioAPI();
+    this.usuarioLogado.atualizarUsuarioAPI();
 
     this.menuItems = [
       {
