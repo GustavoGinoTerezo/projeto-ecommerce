@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 export class ServiceUrlGlobalService {
 
-  url: string = 'http://62.72.1.71:3333/';
+  url: string = 'https://ecommerce.rhuna.tech:3333/';
 
   constructor() { }
 }

@@ -18,9 +18,9 @@ export class ConclusaoDeCompraComponent {
   picPay(){
   
     const paymentData = {
-      referenceId: "teste5",
-      callbackUrl: "http://http://standclass.com.br/meus-pedidos/callback",
-      returnUrl: "http://http://standclass.com.br/meus-pedidos",
+      referenceId: "6316369864",
+      callbackUrl: "https://standclass.com.br/meus-pedidos/callback",
+      returnUrl: "https://standclass.com.br/meus-pedidos",
       value: 0.01,
       expiresAt: "2024-05-01T16:00:00-03:00",
       buyer: {
@@ -37,7 +37,7 @@ export class ConclusaoDeCompraComponent {
       .subscribe(
         (response) => {
 
-          console.log(response);
+          console.log(response.returnUrl);
         },
         (error) => {
 
