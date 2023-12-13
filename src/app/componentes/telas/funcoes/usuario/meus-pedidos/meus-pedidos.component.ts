@@ -92,11 +92,7 @@ export class MeusPedidosComponent {
 
   ngOnInit(){
 
-    this.route.params.subscribe((params) => {
-      this.callback = params['callback'];
-
-      console.log(this.callback)
-    })
+    
 
     this.pedidos = this.pedidoService.getPedido();
 
@@ -106,6 +102,14 @@ export class MeusPedidosComponent {
       this.paginatorStates.push(new PedidoPaginatorState(pedido));
     }
 
+  }
+
+  teste(){
+    this.route.params.subscribe((params) => {
+      this.callback = params['callback'];
+
+      console.log(this.callback)
+    })
   }
 
   calcularValorItem(item: CarrinhoDeCompra): number {
