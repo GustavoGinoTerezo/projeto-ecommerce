@@ -19,7 +19,7 @@ export class ConclusaoDeCompraComponent {
   
     const paymentData = {
       referenceId: "748917383",
-      callbackUrl: "https://plantprod.vercel.app/meus-pedidos/callback",
+      callbackUrl: "https://plantprod.vercel.app/meus-pedidos",
       returnUrl: "https://plantprod.vercel.app/meus-pedidos",
       value: 0.01,
       expiresAt: "2024-05-01T16:00:00-03:00",
