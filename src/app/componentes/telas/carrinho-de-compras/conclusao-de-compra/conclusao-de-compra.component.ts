@@ -18,7 +18,7 @@ export class ConclusaoDeCompraComponent {
   picPay(){
   
     const paymentData = {
-      referenceId: "748917384",
+      referenceId: Math.floor(Math.random() * 1000001).toString(),
       callbackUrl: "https://plantprod.vercel.app/meus-pedidos",
       returnUrl: "https://plantprod.vercel.app/meus-pedidos",
       value: 0.01,
