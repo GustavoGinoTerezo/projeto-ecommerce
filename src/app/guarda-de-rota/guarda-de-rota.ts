@@ -7,17 +7,8 @@ import { Router } from '@angular/router';
 export class GuardaRotaUsuario {
   constructor(private router: Router) {}
 
-  ngOnInit(){
-    
-    console.log("Carregado")
-
-  }
-
-  
-
   canActivate(): boolean {
     
-    console.log("Validando token")
     // Verifique se o token está presente no sessionStorage
     const authToken = sessionStorage.getItem('at');
 
