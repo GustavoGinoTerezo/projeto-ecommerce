@@ -60,33 +60,32 @@ const routes: Routes = [
   {
     path: 'pagamento',
     component: PagamentoComponent,
-    canActivate: [GuardaRotaUsuario, ]
+    // canActivate: [GuardaRotaUsuario, GuardaRotaCarrinho]
   },
   {
     path: 'confirmacao',
     component: ConfirmacaoComponent,
-    canActivate: [GuardaRotaUsuario, ]
+    // canActivate: [GuardaRotaUsuario, GuardaRotaCarrinho]
   },
   {
     path: 'conclusao-da-compra',
     component: ConclusaoDeCompraComponent,
-    canActivate: [GuardaRotaUsuario, ]
+    // canActivate: [GuardaRotaUsuario, GuardaRotaCarrinho]
   },
   {
     path: 'minha-conta',
     component: MinhaContaComponent,
-    pathMatch: 'full',
-    canActivate: [GuardaRotaUsuario]
+    // canActivate: [GuardaRotaUsuario]
   },
   {
     path: 'meus-dados',
     component: MeusDadosComponent,
-    canActivate: [GuardaRotaUsuario]
+    // canActivate: [GuardaRotaUsuario]
   },
   {
     path: 'meus-pedidos',
     component: MeusPedidosComponent,
-    canActivate: [GuardaRotaUsuario]
+    // canActivate: [GuardaRotaUsuario]
   },
   {
     path: 'contato',
@@ -95,47 +94,47 @@ const routes: Routes = [
   {
     path: 'gerenciamento-de-categorias-e-produtos',
     component: GerenciamentoDeCategoriasEProdutosComponent,
-    canActivate: [GuardaRotaAdmin]
+    // canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-estoque',
     component: GerenciamentoDeEstoqueComponent,
-    canActivate: [GuardaRotaAdmin]
+    // canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-estados',
     component: GerenciamentoDeEstadosComponent,
-    canActivate: [GuardaRotaAdmin]
+    // canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-fornecedores',
     component: GerenciamentoDeFornecedoresComponent,
-    canActivate: [GuardaRotaAdmin]
+    // canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-clientes',
     component: GerenciamentoDeClientesComponent,
-    canActivate: [GuardaRotaAdmin]
+    // canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'personalizacao',
     component: PersonalizacaoComponent,
-    canActivate: [GuardaRotaAdmin]
+    // canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-caixas',
     component: GerenciamentoDeCaixasComponent,
-    canActivate: [GuardaRotaAdmin]
+    // canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'gerenciamento-de-comentarios',
     component: GerenciamentoDeComentariosComponent,
-    canActivate: [GuardaRotaAdmin]
+    // canActivate: [GuardaRotaAdmin]
   },
   {
     path: 'relatorio-de-vendas-e-controle-de-pedidos',
     component: RelatoriosDeVendasEControleDePedidosComponent,
-    canActivate: [GuardaRotaAdmin]
+    // canActivate: [GuardaRotaAdmin]
   },
 ];
 
