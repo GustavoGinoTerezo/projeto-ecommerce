@@ -11,25 +11,34 @@ export class ConclusaoDeCompraComponent {
   // Variáveis
 
   qrCode: any;
+  responses: any[] = [];
 
-  // ==================================================
+  // ====================================================================================================
   
   constructor(private picPayService: ServiceAPIPicPayService) {}
 
-  ngOnInit() {
-    
+  ngOnInit(): void {
+    // Assina o observable referenceId$ para obter atualizações
+    this.picPayService.referenceId$.subscribe((referenceId: string) => {
+      // Faça o que precisar com o referenceId na outra tela
+      console.log('Reference ID atualizado na outra tela:', referenceId);
+      
+      this.picPayService.checarStatusPagamento(referenceId).subscribe((response)=> {
 
-  }
+        this.responses.push(response); // Armazena a resposta no array
 
-  
+        if(this.responses[0].status === 'paid'){
+          console.log("Pagamento realizado com sucesso.")
 
-  pagBank(){
-    
-  }
-  
 
-  teste(){
-    console.log("Pagamento aprovado")
+        } else {
+          console.log("Pagamento ainda não realizado.")
+        }
+
+      }, (error) => {
+        console.log(error);
+      });
+    });
   }
 
  
