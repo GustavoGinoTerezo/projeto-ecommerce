@@ -8,6 +8,8 @@ import { AES } from 'crypto-ts';
 import * as CryptoJS from 'crypto-js';
 import { Subscription } from 'rxjs';
 import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrlGlobal/service-url-global.service';
+import { ServiceAPIPicPayService } from 'src/app/services/servicesAPI/serviceAPI-PicPay/service-api-pic-pay.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-confirmacao',
@@ -16,6 +18,8 @@ import { ServiceUrlGlobalService } from 'src/app/services/servicesAPI/serviceUrl
 })
 export class ConfirmacaoComponent implements OnInit{
 
+  // ====================================================================================================
+  // Subscriptions
   private produtosSubscription!: Subscription;
   private inicializacaoConcluidaSubscription!: Subscription;
   private enderecoCarregadoSubscription!: Subscription;
@@ -27,6 +31,8 @@ export class ConfirmacaoComponent implements OnInit{
   private fotosProdutosSubscription!: Subscription;
   private telefonesSubscription!: Subscription;
 
+  // ====================================================================================================
+  // Variáveis
   items: MenuItem[] = [];
   carrinho: CarrinhoDeCompra[] = [];
   enderecosEntrega: EnderecoEntrega[] = []
@@ -42,19 +48,22 @@ export class ConfirmacaoComponent implements OnInit{
   carrinhoIds: number[] = []
   enderecoEntregaSelecionadoId!: number
   formaPagamentoId!: number;
-
   fotosProdutos: any[] = [];
   tipo1Fotos: any[] = [];
-
   telefone!: string;
   telefoneAPI: any[] = [];
   telefoneId!: number;
+  qrCode: any;
 
+  // ====================================================================================================
+  // Constructor, NgOnInit e NgOnDestroy
   constructor(
     private carrinhoService: ServiceCarrinhoDeComprasService,
     private categoriasService: ServiceCategoriasService,
     private usuarioService: ServiceUsuarioLogadoService,
     private urlGlobal: ServiceUrlGlobalService,
+    private picPayService: ServiceAPIPicPayService,
+    private router: Router,
     private formaPagamentoService: FormaPagamentoService,
   ){}
 
@@ -105,7 +114,6 @@ export class ConfirmacaoComponent implements OnInit{
     }
 
     this.carregarFormaPagamento();
-
 
     this.items = [
         {
@@ -174,6 +182,8 @@ export class ConfirmacaoComponent implements OnInit{
 
   }
 
+  // ====================================================================================================
+  // Funções
   carregarTelefone(){
     this.telefonesSubscription = this.usuarioService.getTelefonesUsuarioLogado().subscribe((telefoneAPI) => {
       this.telefone = telefoneAPI[0].telefone
@@ -343,6 +353,9 @@ export class ConfirmacaoComponent implements OnInit{
             // Preencha o array enderecoEntregaSelecionado com o endereço encontrado
             this.formaPagamentoSelecionada = [formaPagamento];
 
+            if(this.formaPagamentoSelecionada[0].tipoPagamento === 'PicPay'){
+              this.picPay();
+            }
 
           }
           console.log("Forma Pagamento selecionada: ",this.formaPagamentoSelecionada)
@@ -390,5 +403,58 @@ export class ConfirmacaoComponent implements OnInit{
     return `${url}${endpoint}${imagem.imgfomulacao}`;
   }
 
+  conclusaoDaCompra(){
+    this.router.navigate(['/conclusao-da-compra']);
+  }
+
+  voltar(){
+    this.router.navigate(['/pagamento']);
+  }
+
+  // ====================================================================================================
+  // API's de Pagemento
+  picPay(){
+  
+    const paymentData = {
+      referenceId: Math.floor(Math.random() * 1000001).toString(),
+      callbackUrl: "https://plantprod.vercel.app/conclusao-da-compra",
+      returnUrl: "https://plantprod.vercel.app/conclusao-da-compra",
+      value: 0.01,
+      expiresAt: "2024-05-01T16:00:00-03:00",
+      buyer: {
+          firstName: "João",
+          lastName: "Da Silva",
+          document: "0",
+          email: "teste@picpay.com",
+          phone: "+55 27 12345-6789"
+      }
+    };
+
+    // Fazendo a chamada para o serviço PicPay
+    this.picPayService.requisicaoPagamentoPicPay(paymentData)
+      .subscribe(
+        (response) => {
+
+          console.log(response)
+
+    if (response && response.qrcode && response.qrcode.base64) {
+      this.qrCode = response.qrcode.base64;
+
+      // Faça o que desejar com o conteúdo do QR Code (qrCodeBase64)
+      console.log('Conteúdo do QR Code:', this.qrCode);
+    } else {
+      console.error('QR Code não encontrado na resposta.');
+    }
+    
+        },
+        (error) => {
+
+          console.error(error);
+        }
+      );
+
+  }
+
+  // ====================================================================================================
 
 }

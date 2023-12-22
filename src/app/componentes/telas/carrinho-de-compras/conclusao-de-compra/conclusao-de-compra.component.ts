@@ -8,51 +8,29 @@ import { ServiceAPIPicPayService } from 'src/app/services/servicesAPI/serviceAPI
 })
 export class ConclusaoDeCompraComponent {
 
+  // Variáveis
+
+  qrCode: any;
+
+  // ==================================================
+  
   constructor(private picPayService: ServiceAPIPicPayService) {}
 
   ngOnInit() {
+    
 
+  }
+
+  
+
+  pagBank(){
     
   }
-
-  picPay(){
   
-    const paymentData = {
-      referenceId: Math.floor(Math.random() * 1000001).toString(),
-      callbackUrl: "https://plantprod.vercel.app/meus-pedidos",
-      returnUrl: "https://plantprod.vercel.app/meus-pedidos",
-      value: 0.01,
-      expiresAt: "2024-05-01T16:00:00-03:00",
-      buyer: {
-          firstName: "João",
-          lastName: "Da Silva",
-          document: "0",
-          email: "teste@picpay.com",
-          phone: "+55 27 12345-6789"
-      }
-    };
-
-    // Fazendo a chamada para o serviço PicPay
-    this.picPayService.requisicaoPagamentoPicPay(paymentData)
-      .subscribe(
-        (response) => {
-
-          console.log(response);
-        },
-        (error) => {
-
-          console.error(error);
-        }
-      );
-
-  }
 
   teste(){
     console.log("Pagamento aprovado")
   }
 
-  pagBank(){
-    
-  }
-
+ 
 }

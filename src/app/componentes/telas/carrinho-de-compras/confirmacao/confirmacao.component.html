@@ -146,15 +146,21 @@
             R$ {{ valorTotal.toFixed(2) }}
           </div>
         </div>
+
+        <div class="imgQrCode">
+          <img [src]="qrCode" alt="Image" class="imgCode">
+        </div>
+
+
         <div class="containerBotoes">
           <p-button
           label="Finalizar"
           class="button"
-          routerLink="/conclusao-da-compra"
+          (onClick)="conclusaoDaCompra()"
           ></p-button>
           <p-button
           class="button"
-          routerLink="/pagamento"
+          (onClick)="voltar()"
           label="Voltar"
           ></p-button>
         </div>

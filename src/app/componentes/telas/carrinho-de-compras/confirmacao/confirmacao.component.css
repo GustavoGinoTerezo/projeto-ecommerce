@@ -393,6 +393,16 @@
   justify-content: space-around;
 }
 
+.imgQrCode{
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.imgCode{
+  width: 100%;
+}
+
 @media (max-width: 1060px) {
 
   .containerInformacoesEValorFinal{
