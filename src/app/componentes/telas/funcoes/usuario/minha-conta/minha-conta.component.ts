@@ -19,8 +19,6 @@ export class MinhaContaComponent implements OnInit, OnDestroy {
 
   usuarioLogadoAPI: any[] = []
 
-  userID!: number;
-
   constructor(
     private router: Router,
     private usuarioService: ServiceUsuarioLogadoService,

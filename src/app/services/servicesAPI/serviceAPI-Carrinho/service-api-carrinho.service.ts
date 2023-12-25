@@ -12,7 +12,6 @@ export class ServiceApiCarrinhoService {
     private http: HttpClient,
   ) {}
 
-
   //================================================//
   // CARRINHO CABEÇA
 
