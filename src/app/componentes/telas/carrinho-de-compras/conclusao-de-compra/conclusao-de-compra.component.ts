@@ -36,6 +36,7 @@ export class ConclusaoDeCompraComponent {
   enderecosEntrega: EnderecoEntrega[] = [];
   enderecoEntregaSelecionado: any[] = [];
   enderecoCobranca: any[] = [];
+  enderecoCobrancaId!: number;
   enderecoEntregaSelecionadoId!: number;
 
   // ====================================================================================================
@@ -184,7 +185,9 @@ export class ConclusaoDeCompraComponent {
       });
       this.enderecosCobrancaSubscription = this.usuarioService.getEnderecoCobrancaUsuarioLogado().subscribe(async (enderecoCobrancaAPI) => {
         this.enderecoCobranca = enderecoCobrancaAPI;
-        console.log("Aqui é dentro do método getEnderecoCobrancaUsuarioLogado", this.enderecoCobranca[0].endId);
+        this.enderecoCobrancaId = this.enderecoCobranca[0].endId;
+
+        console.log("ID cobrança", this.enderecoCobrancaId)
 
         console.log("Fim do método getEnderecoCobrancaUsuarioLogado")
         // Após carregar os endereços, chame o método para preencher o endereço selecionado
@@ -241,22 +244,29 @@ export class ConclusaoDeCompraComponent {
         if(this.responses[0].status === 'paid'){
           console.log("Pagamento realizado com sucesso.")
 
-            // const carrinhoCabecaData = {
-            //   LoginId: this.LoginId,
-            //   endIdEnt: 
-            //   endIdCob: 
-            // }
-
-            // this.carrinhoAPIService.cadastrarCarrinhoCabeca(carrinhoCabecaData)
+          const carrinhoCabecaData = {
+            LoginId: this.LoginId,
+            endIdEnt: this.enderecoEntregaSelecionadoId,
+            endIdCob: this.enderecoCobrancaId
+          }
+          
+          this.carrinhoAPIService.cadastrarCarrinhoCabeca(carrinhoCabecaData).subscribe((response => {
+              console.log("CarrinhoCabeca cadastrado com sucesso", response)
+          }), 
+          (error) => {
+            console.log(error)
+          });
 
         } else {
           console.log("Pagamento ainda não realizado.")
         }
-
-      }, (error) => {
+      }, 
+      (error) => {
         console.log(error);
       });
     });
+
+    
   }
 
 }
