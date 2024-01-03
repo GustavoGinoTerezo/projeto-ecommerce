@@ -264,6 +264,8 @@ export class AppComponent {
     sessionStorage.removeItem('es')
     sessionStorage.removeItem('startEnderecos')
     sessionStorage.removeItem('startUser')
+    sessionStorage.removeItem('q')
+    sessionStorage.removeItem('rd')
 
   }
 }

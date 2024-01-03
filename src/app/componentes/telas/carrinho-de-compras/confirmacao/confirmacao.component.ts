@@ -77,6 +77,8 @@ export class ConfirmacaoComponent implements OnInit{
     const start = sessionStorage.getItem('start')
     const startEnderecos = sessionStorage.getItem('startEnderecos')
     const startUser = sessionStorage.getItem('startUser')
+    const q = sessionStorage.getItem('q')
+    const rd = sessionStorage.getItem('rd')
 
     if(start){
       this.carregarProdutos();
@@ -110,6 +112,30 @@ export class ConfirmacaoComponent implements OnInit{
       if (inicializacaoConcluidaObservable) {
         this.inicializacaoUserConcluidaSubject = inicializacaoConcluidaObservable.subscribe(() => {
           this.carregarUsuario();
+        });
+      }
+    }
+
+    if(q){
+      this.carregarQrCode();
+    } else {
+      const inicializacaoConcluidaObservable = this.usuarioService.getInicializacaoConcluida();
+
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoUserConcluidaSubject = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarQrCode();
+        });
+      }
+    }
+
+    if(rd){
+      this.carregarReferenceID();
+    } else {
+      const inicializacaoConcluidaObservable = this.usuarioService.getInicializacaoConcluida();
+
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoUserConcluidaSubject = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarReferenceID();
         });
       }
     }
@@ -282,6 +308,44 @@ export class ConfirmacaoComponent implements OnInit{
     this.usuarioSubscription = this.usuarioService.getUsuario().subscribe((usuarioAPI) => {
       this.usuario = [usuarioAPI];
     });
+  }
+
+  async carregarQrCode() {
+
+    const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
+
+    const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
+
+    if (a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5) {
+      // Descriptografe o carrinho se ele existir
+      const a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a = AES.decrypt(a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5, a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb);
+
+      // Verifique se a descriptografia foi bem-sucedida
+      if (a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.sigBytes > 0) {
+        // Converta o resultado descriptografado de volta em um array de IDs
+        this.carrinhoIds = JSON.parse(a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.toString(CryptoJS.enc.Utf8));
+        console.log("CarrinhoIds", this.carrinhoIds)
+      }
+    }
+  }
+
+  async carregarReferenceID() {
+
+    const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
+
+    const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
+
+    if (a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5) {
+      // Descriptografe o carrinho se ele existir
+      const a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a = AES.decrypt(a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5, a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb);
+
+      // Verifique se a descriptografia foi bem-sucedida
+      if (a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.sigBytes > 0) {
+        // Converta o resultado descriptografado de volta em um array de IDs
+        this.carrinhoIds = JSON.parse(a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.toString(CryptoJS.enc.Utf8));
+        console.log("CarrinhoIds", this.carrinhoIds)
+      }
+    }
   }
 
   async preencherEnderecoSelecionado() {
