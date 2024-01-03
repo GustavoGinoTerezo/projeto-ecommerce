@@ -12,10 +12,11 @@ export class ServiceAPIPicPayService {
 
   // BehaviorSubject para armazenar o referenceId
   private referenceIdSubject: BehaviorSubject<string> = new BehaviorSubject<any>(null);
+  private qrCodeSubject = new BehaviorSubject<any>(null);
 
   // Observable para ser consumido por outras partes do aplicativo
   referenceId$: Observable<string> = this.referenceIdSubject.asObservable();
-
+  
   constructor(private http: HttpClient) {}
 
   // Método para atualizar o BehaviorSubject com o novo referenceId
@@ -49,5 +50,13 @@ export class ServiceAPIPicPayService {
     const urlStatus = `https://appws.picpay.com/ecommerce/public/payments/${referenceId}/status`;
 
     return this.http.get(urlStatus, { headers })
+  }
+
+  setQrCode(qrCode: string): void {
+    this.qrCodeSubject.next(qrCode);
+  }
+
+  getQrCode(): Observable<string> {
+    return this.qrCodeSubject.asObservable();
   }
 }

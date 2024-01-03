@@ -431,25 +431,27 @@ export class ConfirmacaoComponent implements OnInit{
     };
 
     // Fazendo a chamada para o serviço PicPay
-    // this.picPayService.requisicaoPagamentoPicPay(paymentData)
-    //   .subscribe(
-    //     (response) => {
+    this.picPayService.requisicaoPagamentoPicPay(paymentData)
+      .subscribe(
+        (response) => {
 
-    //       console.log(response)
+          console.log(response)
 
-    //   if (response && response.qrcode && response.qrcode.base64) {
-    //     this.qrCode = response.qrcode.base64;
+      if (response && response.qrcode && response.qrcode.base64) {
+        this.qrCode = response.qrcode.base64;
 
-    //     // Faça o que desejar com o conteúdo do QR Code (qrCodeBase64)
-    //     console.log('Conteúdo do QR Code:', this.qrCode);
-    //   } else {
-    //     console.error('QR Code não encontrado na resposta.');
-    //   }},
-    //   (error) => {
+        this.picPayService.setQrCode(this.qrCode);
 
-    //     console.error(error);
-    //   }
-    // );
+        // Faça o que desejar com o conteúdo do QR Code (qrCodeBase64)
+        console.log('Conteúdo do QR Code:', this.qrCode);
+      } else {
+        console.error('QR Code não encontrado na resposta.');
+      }},
+      (error) => {
+
+        console.error(error);
+      }
+    );
 
   }
 

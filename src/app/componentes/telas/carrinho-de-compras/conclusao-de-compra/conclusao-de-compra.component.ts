@@ -49,6 +49,10 @@ export class ConclusaoDeCompraComponent {
     ) {}
 
   ngOnInit(): void {
+
+    this.picPayService.getQrCode().subscribe(qrCode => {
+      this.qrCode = qrCode
+    })
     
     const startUser = sessionStorage.getItem('startUser')
     const startEnderecos = sessionStorage.getItem('startEnderecos')
