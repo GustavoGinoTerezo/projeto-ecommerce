@@ -54,6 +54,7 @@ export class ConfirmacaoComponent implements OnInit{
   telefoneAPI: any[] = [];
   telefoneId!: number;
   qrCode: any;
+  referenceId: any;
 
   // ====================================================================================================
   // Constructor, NgOnInit e NgOnDestroy
@@ -439,6 +440,27 @@ export class ConfirmacaoComponent implements OnInit{
 
       if (response && response.qrcode && response.qrcode.base64) {
         this.qrCode = response.qrcode.base64;
+
+        this.picPayService.referenceId$.subscribe((referenceId: string) => {
+          this.referenceId = referenceId;
+
+          console.log(this.referenceId);
+        });
+
+        const be2b1446c6c6540ecefc48644af2bf838a6ebc99b0b70a9352406af9ef7b1afe = 'b2b36e465fcf43ea4dd742f2121cc7400c878a4b5a6e02e87250d4c027cb2983';
+
+        const d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b = AES.encrypt(this.referenceId, be2b1446c6c6540ecefc48644af2bf838a6ebc99b0b70a9352406af9ef7b1afe).toString();
+
+        sessionStorage.setItem('rd' ,d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b);
+
+        // ====================================
+        // qrCode
+
+        const d692d7ac5794c83a5bdea776e85d6951e98309114386b72f13c25cd85ead50cd = 'c580d4caba2b6672b16e6a44982028514b83a06eb2dcc00692b34f81eef40014'
+
+        const aad89ffa37f6f227f1021785694c8129a042c138a0a6bd2c35ec3379a8e8f839 = AES.encrypt(this.qrCode, d692d7ac5794c83a5bdea776e85d6951e98309114386b72f13c25cd85ead50cd).toString();
+
+        sessionStorage.setItem('q', aad89ffa37f6f227f1021785694c8129a042c138a0a6bd2c35ec3379a8e8f839)
 
         this.picPayService.setQrCode(this.qrCode);
 
