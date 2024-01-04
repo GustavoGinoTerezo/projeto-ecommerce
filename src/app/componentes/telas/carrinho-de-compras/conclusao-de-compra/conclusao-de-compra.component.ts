@@ -84,18 +84,6 @@ export class ConclusaoDeCompraComponent {
       }
     }
 
-    if(q){
-      this.carregarQrCode();
-    } else {
-      const inicializacaoConcluidaObservable = this.usuarioService.getInicializacaoConcluida();
-
-      if (inicializacaoConcluidaObservable) {
-        this.inicializacaoUserConcluidaSubject = inicializacaoConcluidaObservable.subscribe(() => {
-          this.carregarQrCode();
-        });
-      }
-    }
-
     if(rd){
       this.carregarReferenceID();
     } else {
@@ -188,59 +176,6 @@ export class ConclusaoDeCompraComponent {
     }
   }
 
-  async carregarReferenceID() {
-
-    const d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b = sessionStorage.getItem('rd');
-
-    const be2b1446c6c6540ecefc48644af2bf838a6ebc99b0b70a9352406af9ef7b1afe = 'b2b36e465fcf43ea4dd742f2121cc7400c878a4b5a6e02e87250d4c027cb2983';
-
-    if (d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b) {
-      // Descriptografe o carrinho se ele existir
-      const a0fdc3607878bd1f04b2f0b62ebace03b231b79d6b9050ab08e0f9c76b806ee0 = CryptoJS.AES.decrypt(d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b, be2b1446c6c6540ecefc48644af2bf838a6ebc99b0b70a9352406af9ef7b1afe);
-
-      // Verifique se a descriptografia foi bem-sucedida
-      if (a0fdc3607878bd1f04b2f0b62ebace03b231b79d6b9050ab08e0f9c76b806ee0.sigBytes > 0) {
-        // Converta o resultado descriptografado de volta em um array de IDs
-        this.referenceId = JSON.parse(a0fdc3607878bd1f04b2f0b62ebace03b231b79d6b9050ab08e0f9c76b806ee0.toString(CryptoJS.enc.Utf8));
-      }
-    }
-  }
-
-  async preencherFormaPagamento() {
-
-    console.log("Inicio preencherFormaPagamento")
-
-    const a7ccc9f43fc28a6ce00af20b9ca3e8985739eed74c57b4e4e7a88cd4d3682a5e = sessionStorage.getItem('p');
-
-    const d75bebc1471a279ab08da91a018b44d77bc0db35e56d700a3ffc7a47f455af0b = '8bdc349582ed93b3bab86341c35b5a1c7187b7b9219d6a2c2808cbb9823a3c82';
-
-    if (a7ccc9f43fc28a6ce00af20b9ca3e8985739eed74c57b4e4e7a88cd4d3682a5e) {
-      const bd534ef1857d551a2450df6490121d3a4498e21dffd23873e593a9d40a4b161f = AES.decrypt(a7ccc9f43fc28a6ce00af20b9ca3e8985739eed74c57b4e4e7a88cd4d3682a5e, d75bebc1471a279ab08da91a018b44d77bc0db35e56d700a3ffc7a47f455af0b);
-      if (bd534ef1857d551a2450df6490121d3a4498e21dffd23873e593a9d40a4b161f.sigBytes > 0) {
-        this.formaPagamentoId = JSON.parse(bd534ef1857d551a2450df6490121d3a4498e21dffd23873e593a9d40a4b161f.toString(CryptoJS.enc.Utf8));
-
-        if (this.formaPagamentoId !== undefined) {
-          // Encontre o endereço correspondente com base no ID
-          const formaPagamento = this.formaPagamento.find(formaPagamento => formaPagamento.idPagamento === this.formaPagamentoId);
-
-          // Verifique se o endereço foi encontrado
-          if (formaPagamento) {
-            // Preencha o array enderecoEntregaSelecionado com o endereço encontrado
-            this.formaPagamentoSelecionada = [formaPagamento];
-
-            if(this.formaPagamentoSelecionada[0].tipoPagamento === 'PicPay'){
-              this.picPay();
-            }
-
-          }
-          console.log("Forma Pagamento selecionada: ",this.formaPagamentoSelecionada[0].tipoPagamento)
-        }
-      }
-      console.log("formaPagamentoId: ", this.formaPagamentoId)
-    }
-
-  }
-
   async carregarEnderecos() {
     try {
       this.enderecosEntregaSubscription = this.usuarioService.getEnderecoEntregaUsuarioLogado().subscribe(async (enderecosEntregaAPI) => {
@@ -300,14 +235,68 @@ export class ConclusaoDeCompraComponent {
 
   }
 
+  async preencherFormaPagamento() {
+
+    console.log("Inicio preencherFormaPagamento")
+
+    const a7ccc9f43fc28a6ce00af20b9ca3e8985739eed74c57b4e4e7a88cd4d3682a5e = sessionStorage.getItem('p');
+
+    const d75bebc1471a279ab08da91a018b44d77bc0db35e56d700a3ffc7a47f455af0b = '8bdc349582ed93b3bab86341c35b5a1c7187b7b9219d6a2c2808cbb9823a3c82';
+
+    if (a7ccc9f43fc28a6ce00af20b9ca3e8985739eed74c57b4e4e7a88cd4d3682a5e) {
+      const bd534ef1857d551a2450df6490121d3a4498e21dffd23873e593a9d40a4b161f = AES.decrypt(a7ccc9f43fc28a6ce00af20b9ca3e8985739eed74c57b4e4e7a88cd4d3682a5e, d75bebc1471a279ab08da91a018b44d77bc0db35e56d700a3ffc7a47f455af0b);
+      if (bd534ef1857d551a2450df6490121d3a4498e21dffd23873e593a9d40a4b161f.sigBytes > 0) {
+        this.formaPagamentoId = JSON.parse(bd534ef1857d551a2450df6490121d3a4498e21dffd23873e593a9d40a4b161f.toString(CryptoJS.enc.Utf8));
+
+        if (this.formaPagamentoId !== undefined) {
+          // Encontre o endereço correspondente com base no ID
+          const formaPagamento = this.formaPagamento.find(formaPagamento => formaPagamento.idPagamento === this.formaPagamentoId);
+
+          // Verifique se o endereço foi encontrado
+          if (formaPagamento) {
+            // Preencha o array enderecoEntregaSelecionado com o endereço encontrado
+            this.formaPagamentoSelecionada = [formaPagamento];
+
+            this.carregarReferenceID();
+
+          }
+          console.log("Forma Pagamento selecionada: ",this.formaPagamentoSelecionada[0].tipoPagamento)
+        }
+      }
+      console.log("formaPagamentoId: ", this.formaPagamentoId)
+    }
+
+  }
+
+  async carregarReferenceID() {
+
+    const d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b = sessionStorage.getItem('rd');
+
+    const be2b1446c6c6540ecefc48644af2bf838a6ebc99b0b70a9352406af9ef7b1afe = 'b2b36e465fcf43ea4dd742f2121cc7400c878a4b5a6e02e87250d4c027cb2983';
+
+    if (d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b) {
+      // Descriptografe o carrinho se ele existir
+      const a0fdc3607878bd1f04b2f0b62ebace03b231b79d6b9050ab08e0f9c76b806ee0 = CryptoJS.AES.decrypt(d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b, be2b1446c6c6540ecefc48644af2bf838a6ebc99b0b70a9352406af9ef7b1afe);
+
+      // Verifique se a descriptografia foi bem-sucedida
+      if (a0fdc3607878bd1f04b2f0b62ebace03b231b79d6b9050ab08e0f9c76b806ee0.sigBytes > 0) {
+        // Converta o resultado descriptografado de volta em um array de IDs
+        this.referenceId = JSON.parse(a0fdc3607878bd1f04b2f0b62ebace03b231b79d6b9050ab08e0f9c76b806ee0.toString(CryptoJS.enc.Utf8));
+
+        if(this.formaPagamentoSelecionada[0].tipoPagamento === 'PicPay'){
+          this.picPay();
+        }
+      }
+    }
+  }
+
   picPay(){
-    this.picPayService.referenceId$.subscribe((referenceId: string) => {
-      // Faça o que precisar com o referenceId na outra tela
-      console.log('Reference ID atualizado na outra tela:', referenceId);
-      
-      this.picPayService.checarStatusPagamento(referenceId).subscribe((response)=> {
+    
+      this.picPayService.checarStatusPagamento(this.referenceId).subscribe((response)=> {
 
         this.responses.push(response); // Armazena a resposta no array
+
+        console.log(this.responses[0])
 
         if(this.responses[0].status === 'paid'){
           console.log("Pagamento realizado com sucesso.")
@@ -326,15 +315,14 @@ export class ConclusaoDeCompraComponent {
           });
 
         } else {
-          console.log("Pagamento ainda não realizado.")
+          console.log("Pagamento ainda não realizado");
+          this.carregarQrCode();
         }
       }, 
       (error) => {
         console.log(error);
       });
-    });
-
-    
+   
   }
 
 }

@@ -1,1 +1,15 @@
-<img [src]="qrCode" alt="Image" class="imgCode">
+<div *ngIf="this.responses[0].status === 'paid'">
+    Pagamento realizado
+</div>
+<div *ngIf="this.responses[0].status === 'created'">
+    <div>
+        <h1>Seu pedido está aguardado o pagamento para iniciarmos o processo de separação do pedido.</h1>
+        
+        <h1>O pagamento do seu pedido ainda não foi realizado. Após o pagamento ser realizado e confirmado pelo nosso financeiro, será enviado por email a nota fiscal do pedido e o número de rastreio do mesmo.</h1>
+    </div>
+    <div>
+        <img [src]="qrCode" alt="Image" class="imgCode">
+    </div>
+</div>
+
+
