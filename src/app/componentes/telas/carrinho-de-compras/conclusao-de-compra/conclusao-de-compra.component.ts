@@ -27,6 +27,7 @@ export class ConclusaoDeCompraComponent {
   // Variáveis
 
   qrCode: any;
+  referenceId: any;
   responses: any[] = [];
   formaPagamentoId!: number;
   formaPagamento: FormaPagamento[] = [];
@@ -56,6 +57,8 @@ export class ConclusaoDeCompraComponent {
     
     const startUser = sessionStorage.getItem('startUser')
     const startEnderecos = sessionStorage.getItem('startEnderecos')
+    const q = sessionStorage.getItem('q')
+    const rd = sessionStorage.getItem('rd')
 
     if(startUser){
       this.carregarUsuario();
@@ -77,6 +80,30 @@ export class ConclusaoDeCompraComponent {
       if (enderecoCarregadoObservable) {
         this.enderecoCarregadoSubscription = enderecoCarregadoObservable.subscribe(() => {
           this.carregarEnderecos();
+        });
+      }
+    }
+
+    if(q){
+      this.carregarQrCode();
+    } else {
+      const inicializacaoConcluidaObservable = this.usuarioService.getInicializacaoConcluida();
+
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoUserConcluidaSubject = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarQrCode();
+        });
+      }
+    }
+
+    if(rd){
+      this.carregarReferenceID();
+    } else {
+      const inicializacaoConcluidaObservable = this.usuarioService.getInicializacaoConcluida();
+
+      if (inicializacaoConcluidaObservable) {
+        this.inicializacaoUserConcluidaSubject = inicializacaoConcluidaObservable.subscribe(() => {
+          this.carregarReferenceID();
         });
       }
     }
@@ -139,6 +166,43 @@ export class ConclusaoDeCompraComponent {
         await this.preencherFormaPagamento();
       });
     } catch (error) {
+    }
+  }
+
+  async carregarQrCode() {
+
+    const aad89ffa37f6f227f1021785694c8129a042c138a0a6bd2c35ec3379a8e8f839 = sessionStorage.getItem('q');
+
+    const d692d7ac5794c83a5bdea776e85d6951e98309114386b72f13c25cd85ead50cd = 'c580d4caba2b6672b16e6a44982028514b83a06eb2dcc00692b34f81eef40014'
+
+    if (aad89ffa37f6f227f1021785694c8129a042c138a0a6bd2c35ec3379a8e8f839) {
+      // Descriptografe o QrCode se ele existir
+
+      const c3bb301981d9e81dcd1a72b01aeb32f1e89884e1d94ef550681958186ccb6066 = CryptoJS.AES.decrypt(aad89ffa37f6f227f1021785694c8129a042c138a0a6bd2c35ec3379a8e8f839, d692d7ac5794c83a5bdea776e85d6951e98309114386b72f13c25cd85ead50cd);
+
+      // Verifique se a descriptografia foi bem-sucedida
+      if (c3bb301981d9e81dcd1a72b01aeb32f1e89884e1d94ef550681958186ccb6066.sigBytes > 0) {
+
+        this.qrCode = c3bb301981d9e81dcd1a72b01aeb32f1e89884e1d94ef550681958186ccb6066.toString(CryptoJS.enc.Utf8);
+      }
+    }
+  }
+
+  async carregarReferenceID() {
+
+    const d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b = sessionStorage.getItem('rd');
+
+    const be2b1446c6c6540ecefc48644af2bf838a6ebc99b0b70a9352406af9ef7b1afe = 'b2b36e465fcf43ea4dd742f2121cc7400c878a4b5a6e02e87250d4c027cb2983';
+
+    if (d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b) {
+      // Descriptografe o carrinho se ele existir
+      const a0fdc3607878bd1f04b2f0b62ebace03b231b79d6b9050ab08e0f9c76b806ee0 = CryptoJS.AES.decrypt(d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b, be2b1446c6c6540ecefc48644af2bf838a6ebc99b0b70a9352406af9ef7b1afe);
+
+      // Verifique se a descriptografia foi bem-sucedida
+      if (a0fdc3607878bd1f04b2f0b62ebace03b231b79d6b9050ab08e0f9c76b806ee0.sigBytes > 0) {
+        // Converta o resultado descriptografado de volta em um array de IDs
+        this.referenceId = JSON.parse(a0fdc3607878bd1f04b2f0b62ebace03b231b79d6b9050ab08e0f9c76b806ee0.toString(CryptoJS.enc.Utf8));
+      }
     }
   }
 

@@ -77,8 +77,7 @@ export class ConfirmacaoComponent implements OnInit{
     const start = sessionStorage.getItem('start')
     const startEnderecos = sessionStorage.getItem('startEnderecos')
     const startUser = sessionStorage.getItem('startUser')
-    const q = sessionStorage.getItem('q')
-    const rd = sessionStorage.getItem('rd')
+    
 
     if(start){
       this.carregarProdutos();
@@ -116,29 +115,7 @@ export class ConfirmacaoComponent implements OnInit{
       }
     }
 
-    if(q){
-      this.carregarQrCode();
-    } else {
-      const inicializacaoConcluidaObservable = this.usuarioService.getInicializacaoConcluida();
-
-      if (inicializacaoConcluidaObservable) {
-        this.inicializacaoUserConcluidaSubject = inicializacaoConcluidaObservable.subscribe(() => {
-          this.carregarQrCode();
-        });
-      }
-    }
-
-    if(rd){
-      this.carregarReferenceID();
-    } else {
-      const inicializacaoConcluidaObservable = this.usuarioService.getInicializacaoConcluida();
-
-      if (inicializacaoConcluidaObservable) {
-        this.inicializacaoUserConcluidaSubject = inicializacaoConcluidaObservable.subscribe(() => {
-          this.carregarReferenceID();
-        });
-      }
-    }
+    
 
     this.carregarFormaPagamento();
 
@@ -310,44 +287,6 @@ export class ConfirmacaoComponent implements OnInit{
     });
   }
 
-  async carregarQrCode() {
-
-    const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
-
-    const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
-
-    if (a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5) {
-      // Descriptografe o carrinho se ele existir
-      const a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a = AES.decrypt(a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5, a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb);
-
-      // Verifique se a descriptografia foi bem-sucedida
-      if (a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.sigBytes > 0) {
-        // Converta o resultado descriptografado de volta em um array de IDs
-        this.carrinhoIds = JSON.parse(a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.toString(CryptoJS.enc.Utf8));
-        console.log("CarrinhoIds", this.carrinhoIds)
-      }
-    }
-  }
-
-  async carregarReferenceID() {
-
-    const a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5 = sessionStorage.getItem('c');
-
-    const a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb = 'a3961c51c8a8dca7ae4cd0a4e66a99259ca12dc3144b550efb34ebc8dfb6ecbc';
-
-    if (a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5) {
-      // Descriptografe o carrinho se ele existir
-      const a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a = AES.decrypt(a197524e8eab13c5ef3ce02dd4f4b8cf6972d7b9154604e3f55b3cdcd0e4c2d5, a1ccefeb85a70e1b7d5c9a481670ce830808a393e93472c6265a397022997bcb);
-
-      // Verifique se a descriptografia foi bem-sucedida
-      if (a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.sigBytes > 0) {
-        // Converta o resultado descriptografado de volta em um array de IDs
-        this.carrinhoIds = JSON.parse(a3a61a64a53903b8b315bb3a98a680213b415430c83844e6872d1b332ad2a27a.toString(CryptoJS.enc.Utf8));
-        console.log("CarrinhoIds", this.carrinhoIds)
-      }
-    }
-  }
-
   async preencherEnderecoSelecionado() {
 
     console.log("Iniciando preencherEnderecoSelecionado")
@@ -357,8 +296,11 @@ export class ConfirmacaoComponent implements OnInit{
     const d880c83d159fd83056bf415dc345fdcbd5c642e26ca51703af13bc9db17838d2 = '9776a1b50191cae98292336600e0a7bd4263bf18b3d87c7dbb5cb3dd7f54438f';
 
     if (a8b12ace84b6e44cf9290c7a8d584d0f44a4ff2079add964f67e6e999e0045d6) {
+
       const bb5bcc69117fd472d769d1f7133fcea3a2bd6711dc388041c059f2ae78a15d8b = AES.decrypt(a8b12ace84b6e44cf9290c7a8d584d0f44a4ff2079add964f67e6e999e0045d6, d880c83d159fd83056bf415dc345fdcbd5c642e26ca51703af13bc9db17838d2);
+
       if (bb5bcc69117fd472d769d1f7133fcea3a2bd6711dc388041c059f2ae78a15d8b.sigBytes > 0) {
+
         this.enderecoEntregaSelecionadoId = JSON.parse(bb5bcc69117fd472d769d1f7133fcea3a2bd6711dc388041c059f2ae78a15d8b.toString(CryptoJS.enc.Utf8));
 
         if (this.enderecoEntregaSelecionadoId !== undefined) {
@@ -511,6 +453,9 @@ export class ConfirmacaoComponent implements OnInit{
           console.log(this.referenceId);
         });
 
+        // ===================================
+        // referenceId
+
         const be2b1446c6c6540ecefc48644af2bf838a6ebc99b0b70a9352406af9ef7b1afe = 'b2b36e465fcf43ea4dd742f2121cc7400c878a4b5a6e02e87250d4c027cb2983';
 
         const d5d2dca26251accb16bfbf47d513f86cdbd643980bdbde1b32c1838f982ace7b = AES.encrypt(this.referenceId, be2b1446c6c6540ecefc48644af2bf838a6ebc99b0b70a9352406af9ef7b1afe).toString();
@@ -523,6 +468,10 @@ export class ConfirmacaoComponent implements OnInit{
         const d692d7ac5794c83a5bdea776e85d6951e98309114386b72f13c25cd85ead50cd = 'c580d4caba2b6672b16e6a44982028514b83a06eb2dcc00692b34f81eef40014'
 
         const aad89ffa37f6f227f1021785694c8129a042c138a0a6bd2c35ec3379a8e8f839 = AES.encrypt(this.qrCode, d692d7ac5794c83a5bdea776e85d6951e98309114386b72f13c25cd85ead50cd).toString();
+
+        console.log("Antes da criptografia", this.qrCode)
+
+        console.log("Criptografado", aad89ffa37f6f227f1021785694c8129a042c138a0a6bd2c35ec3379a8e8f839)
 
         sessionStorage.setItem('q', aad89ffa37f6f227f1021785694c8129a042c138a0a6bd2c35ec3379a8e8f839)
 
