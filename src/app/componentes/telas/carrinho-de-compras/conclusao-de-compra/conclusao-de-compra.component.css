@@ -1,0 +1,71 @@
+.containerEfeturarPagamento{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.headerPagamentoPendente{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: orange;
+    margin-bottom: 5px;
+    padding: 15px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.containerInfoPagementoEQrCode{
+    display: flex;
+}
+
+.containerInfoPagamento{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 13px;
+    background-color: var(--container-externo-cards-produtos);
+}
+
+.containerQrCode{
+    display: flex;
+    width: 100%;
+    margin-left: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.203);
+    padding: 13px;
+}
+
+.imgCode{
+    display: flex;
+    max-width: 250px;
+    max-height: 250px;
+}
+
+.containerImgQrCode{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.infoPagamento{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+li{
+    margin-bottom: 10px;
+}
+
+.iconPagamentoRealizado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.labelPagamentoRealizado{
+    margin-left: 5px;
+}

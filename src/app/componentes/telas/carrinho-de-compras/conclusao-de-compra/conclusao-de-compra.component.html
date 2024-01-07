@@ -1,14 +1,42 @@
-<div *ngIf="this.responses[0].status === 'paid'">
-    Pagamento realizado
-</div>
-<div *ngIf="this.responses[0].status === 'created'">
+<div *ngIf="this.responses[0].status === 'paid'" class="containerPagamentoEfetuado">
     <div>
-        <h1>Seu pedido está aguardado o pagamento para iniciarmos o processo de separação do pedido.</h1>
-        
-        <h1>O pagamento do seu pedido ainda não foi realizado. Após o pagamento ser realizado e confirmado pelo nosso financeiro, será enviado por email a nota fiscal do pedido e o número de rastreio do mesmo.</h1>
+        <h1>
+            Seu pedido foi realizado com sucesso.
+        </h1>
+        <h1>
+            Seu pedido será separado e em breve você irá receber a nota fiscal no seu email e o código de rastreio para o(s) seu(s) produto(s).
+        </h1>
+        <div class="iconPagamentoRealizado">
+            <i class="fa-regular fa-circle-check fa-xl"></i>
+            <div class="labelPagamentoRealizado">Pagamento realizado</div>
+        </div>
     </div>
-    <div>
-        <img [src]="qrCode" alt="Image" class="imgCode">
+</div>
+<div *ngIf="this.responses[0].status === 'created'" class="containerEfeturarPagamento">
+    <div class="headerPagamentoPendente">
+        Pagamento pendente
+    </div>
+    <div class="containerInfoPagementoEQrCode">
+        <div class="containerInfoPagamento">
+            <h1>Seu pedido está aguardado o pagamento para iniciarmos o processo de separação do pedido.</h1>
+        
+            <h1>O pagamento do seu pedido ainda não foi realizado. Após o pagamento ser realizado e confirmado pelo nosso financeiro, será enviado por email a nota fiscal do pedido e o número de rastreio do mesmo.</h1>
+        </div>
+        <div class="containerQrCode">
+        
+            <div class="containerImgQrCode">
+                <img [src]="qrCode" alt="Image" class="imgCode">
+            </div>
+            <div class="infoPagamento">
+                <ol>
+                    <li>Abra o aplicativo do PicPay</li>
+                    <li>Escolha a opção PIX</li>
+                    <li>Pagar com QR Code</li>
+                    <li>Confirme as informações e finalize o pagamento.</li>
+                </ol>
+            </div>
+        
+        </div>
     </div>
 </div>
 
